@@ -1,0 +1,163 @@
+# ================================== #
+# Build System Configuration         #
+# ================================== #
+# Setup the build system for setup.py
+[build-system]
+requires = [
+  "setuptools>=61.2",
+  "setuptools_scm[toml]>=6.2",
+  "oldest-supported-numpy",
+  "Cython>=0.29",
+]
+build-backend = "setuptools.build_meta"
+
+# ================================== #
+# Project Configuration              #
+# ================================== #
+# Configuration for the project details.
+[project]
+name = "triceratops"
+dynamic = ["version"]
+description = "Transient Radio Interaction Code for Ejecta, Remnants, And Time-domain Observables in Plasma Shocks"
+authors = [
+  { name = "Eliza Diggins", email = 'eliza.diggins@berkeley.edu'}
+]
+license = { text = "GPL-3.0-or-later" }
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+  "Operating System :: OS Independent",
+]
+dependencies = [
+  "numpy>=1.22,<2.0.0", # This ensures we don't have C header issues.
+  "unyt>=2.9",
+  "h5py>=3.0",
+  "scipy>=1.10",
+  "matplotlib",
+  "tqdm",
+  "platformdirs",
+  "ruamel.yaml",
+  "astropy"
+]
+
+# ================================== #
+# Optional Dependencies              #
+# ================================== #
+# Configuration for the project details.
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+  "pytest-cov",
+  "mypy",
+  "black",
+  "pre-commit",
+  "jupyter",
+]
+docs = [
+  'alabaster>=1.0.0',
+  'matplotlib>=3.9.2',
+  'myst-parser>=4.0.0',
+  "pydata-sphinx-theme>=0.15.2",
+  'nbsphinx>=0.9.5',
+  'jupyter>=1.1.1',
+  'sphinx>=8.1.3',
+  'sphinx_design>=0.6.1',
+  'sphinx-gallery>=0.19.0',
+  'sphinx-plot-directive>=1.0.5',
+  'sphinxcontrib-applehelp>=2.0.0',
+  'sphinxcontrib-bibtex>=2.6.3',
+  'sphinxcontrib-devhelp>=2.0.0',
+  'sphinxcontrib-htmlhelp>=2.1.0',
+  'sphinxcontrib-jsmath>=1.0.1',
+  'sphinxcontrib-qthelp>=2.0.0',
+  'sphinxcontrib-serializinghtml>=2.0.0',
+  'sphinxcontrib-tikz>=0.4.20',
+  "numpydoc",
+]
+test = [
+  "pytest",
+  "pytest-xdist",
+  "pytest-cov",
+  "hypothesis"
+]
+
+# ================================== #
+# Tools                              #
+# ================================== #
+[tool.setuptools]
+packages = { find = { include = ["triceratops*"] } }
+include-package-data = true
+
+[tool.setuptools_scm]
+# Use git tags to determine the project version dynamically.
+# Tags should follow the format `stable_vX.Y.Z` or `dev_vX.Y.Z`.
+# This configuration extracts the version number (X.Y.Z) from the tag.
+
+version_file = "triceratops/_version.py"
+local_scheme = "no-local-version"       # Omit local version info (e.g. +gHASH)
+fallback_version = "0.0.0"              # Used if no tag is found
+tag_regex = "^(?:stable|dev)_v(?P<version>\\d+\\.\\d+\\.\\d+(?:[-a-zA-Z0-9\\.]+)?)$"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers"
+testpaths = ["tests"]
+
+
+# ================================== #
+# Linting and Formatting Settings    #
+# ================================== #
+# Configuration for linting, formatting, and type checking tools.
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+format.docstring-code-format = true
+format.docstring-code-line-length = 50
+lint.pydocstyle.convention = "numpy"  # Use NumPy style for docstrings
+lint.select = [
+  "E",    # pycodestyle errors (style violations)
+  "F",    # pyflakes (undefined names, etc.)
+  "W",    # pycodestyle warnings
+  "I",    # isort (import sorting)
+  "D",    # pydocstyle (docstring formatting)
+  "UP",   # pyupgrade (modern syntax)
+  "B",    # flake8-bugbear (common bugs & bad patterns)
+  "C4",   # flake8-comprehensions (efficiency in comprehensions)
+  "A",    # flake8-builtins (avoid shadowing builtins)
+  "PERF", # Ruff native perf improvements
+  "NPY",  # NumPy-specific style rules
+  "ICN",  # Import conventions (e.g. disallow wildcard imports)
+]
+
+# Disable some too-noisy docstring rules (especially for scientific code)
+lint.ignore = [
+  "D105",  # Don't require docstrings for magic methods
+  "D107",  # Don't require docstrings for __init__
+  "D203",  # One blank line before class docstring (conflicts with D211)
+  "D213",  # Multi-line docstring summary should start at the second line
+  "D102",  # Ignore missing docstring in public method (flexibility)
+  "E731",  # Do not assign a lambda expression, use def instead
+  "B008",  # Do not perform function calls in default arguments (unyt uses this)
+  "UP007", # Do not use Union in type annotations (use | instead)
+  "UP038", # Use | in isinstance checks (e.g. isinstance(x, int | str))
+]
+
+# Optional: you can also ignore docstring warnings in examples or test files
+lint.exclude = [
+    "tests/*",     # Exclude tests from linting.
+    "docs/*",      # Exclude documentation from linting.
+]
+
+[tool.coverage.run]
+branch = true
+source = ["triceratops"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
