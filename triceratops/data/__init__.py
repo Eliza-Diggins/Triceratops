@@ -1,4 +1,4 @@
 """Data management modules for working with radio data in Triceratops."""
 
-__all__ = ["containers"]
-from triceratops.data import containers
+__all__ = ["photometry"]
+from triceratops.data import photometry
