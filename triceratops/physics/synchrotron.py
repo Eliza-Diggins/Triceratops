@@ -2,7 +2,9 @@
 Physics routines for synchrotron emission processes.
 
 This module provides functions to compute key coefficients and parameters
-related to synchrotron radiation from power-law distributions of electrons.
+related to synchrotron radiation. The bulk of the theory behind these functions is drawn from
+the work of :footcite:t:`1970ranp.book.....P` and :footcite:t:`1979rpa..book.....R` with some formulations
+drawn from more refined literature as discussed in the docstrings for each function / class.
 """
 
 from typing import Union
@@ -14,19 +16,29 @@ from scipy.special import gamma as gamma_func
 
 from .constants import c_1_cgs, electron_rest_energy_cgs
 
-
 # ============================================================== #
 # SYNCHROTRON EMISSION AND ABSORPTION COEFFICIENTS               #
 # ============================================================== #
+# As described in standard texts, there are two coefficients (dependent on p) which dictate
+# the coefficient of the emission / absorption scaling for synchrotron from power-law populations.
+# These functions implement these.
+#
+# Define pre-computed coefficients so that they do not need to be re-computed at call-time.
+_c5_coefficient_cgs = np.sqrt(3) / (16 * np.pi) * (constants.e.esu**3 / (constants.m_e * constants.c**2)).cgs.value
+"""float: The coefficient for the ``c5`` parameter in CGS units."""
+_c6_coefficient_cgs = np.sqrt(3) * np.pi / 72 * (constants.e.esu * constants.m_e**5 * constants.c**10).cgs.value
+"""float: the coefficient for the ``c6`` parameter in CGS units."""
+
+
 def compute_c5_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
     r"""
-    Compute the :math:`c_5(p)` coefficient for optically thin synchrotron emission from a power-law population.
+    Compute the :math:`c_5(p)` coefficient for synchrotron assuming a power-law electron population.
 
     Parameters
     ----------
     p : float or array-like, optional
         Power-law index of the electron Lorentz factor distribution,
-        :math:`N(\Gamma) \propto \Gamma^{-p}`. Default is 3.0.
+        :math:`N(\Gamma) \propto \Gamma^{-p}`. Default is ``3.0``.
 
     Returns
     -------
@@ -116,11 +128,10 @@ def compute_c5_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
     .. footbibliography::
 
     """
-    c5_0 = np.sqrt(3) / (16 * np.pi) * (constants.e.esu**3 / (constants.m_e * constants.c**2)).cgs.value
-
     dimless_part = (p + 7 / 3) / (p + 1) * gamma_func((3 * p - 1) / 12) * gamma_func((3 * p + 7) / 12)
 
-    return c5_0 * dimless_part
+    # Multiply the p-dependent term by the globally defined _c5_coefficient_cgs coefficient.
+    return _c5_coefficient_cgs * dimless_part
 
 
 def compute_c6_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
@@ -186,14 +197,11 @@ def compute_c6_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
     .. footbibliography::
 
     """
-    # Dimensional prefactor (CGS units), algebraically equivalent to the
-    # standard Pacholczyk normalization.
-    c6_0 = np.sqrt(3) * np.pi / 72 * (constants.e.esu * constants.m_e**5 * constants.c**10).cgs.value
-
     # Purely dimensionless p-dependent part
     dimensionless_part = (p + 10 / 3) * gamma_func((3 * p + 2) / 12) * gamma_func((3 * p + 10) / 12)
 
-    return c6_0 * dimensionless_part
+    # Scale by the standard coefficient and return.
+    return _c6_coefficient_cgs * dimensionless_part
 
 
 # ============================================================== #
@@ -203,7 +211,7 @@ def compute_c6_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
 # characteristic frequencies associated with synchrotron radiation from
 # relativistic electrons. These frequencies are important for understanding
 # the spectral properties of synchrotron-emitting sources.
-
+#
 # Define constant coefficients so that we do not waste time recomputing them
 # every time the function is called. These are lightweight and can be stored
 # at module load time.
@@ -211,6 +219,7 @@ _cooling_frequency_coefficient_cgs = (
     (18 * np.pi * constants.m_e * constants.c * constants.e.esu) / (constants.sigma_T**2)
 ).cgs.value
 """float: Coefficient for synchrotron cooling frequency in CGS units."""
+
 _characteristic_frequency_coefficient_cgs = (0.5 * constants.e.esu / (np.pi * constants.m_e * constants.c)).cgs.value
 """float: Coefficient for synchrotron characteristic frequency in CGS units."""
 
@@ -531,6 +540,248 @@ def compute_nu_ssa(
 # more general functions found elsewhere in the codebase. These optimized
 # versions are intended to be faster and more efficient, but may rely on static type assumptions
 # or other constraints that make them less flexible than the more general versions.
+#
+# DEVELOPER NOTES:
+# TODO: Handling of the power-law normalization in the BR to / from BPL functions could be compartmentalized.
+#       This could be achieved by re-deriving eq 16 and 17 in terms of N_0 directly and then having a helper function
+#       that computes N_0 from the microphysical parameters. This would reduce code duplication and make it easier
+#       to maintain consistency across the functions. We leave this for future due to labor constraints. Those
+#       normalizations
+#       are however written as separate functions for use elsewhere.
+# TODO: The optimized cases should become cython or numba functions for further speed improvements at some point. Again,
+#       I haven't done this yet for labor reasons.
+
+
+def _optimized_compute_powerlaw_energy_moment(
+    p: Union[float, np.ndarray],
+    gamma_min: Union[float, np.ndarray] = 1.0,
+    gamma_max: Union[float, np.ndarray] = np.inf,
+    *,
+    order: int = 1,
+) -> np.ndarray:
+    r"""
+    Compute the ``order``-th moment of a power-law electron distribution.
+
+    Evaluates
+
+    .. math::
+
+        \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^{\,\mathrm{order} - p}\, d\gamma
+
+    using fully analytic, vectorized expressions.
+    """
+    # Coerce inputs
+    p = np.asarray(p, dtype="f8")
+    gamma_min = np.asarray(gamma_min, dtype="f8")
+    gamma_max = np.asarray(gamma_max, dtype="f8")
+
+    moment = np.zeros_like(p, dtype="f8")
+
+    # Define exponent and critical index
+    exponent = order + 1.0 - p
+
+    p_lt = exponent > 0.0  # upper-limit dominated
+    p_gt = exponent < 0.0  # lower-limit dominated
+    p_eq = exponent == 0.0  # logarithmic
+
+    # p != order+1
+    moment[p_lt | p_gt] = (
+        gamma_max[p_lt | p_gt] ** exponent[p_lt | p_gt] - gamma_min[p_lt | p_gt] ** exponent[p_lt | p_gt]
+    ) / exponent[p_lt | p_gt]
+
+    # p == order+1
+    moment[p_eq] = np.log(gamma_max[p_eq] / gamma_min[p_eq])
+
+    return moment
+
+
+def compute_powerlaw_energy_moment(
+    p: Union[float, np.ndarray],
+    gamma_min: Union[float, np.ndarray] = 1.0,
+    gamma_max: Union[float, np.ndarray] = np.inf,
+    *,
+    order: int = 1,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the ``order``-th moment of a power-law electron distribution.
+
+    This evaluates
+
+    .. math::
+
+        \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^{\,\mathrm{order} - p}\, d\gamma.
+
+    Parameters
+    ----------
+    p : float or array-like
+        Power-law index of the electron Lorentz factor distribution.
+    gamma_min : float or array-like
+        Minimum Lorentz factor (must be > 0).
+    gamma_max : float or array-like
+        Maximum Lorentz factor. May be ``inf`` if the integral converges.
+    order : int, optional
+        Moment order. Default is ``1`` (energy moment).
+
+    Returns
+    -------
+    float or numpy.ndarray
+        Moment value(s).
+    """
+    __is_scalar = np.isscalar(p)
+
+    # Coerce for validation
+    p = np.asarray(p, dtype="f8")
+    gamma_min = np.asarray(gamma_min, dtype="f8")
+    gamma_max = np.asarray(gamma_max, dtype="f8")
+
+    if np.any(gamma_min <= 0):
+        raise ValueError("gamma_min must be strictly positive.")
+
+    exponent = order + 1.0 - p
+
+    # Divergent upper-limit case
+    if np.any((exponent > 0) & np.isinf(gamma_max)):
+        raise ValueError("gamma_max must be finite when p < order + 1 for convergence.")
+
+    result = _optimized_compute_powerlaw_energy_moment(
+        p=p,
+        gamma_min=gamma_min,
+        gamma_max=gamma_max,
+        order=order,
+    )
+
+    return result.item() if __is_scalar else result
+
+
+def compute_powerlaw_normalization_from_microphysics(
+    B: Union[float, np.ndarray, u.Quantity],
+    p: Union[float, np.ndarray],
+    epsilon_B: Union[float, np.ndarray],
+    epsilon_E: Union[float, np.ndarray],
+    *,
+    gamma_min: Union[float, np.ndarray] = 1.0,
+    gamma_max: Union[float, np.ndarray] = np.inf,
+    mode: str = "gamma",
+):
+    r"""
+    Compute the normalization of a power-law electron distribution from microphysical energy-partition parameters.
+
+    If :math:`\epsilon_B` and :math:`\varepsilon_E` are the fractions of the
+    thermal energy which are allocated to magnetic fields and relativistic electrons, then
+
+    .. math::
+
+        \frac{1}{\epsilon_B} \frac{B^2}{8\pi} = u_{\rm int} = \frac{m_e c^2}{\epsilon_E}
+        \int_{\gamma_{\min}}^{\gamma_{\max}} N(\gamma) \gamma \, d\gamma.
+
+    For a power-law distribution, this can be computed analytically as is done in this function. We can therefore
+    compute the normalization of the power-law distribution.
+
+    Parameters
+    ----------
+    B : float, array-like, or astropy.units.Quantity
+        Magnetic field strength. Default units are Gauss, but an :class:`astropy.units.Quantity` may be provided
+        to use general units.
+    p : float or array-like
+        Power-law index of the electron Lorentz factor distribution.
+    epsilon_B : float or array-like
+        Fraction of post-shock energy in magnetic fields. Default is ``0.1``.
+    epsilon_E : float or array-like
+        Fraction of post-shock energy in relativistic electrons. Default is ``0.1``.
+    gamma_min : float or array-like, optional
+        Minimum Lorentz factor. Default is ``1``.
+    gamma_max : float or array-like, optional
+        Maximum Lorentz factor. Default is ``inf``.
+    mode : {'gamma', 'energy'}, optional
+        Return normalization for:
+
+        - ``'gamma'``: compute :math:`N_0` in :math:`N(\gamma) = N_0 \gamma^{-p}`.
+        - ``'energy'``: compute :math:`K_E` in :math:`N(E) = K_E E^{-p}`.
+
+    Returns
+    -------
+    astropy.units.Quantity
+        Power-law normalization. If ``mode='gamma'``, units are :math:`\mathrm{cm^{-3}}`.
+        If ``mode='energy'``, units are :math:`\mathrm{cm^{-3}\ erg^{p-1}}`.
+    """
+    # Track scalar return
+    __is_scalar = np.isscalar(p)
+
+    # Enforce units on the B-field.
+    if hasattr(B, "units"):
+        B = B.to_value(u.Gauss)
+
+    # Validate inputs before passing off to the low-level callable. This
+    # includes checking for convergence of the energy integral.
+    p = np.asarray(p, dtype="f8")
+    gamma_min = np.asarray(gamma_min, dtype="f8")
+    gamma_max = np.asarray(gamma_max, dtype="f8")
+
+    if np.any(gamma_min <= 0):
+        raise ValueError("gamma_min must be strictly positive.")
+
+    exponent = 2.0 - p
+    if np.any((exponent > 0) & np.isinf(gamma_max)):
+        raise ValueError("gamma_max must be finite when p < 2 for energy normalization.")
+
+    # Compute N0 in gamma-space
+    N0_gamma = _optimized_compute_PL_N0_from_microphysics(
+        B=B,
+        p=p,
+        epsilon_B=epsilon_B,
+        epsilon_E=epsilon_E,
+        gamma_min=gamma_min,
+        gamma_max=gamma_max,
+    )
+
+    # Convert normalization if requested
+    if mode == "gamma":
+        result = N0_gamma * u.cm**-3
+    elif mode == "energy":
+        result = N0_gamma * electron_rest_energy_cgs ** (p - 1) * u.cm**-3 * u.erg ** (p - 1)
+    else:
+        raise ValueError("mode must be either 'gamma' or 'energy'.")
+
+    return result.item() if __is_scalar else result
+
+
+def _optimized_compute_PL_N0_from_microphysics(
+    B: Union[float, np.ndarray],
+    p: Union[float, np.ndarray],
+    epsilon_B: Union[float, np.ndarray],
+    epsilon_E: Union[float, np.ndarray],
+    gamma_min: Union[float, np.ndarray] = 1.0,
+    gamma_max: Union[float, np.ndarray] = np.inf,
+) -> np.ndarray:
+    """
+    Compute the normalization :math:`N_0` of a power-law electron distribution using equipartition arguments.
+
+    Assumes CGS units throughout and returns ``N_0`` in ``cm^{-3}``.
+    """
+    # Coerce inputs
+    B = np.asarray(B, dtype="f8")
+    p = np.asarray(p, dtype="f8")
+    epsilon_B = np.asarray(epsilon_B, dtype="f8")
+    epsilon_E = np.asarray(epsilon_E, dtype="f8")
+    gamma_min = np.asarray(gamma_min, dtype="f8")
+    gamma_max = np.asarray(gamma_max, dtype="f8")
+
+    # Magnetic energy density
+    u_B = B**2 / (8.0 * np.pi)
+
+    moment = _optimized_compute_powerlaw_energy_moment(
+        p=p,
+        gamma_min=gamma_min,
+        gamma_max=gamma_max,
+        order=1,
+    )
+
+    # Normalization
+    N0 = (epsilon_E / epsilon_B) * u_B / (electron_rest_energy_cgs * moment)
+
+    return N0
+
+
 def compute_BR_from_BPL_SED(
     nu_brk: Union[float, np.ndarray, u.Quantity],
     F_nu_brk: Union[float, np.ndarray, u.Quantity],
