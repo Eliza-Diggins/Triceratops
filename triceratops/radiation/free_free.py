@@ -75,7 +75,7 @@ def compute_RJ_FF_absorption_coefficient(
     Notes
     -----
     The free-free absorption coefficient in the Rayleigh–Jeans limit is given by (See equation 5.19b in
-    :footcite:p:`1979rpa..book.....R`):
+    :footcite:p:`RybickiLightman`):
 
     .. math::
 

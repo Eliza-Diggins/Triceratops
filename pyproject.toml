@@ -39,6 +39,8 @@ dependencies = [
   "tqdm",
   "platformdirs",
   "ruamel.yaml",
+    "emcee",
+    "corner",
   "astropy"
 ]
 

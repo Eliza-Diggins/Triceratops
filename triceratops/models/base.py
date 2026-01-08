@@ -1,1 +1,0 @@
-"""Synchrotron emission models."""

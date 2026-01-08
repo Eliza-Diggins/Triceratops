@@ -2,8 +2,10 @@
 
 import matplotlib.pyplot as plt
 
+from .config import triceratops_config
 
-def resolve_fig_axes(fig=None, axes=None, fig_size=(8, 6)):
+
+def resolve_fig_axes(fig=None, axes=None, fig_size=None):
     """
     Resolve and return a figure and axes for plotting.
 
@@ -22,6 +24,9 @@ def resolve_fig_axes(fig=None, axes=None, fig_size=(8, 6)):
         The resolved figure object.
     """
     import matplotlib.pyplot as plt
+
+    if fig_size is None:
+        fig_size = triceratops_config["plotting.default_figsize"]
 
     if fig is None and axes is None:
         fig, axes = plt.subplots(figsize=fig_size)
@@ -55,20 +60,41 @@ def get_default_cmap():
     cmap : matplotlib.colors.Colormap
         The default colormap.
     """
-    return plt.get_cmap("viridis")
+    return plt.get_cmap(triceratops_config["plotting.default_cmap"])
 
 
-def get_cmap_from_name(cmap_name):
-    """Return a colormap given its name.
+def get_cmap(cmap):
+    """
+    Return a Matplotlib colormap from either a colormap instance or a name.
 
     Parameters
     ----------
-    cmap_name : str
-        The name of the colormap.
+    cmap : str or matplotlib.colors.Colormap
+        Either a Matplotlib colormap instance or the name of a registered
+        Matplotlib colormap.
 
     Returns
     -------
-    cmap : matplotlib.colors.Colormap
-        The colormap corresponding to the given name.
+    matplotlib.colors.Colormap
+        A Matplotlib colormap object.
+
+    Raises
+    ------
+    TypeError
+        If ``cmap`` is neither a string nor a Colormap instance.
+    ValueError
+        If ``cmap`` is a string but does not correspond to a known colormap.
     """
-    return plt.get_cmap(cmap_name)
+    import matplotlib.pyplot as plt
+    from matplotlib.colors import Colormap
+
+    if isinstance(cmap, Colormap):
+        return cmap
+
+    if isinstance(cmap, str):
+        try:
+            return plt.get_cmap(cmap)
+        except ValueError as exc:
+            raise ValueError(f"Unknown colormap name '{cmap}'.") from exc
+
+    raise TypeError("cmap must be either a matplotlib.colors.Colormap instance or a string colormap name.")

@@ -41,7 +41,7 @@ extensions = [
     "sphinx.ext.doctest",
     "matplotlib.sphinxext.plot_directive",
     "sphinxcontrib.bibtex",
-    # "sphinx_gallery.gen_gallery",
+    "sphinx_gallery.gen_gallery",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -79,3 +79,14 @@ intersphinx_mapping = {
 
 napoleon_use_param = True
 napoleon_preprocess_types = True
+
+# Configure the sphinx galleries. These are contained in the
+# /examples gallery.
+sphinx_gallery_conf = {
+    "examples_dirs": [
+        "./galleries/examples",
+    ],  # path to your example scripts
+    "gallery_dirs": [
+        "auto_examples",
+    ],  # path to where to save gallery generated output
+}

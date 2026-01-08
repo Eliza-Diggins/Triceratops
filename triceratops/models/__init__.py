@@ -1,7 +1,14 @@
 """
-Models of synchrotron emission from transient sources.
+Models of radio emission from astrophysical transients.
 
-The models in this module combine physical building-blocks from the
-:mod:`triceratops.physics` module to create end-to-end models of synchrotron
-emission from sources such as supernovae and gamma-ray bursts.
+This module includes various models for simulating and analyzing the spectral energy distributions (SEDs
+of astrophysical transient events such as supernovae, gamma-ray bursts, and tidal disruption events. Models
+are distributed across several submodules for better organization and maintainability.
 """
+
+__all__ = [
+    "sed_models",
+    "generic",
+    "core",
+]
+from . import core, generic, sed_models
