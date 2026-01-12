@@ -40,10 +40,11 @@ def resolve_fig_axes(fig=None, axes=None, fig_size=None):
 
 def set_plot_style():
     """Set the global plot style for matplotlib figures."""
-    plt.rcParams["text.usetex"] = True
-    plt.rcParams["text.latex.preamble"] = (
-        r"\usepackage{graphicx,amsmath,amssymb,amsfonts,algorithmicx,algorithm,algpseudocodex}"
-    )
+    plt.rcParams["text.usetex"] = triceratops_config["plotting.use_tex"]
+
+    if triceratops_config["plotting.use_tex"]:
+        plt.rcParams["text.latex.preamble"] = triceratops_config["plotting.latex_preamble"]
+
     plt.rcParams["xtick.major.size"] = 8
     plt.rcParams["xtick.minor.size"] = 5
     plt.rcParams["ytick.major.size"] = 8
