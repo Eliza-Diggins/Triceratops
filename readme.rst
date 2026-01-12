@@ -6,7 +6,7 @@ Triceratops
 ===========
 
 +-------------------+----------------------------------------------------------+
-| **Code**          | |RUFF| |PRE-COMMIT| |YT-PROJECT|                         |
+| **Code**          | |RUFF| |PRE-COMMIT| |ASTROPY|                            |
 +-------------------+----------------------------------------------------------+
 | **Documentation** | |docs| |docs-stable| |numpydoc|                          |
 +-------------------+----------------------------------------------------------+
@@ -76,9 +76,6 @@ If you use Triceratops in your research, please cite or acknowledge it with text
     We acknowledge the use of the Triceratops software package, written by E. Diggins et al., in this work.
 
 
-.. |yt-project| image:: https://img.shields.io/static/v1?label=yt&message=compatible&color=blueviolet
-   :target: https://yt-project.org
-   :alt: Works with yt
 
 .. |docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
    :target: https://Eliza-Diggins.github.io/Triceratops
@@ -115,3 +112,7 @@ If you use Triceratops in your research, please cite or acknowledge it with text
 .. |last-commit| image:: https://img.shields.io/github/last-commit/eliza-diggins/Triceratop
    :target: https://github.com/Eliza-Diggins/Triceratop
    :alt: Last Commit
+
+.. |ASTROPY| image:: http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat
+   :target: http://www.astropy.org/
+   :alt: Powered by Astropy
