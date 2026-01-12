@@ -1,6 +1,0 @@
-radiation.constants.c\_1
-========================
-
-.. currentmodule:: radiation.constants
-
-.. autodata:: c_1

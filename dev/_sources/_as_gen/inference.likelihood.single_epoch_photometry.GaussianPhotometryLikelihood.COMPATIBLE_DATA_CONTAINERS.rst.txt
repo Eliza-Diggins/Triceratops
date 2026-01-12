@@ -1,6 +1,0 @@
-inference.likelihood.single\_epoch\_photometry.GaussianPhotometryLikelihood.COMPATIBLE\_DATA\_CONTAINERS
-========================================================================================================
-
-.. currentmodule:: inference.likelihood.single_epoch_photometry
-
-.. autoattribute:: GaussianPhotometryLikelihood.COMPATIBLE_DATA_CONTAINERS

@@ -1,6 +1,0 @@
-radiation.synchrotron.frequencies.compute\_characteristic\_frequency
-====================================================================
-
-.. currentmodule:: radiation.synchrotron.frequencies
-
-.. autofunction:: compute_characteristic_frequency

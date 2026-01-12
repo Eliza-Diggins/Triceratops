@@ -1,6 +1,0 @@
-radiation.synchrotron.distributions.compute\_powerlaw\_normalization\_from\_microphysics
-========================================================================================
-
-.. currentmodule:: radiation.synchrotron.distributions
-
-.. autofunction:: compute_powerlaw_normalization_from_microphysics

@@ -1,6 +1,0 @@
-profiles.band\_profile
-======================
-
-.. currentmodule:: profiles
-
-.. autofunction:: band_profile

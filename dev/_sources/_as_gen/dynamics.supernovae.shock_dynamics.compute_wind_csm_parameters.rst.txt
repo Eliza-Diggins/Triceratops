@@ -1,6 +1,0 @@
-dynamics.supernovae.shock\_dynamics.compute\_wind\_csm\_parameters
-==================================================================
-
-.. currentmodule:: dynamics.supernovae.shock_dynamics
-
-.. autofunction:: compute_wind_csm_parameters
