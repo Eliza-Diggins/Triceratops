@@ -1,0 +1,6 @@
+models.transients.general.synchotron\_shock.SynchrotronShockModel.\_\_init\_\_
+==============================================================================
+
+.. currentmodule:: models.transients.general.synchotron_shock
+
+.. automethod:: SynchrotronShockModel.__init__

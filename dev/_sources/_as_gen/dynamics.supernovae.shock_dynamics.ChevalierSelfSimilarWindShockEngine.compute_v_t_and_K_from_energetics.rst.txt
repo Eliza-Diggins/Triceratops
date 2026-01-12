@@ -1,0 +1,6 @@
+dynamics.supernovae.shock\_dynamics.ChevalierSelfSimilarWindShockEngine.compute\_v\_t\_and\_K\_from\_energetics
+===============================================================================================================
+
+.. currentmodule:: dynamics.supernovae.shock_dynamics
+
+.. automethod:: ChevalierSelfSimilarWindShockEngine.compute_v_t_and_K_from_energetics

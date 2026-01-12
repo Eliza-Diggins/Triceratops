@@ -1,0 +1,6 @@
+radiation.synchrotron.SEDs.compute\_BR\_from\_SSA\_SED
+======================================================
+
+.. currentmodule:: radiation.synchrotron.SEDs
+
+.. autofunction:: compute_BR_from_SSA_SED
