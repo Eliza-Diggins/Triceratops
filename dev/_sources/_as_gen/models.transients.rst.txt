@@ -1,0 +1,37 @@
+﻿models.transients
+=================
+
+.. automodule:: models.transients
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      GRBs
+      TDEs
+      general
+      supernovae
+   
+   
+
+   
+   
+   
+
+   
+   
+   
