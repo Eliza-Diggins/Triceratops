@@ -16,20 +16,64 @@ Triceratops
 | **PyPi**          | Coming Soon                                              |
 +-------------------+----------------------------------------------------------+
 
-Welcome to TRICERATOPS, the **T**\ransient **R**\adio **I**\nteraction **C**\ode for **E**\jecta, **R**\emnants, **A**\nd
-**T**\ime-domain **O**\bservables from **P**\lasma **S**\hocks. TRICERATOPS is a powerful computational tool designed to
-simulate and analyze the complex interactions between transient radio sources and their surrounding environments.
-It provides researchers with the ability to model plasma shocks, ejecta dynamics, and the resulting time-domain
-observables with high precision.
+Welcome to **Triceratops** — the **T**\ransient **R**\adio **I**\nteraction **C**\ode for **E**\jecta,
+**R**\emnants, **A**\nd **T**\ime-domain **O**\bservables from **P**\lasma **S**\hocks.
 
-The software can be used to fit models of transient outflows to observation data from radio telescopes, enabling
-astronomers to better understand the physical processes driving these phenomena. TRICERATOPS is built with a focus on
-flexibility and user-friendliness, making it accessible to both novices and experienced researchers in the field of
-astrophysics.
+Triceratops is a computational framework for modeling the dynamical and radiative evolution of
+astrophysical transients interacting with their environments. The package is designed to
+simulate plasma shocks, ejecta dynamics, and their resulting time-domain observables, with a
+particular focus on radio emission from transient outflows.
 
-Development takes place on `GitHub <https://www.github.com/Eliza-Diggins/Triceratops>`_. If you encounter any issues, documentation
-gaps, or have feature suggestions, we encourage you to submit them via the repository's issues page.
+The software enables forward modeling and parameter inference for radio observations of
+explosive and eruptive phenomena, allowing theoretical models to be directly confronted with
+data from modern radio facilities. Triceratops emphasizes physical transparency, modular
+design, and numerical robustness, making it suitable for both exploratory modeling and
+production-level analysis.
 
+Getting Started
+---------------
+
+To install the package using ``pip`` (not yet available on PyPI):
+
+.. code-block:: bash
+
+    pip install triceratops  # NOT YET IMPLEMENTED
+
+Alternatively, you can install directly from the GitHub repository:
+
+.. code-block:: bash
+
+    git clone https://www.github.com/Eliza-Diggins/Triceratops
+    cd Triceratops
+    pip install .
+
+For detailed setup instructions, see the
+`Installation Guide <https://Eliza-Diggins.github.io/Triceratops/getting_started/installation.html>`_.
+
+Documentation
+-------------
+
+The full documentation is available at
+`https://Eliza-Diggins.github.io/Triceratops <https://Eliza-Diggins.github.io/Triceratops>`_.
+
+This includes conceptual overviews, user guides, API references, and worked examples.
+
+Contributing
+------------
+
+Development takes place on
+`GitHub <https://www.github.com/Eliza-Diggins/Triceratops>`_.
+
+Bug reports, feature requests, and documentation improvements are welcome via the issue tracker.
+Contributions should follow the established coding, documentation, and commit-style guidelines
+indicated above.
+
+Attribution
+-----------
+
+If you use Triceratops in your research, please cite or acknowledge it with text similar to:
+
+    We acknowledge the use of the Triceratops software package, written by E. Diggins et al., in this work.
 
 
 .. |yt-project| image:: https://img.shields.io/static/v1?label=yt&message=compatible&color=blueviolet
@@ -64,7 +108,7 @@ gaps, or have feature suggestions, we encourage you to submit them via the repos
    :target: https://www.conventionalcommits.org/en/v1.0.0/
    :alt: Commit style: Conventional Commits
 
-.. |contributors| image:: https://img.shields.io/github/contributors/eliza-diggins/Triceratop
+.. |contributors| image:: https://img.shields.io/github/contributors/eliza-diggins/Triceratops
    :target: https://github.com/Eliza-Diggins/Triceratop/graphs/contributors
    :alt: GitHub Contributors
 
