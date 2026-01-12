@@ -58,7 +58,8 @@ class GaussianPhotometryLikelihood(Likelihood):
 
     where :math:`F_{\rm obs, i}` is the observed flux density, :math:`F_{\rm model, i}`
     is the model-predicted flux density, and :math:`\sigma_i` is the measurement error. These correspond to the
-    ``freq``, ``flux_density``, and ``flux_density_error`` fields in the :class:`RadioPhotometryContainer`.
+    ``freq``, ``flux_density``, and ``flux_density_error`` fields in the
+    :class:`~data.photometry.RadioPhotometryContainer`.
 
     The upper limit component of the log-likelihood is given by:
 

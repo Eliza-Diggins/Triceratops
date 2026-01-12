@@ -46,7 +46,7 @@ class Synchrotron_SSA_SBPL_SED(Model):
 
     .. math::
 
-        \alpha_{\rm thick} = \frac{5}{3},
+        \alpha_{\rm thick} = \frac{5}{2},
         \qquad
         \alpha_{\rm thin} = -\frac{p - 1}{2}.
 
@@ -120,6 +120,13 @@ class Synchrotron_SSA_SBPL_SED(Model):
     the radio SED. Care should be taken when interpreting fit results, especially when using
     sparse data.
     """
+
+    # ============================================== #
+    # Model Initialization                           #
+    # ============================================== #
+    def __init__(self, *args, **kwargs):
+        """Initialize the :class:`Synchrotron_SSA_SBPL_SED` model."""
+        super().__init__(*args, **kwargs)
 
     # =============================================== #
     # Parameter and Variable Declarations             #
@@ -212,7 +219,7 @@ class Synchrotron_SSA_SBPL_SED(Model):
     ) -> _ModelOutputRaw:
         # Construct the indices from the value of p.
         p = parameters["p"]
-        alpha_2 = 5 / 3
+        alpha_2 = 5 / 2
         alpha_1 = -(p - 1) / 2
 
         result = smoothed_BPL(

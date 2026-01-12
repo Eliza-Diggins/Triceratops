@@ -7,8 +7,8 @@ are distributed across several submodules for better organization and maintainab
 """
 
 __all__ = [
-    "sed_models",
-    "generic",
     "core",
+    "transients",
+    "emission",
 ]
-from . import core, generic, sed_models
+from . import core, emission, transients

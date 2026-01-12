@@ -6,7 +6,7 @@ Fit Radio Photometry to a BPL
 In this example, we'll do the simplest possible SED fit to radio photometry data using a broken power-law (BPL) model.
 This is an excellent place to start for understanding how to fit models to data using the Triceratops library.
 
-We'll use the :class:`~models.sed_models.synchrotron_seds.Synchrotron_SSA_SBPL_SED` model to generate some synthetic
+We'll use the :class:`~models.emission.synchrotron.Synchrotron_SSA_SBPL_SED` model to generate some synthetic
 data with a fixed noise threshold and then we'll invert that data to recover the original parameters using MCMC.
 This will take us through the basic steps of generating the model, defining the dataset, setting up the likelihood,
 and running the inference with correct priors.
@@ -22,7 +22,7 @@ from astropy import units as u
 from triceratops.models.emission.synchrotron import Synchrotron_SSA_SBPL_SED
 
 # %%
-# Now, the :class:`~models.sed_models.synchrotron_seds.Synchrotron_SSA_SBPL_SED` model produces a synchrotron SED
+# Now, the :class:`~models.emission.synchrotron.Synchrotron_SSA_SBPL_SED` model produces a synchrotron SED
 # with the form:
 #
 # .. math::
@@ -40,7 +40,7 @@ from triceratops.models.emission.synchrotron import Synchrotron_SSA_SBPL_SED
 #
 # .. math::
 #
-#    \alpha_{\rm thick} = \frac{5}{3},
+#    \alpha_{\rm thick} = \frac{5}{2},
 #    \qquad
 #    \alpha_{\rm thin} = -\frac{p - 1}{2}.
 #

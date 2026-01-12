@@ -19,9 +19,8 @@ from triceratops.data.photometry import RadioPhotometryContainer
 from triceratops.utils.plot_utils import set_plot_style
 
 # %%
-# We'll be using sample data from the AT2018COW event (an LFBOT) which was originally published in
-# :footcite:t:`margutti2019COW`. This file is included in the Triceratops documentation directory for
-# convenience.
+# We'll use a set of synthetically generated radio photometry data for this example. The data is
+# stored in the ``_data/example_photometry.fits`` file within the documentation source directory.
 #
 # This dataset is almost in the perfect format for loading into a
 # :class:`data.photometry.RadioPhotometryContainer`, except that it doesn't have an explicit ``time`` column, so
@@ -30,7 +29,7 @@ from triceratops.utils.plot_utils import set_plot_style
 
 # Resolve the path to the dataset. In this case, we seek out the data in the
 # documentation.
-data_file = "../../../_data/AT2018COW_margutti.fits"
+data_file = "../../../../../docs/source/_data/example_photometry.fits"
 
 # Load the dataset as a RadioPhotometryContainer. We specify that the ``time`` column
 # should be taken from the ``time_midobs`` column in the dataset.

@@ -1,9 +1,11 @@
 /docs/build/
-/docs/sources/_as_gen/
+/docs/source/_as_gen/
+/docs/source/auto_examples/
 /.idea/
 /.venv/
 .idea/
 .venv/
+.DS_Store
 
 # The ._version file.
 /triceratops/_version.py

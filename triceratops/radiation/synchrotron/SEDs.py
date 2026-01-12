@@ -12,7 +12,10 @@ import numpy as np
 from astropy import units as u
 
 from triceratops.radiation.constants import c_1_cgs, electron_rest_energy_cgs
-from triceratops.radiation.synchrotron import compute_c5_parameter, compute_c6_parameter
+from triceratops.radiation.synchrotron.utils import (
+    compute_c5_parameter,
+    compute_c6_parameter,
+)
 
 
 # ==============================================================

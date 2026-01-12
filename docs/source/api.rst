@@ -23,8 +23,9 @@ in different scenarios. These models can be used to simulate observations, fit d
     :recursive:
     :template: module.rst
 
-    models.generic
-    models.sed_models
+    models.transients
+    models.core
+    models.emission
 
 Data Modules
 ------------

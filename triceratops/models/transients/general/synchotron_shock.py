@@ -160,7 +160,6 @@ class SynchrotronShockModel(Model):
     # Parameter and Variable Declarations             #
     # =============================================== #
     PARAMETERS = (
-        # ------------- Microscopic Shock Parameters ------------- #
         ModelParameter(
             "epsilon_e",
             0.1,
@@ -201,7 +200,6 @@ class SynchrotronShockModel(Model):
             latex=r"\gamma_{\rm max}",
             base_units="",
         ),
-        # ----------- Geometric Parameters ------------ #
         ModelParameter(
             "f",
             0.5,
@@ -227,7 +225,6 @@ class SynchrotronShockModel(Model):
             latex=r"s",
             base_units="",
         ),
-        # ----------- Macroscopic Shock Parameters ------------ #
         ModelParameter(
             "B",
             0.1,
@@ -271,6 +268,12 @@ class SynchrotronShockModel(Model):
     """str: A brief description of the model."""
     REFERENCE: str = ""
     """str: A reference for the model, e.g., a journal article or textbook."""
+
+    # =============================================== #
+    # Initialization Method                           #
+    # =============================================== #
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     # =============================================== #
     # Model Evaluation Method                         #

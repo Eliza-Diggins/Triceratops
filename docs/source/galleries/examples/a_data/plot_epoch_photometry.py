@@ -19,9 +19,8 @@ from triceratops.data.photometry import RadioPhotometryContainer
 from triceratops.utils.plot_utils import set_plot_style
 
 # %%
-# We'll be using sample data from the AT2018COW event (an LFBOT) which was originally published in
-# :footcite:t:`margutti2019COW`. This file is included in the Triceratops documentation directory for
-# convenience.
+# We'll use a set of synthetically generated radio photometry data for this example. The data is
+# stored in the ``_data/example_photometry.fits`` file within the documentation source directory.
 #
 # This dataset is almost in the perfect format for loading into a
 # :class:`data.photometry.RadioPhotometryContainer`, except that it doesn't have an explicit ``time`` column, so
@@ -30,7 +29,7 @@ from triceratops.utils.plot_utils import set_plot_style
 
 # Resolve the path to the dataset. In this case, we seek out the data in the
 # documentation.
-data_file = "../../../_data/AT2018COW_margutti.fits"
+data_file = "../../../../../docs/source/_data/example_photometry.fits"
 
 # Load the dataset as a RadioPhotometryContainer. We specify that the ``time`` column
 # should be taken from the ``time_midobs`` column in the dataset.
@@ -45,9 +44,9 @@ print(f"Loaded photometry data with {len(photometry_data)} entries.")
 photometry_data.table.pprint()
 
 # %%
-# Now that we have loaded the data, we can plot it. The :class:`data.photometry.RadioPhotometryContainer`
+# Now that we have loaded the data, we can plot it. The :class:`~data.photometry.RadioPhotometryContainer`
 # includes a built-in plotting method that makes this straightforward:
-# :meth:`data.photometry.RadioPhotometryContainer.plot_photometry`.
+# :meth:`~data.photometry.RadioPhotometryContainer.plot_photometry`.
 
 # Set the plot style.
 set_plot_style()
@@ -65,7 +64,7 @@ fig.show()
 # As you may notice, the data points (even sorted by color) are not all that easy to pick apart. Let's instead
 # plot the empirical SEDs at different epochs to better visualize the evolution of the radio emission over time.
 # To do this, we'll need to use the built-in epoching functionality of the
-# :class:`data.photometry.RadioPhotometryContainer`.
+# :class:`~data.photometry.RadioPhotometryContainer`.
 #
 # Let's first look at the various time ranges covered by the data:
 
@@ -80,9 +79,9 @@ fig.show()
 # %%
 # If you already have clearly defined epochs in mind, you can specify them directly in your table using the
 # ``epoch_id`` column, or you can use the built-in method
-# :meth:`data.photometry.PhotometryContainer.set_epochs_from_indices`; however, we do not have that information here.
+# :meth:`~data.photometry.RadioPhotometryContainer.set_epochs_from_indices`; however, we do not have that information here.
 #
-# Instead, we can use the :meth:`data.photometry.PhotometryContainer.set_epochs_from_time_gaps` method to
+# Instead, we can use the :meth:`~data.photometry.RadioPhotometryContainer.set_epochs_from_time_gaps` method to
 # automatically define epochs based on gaps in the observation times. We'll specify a gap threshold of 2 days to
 # separate the epochs.
 

@@ -33,7 +33,22 @@ inference pipelines. The following guides cover the relevant functionality:
 
 
 Triceratops Models
--------------
+------------------
+
+The core functionality of triceratops is its ability to create physical models of radio sources and their
+environments. These models are built using a combination of modular building blocks that represent different physical
+processes and components. The following guides provide an overview of the modeling capabilities of triceratops:
+
+.. toctree::
+    :maxdepth: 1
+
+    models/overview
+
+More than any other part of the Triceratops library, the models section is designed for extensibility, even by every
+day users of the code. It is important to be able to correctly leverage the capabilities of the building blocks and
+correctly implement the models relevant to your science case.
+
+
 
 
 Building Blocks
@@ -61,6 +76,12 @@ achieve its goals. This section provides an overview of the key methodologies an
 library, including the mathematical foundations and algorithms used in the modeling and inference processes. Where
 possible, we cover high level details of relevant theory in the broad theory-based sections and provide
 more detailed, case-specific, considerations to the discussions about specific systems.
+
+.. toctree::
+    :maxdepth: 1
+
+    shocks/overview.rst
+
 
 
 Systems

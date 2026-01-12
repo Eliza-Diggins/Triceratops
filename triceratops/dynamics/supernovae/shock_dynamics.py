@@ -134,6 +134,9 @@ class ChevalierSelfSimilarShockEngine(ShockEngine):
 
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     # ============================================================= #
     # Supplementary Numerical Methods                               #
     # ============================================================= #
@@ -280,7 +283,7 @@ class ChevalierSelfSimilarShockEngine(ShockEngine):
         # Compute normalization constant K
         K = M_ej * v_t ** (delta - 3) * (1 / (4.0 * np.pi)) * ((3 - delta) * (n - 3)) / (n - delta)
 
-        return v_t, K
+        return v_t, K * v_t ** (n - delta)
 
     @staticmethod
     def compute_scale_parameter(n: float, s: float):
@@ -484,7 +487,6 @@ class ChevalierSelfSimilarShockEngine(ShockEngine):
         # ``_gamma`` appears in the radius scale factor, as does the ``_lambda_gamma_constant``.
         _lambda = (3 - n) / (s - n)
         SCALE_CONSTANT = self.compute_scale_parameter(n=n, s=s)
-
         R_0 = (SCALE_CONSTANT * K_csm / K_EJ) ** (1 / (s - n))
 
         # Compute the shock radius and velocity at the given time(s).
@@ -627,6 +629,9 @@ class ChevalierSelfSimilarWindShockEngine(ChevalierSelfSimilarShockEngine):
 
         K_{\rm CSM} = \frac{\\dot{M}}{4\\pi v_{\rm wind}}.
     """
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
     def compute_shock_properties(
         self,
@@ -834,6 +839,9 @@ class NumericalThinShellShockEngine(ShockEngine):
 
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
     # ============================================================= #
     # Supplementary Numerical Methods                               #
     # ============================================================= #
@@ -886,7 +894,7 @@ class NumericalThinShellShockEngine(ShockEngine):
 
             # Compute the derivatives.
             _dxi_dtau = -delta
-            _ddelta_dtau = -delta + (7 * xi**2 * np.pi / m) * (t**3 * _rho_csm * (xi - delta) ** 2 - _G_ej * delta**2)
+            _ddelta_dtau = -delta + (3 * xi**2 * np.pi / m) * (t**3 * _rho_csm * (xi - delta) ** 2 - _G_ej * delta**2)
             _dm_dtau = 4.0 * np.pi * xi**2 * (t**3 * _rho_csm * (xi - delta) + _G_ej * delta)
 
             return np.array([_dxi_dtau, _ddelta_dtau, _dm_dtau])

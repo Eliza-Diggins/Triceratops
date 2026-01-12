@@ -11,6 +11,5 @@ __all__ = [
     "Likelihood",
     "GaussianPhotometryLikelihood",
 ]
-from base import Likelihood
-
+from .base import Likelihood
 from .single_epoch_photometry import GaussianPhotometryLikelihood
