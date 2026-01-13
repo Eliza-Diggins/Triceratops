@@ -24,6 +24,9 @@ if TYPE_CHECKING:
 __all__ = [
     "compute_electron_gamma_PL_moment",
     "compute_PL_norm_from_magnetic_field",
+    "compute_PL_norm_from_thermal_energy_density",
+    "compute_equipartition_magnetic_field",
+    "compute_bol_emissivity",
 ]
 
 
