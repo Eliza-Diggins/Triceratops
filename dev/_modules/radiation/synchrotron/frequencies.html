@@ -1,0 +1,1594 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>radiation.synchrotron.frequencies &#8212; Triceratops  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/radiation/synchrotron/frequencies';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Triceratops  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../reference/user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">radiation.synchrotron.frequencies</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for radiation.synchrotron.frequencies</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Module for computing synchrotron frequencies of various sorts.</span>
+
+<span class="sd">This module provides functions to compute key synchrotron frequencies used in</span>
+<span class="sd">modeling synchrotron radiation from astrophysical sources. These include the</span>
+<span class="sd">synchrotron cooling frequency, characteristic frequency, gyrofrequency,</span>
+<span class="sd">and synchrotron self-absorption frequency. The functions are optimized for</span>
+<span class="sd">CGS units for performance-critical applications.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.radiation.constants</span><span class="w"> </span><span class="kn">import</span> <span class="n">c_1_cgs</span><span class="p">,</span> <span class="n">electron_rest_energy_cgs</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.radiation.synchrotron.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_c6_parameter</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;compute_cooling_gamma&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_cooling_frequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_IC_cooling_gamma&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_IC_cooling_frequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_characteristic_frequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_gyrofrequency&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_nu_critical&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;compute_nu_ssa&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="c1"># ==================================================== #</span>
+<span class="c1"># CGS CONSTANTS FOR SYNCHROTRON FREQUENCY CALCULATIONS #</span>
+<span class="c1"># ==================================================== #</span>
+<span class="n">_cooling_frequency_coefficient_cgs</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="mi">18</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">m_e</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">c</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="n">esu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">sigma_T</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span>
+<span class="n">_characteristic_frequency_coefficient_cgs</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="n">esu</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">m_e</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span>
+<span class="n">_gyrofrequency_coefficient_cgs</span> <span class="o">=</span> <span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="n">esu</span> <span class="o">/</span> <span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">m_e</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">c</span><span class="p">))</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span>
+
+
+<span class="c1"># ========================================== #</span>
+<span class="c1"># CGS-ONLY OPTIMIZED FREQUENCY CALCULATIONS  #</span>
+<span class="c1"># ========================================== #</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_cooling_gamma</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the electron Lorentz factor corresponding to the synchrotron cooling frequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float or array-like</span>
+<span class="sd">        Magnetic field strength in Gauss.</span>
+
+<span class="sd">    t : float or array-like</span>
+<span class="sd">        Time since electron acceleration in seconds. This can be understood as</span>
+<span class="sd">        the relevant dynamical time.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    gamma_c : float or array-like</span>
+<span class="sd">        Electron Lorentz factor corresponding to the synchrotron cooling frequency (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function computes the Lorentz factor of electrons whose radiative cooling time equals</span>
+<span class="sd">    the age of the system. The expression is derived from equating the synchrotron cooling time</span>
+<span class="sd">    to the dynamical time.</span>
+
+<span class="sd">    The Lorentz factor is given by:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \gamma_c = \frac{6 \pi m_e c}{\sigma_T B^2 t}</span>
+
+<span class="sd">    No unit validation is performed. Inputs must already be in CGS.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">m_e</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">sigma_T</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_cooling_frequency</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron cooling frequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float or array-like</span>
+<span class="sd">        Magnetic field strength in Gauss.</span>
+
+<span class="sd">    t : float or array-like</span>
+<span class="sd">        Time since electron acceleration in seconds. This can be understood as</span>
+<span class="sd">        the relevant dynamical time.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_c : float or array-like</span>
+<span class="sd">        Synchrotron cooling frequency in Hz (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function implements equation (3) of DeMarchi et al. (2022):</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_c = \frac{18\pi m_e c e}{\sigma_T^2 B^3 t^2}</span>
+
+<span class="sd">    No unit validation is performed. Inputs must already be in CGS.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_cooling_frequency_coefficient_cgs</span> <span class="o">/</span> <span class="p">(</span><span class="n">B</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="n">t</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_IC_cooling_gamma</span><span class="p">(</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the electron Lorentz factor corresponding to the inverse Compton cooling frequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L_bol : float or array-like</span>
+<span class="sd">        Bolometric luminosity of the radiation field in erg/s.</span>
+
+<span class="sd">    R : float or array-like</span>
+<span class="sd">        Distance from the radiation source in cm.</span>
+
+<span class="sd">    t : float or array-like</span>
+<span class="sd">        Time since electron acceleration in seconds. This can be understood as</span>
+<span class="sd">        the relevant dynamical time.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    gamma_IC : float or array-like</span>
+<span class="sd">        Electron Lorentz factor corresponding to the inverse Compton cooling frequency (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function computes the Lorentz factor of electrons whose inverse Compton cooling time equals</span>
+<span class="sd">    the age of the system. The expression is derived from equating the inverse Compton cooling time</span>
+<span class="sd">    to the dynamical time.</span>
+
+<span class="sd">    The Lorentz factor is given by:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \gamma_{IC} = \frac{3 m_e c^3 R^2}{\sigma_T L_{bol} t}</span>
+
+<span class="sd">    No unit validation is performed. Inputs must already be in CGS.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">m_e</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">sigma_T</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">L_bol</span> <span class="o">*</span> <span class="n">t</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_IC_cooling_frequency</span><span class="p">(</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the inverse Compton cooling frequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L_bol : float or array-like</span>
+<span class="sd">        Bolometric luminosity of the radiation field in erg/s.</span>
+
+<span class="sd">    R : float or array-like</span>
+<span class="sd">        Distance from the radiation source in cm.</span>
+
+<span class="sd">    B : float or array-like</span>
+<span class="sd">        Magnetic field strength in Gauss.</span>
+
+<span class="sd">    t : float or array-like</span>
+<span class="sd">        Time since electron acceleration in seconds. This can be understood as</span>
+<span class="sd">        the relevant dynamical time.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_IC_c : float or array-like</span>
+<span class="sd">        Inverse Compton cooling frequency in Hz (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function computes the inverse Compton cooling frequency using the provided parameters.</span>
+
+<span class="sd">    No unit validation is performed. Inputs must already be in CGS.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Calculate the corresponding gamma_IC:</span>
+    <span class="n">gamma_IC</span> <span class="o">=</span> <span class="n">_optimized_compute_IC_cooling_gamma</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Now compute the characteristic frequency for this gamma_IC in the magnetic field B</span>
+    <span class="k">return</span> <span class="n">_optimized_compute_characteristic_frequency</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">gamma_IC</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_characteristic_frequency</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron characteristic frequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float or array-like</span>
+<span class="sd">        Magnetic field strength in Gauss.</span>
+
+<span class="sd">    gamma : float or array-like</span>
+<span class="sd">        Electron Lorentz factor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu : float or array-like</span>
+<span class="sd">        Synchrotron characteristic frequency in Hz (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Implements equation (4) of :footcite:t:`demarchiRadioAnalysisSN2004C2022`.:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu(\gamma) = \frac{e}{2\pi m_e c} B \gamma^2</span>
+
+<span class="sd">    No unit validation is performed.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_characteristic_frequency_coefficient_cgs</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">gamma</span><span class="o">**</span><span class="mi">2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_nu_gyro</span><span class="p">(</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron gyrofrequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gamma : float or array-like</span>
+<span class="sd">        Electron Lorentz factor.</span>
+
+<span class="sd">    B : float or array-like</span>
+<span class="sd">        Magnetic field strength in Gauss.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_g : float or array-like</span>
+<span class="sd">        Synchrotron gyrofrequency in Hz (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Implements the gyrofrequency formula:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_g = \frac{e B}{m_e c \gamma}</span>
+
+<span class="sd">    No unit validation is performed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_gyrofrequency_coefficient_cgs</span> <span class="o">*</span> <span class="n">B</span> <span class="o">/</span> <span class="n">gamma</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_nu_critical</span><span class="p">(</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron critical frequency (CGS, optimized).</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gamma : float or array-like</span>
+<span class="sd">        Electron Lorentz factor.</span>
+
+<span class="sd">    B : float or array-like</span>
+<span class="sd">        Magnetic field strength in Gauss.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_critical : float or array-like</span>
+<span class="sd">        Synchrotron critical frequency in Hz (CGS-equivalent).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Implements the critical frequency formula:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_{critical} = \frac{3 e B \gamma^2}{4 \pi m_e c}</span>
+
+<span class="sd">    No unit validation is performed.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="mi">3</span> <span class="o">/</span> <span class="p">(</span><span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">_gyrofrequency_coefficient_cgs</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">gamma</span><span class="o">**</span><span class="mi">2</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_optimized_compute_nu_ssa</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">p</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">epsilon_E</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">gamma_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gamma_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Optimized CGS-only computation of the synchrotron self-absorption frequency.</span>
+
+<span class="sd">    Implements equation (9) of DeMarchi et al. (2022), with analytic elimination</span>
+<span class="sd">    of the electron distribution normalization using microphysical energy</span>
+<span class="sd">    partition assumptions.</span>
+
+<span class="sd">    All inputs must already be in CGS units.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Cast to float64 arrays for vectorized math</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+    <span class="n">gamma_min</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma_min</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+    <span class="n">gamma_max</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma_max</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Synchrotron coefficients</span>
+    <span class="n">c_6</span> <span class="o">=</span> <span class="n">compute_c6_parameter</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">c_1</span> <span class="o">=</span> <span class="n">c_1_cgs</span>  <span class="c1"># scalar</span>
+
+    <span class="c1"># Delta correction for electron energy integral</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="n">mask</span> <span class="o">=</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">2</span>
+    <span class="n">delta</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma_max</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">/</span> <span class="n">gamma_min</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">p</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span> <span class="o">-</span> <span class="mi">1</span>
+
+    <span class="c1"># |p - 2| factor for unified normalization</span>
+    <span class="n">p_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="c1"># Minimum electron energy</span>
+    <span class="n">E_l</span> <span class="o">=</span> <span class="n">electron_rest_energy_cgs</span> <span class="o">*</span> <span class="n">gamma_min</span>
+
+    <span class="c1"># Electron distribution normalization N_0</span>
+    <span class="n">N_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">epsilon_E</span> <span class="o">/</span> <span class="p">(</span><span class="n">epsilon_B</span> <span class="o">*</span> <span class="n">delta</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">p_norm</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="n">B</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">E_l</span> <span class="o">**</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="n">p</span><span class="p">))</span>
+
+    <span class="c1"># Synchrotron self-absorption frequency (DM22 Eq. 9)</span>
+    <span class="n">prefactor</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">c_1</span>
+    <span class="n">geom_term</span> <span class="o">=</span> <span class="p">((</span><span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">R</span> <span class="o">*</span> <span class="n">c_6</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">))</span>
+    <span class="n">field_term</span> <span class="o">=</span> <span class="p">(</span><span class="n">B</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">theta</span><span class="p">))</span> <span class="o">**</span> <span class="p">((</span><span class="n">p</span> <span class="o">+</span> <span class="mf">2.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">))</span>
+    <span class="n">norm_term</span> <span class="o">=</span> <span class="n">N_0</span> <span class="o">**</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">))</span>
+
+    <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">prefactor</span> <span class="o">*</span> <span class="n">geom_term</span> <span class="o">*</span> <span class="n">norm_term</span> <span class="o">*</span> <span class="n">field_term</span>
+
+    <span class="k">return</span> <span class="n">nu_ssa</span>
+
+
+<div class="viewcode-block" id="compute_cooling_gamma">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_cooling_gamma.html#radiation.synchrotron.frequencies.compute_cooling_gamma">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_cooling_gamma</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the electron Lorentz factor corresponding to the synchrotron cooling frequency.</span>
+
+<span class="sd">    The cooling Lorentz factor corresponds to the Lorentz factor of electrons whose radiative</span>
+<span class="sd">    cooling time equals the age of the system.</span>
+
+<span class="sd">    This is given by :footcite:p:`demarchiRadioAnalysisSN2004C2022` as</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \gamma_c = \frac{6 \pi m_e c}{\sigma_T B^2 t},</span>
+
+<span class="sd">    where :math:`t` is a relevant measure of the dynamical time since over which</span>
+<span class="sd">    electrons have been radiating.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+<span class="sd">    t : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Time since electron acceleration. Default units are seconds.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    gamma_c : float or array-like</span>
+<span class="sd">        Electron Lorentz factor corresponding to the synchrotron cooling frequency.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function wraps a low-level CGS implementation and performs</span>
+<span class="sd">    unit coercion only. Shape compatibility is handled implicitly by NumPy.</span>
+
+<span class="sd">    The underlying expression is taken from equation (3) of</span>
+<span class="sd">    :footcite:t:`demarchiRadioAnalysisSN2004C2022`.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">gamma_c</span> <span class="o">=</span> <span class="n">_optimized_compute_cooling_gamma</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gamma_c</span></div>
+
+
+
+<div class="viewcode-block" id="compute_cooling_frequency">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_cooling_frequency.html#radiation.synchrotron.frequencies.compute_cooling_frequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_cooling_frequency</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron cooling frequency.</span>
+
+<span class="sd">    The cooling frequency corresponds to the characteristic synchrotron</span>
+<span class="sd">    frequency of electrons whose radiative cooling time equals the age</span>
+<span class="sd">    of the system.</span>
+
+<span class="sd">    This is given by :footcite:p:`demarchiRadioAnalysisSN2004C2022` as</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_c = \frac{18\pi m_e c e}{\sigma_T^2 B^3 t^2},</span>
+
+<span class="sd">    where :math:`t` is a relevant measure of the dynamical time since over which</span>
+<span class="sd">    electrons have been radiating.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+<span class="sd">    t : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Time since electron acceleration. Default units are seconds.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_c : astropy.units.Quantity</span>
+<span class="sd">        Synchrotron cooling frequency in Hz.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function wraps a low-level CGS implementation and performs</span>
+<span class="sd">    unit coercion only. Shape compatibility is handled implicitly by NumPy.</span>
+
+<span class="sd">    The underlying expression is taken from equation (3) of</span>
+<span class="sd">    :footcite:t:`demarchiRadioAnalysisSN2004C2022`.</span>
+
+<span class="sd">    It should be noted that the cooling frequency computed by this function does **NOT** consider the</span>
+<span class="sd">    ambient radiation field. If inverse Compton cooling is significant, the effective cooling frequency</span>
+<span class="sd">    will be lower than the value computed here. That should be computed using the :func:`compute_IC_cooling_frequency`</span>
+<span class="sd">    function.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">nu_c</span> <span class="o">=</span> <span class="n">_optimized_compute_cooling_frequency</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nu_c</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span></div>
+
+
+
+<div class="viewcode-block" id="compute_IC_cooling_gamma">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_IC_cooling_gamma.html#radiation.synchrotron.frequencies.compute_IC_cooling_gamma">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_IC_cooling_gamma</span><span class="p">(</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the electron Lorentz factor corresponding to the inverse Compton cooling frequency.</span>
+
+<span class="sd">    The inverse Compton cooling Lorentz factor corresponds to the Lorentz factor of electrons whose</span>
+<span class="sd">    inverse Compton cooling time equals the age of the system.</span>
+
+<span class="sd">    This is given by</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \gamma_{IC} = \frac{3 m_e c^3 R^2}{\sigma_T L_{bol} t},</span>
+
+<span class="sd">    where :math:`L_{bol}` is the bolometric luminosity of the ambient radiation field,</span>
+<span class="sd">    :math:`R` is the distance from the radiation source, and :math:`t` is a relevant measure</span>
+<span class="sd">    of the dynamical time since over which electrons have been radiating.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L_bol : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Bolometric luminosity of the radiation field. Default units are erg/s.</span>
+
+<span class="sd">    R : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Distance from the radiation source. Default units are cm.</span>
+
+<span class="sd">    t : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Time since electron acceleration. Default units are seconds.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    gamma_IC : float or array-like</span>
+<span class="sd">        Electron Lorentz factor corresponding to the inverse Compton cooling frequency.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function wraps a low-level CGS implementation and performs</span>
+<span class="sd">    unit coercion only. Shape compatibility is handled implicitly by NumPy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">L_bol</span> <span class="o">=</span> <span class="n">L_bol</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">gamma_IC</span> <span class="o">=</span> <span class="n">_optimized_compute_IC_cooling_gamma</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">gamma_IC</span></div>
+
+
+
+<div class="viewcode-block" id="compute_IC_cooling_frequency">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_IC_cooling_frequency.html#radiation.synchrotron.frequencies.compute_IC_cooling_frequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_IC_cooling_frequency</span><span class="p">(</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the inverse Compton cooling frequency.</span>
+
+<span class="sd">    The inverse Compton cooling frequency corresponds to the characteristic synchrotron</span>
+<span class="sd">    frequency of electrons whose inverse Compton cooling time equals the age of the system.</span>
+
+<span class="sd">    This is given by</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_{IC,c} = \gamma_{IC}^2 \frac{e B}{2 \pi m_e c},</span>
+
+<span class="sd">    where :math:`\gamma_{IC} = \frac{3 m_e c^3 R^2}{\sigma_T L_{bol} t}` is the Lorentz factor</span>
+<span class="sd">    of electrons whose inverse Compton cooling time equals the dynamical time.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    L_bol : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Bolometric luminosity of the radiation field. Default units are erg/s.</span>
+
+<span class="sd">    R : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Distance from the radiation source. Default units are cm.</span>
+
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+
+<span class="sd">    t : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Time since electron acceleration. Default units are seconds.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_IC_c : astropy.units.Quantity</span>
+<span class="sd">        Inverse Compton cooling frequency in Hz.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function wraps a low-level CGS implementation and performs</span>
+<span class="sd">    unit coercion only. Shape compatibility is handled implicitly by NumPy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">L_bol</span> <span class="o">=</span> <span class="n">L_bol</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">nu_IC_c</span> <span class="o">=</span> <span class="n">_optimized_compute_IC_cooling_frequency</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nu_IC_c</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span></div>
+
+
+
+<div class="viewcode-block" id="compute_characteristic_frequency">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_characteristic_frequency.html#radiation.synchrotron.frequencies.compute_characteristic_frequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_characteristic_frequency</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron characteristic frequency for relativistic electrons.</span>
+
+<span class="sd">    For relativistic electrons in a **non-relativistic flow**, the characteristic frequency</span>
+<span class="sd">    corresponds roughly to the peak of the single-electron synchrotron emission spectrum. It is</span>
+<span class="sd">    precisely the frequency at which an electron with the lowest Lorentz factor in the</span>
+<span class="sd">    distribution emits the bulk of its synchrotron radiation :footcite:p:`demarchiRadioAnalysisSN2004C2022`.</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_m = \gamma_m^2 \frac{e B}{2 \pi m_e c}</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+<span class="sd">    gamma : float or array-like</span>
+<span class="sd">        Electron Lorentz factor.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu : astropy.units.Quantity</span>
+<span class="sd">        Synchrotron characteristic frequency in Hz.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function computes the characteristic frequency associated with</span>
+<span class="sd">    synchrotron emission from electrons of Lorentz factor ``gamma`` in</span>
+<span class="sd">    a magnetic field ``B``.</span>
+
+<span class="sd">    The calculation follows equation (4) of</span>
+<span class="sd">    :footcite:t:`demarchiRadioAnalysisSN2004C2022`.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+
+    <span class="n">nu</span> <span class="o">=</span> <span class="n">_optimized_compute_characteristic_frequency</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">nu</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span></div>
+
+
+
+<div class="viewcode-block" id="compute_gyrofrequency">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_gyrofrequency.html#radiation.synchrotron.frequencies.compute_gyrofrequency">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gyrofrequency</span><span class="p">(</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron gyrofrequency for relativistic electrons.</span>
+
+<span class="sd">    The gyrofrequency corresponds to the frequency at which a charged particle</span>
+<span class="sd">    orbits in a magnetic field. For relativistic electrons, this frequency is</span>
+<span class="sd">    modified by the Lorentz factor of the electron.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gamma : float or array-like</span>
+<span class="sd">        Electron Lorentz factor.</span>
+
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_g : astropy.units.Quantity</span>
+<span class="sd">        Synchrotron gyrofrequency in Hz.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The gyrofrequency for a relativistic electron is given by</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_g = \frac{e B}{m_e c \gamma}</span>
+
+<span class="sd">    This function computes the gyrofrequency associated with</span>
+<span class="sd">    synchrotron emission from electrons of Lorentz factor ``gamma`` in</span>
+<span class="sd">    a magnetic field ``B``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_optimized_compute_nu_gyro</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span></div>
+
+
+
+<div class="viewcode-block" id="compute_nu_critical">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_nu_critical.html#radiation.synchrotron.frequencies.compute_nu_critical">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_nu_critical</span><span class="p">(</span>
+    <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron critical frequency for relativistic electrons.</span>
+
+<span class="sd">    The critical frequency corresponds to the frequency at which the synchrotron</span>
+<span class="sd">    emission from a relativistic electron peaks. This follows the formalism as described in</span>
+<span class="sd">    :footcite:t:`RybickiLightman`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    gamma : float or array-like</span>
+<span class="sd">        Electron Lorentz factor.</span>
+
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_critical : astropy.units.Quantity</span>
+<span class="sd">        Synchrotron critical frequency in Hz.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The critical frequency for a relativistic electron is given by</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_{critical} = \frac{3 e B \gamma^2}{4 \pi m_e c}</span>
+
+<span class="sd">    This function computes the critical frequency associated with</span>
+<span class="sd">    synchrotron emission from electrons of Lorentz factor ``gamma`` in</span>
+<span class="sd">    a magnetic field ``B``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">_optimized_compute_nu_critical</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span></div>
+
+
+
+<div class="viewcode-block" id="compute_nu_ssa">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.compute_nu_ssa.html#radiation.synchrotron.frequencies.compute_nu_ssa">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_nu_ssa</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="o">*</span><span class="p">,</span>
+    <span class="n">p</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">epsilon_E</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">gamma_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gamma_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the synchrotron self-absorption (SSA) frequency.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+
+<span class="sd">    R : float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Radius of the emitting region. Default units are cm.</span>
+
+<span class="sd">    p, f, theta, epsilon_B, epsilon_E, gamma_min, gamma_max</span>
+<span class="sd">        Standard synchrotron and microphysical parameters. See Notes.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    nu_ssa : astropy.units.Quantity</span>
+<span class="sd">        Synchrotron self-absorption frequency in Hz.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The SSA frequency is defined as the frequency at which the synchrotron</span>
+<span class="sd">    optical depth equals unity. This function implements equation (9) of</span>
+<span class="sd">    :footcite:t:`demarchiRadioAnalysisSN2004C2022`:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \nu_{\rm ssa} = 2 c_1 \left(\frac{4f R c_6 N_0}{3}\right)^{2/(p+4)} (B \sin\theta)^{(p+2)/(p+4)},</span>
+
+<span class="sd">    The normalization of the electron energy distribution is eliminated</span>
+<span class="sd">    analytically by equating the electron and magnetic energy densities:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        u_e = \epsilon_E u_{\rm int}, \quad</span>
+<span class="sd">        u_B = \epsilon_B u_{\rm int}.</span>
+
+<span class="sd">    For :math:`p \neq 2`, this introduces a correction factor</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \delta =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">        1, &amp; p &gt; 2 \\</span>
+<span class="sd">        (\gamma_{\max}/\gamma_{\min})^{2-p} - 1, &amp; p &lt; 2</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    which accounts for the convergence properties of the electron energy</span>
+<span class="sd">    integral.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="mi">2</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;compute_nu_ssa does not support p = 2 due to logarithmic divergence in the electron energy integral.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">_optimized_compute_nu_ssa</span><span class="p">(</span>
+        <span class="n">B</span><span class="o">=</span><span class="n">B</span><span class="p">,</span>
+        <span class="n">R</span><span class="o">=</span><span class="n">R</span><span class="p">,</span>
+        <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
+        <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
+        <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span>
+        <span class="n">epsilon_B</span><span class="o">=</span><span class="n">epsilon_B</span><span class="p">,</span>
+        <span class="n">epsilon_E</span><span class="o">=</span><span class="n">epsilon_E</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="o">=</span><span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">nu_ssa</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_determine_SYNCH_regime_from_nu</span><span class="p">(</span>
+    <span class="n">nu_m</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">nu_c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">nu_ssa</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Identify the synchrotron spectral regime based on the characteristic frequencies.</span>
+
+<span class="sd">    See the higher-level API function :func:`determine_synchrotron_regime_from_frequencies`</span>
+<span class="sd">    for documentation.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nu_m: array-like</span>
+<span class="sd">        The characteristic synchrotron frequency determined by the minimum energy electrons in the</span>
+<span class="sd">        population.</span>
+<span class="sd">    nu_c: array-like</span>
+<span class="sd">        The synchrotron cooling frequency. This may either be the standard synchrotron cooling frequency</span>
+<span class="sd">        or the inverse Compton cooling frequency, depending on context.</span>
+<span class="sd">    nu_ssa: array-like</span>
+<span class="sd">        The synchrotron self-absorption frequency.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    np.ndarray</span>
+<span class="sd">        The synchrotron spectral regime identifiers as an array of uint8 values.</span>
+<span class="sd">        Each value corresponds to a specific regime as described in the higher-level API function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Coerce all of the inputs to numpy arrays so that we can ensure correct</span>
+    <span class="c1"># mapping access.</span>
+    <span class="n">nu_m</span><span class="p">,</span> <span class="n">nu_c</span><span class="p">,</span> <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_m</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_c</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_ssa</span><span class="p">)</span>
+
+    <span class="c1"># Construct the relevant regime masks.</span>
+    <span class="n">_regime_1_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">nu_ssa</span> <span class="o">&lt;=</span> <span class="n">nu_m</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nu_m</span> <span class="o">&lt;</span> <span class="n">nu_c</span><span class="p">)</span>
+    <span class="n">_regime_2_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">nu_ssa</span> <span class="o">&gt;</span> <span class="n">nu_m</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nu_ssa</span> <span class="o">&lt;</span> <span class="n">nu_c</span><span class="p">)</span>
+    <span class="n">_regime_3_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">nu_c</span> <span class="o">&lt;=</span> <span class="n">nu_ssa</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nu_m</span> <span class="o">&lt;=</span> <span class="n">nu_ssa</span><span class="p">)</span>
+    <span class="n">_regime_4_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">nu_c</span> <span class="o">&lt;=</span> <span class="n">nu_ssa</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nu_ssa</span> <span class="o">&lt;</span> <span class="n">nu_m</span><span class="p">)</span>
+    <span class="n">_regime_5_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">nu_ssa</span> <span class="o">&lt;</span> <span class="n">nu_c</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">nu_c</span> <span class="o">&lt;</span> <span class="n">nu_m</span><span class="p">)</span>
+
+    <span class="c1"># Initialize output array</span>
+    <span class="n">regime_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">nu_m</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+    <span class="n">regime_ids</span><span class="p">[</span><span class="n">_regime_1_mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">regime_ids</span><span class="p">[</span><span class="n">_regime_2_mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">regime_ids</span><span class="p">[</span><span class="n">_regime_3_mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">regime_ids</span><span class="p">[</span><span class="n">_regime_4_mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+    <span class="n">regime_ids</span><span class="p">[</span><span class="n">_regime_5_mask</span><span class="p">]</span> <span class="o">=</span> <span class="mi">5</span>
+
+    <span class="k">return</span> <span class="n">regime_ids</span>
+
+
+<div class="viewcode-block" id="determine_synch_regime_from_frequencies">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.determine_synch_regime_from_frequencies.html#radiation.synchrotron.frequencies.determine_synch_regime_from_frequencies">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">determine_synch_regime_from_frequencies</span><span class="p">(</span>
+    <span class="n">nu_m</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">nu_c</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">nu_ssa</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the synchrotron spectral regime based on characteristic frequencies.</span>
+
+<span class="sd">    This function classifies the synchrotron spectral regime by comparing the characteristic</span>
+<span class="sd">    frequencies: the minimum electron frequency (:math:`nu_m`), the cooling frequency (:math:`nu_c`), and the</span>
+<span class="sd">    self-absorption frequency (:math:`nu_a`). The classification follows standard synchrotron theory</span>
+<span class="sd">    and is useful for interpreting synchrotron emission spectra.</span>
+
+<span class="sd">    Following the convention of :footcite:t:`GranotSari2002SpectralBreaks`, the regimes are defined as</span>
+
+<span class="sd">    .. list-table::</span>
+<span class="sd">       :widths: auto</span>
+<span class="sd">       :header-rows: 1</span>
+
+<span class="sd">       * - Regime</span>
+<span class="sd">         - Condition</span>
+<span class="sd">         - Description</span>
+<span class="sd">       * - I</span>
+<span class="sd">         - :math:`\nu_a &lt; \nu_m &lt; \nu_c`</span>
+<span class="sd">         - Slow cooling, optically thin peak.</span>
+<span class="sd">       * - II</span>
+<span class="sd">         - :math:`\nu_m &lt; \nu_a &lt; \nu_c`</span>
+<span class="sd">         - Slow cooling, optically thick peak.</span>
+<span class="sd">       * - III</span>
+<span class="sd">         - :math:`\nu_a &gt; \nu_c, \nu_m`</span>
+<span class="sd">         - SSA dominated.</span>
+<span class="sd">       * - IV</span>
+<span class="sd">         - :math:`\nu_c &lt; \nu_{a} &lt; \nu_m`</span>
+<span class="sd">         - Fast cooling, optically thick</span>
+<span class="sd">       * - V</span>
+<span class="sd">         - :math:`\nu_a &lt; \nu_c &lt; \nu_m`</span>
+<span class="sd">         - Fast cooling, optically thin.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    nu_m: float or numpy.ndarray or astropy.units.Quantity</span>
+<span class="sd">        The characteristic synchrotron frequency determined by the minimum energy electrons in the</span>
+<span class="sd">        population. This can be computed using :func:`compute_characteristic_frequency`.</span>
+<span class="sd">    nu_c: float or numpy.ndarray or astropy.units.Quantity</span>
+<span class="sd">        The synchrotron cooling frequency. This can be computed using :func:`compute_cooling_frequency`</span>
+<span class="sd">        or :func:`compute_IC_cooling_frequency`, depending on the cooling mechanism.</span>
+<span class="sd">    nu_ssa: float or numpy.ndarray or astropy.units.Quantity</span>
+<span class="sd">        The synchrotron self-absorption frequency. This can be computed using :func:`compute_nu_ssa`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray</span>
+<span class="sd">        An array of integers (uint8) representing the synchrotron spectral regime for each set of input frequencies.</span>
+<span class="sd">        Each value corresponds to the numerical designation of the regime as described above (1 through 5).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Coerce all unit-bearing inputs to Hz</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">nu_m</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">nu_m</span> <span class="o">=</span> <span class="n">nu_m</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">nu_c</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">nu_c</span> <span class="o">=</span> <span class="n">nu_c</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">nu_ssa</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">nu_ssa</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+
+    <span class="c1"># Pass off to the low-level implementation</span>
+    <span class="n">regime_ids</span> <span class="o">=</span> <span class="n">_determine_SYNCH_regime_from_nu</span><span class="p">(</span><span class="n">nu_m</span><span class="p">,</span> <span class="n">nu_c</span><span class="p">,</span> <span class="n">nu_ssa</span><span class="p">)</span>
+
+    <span class="c1"># Check for pass through without assignment.</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">regime_ids</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to assign synchrotron regime ID for some input frequencies.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if we have a 1D array with a single element and return scalar if so</span>
+    <span class="k">if</span> <span class="n">regime_ids</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">regime_ids</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">regime_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">regime_ids</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_determine_SYNCH_regime_from_physics</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">p</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">epsilon_E</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">gamma_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gamma_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the synchrotron spectral regime based on physical parameters assuming either cooling scheme.</span>
+
+<span class="sd">    This function computes the characteristic frequencies (:math:`\nu_m`, :math:`\nu_c`, :math:`\nu_a`)</span>
+<span class="sd">    from the provided physical parameters and then classifies the synchrotron spectral regime</span>
+<span class="sd">    by comparing these frequencies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute the relevant frequencies. We use CHARACTERISTIC, not CRITICAL following the</span>
+    <span class="c1"># standard convention for nu_m in deMarchi+.</span>
+    <span class="n">nu_m</span> <span class="o">=</span> <span class="n">_optimized_compute_characteristic_frequency</span><span class="p">(</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">nu_c_IC</span> <span class="o">=</span> <span class="n">_optimized_compute_IC_cooling_frequency</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">nu_c_synch</span> <span class="o">=</span> <span class="n">_optimized_compute_cooling_frequency</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">nu_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">nu_c_IC</span><span class="p">,</span> <span class="n">nu_c_synch</span><span class="p">)</span>
+    <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">_optimized_compute_nu_ssa</span><span class="p">(</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">R</span><span class="p">,</span>
+        <span class="n">p</span><span class="p">,</span>
+        <span class="n">f</span><span class="p">,</span>
+        <span class="n">theta</span><span class="p">,</span>
+        <span class="n">epsilon_B</span><span class="p">,</span>
+        <span class="n">epsilon_E</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Now return the regime IDs:</span>
+    <span class="k">return</span> <span class="n">_determine_SYNCH_regime_from_nu</span><span class="p">(</span><span class="n">nu_m</span><span class="p">,</span> <span class="n">nu_c</span><span class="p">,</span> <span class="n">nu_ssa</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_determine_SYNCH_regime_from_physics_IC_cooling</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">p</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">epsilon_E</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">gamma_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gamma_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the synchrotron spectral regime based on physical parameters assuming IC cooling.</span>
+
+<span class="sd">    This function computes the characteristic frequencies (:math:`\nu_m`, :math:`\nu_c`, :math:`\nu_a`)</span>
+<span class="sd">    from the provided physical parameters and then classifies the synchrotron spectral regime</span>
+<span class="sd">    by comparing these frequencies.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute the relevant frequencies. We use CHARACTERISTIC, not CRITICAL following the</span>
+    <span class="c1"># standard convention for nu_m in deMarchi+.</span>
+    <span class="n">nu_m</span> <span class="o">=</span> <span class="n">_optimized_compute_characteristic_frequency</span><span class="p">(</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">nu_c</span> <span class="o">=</span> <span class="n">_optimized_compute_IC_cooling_frequency</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">_optimized_compute_nu_ssa</span><span class="p">(</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">R</span><span class="p">,</span>
+        <span class="n">p</span><span class="p">,</span>
+        <span class="n">f</span><span class="p">,</span>
+        <span class="n">theta</span><span class="p">,</span>
+        <span class="n">epsilon_B</span><span class="p">,</span>
+        <span class="n">epsilon_E</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Now return the regime IDs:</span>
+    <span class="k">return</span> <span class="n">_determine_SYNCH_regime_from_nu</span><span class="p">(</span><span class="n">nu_m</span><span class="p">,</span> <span class="n">nu_c</span><span class="p">,</span> <span class="n">nu_ssa</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_determine_SYNCH_regime_from_physics_synchrotron_cooling</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">p</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">epsilon_E</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">gamma_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gamma_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the synchrotron spectral regime based on physical parameters assuming synchrotron cooling.</span>
+
+<span class="sd">    This function computes the characteristic frequencies (:math:`\nu_m`, :math:`\nu_c`, :math:`\nu_a`)</span>
+<span class="sd">    from the provided physical parameters and then classifies the synchrotron spectral regime</span>
+<span class="sd">    by comparing these frequencies.</span>
+
+<span class="sd">    This is done via calls to the various low-level helper functions that compute the relevant frequencies</span>
+<span class="sd">    and then a final call to the regime identification function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute the relevant frequencies. We use CHARACTERISTIC, not CRITICAL following the</span>
+    <span class="c1"># standard convention for nu_m in deMarchi+.</span>
+    <span class="n">nu_m</span> <span class="o">=</span> <span class="n">_optimized_compute_characteristic_frequency</span><span class="p">(</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">nu_c</span> <span class="o">=</span> <span class="n">_optimized_compute_cooling_frequency</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">nu_ssa</span> <span class="o">=</span> <span class="n">_optimized_compute_nu_ssa</span><span class="p">(</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">R</span><span class="p">,</span>
+        <span class="n">p</span><span class="p">,</span>
+        <span class="n">f</span><span class="p">,</span>
+        <span class="n">theta</span><span class="p">,</span>
+        <span class="n">epsilon_B</span><span class="p">,</span>
+        <span class="n">epsilon_E</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Now return the regime IDs:</span>
+    <span class="k">return</span> <span class="n">_determine_SYNCH_regime_from_nu</span><span class="p">(</span><span class="n">nu_m</span><span class="p">,</span> <span class="n">nu_c</span><span class="p">,</span> <span class="n">nu_ssa</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="determine_synch_regime_from_phys">
+<a class="viewcode-back" href="../../../_as_gen/radiation.synchrotron.frequencies.determine_synch_regime_from_phys.html#radiation.synchrotron.frequencies.determine_synch_regime_from_phys">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">determine_synch_regime_from_phys</span><span class="p">(</span>
+    <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">t</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">R</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+    <span class="n">L_bol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">p</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
+    <span class="n">f</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">epsilon_E</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">gamma_min</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">gamma_max</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Determine the synchrotron spectral regime based on physical parameters.</span>
+
+<span class="sd">    This function computes the characteristic frequencies (:math:`\nu_m`, :math:`\nu_c`, :math:`\nu_a`)</span>
+<span class="sd">    from the provided physical parameters and then classifies the synchrotron spectral regime</span>
+<span class="sd">    by comparing these frequencies.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    B: float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Magnetic field strength. Default units are Gauss.</span>
+<span class="sd">    t: float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Time since electron acceleration. Default units are seconds.</span>
+<span class="sd">    R: float, array-like, or astropy.units.Quantity</span>
+<span class="sd">        Radius of the emitting region. Default units are cm.</span>
+<span class="sd">    L_bol: float, array-like, or astropy.units.Quantity, optional</span>
+<span class="sd">        Bolometric luminosity of the radiation field. Default units are erg/s. If not provided,</span>
+<span class="sd">        only synchrotron cooling is considered.</span>
+<span class="sd">    p: float or array-like, optional</span>
+<span class="sd">        Power-law index of the electron energy distribution. Default is 3.0.</span>
+<span class="sd">    f: float or array-like, optional</span>
+<span class="sd">        Filling factor of the emitting region. Default is 0.5.</span>
+<span class="sd">    theta: float or array-like, optional</span>
+<span class="sd">        Pitch angle between the electron velocity and the magnetic field. Default is pi/2 (90 degrees).</span>
+<span class="sd">    epsilon_B: float or array-like, optional</span>
+<span class="sd">        Fraction of the internal energy in the magnetic field. Default is 0.1.</span>
+<span class="sd">    epsilon_E: float or array-like, optional</span>
+<span class="sd">        Fraction of the internal energy in the electrons. Default is 0.1.</span>
+<span class="sd">    gamma_min: float or array-like, optional</span>
+<span class="sd">        Minimum Lorentz factor of the electron energy distribution. Default is 1.0.</span>
+<span class="sd">    gamma_max: float or array-like, optional</span>
+<span class="sd">        Maximum Lorentz factor of the electron energy distribution. Default is 1e6.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    numpy.ndarray or int</span>
+<span class="sd">        An array of integers (uint8) representing the synchrotron spectral regime for each set of input parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Coerce to CGS</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Gauss</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">L_bol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">L_bol</span><span class="p">,</span> <span class="s2">&quot;units&quot;</span><span class="p">):</span>
+        <span class="n">L_bol</span> <span class="o">=</span> <span class="n">L_bol</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="c1"># Determine which evaluation function we&#39;re going to use.</span>
+    <span class="k">if</span> <span class="n">L_bol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">evaluator</span> <span class="o">=</span> <span class="n">_determine_SYNCH_regime_from_physics_synchrotron_cooling</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">evaluator</span> <span class="o">=</span> <span class="n">_determine_SYNCH_regime_from_physics</span>
+
+    <span class="c1"># Now compute</span>
+    <span class="n">regime_ids</span> <span class="o">=</span> <span class="n">evaluator</span><span class="p">(</span>
+        <span class="n">B</span><span class="o">=</span><span class="n">B</span><span class="p">,</span>
+        <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+        <span class="n">R</span><span class="o">=</span><span class="n">R</span><span class="p">,</span>
+        <span class="n">L_bol</span><span class="o">=</span><span class="n">L_bol</span><span class="p">,</span>
+        <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span>
+        <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span>
+        <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span>
+        <span class="n">epsilon_B</span><span class="o">=</span><span class="n">epsilon_B</span><span class="p">,</span>
+        <span class="n">epsilon_E</span><span class="o">=</span><span class="n">epsilon_E</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="o">=</span><span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Check for pass through without assignment.</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">regime_ids</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to assign synchrotron regime ID for some input frequencies.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Check if we have a 1D array with a single element and return scalar if so</span>
+    <span class="k">if</span> <span class="n">regime_ids</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">regime_ids</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">regime_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">regime_ids</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Eliza Diggins.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

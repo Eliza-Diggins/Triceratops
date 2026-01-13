@@ -1,0 +1,6 @@
+inference.likelihood.single\_epoch\_photometry.GaussianPhotometryLikelihood.COMPATIBLE\_MODELS
+==============================================================================================
+
+.. currentmodule:: inference.likelihood.single_epoch_photometry
+
+.. autoattribute:: GaussianPhotometryLikelihood.COMPATIBLE_MODELS

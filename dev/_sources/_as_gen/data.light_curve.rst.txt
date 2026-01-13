@@ -1,0 +1,24 @@
+﻿data.light_curve
+================
+
+.. automodule:: data.light_curve
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

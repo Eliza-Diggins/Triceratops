@@ -1,0 +1,6 @@
+dynamics.rankine\_hugoniot.compute\_SH\_magnetic\_field
+=======================================================
+
+.. currentmodule:: dynamics.rankine_hugoniot
+
+.. autofunction:: compute_SH_magnetic_field
