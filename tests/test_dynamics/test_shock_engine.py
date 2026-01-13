@@ -11,7 +11,6 @@ import pytest
 from astropy import units as u
 from numpy.testing import assert_allclose
 
-from tests.conftest import diagnostic_plots
 from triceratops.dynamics.supernovae.shock_dynamics import (
     ChevalierSelfSimilarShockEngine,
     NumericalThinShellShockEngine,
@@ -106,7 +105,7 @@ class TestNumericalThinShellShockEngine:
     @pytest.fixture(scope="class")
     def relative_tolerance(self):
         """The relative tolerance to use for comparisons."""
-        return 5e-2
+        return 1e-5
 
     @pytest.fixture(scope="class")
     def time_grid(self):
