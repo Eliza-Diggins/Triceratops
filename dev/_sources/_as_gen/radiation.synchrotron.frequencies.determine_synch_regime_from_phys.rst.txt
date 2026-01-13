@@ -1,0 +1,6 @@
+radiation.synchrotron.frequencies.determine\_synch\_regime\_from\_phys
+======================================================================
+
+.. currentmodule:: radiation.synchrotron.frequencies
+
+.. autofunction:: determine_synch_regime_from_phys

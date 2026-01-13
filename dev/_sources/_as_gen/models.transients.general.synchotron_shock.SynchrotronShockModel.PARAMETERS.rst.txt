@@ -1,0 +1,6 @@
+models.transients.general.synchotron\_shock.SynchrotronShockModel.PARAMETERS
+============================================================================
+
+.. currentmodule:: models.transients.general.synchotron_shock
+
+.. autoattribute:: SynchrotronShockModel.PARAMETERS
