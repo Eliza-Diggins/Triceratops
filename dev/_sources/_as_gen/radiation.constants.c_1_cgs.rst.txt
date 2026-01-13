@@ -1,6 +1,0 @@
-radiation.constants.c\_1\_cgs
-=============================
-
-.. currentmodule:: radiation.constants
-
-.. autodata:: c_1_cgs
