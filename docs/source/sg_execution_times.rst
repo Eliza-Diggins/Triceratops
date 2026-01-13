@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:17.715** total execution time for 4 files **from all galleries**:
+**00:11.768** total execution time for 4 files **from all galleries**:
 
 .. container::
 
@@ -33,14 +33,14 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_b_inference_plot_SED_fit.py` (``galleries/examples/b_inference/plot_SED_fit.py``)
-     - 00:17.715
+     - 00:10.838
      - 0.0
    * - :ref:`sphx_glr_auto_examples_a_data_plot_epoch_photometry.py` (``galleries/examples/a_data/plot_epoch_photometry.py``)
-     - 00:00.000
+     - 00:00.508
      - 0.0
    * - :ref:`sphx_glr_auto_examples_a_data_plot_photometry_data.py` (``galleries/examples/a_data/plot_photometry_data.py``)
-     - 00:00.000
+     - 00:00.247
      - 0.0
    * - :ref:`sphx_glr_auto_examples_c_models_plot_chevalier_shock_synchrotron.py` (``galleries/examples/c_models/plot_chevalier_shock_synchrotron.py``)
-     - 00:00.000
+     - 00:00.175
      - 0.0

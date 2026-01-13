@@ -59,6 +59,11 @@ of the system being modeled. These building blocks can be combined in various wa
 capture the nuances of radio observations. The following guides provide an overview of the various modules and
 the constituent physics:
 
+.. toctree::
+    :maxdepth: 1
+
+    physics/shocks/overview
+    physics/radiation/overview
 
 
 Extensions and 3rd Party Libraries
@@ -68,32 +73,9 @@ Extensions and 3rd Party Libraries
 Configuration and Setup
 ------------------------
 
-
-Methodology, Theory, and Systems
----------------------------------
-As a highly technical library, triceratops relies on a number of advanced methodologies and theoretical concepts to
-achieve its goals. This section provides an overview of the key methodologies and theories that underpin the
-library, including the mathematical foundations and algorithms used in the modeling and inference processes. Where
-possible, we cover high level details of relevant theory in the broad theory-based sections and provide
-more detailed, case-specific, considerations to the discussions about specific systems.
-
-.. toctree::
-    :maxdepth: 1
-
-    shocks/overview.rst
-
-
-
-Systems
-^^^^^^^
-
-Below are a number of guides that cover specific systems modeled in triceratops, including the relevant physics,
-methodologies, and considerations for each system.
-
-Supernovae
-~~~~~~~~~~
-
-.. toctree::
-   :maxdepth: 2
-
-   physics/supernovae/shocks
+Analysis Guides
+----------------
+Having now covered all of the core infrastructure of the Triceratops library, we can now turn to the analysis pipelines that
+leverage these components to perform scientific inference and other important workflows. The goal of the guides in this section
+is to provide a comprehensive overview of the standard methods used in the literature to analyze various types of radio transients
+and how to perform those analyses using Triceratops. We break down the guides by system.
