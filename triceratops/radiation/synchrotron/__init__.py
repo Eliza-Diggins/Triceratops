@@ -9,6 +9,6 @@ These tools can be integrated with dynamical models of astrophysical transients 
 produce comprehensive simulations of radiation from events like supernovae and gamma-ray bursts.
 """
 
-__all__ = ["distributions", "frequencies", "SEDs", "utils"]
+__all__ = ["microphysics", "frequencies", "SEDs", "utils"]
 
-from . import SEDs, distributions, frequencies, utils
+from . import SEDs, frequencies, microphysics, utils
