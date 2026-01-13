@@ -6,11 +6,11 @@ Triceratops
 ===========
 
 +-------------------+----------------------------------------------------------+
-| **Code**          | |RUFF| |PRE-COMMIT| |ASTROPY|                            |
+| **Code**          | |RUFF| |PRE-COMMIT| |ASTROPY| |ISORT|                    |
 +-------------------+----------------------------------------------------------+
-| **Documentation** | |docs| |docs-stable| |numpydoc|                          |
+| **Documentation** | |docs| |docs-stable| |numpydoc| |docformatter|           |
 +-------------------+----------------------------------------------------------+
-| **GitHub**        | |CONTRIBUTORS| |LAST-COMMIT|                             |
+| **GitHub**        | |CONTRIBUTORS| |LAST-COMMIT| |Tests|                     |
 |                   | |COMMITIZEN| |CONVENTIONAL-COMMITS|                      |
 +-------------------+----------------------------------------------------------+
 | **PyPi**          | Coming Soon                                              |
@@ -76,6 +76,7 @@ If you use Triceratops in your research, please cite or acknowledge it with text
     We acknowledge the use of the Triceratops software package, written by E. Diggins et al., in this work.
 
 
+.. |Tests| image:: https://github.com/eliza-diggins/Triceratops/actions/workflows/run_tests.yml/badge.svg
 
 .. |docs| image:: https://img.shields.io/badge/docs-latest-brightgreen.svg
    :target: https://Eliza-Diggins.github.io/Triceratops
@@ -116,3 +117,9 @@ If you use Triceratops in your research, please cite or acknowledge it with text
 .. |ASTROPY| image:: http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat
    :target: http://www.astropy.org/
    :alt: Powered by Astropy
+
+.. |docformatter| image:: https://img.shields.io/badge/%20formatter-docformatter-fedcba
+    :target: https://github.com/PyCQA/docformatter
+
+.. |isort| image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
+   :target: https://pycqa.github.io/isort/

@@ -19,6 +19,7 @@ nested dictionary with automatic loading and saving.
 import os
 from collections.abc import MutableMapping
 from pathlib import Path
+from typing import Union
 
 from platformdirs import user_config_dir
 
@@ -48,7 +49,7 @@ class ConfigManager(MutableMapping):
     __YAML__ = unit_compatible_yaml
     """ The YAML manager."""
 
-    def __init__(self, path: str | Path, autosave: bool = True):
+    def __init__(self, path: Union[str, Path], autosave: bool = True):
         self._path = Path(path).expanduser().resolve()
         self._autosave = autosave
         self._data = self._load()
