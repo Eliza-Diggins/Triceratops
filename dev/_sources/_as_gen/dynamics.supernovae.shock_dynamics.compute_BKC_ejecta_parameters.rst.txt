@@ -1,6 +1,0 @@
-dynamics.supernovae.shock\_dynamics.compute\_BKC\_ejecta\_parameters
-====================================================================
-
-.. currentmodule:: dynamics.supernovae.shock_dynamics
-
-.. autofunction:: compute_BKC_ejecta_parameters

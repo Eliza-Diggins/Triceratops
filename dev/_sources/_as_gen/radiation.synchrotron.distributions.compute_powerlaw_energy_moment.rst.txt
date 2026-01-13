@@ -1,6 +1,0 @@
-radiation.synchrotron.distributions.compute\_powerlaw\_energy\_moment
-=====================================================================
-
-.. currentmodule:: radiation.synchrotron.distributions
-
-.. autofunction:: compute_powerlaw_energy_moment

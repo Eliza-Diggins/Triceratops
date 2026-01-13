@@ -1,6 +1,0 @@
-profiles.double\_BPL
-====================
-
-.. currentmodule:: profiles
-
-.. autofunction:: double_BPL
