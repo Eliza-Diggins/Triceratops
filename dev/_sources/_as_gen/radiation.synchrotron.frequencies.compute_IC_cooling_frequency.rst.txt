@@ -1,0 +1,6 @@
+radiation.synchrotron.frequencies.compute\_IC\_cooling\_frequency
+=================================================================
+
+.. currentmodule:: radiation.synchrotron.frequencies
+
+.. autofunction:: compute_IC_cooling_frequency

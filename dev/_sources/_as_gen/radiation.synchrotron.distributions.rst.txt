@@ -1,0 +1,34 @@
+radiation.synchrotron.distributions
+===================================
+
+.. automodule:: radiation.synchrotron.distributions
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      compute_powerlaw_energy_moment
+      compute_powerlaw_normalization_from_microphysics
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
