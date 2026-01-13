@@ -1,0 +1,34 @@
+radiation.synchrotron.utils
+===========================
+
+.. automodule:: radiation.synchrotron.utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      compute_c5_parameter
+      compute_c6_parameter
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

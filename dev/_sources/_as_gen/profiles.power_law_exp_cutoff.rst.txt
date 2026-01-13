@@ -1,0 +1,6 @@
+profiles.power\_law\_exp\_cutoff
+================================
+
+.. currentmodule:: profiles
+
+.. autofunction:: power_law_exp_cutoff

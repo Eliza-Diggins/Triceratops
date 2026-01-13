@@ -1,0 +1,6 @@
+inference.likelihood.single\_epoch\_photometry.GaussianPhotometryLikelihood.n\_sigma\_upper\_limit
+==================================================================================================
+
+.. currentmodule:: inference.likelihood.single_epoch_photometry
+
+.. autoattribute:: GaussianPhotometryLikelihood.n_sigma_upper_limit
