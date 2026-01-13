@@ -1,6 +1,0 @@
-profiles.power\_law
-===================
-
-.. currentmodule:: profiles
-
-.. autofunction:: power_law

@@ -1,6 +1,0 @@
-radiation.synchrotron.frequencies.compute\_gyrofrequency
-========================================================
-
-.. currentmodule:: radiation.synchrotron.frequencies
-
-.. autofunction:: compute_gyrofrequency
