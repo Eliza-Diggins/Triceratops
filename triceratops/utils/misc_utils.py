@@ -41,7 +41,7 @@ def ensure_in_units(value, unit):
 
     Returns
     -------
-    astropy.units.Quantity
+    float
         The value in the specified units.
     """
     import astropy.units as u
