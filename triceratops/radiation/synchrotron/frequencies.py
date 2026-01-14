@@ -1,11 +1,10 @@
 """
-Module for computing synchrotron frequencies of various sorts.
+Module for computing various synchrotron characteristic frequencies.
 
-This module provides functions to compute key synchrotron frequencies used in
-modeling synchrotron radiation from astrophysical sources. These include the
-synchrotron cooling frequency, characteristic frequency, gyrofrequency,
-and synchrotron self-absorption frequency. The functions are optimized for
-CGS units for performance-critical applications.
+This module provides utilities for computing cooling frequencies, characteristic frequencies,
+gyrofrequencies, critical frequencies, and synchrotron self-absorption frequencies in a number of situations.
+As with all of the backend modules, this module exposes both the CGS only optimized implementations
+and higher-level API functions that perform unit coercion and validation.
 """
 
 from typing import Union
@@ -28,9 +27,12 @@ __all__ = [
     "compute_nu_ssa",
 ]
 
-# ==================================================== #
-# CGS CONSTANTS FOR SYNCHROTRON FREQUENCY CALCULATIONS #
-# ==================================================== #
+# ================================================ #
+# Constants for optimized Low-Level API Calls      #
+# ================================================ #
+# Calls to astropy for constant coercion are somewhat expensive because
+# they rely on a symbolic backend. Better make that call once here and then simply
+# reference the pre-computed values in the optimized functions.
 _cooling_frequency_coefficient_cgs = (
     (18 * np.pi * constants.m_e * constants.c * constants.e.esu) / (constants.sigma_T**2)
 ).cgs.value
