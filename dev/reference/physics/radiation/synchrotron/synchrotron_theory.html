@@ -1,0 +1,1430 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Synchrotron Radiation Theory &#8212; Triceratops  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/physics/radiation/synchrotron/synchrotron_theory';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Triceratops  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Synchrotron Radiation Theory</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="synchrotron-radiation-theory">
+<span id="synchrotron-theory"></span><h1>Synchrotron Radiation Theory<a class="headerlink" href="#synchrotron-radiation-theory" title="Link to this heading">#</a></h1>
+<p>Synchrotron radiation is one of the most fundamental radiative processes in the world of transient astrophysics. It is
+responsible for a wide variety of observed phenomena, from the radio afterglows of gamma-ray bursts (GRBs) to the emission from
+active galactic nuclei (AGN) jets. Because Triceratops is so heavily reliant on synchrotron radiation for modeling
+transient sources, it is important to have a solid understanding of the theory; particularly the conventions and
+terminology used throughout the Triceratops documentation.</p>
+<p>In this documentation, we seek to provide a concise overview of the topics one needs to understand to begin using
+Triceratops for synchrotron modeling. We cannot hope to provide a comprehensive review of synchrotron radiation theory;
+however, we provide references throughout to more detailed treatments of the subject and the relevant literature
+for various results.</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#synchrotron-from-a-single-electron" id="id22">Synchrotron From a Single Electron</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-cyclotron-frequency" id="id23">The Cyclotron Frequency</a></p></li>
+<li><p><a class="reference internal" href="#synchrotron-power" id="id24">Synchrotron Power</a></p></li>
+<li><p><a class="reference internal" href="#the-characteristic-synchrotron-frequency" id="id25">The Characteristic Synchrotron Frequency</a></p></li>
+<li><p><a class="reference internal" href="#the-single-electron-synchrotron-spectrum" id="id26">The Single Electron Synchrotron Spectrum</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#synchrotron-from-a-population-of-electrons" id="id27">Synchrotron From A Population of Electrons</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-spectrum-of-a-power-law-distribution" id="id28">The Spectrum of a Power-Law Distribution</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#microphysical-closures-and-equipartition" id="id29">Microphysical Closures and Equipartition</a></p>
+<ul>
+<li><p><a class="reference internal" href="#equipartition" id="id30">Equipartition</a></p></li>
+<li><p><a class="reference internal" href="#power-law-electron-distributions" id="id31">Power-Law Electron Distributions</a></p></li>
+<li><p><a class="reference internal" href="#cooling-of-electrons" id="id32">Cooling of Electrons</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#absorption-processes-in-synchrotron-radiation" id="id33">Absorption Processes in Synchrotron Radiation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#synchrotron-emissivity-and-absorption" id="id34">Synchrotron Emissivity and Absorption</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#spectral-regimes-of-synchrotron-seds" id="id35">Spectral Regimes of Synchrotron SEDs</a></p>
+<ul>
+<li><p><a class="reference internal" href="#review-of-important-frequencies" id="id36">Review of Important Frequencies</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#references" id="id37">References</a></p></li>
+</ul>
+</nav>
+<section id="synchrotron-from-a-single-electron">
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">Synchrotron From a Single Electron</a><a class="headerlink" href="#synchrotron-from-a-single-electron" title="Link to this heading">#</a></h2>
+<p>To describe, from first principles, the relevant synchrotron theory used in Triceratops, we first need to develop
+the emission of a single relativistic electron spiraling in a magnetic field. With that in hand, it will be a
+relatively straightforward process to extend to a population of electrons with some distribution function.</p>
+<p>Synchrotron emission is the relativistic generalization of cyclotron emission, which is the radiation emitted
+by a charged particle spiraling in a magnetic field. The key difference is that in the relativistic case, the
+emission is beamed in the direction of motion of the particle, leading to a characteristic spectrum and angular distribution.</p>
+<p>From the Fourier uncertainty principle, the shorter a pulse of radiation lasts in time, the broader its frequency
+composition must be. Thus, for the relativistic electrons in this case, the emission is concentrated in short pulses
+as the electron’s velocity vector sweeps past the observer. This leads to a characteristic synchrotron spectrum which
+can extend to very high frequencies.</p>
+<section id="the-cyclotron-frequency">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">The Cyclotron Frequency</a><a class="headerlink" href="#the-cyclotron-frequency" title="Link to this heading">#</a></h3>
+<p>In the classical case, we consider a magnetic field <span class="math notranslate nohighlight">\({\bf B} = B_0 \hat{\bf z}\)</span> and a particle of
+charge <span class="math notranslate nohighlight">\(q\)</span> bound to the :math:<a href="#id1"><span class="problematic" id="id2">`</span></a>x-y`plane. The <strong>Lorentz Force</strong> dictates that</p>
+<div class="math notranslate nohighlight">
+\[{\bf F} = m {\bf a} = \frac{q}{c}{\bf v} \times {\bf B}.\]</div>
+<p>This will cause gyroscopic motion about the field lines. We imagine constructing our coordinate system
+so that <span class="math notranslate nohighlight">\({\bf v}_0 = v_0 \hat{\bf x}.\)</span> Then we achieve a force always directed inward of magnitude</p>
+<div class="math notranslate nohighlight">
+\[F = \frac{qB_0v_0}{c} = m\omega^2 r \implies \omega = \frac{qB_0}{mc}.\]</div>
+<p>This is the <strong>cyclotron frequency</strong> of the particle:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\omega_{\rm cyclotron} = \frac{qB_0}{mc},\;\text{(gaussian units)}.
+}\]</div>
+<p>In the relativistic case, we must account for time dilation. The relativistic gyrofrequency is therefore</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\omega_B = \frac{qB_0}{\gamma mc},\;\text{(gaussian units)}.
+}\]</div>
+</section>
+<section id="synchrotron-power">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">Synchrotron Power</a><a class="headerlink" href="#synchrotron-power" title="Link to this heading">#</a></h3>
+<p>Already, because we know the acceleration of the electron, we can compute the total power emitted from synchrotron
+radiation using the Larmor formula. The Larmor formula states that the power emitted by an accelerating charge is</p>
+<div class="math notranslate nohighlight">
+\[P = \frac{2}{3} \frac{q^2 a^2}{c^3}.\]</div>
+<p>Given that the acceleration from the Lorentz force must maintain circular motion, we have</p>
+<div class="math notranslate nohighlight">
+\[a = \omega_B^2 r = \omega_B^2 v_{\perp} = \frac{qB_0 v_\perp}{\gamma m c}\]</div>
+<p>so,</p>
+<div class="math notranslate nohighlight">
+\[P = \frac{2}{3} \frac{q^4 \gamma^2 B^2}{c^5 m^2} v_{\perp}^2 = \frac{4}{3} \sigma_T c \beta^2 \gamma^2 U_B.\]</div>
+<p>In the relativistic limit (<span class="math notranslate nohighlight">\(\beta \approx 1\)</span>), this becomes</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+P_{\rm synch} = \frac{4}{3} \sigma_T c \gamma^2 U_B,
+}\]</div>
+<p>where <span class="math notranslate nohighlight">\(U_B = B^2/8\pi\)</span> is the magnetic energy density.</p>
+</section>
+<section id="the-characteristic-synchrotron-frequency">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">The Characteristic Synchrotron Frequency</a><a class="headerlink" href="#the-characteristic-synchrotron-frequency" title="Link to this heading">#</a></h3>
+<p>The critical physical insight that distinguishes <strong>synchrotron radiation</strong> from its
+non-relativistic cyclotron counterpart is the emergence of <strong>strong relativistic beaming</strong>.
+Although an accelerated charged particle emits radiation continuously in its instantaneous
+rest frame, relativistic aberration causes that emission to be concentrated into a narrow
+forward cone of angular width <span class="math notranslate nohighlight">\(\Delta\theta \sim 1/\gamma\)</span> in the lab frame.</p>
+<p>As a relativistic particle spirals along a magnetic field line, this forward emission cone
+does not remain pointed toward a distant observer. Instead, the observer receives radiation
+only during the brief interval when the cone sweeps across the line of sight. The observed
+signal therefore takes the form of a <strong>temporally localized pulse</strong>, rather than a continuous
+sinusoidal wave.</p>
+<p>From Fourier theory, a signal confined to a short interval in time necessarily corresponds to
+a <strong>broad frequency spectrum</strong>. Thus, even though the underlying motion of the particle is
+periodic, relativistic beaming transforms what would otherwise be narrow-band cyclotron
+emission into the broadband synchrotron spectrum characteristic of relativistic sources.</p>
+<p>The particle emits
+radiation into a cone of angular width <span class="math notranslate nohighlight">\(\Delta\theta \sim 2/\gamma\)</span>. As the particle
+moves along its curved trajectory of radius <span class="math notranslate nohighlight">\(a\)</span>, the arc length over which the observer
+remains inside the beam is approximately</p>
+<div class="math notranslate nohighlight">
+\[\Delta s \simeq \frac{2a}{\gamma}.\]</div>
+<p>The radius of the particle’s helical trajectory is</p>
+<div class="math notranslate nohighlight">
+\[r = \frac{v}{\omega_B \sin\varphi},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\varphi\)</span> is the pitch angle between the particle velocity and the magnetic field,
+and <span class="math notranslate nohighlight">\(\omega_B = qB/(\gamma m_e c)\)</span> is the relativistic gyrofrequency.</p>
+<p>The pulse begins when the edge of the emission cone first intersects the observer’s line of
+sight and ends when it exits the cone. The corresponding emission time interval is therefore</p>
+<div class="math notranslate nohighlight">
+\[\Delta t_{\rm emit}
+\simeq
+\frac{2}{\gamma \omega_B \sin\varphi}.\]</div>
+<p>Because photons emitted at the beginning and end of the pulse originate from different
+locations along the trajectory, there is an additional light-travel-time compression factor.
+Accounting for this effect yields an observed pulse duration</p>
+<div class="math notranslate nohighlight">
+\[\Delta t_{\rm obs}
+\simeq
+\frac{2}{\gamma \omega_B \sin\varphi}(1-\beta).\]</div>
+<p>In the ultra-relativistic limit, <span class="math notranslate nohighlight">\(1-\beta \simeq 1/(2\gamma^2)\)</span>, so the pulse duration
+scales as</p>
+<div class="math notranslate nohighlight">
+\[\Delta t_{\rm obs}
+\sim
+\frac{1}{\gamma^3 \omega_B \sin\varphi}.\]</div>
+<p>This timescale defines a characteristic upper frequency in the synchrotron spectrum,
+corresponding to the inverse pulse duration. We therefore define the <strong>critical synchrotron
+frequency</strong> as</p>
+<div class="math notranslate nohighlight">
+\[\omega_c
+=
+\frac{3}{2}\,\gamma^3 \omega_B \sin\varphi.\]</div>
+<p>Expressed as a linear frequency, this becomes</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\nu_c
+=
+\frac{3}{4\pi}\,\gamma^3 \omega_B \sin\varphi
+=
+\frac{3}{4\pi}\,\gamma^2\,\frac{qB}{m_e c}\,\sin\varphi.
+}\]</div>
+<p>Although <span class="math notranslate nohighlight">\(\nu_c\)</span> is often colloquially referred to as the “synchrotron frequency” or
+“fundamental frequency,” it does <strong>not</strong> correspond to the peak of the emitted spectrum.
+Instead, the single-electron synchrotron spectrum peaks at approximately
+<span class="math notranslate nohighlight">\(\nu \simeq 0.29\,\nu_c\)</span>. Nevertheless, <span class="math notranslate nohighlight">\(\nu_c\)</span> provides a convenient and physically
+meaningful scale that sets the overall frequency range of synchrotron emission.</p>
+<p>It is common to define the constant</p>
+<div class="math notranslate nohighlight">
+\[c_1 \equiv \frac{3e}{4\pi m_e c},\]</div>
+<p>in terms of which the characteristic frequency may be written compactly as</p>
+<div class="math notranslate nohighlight">
+\[\nu_c = c_1\,B\,\sin\varphi\,\gamma^2.\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>For populations of electrons, we often define the characteristic frequency as <span class="math notranslate nohighlight">\(\nu_c(\gamma)\)</span> for a
+particular choice of <span class="math notranslate nohighlight">\(\gamma\)</span>. In particular, when considering power-law distributions of electrons,
+we often define the characteristic frequency as that corresponding to the minimum Lorentz factor.</p>
+<p>The convention for this frequency varies by a constant of order unity in the literature. See the section below
+for the Triceratops convention.</p>
+</div>
+</section>
+<section id="the-single-electron-synchrotron-spectrum">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">The Single Electron Synchrotron Spectrum</a><a class="headerlink" href="#the-single-electron-synchrotron-spectrum" title="Link to this heading">#</a></h3>
+<p>In this section, we will derive the synchrotron spectrum of a single electron spiraling in a magnetic field. From
+elementary electrodynamics (see Rybicki and Lightman<a class="footnote-reference brackets" href="#footcite-rybickilightman" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> for a detailed treatment), the power radiated per unit
+frequency per unit solid angle is given by</p>
+<div class="math notranslate nohighlight">
+\[\frac{dE}{dt\,d\omega d\Omega} = \frac{q^2 \omega^2}{4\pi^2 c}\left|
+\int_{-\infty}^{\infty} \frac{\hat{n} \times (\hat{n} \times \beta)}{1-\hat{n} \cdot \beta}
+e^{i\omega(t' - \hat{n} \cdot r(t')/c)} dt' \right|^2.\]</div>
+<p>Consider an electron such that, at a retarded time <span class="math notranslate nohighlight">\(t' = 0\)</span>, it is a distance <span class="math notranslate nohighlight">\(a\)</span> from the origin and has
+velocity along the x-axis. Let
+the observer be oriented along <span class="math notranslate nohighlight">\(\hat{n}\)</span> and let the vector from the electron’s position to the origin be
+<span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}_\perp\)</span>. Let <span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}_\parallel = \hat{n} \times
+\boldsymbol{\epsilon}_\perp\)</span> be the vector perpendicular to both <span class="math notranslate nohighlight">\(\hat{n}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{\epsilon}_\perp\)</span>.
+Finally, let <span class="math notranslate nohighlight">\(\theta\)</span> be the angle between <span class="math notranslate nohighlight">\(\hat{\bf n}\)</span> and the x-axis.</p>
+<p>In this geometry, the phase angle of the electron in its orbit is just</p>
+<div class="math notranslate nohighlight">
+\[\phi = \frac{vt'}{a},\]</div>
+<p>and the velocity vector is</p>
+<div class="math notranslate nohighlight">
+\[\boldsymbol{\beta} = \beta \left(\cos \phi \hat{\bf x} + \sin \phi \boldsymbol{\epsilon}_\perp \right).\]</div>
+<p>Thus, the cross product in the integrand becomes</p>
+<div class="math notranslate nohighlight">
+\[\hat{n} \times (\hat{n} \times \beta) = \beta\left(\cos \phi \sin \theta \boldsymbol{\epsilon}_\parallel -
+\sin \phi \boldsymbol{\epsilon}_\perp \right).\]</div>
+<p>The phase term in the exponential is</p>
+<div class="math notranslate nohighlight">
+\[t - \frac{\hat{n} \cdot r(t')}{c} = t' - \frac{a}{c} \cos \theta \sin \phi.\]</div>
+<p>After some simplifications (see the drop down), we arrive at the final result for the power radiated per unit frequency
+per unit solid angle:</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Small-Angle Expansion and Evaluation of the Master Integral</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We now evaluate the master expression for the radiated energy in the relativistic limit.
+For ultra-relativistic particles we take <span class="math notranslate nohighlight">\(\beta \simeq 1\)</span>, and because synchrotron
+emission is concentrated into short pulses and strongly beamed, we may expand all angular
+quantities to lowest nontrivial order.</p>
+<p class="sd-card-text">In particular, for small angles <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> we use</p>
+<div class="math notranslate nohighlight">
+\[\cos\theta \simeq 1 - \frac{\theta^2}{2},
+\qquad
+\sin\phi \simeq \phi - \frac{\phi^3}{6},\]</div>
+<p class="sd-card-text">which implies</p>
+<div class="math notranslate nohighlight">
+\[\cos\theta\,\sin\phi
+\simeq
+\phi - \frac{\phi\theta^2}{2} - \frac{\phi^3}{6}.\]</div>
+<p class="sd-card-text">Using the orbital phase relation <span class="math notranslate nohighlight">\(\phi = vt'/a\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\cos\theta\,\sin\phi
+\simeq
+\frac{vt'}{a}\left(1 - \frac{\theta^2}{2}\right)
+- \frac{v^3 t'^3}{6a^3}.\]</div>
+<p class="sd-card-text">Substituting this into the phase factor of the exponential yields</p>
+<div class="math notranslate nohighlight">
+\[t - \frac{\hat{n}\cdot r(t')}{c}
+=
+(1 - \beta)t'
++ \frac{\beta\theta^2}{2}t'
++ \frac{\beta^3 c^2 t'^3}{6a^2}.\]</div>
+<p class="sd-card-text">Factoring out <span class="math notranslate nohighlight">\(\Gamma^{-2} \simeq 2(1-\beta)\)</span>, this may be written as</p>
+<div class="math notranslate nohighlight">
+\[t
+=
+\frac{1}{2\Gamma^2}
+\left[
+    \left(1 + \Gamma^2\theta^2\right)t'
+    + \frac{c^2\Gamma^2 t'^3}{3a^2}
+\right].\]</div>
+<p class="sd-card-text">The master formula may now be decomposed into its perpendicular and parallel polarization
+components. After simplification, we find</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{dE_\perp}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2}{4\pi^2 c}
+\left|
+\int_{-\infty}^{\infty}
+\frac{ct'}{a}
+\exp\!\left[
+    \frac{i\omega}{2\Gamma^2}
+    \left(
+        \Theta_\gamma^2 t'
+        + \frac{c^2\Gamma^2 t'^3}{3a^2}
+    \right)
+\right]
+dt'
+\right|^2, \\[6pt]
+\frac{dE_\parallel}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2\theta^2}{4\pi^2 c}
+\left|
+\int_{-\infty}^{\infty}
+\exp\!\left[
+    \frac{i\omega}{2\Gamma^2}
+    \left(
+        \Theta_\gamma^2 t'
+        + \frac{c^2\Gamma^2 t'^3}{3a^2}
+    \right)
+\right]
+dt'
+\right|^2,
+\end{aligned}\end{split}\]</div>
+<p class="sd-card-text">where we have defined</p>
+<div class="math notranslate nohighlight">
+\[\Theta_\gamma^2 \equiv 1 + \Gamma^2\theta^2.\]</div>
+<p class="sd-card-text">Although these integrals appear formidable, they may be reduced to standard forms by
+introducing the dimensionless variables</p>
+<div class="math notranslate nohighlight">
+\[y = \Gamma \frac{ct'}{a\Theta_\gamma},
+\qquad
+\eta = \frac{\omega a \Theta_\gamma^3}{3c\Gamma^3}.\]</div>
+<p class="sd-card-text">In terms of these variables, the expressions simplify to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boxed{
+\begin{aligned}
+\frac{dE_\perp}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2}{4\pi^2 c}
+\left(\frac{a\Theta_\gamma^2}{\Gamma^2 c}\right)^2
+\left|
+\int_{-\infty}^{\infty}
+y
+\exp\!\left[
+    \frac{3i\eta}{2}
+    \left(
+        y + \frac{y^3}{3}
+    \right)
+\right]
+dy
+\right|^2, \\[6pt]
+\frac{dE_\parallel}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2\theta^2}{4\pi^2 c}
+\left(\frac{a\Theta_\gamma}{\Gamma c}\right)^2
+\left|
+\int_{-\infty}^{\infty}
+y
+\exp\!\left[
+    \frac{3i\eta}{2}
+    \left(
+        y + \frac{y^3}{3}
+    \right)
+\right]
+dy
+\right|^2.
+\end{aligned}
+}\end{split}\]</div>
+<p class="sd-card-text">These integrals are well known and may be expressed in terms of modified Bessel functions.
+Evaluating them yields the standard synchrotron expressions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boxed{
+\begin{aligned}
+\frac{dE_\perp}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2}{3\pi c}
+\left(\frac{a\Theta_\gamma^2}{\Gamma^2 c}\right)^2
+K_{2/3}^2(\eta), \\[6pt]
+\frac{dE_\parallel}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2\theta^2}{3\pi^2 c}
+\left(\frac{a\Theta_\gamma}{\Gamma c}\right)^2
+K_{1/3}^2(\eta),
+\end{aligned}
+}\end{split}\]</div>
+<p class="sd-card-text">where <span class="math notranslate nohighlight">\(K_\nu\)</span> denotes the modified Bessel function of the second kind. Because the
+emission is strongly beamed, the dominant contribution arises near <span class="math notranslate nohighlight">\(\theta \simeq 0\)</span>,
+in which case</p>
+<div class="math notranslate nohighlight">
+\[\eta \simeq \frac{\omega}{2\omega_c},\]</div>
+<p class="sd-card-text">with <span class="math notranslate nohighlight">\(\omega_c\)</span> the characteristic synchrotron frequency.</p>
+</div>
+</details><div class="math notranslate nohighlight">
+\[\begin{split}\boxed{
+\begin{aligned}
+\frac{dE_\perp}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2}{3\pi c}
+\left(\frac{a\Theta_\gamma^2}{\Gamma^2 c}\right)^2
+K_{2/3}^2(\eta), \\[6pt]
+\frac{dE_\parallel}{dt\,d\omega\,d\Omega}
+&amp;=
+\frac{q^2\omega^2\theta^2}{3\pi^2 c}
+\left(\frac{a\Theta_\gamma}{\Gamma c}\right)^2
+K_{1/3}^2(\eta),
+\end{aligned}
+}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K_\nu\)</span> denotes the modified Bessel function of the second kind. Because the
+emission is strongly beamed, the dominant contribution arises near <span class="math notranslate nohighlight">\(\theta \simeq 0\)</span>,
+in which case</p>
+<div class="math notranslate nohighlight">
+\[\eta \simeq \frac{\omega}{2\omega_c},\]</div>
+<p>with <span class="math notranslate nohighlight">\(\omega_c\)</span> the characteristic synchrotron frequency.</p>
+<p>Because the radiation is strongly beamed, it will only emit into a thin band of solid angles with width approximately
+<span class="math notranslate nohighlight">\(1/\gamma\)</span> centered around the cone <span class="math notranslate nohighlight">\(1/\alpha\)</span> (see Rybicki and Lightman<a class="footnote-reference brackets" href="#footcite-rybickilightman" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> for details). Integrating
+over solid angle, we find the total power radiated per unit frequency is</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Details</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+</div>
+</details><div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+    \frac{dE_\perp}{dt\;d\omega} &amp;= \frac{\sqrt{3} q^2 \Gamma \sin \alpha}{2c}\left(F(x)+G(x)\right)\\
+    \frac{dE_\parallel}{dt\;d\omega} &amp;= \frac{\sqrt{3}q^2 \Gamma \sin \alpha}{2c} \left(F(x)-G(x)\right)
+\end{aligned}\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[F(x) = x \int_x^\infty K_{5/3}(\xi)\;d\xi,\;\;G(x) = xK_{2/3}(x).\]</div>
+<p>Summing these two contributions, the total power radiated per unit frequency is</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+P(\omega) = \frac{\sqrt{3}q^3 B \sin\alpha}{2\pi m c^2} F\left(\frac{\omega}{\omega_c}\right),
+}\]</div>
+<p>In terms of frequency,</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+P(\nu) = \frac{\sqrt{3}q^3 B \sin\alpha}{m c^2} F\left(\frac{\nu}{\nu_c}\right),
+}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\nu_c\)</span> is the characteristic synchrotron frequency defined previously.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In Triceratops, <span class="math notranslate nohighlight">\(F(x)\)</span> is referred to as the <strong>first synchrotron kernel</strong> and <span class="math notranslate nohighlight">\(G(x)\)</span> as
+the <strong>second synchrotron kernel</strong>.</p>
+</div>
+</section>
+</section>
+<section id="synchrotron-from-a-population-of-electrons">
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Synchrotron From A Population of Electrons</a><a class="headerlink" href="#synchrotron-from-a-population-of-electrons" title="Link to this heading">#</a></h2>
+<p>With the all-important single-electron synchrotron spectrum in hand, we can now extend our arguments to the
+emission from a population of electrons. Let the distribution function be <span class="math notranslate nohighlight">\(\frac{dN}{d\gamma}\)</span>. Then,</p>
+<div class="math notranslate nohighlight">
+\[P(\nu) = \int_{\gamma_{\rm min}}^{\gamma_{\rm max}} \frac{dN}{d\gamma} P(\nu, \gamma) d\gamma =
+\frac{\sqrt{3} q^3 B \sin \alpha}{mc^2} \int_{\gamma_{\rm min}}^{\gamma_{\rm max}} \frac{dN}{d\gamma} F\left(
+    \frac{\nu}{\nu_c(\gamma)} \right) d\gamma,\]</div>
+<p>where <span class="math notranslate nohighlight">\(P(\nu, \gamma)\)</span> is the single-electron synchrotron power derived previously.</p>
+<p>Now, in general, this integration is not analytically tractable for arbitrary distribution functions; however, there
+are some scenarios which are of particular relevance to astrophysical sources where analytic results can be obtained.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Support for performing these integrations numerically for arbitrary distribution functions is a planned
+feature of Triceratops, but not currently implemented.</p>
+</div>
+<section id="the-spectrum-of-a-power-law-distribution">
+<h3><a class="toc-backref" href="#id28" role="doc-backlink">The Spectrum of a Power-Law Distribution</a><a class="headerlink" href="#the-spectrum-of-a-power-law-distribution" title="Link to this heading">#</a></h3>
+<p>The most important case in which the above formalism has a known closure is that of a power-law distribution
+of electrons. This is the most common assumption in astrophysical synchrotron modeling, as it is both
+theoretically motivated by diffusive shock acceleration:footcite:p:<cite>caprioliParticleAccelerationShocks2023</cite> and
+empirically successful in explaining non-thermal emission across a wide range of astrophysical environments.</p>
+<p>Assuming a power-law distribution of electrons</p>
+<div class="math notranslate nohighlight">
+\[\frac{dN}{d\gamma} = N_0 \gamma^{-p},\;\;\gamma_{\min} \le \gamma \le \gamma_{\max},\]</div>
+<p>we can compute the integral above to find the famous result (see e.g. Rybicki and Lightman<a class="footnote-reference brackets" href="#footcite-rybickilightman" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>,
+DeMarchi <em>et al.</em><a class="footnote-reference brackets" href="#footcite-demarchiradioanalysissn2004c2022" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> etc):</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+P(\nu) = c_5(p) N_0 B^{(p+1)/2} \nu^{-(p-1)/2},
+}\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_5(p)\)</span> is one of a number of constants which appear in the literature to disguise the complex
+expressions involving gamma functions and powers of fundamental constants:</p>
+<div class="math notranslate nohighlight">
+\[c_5(p) = \frac{\sqrt{3}}{16 \pi} \left(\frac{e^3}{m_ec^2}\right) \frac{p+7/3}{p+1} \Gamma\left(\frac{3p-1}{12}\right)
+\Gamma\left(\frac{3p + 7}{12}\right).\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Conventions differ on the definition of this <span class="math notranslate nohighlight">\(c_5(p)\)</span> function. By default, Triceratops adopts the convention
+of Pacholczyk<a class="footnote-reference brackets" href="#footcite-1970ranp-book-p" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>, which has become the general standard in the astrophysical literature
+(see e.g. DeMarchi <em>et al.</em><a class="footnote-reference brackets" href="#footcite-demarchiradioanalysissn2004c2022" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, Margutti <em>et al.</em><a class="footnote-reference brackets" href="#footcite-margutti2019cow" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, etc.). However,
+other versions do arise in the literature (e.g. Rybicki and Lightman<a class="footnote-reference brackets" href="#footcite-rybickilightman" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>), so care should be taken
+when comparing results from different sources.</p>
+</div>
+<p>It should be noted that, because <span class="math notranslate nohighlight">\(N(\gamma)\)</span> is (traditionally) thought of as the number <em>density</em> of electrons,
+the above expression for <span class="math notranslate nohighlight">\(P(\nu)\)</span> is the power emitted per unit volume per unit frequency. It is therefore more
+precisely a power spectral density.</p>
+</section>
+</section>
+<section id="microphysical-closures-and-equipartition">
+<h2><a class="toc-backref" href="#id29" role="doc-backlink">Microphysical Closures and Equipartition</a><a class="headerlink" href="#microphysical-closures-and-equipartition" title="Link to this heading">#</a></h2>
+<p>A critical element of most synchrotron modeling pipelines is a treatment of the coupling between the dynamics
+of the radiating material and the resulting synchrotron emission. A detailed treatment of this coupling is generally
+beyond the scope of most modeling efforts, and so we instead rely on a set of microphysical parameters that
+parameterize our ignorance of the detailed physics at play.</p>
+<section id="equipartition">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">Equipartition</a><a class="headerlink" href="#equipartition" title="Link to this heading">#</a></h3>
+<p>The most common approach to microphysical closure is to assume some form of equipartition between the energy
+in the magnetic fields and relativistic electrons and the thermal energy of the shocked plasma. This approach
+is motivated by the idea that shocks are efficient at converting kinetic energy into thermal energy, and that
+some fraction of this thermal energy is then partitioned into magnetic fields and relativistic particles.</p>
+<p>A common choice throughout the modern literature (e.g. Margutti <em>et al.</em><a class="footnote-reference brackets" href="#footcite-margutti2019cow" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>,
+DeMarchi <em>et al.</em><a class="footnote-reference brackets" href="#footcite-demarchiradioanalysissn2004c2022" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, Wu <em>et al.</em><a class="footnote-reference brackets" href="#footcite-wudelayedradioemission2025" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>, etc.) is to introduce
+the parameters <span class="math notranslate nohighlight">\(\epsilon_e\)</span> and <span class="math notranslate nohighlight">\(\epsilon_B\)</span>, which represent the fraction of the thermal energy density
+that goes into relativistic electrons and magnetic fields, respectively.</p>
+<p>Given a thermal energy density <span class="math notranslate nohighlight">\(U_{\rm thermal}\)</span>, we can then write the energy densities in relativistic electrons
+and magnetic fields as:</p>
+<div class="math notranslate nohighlight">
+\[U_e = \epsilon_e U_{\rm thermal},\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[U_B = \epsilon_B U_{\rm thermal} = \frac{B^2}{8 \pi},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\epsilon_e\)</span> and <span class="math notranslate nohighlight">\(\epsilon_B\)</span> are dimensionless parameters typically in the range
+<span class="math notranslate nohighlight">\(0 &lt; \epsilon_e, \epsilon_B &lt; 1\)</span>, and <span class="math notranslate nohighlight">\(U_B\)</span> is the magnetic energy density given by</p>
+<div class="math notranslate nohighlight">
+\[U_B = \frac{B^2}{8 \pi},\]</div>
+<p>and <span class="math notranslate nohighlight">\(B\)</span> is the magnetic field strength.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The resulting implications for the emission of synchrotron is dictated by the way that <span class="math notranslate nohighlight">\(U_e\)</span> is distributed
+into the population of relativistic electrons. In the most common scenario, where we have a power-law distribution of
+relativistic electrons, equipartition can uniquely determine the normalization of the distribution given
+<span class="math notranslate nohighlight">\(\epsilon_e\)</span>, <span class="math notranslate nohighlight">\(\epsilon_B\)</span>, and <span class="math notranslate nohighlight">\(U_{\rm thermal}\)</span>.</p>
+</div>
+</section>
+<section id="power-law-electron-distributions">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">Power-Law Electron Distributions</a><a class="headerlink" href="#power-law-electron-distributions" title="Link to this heading">#</a></h3>
+<p>A central assumption in most synchrotron emission models is that the population of relativistic
+electrons accelerated by a shock follows a power-law distribution in Lorentz factor (and energy). This assumption
+is motivated both by theoretical considerations of diffusive shock
+acceleration:footcite:p:<cite>caprioliParticleAccelerationShocks2023</cite> and by its empirical success in explaining non-thermal
+emission across a wide range of astrophysical environments.</p>
+<p>We write the electron distribution function as</p>
+<div class="math notranslate nohighlight">
+\[\frac{dN}{d\gamma} = N_0 \gamma^{-p},
+\qquad
+\gamma_{\min} \le \gamma \le \gamma_{\max},\]</div>
+<p>where <span class="math notranslate nohighlight">\(p\)</span> is the power-law index, <span class="math notranslate nohighlight">\(N\)</span> is the number (density), <span class="math notranslate nohighlight">\(\gamma_{\min}\)</span>
+and <span class="math notranslate nohighlight">\(\gamma_{\max}\)</span> define the support of the distribution, and <span class="math notranslate nohighlight">\(N_0\)</span> is a normalization constant.
+Outside this range, the distribution is assumed to vanish.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In some instances, authors refer instead to the energy distribution of electrons:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dN}{dE} = N_{E,0} E^{-p}.\]</div>
+<p>Triceratops adopts the <strong>Lorentz factor</strong> formulation as the <strong>canonical standard</strong>; however, both are
+implemented in the relevant API (see <a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.microphysics.html#module-radiation.synchrotron.microphysics" title="radiation.synchrotron.microphysics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron.microphysics</span></code></a>).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\(N\)</span> may be either the total number of electrons or the number density of electrons, depending on context.
+Triceratops generally works with number densities to facilitate coupling with hydrodynamical quantities. The
+conversion between the two is just a division by the relevant volume.</p>
+</div>
+<section id="equipartition-for-power-law-distributions">
+<h4>Equipartition for Power-Law Distributions<a class="headerlink" href="#equipartition-for-power-law-distributions" title="Link to this heading">#</a></h4>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The relevant API in Triceratops is in the <a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.microphysics.html#module-radiation.synchrotron.microphysics" title="radiation.synchrotron.microphysics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron.microphysics</span></code></a> module. See
+<a class="reference internal" href="synchrotron_microphysics.html#synchrotron-microphysics"><span class="std std-ref">Synchrotron Microphysics</span></a> for details on use.</p>
+</div>
+<p>Assuming a power-law distribution of electrons, we can derive normalization of the distribution
+from our closure relationship. Here, we describe the procedure when assuming equipartition with some
+choice of <span class="math notranslate nohighlight">\(\epsilon_e\)</span> and <span class="math notranslate nohighlight">\(\epsilon_B\)</span>.</p>
+<p>Given a thermal energy density <span class="math notranslate nohighlight">\(U_{\rm thermal}\)</span>, the energy density in relativistic electrons is (by
+equipartition)</p>
+<div class="math notranslate nohighlight">
+\[U_e = \epsilon_e U_{\rm thermal}.\]</div>
+<p>The total energy density of the electron population is</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+In Terms of Lorentz Factor</label><div class="sd-tab-content docutils">
+<div class="math notranslate nohighlight">
+\[U_e = m_e c^2 \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma \frac{dN}{d\gamma} d\gamma
+= N_0 m_e c^2 \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^{1 - p} d\gamma.\]</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+In Terms of Energy</label><div class="sd-tab-content docutils">
+<div class="math notranslate nohighlight">
+\[U_e = \int_{E_{\min}}^{E_{\max}} E \frac{dN}{dE} dE = N_{E,0} \int_{E_{\min}}^{E_{\max}} E^{1 - p} dE.\]</div>
+</div>
+</div>
+<p>Letting</p>
+<div class="math notranslate nohighlight">
+\[M^{(\ell)}_{\gamma} = N_0 \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^{\ell} \gamma^{-p} d\gamma,\]</div>
+<p>be the <span class="math notranslate nohighlight">\(\ell\)</span>-th moment of the Lorentz factor distribution, we can write the energy density as</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+U_e = m_e c^2 N_0 M^{(1)}_{\gamma}.
+}\]</div>
+<p>Solving for <span class="math notranslate nohighlight">\(N_0\)</span>, we find</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+N_0 = \frac{\epsilon_e U_{\rm thermal}}{m_e c^2 M^{(1)}_{\gamma}}.
+}\]</div>
+<p>In terms of the magnetic field, we also have</p>
+<div class="math notranslate nohighlight">
+\[B = \sqrt{8 \pi \epsilon_B U_{\rm thermal}} \implies N_0 = \frac{\epsilon_e B^2}{8 \pi \epsilon_B m_e c^2 M^{(1)}_{\gamma}}.\]</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This is the canonical way to convert dynamics into synchrotron emission in Triceratops when assuming
+equipartition and a power-law distribution of electrons. See <a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.microphysics.html#module-radiation.synchrotron.microphysics" title="radiation.synchrotron.microphysics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron.microphysics</span></code></a>
+for the relevant API.</p>
+</div>
+<p>Another useful computation which is made possible with equipartition is the <strong>total emitted power</strong> from synchrotron.
+From the Larmor formula, we previously derived that the total power of a <strong>single electron</strong> is</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm synch} = \frac{4}{3} \sigma_T c \gamma^2 \beta^2 U_B.\]</div>
+<p>Thus, the total power from a <strong>population</strong> of electrons in the relativistic limit (<span class="math notranslate nohighlight">\(\beta \approx 1\)</span>) is</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm total} = \frac{4}{3} \sigma_T c U_B \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^2 \frac{dN}{d\gamma} d\gamma
+= \frac{4}{3} \sigma_T c U_B N_0 M^{(2)}_{\gamma}.\]</div>
+<p>From equipartition, we know <span class="math notranslate nohighlight">\(N_0\)</span> in terms of <span class="math notranslate nohighlight">\(U_{\rm thermal}\)</span> and <span class="math notranslate nohighlight">\(\epsilon_e\)</span>, <span class="math notranslate nohighlight">\(\epsilon_B\)</span>, so we can write</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+P_{\rm total} = \frac{4}{3} \sigma_T c \frac{\epsilon_e \epsilon_B u_{\rm therm}^2}{m_e c^2} \left(
+    \frac{M^{(2)}_{\gamma}}{M^{(1)}_{\gamma}}
+\right).
+}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One frequently uses the fact that <span class="math notranslate nohighlight">\(N_{\rm eff} = N_0 M^{(2)}_{\gamma}\)</span> is the effective number of
+radiating electrons in the population (see <a class="reference internal" href="synchrotron_seds.html#synchrotron-seds"><span class="std std-ref">Synchrotron Spectral Energy Distributions</span></a> for details). This allows us to write</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm total} = \frac{4}{3} \sigma_T c U_B N_{\rm eff}.\]</div>
+</div>
+</section>
+</section>
+<section id="cooling-of-electrons">
+<span id="electron-cooling"></span><h3><a class="toc-backref" href="#id32" role="doc-backlink">Cooling of Electrons</a><a class="headerlink" href="#cooling-of-electrons" title="Link to this heading">#</a></h3>
+<p>As a population, relativistic electrons will cool and thereby evolve away from their injected energy distribution.
+This evolution can imprint additional spectral breaks and modify the normalization of the synchrotron emission.</p>
+<p>Let <span class="math notranslate nohighlight">\(P(\gamma,t)\)</span> denote the differential electron distribution (number or number density per unit Lorentz factor),
+so that <span class="math notranslate nohighlight">\(P(\gamma,t)\,d\gamma\)</span> is the number of electrons in <span class="math notranslate nohighlight">\((\gamma,\gamma+d\gamma)\)</span>. Suppose electrons are
+injected at a rate <span class="math notranslate nohighlight">\(Q(\gamma)\)</span> (per unit time per unit <span class="math notranslate nohighlight">\(\gamma\)</span>) and cool according to</p>
+<div class="math notranslate nohighlight">
+\[\dot{\gamma} \equiv \frac{d\gamma}{dt} = H(\gamma),\]</div>
+<p>with <span class="math notranslate nohighlight">\(H(\gamma) &lt; 0\)</span> for radiative cooling. Conservation of particle number in energy space implies that, for any
+interval <span class="math notranslate nohighlight">\(\gamma\in[\gamma_1,\gamma_2]\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{dt}\int_{\gamma_1}^{\gamma_2} P(\gamma,t)\,d\gamma
+=
+\int_{\gamma_1}^{\gamma_2} Q(\gamma)\,d\gamma
+- \left[ H(\gamma)\,P(\gamma,t)\right]_{\gamma_1}^{\gamma_2}.\]</div>
+<p>Taking <span class="math notranslate nohighlight">\(\gamma_2\to\gamma_1\)</span> yields the continuity equation</p>
+<div class="math notranslate nohighlight">
+\[\frac{\partial P(\gamma,t)}{\partial t}
++
+\frac{\partial}{\partial\gamma}\!\left[H(\gamma)\,P(\gamma,t)\right]
+=
+Q(\gamma).\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This first-order PDE is solvable by the method of characteristics for general <span class="math notranslate nohighlight">\(H(\gamma)\)</span> and <span class="math notranslate nohighlight">\(Q(\gamma)\)</span>.
+In this documentation we focus on steady-state solutions commonly used in synchrotron modeling.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We have here ignored the effects of adiabatic cooling, which can be important in expanding systems.</p>
+</div>
+<section id="steady-state-power-law-injection-with-power-law-cooling">
+<h4>Steady-state power-law injection with power-law cooling<a class="headerlink" href="#steady-state-power-law-injection-with-power-law-cooling" title="Link to this heading">#</a></h4>
+<p>In steady state (<span class="math notranslate nohighlight">\(\partial P/\partial t=0\)</span>), the continuity equation reduces to</p>
+<div class="math notranslate nohighlight">
+\[\frac{d}{d\gamma}\!\left[H(\gamma)\,P(\gamma)\right] = Q(\gamma).\]</div>
+<p>Assuming <span class="math notranslate nohighlight">\(P(\gamma)\to 0\)</span> sufficiently fast as <span class="math notranslate nohighlight">\(\gamma\to\infty\)</span>, integration gives</p>
+<div class="math notranslate nohighlight">
+\[H(\gamma)\,P(\gamma) = -\int_{\gamma}^{\infty} Q(\gamma')\,d\gamma'.\]</div>
+<p>Now take a power-law injection spectrum</p>
+<div class="math notranslate nohighlight">
+\[Q(\gamma) = Q_0\,\gamma^{-p}, \qquad p&gt;1,\]</div>
+<p>and a power-law cooling law</p>
+<div class="math notranslate nohighlight">
+\[H(\gamma) = -\Lambda\,\gamma^k, \qquad \Lambda&gt;0.\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[\int_{\gamma}^{\infty} Q(\gamma')\,d\gamma'
+=
+\frac{Q_0}{p-1}\,\gamma^{-(p-1)},\]</div>
+<p>and the steady-state distribution becomes</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+P_{\rm SS}(\gamma)
+=
+\frac{Q_0}{\Lambda\,(p-1)}\,\gamma^{-(p+k-1)}.
+}\]</div>
+<p>Thus, radiative cooling steepens the injected spectrum by <span class="math notranslate nohighlight">\(k-1\)</span>. For synchrotron/Thomson IC cooling,
+<span class="math notranslate nohighlight">\(\dot{\gamma}\propto -\gamma^2\)</span> (i.e. <span class="math notranslate nohighlight">\(k=2\)</span>), so the steady-state slope steepens by one:
+<span class="math notranslate nohighlight">\(P\propto \gamma^{-(p+1)}\)</span> above the cooling break.</p>
+</section>
+<section id="cooling-break-at-gamma-c">
+<h4>Cooling break at <span class="math notranslate nohighlight">\(\gamma_c\)</span><a class="headerlink" href="#cooling-break-at-gamma-c" title="Link to this heading">#</a></h4>
+<p>In many applications, only electrons above a critical Lorentz factor <span class="math notranslate nohighlight">\(\gamma_c\)</span> cool efficiently within the
+relevant timescale (often the dynamical time). A common phenomenological approximation is:</p>
+<ul class="simple">
+<li><p>for <span class="math notranslate nohighlight">\(\gamma&gt;\gamma_c\)</span>, electrons are in the cooled steady-state regime, <span class="math notranslate nohighlight">\(P\propto \gamma^{-(p+k-1)}\)</span>;</p></li>
+<li><p>for <span class="math notranslate nohighlight">\(\gamma&lt;\gamma_c\)</span>, cooling is negligible and the distribution retains the injection slope, <span class="math notranslate nohighlight">\(P\propto\gamma^{-p}\)</span>.</p></li>
+</ul>
+<p>Imposing continuity at <span class="math notranslate nohighlight">\(\gamma=\gamma_c\)</span> yields the broken power-law form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boxed{
+P_{\rm SS}(\gamma)
+=
+\begin{cases}
+    \dfrac{Q_0}{\Lambda\,(p-1)}\,\gamma^{-(p+k-1)}, &amp; \gamma &gt; \gamma_c, \\[10pt]
+    \dfrac{Q_0}{\Lambda\,(p-1)}\,\gamma_c^{-(k-1)}\,\gamma^{-p}, &amp; \gamma &lt; \gamma_c.
+\end{cases}
+}\end{split}\]</div>
+</section>
+<section id="synchrotron-cooling">
+<h4>Synchrotron Cooling<a class="headerlink" href="#synchrotron-cooling" title="Link to this heading">#</a></h4>
+<p>The most obvious source of cooling from relativistic electrons in a synchrotron-emitting plasma is the synchrotron
+radiation itself. The power radiated by a single electron due to synchrotron emission is</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm synch} = \frac{4}{3} \sigma_T c \gamma^2 \beta^2 U_B,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sigma_T\)</span> is the Thomson cross section, <span class="math notranslate nohighlight">\(c\)</span> is the speed of light, <span class="math notranslate nohighlight">\(\gamma\)</span> is the
+Lorentz factor of the electron, <span class="math notranslate nohighlight">\(\beta\)</span> is the dimensionless velocity (<span class="math notranslate nohighlight">\(\beta = v/c\)</span>),
+and <span class="math notranslate nohighlight">\(U_B\)</span> is the magnetic energy density. In the relativistic limit (<span class="math notranslate nohighlight">\(\beta \approx 1\)</span>), this simplifies to</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm synch} \approx \frac{4}{3} \sigma_T c \gamma^2 U_B.\]</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Since <span class="math notranslate nohighlight">\(P \propto \gamma^2\)</span>, the resulting steady state distribution steepens by one power in the
+synchrotron-cooled regime (see previous section).</p>
+</div>
+<p>In this case, the cooling timescale is</p>
+<div class="math notranslate nohighlight">
+\[\tau_{\rm synch, cool} = \frac{\gamma m_e c^2}{P_{\rm synch}} = \frac{3 m_e c}{4 \sigma_T U_B \gamma}.\]</div>
+<p>If we then define a dynamical timescale <span class="math notranslate nohighlight">\(t_{\rm dyn}\)</span>, we can solve for the cooling Lorentz factor:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\gamma_c = \frac{3 m_e c}{4 \sigma_T U_B t_{\rm dyn}} = \frac{6 \pi m_e c}{\sigma_T B^2 t_{\rm dyn}}.
+}\]</div>
+<p>The corresponding synchrotron frequency is</p>
+<div class="math notranslate nohighlight">
+\[\nu_c = \frac{18 \pi m_e c e}{\sigma_T^2 B^3 t_{\rm dyn}^2}.\]</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This is implemented in the <a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.frequencies.html#module-radiation.synchrotron.frequencies" title="radiation.synchrotron.frequencies"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron.frequencies</span></code></a> module!</p>
+</div>
+</section>
+<section id="ic-cooling">
+<h4>IC Cooling<a class="headerlink" href="#ic-cooling" title="Link to this heading">#</a></h4>
+<p>In addition to synchrotron radiation, relativistic electrons may also lose energy through
+<strong>inverse Compton (IC) scattering</strong>, in which electrons transfer energy to ambient photon fields.
+This process is particularly important in environments with strong radiation backgrounds,
+such as dense star-forming regions, AGN environments, or compact transients.</p>
+<p>In the <strong>Thomson regime</strong>, where the photon energy in the electron rest frame satisfies
+<span class="math notranslate nohighlight">\(\gamma h\nu \ll m_e c^2\)</span>, the power radiated by a single electron due to inverse Compton
+scattering is</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm IC}
+=
+\frac{4}{3}\,\sigma_T c\,\gamma^2 \beta^2 U_{\rm rad},\]</div>
+<p>where <span class="math notranslate nohighlight">\(U_{\rm rad}\)</span> is the energy density of the target photon field. In the relativistic
+limit (<span class="math notranslate nohighlight">\(\beta \approx 1\)</span>), this simplifies to</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm IC}
+\approx
+\frac{4}{3}\,\sigma_T c\,\gamma^2 U_{\rm rad}.\]</div>
+<p>This expression is formally identical to the synchrotron power, with the magnetic energy
+density <span class="math notranslate nohighlight">\(U_B\)</span> replaced by the radiation energy density <span class="math notranslate nohighlight">\(U_{\rm rad}\)</span>. As a result,
+inverse Compton cooling produces the same qualitative effect on the electron distribution as
+synchrotron cooling.</p>
+<p>The corresponding inverse Compton cooling timescale is</p>
+<div class="math notranslate nohighlight">
+\[\tau_{\rm IC, cool}
+=
+\frac{\gamma m_e c^2}{P_{\rm IC}}
+=
+\frac{3 m_e c}{4 \sigma_T U_{\rm rad}\,\gamma}.\]</div>
+<p>Defining a dynamical timescale <span class="math notranslate nohighlight">\(t_{\rm dyn}\)</span>, we may introduce the <strong>inverse Compton cooling
+Lorentz factor</strong></p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\gamma_{c,{\rm IC}}
+=
+\frac{3 m_e c}{4 \sigma_T U_{\rm rad}\,t_{\rm dyn}}.
+}\]</div>
+<p>Electrons with <span class="math notranslate nohighlight">\(\gamma &gt; \gamma_{c,{\rm IC}}\)</span> cool efficiently via inverse Compton scattering
+within a dynamical time, while lower-energy electrons remain effectively uncooled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In many astrophysical environments, electrons cool through <strong>both</strong> synchrotron and inverse
+Compton losses. In this case, the total cooling rate is additive:</p>
+<div class="math notranslate nohighlight">
+\[P_{\rm tot}
+=
+P_{\rm synch} + P_{\rm IC}
+=
+\frac{4}{3}\,\sigma_T c\,\gamma^2\left(U_B + U_{\rm rad}\right).\]</div>
+<p>The effective cooling Lorentz factor is therefore</p>
+<div class="math notranslate nohighlight">
+\[\gamma_c
+=
+\frac{3 m_e c}{4 \sigma_T \left(U_B + U_{\rm rad}\right) t_{\rm dyn}}.\]</div>
+<p>This regime is often parameterized by the <strong>Compton (Y)-parameter</strong>,
+<span class="math notranslate nohighlight">\(Y \equiv U_{\rm rad}/U_B\)</span>, which quantifies the relative importance of IC cooling
+compared to synchrotron cooling.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>At sufficiently high electron energies, inverse Compton scattering enters the
+<strong>Klein–Nishina regime</strong>, where the scattering cross section is reduced and the
+<span class="math notranslate nohighlight">\(\gamma^2\)</span> scaling of the cooling rate breaks down. Triceratops currently assumes
+Thomson-regime IC cooling; Klein–Nishina corrections are not yet implemented.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This is implemented in the <a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.frequencies.html#module-radiation.synchrotron.frequencies" title="radiation.synchrotron.frequencies"><code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron.frequencies</span></code></a> module! See
+<a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.frequencies.compute_IC_cooling_gamma.html#radiation.synchrotron.frequencies.compute_IC_cooling_gamma" title="radiation.synchrotron.frequencies.compute_IC_cooling_gamma"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_IC_cooling_gamma()</span></code></a>,
+<a class="reference internal" href="../../../../_as_gen/radiation.synchrotron.frequencies.compute_IC_cooling_frequency.html#radiation.synchrotron.frequencies.compute_IC_cooling_frequency" title="radiation.synchrotron.frequencies.compute_IC_cooling_frequency"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_IC_cooling_frequency()</span></code></a>, and the
+associated low-level API.</p>
+</div>
+</section>
+</section>
+</section>
+<section id="absorption-processes-in-synchrotron-radiation">
+<h2><a class="toc-backref" href="#id33" role="doc-backlink">Absorption Processes in Synchrotron Radiation</a><a class="headerlink" href="#absorption-processes-in-synchrotron-radiation" title="Link to this heading">#</a></h2>
+<p>It is not always the case that radiation observed by an observer is simply the emitted synchrotron radiation; it may
+be modified by absorption processes in the emitting plasma or along the line of sight. Two important absorption
+processes that can affect synchrotron radiation are synchrotron self-absorption (SSA) and free-free absorption.</p>
+<p>In this section, we’ll discuss both processes and derive the critical results.</p>
+<section id="synchrotron-emissivity-and-absorption">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">Synchrotron Emissivity and Absorption</a><a class="headerlink" href="#synchrotron-emissivity-and-absorption" title="Link to this heading">#</a></h3>
+<p>We have already shown that, for a population of electrons with some <span class="math notranslate nohighlight">\(N(\gamma)\)</span>, the synchrotron emissivity is</p>
+<div class="math notranslate nohighlight">
+\[j_\nu = \frac{1}{4\pi} \int_{\gamma_{\min}}^{\gamma_{\max}} N(\gamma) P(\nu, \gamma) d\gamma,\]</div>
+<section id="free-free-absorption">
+<h4>Free-Free Absorption<a class="headerlink" href="#free-free-absorption" title="Link to this heading">#</a></h4>
+</section>
+</section>
+</section>
+<section id="spectral-regimes-of-synchrotron-seds">
+<h2><a class="toc-backref" href="#id35" role="doc-backlink">Spectral Regimes of Synchrotron SEDs</a><a class="headerlink" href="#spectral-regimes-of-synchrotron-seds" title="Link to this heading">#</a></h2>
+<p>The primary task of the synchrotron backend in Triceratops is to take a set of physical parameters including
+(potentially) both the dynamics of the radiating material and the microphysical parameters governing the
+synchrotron emission, and produce an accurate computation of the radiation. One element of this is correctly computing
+the spectrum of the resultant radiation.</p>
+<p>Unfortunately, the synchrotron spectrum is a complicated beast. Even in the ideal case (see Chapter 6 of
+Rybicki and Lightman<a class="footnote-reference brackets" href="#footcite-rybickilightman" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>) is a non-trivial computation. More detailed treatments reveal a number of additional
+complications including absorption processes (both synchrotron self-absorption and free-free absorption), cooling of
+the electron population, and the presence of spectral breaks due to characteristic frequencies in the system.</p>
+<p>In this section, we’ll describe the various spectral regimes that can arise in synchrotron SEDs, and how they
+are treated in Triceratops.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For detailed descriptions in the literature, we encourage the reader to consult
+DeMarchi <em>et al.</em><a class="footnote-reference brackets" href="#footcite-demarchiradioanalysissn2004c2022" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for the “classical” synchrotron SED treatment. For the multi-domain
+treatment, we suggest Granot and Sari<a class="footnote-reference brackets" href="#footcite-granotsari2002spectralbreaks" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, Piran<a class="footnote-reference brackets" href="#footcite-pirangammaraybursts2004" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> for
+introductory reading. Gao <em>et al.</em><a class="footnote-reference brackets" href="#footcite-gaosynchrotronreview2013" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a> provides an exhaustive reference of the
+synchrotron theory relevant here.</p>
+</div>
+<div class="admonition-big-idea admonition">
+<p class="admonition-title">Big Idea</p>
+<p>In this section, we are going to consider the shape of the synchrotron spectrum depending on the ordering of
+various characteristic frequencies in the system. These frequencies include:</p>
+<ul class="simple">
+<li><p>The peak frequency <span class="math notranslate nohighlight">\(\nu_m\)</span>, corresponding to the minimum Lorentz factor of the electron distribution.</p></li>
+<li><p>The cooling frequency <span class="math notranslate nohighlight">\(\nu_c\)</span>, corresponding to the Lorentz factor at which electrons cool on the dynamical
+timescale.</p></li>
+<li><p>The self-absorption frequency <span class="math notranslate nohighlight">\(\nu_a\)</span>, below which the spectrum is self-absorbed.</p></li>
+</ul>
+<p>Depending on the order of the frequencies, we can have a variety of different spectral shapes. Here we will discuss
+the details of each of these.</p>
+</div>
+<section id="review-of-important-frequencies">
+<h3><a class="toc-backref" href="#id36" role="doc-backlink">Review of Important Frequencies</a><a class="headerlink" href="#review-of-important-frequencies" title="Link to this heading">#</a></h3>
+<p>Before proceeding with the relevant theory, we will here briefly review the important frequencies
+that will determine the shape of the synchrotron spectrum.</p>
+<section id="the-peak-frequency">
+<h4>The Peak Frequency<a class="headerlink" href="#the-peak-frequency" title="Link to this heading">#</a></h4>
+<p>For a single-electron, the synchrotron spectrum is dominated by emission around the “peak frequency”</p>
+<div class="math notranslate nohighlight">
+\[\nu_{\rm crit} = \frac{3}{4\pi} \gamma^3 \omega_B \sin \alpha \sim \frac{e}{2\pi m_e c} \gamma^2 B,\]</div>
+<p>where <span class="math notranslate nohighlight">\(\omega_B\)</span> is the relativistic gyrofrequency (<span class="math notranslate nohighlight">\(\omega_B = eB/\gamma m_e c\)</span>), <span class="math notranslate nohighlight">\(\gamma\)</span> is the
+Lorentz factor of the electron, and <span class="math notranslate nohighlight">\(\alpha\)</span> is the pitch angle between the
+magnetic field and the electron velocity.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The pedagogical reference (Rybicki and Lightman<a class="footnote-reference brackets" href="#footcite-rybickilightman" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>) uses the first expression, while the
+second expression is more common in the astrophysical literature (e.g. DeMarchi <em>et al.</em><a class="footnote-reference brackets" href="#footcite-demarchiradioanalysissn2004c2022" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>).
+Either way, these are an order unity correction of one another.</p>
+</div>
+<p>For a population of electrons with a power-law distribution in Lorentz factor, the emission is dominated by the
+lowest energy electrons, we therefore define the <strong>characteristic peak frequency</strong> as</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\nu_m = \nu_{\rm crit}(\gamma_{\min}) = \frac{1}{2\pi} \gamma_{\min}^2 \frac{eB}{m_e c}.
+}\]</div>
+<p>This is the first important frequency in determining the shape of the synchrotron spectrum. In general, one expects
+that the spectrum will peak around <span class="math notranslate nohighlight">\(\nu_m\)</span>, with different power-law segments above and below this frequency.</p>
+</section>
+<section id="the-cooling-frequency">
+<h4>The Cooling Frequency<a class="headerlink" href="#the-cooling-frequency" title="Link to this heading">#</a></h4>
+<p>Another important frequency in determining the shape of the synchrotron spectrum is the <strong>cooling frequency</strong>,
+<span class="math notranslate nohighlight">\(\nu_c\)</span>. This frequency corresponds to the Lorentz factor at which electrons cool on the dynamical timescale
+of the system.</p>
+<p>Given a cooling process with rate <span class="math notranslate nohighlight">\(\Lambda\)</span> per electron, we can define the cooling time as a function of the
+Lorentz factor to be</p>
+<div class="math notranslate nohighlight">
+\[\tau(\gamma) = \frac{\gamma m_e c^2}{\Lambda(\gamma)}.\]</div>
+<p>Relative to a dynamical timescale <span class="math notranslate nohighlight">\(t_{\rm dyn}\)</span>, we can then define the cooling Lorentz factor</p>
+<div class="math notranslate nohighlight">
+\[\gamma_c : \tau(\gamma_c) = t_{\rm dyn} \implies \gamma_c = \frac{m_e c^2}{\Lambda(\gamma_c) t_{\rm dyn}}.\]</div>
+<p>This corresponds to a characteristic frequency (the characteristic frequency of electrons with Lorentz factor
+<span class="math notranslate nohighlight">\(\gamma_c\)</span>) of</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\nu_c = \frac{m_e c^3 e}{2\pi} B \Lambda^{-2} t_{\rm dyn}^{-2}
+}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Depending on the mechanism of cooling, <span class="math notranslate nohighlight">\(\Lambda\)</span> will take different forms. For pure synchrotron
+cooling, we have</p>
+<div class="math notranslate nohighlight">
+\[\nu_c = \frac{18 \pi m_e c e}{\sigma_T^2 t_{\rm dyn}^2 B^3},\]</div>
+<p>while for other mechanisms (e.g. inverse Compton), the expression will differ. See <a class="reference internal" href="#electron-cooling"><span class="std std-ref">Cooling of Electrons</span></a>
+above for details.</p>
+</div>
+</section>
+<section id="the-ssa-frequency">
+<h4>The SSA Frequency<a class="headerlink" href="#the-ssa-frequency" title="Link to this heading">#</a></h4>
+<p>The final important frequency in determining the shape of the synchrotron spectrum is the <strong>self-absorption frequency</strong>,
+<span class="math notranslate nohighlight">\(\nu_a\)</span>. A more detailed discussion of synchrotron self-absorption is provided in <span class="xref std std-ref">ssa</span>; however, it suffices
+in this discussion to note that we define the self-absorption frequency as the frequency at which the optical depth
+to synchrotron self-absorption is unity:</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\tau_{\nu_a} = 1.
+}\]</div>
+<p>Given that <span class="math notranslate nohighlight">\(\tau_\nu = \alpha_\nu L\)</span>, where <span class="math notranslate nohighlight">\(\alpha_\nu\)</span> is the synchrotron absorption coefficient
+and <span class="math notranslate nohighlight">\(L\)</span> is the path length through the emitting region, we can compute <span class="math notranslate nohighlight">\(\nu_a\)</span> (in principle) by
+solving</p>
+<div class="math notranslate nohighlight">
+\[\alpha_{\nu_a} L = - \frac{1}{8\pi m_e \nu_a^2} \int_{\gamma_{\min}}^{\gamma_{\max}} P(\nu_a, \gamma)
+\gamma^2 \frac{\partial}{\partial \gamma} \left[ \frac{1}{\gamma^2}
+\frac{dN}{d\gamma} \right] d\gamma \cdot L = 1.\]</div>
+</section>
+</section>
+</section>
+<section id="references">
+<h2><a class="toc-backref" href="#id37" role="doc-backlink">References</a><a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id21">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-rybickilightman" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id4">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id10">4</a>,<a role="doc-backlink" href="#id14">5</a>,<a role="doc-backlink" href="#id19">6</a>)</span>
+<p>George B. Rybicki and Alan P. Lightman. <em>Radiative processes in astrophysics</em>. John Wiley &amp; Sons, 1979.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-demarchiradioanalysissn2004c2022" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id6">1</a>,<a role="doc-backlink" href="#id8">2</a>,<a role="doc-backlink" href="#id12">3</a>,<a role="doc-backlink" href="#id15">4</a>,<a role="doc-backlink" href="#id20">5</a>)</span>
+<p>Lindsay DeMarchi, R. Margutti, J. Dittman, A. Brunthaler, D. Milisavljevic, Michael F. Bietenholz, C. Stauffer, D. Brethauer, D. Coppejans, K. Auchettl, K. D. Alexander, C. D. Kilpatrick, Joe S. Bright, L. Z. Kelley, Michael C. Stroh, and W. V. Jacobson-Galán. Radio Analysis of SN2004C Reveals an Unusual CSM Density Profile as a Harbinger of Core Collapse. <em>The Astrophysical Journal</em>, 938(1):84, October 2022. <a class="reference external" href="https://doi.org/10.3847/1538-4357/ac8c26">doi:10.3847/1538-4357/ac8c26</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-1970ranp-book-p" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">3</a><span class="fn-bracket">]</span></span>
+<p>A. G. Pacholczyk. <em>Radio astrophysics. Nonthermal processes in galactic and extragalactic sources</em>. American Institute of Physics, 1970.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-margutti2019cow" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id9">1</a>,<a role="doc-backlink" href="#id11">2</a>)</span>
+<p>R. Margutti, B. D. Metzger, R. Chornock, I. Vurm, N. Roth, B. W. Grefenstette, V. Savchenko, R. Cartier, J. F. Steiner, G. Terreran, B. Margalit, G. Migliori, D. Milisavljevic, K. D. Alexander, M. Bietenholz, P. K. Blanchard, E. Bozzo, D. Brethauer, I. V. Chilingarian, D. L. Coppejans, L. Ducci, C. Ferrigno, W. Fong, D. Götz, C. Guidorzi, A. Hajela, K. Hurley, E. Kuulkers, P. Laurent, S. Mereghetti, M. Nicholl, D. Patnaude, P. Ubertini, J. Banovetz, N. Bartel, E. Berger, E. R. Coughlin, T. Eftekhari, D. D. Frederiks, A. V. Kozlova, T. Laskar, D. S. Svinkin, M. R. Drout, A. MacFadyen, and K. Paterson. An Embedded X-Ray Source Shines through the Aspherical AT 2018cow: Revealing the Inner Workings of the Most Luminous Fast-evolving Optical Transients. <em>\apj </em>, 872(1):18, February 2019. <a class="reference external" href="https://arxiv.org/abs/1810.10720">arXiv:1810.10720</a>, <a class="reference external" href="https://doi.org/10.3847/1538-4357/aafa01">doi:10.3847/1538-4357/aafa01</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-wudelayedradioemission2025" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">5</a><span class="fn-bracket">]</span></span>
+<p>Samantha C. Wu, Daichi Tsuna, Brenna Mockler, and Anthony L. Piro. Delayed radio emission in tidal disruption events from collisions of outflows driven by disk instabilities. November 2025. ADS Bibcode: 2025arXiv251114008W. URL: <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2025arXiv251114008W">https://ui.adsabs.harvard.edu/abs/2025arXiv251114008W</a> (visited on 2025-11-19).</p>
+</aside>
+<aside class="footnote brackets" id="footcite-granotsari2002spectralbreaks" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">6</a><span class="fn-bracket">]</span></span>
+<p>Jonathan Granot and Re’em Sari. The Shape of Spectral Breaks in Gamma-Ray Burst Afterglows. <em>\apj </em>, 568(2):820–829, April 2002. <a class="reference external" href="https://arxiv.org/abs/astro-ph/0108027">arXiv:astro-ph/0108027</a>, <a class="reference external" href="https://doi.org/10.1086/338966">doi:10.1086/338966</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-pirangammaraybursts2004" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">7</a><span class="fn-bracket">]</span></span>
+<p>Tsvi Piran. The physics of gamma-ray bursts. <em>Reviews of Modern Physics</em>, 76(4):1143–1210, October 2004. <a class="reference external" href="https://arxiv.org/abs/astro-ph/0405503">arXiv:astro-ph/0405503</a>, <a class="reference external" href="https://doi.org/10.1103/RevModPhys.76.1143">doi:10.1103/RevModPhys.76.1143</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-gaosynchrotronreview2013" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">8</a><span class="fn-bracket">]</span></span>
+<p>He Gao, Wei-Hua Lei, Yuan-Chuan Zou, Xue-Feng Wu, and Bing Zhang. A complete reference of the analytical synchrotron external shock models of gamma-ray bursts. <em>\nar </em>, 57(6):141–190, December 2013. <a class="reference external" href="https://arxiv.org/abs/1310.2181">arXiv:1310.2181</a>, <a class="reference external" href="https://doi.org/10.1016/j.newar.2013.10.001">doi:10.1016/j.newar.2013.10.001</a>.</p>
+</aside>
+</aside>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchrotron-from-a-single-electron">Synchrotron From a Single Electron</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cyclotron-frequency">The Cyclotron Frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchrotron-power">Synchrotron Power</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-characteristic-synchrotron-frequency">The Characteristic Synchrotron Frequency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-single-electron-synchrotron-spectrum">The Single Electron Synchrotron Spectrum</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#synchrotron-from-a-population-of-electrons">Synchrotron From A Population of Electrons</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-spectrum-of-a-power-law-distribution">The Spectrum of a Power-Law Distribution</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#microphysical-closures-and-equipartition">Microphysical Closures and Equipartition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartition">Equipartition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#power-law-electron-distributions">Power-Law Electron Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#equipartition-for-power-law-distributions">Equipartition for Power-Law Distributions</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cooling-of-electrons">Cooling of Electrons</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#steady-state-power-law-injection-with-power-law-cooling">Steady-state power-law injection with power-law cooling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#cooling-break-at-gamma-c">Cooling break at <span class="math notranslate nohighlight">\(\gamma_c\)</span></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#synchrotron-cooling">Synchrotron Cooling</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ic-cooling">IC Cooling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#absorption-processes-in-synchrotron-radiation">Absorption Processes in Synchrotron Radiation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchrotron-emissivity-and-absorption">Synchrotron Emissivity and Absorption</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#free-free-absorption">Free-Free Absorption</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-regimes-of-synchrotron-seds">Spectral Regimes of Synchrotron SEDs</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-of-important-frequencies">Review of Important Frequencies</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-peak-frequency">The Peak Frequency</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-cooling-frequency">The Cooling Frequency</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ssa-frequency">The SSA Frequency</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/reference/physics/radiation/synchrotron/synchrotron_theory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Eliza Diggins.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

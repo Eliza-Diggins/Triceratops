@@ -1,0 +1,37 @@
+radiation.constants
+===================
+
+.. automodule:: radiation.constants
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      c_1
+      c_1_cgs
+      electron_rest_energy
+      electron_rest_energy_cgs
+      sigma_T_cgs
+      c_cgs
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

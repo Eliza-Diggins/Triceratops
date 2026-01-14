@@ -1,0 +1,6 @@
+models.transients.general.synchotron\_shock.SynchrotronShockModel.UNITS
+=======================================================================
+
+.. currentmodule:: models.transients.general.synchotron_shock
+
+.. autoattribute:: SynchrotronShockModel.UNITS

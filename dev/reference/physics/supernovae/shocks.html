@@ -1,0 +1,915 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Supernova Shocks &#8212; Triceratops  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/physics/supernovae/shocks';</script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Triceratops  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Supernova Shocks</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="supernova-shocks">
+<span id="supernova-shocks-theory"></span><h1>Supernova Shocks<a class="headerlink" href="#supernova-shocks" title="Link to this heading">#</a></h1>
+<p>One of the primary modeling goals of Triceratops is to model the emission of synchrotron radiation from supernova shocks
+as they interact with the circumstellar medium (CSM). This interaction accelerates particles to relativistic speeds and
+amplifies magnetic fields, leading to the production of radio emission that can be observed with radio telescopes.</p>
+<p>The shock dynamics are typically modeled using self-similar solutions, such as those described by
+Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierxrayradioemission1982" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> or Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierselfsimilarsolutionsinteraction1982" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. These
+are; however, not the only solutions available, and a number of approaches are taken to the self-consistent modeling
+of shock dynamics in supernovae.</p>
+<p>The resulting synchrotron emission is calculated based on the shock properties, CSM density profile, and microphysical
+parameters that describe the efficiency of particle acceleration and magnetic field amplification. The synchrotron
+spectrum is typically modeled using a power-law distribution of electron energies, with a characteristic spectral index
+that depends on the shock properties and the CSM environment. The details of our synchrotron modeling can be found in the
+<span class="xref std std-ref">synchrotron_radiation</span> section.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>There are 3 canonical stages to the evolution of a supernova shock remnant:</p>
+<ol class="arabic simple">
+<li><p>Free Expansion Phase: In this initial phase, the supernova ejecta expands freely into the surrounding CSM. The shock
+velocity is high, and the shock radius increases linearly with time. The radio emission during this phase is typically
+dominated by synchrotron radiation from relativistic electrons accelerated at the shock front.</p></li>
+<li><p>Sedov-Taylor Phase: As the shock sweeps up more CSM material, it enters the Sedov-Taylor phase, where the dynamics
+are governed by the conservation of energy. The shock radius increases as a power-law function of time, and the
+shock velocity decreases. The radio emission during this phase is still dominated by synchrotron radiation,
+but the spectral properties may change due to the evolving shock conditions.</p></li>
+<li><p>Radiative Phase: In the final phase, the shock cools radiatively, leading to the formation of a dense shell of
+material behind the shock front. The shock velocity decreases further, and the radio emission may be dominated by
+thermal bremsstrahlung radiation from the shocked CSM.</p></li>
+</ol>
+<p>The majority of radio supernovae are observed during the free expansion phase, where the synchrotron emission is most
+prominent; however, Triceratops is intended to (eventually) model all phases of supernova shock evolution.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Importantly, modeling of a specific remnant will require identifying the appropriate phase of evolution and
+selecting the relevant physical parameters and models accordingly.</p>
+</div>
+<section id="homologous-expansion-free-expansion-phase">
+<h3>Homologous Expansion (Free Expansion Phase)<a class="headerlink" href="#homologous-expansion-free-expansion-phase" title="Link to this heading">#</a></h3>
+<p>The <em>earliest stage</em> of a supernova remnant’s evolution begins immediately after the stellar envelope has been
+ejected and the forward shock has broken out of the progenitor. At this point, the ejecta moves
+<strong>almost unimpeded</strong> into the surrounding circumstellar medium (CSM).
+Critically, the energy is <strong>kinetic</strong> and the expansion is <strong>ejecta-momentum</strong> dominated not pressure dominated
+like the Sedov scenario.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This phase is sometimes referred to as the “ejecta-dominated phase” or “free expansion phase” in the literature. It
+is worth thinking about this phase as the period in which the remnant is still thermalizing all of the ejecta
+energy, at which point the Sedov-Taylor phase will begin.</p>
+</div>
+<p>Given a total ejected mass <span class="math notranslate nohighlight">\(M_{\rm ej}\)</span> with velocity <span class="math notranslate nohighlight">\(v_{\rm ej}\)</span>, this phase <em>conserves momentum</em>,
+so</p>
+<div class="math notranslate nohighlight">
+\[R_{\rm shock} \sim v_{\rm ej} t = 1.02 \left(\frac{v_{\rm ej}}{\rm 10^4\; km\;s^{-1}}\right)\left(\frac{t}
+{\rm 100\;yr}\right)\; {\rm pc}.\]</div>
+<p>This, of course, corresponds to a corresponding ejecta energy <span class="math notranslate nohighlight">\(E_{\rm ej}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[E_{0} = \frac{1}{2} M_{\rm ej} v_{\rm ej}^2 \implies v_{\rm ej} =
+10^4\;\left(\frac{M_{\rm ej}}{M_\odot}\right)^{-1/2} \left(\frac{E_0}{10^{51}\;{\rm erg}}\right)^{1/2}\;
+{\rm km\;s^{-1}}\]</div>
+<p>Once the explosion has broken out of the star, the ejecta can move ballistically, so, for any given fluid element <span class="math notranslate nohighlight">\(i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[r_i(t) = v_i t,\;\text{and}\; dv_i/dt = 0\]</div>
+<p>Thus, each parcel will have</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+v(r,t) = \frac{r}{t},
+}\]</div>
+<p>corresponding to so-called <strong>homologous expansion</strong>.</p>
+<p>The obvious question to ask is <em>at what point does deceleration matter?</em>
+To answer this, we require that the swept up mass of the ICM/ISM be similar
+to the ejecta mass, meaning that we have been forced to accelerate a non-trivial amount of mass.
+In this scenario,</p>
+<div class="math notranslate nohighlight">
+\[M_{\rm ej} \sim M_{\rm ism}(t) = \frac{4}{3}\pi \rho_0 R_{\rm shock}^3 = \frac{4}{3}\pi \rho_0 v_{\rm ej}^3 t^3.\]</div>
+<p>We can therefore identify a time at the <em>end of free expansion</em> for which</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+t \sim \left(\frac{3M_{\rm ej}}{4\pi \rho_0}\right)^{1/3} \frac{1}{v_{\rm ej}}, \;R\sim \left(\frac{3 M_{\rm ej}}{4\pi \rho}\right)^{1/3}.
+}\]</div>
+<p>For standard scalings, this becomes</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\boxed{
+\begin{aligned}
+            R_{\rm FE} &amp;\sim 2.5 \left(\frac{M_{\rm ej}}{M_\odot}\right)^{1/3} \left(\frac{\rho_0}{10^{-24}\;{\rm g/cm^3}}\right)^{-1/3}\; {\rm pc}. \;\text{(FE)}\\
+        t_{\rm FE} &amp;\sim 244\;\left(\frac{v_{\rm ej}}{10^4\;{\rm km/s}}\right)^{-1}\left(\frac{M_{\rm ej}}{M_\odot}\right)^{1/3} \left(\frac{\rho_0}{10^{-24}\;{\rm g/cm^3}}\right)^{-1/3}\; {\rm yr}. \;\text{(FE)}
+\end{aligned}
+}\end{split}\]</div>
+<p>Beyond this point, the swept-up mass begins to dominate the dynamics, and the remnant enters the adiabatic,
+energy-conserving stage described by the <strong>Sedov–Taylor solution</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is actually an aggressive choice
+for the truncation time. We might prefer something on the order of 500 - 1000 years from a more
+sophisticated analysis.</p>
+</div>
+</section>
+<section id="sedov-taylor-phase">
+<h3>Sedov-Taylor Phase<a class="headerlink" href="#sedov-taylor-phase" title="Link to this heading">#</a></h3>
+<p>After the free expansion phase, the supernova remnant enters the Sedov-Taylor phase, where the dynamics are governed
+by the conservation of energy. In this phase, the shock radius increases as a power-law function of time, and the
+shock velocity decreases.</p>
+<p>The solution for the shock radius as a function of time was first derived independently by
+Sedov<a class="footnote-reference brackets" href="#footcite-sedov1946propagation" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> and Taylor<a class="footnote-reference brackets" href="#footcite-taylor1950formation" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a>, and is given by</p>
+<div class="math notranslate nohighlight">
+\[R_{\rm shock}(t) = \xi_0\left(\frac{E_0t^2}{\rho_0}\right)^{1/5},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\xi_0\)</span> is a dimensionless constant that depends on the adiabatic index of the gas
+(for a monatomic ideal gas, <span class="math notranslate nohighlight">\(\gamma = 5/3\)</span>, <span class="math notranslate nohighlight">\(\xi_0 \approx 1.15\)</span>).</p>
+<p>If we calculate these for the typical scalings relevant to textbf{supernova remnants}, we will find that</p>
+<div class="math notranslate nohighlight">
+\[R_{\rm shock} \approx 2.3 \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{1/5}
+\left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{-1/5}\left(\frac{t}{1000\;\rm yr}\right)^{2/5}\;{\rm pc}.\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[u_{\rm shock} \approx 9 \times 10^3 \left(\frac{E_0}{10^{51}\;\rm erg}\right)^{1/5}
+\left(\frac{\rho_0}{10^{-24}\;\rm g\;cm^{-3}}\right)^{-1/5}\left(\frac{t}{1000\;\rm yr}\right)^{-3/5}\;{\rm km/s.}\]</div>
+<p>Eventually, the Sedov–Taylor (ST) description breaks down because textbf{the post–shock gas cools efficiently.  }
+The key comparison is between the textbf{cooling time} of the shocked gas and the textbf{dynamical (expansion) time}
+of the remnant.</p>
+<p>As the remnant continues to expand beyond the Sedov–Taylor stage, the post-shock gas cools to progressively lower temperatures.
+During the Sedov phase the shock remains hot ($T_s gtrsim 10^6,$K), and the cooling time greatly exceeds
+the expansion time, textbf{ensuring that radiative losses are dynamically negligible.}
+However, because the shock velocity decreases as $v_s propto t^{-3/5}$, the post-shock temperature eventually
+falls into the regime where radiative cooling—particularly via metal line emission—becomes extremely efficient.
+As we have seen, when the losses due to cooling are no longer negligible, we have textbf{left the Sedov phase} and
+entered the textbf{radiative phase} (snowplow phase).</p>
+<p>The immediate consequence of rapid cooling is that the shocked interstellar material textbf{collapses into a thin,
+dense shell just behind the blast wave.}
+The shock itself continues to sweep up and thermalize ambient material, but the post-shock gas now loses
+its thermal energy almost instantaneously and is deposited into the shell at temperatures of order $10^2$–$10^4,$K.
+Behind this cold shell lies the still-hot interior plasma—the relic of the Sedov phase—which has not yet
+cooled appreciably.
+The interface between the high-pressure interior and the textbf{thin radiative shell is highly unstable}, and
+Rayleigh–Taylor fingers develop as the lighter, overpressured interior gas pushes outward against the heavy shell.
+These instabilities contribute to the complex filamentary morphology seen in many middle-aged supernova remnants.</p>
+<p>Because the cooled shell is extremely dense and thin, its thermal pressure is negligible compared to its bulk kinetic
+energy. The remnant can therefore be approximated as a textbf{momentum-conserving “snowplow”} in
+which the dynamics are governed by the conservation of radial momentum rather
+than total energy.</p>
+</section>
+</section>
+<section id="shock-modeling-in-homologous-expansion">
+<h2>Shock Modeling in Homologous Expansion<a class="headerlink" href="#shock-modeling-in-homologous-expansion" title="Link to this heading">#</a></h2>
+<p>Our first implementation of supernova shock modeling in Triceratops focuses on the homologous expansion phase.
+This is primarily because the majority of radio supernovae are observed during this phase, where the synchrotron
+emission is most prominent. There are a number of ways to treat the relevant physics, and we have implemented
+a few different models to capture the shock dynamics and resulting synchrotron emission. We will discuss them
+in order of complexity.</p>
+<section id="remark-the-morphology-of-the-shock">
+<h3>Remark: The Morphology of the Shock<a class="headerlink" href="#remark-the-morphology-of-the-shock" title="Link to this heading">#</a></h3>
+<p>Once the supernova shock has escaped the stellar progenitor, it generically separates into four dynamical regions:</p>
+<ul class="simple">
+<li><p>The textbf{unshocked CSM (region 4)} — the ambient interstellar or circumstellar gas, initially at
+rest with density $rho_0$ and pressure $P_0$.</p></li>
+<li><p>The textbf{shocked CSM (region III)} — material swept up by the forward shock and heated to high
+temperatures ($T sim 10^{6}$–$10^{8}$ K).</p></li>
+<li><p>The textbf{shocked ejecta (region II)} — ejecta that have passed through the reverse shock, now
+moving subsonically in the local frame.</p></li>
+<li><p>The textbf{unshocked ejecta (region I)} — freely expanding stellar material,
+often still cold and dense relative to the shocked regions.</p></li>
+</ul>
+<p>Between regions (II) and (III) lies a textbf{contact discontinuity} that separates the shocked CSM
+from the shocked ejecta. The two shocks (forward and reverse) and the contact surface evolve self-consistently
+as the explosion expands into the surrounding medium.</p>
+<p>The jump conditions across a strong adiabatic shock (Mach number $M gg 1$) follow from the conservation of mass,
+momentum, and energy (textbf{Rankine–Hugoniot Conditions}):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\rho_1 v_1 &amp;= \rho_2 v_2, \\
+P_2 + \rho_2 v_2^2 &amp;= P_1 + \rho_1 v_1^2, \\
+\frac{1}{2}v_1^2 + \frac{\gamma}{\gamma-1}\frac{P_1}{\rho_1} &amp;= \frac{1}{2}v_2^2 + \frac{\gamma}{\gamma-1}\frac{P_2}{\rho_2}.
+\end{aligned}\end{split}\]</div>
+<p>Here subscripts 1 and 2 refer to pre- and post-shock quantities respectively. Solving these for a given adiabatic
+index $gamma$ yields the compression, pressure, and temperature jumps across the shock.</p>
+<p>For a strong shock in a monatomic gas ($gamma = 5/3$), one finds:</p>
+<div class="math notranslate nohighlight">
+\[\frac{\rho_2}{\rho_1} = \frac{\gamma+1}{\gamma-1} = 4,\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{P_2}{P_1} = \frac{2\gamma M_1^2 - (\gamma - 1)}{\gamma + 1} \approx \frac{2\gamma}{\gamma + 1}
+M_1^2 \quad (M_1 \gg 1),\]</div>
+<p>and thus for $gamma=5/3$,</p>
+<div class="math notranslate nohighlight">
+\[\frac{P_2}{P_1} \approx \frac{5}{4} M_1^2.\]</div>
+<p>Finally, the post-shock temperature is given by</p>
+<div class="math notranslate nohighlight">
+\[T_2 \approx \frac{3}{16}\frac{\mu m_p}{k_B} v_s^2.\]</div>
+<p>For $v_s = 10^4,{rm km,s^{-1}}$, this yields $T_2 sim 10^9,{rm K}$, sufficient to produce
+strong thermal bremsstrahlung and line emission in the X-ray band.</p>
+</section>
+<section id="the-self-similar-model">
+<h3>The Self-Similar Model<a class="headerlink" href="#the-self-similar-model" title="Link to this heading">#</a></h3>
+<p>The canonical approach to modeling the shock dynamics during the homologous expansion phase is to
+use self-similar solutions as described by Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierxrayradioemission1982" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and
+Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierselfsimilarsolutionsinteraction1982" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>. These models make the following assumptions:</p>
+<ul>
+<li><p>The ejecta density profile follows a power-law distribution in velocity space</p>
+<div class="math notranslate nohighlight">
+\[\rho(r,t) = A_1 t^{-3} \left(\frac{r}{t}\right)^{-n},\]</div>
+</li>
+<li><p>The CSM density profile also follows a power-law distribution in radius</p>
+<div class="math notranslate nohighlight">
+\[\rho_{\rm csm}(r) = A_4 \left(r\right)^{-s},\]</div>
+</li>
+<li><p>The shock dynamics are self-similar, meaning that the shock radius and velocity can be expressed as power-law
+functions of time.</p></li>
+<li><p>The shocks are strong and adiabatic, allowing the use of the Rankine-Hugoniot jump conditions to relate
+pre- and post-shock quantities.</p></li>
+<li><p>The forward and backward shocks are sufficiently close together that the entire shock may be treated as a
+“thin shell” for the purposes of calculating synchrotron emission. In fact,
+Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierselfsimilarsolutionsinteraction1982" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> did not rely on this assumption and instead solved the
+self-similar ODE system directly to obtain the full structure of the shocked region. It has become standard practice;
+however, to use the thin-shell approximation for simplicity following Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierxrayradioemission1982" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p></li>
+</ul>
+<section id="the-shock-radius-and-velocity">
+<h4>The Shock Radius and Velocity<a class="headerlink" href="#the-shock-radius-and-velocity" title="Link to this heading">#</a></h4>
+<p>In a self-similar framework, there can be no intrinsic timescale or length scale, and so ratios of physical quantities
+must remain constant. Requiring that the ratio of the CSM to the ejecta density be constant with time at the
+shock radius leads to the following scaling for the shock radius:</p>
+<div class="math notranslate nohighlight">
+\[R_{\rm shock}(t) = \left[\frac{A_4}{A_1} \zeta\right]^{1/(s-n)} t^{(3-n)/(s-n)} = A_{\rm shock} t^{\lambda},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\zeta\)</span> is a dimensionless constant determined by solving the self-similar ODEs, and
+<span class="math notranslate nohighlight">\(\lambda = (n-3)/(n-s)\)</span>. The shock velocity is then given by</p>
+<div class="math notranslate nohighlight">
+\[v_{\rm shock}(t) = \frac{dR_{\rm shock}}{dt} = \lambda A_{\rm shock} t^{\lambda - 1} = \lambda R_{\rm shock}/t.\]</div>
+<p>The normalization constant <span class="math notranslate nohighlight">\(A_{\rm shock}\)</span> is (unfortunately), quite difficult to obtain in closed form,
+as it depends on the detailed structure of the ejecta and CSM density profiles as well as the solution to the
+self-similar ODEs. This observation motivates the use of the <strong>thin-shell</strong> approximation, where we treat the shocked
+region as a thin shell, which makes it possible to derive approximate expressions for <span class="math notranslate nohighlight">\(A_{\rm shock}\)</span> as shown
+in the dropdown below.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Shock Normalization</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">In the thin-shell approximation, the pressure difference across the shock must balance the momentum
+flux into the shell. Thus,</p>
+<div class="math notranslate nohighlight">
+\[\frac{dp}{dt} = [M_2+M_3]\frac{d}{dt}\left( \dot{R}_{\rm shock}\right)= 4\pi R_{\rm shock}^2 (P_3 -P_2).\]</div>
+<p class="sd-card-text">It can be shown that the CSM mass swept up by the forward shock is</p>
+<div class="math notranslate nohighlight">
+\[M_3(R_{\rm shock}) = \frac{4\pi A_4}{3-s} R_{\rm shock}^{3-s}.\]</div>
+<p class="sd-card-text">The mass swept up by the reverse shock corresponds to all of the ejecta mass with velocities larger than</p>
+<div class="math notranslate nohighlight">
+\[\tilde{v} = \frac{R_{\rm shock}}{t}.\]</div>
+<p class="sd-card-text">Therefore, at any time <span class="math notranslate nohighlight">\(t\)</span>, the material beyond <span class="math notranslate nohighlight">\(\tilde{v}\)</span> has been shocked, and the mass
+in this region is</p>
+<div class="math notranslate nohighlight">
+\[M_2(t) = \int_{R_{\rm shock}}^{\infty} 4\pi \xi^2\;\rho_1(\xi,t)\;d\xi.\]</div>
+<p class="sd-card-text">Integrating,</p>
+<div class="math notranslate nohighlight">
+\[M_2(t) = 4\pi A_1 t^{-3}\int_{R_{\rm shock}}^{\infty} \xi^{2-n} \;d\xi =
+\frac{4\pi A_1 t^{n-3}}{3-n} \left[ - R_{\rm shock}^{3-n}\right].\]</div>
+<p class="sd-card-text">Since we generally are interested in <span class="math notranslate nohighlight">\(n&gt;3\)</span>, the textbf{dominant term} is</p>
+<div class="math notranslate nohighlight">
+\[M_2(t) \simeq \frac{4\pi A_1 t^{n-3}}{n-3} R_{\rm shock}^{3-n}.\]</div>
+<p class="sd-card-text">Clearly, the total mass is</p>
+<div class="math notranslate nohighlight">
+\[M_2 + M_3 = 4\pi\left[\frac{A_4}{3-s}R_{\rm shock}^{3-s} + \frac{A_1 t^{n-3}}{n-3}R_{\rm shock}^{3-n}\right],\]</div>
+<p class="sd-card-text">If we substitute our ansatz for <span class="math notranslate nohighlight">\(R_{\rm shock}\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[M_{\rm sh} = 4\pi \left(\frac{A_4}{3-s} A_{\rm shock}^{3-s}t^{\lambda(3- s)} +
+\frac{A_1}{n-3} A_{\rm shock}^{3-n} t^{(\lambda-1)(3-n) }\right).\]</div>
+<p class="sd-card-text">With $lambda = (n-3)/(n-s)$, this becomes</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+    M_{\rm sh} = K_{\rm sh} t^{\gamma}= 4\pi t^{\gamma} \left[\frac{A_4}{3-s}A_{\rm shock}^{3-s}
+    + \frac{A_1}{n-3} A_{\rm shock}^{3-n}\right],\;\gamma = \frac{(n-3)(3-s)}{n-s}.
+    }\]</div>
+<p class="sd-card-text">In order to use the thin-shell approximation to close the problem, we need expressions for the pressures
+behind the forward and reverse shocks. Using the strong shock jump conditions, these are</p>
+<div class="math notranslate nohighlight">
+\[P_2 = \frac{3}{4}\rho_1(R_{\rm sh},t) \left(\tilde{v} - \dot{R}_{\rm sh}\right)^2,\]</div>
+<div class="math notranslate nohighlight">
+\[P_3 = \frac{3}{4}\rho_4(R_{\rm sh}) \left(\dot{R}_{\rm sh}\right)^2.\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="sd-card-text">In some texts, specifically Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierxrayradioemission1982" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> , these pressures are
+given with a factor of 1 instead of 3/4. This is because the impact of the factor is of order unity and
+does little to influence the overall dynamics. We have chosen to use the more accurate 3/4 factor here.</p>
+</div>
+<p class="sd-card-text">Returning to the momentum equation, the RHS becomes</p>
+<div class="math notranslate nohighlight">
+\[4\pi R_{\rm sh}^2 \left(P_2-P_3\right) = 3\pi R_{\rm sh}^2\left(\rho_1 \left(\tilde{v}
+-\dot{R}_{\rm sh}\right)^2 - \rho_4 \dot{R}_{\rm sh}^2 \right).\]</div>
+<p class="sd-card-text">Using the self-similar ansatz, the time dependency can be separated out, yielding</p>
+<div class="math notranslate nohighlight">
+\[4\pi (\lambda -1)\lambda A_{\rm shock}\left[\frac{A_4}{3-s}A_{\rm shock}^{3-s} +
+\frac{A_1}{n-3} A_{\rm shock}^{3-n}\right] = 3\pi A_{\rm shock}^{4-s}
+\left[A_1(1-\lambda)^2 A_{\rm shock}^{s-n} - A_4 \lambda^2\right]\]</div>
+<p class="sd-card-text">Collecting terms, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\underbrace{4\pi A_4 \frac{\lambda(\lambda  -1) }{3-s}}_{A}A_{\rm shock}^{4-s} + \underbrace{4\pi A_1
+\frac{\lambda(\lambda  -1)}{n-3}}_{B}A_{\rm shock}^{4-n} &amp;=\\
+-\underbrace{3\pi \lambda^2 A_4}_C A_{\rm shock}^{4-s} + \underbrace{3\pi A_1 (1-\lambda)^2}_D A_{\rm shock}^{4-n}
+\end{aligned}\end{split}\]</div>
+<p class="sd-card-text">The equation reduces to the form</p>
+<div class="math notranslate nohighlight">
+\[\zeta = \frac{C+A}{D-B} =\frac{3\lambda^2 +4\frac{ (\lambda -1)\lambda}{3-s} }
+            { 3(1-\lambda)^2-4\frac{ (\lambda  -1)\lambda}{n-3}}\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p class="sd-card-text">Without the 3/4 factor, this reduces to the expression</p>
+<div class="math notranslate nohighlight">
+\[\zeta = \frac{C+A}{D-B} =\frac{\lambda^2 +\frac{ (\lambda -1)\lambda}{3-s} }
+            { (1-\lambda)^2-\frac{ (\lambda  -1)\lambda}{n-3}}.\]</div>
+<p class="sd-card-text">Furthermore, for a wind-like CSM (<span class="math notranslate nohighlight">\(s=2\)</span>), this expression simplifies to</p>
+<div class="math notranslate nohighlight">
+\[\zeta = \frac{(n-4)(n-3)}{2},\]</div>
+<p class="sd-card-text">Which is the expression given in Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierxrayradioemission1982" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
+</div>
+</div>
+</details><p>The resulting value for <span class="math notranslate nohighlight">\(\zeta\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\zeta = \frac{3\lambda^2 +4\frac{ (\lambda -1)\lambda}{3-s} }
+            { 3(1-\lambda)^2-4\frac{ (\lambda  -1)\lambda}{n-3}}.
+}\]</div>
+<p>With this, the entire dynamics of the shock are specified. This approach is implemented in the
+<a class="reference internal" href="../../../_as_gen/dynamics.supernovae.shock_dynamics.ChevalierSelfSimilarShockEngine.html#dynamics.supernovae.shock_dynamics.ChevalierSelfSimilarShockEngine" title="dynamics.supernovae.shock_dynamics.ChevalierSelfSimilarShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChevalierSelfSimilarShockEngine</span></code></a> and
+<a class="reference internal" href="../../../_as_gen/dynamics.supernovae.shock_dynamics.ChevalierSelfSimilarWindShockEngine.html#dynamics.supernovae.shock_dynamics.ChevalierSelfSimilarWindShockEngine" title="dynamics.supernovae.shock_dynamics.ChevalierSelfSimilarWindShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">ChevalierSelfSimilarWindShockEngine</span></code></a> classes. You can read more about
+how to use these models in the <a class="reference internal" href="../../user_guide.html#user-guide"><span class="std std-ref">Triceratops User Guide</span></a> sections on shock engines.</p>
+</section>
+<section id="connection-to-explosion-energetics">
+<h4>Connection To Explosion Energetics<a class="headerlink" href="#connection-to-explosion-energetics" title="Link to this heading">#</a></h4>
+<p>Providing the normalization constants <span class="math notranslate nohighlight">\(A_1\)</span> and <span class="math notranslate nohighlight">\(A_4\)</span> requires connecting the density profiles
+to physical parameters of the explosion and CSM. For the ejecta, we can relate <span class="math notranslate nohighlight">\(A_1\)</span> to the total ejecta mass
+<span class="math notranslate nohighlight">\(M_{\rm ej}\)</span> and energy <span class="math notranslate nohighlight">\(E_{\rm ej}\)</span>.</p>
+<p>As described in Chevalier<a class="footnote-reference brackets" href="#footcite-chevalierselfsimilarsolutionsinteraction1982" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>, the ejecta velocity profile
+is well described by a broken power-law. During homologous expansion, <span class="math notranslate nohighlight">\(r = vt\)</span> implies that the density
+of the ejecta is likewise a broken power-law in velocity space:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\rho(r,t) = Kt^{-3} \begin{cases}
+    v^{-\delta}, &amp; v &lt; v_t \\
+    v_t^{n-\delta} v^{-n}, &amp; v \geq v_t,
+\end{cases}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_t\)</span> is the transition velocity between the inner and outer ejecta profiles. The total mass of
+the ejecta is given by <span class="math notranslate nohighlight">\(M_{\rm ej}\)</span> and must be conserved:</p>
+<div class="math notranslate nohighlight">
+\[M_{\rm ej} = \int_0^{\infty} 4\pi r^2 \rho(r,t) dr = 4\pi K v_t^{3-\delta} \frac{n-\delta}{(3-\delta)(n-3)}.\]</div>
+<p>Similarly, the total kinetic energy of the ejecta is given by <span class="math notranslate nohighlight">\(E_{\rm ej}\)</span> and must also be conserved:</p>
+<div class="math notranslate nohighlight">
+\[E_{\rm ej} = \int_0^{\infty} \frac{1}{2} 4\pi r^2 \rho(r,t) v^2 dr =
+2\pi K v_t^{5-\delta} \frac{n-\delta}{(5-\delta)(n-5)}.\]</div>
+<p>In terms of the energy per unit mass, <span class="math notranslate nohighlight">\(E_{\rm ej}/M_{\rm ej}\)</span>, these two equations can be combined to
+solve for the transition velocity:</p>
+<div class="math notranslate nohighlight">
+\[v_t^2 = \frac{2(5-\delta)(n-5)}{(3-\delta)(n-3)} \frac{E_{\rm ej}}{M_{\rm ej}}.\]</div>
+<p>Finally, substituting this back into the mass equation allows us to solve for the normalization constant
+<span class="math notranslate nohighlight">\(K_1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[K_1 = \frac{1}{4\pi} \left(\frac{(3-\delta)(n-3)}{(n-\delta)}\right) \frac{M_{\rm ej}}{v_t^{3-\delta}}.\]</div>
+<p>This is implemented in
+<code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_v_t_and_K_from_energetics()</span></code>.</p>
+</section>
+</section>
+<section id="the-thin-shell-numerical-model">
+<h3>The Thin-Shell Numerical Model<a class="headerlink" href="#the-thin-shell-numerical-model" title="Link to this heading">#</a></h3>
+<p>One downside of the self-similar approach is that it relies on a number of assumptions about the ejecta and CSM density
+profiles, which may not always be valid. To address this, we implement a purely numerical thin-shell model which
+permits much more general density profiles for both the ejecta and CSM.</p>
+<p>In this approach, we imagine the shock as a thin shell with an equation of motion dictated by the conservation of
+momentum in the same form as described in the dropdown above. However, instead of relying on self-similar scalings, we
+numerically integrate the equation of motion using arbitrary density profiles for the ejecta and CSM. This allows
+us to capture more complex shock dynamics that may arise from non-power-law density profiles or other physical effects.</p>
+<p>The momentum equation takes the form</p>
+<div class="math notranslate nohighlight">
+\[\frac{dp}{dt} = [M_2+M_3]\frac{d}{dt}\left( \dot{R}_{\rm shock}\right)=
+4\pi R_{\rm shock}^2 (P_3 -P_2)
++ \dot{M}_{\rm 2} v_{\rm ej}
+- \dot{M}_{\rm 3} v_{\rm shock}.\]</div>
+<p>We previously showed that the Rankine-Hugoniot jump conditions give us expressions for the pressures behind the forward
+and reverse shocks:</p>
+<div class="math notranslate nohighlight">
+\[4\pi R_{\rm sh}^2 \left(P_2-P_3\right) = 3\pi R_{\rm sh}^2\left(\rho_1 \left(\tilde{v}
+-\dot{R}_{\rm sh}\right)^2 - \rho_4 \dot{R}_{\rm sh}^2 \right).\]</div>
+<p>We also showed that the swept-up masses could be computed in quadrature; however, for numerical implementation, this
+produces a slow algorithm as each timestep requires an integral evaluation.</p>
+<p>A more mathematically rich approach relies again on the <strong>homologous expansion</strong> in the early phase of the supernova
+expansion. Because this is true regardless of the ejecta profile, it remains the case that if the ejecta have some
+distribution of velocities such that</p>
+<div class="math notranslate nohighlight">
+\[\frac{dM_{\rm ej}}{dv} = f(v),\]</div>
+<p>then the density must be of the form</p>
+<div class="math notranslate nohighlight">
+\[\rho_{\rm ej}(r,t) = t^{-3} G(v = r/t),\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[G(v) = \frac{f(v)}{4\pi v^2}.\]</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In the self-similar model, we allow only scenarios where <span class="math notranslate nohighlight">\(f(v) \propto v^{-n}\)</span>; however, here we can
+consider arbitrary distributions.</p>
+</div>
+<p>Now, at a given time <span class="math notranslate nohighlight">\(t\)</span>, the mass swept up in textbf{region 2} (post-shock ejecta) is the same as all of
+the mass with</p>
+<div class="math notranslate nohighlight">
+\[r&gt;R_{\rm sh} \iff v&gt; R_{\rm sh}/t = \tilde{v},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tilde{v}\)</span> is homologous equivalent velocity at the shock radius. Thus,</p>
+<div class="math notranslate nohighlight">
+\[M_2(t) = \int_{v_{\rm ej}}^{\infty} f(v) dv,\]</div>
+<p>which means that (using Leibniz rule), noting that</p>
+<div class="math notranslate nohighlight">
+\[\frac{dv_{\rm ej}{dt} = \frac{d}{dt}\left(\frac{R_{\rm sh}}{t}\right)
+ = \frac{\dot{R}_{\rm sh}}{t} - \frac{R_{\rm sh}}{t^2}\]</div>
+<div class="math notranslate nohighlight">
+\[\frac{dM_2}{dt} = \frac{dM_2}{dv_{\rm ej}} \frac{dv_{\rm ej}}{dt} = -4\pi \frac{R_{\rm sh}^2}{t^3}
+G\left[\frac{R_{\rm sh}}{t}\right] \left(v_{\rm sh}- \frac{R_{\rm sh}}{t}\right).\]</div>
+<p>Crucially, this allows us to avoid time-step integration. Using</p>
+<div class="math notranslate nohighlight">
+\[\frac{dM_3}{dt} = 4\pi \rho_{\rm csm}[R_{\rm sh}] R_{\rm sh}^2 v_{\rm sh},\]</div>
+<p>we have</p>
+<div class="math notranslate nohighlight">
+\[\frac{dM_{\rm sh}}{dt} = 4\pi \left\{\rho_{\rm csm}(R_{\rm sh}) R_{\rm sh}^2 v_{\rm sh}
+- \frac{R_{\rm sh}^2}{t^3} G\left[\tilde{v}\right] \left(v_{\rm sh}- \tilde{v}\right)\right\}.\]</div>
+<p>We therefore solve the set of differential equation</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{dR}{dt} &amp;= v\\
+\frac{dv}{dt} &amp;=  -\frac{7\pi R^2}{M} \left(\rho_{\rm csm} v^2-t^{-3} G(v_{\rm ej}) \Delta^2\right)\\
+    \frac{dM}{dt} &amp;= 4\pi R^2 \left\{\rho_{\rm csm} v + \frac{1}{t^3} G(v_{\rm ej})\Delta\right\},
+\end{aligned}\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta = \tilde{v} - v_{\rm sh}\)</span>.</p>
+<p>Some additional effort can be taken to make this numerically stable at early times as described in the dropdown below;
+however, the overall approach is straightforward to implement using any standard ODE integrator. This approach is implemented
+in the <a class="reference internal" href="../../../_as_gen/dynamics.supernovae.shock_dynamics.NumericalThinShellShockEngine.html#dynamics.supernovae.shock_dynamics.NumericalThinShellShockEngine" title="dynamics.supernovae.shock_dynamics.NumericalThinShellShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">NumericalThinShellShockEngine</span></code></a> class. You can read more about how to use
+this model in the <a class="reference internal" href="../../user_guide.html#user-guide"><span class="std std-ref">Triceratops User Guide</span></a> sections on shock engines.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">Numerical Details</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">With <span class="math notranslate nohighlight">\(\xi = R_{\rm sh}/t\)</span>, <span class="math notranslate nohighlight">\(\tau = \log t\)</span>, and <span class="math notranslate nohighlight">\(\Delta = \xi - v_{\rm sh}\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+    \frac{d\xi}{d\tau} &amp;= -\Delta\\
+    \frac{d\Delta}{d\tau} &amp;= -\Delta + \frac{7\xi^2\pi}{M}\left\{t^3\rho_{\rm csm}(\xi t)
+    (\xi - \Delta)^2 - G(\xi) \Delta (4\xi - \Delta)\right\}\\
+    \frac{dM}{d\tau} &amp;= 4\pi \xi^2 \left\{t^3\rho_{\rm csm}(\xi t)(\xi -\Delta) + G(\xi) \Delta\right\}
+\end{aligned}\end{split}\]</div>
+</div>
+</details></section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<div class="docutils container" id="id12">
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="footcite-chevalierxrayradioemission1982" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id5">2</a>,<a role="doc-backlink" href="#id8">3</a>,<a role="doc-backlink" href="#id9">4</a>,<a role="doc-backlink" href="#id10">5</a>)</span>
+<p>R. A. Chevalier. The radio and X-ray emission from type II supernovae. <em>\apj </em>, 259:302–310, August 1982. <a class="reference external" href="https://doi.org/10.1086/160167">doi:10.1086/160167</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-chevalierselfsimilarsolutionsinteraction1982" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id6">2</a>,<a role="doc-backlink" href="#id7">3</a>,<a role="doc-backlink" href="#id11">4</a>)</span>
+<p>R. A. Chevalier. Self-similar solutions for the interaction of stellar ejecta with an external medium. <em>The Astrophysical Journal</em>, 258:790–797, July 1982. ADS Bibcode: 1982ApJ…258..790C. URL: <a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1982ApJ...258..790C">https://ui.adsabs.harvard.edu/abs/1982ApJ…258..790C</a> (visited on 2025-11-25), <a class="reference external" href="https://doi.org/10.1086/160126">doi:10.1086/160126</a>.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-sedov1946propagation" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>Leonid Ivanovich Sedov. Propagation of strong shock waves. <em>Journal of Applied Mathematics and Mechanics</em>, 10:241–250, 1946.</p>
+</aside>
+<aside class="footnote brackets" id="footcite-taylor1950formation" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">4</a><span class="fn-bracket">]</span></span>
+<p>Geoffrey Ingram Taylor. The formation of a blast wave by a very intense explosion.-ii. the atomic explosion of 1945. <em>Proceedings of the Royal Society of London. Series A. Mathematical and Physical Sciences</em>, 201(1065):175–186, 1950.</p>
+</aside>
+</aside>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#homologous-expansion-free-expansion-phase">Homologous Expansion (Free Expansion Phase)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sedov-taylor-phase">Sedov-Taylor Phase</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shock-modeling-in-homologous-expansion">Shock Modeling in Homologous Expansion</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remark-the-morphology-of-the-shock">Remark: The Morphology of the Shock</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-self-similar-model">The Self-Similar Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-shock-radius-and-velocity">The Shock Radius and Velocity</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-explosion-energetics">Connection To Explosion Energetics</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-thin-shell-numerical-model">The Thin-Shell Numerical Model</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/reference/physics/supernovae/shocks.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Eliza Diggins.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
