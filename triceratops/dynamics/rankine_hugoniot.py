@@ -15,8 +15,204 @@ import numpy as np
 k_B_cgs = const.k_B.cgs.value  # Boltzmann constant in CGS
 m_p_cgs = const.m_p.cgs.value  # Proton mass in CGS
 
+# ========================================= #
+# Strong Shock Utilities                    #
+# ========================================= #
 
-def compute_SH_magnetic_field(
+# --- Low-Level CGS Implementations --- #
+# Implementations of the Low-Level strong shock functions in CGS units.
+# These are used by the higher-level functions that handle units.
+#
+# CONVENTION:
+# Naming should be _compute_<s/w>_<c/h>_<physical_quantity>_cgs
+# where:
+# s = strong shock
+# w = weak shock
+# c = cold upstream
+# h = hot upstream
+
+
+def _compute_s_c_shock_magnetic_field_cgs(
+    shock_velocity: float,
+    upstream_density: float,
+    gamma: float = 5 / 3,
+    epsilon_B: float = 0.1,
+) -> float:
+    r"""
+    Compute the magnetic field strength immediately behind a strong shock assuming energy partition.
+
+    This function estimates the post-shock magnetic field for classical, strong, cold shocks using
+    an equipartition argument (e.g. :footcite:t:`Chevalier1998SynchrotronSelfAbsorption`). This function
+    assumes a cold, strong, classical shock propagating into an unmagnetized medium. The magnetic field strength
+    is computed by assuming that a fixed fraction of the post-shock internal energy density is converted into
+    magnetic field energy.
+
+    Parameters
+    ----------
+    shock_velocity: float
+        The relative velocity of the shock front in cm/s. In cases where the pre-shock medium is
+        not at rest, this should be the *relative* velocity of the shock in the comoving frame.
+    upstream_density: float
+        The density of the unshocked medium ahead of the shock in g/cm^3. Typically,
+        this is the density of the CSM of ISM.
+    gamma: float, optional
+        The adiabatic index of the fluid. Default is 5/3 (ideal monatomic gas).
+    epsilon_B: float, optional
+        The fraction of the post-shock internal energy density that is converted into magnetic field energy.
+        Default is 0.1.
+
+    Returns
+    -------
+    float
+        The magnetic field strength immediately behind the shock front in Gauss.
+
+    Notes
+    -----
+    The post-shock thermal energy of a classical, strong, cold shock is given by
+
+    .. math::
+
+        U = \frac{3}{2} \frac{(R-1)}{R^2} \rho_1 v_{\rm sh}^2.
+
+    Assuming :math:`\epsilon_B` fraction of this energy goes into magnetic fields, the magnetic field strength is
+    given by
+
+    .. math::
+
+        B = \sqrt{8\pi \epsilon_B U} = \sqrt{8 \pi \epsilon_B \frac{3}{2} \frac{(R-1)}{R^2} \rho_1 v_{\rm sh}^2},
+    """
+    # Calculate the density jump across the shock using RH conditions in strong shock.
+    R = (gamma + 1) / (gamma - 1)
+
+    # Compute the internal energy density behind the shock
+    U = (3 / 2) * ((R - 1) / R**2) * upstream_density * shock_velocity**2
+
+    # Compute the magnetic field strength
+    B = np.sqrt(8 * np.pi * epsilon_B * U)
+
+    return B
+
+
+def _compute_s_c_shock_pressure_cgs(
+    shock_velocity: float,
+    upstream_density: float,
+    gamma: float = 5 / 3,
+) -> float:
+    """
+    Compute the gas pressure immediately behind a classical strong shock propagating into a cold upstream medium.
+
+    Parameters
+    ----------
+    shock_velocity: float
+        The relative velocity of the shock front in cm/s.
+    upstream_density: float
+        The density of the unshocked medium ahead of the shock in g/cm^3.
+    gamma: float, optional
+        The adiabatic index of the fluid.
+
+    Returns
+    -------
+    float
+        The gas pressure immediately behind the shock front in dyne/cm^2.
+    """
+    # Strong-shock, cold-upstream pressure jump
+    P2 = (2.0 / (gamma + 1.0)) * upstream_density * shock_velocity**2
+    return P2
+
+
+def _compute_s_c_shock_temperature_cgs(
+    shock_velocity: float,
+    gamma: float = 5 / 3,
+    mu: float = 0.61,
+) -> float:
+    r"""
+    Compute the temperature immediately behind a strong shock under canonical assumptions.
+
+    Low-level CGS implementation of `compute_strong_shock_temperature`. Assumptions:
+
+    - The upstream region is cold and the shock is strong (Mach >> 1).
+    - The gas is ideal with adiabatic index gamma.
+    - The shock is non-relativistic.
+    - Temperature is inferred from the ideal-gas relation using a mean molecular weight mu.
+
+    Parameters
+    ----------
+    shock_velocity: float
+        Shock speed relative to the upstream medium in cm/s.
+    gamma: float, optional
+        Adiabatic index.
+    mu: float, optional
+        Mean molecular weight (dimensionless), in units of m_p.
+
+    Returns
+    -------
+    float
+        Post-shock temperature in Kelvin.
+    """
+    prefac = 2.0 * (gamma - 1.0) / (gamma + 1.0) ** 2
+    T2 = prefac * (mu * m_p_cgs / k_B_cgs) * shock_velocity**2
+    return T2
+
+
+def _compute_s_shock_velocity_cgs(
+    shock_velocity: float,
+    gamma: float = 5 / 3,
+) -> float:
+    r"""
+    Compute the downstream bulk velocity for a strong shock into a cold upstream medium.
+
+    Low-level CGS implementation of `compute_strong_shock_velocity`. Assumptions:
+
+    - Strong shock (Mach >> 1), cold upstream.
+    - Non-relativistic, ideal gas.
+    - Returned velocity is the *lab-frame* downstream velocity assuming the upstream is at rest.
+
+    Parameters
+    ----------
+    shock_velocity: float
+        Shock speed relative to the upstream medium in cm/s.
+    gamma: float, optional
+        Adiabatic index.
+
+    Returns
+    -------
+    float
+        Downstream bulk velocity in cm/s.
+    """
+    R = (gamma + 1.0) / (gamma - 1.0)
+    v2 = shock_velocity * (R - 1.0) / R  # == 2/(gamma+1) * v_sh
+    return v2
+
+
+def _compute_s_density_cgs(
+    upstream_density: float,
+    gamma: float = 5 / 3,
+) -> float:
+    r"""
+    Compute the downstream density for a strong shock into a cold upstream medium.
+
+    Low-level CGS implementation of `compute_strong_shock_density`. Assumptions:
+
+    - Strong shock (Mach >> 1), cold upstream.
+    - Non-relativistic, ideal gas.
+
+    Parameters
+    ----------
+    upstream_density: float
+        Upstream density in g/cm^3.
+    gamma: float, optional
+        Adiabatic index.
+
+    Returns
+    -------
+    float
+        Downstream density in g/cm^3.
+    """
+    R = (gamma + 1.0) / (gamma - 1.0)
+    return R * upstream_density
+
+
+def compute_strong_cold_shock_magnetic_field(
     shock_velocity,
     upstream_density,
     gamma: float = 5 / 3,
@@ -72,7 +268,7 @@ def compute_SH_magnetic_field(
         upstream_density_cgs = upstream_density  # Assume CGS
 
     # Compute the magnetic field in CGS
-    B_cgs = _compute_SH_B_CGS(
+    B_cgs = _compute_s_c_shock_magnetic_field_cgs(
         shock_velocity=shock_velocity_cgs,
         upstream_density=upstream_density_cgs,
         gamma=gamma,
@@ -82,59 +278,7 @@ def compute_SH_magnetic_field(
     return B_cgs * u.G  # Return with Gauss units
 
 
-def _compute_SH_B_CGS(
-    shock_velocity: float,
-    upstream_density: float,
-    gamma: float = 5 / 3,
-    epsilon_B: float = 0.1,
-) -> float:
-    """
-    Compute the magnetic field strength immediately behind a strong shock assuming energy partition.
-
-    This is a low-level CGS implementation of `compute_SH_magnetic_field`. This makes the following
-    assumptions:
-
-    - The upstream region is cold: the pressure is negligible compared to the ram pressure.
-    - The shock is strong: the Mach number is much greater than 1.
-    - The fluid is ideal and follows the Rankine-Hugoniot jump conditions.
-    - The magnetic field energy density is a fixed fraction (epsilon_B) of the post-shock internal energy density.
-    - The shock is non-relativistic.
-    - The upstream magnetic field is negligible compared to the post-shock magnetic field.
-    - The material is an ideal gas.
-    - The provided velocity is the relative velocity of the shock in the comoving frame of the
-        upstream medium. Alternatively, if the upstream medium is at rest, this is the shock velocity in the lab frame.
-
-    Parameters
-    ----------
-    shock_velocity: float
-        The relative velocity of the shock front in cm/s.
-    upstream_density: float
-        The density of the unshocked medium ahead of the shock in g/cm^3. Typically,
-        this is the density of the CSM of ISM.
-    gamma: float, optional
-        The adiabatic index of the fluid. Default is 5/3 (ideal monatomic gas).
-    epsilon_B: float, optional
-        The fraction of the post-shock internal energy density that is converted into magnetic field energy.
-        Default is 0.1.
-
-    Returns
-    -------
-    float
-        The magnetic field strength immediately behind the shock front in Gauss.
-    """
-    # Calculate the density jump across the shock using RH conditions in strong shock.
-    R = (gamma + 1) / (gamma - 1)
-
-    # Compute the internal energy density behind the shock
-    U = (3 / 2) * ((R - 1) / R**2) * upstream_density * shock_velocity**2
-
-    # Compute the magnetic field strength
-    B = np.sqrt(8 * np.pi * epsilon_B * U)
-
-    return B
-
-
-def compute_strong_shock_pressure(
+def compute_strong_cold_shock_pressure(
     shock_velocity,
     upstream_density,
     gamma: float = 5 / 3,
@@ -180,7 +324,7 @@ def compute_strong_shock_pressure(
     else:
         upstream_density_cgs = upstream_density  # Assume CGS
 
-    P_cgs = _compute_SH_P_CGS(
+    P_cgs = _compute_s_c_shock_pressure_cgs(
         shock_velocity=shock_velocity_cgs,
         upstream_density=upstream_density_cgs,
         gamma=gamma,
@@ -189,43 +333,7 @@ def compute_strong_shock_pressure(
     return P_cgs * (u.dyne / u.cm**2)
 
 
-def _compute_SH_P_CGS(
-    shock_velocity: float,
-    upstream_density: float,
-    gamma: float = 5 / 3,
-) -> float:
-    """
-    Compute the gas pressure immediately behind a strong shock propagating into a cold upstream medium.
-
-    This is a low-level CGS implementation of `compute_strong_shock_pressure`. This makes the following
-    assumptions:
-
-    - The upstream region is cold: the pressure is negligible compared to the ram pressure.
-    - The shock is strong: the Mach number is much greater than 1.
-    - The fluid is ideal and follows the Rankine-Hugoniot jump conditions.
-    - The shock is non-relativistic.
-    - The provided velocity is the relative velocity of the shock in the comoving frame of the upstream medium.
-
-    Parameters
-    ----------
-    shock_velocity: float
-        The relative velocity of the shock front in cm/s.
-    upstream_density: float
-        The density of the unshocked medium ahead of the shock in g/cm^3.
-    gamma: float, optional
-        The adiabatic index of the fluid.
-
-    Returns
-    -------
-    float
-        The gas pressure immediately behind the shock front in dyne/cm^2.
-    """
-    # Strong-shock, cold-upstream pressure jump
-    P2 = (2.0 / (gamma + 1.0)) * upstream_density * shock_velocity**2
-    return P2
-
-
-def compute_strong_shock_temperature(
+def compute_strong_cold_shock_temperature(
     shock_velocity,
     gamma: float = 5 / 3,
     mu: float = 0.61,
@@ -268,47 +376,13 @@ def compute_strong_shock_temperature(
     else:
         shock_velocity_cgs = shock_velocity  # Assume CGS
 
-    T_cgs = _compute_SH_T_CGS(
+    T_cgs = _compute_s_c_shock_temperature_cgs(
         shock_velocity=shock_velocity_cgs,
         gamma=gamma,
         mu=mu,
     )
 
     return T_cgs * u.K
-
-
-def _compute_SH_T_CGS(
-    shock_velocity: float,
-    gamma: float = 5 / 3,
-    mu: float = 0.61,
-) -> float:
-    r"""
-    Compute the temperature immediately behind a strong shock under canonical assumptions.
-
-    Low-level CGS implementation of `compute_strong_shock_temperature`. Assumptions:
-
-    - The upstream region is cold and the shock is strong (Mach >> 1).
-    - The gas is ideal with adiabatic index gamma.
-    - The shock is non-relativistic.
-    - Temperature is inferred from the ideal-gas relation using a mean molecular weight mu.
-
-    Parameters
-    ----------
-    shock_velocity: float
-        Shock speed relative to the upstream medium in cm/s.
-    gamma: float, optional
-        Adiabatic index.
-    mu: float, optional
-        Mean molecular weight (dimensionless), in units of m_p.
-
-    Returns
-    -------
-    float
-        Post-shock temperature in Kelvin.
-    """
-    prefac = 2.0 * (gamma - 1.0) / (gamma + 1.0) ** 2
-    T2 = prefac * (mu * m_p_cgs / k_B_cgs) * shock_velocity**2
-    return T2
 
 
 def compute_strong_shock_velocity(
@@ -349,42 +423,12 @@ def compute_strong_shock_velocity(
     else:
         shock_velocity_cgs = shock_velocity  # Assume CGS
 
-    v2_cgs = _compute_SH_v_CGS(
+    v2_cgs = _compute_s_shock_velocity_cgs(
         shock_velocity=shock_velocity_cgs,
         gamma=gamma,
     )
 
     return v2_cgs * (u.cm / u.s)
-
-
-def _compute_SH_v_CGS(
-    shock_velocity: float,
-    gamma: float = 5 / 3,
-) -> float:
-    r"""
-    Compute the downstream bulk velocity for a strong shock into a cold upstream medium.
-
-    Low-level CGS implementation of `compute_strong_shock_velocity`. Assumptions:
-
-    - Strong shock (Mach >> 1), cold upstream.
-    - Non-relativistic, ideal gas.
-    - Returned velocity is the *lab-frame* downstream velocity assuming the upstream is at rest.
-
-    Parameters
-    ----------
-    shock_velocity: float
-        Shock speed relative to the upstream medium in cm/s.
-    gamma: float, optional
-        Adiabatic index.
-
-    Returns
-    -------
-    float
-        Downstream bulk velocity in cm/s.
-    """
-    R = (gamma + 1.0) / (gamma - 1.0)
-    v2 = shock_velocity * (R - 1.0) / R  # == 2/(gamma+1) * v_sh
-    return v2
 
 
 def compute_strong_shock_density(
@@ -417,37 +461,9 @@ def compute_strong_shock_density(
     else:
         upstream_density_cgs = upstream_density  # Assume CGS
 
-    rho2_cgs = _compute_SH_rho_CGS(
+    rho2_cgs = _compute_s_density_cgs(
         upstream_density=upstream_density_cgs,
         gamma=gamma,
     )
 
     return rho2_cgs * (u.g / u.cm**3)
-
-
-def _compute_SH_rho_CGS(
-    upstream_density: float,
-    gamma: float = 5 / 3,
-) -> float:
-    r"""
-    Compute the downstream density for a strong shock into a cold upstream medium.
-
-    Low-level CGS implementation of `compute_strong_shock_density`. Assumptions:
-
-    - Strong shock (Mach >> 1), cold upstream.
-    - Non-relativistic, ideal gas.
-
-    Parameters
-    ----------
-    upstream_density: float
-        Upstream density in g/cm^3.
-    gamma: float, optional
-        Adiabatic index.
-
-    Returns
-    -------
-    float
-        Downstream density in g/cm^3.
-    """
-    R = (gamma + 1.0) / (gamma - 1.0)
-    return R * upstream_density

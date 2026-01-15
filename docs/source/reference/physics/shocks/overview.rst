@@ -78,9 +78,109 @@ types of shocks and their relevant physics.
 Rankine–Hugoniot Jump Conditions
 ================================
 
+.. hint::
+
+    Canned routines for performing Rankine–Hugoniot calculations are available in the :mod:`~dynamics.rankine_hugoniot`
+    module.
+
+The `Rankine–Hugoniot <https://en.wikipedia.org/wiki/Rankine%E2%80%93Hugoniot_conditions>`__ jump conditions describe
+the relationships between the physical properties of a fluid
+on either side of a shock front. These conditions are derived from the conservation laws of mass, momentum, and energy
+across the shock discontinuity. They are fundamental to understanding shock dynamics and are widely used in
+astrophysics to model shock waves in various contexts, including supernova remnants, stellar winds, and jet interactions.
+
+.. note::
+
+    For detailed references, we suggest :footcite:t:`landau1987fluid`, :footcite:t:`thorne2017modern`, and
+    :footcite:t:`clarke2007principles`.
+
+Classical Shock Relations
+-------------------------
+
+In the classical (non-relativistic) regime, the Rankine–Hugoniot conditions relate the upstream (pre-shock) and downstream
+(post-shock) states of the fluid. The key relations are as follows:
+
+.. math::
+
+    \begin{aligned}
+    \rho_1 u_1 &= \rho_2 u_2 \quad &\text{(Mass Conservation)} \\
+    P_1 + \rho_1 u_1^2 &= P_2 + \rho_2 u_2^2 \quad &\text{(Momentum Conservation)} \\
+    \frac{1}{2} u_1^2 + \frac{c_1^2}{\Gamma-1} &= \frac{1}{2} u_2^2 + \frac{c_2^2}{\Gamma-1}
+    \quad &\text{(Energy Conservation)},
+    \end{aligned}
+
+where we have assumed an ideal gas with polytropic equation of state :math:`P = K \rho^{\Gamma}`. From these, a number
+of useful relations can be derived relating the thermodynamic quantities in the upstream and downstream regions. We
+further refine based on two factors:
+
+1. Whether the shock is weak or strong: For strong shocks (:math:`M_1 \to \infty`), the relations further simplify.
+2. For shocks into **cold media** (i.e., :math:`P_1 \approx 0`), which is often the case in astrophysical contexts.
+
+We follow the standard naming convention
+
+.. code-block:: python
+
+    # High-Level API
+    def compute_<strong/weak>_<cold/warm>_shock_<quantity>(...):
+        # Compute the specified shock quantity based on the shock type.
+
+    # Low Level API
+    def _compute_<s/w>_<h/c>_shock_<quantity>_cgs(...):
+        # Compute the specified shock quantity in CGS units.
+
+to distinguish between the different cases.
+
+.. rubric:: API Methods
+
+*current module*: :mod:`dynamics.rankine_hugoniot`
+
+.. currentmodule:: dynamics.rankine_hugoniot
+
+.. tab-set::
+
+    .. tab-item:: High-Level API
+
+        The high-level API is designed to provide unit handling and guardrails for common use cases which
+        are not performance critical. The high-level functions accept parameters with units and perform
+        the necessary conversions internally.
+
+        .. autosummary::
+
+            compute_strong_cold_shock_magnetic_field
+            compute_strong_cold_shock_pressure
+            compute_strong_cold_shock_temperature
+            compute_strong_shock_velocity
+            compute_strong_shock_density
+
+    .. tab-item:: Low-Level API
+
+        The low-level API functions are designed for performance-critical applications where unit
+        conversions are handled externally. These functions accept parameters in CGS units only.
+
+        .. autosummary::
+
+            _compute_s_c_shock_magnetic_field_cgs
+            _compute_s_c_shock_pressure_cgs
+            _compute_s_c_shock_temperature_cgs
+            _compute_s_shock_velocity_cgs
+            _compute_s_density_cgs
+
+Relavitistic Shock Relations
+----------------------------
+
+.. hint::
+
+    Coming soon!
 
 Types of Shocks
 ================
+
+A number of different shock models are available in Triceratops, each relevant to different astrophysical scenarios.
+Wherever possible, the relevant implementation is provided in the dynamics module for the corresponding transient.
+Nonetheless, some shock models are more general and can be used across multiple transient types. In those cases, we
+provide the shock engine in the module it most closely fits with.
+
+In the sections below, we'll discuss the currently implemented shock engines available in Triceratops.
 
 Self-Similar Shocks
 --------------------
@@ -315,9 +415,6 @@ properties:
         plt.tight_layout()
         plt.show()
 
-
-Sedov-Taylor Self-Similar Engines
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Numerical Shock Engines
 -----------------------

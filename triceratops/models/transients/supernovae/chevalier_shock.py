@@ -12,7 +12,7 @@ References
 import numpy as np
 from astropy import units as u
 
-from triceratops.dynamics.rankine_hugoniot import _compute_SH_B_CGS
+from triceratops.dynamics.rankine_hugoniot import _compute_s_c_shock_magnetic_field_cgs
 from triceratops.dynamics.supernovae.shock_dynamics import (
     ChevalierSelfSimilarShockEngine,
 )
@@ -219,7 +219,7 @@ class ChevalierShockModel(Model):
 
         # Now use the shock radius and velocity to compute the
         # corresponding magnetic field strength.
-        _shock_B = _compute_SH_B_CGS(
+        _shock_B = _compute_s_c_shock_magnetic_field_cgs(
             _shock_velocity,
             parameters["rho_0"] * (_shock_radius / 1e14) ** -parameters["s"],
             gamma=5 / 3,
