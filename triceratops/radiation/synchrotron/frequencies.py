@@ -22,8 +22,6 @@ __all__ = [
     "compute_IC_cooling_gamma",
     "compute_IC_cooling_frequency",
     "compute_characteristic_frequency",
-    "compute_gyrofrequency",
-    "compute_nu_critical",
     "compute_nu_ssa",
 ]
 
@@ -37,7 +35,6 @@ _cooling_frequency_coefficient_cgs = (
     (18 * np.pi * constants.m_e * constants.c * constants.e.esu) / (constants.sigma_T**2)
 ).cgs.value
 _characteristic_frequency_coefficient_cgs = (0.5 * constants.e.esu / (np.pi * constants.m_e * constants.c)).cgs.value
-_gyrofrequency_coefficient_cgs = (constants.e.esu / (constants.m_e * constants.c)).cgs.value
 
 
 # ========================================== #
@@ -236,72 +233,6 @@ def _optimized_compute_characteristic_frequency(
     .. footbibliography::
     """
     return _characteristic_frequency_coefficient_cgs * B * gamma**2
-
-
-def _optimized_compute_nu_gyro(
-    gamma: Union[float, np.ndarray],
-    B: Union[float, np.ndarray],
-):
-    r"""
-    Compute the synchrotron gyrofrequency (CGS, optimized).
-
-    Parameters
-    ----------
-    gamma : float or array-like
-        Electron Lorentz factor.
-
-    B : float or array-like
-        Magnetic field strength in Gauss.
-
-    Returns
-    -------
-    nu_g : float or array-like
-        Synchrotron gyrofrequency in Hz (CGS-equivalent).
-
-    Notes
-    -----
-    Implements the gyrofrequency formula:
-
-    .. math::
-
-        \nu_g = \frac{e B}{m_e c \gamma}
-
-    No unit validation is performed.
-    """
-    return _gyrofrequency_coefficient_cgs * B / gamma
-
-
-def _optimized_compute_nu_critical(
-    gamma: Union[float, np.ndarray],
-    B: Union[float, np.ndarray],
-):
-    r"""
-    Compute the synchrotron critical frequency (CGS, optimized).
-
-    Parameters
-    ----------
-    gamma : float or array-like
-        Electron Lorentz factor.
-
-    B : float or array-like
-        Magnetic field strength in Gauss.
-
-    Returns
-    -------
-    nu_critical : float or array-like
-        Synchrotron critical frequency in Hz (CGS-equivalent).
-
-    Notes
-    -----
-    Implements the critical frequency formula:
-
-    .. math::
-
-        \nu_{critical} = \frac{3 e B \gamma^2}{4 \pi m_e c}
-
-    No unit validation is performed.
-    """
-    return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * gamma**2
 
 
 def _optimized_compute_nu_ssa(
@@ -629,90 +560,6 @@ def compute_characteristic_frequency(
 
     nu = _optimized_compute_characteristic_frequency(B, gamma)
     return nu * u.Hz
-
-
-def compute_gyrofrequency(
-    gamma: Union[float, np.ndarray],
-    B: Union[float, np.ndarray, u.Quantity],
-) -> u.Quantity:
-    r"""
-    Compute the synchrotron gyrofrequency for relativistic electrons.
-
-    The gyrofrequency corresponds to the frequency at which a charged particle
-    orbits in a magnetic field. For relativistic electrons, this frequency is
-    modified by the Lorentz factor of the electron.
-
-    Parameters
-    ----------
-    gamma : float or array-like
-        Electron Lorentz factor.
-
-    B : float, array-like, or astropy.units.Quantity
-        Magnetic field strength. Default units are Gauss.
-
-    Returns
-    -------
-    nu_g : astropy.units.Quantity
-        Synchrotron gyrofrequency in Hz.
-
-    Notes
-    -----
-    The gyrofrequency for a relativistic electron is given by
-
-    .. math::
-
-        \nu_g = \frac{e B}{m_e c \gamma}
-
-    This function computes the gyrofrequency associated with
-    synchrotron emission from electrons of Lorentz factor ``gamma`` in
-    a magnetic field ``B``.
-    """
-    if hasattr(B, "units"):
-        B = B.to_value(u.Gauss)
-
-    return _optimized_compute_nu_gyro(gamma, B) * u.Hz
-
-
-def compute_nu_critical(
-    gamma: Union[float, np.ndarray],
-    B: Union[float, np.ndarray, u.Quantity],
-) -> u.Quantity:
-    r"""
-    Compute the synchrotron critical frequency for relativistic electrons.
-
-    The critical frequency corresponds to the frequency at which the synchrotron
-    emission from a relativistic electron peaks. This follows the formalism as described in
-    :footcite:t:`RybickiLightman`.
-
-    Parameters
-    ----------
-    gamma : float or array-like
-        Electron Lorentz factor.
-
-    B : float, array-like, or astropy.units.Quantity
-        Magnetic field strength. Default units are Gauss.
-
-    Returns
-    -------
-    nu_critical : astropy.units.Quantity
-        Synchrotron critical frequency in Hz.
-
-    Notes
-    -----
-    The critical frequency for a relativistic electron is given by
-
-    .. math::
-
-        \nu_{critical} = \frac{3 e B \gamma^2}{4 \pi m_e c}
-
-    This function computes the critical frequency associated with
-    synchrotron emission from electrons of Lorentz factor ``gamma`` in
-    a magnetic field ``B``.
-    """
-    if hasattr(B, "units"):
-        B = B.to_value(u.Gauss)
-
-    return _optimized_compute_nu_critical(gamma, B) * u.Hz
 
 
 def compute_nu_ssa(

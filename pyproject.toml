@@ -148,6 +148,7 @@ lint.ignore = [
   "B008",  # Do not perform function calls in default arguments (unyt uses this)
   "UP007", # Do not use Union in type annotations (use | instead)
   "UP038", # Use | in isinstance checks (e.g. isinstance(x, int | str))
+  "NPY201", # We use Numpy<2.0, so this is not relevant.
 ]
 
 # Optional: you can also ignore docstring warnings in examples or test files
@@ -183,7 +184,8 @@ ignore = [
     "W605",
     "B009",
     "B010",
-    "B008"
+    "B008",
+    "NPY201", # We use Numpy<2.0, so this is not relevant.
   ]
 enable-extensions = "G"  # flake8-logging-format (extension is disabled by default)
 jobs = 8
