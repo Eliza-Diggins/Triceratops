@@ -1,6 +1,0 @@
-profiles.smoothed\_BPL
-======================
-
-.. currentmodule:: profiles
-
-.. autofunction:: smoothed_BPL
