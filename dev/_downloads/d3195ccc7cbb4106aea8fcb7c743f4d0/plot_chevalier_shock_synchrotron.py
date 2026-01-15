@@ -1,0 +1,191 @@
+r"""
+========================================
+Modeling a Supernova Shock Emission SED
+========================================
+
+In this example, we'll do a quick demonstration of how to use Triceratops models (:mod:`models`) to perform forward
+modeling tasks like generating synthetic SEDs, light curves, or mock observations.
+
+For this example, we'll use the modeling framework based on the seminal work
+of :footcite:t:`ChevalierXRayRadioEmission1982` to generate synchrotron SEDs from a supernova shock expanding into a
+circumstellar medium (CSM). This model is widely used to interpret radio and X-ray observations of supernovae, and it
+provides a robust framework for understanding the interaction between supernova ejecta and their surrounding
+environment.
+
+We'll consider a supernova shock propagating into a wind-like CSM (i.e., density profile :math:`\rho \propto r^{-2}`),
+which is typical for massive star progenitors that have undergone significant mass loss prior to explosion. We'll
+generate synchrotron SEDs at multiple epochs to illustrate how the emission evolves over time.
+"""
+
+# %%
+# Setup
+# -----
+# To get started, we'll need just a couple of imports. We'll need the class
+# (:class:`~models.transients.supernovae.chevalier_shock.ChevalierShockModel`) that
+# implements the Chevalier shock model, as well as `numpy` and `astropy.units` for numerical operations and
+# unit handling.
+import numpy as np
+from astropy import units as u
+
+from triceratops.models.transients.supernovae.chevalier_shock import ChevalierShockModel
+
+# Create the model object.
+model = ChevalierShockModel()
+
+# %%
+# Parameter Selection
+# ~~~~~~~~~~~~~~~~~~~~
+#
+# With the model generated, we'll just need to figure out the parameters we want to use for our
+# supernova shock. The Chevalier shock model requires both macroscopic parameters (e.g., ejecta energy and mass,
+# circumstellar density profile) as well as microscopic shock parameters (e.g., :math:`\epsilon_e`, :math:`\epsilon_B`,
+# electron power law index, etc.). Fortunately, most of these are set to reasonable defaults.
+#
+# .. important::
+#
+#   For scientific usage, you should familiarize yourself with the model parameters and their defaults
+#   to ensure they are appropriate for your specific application. The fiducial values are intended
+#   as a starting point and may not be suitable for all scenarios. You can find detailed documentation
+#   for each parameter in the :class:`~models.transients.supernovae.chevalier_shock.ChevalierShockModel` docstring.
+#
+# In this case, we'll need to specify the following:
+#
+# 1. ``E_ej``: The total kinetic energy of the supernova ejecta.
+# 2. ``M_ej``: The total mass of the supernova ejecta.
+# 3. ``n``: The power-law index of the outer ejecta density profile.
+# 4. ``s``: The power-law index of the circumstellar medium density profile.
+# 5. ``rho_0``: The normalization of the circumstellar medium density profile at a reference radius.
+#
+# We'll use typical values for a core-collapse supernova interacting with a wind-like CSM. We can let
+# :math:`E_{\rm ej} = 10^{51}` erg, :math:`M_{\rm ej} = 5 M_{\odot}`, :math:`n = 10`, :math:`s = 2`. To set the
+# ``rho_0`` normalization (which is the density at a reference radius of :math:`10^{14}` cm), we'll assume a mass-loss
+# rate of :math:`\dot{M} = 10^{-5} M_{\odot} \rm yr^{-1}` and a wind velocity of :math:`v_w = 1000 \rm km s^{-1}`. This
+# gives a normalization of
+#
+# .. math::
+#
+#     \rho_0 = \frac{\dot{M}}{4 \pi r_{\rm ref}^2 v_w} \approx 5\times 10^{-17} \rm g\; cm^{-3}.
+#
+# Let's get it set up!
+
+# For this example, we'll set these parameters as follows:
+params = {
+    "E_ej": 1e51 * u.erg,  # Kinetic energy of the ejecta
+    "M_ej": 5 * u.Msun,  # Mass of the ejecta
+    "n": 10,  # Ejecta density profile index
+    "s": 2,  # CSM density profile index (wind-like)
+    "rho_0": 5e-17 * u.g / u.cm**3,  # CSM density at 1e14 cm
+}
+
+# Define the epochs at which to generate the SEDs and the frequencies to evaluate.
+times = np.geomspace(0.5, 100, 10)  # in days.
+frequencies = np.logspace(7, 11, 50)  # in Hz.
+
+# record the shape (we'll need it later to make accessing the data a little easier).
+data_shape = (len(times), len(frequencies))
+
+# Generate a meshgrid so that we get all combinations of time and frequency.
+time_grid, frequency_grid = np.meshgrid(times, frequencies, indexing="ij")
+
+time_grid = time_grid.flatten() * u.day
+frequency_grid = frequency_grid.flatten() * u.Hz
+
+# Pass the data to the model's forward method to generate the SEDs.
+output = model.forward_model({"time": time_grid, "frequency": frequency_grid}, params)
+
+# %%
+# Plotting the Results
+# ---------------------
+# With the model SEDs generated, we can now plot the results. We'll use `matplotlib` for this purpose. To start,
+# Let's just generate the relevant SEDs.
+import matplotlib.pyplot as plt
+
+from triceratops.utils.plot_utils import set_plot_style
+
+# Reshape the flux density output to match our data shape.
+flux_densities = output["flux_density"].reshape(data_shape)
+
+# Set the plot style.
+set_plot_style()
+
+# Create the figure and axis.
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Select a colormap for the different epochs.
+cmap = plt.get_cmap("viridis")
+
+# Plot the SEDs for each epoch.
+for i, time in enumerate(times):
+    ax.plot(frequencies, flux_densities[i, :].to_value(u.mJy), label=f"t = {time:.1f} days", color=cmap(i / len(times)))
+
+# Set the plot to log-log scale.
+ax.set_ylim([1e-4, 1e1])
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_xlabel("Frequency [Hz]")
+ax.set_ylabel("Flux Density [mJy]")
+ax.set_title("Synchrotron SEDs from Chevalier Supernova Shock Model")
+fig.colorbar(
+    plt.cm.ScalarMappable(cmap=cmap, norm=plt.Normalize(vmin=times.min(), vmax=times.max())),
+    ax=ax,
+    label="Time [days]",
+)
+plt.show()
+
+# %%
+# Producing Synthetic Data
+# ------------------------
+# There are a number of ways to produce synthetic data from the model outputs with various levels of sophistication.
+# For this example, we'll just do something simple: we'll add Gaussian noise to the model flux densities to simulate
+# observational uncertainties. We'll assume a signal-to-noise ratio (SNR) of 10 for this example.
+
+# Define the SNR.
+snr = 3
+
+# Sample at all of the defined times but with only a few typical band frequencies.
+band_frequencies = np.array([1.4e9, 5e9, 8.4e9, 15e9, 22e9]) * u.Hz
+
+# Create grids of band and time so that we can feed them to the
+# forward model.
+time_grid_syn, frequency_grid_syn = np.meshgrid(times * u.day, band_frequencies, indexing="ij")
+
+# Forward model the synthetic observation grid.
+output_syn = model.forward_model({"time": time_grid_syn, "frequency": frequency_grid_syn}, params)
+
+# Extract the flux densities.
+flux_densities_syn = output_syn["flux_density"]
+
+# Add Gaussian noise to simulate observational uncertainties.
+noise = (flux_densities_syn / snr) * np.random.normal(size=flux_densities_syn.shape)
+synthetic_fluxes = flux_densities_syn + noise
+
+# Plot the synthetic data.
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Plot the synthetic data points.
+for i, time in enumerate(times):
+    # Extract the data for this time.
+
+    ax.errorbar(
+        band_frequencies.to_value(u.GHz),
+        synthetic_fluxes[i, :].to_value(u.mJy),
+        yerr=(flux_densities_syn[i, :] / snr).to_value(u.mJy),
+        fmt="o",
+        label=f"t = {time:.1f} days",
+        capsize=3,
+        color=cmap(i / len(times)),
+    )
+
+# Set the plot to log-log scale.
+ax.set_ylim([1e-4, 1e1])
+ax.set_xscale("log")
+ax.set_yscale("log")
+ax.set_xlabel("Frequency [GHz]")
+ax.set_ylabel("Flux Density [mJy]")
+ax.set_title("Synthetic Synchrotron Data from Chevalier Supernova Shock Model")
+plt.show()
+
+# %%
+# References
+# ----------
+# .. footbibliography::

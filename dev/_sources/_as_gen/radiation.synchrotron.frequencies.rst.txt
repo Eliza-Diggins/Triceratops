@@ -1,0 +1,40 @@
+radiation.synchrotron.frequencies
+=================================
+
+.. automodule:: radiation.synchrotron.frequencies
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      compute_IC_cooling_frequency
+      compute_IC_cooling_gamma
+      compute_characteristic_frequency
+      compute_cooling_frequency
+      compute_cooling_gamma
+      compute_nu_ssa
+      determine_synch_regime_from_frequencies
+      determine_synch_regime_from_phys
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
