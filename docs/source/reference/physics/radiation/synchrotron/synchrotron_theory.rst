@@ -166,7 +166,7 @@ scales as
     \frac{1}{\gamma^3 \omega_B \sin\varphi}.
 
 This timescale defines a characteristic upper frequency in the synchrotron spectrum,
-corresponding to the inverse pulse duration. We therefore define the **critical synchrotron
+corresponding to the inverse pulse duration. We therefore define the **characteristic synchrotron
 frequency** as
 
 .. math::
@@ -187,33 +187,18 @@ Expressed as a linear frequency, this becomes
     \frac{3}{4\pi}\,\gamma^2\,\frac{qB}{m_e c}\,\sin\varphi.
     }
 
-Although :math:`\nu_c` is often colloquially referred to as the “synchrotron frequency” or
-“fundamental frequency,” it does **not** correspond to the peak of the emitted spectrum.
-Instead, the single-electron synchrotron spectrum peaks at approximately
-:math:`\nu \simeq 0.29\,\nu_c`. Nevertheless, :math:`\nu_c` provides a convenient and physically
-meaningful scale that sets the overall frequency range of synchrotron emission.
-
-It is common to define the constant
+It is common to introduce the constant :math:`c_1`:footcite:p:`1970ranp.book.....P`, which is defined such that
 
 .. math::
 
-    c_1 \equiv \frac{3e}{4\pi m_e c},
+    \nu_c = c_1 B E^2 \sin \varphi,\;\;c_1 = \frac{3e}{4\pi m_e^3 c^5} = 6.27\times 10^{18}\;{\rm cgs}.
 
-in terms of which the characteristic frequency may be written compactly as
+.. note::
 
-.. math::
-
-    \nu_c = c_1\,B\,\sin\varphi\,\gamma^2.
-
-.. important::
-
-    For populations of electrons, we often define the characteristic frequency as :math:`\nu_c(\gamma)` for a
-    particular choice of :math:`\gamma`. In particular, when considering power-law distributions of electrons,
-    we often define the characteristic frequency as that corresponding to the minimum Lorentz factor.
-
-    The convention for this frequency varies by a constant of order unity in the literature. See the section below
-    for the Triceratops convention.
-
+    For clarity: we refer to this frequency as it is defined in :footcite:t:`RybickiLightman` as the
+    **characteristic synchrotron frequency**. In the context of *populations* of electrons, conventions diverge;
+    however, we prefer to contain those differences of convention to that context. See the section on
+    electron populations for more details.
 
 The Single Electron Synchrotron Spectrum
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -482,7 +467,14 @@ where
 
 .. math::
 
-    F(x) = x \int_x^\infty K_{5/3}(\xi)\;d\xi,\;\;G(x) = xK_{2/3}(x).
+    F(x) = x \int_x^\infty K_{5/3}(\xi)\;d\xi,\;\;G(x) = xK_{2/3}(x),
+
+and :math:`x = \frac{\omega}{\omega_c}`.
+
+.. note::
+
+    This is *not* a typo: :math:`\eta = \frac{\omega}{2\omega_c}` in the previous section, but here we have
+    :math::`x = \frac{\omega}{\omega_c}`.
 
 Summing these two contributions, the total power radiated per unit frequency is
 
@@ -512,8 +504,27 @@ where :math:`\nu_c` is the characteristic synchrotron frequency defined previous
 Synchrotron From A Population of Electrons
 ------------------------------------------
 
+.. important::
+
+    At this point, convention in the literature diverges in certain respects. As we describe the relevant theory,
+    we seek to be (a) explicit regarding the conventions and (b) true to a **single convention**: that used in
+    :footcite:t:`1970ranp.book.....P`, which has become the general standard in the astrophysical literature
+    (e.g. :footcite:t:`demarchiRadioAnalysisSN2004C2022`, :footcite:t:`Margutti2019COW`, etc.).
+
+
 With the all-important single-electron synchrotron spectrum in hand, we can now extend our arguments to the
-emission from a population of electrons. Let the distribution function be :math:`\frac{dN}{d\gamma}`. Then,
+emission from a population of electrons. There are generally two ways to define such a population: either by
+**energy** or by **Lorentz Factor**.
+
+.. note::
+
+    In Triceratops, we offer implementations and support for the use of *both approaches*; however, the
+    Lorentz factor approach is the **standard convention** unless the documentation clearly indicates otherwise.
+
+    In this documentation, we will always write the Lorentz factor distribution as :math:`\frac{dN}{d\gamma}`,
+    and the energy distribution as :math:`\frac{dN}{dE}`.
+
+Let the distribution function be :math:`\frac{dN}{d\gamma}`. Then,
 
 .. math::
 
@@ -536,43 +547,255 @@ The Spectrum of a Power-Law Distribution
 
 The most important case in which the above formalism has a known closure is that of a power-law distribution
 of electrons. This is the most common assumption in astrophysical synchrotron modeling, as it is both
-theoretically motivated by diffusive shock acceleration:footcite:p:`caprioliParticleAccelerationShocks2023` and
+theoretically motivated by diffusive shock acceleration :footcite:t:`caprioliParticleAccelerationShocks2023` and
 empirically successful in explaining non-thermal emission across a wide range of astrophysical environments.
 
-Assuming a power-law distribution of electrons
+In the literature, there are two typical ways to parameterize a power-law distribution of electrons: either in
+terms of :math:`\gamma` or in terms of energy :math:`E`:
+
+.. tab-set::
+
+    .. tab-item:: Lorentz Factor Distribution
+
+        .. math::
+
+            \frac{dN}{d\gamma} = N_0 \gamma^{-p},\;\;\gamma_{\min} \le \gamma \le \gamma_{\max}.
+
+    .. tab-item:: Energy Distribution
+
+        .. math::
+
+            \frac{dN}{dE} = N_{0,E} E^{-p},\;\;E_{\min} \le E \le E_{\max}.
+
+Given the normalization in one parameterization, the other normalization can be computed via
+
+.. math::
+
+    \frac{dN}{dE} = \frac{dN}{d\gamma} \frac{d\gamma}{dE} \implies N_{0,E} = N_0 (m_e c^2)^{p-1}.
+
+
+.. important::
+
+    In Triceratops, we strive to fully support both such parameterizations; however, the Lorentz factor
+    parameterization is the **standard convention** unless the documentation clearly indicates otherwise.
+
+Now, given a power-law distribution in Lorentz factor:
 
 .. math::
 
     \frac{dN}{d\gamma} = N_0 \gamma^{-p},\;\;\gamma_{\min} \le \gamma \le \gamma_{\max},
 
-we can compute the integral above to find the famous result (see e.g. :footcite:t:`RybickiLightman`,
-:footcite:t:`demarchiRadioAnalysisSN2004C2022` etc):
+we can perform the integral over the electron distribution to find the total synchrotron power. The
+*power per unit frequency per unit volume* is given by :footcite:p:`RybickiLightman`:
 
 .. math::
 
-    \boxed{
-    P(\nu) = c_5(p) N_0 B^{(p+1)/2} \nu^{-(p-1)/2},
-    }
+    P(\nu) = \frac{\sqrt{3} e^3}{4m_e c^2} N_0 \left(B \sin \alpha\right)^{(p+1)/2} \left(\frac{p+(7/3)}{p+1}\right)
+    \Gamma\left(\frac{3p-1}{12}\right) \Gamma\left(\frac{3p+7}{12}\right) \left(\frac{2\pi m_e c \nu}{3e}\right)^{-(p-1)/2}.
 
-where :math:`c_5(p)` is one of a number of constants which appear in the literature to disguise the complex
-expressions involving gamma functions and powers of fundamental constants:
+.. hint::
+
+    The exact expression in :footcite:t:`RybickiLightman` is identical but uses identities of the
+    Gamma function to rewrite the result in a slightly different form.
+
+While this result is not immediately appealing, it can, in large part, be reduced to some critical scalings and
+relevant constants. We can write the frequency term as
+
+.. math::
+
+    \left(\frac{2\pi m_e c\nu}{3e}\right)^{-(p-1)/2} = \left(m_e c^2\right)^{(p-1)}\left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+We can then also introduce another useful piece of notation adopted from :footcite:t:`1970ranp.book.....P`:
 
 .. math::
 
     c_5(p) = \frac{\sqrt{3}}{16 \pi} \left(\frac{e^3}{m_ec^2}\right) \frac{p+7/3}{p+1} \Gamma\left(\frac{3p-1}{12}\right)
     \Gamma\left(\frac{3p + 7}{12}\right).
 
-.. important::
+We therefore have the critical result for the total power in either of the two parameterizations:
 
-    Conventions differ on the definition of this :math:`c_5(p)` function. By default, Triceratops adopts the convention
-    of :footcite:t:`1970ranp.book.....P`, which has become the general standard in the astrophysical literature
-    (see e.g. :footcite:t:`demarchiRadioAnalysisSN2004C2022`, :footcite:t:`Margutti2019COW`, etc.). However,
-    other versions do arise in the literature (e.g. :footcite:t:`RybickiLightman`), so care should be taken
-    when comparing results from different sources.
+.. tab-set::
 
-It should be noted that, because :math:`N(\gamma)` is (traditionally) thought of as the number *density* of electrons,
-the above expression for :math:`P(\nu)` is the power emitted per unit volume per unit frequency. It is therefore more
-precisely a power spectral density.
+    .. tab-item:: Lorentz Factor Distribution
+
+        .. math::
+
+            P(\nu) = 4\pi c_5(p) N_0 \left(m_e c^2\right)^{(p-1)} \left(B \sin \alpha\right)^{(p+1)/2}
+            \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+    .. tab-item:: Energy Distribution
+
+        .. math::
+
+            P(\nu) = 4\pi c_5(p) N_{0,E} \left(B \sin \alpha\right)^{(p+1)/2}
+            \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+Emissivity
+~~~~~~~~~~
+
+Another useful quantity in synchrotron radiation theory is the **emissivity**,
+:math:`j_\nu`, defined as the power emitted per unit frequency per unit volume per
+unit solid angle.
+
+Because synchrotron emission depends explicitly on the angle between the electron
+velocity and the magnetic field, it is useful to first distinguish between:
+
+1. the emissivity for electrons radiating at a **fixed pitch angle**, and
+2. the **angle-averaged emissivity** appropriate for an isotropic electron population.
+
+We treat these cases in turn.
+
+**Single Pitch-Angle Emissivity**:
+
+Consider a population of electrons radiating at a single pitch angle
+:math:`\alpha` relative to the magnetic field.
+For a power-law distribution of electrons, the synchrotron emissivity at that
+pitch angle is
+
+.. tab-set::
+
+    .. tab-item:: Lorentz Factor Distribution
+
+        .. math::
+
+            j_\nu(\alpha)
+            =
+            c_5(p)\,N_0\,(m_e c^2)^{p-1}
+            \left(B\sin\alpha\right)^{(p+1)/2}
+            \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+    .. tab-item:: Energy Distribution
+
+        .. math::
+
+            j_\nu(\alpha)
+            =
+            c_5(p)\,N_{0,E}
+            \left(B\sin\alpha\right)^{(p+1)/2}
+            \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+These expressions represent the emissivity **per unit solid angle**, evaluated for
+electrons whose velocities make a fixed angle :math:`\alpha` with the magnetic
+field.
+
+They are therefore *not* yet the physically relevant emissivity unless the electron
+population truly occupies a single pitch angle.
+
+**Angle-Averaged Emissivity**:
+
+Given that one knows the emissivity at a fixed pitch angle and the distribution of
+pitch angles, one can compute the angle-averaged emissivity by integrating over
+the pitch-angle distribution:
+
+.. math::
+
+    j_\nu = \int_0^\pi j_\nu(\alpha)\,f(\alpha)\,d\alpha.
+
+In most astrophysical applications, electrons are assumed to have an **isotropic
+distribution of pitch angles** (however, some studies have considered the effects of anisotropy
+:footcite:p:`YangPitchAngles`).
+In this case, the observed emissivity must be averaged over the pitch-angle
+distribution.
+
+For an isotropic velocity distribution, the probability density for the pitch
+angle is
+
+.. math::
+
+    f(\alpha)\,d\alpha
+    =
+    \frac{1}{2}\,\sin\alpha\,d\alpha,
+    \qquad
+    0 \le \alpha \le \pi.
+
+The angle-averaged emissivity is therefore
+
+.. math::
+
+    j_\nu
+    =
+    \int_0^\pi j_\nu(\alpha)\,f(\alpha)\,d\alpha
+    =
+    \frac{1}{2}
+    \int_0^\pi
+    j_\nu(\alpha)\,\sin\alpha\,d\alpha.
+
+Substituting the fixed-angle emissivity gives
+
+.. math::
+
+    j_\nu
+    \propto
+    B^{(p+1)/2}
+    \int_0^\pi
+    \sin^{(p+1)/2}\!\alpha\;\sin\alpha\;d\alpha
+    =
+    B^{(p+1)/2}
+    \int_0^\pi
+    \sin^{(p+3)/2}\!\alpha\;d\alpha.
+
+The remaining integral is a standard one :footcite:p:`CRCTables`:
+
+.. math::
+
+    \int_0^\pi \sin^k\alpha\;d\alpha
+    =
+    \sqrt{\pi}\,
+    \frac{\Gamma\!\left(\frac{k+1}{2}\right)}
+         {\Gamma\!\left(\frac{k+2}{2}\right)}.
+
+Letting
+
+.. math::
+
+    c_{5,\rm ISO}(p) = c_5(p) \Gamma\left(\frac{p+5}{4}\right) \Gamma^{-1}\left(\frac{p+7}{4}\right),
+
+the angle-averaged emissivity for an isotropic distribution of pitch angles is
+
+.. tab-set::
+
+    .. tab-item:: Lorentz Factor Distribution
+
+        .. math::
+
+            j_\nu(\alpha)
+            =
+            c_{\rm 5, ISO}(p)\,N_0\,(m_e c^2)^{p-1}
+            \left(B\right)^{(p+1)/2}
+            \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+    .. tab-item:: Energy Distribution
+
+        .. math::
+
+            j_\nu(\alpha)
+            =
+            c_{\rm 5, ISO}(p)\,N_{0,E}
+            \left(B\right)^{(p+1)/2}
+            \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+
+Conventions in the Literature
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Two common conventions appear in synchrotron modeling:
+
+- Some authors (e.g. :footcite:t:`Chevalier1998SynchrotronSelfAbsorption`) simply
+  approximate :math:`\sin\alpha \simeq 1`, effectively assuming that all electrons
+  radiate perpendicular to the magnetic field.
+
+- Others (e.g. :footcite:t:`ChevalierFranssonHandbook`, :footcite:t:`Pacholczyk1970`)
+  explicitly perform the isotropic pitch-angle average described above.
+
+Both conventions lead to the same **spectral scalings**, differing only by factors
+of order unity.
+
+.. note::
+
+    Triceratops supports **both** approaches. The low-level API exposes the
+    pitch-angle–dependent emissivity :math:`j_\nu(\alpha)`, while the high-level
+    routines return the angle-averaged emissivity using the isotropic assumption.
+
 
 Microphysical Closures and Equipartition
 ----------------------------------------
@@ -1033,162 +1256,243 @@ processes that can affect synchrotron radiation are synchrotron self-absorption 
 
 In this section, we'll discuss both processes and derive the critical results.
 
-Synchrotron Emissivity and Absorption
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _ssa:
+Synchrotron Self-Absorption
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We have already shown that, for a population of electrons with some :math:`N(\gamma)`, the synchrotron emissivity is
+At sufficiently low frequencies, synchrotron photons emitted by a population of relativistic
+electrons may be re-absorbed by the *same* electrons that produced them. This process is known as
+**synchrotron self-absorption (SSA)** and leads to a suppression of the emergent radiation below a
+characteristic frequency :math:`\nu_a`.
 
-.. math::
+Unlike free–free absorption, SSA is an intrinsically **non-thermal** process: the absorbing
+particles are the relativistic electrons themselves, and the absorption is governed by the same
+microphysics that produces the synchrotron emission.
 
-    j_\nu = \frac{1}{4\pi} \int_{\gamma_{\min}}^{\gamma_{\max}} N(\gamma) P(\nu, \gamma) d\gamma,
-
-
-
-
-
-
-
-Free-Free Absorption
-~~~~~~~~~~~~~~~~~~~~~~
-
-
-Spectral Regimes of Synchrotron SEDs
-------------------------------------
-
-The primary task of the synchrotron backend in Triceratops is to take a set of physical parameters including
-(potentially) both the dynamics of the radiating material and the microphysical parameters governing the
-synchrotron emission, and produce an accurate computation of the radiation. One element of this is correctly computing
-the spectrum of the resultant radiation.
-
-Unfortunately, the synchrotron spectrum is a complicated beast. Even in the ideal case (see Chapter 6 of
-:footcite:t:`RybickiLightman`) is a non-trivial computation. More detailed treatments reveal a number of additional
-complications including absorption processes (both synchrotron self-absorption and free-free absorption), cooling of
-the electron population, and the presence of spectral breaks due to characteristic frequencies in the system.
-
-In this section, we'll describe the various spectral regimes that can arise in synchrotron SEDs, and how they
-are treated in Triceratops.
-
-.. note::
-
-    For detailed descriptions in the literature, we encourage the reader to consult
-    :footcite:t:`demarchiRadioAnalysisSN2004C2022` for the "classical" synchrotron SED treatment. For the multi-domain
-    treatment, we suggest :footcite:t:`GranotSari2002SpectralBreaks`, :footcite:t:`PiranGammaRayBursts2004` for
-    introductory reading. :footcite:t:`GaoSynchrotronReview2013` provides an exhaustive reference of the
-    synchrotron theory relevant here.
-
-.. admonition:: Big Idea
-
-    In this section, we are going to consider the shape of the synchrotron spectrum depending on the ordering of
-    various characteristic frequencies in the system. These frequencies include:
-
-    - The peak frequency :math:`\nu_m`, corresponding to the minimum Lorentz factor of the electron distribution.
-    - The cooling frequency :math:`\nu_c`, corresponding to the Lorentz factor at which electrons cool on the dynamical
-      timescale.
-    - The self-absorption frequency :math:`\nu_a`, below which the spectrum is self-absorbed.
-
-    Depending on the order of the frequencies, we can have a variety of different spectral shapes. Here we will discuss
-    the details of each of these.
-
-Review of Important Frequencies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Before proceeding with the relevant theory, we will here briefly review the important frequencies
-that will determine the shape of the synchrotron spectrum.
-
-The Peak Frequency
-~~~~~~~~~~~~~~~~~~
-
-For a single-electron, the synchrotron spectrum is dominated by emission around the "peak frequency"
+For a population of electrons with differential distribution
+:math:`N(\gamma) \equiv dN/d\gamma`, the synchrotron emissivity (power emitted per unit volume per
+unit frequency per unit solid angle) is
 
 .. math::
 
-    \nu_{\rm crit} = \frac{3}{4\pi} \gamma^3 \omega_B \sin \alpha \sim \frac{e}{2\pi m_e c} \gamma^2 B,
+    j_\nu
+    =
+    \frac{1}{4\pi}
+    \int_{\gamma_{\min}}^{\gamma_{\max}}
+    N(\gamma)\,P(\nu,\gamma)\,d\gamma,
 
-where :math:`\omega_B` is the relativistic gyrofrequency (:math:`\omega_B = eB/\gamma m_e c`), :math:`\gamma` is the
-Lorentz factor of the electron, and :math:`\alpha` is the pitch angle between the
-magnetic field and the electron velocity.
+where :math:`P(\nu,\gamma)` is the single-electron synchrotron power derived previously.
 
-.. note::
+The same population also absorbs synchrotron photons. Defining
+:math:`B(\gamma,\nu)` as the absorption probability per unit time for an electron of Lorentz
+factor :math:`\gamma` interacting with radiation of frequency :math:`\nu`, the absorption
+coefficient is
 
-    The pedagogical reference (:footcite:t:`RybickiLightman`) uses the first expression, while the
-    second expression is more common in the astrophysical literature (e.g. :footcite:t:`demarchiRadioAnalysisSN2004C2022`).
-    Either way, these are an order unity correction of one another.
+.. math::
 
-For a population of electrons with a power-law distribution in Lorentz factor, the emission is dominated by the
-lowest energy electrons, we therefore define the **characteristic peak frequency** as
+    \alpha_\nu
+    =
+    \int_{\gamma_{\min}}^{\gamma_{\max}}
+    N(\gamma)\,B(\gamma,\nu)\,d\gamma.
+
+At first glance, :math:`B(\gamma,\nu)` appears to be an independent and complicated quantity.
+However, it may be related directly to the emissivity using `**detailed balance** <https://en.wikipedia.org/wiki/Detailed_balance>`__.
+For synchrotron radiation, electrons occupy a continuum of energies rather than discrete levels.
+Nevertheless, the logic of Einstein coefficients still applies if we treat each infinitesimal
+energy interval as an effective “state.”
+
+An electron absorbing a photon of frequency :math:`\nu` undergoes a transition
+
+.. math::
+
+    \gamma
+    \;\longrightarrow\;
+    \gamma + \frac{h\nu}{m_e c^2}.
+
+Detailed balance requires that, in thermodynamic equilibrium, the rates of absorption and
+stimulated emission balance the spontaneous emission. This condition allows the absorption
+coefficient to be written *entirely* in terms of the synchrotron emission power
+(see :footcite:t:`RybickiLightman`, Chapter 6):
 
 .. math::
 
     \boxed{
-    \nu_m = \nu_{\rm crit}(\gamma_{\min}) = \frac{1}{2\pi} \gamma_{\min}^2 \frac{eB}{m_e c}.
-    }
+    \alpha_\nu
+    =
+    -\frac{1}{8\pi m_e \nu^2}
+    \int_{\gamma_{\min}}^{\gamma_{\max}}
+    P(\nu,\gamma)\,
+    \gamma^2
+    \frac{\partial}{\partial\gamma}
+    \left[
+        \frac{1}{\gamma^2}
+        \frac{dN}{d\gamma}
+    \right]
+    d\gamma
+    }.
 
-This is the first important frequency in determining the shape of the synchrotron spectrum. In general, one expects
-that the spectrum will peak around :math:`\nu_m`, with different power-law segments above and below this frequency.
+This expression is exact and holds for *any* electron distribution :math:`N(\gamma)`. It is the
+fundamental result underlying synchrotron self-absorption.
 
-The Cooling Frequency
-~~~~~~~~~~~~~~~~~~~~~
-Another important frequency in determining the shape of the synchrotron spectrum is the **cooling frequency**,
-:math:`\nu_c`. This frequency corresponds to the Lorentz factor at which electrons cool on the dynamical timescale
-of the system.
+.. important::
 
-Given a cooling process with rate :math:`\Lambda` per electron, we can define the cooling time as a function of the
-Lorentz factor to be
+    The derivative term reflects the fact that absorption depends on the **gradient of the
+    electron distribution in energy space**, not simply on the number of electrons present.
+    Physically, absorption is efficient only when lower-energy states are more populated than
+    higher-energy states, ensuring a net upward transition rate.
+
+The SSA Spectrum
+^^^^^^^^^^^^^^^^
+
+From radiative transfer theory, the specific intensity emerging from a homogeneous synchrotron
+source of path length :math:`L` is
 
 .. math::
 
-    \tau(\gamma) = \frac{\gamma m_e c^2}{\Lambda(\gamma)}.
+    I_\nu(\tau) = I_\nu(0) e^{-\tau_\nu} + \int_0^\tau S_\nu(\xi) e^{-\tau-\xi} \;d\xi.
 
-Relative to a dynamical timescale :math:`t_{\rm dyn}`, we can then define the cooling Lorentz factor
-
-.. math::
-
-    \gamma_c : \tau(\gamma_c) = t_{\rm dyn} \implies \gamma_c = \frac{m_e c^2}{\Lambda(\gamma_c) t_{\rm dyn}}.
-
-This corresponds to a characteristic frequency (the characteristic frequency of electrons with Lorentz factor
-:math:`\gamma_c`) of
+Since it is absorption and subsequent re-emission by the same electrons that produce the SSA emission, we can
+take the initial intensity to be zero and, assuming a constant source function :math:`S_\nu = j_\nu/\alpha_\nu`, we find
 
 .. math::
 
-    \boxed{
-    \nu_c = \frac{m_e c^3 e}{2\pi} B \Lambda^{-2} t_{\rm dyn}^{-2}
-    }
+    I_\nu = S_\nu \left(1-e^{-\tau_\nu}\right).
+
+Thus, if one can successfully compute the absorption coefficient :math:`\alpha_\nu`, one can compute the emergent intensity
+from a synchrotron source including SSA effects.
+
+It is often useful to define the **SSA frequency** :math:`\nu_a` as the frequency at which the optical depth
+:math:`\tau_\nu = \alpha_\nu \ell` equals unity:
+
+.. math::
+
+    \tau_{\nu_a} = 1 \implies \alpha_{\nu_a} \ell = 1.
+
+In doing so, the optical depth to SSA then becomes
+
+.. math::
+
+    \tau_\nu = \frac{\alpha_\nu}{\alpha_{\nu_a}}.
+
+SSA In Power-Law Electron Distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Let's now specialize to the case of a power-law distribution of electrons. Assume that
+
+.. math::
+
+    \frac{dN}{d\gamma} = N_0 \gamma^{-p}, \qquad \gamma_{\min} \le \gamma \le \gamma_{\max}.
+
+We know, therefore, that
+
+.. math::
+
+    \gamma^2 \frac{\partial}{\partial\gamma}\left[\frac{1}{\gamma^2} \frac{dN}{d\gamma}\right]
+    =
+    - (p+2) N_0 \gamma^{-(p+1)},
+
+so the absorption coefficient becomes
+
+.. math::
+
+    \alpha_\nu = \frac{(p+2) N_0}{8\pi m_e \nu^2} \int_{\gamma_{\min}}^{\gamma_{\max}} P(\nu,\gamma) \gamma^{-(p+1)} d\gamma.
+
+We have already computed integrals of this form before. Recall that
+
+.. math::
+
+    \int_{\gamma_{\min}}^{\gamma_{\max}} P(\nu,\gamma) N_0 \gamma^{-s} d\gamma = 4\pi c_5(s) N_0 \left(m_e c^2\right)^{s-1}
+    (B\sin\alpha)^{(s+1)/2} \left(\frac{\nu}{2 c_1}\right)^{-(s-1)/2}.
+
+We therefore introduce another constant, :math:`c_6(p)` to capture the relevant factors:
+
+.. math::
+
+    c_6(p) = \sqrt{3} \frac{\pi}{72} em_e^5 c^{10} \left(p+\frac{10}{3}\right) \Gamma\left(\frac{3p+2}{12}\right) \Gamma\left(\frac{3p+10}{12}\right).
+
+With this, the absorption coefficient for a power-law distribution of electrons is
+
+.. tab-set::
+
+    .. tab-item:: Lorentz Factor Distribution
+
+        .. math::
+
+            \alpha_\nu
+            =
+            c_6(p)\,N_0\,(m_e c^2)^{p-1}
+            (B\sin\alpha)^{(p+2)/2}
+            \left(\frac{\nu}{2 c_1}\right)^{-(p+4)/2},
+
+    .. tab-item:: Energy Distribution
+
+        .. math::
+
+            \alpha_\nu
+            =
+            c_6(p)\,N_{0,E}
+            (B\sin\alpha)^{(p+2)/2}
+            \left(\frac{\nu}{2 c_1}\right)^{-(p+4)/2}.
+
+Recalling that the emissivity for a power-law distribution of electrons is
+
+.. math::
+
+        j_\nu = c_5(p)\,N_{0,E}
+        \left(B\sin\alpha\right)^{(p+1)/2}
+        \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+We have the all-important source function
+
+.. math::
+
+    S_\nu = \frac{j_\nu}{\alpha_\nu} =
+    \frac{c_5(p)}{c_6(p)} (B\sin\alpha)^{-1/2} \left(\frac{\nu}{2 c_1}\right)^{5/2}.
+
+From our discussion in the previous section, we know that
+
+.. math::
+
+    \tau_\nu = \frac{\alpha_\nu}{\alpha_{\nu_a}} = \left(\frac{\nu}{\nu_a}\right)^{-(p+4)/2}.
+
+And therefore, the specific intensity including SSA effects is (e.g. :footcite:t:`demarchiRadioAnalysisSN2004C2022`)
+
+.. math::
+
+    I_\nu = S_\nu(\nu_a) J_\nu(y, p),
+
+where
+
+.. math::
+
+    J_\nu(y,p) = y^{5/2} \left(1 - e^{-y^{-(p+4)/2}}\right),
+    \qquad
+    y = \frac{\nu}{\nu_a}.
+
+Assuming some known path length :math:`\ell`, one can compute :math:`\nu_a` from the condition :math:`\alpha_{\nu_a} \ell = 1`.
+This implies that
+
+.. tab-set::
+
+    .. tab-item:: Lorentz Factor Distribution
+
+        .. math::
+
+            \nu_a = 2c_1 \left(c_6 \ell\right)^{2/(p+4)} \left(N_0 (m_e c^2)^{p-1}\right)^{2/(p+4)} (B\sin\alpha)^{(p+2)/(p+4)}.
+
+    .. tab-item:: Energy Distribution
+
+        .. math::
+
+            \nu_a = 2c_1 \left(c_6 \ell\right)^{2/(p+4)} \left(N_{0,E}\right)^{2/(p+4)} (B\sin\alpha)^{(p+2)/(p+4)}.
+
+The details of how :math:`\ell` should be determined are a matter of dynamics and not of radiation.
 
 .. note::
 
-    Depending on the mechanism of cooling, :math:`\Lambda` will take different forms. For pure synchrotron
-    cooling, we have
-
-    .. math::
-
-        \nu_c = \frac{18 \pi m_e c e}{\sigma_T^2 t_{\rm dyn}^2 B^3},
-
-    while for other mechanisms (e.g. inverse Compton), the expression will differ. See :ref:`electron_cooling`
-    above for details.
-
-The SSA Frequency
-~~~~~~~~~~~~~~~~~~~~
-
-The final important frequency in determining the shape of the synchrotron spectrum is the **self-absorption frequency**,
-:math:`\nu_a`. A more detailed discussion of synchrotron self-absorption is provided in :ref:`ssa`; however, it suffices
-in this discussion to note that we define the self-absorption frequency as the frequency at which the optical depth
-to synchrotron self-absorption is unity:
-
-.. math::
-
-    \boxed{
-    \tau_{\nu_a} = 1.
-    }
-
-Given that :math:`\tau_\nu = \alpha_\nu L`, where :math:`\alpha_\nu` is the synchrotron absorption coefficient
-and :math:`L` is the path length through the emitting region, we can compute :math:`\nu_a` (in principle) by
-solving
-
-.. math::
-
-    \alpha_{\nu_a} L = - \frac{1}{8\pi m_e \nu_a^2} \int_{\gamma_{\min}}^{\gamma_{\max}} P(\nu_a, \gamma)
-    \gamma^2 \frac{\partial}{\partial \gamma} \left[ \frac{1}{\gamma^2}
-    \frac{dN}{d\gamma} \right] d\gamma \cdot L = 1.
+    It is worth emphasizing that the SSA frequency depends on the properties of the electron population. Thus, for
+    any set of assumptions about the behavior of the underlying electrons, the corresponding SSA frequency may be quite
+    different.
 
 References
 -----------
