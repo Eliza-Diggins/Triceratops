@@ -84,7 +84,7 @@ A detailed discussion of the physical origin of this distribution can be found i
 
         .. currentmodule:: triceratops.radiation.synchrotron.microphysics
         .. autosummary::
-           :toctree: generated
+           :toctree: ../../../../_as_gen
            :nosignatures:
 
            compute_electron_gamma_PL_moment
@@ -200,7 +200,7 @@ the API in the tab-set below:
 
         .. currentmodule:: triceratops.radiation.synchrotron.microphysics
         .. autosummary::
-           :toctree: generated
+           :toctree: ../../../../_as_gen
            :nosignatures:
 
            compute_PL_norm_from_magnetic_field

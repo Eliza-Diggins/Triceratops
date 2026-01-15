@@ -30,9 +30,9 @@ theory in the :ref:`synchrotron_theory` section of the documentation.
     :maxdepth: 1
     :caption: Synchrotron Radiation Topics
 
-    synchrotron/synchrotron_seds
+    synchrotron/synchrotron_core
     synchrotron/synchrotron_microphysics
-
+    synchrotron/synchrotron_seds
 
 Free-Free Radiation
 --------------------
