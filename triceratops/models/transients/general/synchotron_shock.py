@@ -12,8 +12,7 @@ from astropy import units as u
 
 from triceratops.models.core.base import Model
 from triceratops.models.core.parameters import ModelParameter, ModelVariable
-from triceratops.profiles import smoothed_BPL
-from triceratops.radiation.synchrotron.SEDs import _optimized_compute_SSA_SED_from_BR
+from triceratops.radiation.synchrotron.SEDs import SSA_SED_PowerLaw
 
 
 class SynchrotronShockModel(Model):
@@ -273,7 +272,11 @@ class SynchrotronShockModel(Model):
     # Initialization Method                           #
     # =============================================== #
     def __init__(self, *args, **kwargs):
+        # Initialize the base Model class
         super().__init__(*args, **kwargs)
+
+        # Generate our SED object.
+        self._SED = SSA_SED_PowerLaw()
 
     # =============================================== #
     # Model Evaluation Method                         #
@@ -285,7 +288,7 @@ class SynchrotronShockModel(Model):
     ):
         # First use the parameters to compute the BPL parameters from the
         # core physics parameters.
-        nu_brk, F_brk = _optimized_compute_SSA_SED_from_BR(
+        nu_brk, F_brk = self._SED._opt_from_physics_to_params(
             parameters["B"],  # Gauss
             parameters["R"],  # cm
             parameters["D"],  # cm
@@ -302,5 +305,5 @@ class SynchrotronShockModel(Model):
         # 1e-23 erg/s/cm^2/Hz = 1 Jy
         return {
             "flux_density": 1e-23
-            * smoothed_BPL(variables["frequency"], F_brk, nu_brk, -(parameters["p"] - 1) / 2, (5 / 2), parameters["s"])
+            * self._SED._opt_sed(variables["frequency"], nu_brk, F_brk, parameters["p"], parameters["s"])
         }

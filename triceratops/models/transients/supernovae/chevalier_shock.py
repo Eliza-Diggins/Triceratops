@@ -18,8 +18,7 @@ from triceratops.dynamics.supernovae.shock_dynamics import (
 )
 from triceratops.models.core.base import Model
 from triceratops.models.core.parameters import ModelParameter, ModelVariable
-from triceratops.profiles import smoothed_BPL
-from triceratops.radiation.synchrotron.SEDs import _optimized_compute_SSA_SED_from_BR
+from triceratops.radiation.synchrotron.SEDs import SSA_SED_PowerLaw
 
 
 # noinspection PyProtectedMember
@@ -195,6 +194,9 @@ class ChevalierShockModel(Model):
         # to re-instantiate it on every forward model call.
         self.shock_engine = ChevalierSelfSimilarShockEngine()
 
+        # Set up the SED engine
+        self.sed = SSA_SED_PowerLaw()
+
     # =============================================== #
     # Core Model Evaluation Method                    #
     # =============================================== #
@@ -226,7 +228,7 @@ class ChevalierShockModel(Model):
 
         # First use the parameters to compute the BPL parameters from the
         # core physics parameters.
-        nu_brk, F_brk = _optimized_compute_SSA_SED_from_BR(
+        nu_brk, F_brk = self.sed._opt_from_physics_to_params(
             _shock_B,
             _shock_radius,
             parameters["D"],  # cm
@@ -243,7 +245,11 @@ class ChevalierShockModel(Model):
         # 1e-23 erg/s/cm^2/Hz = 1 Jy
         return {
             "flux_density": 1e-23
-            * smoothed_BPL(
-                variables["frequency"], F_brk, nu_brk, -(parameters["p"] - 1) / 2, (5 / 2), parameters["smoothing_s"]
+            * self.sed._opt_sed(
+                variables["frequency"],
+                nu_brk,
+                F_brk,
+                parameters["p"],
+                parameters["smoothing_s"],
             )
         }

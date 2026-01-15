@@ -146,9 +146,11 @@ lint.ignore = [
   "D102",  # Ignore missing docstring in public method (flexibility)
   "E731",  # Do not assign a lambda expression, use def instead
   "B008",  # Do not perform function calls in default arguments (unyt uses this)
+  "B027",  # Allow empty inits on ABCs without abstractmethods.
   "UP007", # Do not use Union in type annotations (use | instead)
   "UP038", # Use | in isinstance checks (e.g. isinstance(x, int | str))
   "NPY201", # We use Numpy<2.0, so this is not relevant.
+
 ]
 
 # Optional: you can also ignore docstring warnings in examples or test files
