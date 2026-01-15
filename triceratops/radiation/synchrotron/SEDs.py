@@ -11,8 +11,9 @@ from typing import Union
 import numpy as np
 from astropy import units as u
 
-from triceratops.radiation.constants import c_1_cgs, electron_rest_energy_cgs
+from triceratops.radiation.constants import electron_rest_energy_cgs
 from triceratops.radiation.synchrotron.utils import (
+    c_1_cgs,
     compute_c5_parameter,
     compute_c6_parameter,
 )

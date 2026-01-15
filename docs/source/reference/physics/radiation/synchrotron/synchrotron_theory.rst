@@ -500,7 +500,7 @@ where :math:`\nu_c` is the characteristic synchrotron frequency defined previous
     the **second synchrotron kernel**.
 
 
-
+.. _synch_theory_populations:
 Synchrotron From A Population of Electrons
 ------------------------------------------
 
@@ -796,7 +796,7 @@ of order unity.
     pitch-angle–dependent emissivity :math:`j_\nu(\alpha)`, while the high-level
     routines return the angle-averaged emissivity using the isotropic assumption.
 
-
+.. _synch_equipartition_theory:
 Microphysical Closures and Equipartition
 ----------------------------------------
 

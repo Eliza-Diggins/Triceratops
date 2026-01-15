@@ -10,6 +10,8 @@ from typing import Union
 
 import numpy as np
 from astropy import constants
+from astropy import constants as const
+from astropy import units as u
 from scipy.special import gamma as gamma_func
 
 __all__ = [
@@ -23,10 +25,34 @@ __all__ = [
 _c5_coefficient_cgs = (np.sqrt(3) / (16 * np.pi)) * (constants.e.esu**3 / (constants.m_e * constants.c**2)).cgs.value
 _c6_coefficient_cgs = np.sqrt(3) * (np.pi / 72) * (constants.e.esu * constants.m_e**5 * constants.c**10).cgs.value
 
+c_1: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e**3 * const.c**5))
+r"""astropy.units.Quantity: Synchrotron radiation constant :math:`c_1`.
+
+The :math:`c_1` constant is the coefficient appearing in the synchrotron frequency :footcite:p:`1970ranp.book.....P`
+
+.. math::
+
+    \nu_c = \frac{3e}{4\pi m_e c} B\sin \alpha \Gamma^2 = c_1 B \sin \alpha E^2.
+
+Thus,
+
+.. math::
+
+    c_1 = \frac{3}{4\pi} \frac{e}{m_e^3 c^5}.
+
+References
+----------
+.. footbibliography::
+"""
+c_1_cgs: float = c_1.cgs.value
+"""float: Synchrotron radiation constant :math:`c_1` in CGS units."""
+
 
 # =========================================== #
 # C5 AND C6 PARAMETERS                        #
 # =========================================== #
+# These are the c5 and c6 coefficients as defined in Pacholczyk (1970) and used in
+# deMarchi+22 which are common in radio supernova modeling.
 def compute_c5_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
     r"""
     Compute the :math:`c_5(p)` coefficient for synchrotron assuming a power-law electron population.
@@ -34,7 +60,7 @@ def compute_c5_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
     Parameters
     ----------
     p : float or array-like, optional
-        Power-law index of the electron Lorentz factor distribution,
+        Power-law index of the electron Lorentz factor (or energy) distribution,
         :math:`N(\Gamma) \propto \Gamma^{-p}`. Default is ``3.0``.
 
     Returns
@@ -78,9 +104,9 @@ def compute_c5_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
 
         N(\Gamma)\, d\Gamma
         =
-        K_e\, \Gamma^{-p}\, d\Gamma,
+        N_0\, \Gamma^{-p}\, d\Gamma,
 
-    where :math:`K_e` is the normalization of the electron number density
+    where :math:`N_0` is the normalization of the electron number density
     (units of :math:`\mathrm{cm^{-3}}`), the synchrotron emissivity
     :math:`j_\nu` (power per unit volume per unit frequency per unit solid angle)
     is obtained by integrating the single-electron power over the distribution:
@@ -97,10 +123,9 @@ def compute_c5_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
 
         j_\nu
         =
-        c_5(p)\,
-        K_e\,
-        B^{(p+1)/2}\,
-        \nu^{-(p-1)/2},
+        c_5(p)\,N_0\,(m_e c^2)^{p-1}
+        \left(B\sin\alpha\right)^{(p+1)/2}
+        \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
 
     where the coefficient :math:`c_5(p)` encapsulates the full integration
     of the synchrotron kernel over the power-law electron distribution and
@@ -162,10 +187,10 @@ def compute_c6_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
 
         \alpha_\nu
         =
-        c_6(p)\,
-        K_e\,
-        B^{(p+2)/2}\,
-        \nu^{-(p+4)/2}.
+        c_6(p)\,N_0\,(m_e c^2)^{p-1}
+        (B\sin\alpha)^{(p+2)/2}
+        \left(\frac{\nu}{2 c_1}\right)^{-(p+4)/2},
+
 
     The coefficient :math:`c_6(p)` encapsulates the full analytic integration
     of the synchrotron absorption kernel over the power-law electron

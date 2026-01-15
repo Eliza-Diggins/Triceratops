@@ -160,6 +160,80 @@ def _opt_compute_PL_n_eff(
     return n_eff.reshape(()) if n_eff.ndim == 0 else n_eff
 
 
+def _opt_convert_PL_norm_gamma_to_energy(
+    N0: "_ArrayLike",
+    p: "_ArrayLike",
+) -> "_ArrayLike":
+    """
+    Convert the normalization of a power-law electron distribution from gamma-space to energy-space.
+
+    Assumes:
+        N(gamma) = N0 gamma^{-p}
+        N(E) = K_E E^{-p}
+    Returns K_E in the same shape as N0.
+    """
+    N0 = np.asarray(N0, dtype="f8")
+
+    # Utilize the relation that N_(0,E) = (m_e c^2)**(p-1) * N_(0,gamma)
+    K_E = N0 * (electron_rest_energy_cgs ** (p - 1))
+    return K_E.reshape(()) if K_E.ndim == 0 else K_E
+
+
+def _opt_compute_convert_PL_norm_energy_to_gamma(
+    K_E: "_ArrayLike",
+    p: "_ArrayLike",
+) -> "_ArrayLike":
+    """
+    Convert the normalization of a power-law electron distribution from energy-space to gamma-space.
+
+    Assumes:
+        N(gamma) = N0 gamma^{-p}
+        N(E) = K_E E^{-p}
+    """
+    K_E = np.asarray(K_E, dtype="f8")
+
+    # Utilize the relation that N_(0,gamma) = (m_e c^2)**(1-p) * N_(0,E)
+    N0 = K_E * (electron_rest_energy_cgs ** (1 - p))
+    return N0.reshape(()) if N0.ndim == 0 else N0
+
+
+def swap_electron_PL_normalization(N0: "_UnitBearingArrayLike", p: "_ArrayLike", mode: str = "energy"):
+    r"""
+    Convert the normalization of a power-law electron distribution between gamma-space and energy-space.
+
+    Parameters
+    ----------
+    N0 : float, array-like, or astropy.units.Quantity
+        Power-law normalization. If ``mode='gamma'``, this is :math:`N_0` in :math:`N(\gamma) = N_0 \gamma^{-p}`.
+        If ``mode='energy'``, this is :math:`K_E` in :math:`N(E) = K_E E^{-p}`.
+    p : float or array-like
+        Power-law index of the electron distribution.
+    mode : {'gamma', 'energy'}, optional
+        Indicates the input normalization type:
+
+        - ``'gamma'``: input is :math:`N_0`.
+        - ``'energy'``: input is :math:`K_E`.
+
+    Returns
+    -------
+    astropy.units.Quantity
+        Converted power-law normalization. If input was ``mode='gamma'``, output is ``K_E``.
+        If input was ``mode='energy'``, output is ``N_0``.
+    """
+    if mode == "gamma":
+        # Convert from gamma-space to energy-space
+        N0_cgs = ensure_in_units(N0, u.cm**-3)
+        K_E = _opt_convert_PL_norm_gamma_to_energy(N0=N0_cgs, p=p)
+        return K_E * u.cm**-3 * u.erg ** (p - 1)
+    elif mode == "energy":
+        # Convert from energy-space to gamma-space
+        K_E_cgs = ensure_in_units(N0, u.cm**-3 * u.erg ** (p - 1))
+        N0 = _opt_compute_convert_PL_norm_energy_to_gamma(K_E=K_E_cgs, p=p)
+        return N0 * u.cm**-3
+    else:
+        raise ValueError("mode must be either 'gamma' or 'energy'.")
+
+
 def compute_electron_gamma_PL_moment(
     p: "_ArrayLike",
     gamma_min: "_ArrayLike" = 1.0,

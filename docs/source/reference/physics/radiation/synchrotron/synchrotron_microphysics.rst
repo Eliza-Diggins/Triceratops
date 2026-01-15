@@ -9,17 +9,35 @@ parameters / closures which encapsulate our ignorance of the detailed physics at
 critical to the modeling of synchrotron emission, as they directly influence the resulting spectra and light curves.
 
 In this document, we'll describe the available microphysical closures implemented in Triceratops, how to use them,
-and provide references for further reading on the subject.
+and provide references for further reading on the subject. The :mod:`radiation.synchrotron.microphysics` module is
+responsible for two core aspects of synchrotron microphysics:
+
+1. Operations regarding electron distributions, including computing moments of the distributions
+   and normalizing them.
+2. Implementing microphysical closures, such as equipartition closure, to relate macrophysical quantities
+   (e.g. shock energy densities) to microphysical ones (e.g. electron distribution normalizations and magnetic field strengths).
+
+.. contents::
+    :local:
+    :depth: 2
 
 Electron Distributions
 ----------------------
 
-Synchrotron emission in Triceratops is computed by combining macrophysical dynamical quantities
-(e.g. shock velocities, densities, pressures) with a phenomenological model for the population of
-relativistic electrons responsible for the radiation.
+.. hint::
 
-At present, Triceratops implements a **single, canonical electron distribution**: a power-law in
-Lorentz factor,
+    See :ref:`synch_theory_populations` for the corresponding documentation on synchrotron theory.
+
+While it is possible to compute synchrotron emission from an arbitrary population of electrons, in practice, one
+often selects a specific distribution function for their electron population. At current, Triceratops only provides
+explicit support for **power-law electron distributions**; however, the modular nature of the mode makes it a
+straightforward exercise to implement additional distributions in the future.
+
+Power-Law Electron Distributions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The most commonly used electron distribution in astrophysical synchrotron modeling is the power-law distribution.
+In this framework, the number density of electrons per unit Lorentz factor :math:`\gamma` is given by:
 
 .. math::
 
@@ -38,6 +56,13 @@ empirical success in modeling non-thermal emission from a wide range of astrophy
 A detailed discussion of the physical origin of this distribution can be found in
 :ref:`synchrotron_theory`.
 
+.. note::
+
+    (See :ref:`synchrotron_theory` for detailed discussion) For the sake of clarity, Triceratops
+    always defaults to using the Lorentz factor :math:`\gamma` as the independent variable in
+    electron distributions, not the energy. Nonetheless, support for both is included and conversion functions
+    are available.
+
 .. hint::
 
     From the perspective of **model building**, the important point is that essentially all synchrotron
@@ -45,11 +70,6 @@ A detailed discussion of the physical origin of this distribution can be found i
     a number of useful functions in the :mod:`radiation.synchrotron` module for computing these moments
     directly without needing to manipulate the distribution itself.
 
-.. note::
-
-    While only a power-law distribution is currently implemented, the modular nature of Triceratops
-    makes it straightforward to implement additional electron distributions in the future.
-    Contributions from the community are welcome!
 
 .. rubric:: API Reference
 
@@ -73,6 +93,7 @@ A detailed discussion of the physical origin of this distribution can be found i
            compute_mean_energy_PL
            compute_PL_total_number_density
            compute_PL_effective_number_density
+           swap_electron_PL_normalization
 
     .. tab-item:: Low-Level API
 
@@ -103,10 +124,55 @@ A detailed discussion of the physical origin of this distribution can be found i
 
                 N_{\rm eff} = N_0 M^{(2)}_\gamma. = N_{\rm total} \frac{M^{(2)}_\gamma}{M^{(1)}_\gamma}.
 
+        - ``_opt_compute_convert_PL_norm_energy_to_gamma``, which converts the normalization of a power-law
+          electron energy distribution to that of a power-law electron Lorentz factor distribution.
+        - ``_opt_compute_convert_PL_norm_gamma_to_energy``, which converts the normalization of a power-law
+          electron Lorentz factor distribution to that of a power-law electron energy distribution.
+
+.. rubric:: Examples
+
+For the most part, these functions are intended for internal use by higher-level modeling functions. However,
+they can also be used directly when building custom models. For example, to compute the mean Lorentz factor
+of a power-law electron distribution with :math:`p = 2.5`, :math:`\gamma_{\min} = 10^2`, and
+:math:`\gamma_{\max} = 10^6`, one could use the following code:
+
+.. code-block:: python
+
+    from triceratops.radiation.synchrotron.microphysics import compute_mean_gamma_PL
+
+    p = 2.5
+    gamma_min = 1e2
+    gamma_max = 1e6
+
+    mean_gamma = compute_mean_gamma_PL(p, gamma_min, gamma_max)
+    print(f"Mean Lorentz factor: {mean_gamma:.2f}")
+
+You can also switch between normalizations of power-law distributions in energy and Lorentz factor. For example,
+to convert a power-law electron energy distribution normalization of :math:`N_0 = 1e10 \, \rm cm^{-3} \, erg^{-1}`
+with :math:`p = 2.5`, :math:`E_{\min} = 10^2 \, m_e c^2`, and :math:`E_{\max} = 10^6 \, m_e c^2` to the
+corresponding Lorentz factor normalization, one could use the following code:
+
+.. code-block:: python
+
+    from triceratops.radiation.synchrotron.microphysics import (
+        swap_electron_PL_normalization
+    )
+
+    p = 2.5
+    N0_energy = 1e10  # in units of cm^-3 erg^-1
+
+    N0_gamma = swap_electron_PL_normalization(
+        N0_energy, p=p, mode='energy')
+    print(f"Power-law normalization in gamma: {N0_gamma:.2e} cm^-3")
+
 ----
 
 Equipartition Closure
 ----------------------
+
+.. hint::
+
+    See :ref:`synch_equipartition_theory` for the corresponding documentation on synchrotron theory.
 
 The most common closure mechanism used in the literature (and the only primarily used in Triceratops) is the
 **equipartition closure**. In this framework, we assume that a fixed fraction of the thermal energy density
@@ -179,3 +245,56 @@ synchrotron models.
 
 For use in models, users should instead use the low-level CGS version of the function
 (``_opt_normalize_PL_from_thermal_energy_density``), which is optimized for performance.
+
+.. rubric:: Examples
+
+For the most part, these functions are intended for internal use by higher-level modeling functions. However,
+they can also be used directly when building custom models. For example, let's compute the equipartition magnetic
+field strength from a thermal energy density of :math:`u_{\rm th} = 10^{-2} \, \rm erg \, cm^{-3}`
+and an equipartition parameter of :math:`\epsilon_B = 0.01`. We can do this using the following code:
+
+.. code-block:: python
+
+    import astropy.units as u
+    from triceratops.radiation.synchrotron.microphysics import (
+        compute_equipartition_magnetic_field
+    )
+
+    u_therm = 1e-2 * u.erg / u.cm**3
+    epsilon_B = 0.01
+
+    B = compute_equipartition_magnetic_field(
+        u_therm=u_therm,
+        epsilon_B=epsilon_B,
+    )
+
+    print(f"Magnetic field strength: {B:.3e}")
+
+    >>> 5.013e-02 G
+
+If we want instead to compute the bolometric luminosity assuming :math:`\epsilon_e = \epsilon_B = 0.01`, and :math:`p=2.5`,
+we can use the following code:
+
+.. code-block:: python
+
+    import astropy.units as u
+    from triceratops.radiation.synchrotron.microphysics import (
+        compute_bol_emissivity_from_thermal_energy_density
+    )
+
+    u_therm = 1e-2 * u.erg / u.cm ** 3
+    epsilon_e = 0.01
+    epsilon_B = 0.01
+    p = 3
+
+    j_bol = compute_bol_emissivity_from_thermal_energy_density(
+        u_therm=u_therm,
+        epsilon_E=epsilon_e,
+        epsilon_B=epsilon_B,
+        p=p,
+        gamma_min=1,
+        gamma_max=1e8
+    )
+
+    print(f"Bolometric emissivity: {j_bol:.3e}")
+    >>> 5.983e-15 erg / (s cm3)
