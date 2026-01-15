@@ -6,7 +6,7 @@
 Triceratops
 ============
 
-|RUFF| |PRE-COMMIT| |NUMPYDOC| |COMMITIZEN| |CONVENTIONAL-COMMITS| |LAST-COMMIT| |CONTRIBUTORS| |DOCS|
+|RUFF| |PRE-COMMIT| |NUMPYDOC| |COMMITIZEN| |CONVENTIONAL-COMMITS| |LAST-COMMIT| |CONTRIBUTORS| |DOCS| |ASTROPY|
 
 Welcome to TRICERATOPS, the **T**\ransient **R**\adio **I**\nteraction **C**\ode for **E**\jecta, **R**\emnants, **A**\nd
 **T**\ime-domain **O**\bservables from **P**\lasma **S**\hocks. TRICERATOPS is a powerful computational tool designed to
@@ -158,3 +158,7 @@ Indices and tables
 .. |last-commit| image:: https://img.shields.io/github/last-commit/eliza-diggins/Triceratops
    :target: https://github.com/eliza-diggins/Triceratops
    :alt: Last Commit
+
+.. |ASTROPY| image:: http://img.shields.io/badge/powered%20by-AstroPy-orange.svg?style=flat
+   :target: http://www.astropy.org/
+   :alt: Powered by Astropy

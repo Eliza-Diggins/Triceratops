@@ -34,8 +34,27 @@ theory in the :ref:`synchrotron_theory` section of the documentation.
     synchrotron/synchrotron_microphysics
     synchrotron/synchrotron_seds
 
+Additionally, there are a few additional theory documents which provide further context for the implementation of
+synchrotron radiation in Triceratops:
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Synchrotron Theory References
+
+    synchrotron/synchrotron_theory
+    synchrotron/synch_sed_theory
+
 Free-Free Radiation
 --------------------
 
+.. important::
+
+    Coming Soon!
+
+
 Inverse Compton Scattering
 --------------------------
+
+.. important::
+
+    Coming Soon!
