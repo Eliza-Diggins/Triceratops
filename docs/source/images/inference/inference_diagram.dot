@@ -1,0 +1,111 @@
+digraph TriceratopsInference {
+
+    rankdir=BT;
+    fontsize=12;
+    fontname="Helvetica";
+    nodesep=0.6;
+    ranksep=0.9;
+    bgcolor="transparent";
+
+    node [
+        shape=box,
+        style="rounded,filled",
+        fontname="Helvetica",
+        fontsize=10,
+        penwidth=1.2
+    ];
+
+    edge [
+        fontname="Helvetica",
+        fontsize=9,
+        color="#555555"
+    ];
+
+    # ===================== RANKS ===================== #
+    { rank=same; ModelParameter; Model; Data }
+    { rank=same; InferenceParameter; Prior; Likelihood }
+    { rank=same; InferenceProblem; Sampler }
+    { rank=same; SamplingResult }
+
+    # ===================== NODES ===================== #
+    Data [
+        label="Data\n(Container)",
+        fillcolor="#ECEFF1",
+        URL="#triceratops.data"
+    ];
+
+    ModelParameter [
+        label="ModelParameter",
+        fillcolor="#F3E5F5",
+        URL="#triceratops.model.ModelParameter"
+    ];
+
+    Model [
+        label="Model\n(Physics)",
+        fillcolor="#E1F5FE",
+        URL="#triceratops.model.Model"
+    ];
+
+    Prior [
+        label="Prior",
+        fillcolor="#FFF3E0",
+        URL="#triceratops.prior.Prior"
+    ];
+
+    InferenceParameter [
+        label="InferenceParameter",
+        fillcolor="#FFFDE7",
+        URL="#triceratops.problem.InferenceParameter"
+    ];
+
+    Likelihood [
+        label="Likelihood\n(Data + Noise)",
+        fillcolor="#E8F5E9",
+        URL="#triceratops.likelihood.Likelihood"
+    ];
+
+    InferenceProblem [
+        label="InferenceProblem\n(Statistical Model)",
+        fillcolor="#BBDEFB",
+        URL="#triceratops.problem.InferenceProblem"
+    ];
+
+    Sampler [
+        label="Sampler\n(MCMC / Nested)",
+        fillcolor="#C8E6C9",
+        URL="#triceratops.sampling.Sampler"
+    ];
+
+    SamplingResult [
+        label="SamplingResult",
+        shape=ellipse,
+        fillcolor="#FFF9C4"
+    ];
+
+    # ===================== ALIGNMENT ===================== #
+    ModelParameter -> Model -> Data [style=invis];
+    InferenceParameter -> Prior -> Likelihood [style=invis];
+    InferenceProblem -> Sampler -> SamplingResult [style=invis];
+
+    # ===================== EDGES ===================== #
+    ModelParameter -> Model        [label="binds"];
+    ModelParameter -> InferenceParameter [label="maps"];
+
+    Prior -> InferenceParameter    [label="applies"];
+
+    Data -> Likelihood             [label="feeds"];
+    Model -> Likelihood            [label="predicts"];
+
+    InferenceParameter -> InferenceProblem [label="defines"];
+    Likelihood -> InferenceProblem [label="composes"];
+
+    Model -> InferenceProblem [
+        style="dashed",
+        label="parameterizes",
+        color="#888888",
+        constraint=false
+    ];
+
+    InferenceProblem -> Sampler    [label="passed to", minlen=2];
+    Sampler -> SamplingResult      [label="yields", minlen=2];
+}

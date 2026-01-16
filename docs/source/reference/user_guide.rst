@@ -48,7 +48,16 @@ More than any other part of the Triceratops library, the models section is desig
 day users of the code. It is important to be able to correctly leverage the capabilities of the building blocks and
 correctly implement the models relevant to your science case.
 
+Inference and Statistical Analysis
+-----------------------------------
+Triceratops models are designed to very easily plug into inference pipelines to perform parameter estimation
+and model comparison. The inference modules provide tools for setting up and running inference analyses using
+various sampling algorithms. The following guides cover the relevant functionality:
 
+.. toctree::
+    :maxdepth: 1
+
+    inference/overview
 
 
 Building Blocks
