@@ -1,0 +1,31 @@
+﻿triceratops.inference.likelihood.single\_epoch\_photometry.GaussianPhotometryLikelihood
+=======================================================================================
+
+.. currentmodule:: triceratops.inference.likelihood.single_epoch_photometry
+
+.. autoclass:: GaussianPhotometryLikelihood
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~GaussianPhotometryLikelihood.__init__
+      ~GaussianPhotometryLikelihood.log_likelihood
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~GaussianPhotometryLikelihood.COMPATIBLE_DATA_CONTAINERS
+      ~GaussianPhotometryLikelihood.COMPATIBLE_MODELS
+      ~GaussianPhotometryLikelihood.n_sigma_upper_limit
+   
+   

@@ -1,0 +1,34 @@
+models.transients.supernovae
+============================
+
+.. automodule:: models.transients.supernovae
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      chevalier_shock
+   
+   
+
+   
+   
+   
+
+   
+   
+   

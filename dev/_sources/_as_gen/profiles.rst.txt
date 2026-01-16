@@ -1,0 +1,39 @@
+﻿profiles
+========
+
+.. automodule:: profiles
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      band_profile
+      broken_power_law
+      double_BPL
+      double_smoothed_BPL
+      power_law
+      power_law_exp_cutoff
+      smoothed_BPL
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

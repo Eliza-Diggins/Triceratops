@@ -1,0 +1,709 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>triceratops.inference.likelihood.single_epoch_photometry &#8212; Triceratops  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/triceratops/inference/likelihood/single_epoch_photometry';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Triceratops  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../reference/user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">triceratops.inference.likelihood.single_epoch_photometry</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for triceratops.inference.likelihood.single_epoch_photometry</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Likelihood models for single-epoch photometric data in Triceratops.</span>
+
+<span class="sd">This module defines likelihood classes designed to compare theoretical</span>
+<span class="sd">spectral energy distribution (SED) models against single-epoch photometric</span>
+<span class="sd">observations. Both detections and non-detections (upper limits) are handled</span>
+<span class="sd">in a statistically consistent manner.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleNamespace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.data.photometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">RadioPhotometryContainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.models.core.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">Likelihood</span>
+
+<span class="c1"># Type checking imports</span>
+<span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.models._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ModelParametersInputRaw</span>
+
+<span class="c1"># Defining the __all__ variable.</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;GaussianPhotometryLikelihood&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+
+<span class="c1"># ============================================================ #</span>
+<span class="c1"># Likelihood Classes                                           #</span>
+<span class="c1"># ============================================================ #</span>
+<div class="viewcode-block" id="GaussianPhotometryLikelihood">
+<a class="viewcode-back" href="../../../../reference/inference/triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood.html#triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GaussianPhotometryLikelihood</span><span class="p">(</span><span class="n">Likelihood</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Gaussian likelihood model for fitting single-epoch photometric data.</span>
+
+<span class="sd">    This likelihood model is designed to compare theoretical spectral energy</span>
+<span class="sd">    distribution (SED) models against observed photometric data at a single epoch.</span>
+<span class="sd">    It accounts for both detections and non-detections (upper limits) in a</span>
+<span class="sd">    statistically consistent manner.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Formally, the log-likelihood is broken into two components: one for the true detections</span>
+<span class="sd">    and one for the upper limits. For detected data points, we assume Gaussian errors,</span>
+<span class="sd">    leading to the standard Gaussian log-likelihood formulation. For non-detections, we</span>
+<span class="sd">    treat the upper limits using the cumulative distribution function (CDF) of the</span>
+<span class="sd">    Gaussian distribution.</span>
+
+<span class="sd">    The detection component of the log-likelihood is given by:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \log \mathcal{L}_{\rm det} = -\frac{1}{2} \sum_{i}</span>
+<span class="sd">        \left[ \frac{(F_{\rm obs, i} - F_{\rm model, i})^2}{\sigma_i^2} +</span>
+<span class="sd">        \log(2 \pi \sigma_i^2) \right]</span>
+
+<span class="sd">    where :math:`F_{\rm obs, i}` is the observed flux density, :math:`F_{\rm model, i}`</span>
+<span class="sd">    is the model-predicted flux density, and :math:`\sigma_i` is the measurement error. These correspond to the</span>
+<span class="sd">    ``freq``, ``flux_density``, and ``flux_density_error`` fields in the</span>
+<span class="sd">    :class:`~data.photometry.RadioPhotometryContainer`.</span>
+
+<span class="sd">    The upper limit component of the log-likelihood is given by:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \log \mathcal{L}_{\rm upper} = \sum_{j}</span>
+<span class="sd">        \log \left[ \Phi\left( \frac{F_{\rm limit, j} - F_{\rm model, j}}{\sigma_j} \right) \right],</span>
+
+<span class="sd">    where :math:`F_{\rm limit, j}` is the upper limit flux density, :math:`F_{\rm model, j}`</span>
+<span class="sd">    is the model-predicted flux density, :math:`\sigma_j` is the noise level, and :math:`\Phi` is the CDF of</span>
+<span class="sd">    the standard normal distribution:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \Phi(x) = \frac{1}{2} \left[ 1 + {\rm erf}\left( \frac{x}{\sqrt{2}} \right) \right].</span>
+
+<span class="sd">    **Missing Errors on Non-Detections**:</span>
+
+<span class="sd">    It is common for non-detections to lack explicit error estimates. In such cases, we</span>
+<span class="sd">    infer the noise level from the provided upper limit using a specified number of</span>
+<span class="sd">    standard deviations, :math:`n_\sigma`. Specifically, if the upper limit is given</span>
+<span class="sd">    as :math:`F_{\rm limit}`, we estimate the noise level as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \sigma = \frac{F_{\rm limit}}{n_\sigma}.</span>
+
+<span class="sd">    By default, :math:`n_\sigma = 3`, but this can be adjusted via the</span>
+<span class="sd">    ``n_sigma_upper_limit`` parameter during initialization. If the ``flux_density_error``</span>
+<span class="sd">    field is provided for non-detections, any ``np.nan`` fields will be filled with the predicted uncertainty from</span>
+<span class="sd">    this calculation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ============================================================ #</span>
+    <span class="c1"># Class Semantics                                              #</span>
+    <span class="c1"># ============================================================ #</span>
+
+    <span class="c1"># TODO: Currently, we are permitting all models to be used with this likelihood.</span>
+    <span class="c1">#       In the future, we may want to restrict this to only SED-type models, but we</span>
+    <span class="c1">#       don&#39;t currently have any other models.</span>
+    <span class="n">COMPATIBLE_MODELS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">Model</span><span class="p">],</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Model</span><span class="p">,)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`~triceratops.models.core.base.Model`</span>
+
+<span class="sd">    Model classes compatible with this likelihood. The provided model instance</span>
+<span class="sd">    must be an instance of one of these classes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">COMPATIBLE_DATA_CONTAINERS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">RadioPhotometryContainer</span><span class="p">,)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of types</span>
+
+<span class="sd">    Data container classes compatible with this likelihood. The provided data</span>
+<span class="sd">    object must be an instance of one of these types.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ============================================================ #</span>
+    <span class="c1"># Initialization                                               #</span>
+    <span class="c1"># ============================================================ #</span>
+    <span class="c1"># We overwrite the __init__ to handle specific options for handling of</span>
+    <span class="c1"># non-detections.</span>
+<div class="viewcode-block" id="GaussianPhotometryLikelihood.__init__">
+<a class="viewcode-back" href="../../../../reference/inference/triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood.html#triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood.__init__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">n_sigma_upper_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initialize the :class:`GaussianPhotometryLikelihood` object.</span>
+
+<span class="sd">        This performs:</span>
+
+<span class="sd">        1. Compatibility validation between model and data.</span>
+<span class="sd">        2. Storage of the raw model and data container.</span>
+<span class="sd">        3. One-time preprocessing of the data into numerical form suitable</span>
+<span class="sd">           for fast likelihood evaluation.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        model : ~models.core.base.Model</span>
+<span class="sd">            The astrophysical model to be evaluated. This must be a subclass of :class:`~models.core.base.Model` and</span>
+<span class="sd">            be compatible with the likelihood class (see :attr:`COMPATIBLE_MODELS`). This defines the forward model</span>
+<span class="sd">            being fit against.</span>
+<span class="sd">        data:</span>
+<span class="sd">            The data container object holding the observational data. This must be of a type compatible</span>
+<span class="sd">            with the likelihood class (see :attr:`COMPATIBLE_DATA_CONTAINERS`). This defines the observations being</span>
+<span class="sd">            compared against.</span>
+<span class="sd">        n_sigma_upper_limit : float, optional</span>
+<span class="sd">            The number of standard deviations above the noise level to consider</span>
+<span class="sd">            as the upper limit for non-detections. Default is 3.0. See the class notes</span>
+<span class="sd">            (:class:`GaussianPhotometryLikelihood`) for more details on how upper limits</span>
+<span class="sd">            are treated in the likelihood.</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Additional keyword arguments passed to the data processing method. These are unused.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError:</span>
+<span class="sd">            If the provided model or data are not compatible with this likelihood.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Upon initialization, the likelihood object processes the input data</span>
+<span class="sd">        via the :meth:`_process_input_data` method. The results are cached in</span>
+<span class="sd">        ``self._data`` for efficient reuse during likelihood evaluations. All data is coerced</span>
+<span class="sd">        into consistent base units during this step.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_validate_input_model_and_data</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_sigma_upper_limit</span> <span class="o">=</span> <span class="n">n_sigma_upper_limit</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;float: Number of standard deviations above the noise level to consider as the upper limit for non-detections.</span>
+
+<span class="sd">        This value is used in the likelihood evaluation to handle non-detections</span>
+<span class="sd">        appropriately. See the class notes (:class:`GaussianPhotometryLikelihood`) for more details.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Process and cache numerical data needed for likelihood evaluation.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="p">:</span> <span class="n">SimpleNamespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_input_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+    <span class="c1"># ============================================================ #</span>
+    <span class="c1"># Data Processing                                              #</span>
+    <span class="c1"># ============================================================ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_process_input_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SimpleNamespace</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the input data container into a numerical representation suitable for likelihood evaluation.</span>
+
+<span class="sd">        This method is called exactly once during initialization and should:</span>
+
+<span class="sd">        - Extract relevant quantities from the data container</span>
+<span class="sd">        - Convert all values into consistent base units</span>
+<span class="sd">        - Store the results in a :class:`types.SimpleNamespace`</span>
+
+<span class="sd">        The returned namespace is cached as ``self._data`` and should be treated</span>
+<span class="sd">        as immutable.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        types.SimpleNamespace</span>
+<span class="sd">            Namespace containing all numerical arrays required for computing</span>
+<span class="sd">            the likelihood.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get the model units for the flux and the frequency.</span>
+        <span class="n">flux_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">UNITS</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># Assume first output is flux density (its the only output of the model).</span>
+        <span class="n">frequency_unit</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">base_units</span>
+
+        <span class="c1"># Now extract the flux, frequency, error, and upper units from the data container,</span>
+        <span class="c1"># converting to the model units as we go.</span>
+        <span class="n">freq</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">upper_lim</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">freq</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">frequency_unit</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">flux_density</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">flux_unit</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">flux_density_error</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">flux_unit</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">to_value</span><span class="p">(</span><span class="n">flux_unit</span><span class="p">),</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Extract the detection mask.</span>
+        <span class="n">detection_mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">detection_mask</span>
+
+        <span class="c1"># Correct any missing non-detection errors. We do this by building a mask of nan errors and</span>
+        <span class="c1"># taking the intersection with the non-detection mask.</span>
+        <span class="n">missing_errors_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">missing_errors_mask</span> <span class="o">&amp;</span> <span class="n">detection_mask</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Detected data points cannot have missing errors.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">missing_errors_mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">detection_mask</span><span class="p">):</span>
+            <span class="c1"># Compute the inferred errors.</span>
+            <span class="n">inferred_errors</span> <span class="o">=</span> <span class="n">upper_lim</span><span class="p">[</span><span class="n">missing_errors_mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">detection_mask</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_sigma_upper_limit</span>
+            <span class="c1"># Fill them in.</span>
+            <span class="n">err</span><span class="p">[</span><span class="n">missing_errors_mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">detection_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">inferred_errors</span>
+
+        <span class="c1"># Now fill everything into the namespace and return it.</span>
+        <span class="k">return</span> <span class="n">SimpleNamespace</span><span class="p">(</span>
+            <span class="n">frequency</span><span class="o">=</span><span class="n">freq</span><span class="p">,</span>
+            <span class="n">flux_density</span><span class="o">=</span><span class="n">flux</span><span class="p">,</span>
+            <span class="n">flux_density_err</span><span class="o">=</span><span class="n">err</span><span class="p">,</span>
+            <span class="n">flux_density_upper_limits</span><span class="o">=</span><span class="n">upper_lim</span><span class="p">,</span>
+            <span class="n">detection_mask</span><span class="o">=</span><span class="n">detection_mask</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># ============================================================ #</span>
+    <span class="c1"># Likelihood Evaluation                                        #</span>
+    <span class="c1"># ============================================================ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_log_likelihood</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;_ModelParametersInputRaw&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the total log-likelihood for the given model parameters.</span>
+
+<span class="sd">        The likelihood is composed of two parts:</span>
+
+<span class="sd">        1. **Detections**</span>
+<span class="sd">           Gaussian likelihood using measured flux densities and errors.</span>
+
+<span class="sd">        2. **Non-detections (upper limits)**</span>
+<span class="sd">           Censored Gaussian likelihood computed via the normal CDF.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        parameters : dict</span>
+<span class="sd">            Dictionary mapping model parameter names to values in base units.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        float</span>
+<span class="sd">            Log-likelihood value.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Allocate the log likelihood variable.</span>
+        <span class="n">log_likelihood</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="c1"># --- Perform the forward modeling step --- #</span>
+        <span class="c1"># We send parameters down to the model to compute the forward</span>
+        <span class="c1"># modeling step. This provides the model flux densities at the</span>
+        <span class="c1"># observed frequencies.</span>
+        <span class="n">model_flux_density</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">_forward_model</span><span class="p">({</span><span class="s2">&quot;frequency&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">frequency</span><span class="p">},</span> <span class="n">parameters</span><span class="p">)[</span><span class="s2">&quot;flux_density&quot;</span><span class="p">]</span>
+
+        <span class="c1"># --- Compute the detection log-likelihood component --- #</span>
+        <span class="c1"># We start with the log-likelihood for the detected bands. This is</span>
+        <span class="c1"># a standard Gaussian log-likelihood.</span>
+        <span class="n">detected_flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">flux_density</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">detection_mask</span><span class="p">]</span>
+        <span class="n">detected_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">flux_density_err</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">detection_mask</span><span class="p">]</span>
+        <span class="n">model_detected_flux</span> <span class="o">=</span> <span class="n">model_flux_density</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">detection_mask</span><span class="p">]</span>
+
+        <span class="c1"># Compute the exponential term first.</span>
+        <span class="n">_ll</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(((</span><span class="n">detected_flux</span> <span class="o">-</span> <span class="n">model_detected_flux</span><span class="p">)</span> <span class="o">/</span> <span class="n">detected_err</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Now add the normalization term.</span>
+        <span class="n">_ll</span> <span class="o">+=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">detected_err</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+        <span class="c1"># Accumulate before moving on to the upper limits.</span>
+        <span class="n">log_likelihood</span> <span class="o">+=</span> <span class="n">_ll</span>
+
+        <span class="c1"># --- Handle the upper limit log-likelihood component --- #</span>
+        <span class="c1"># We use the error function CDF to compute the log-likelihood for the upper limits.</span>
+        <span class="n">non_detected_upper_limits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">flux_density_upper_limits</span><span class="p">[</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">detection_mask</span><span class="p">]</span>
+        <span class="n">non_detected_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">flux_density_err</span><span class="p">[</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">detection_mask</span><span class="p">]</span>
+        <span class="n">model_non_detected_flux</span> <span class="o">=</span> <span class="n">model_flux_density</span><span class="p">[</span><span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">_data</span><span class="o">.</span><span class="n">detection_mask</span><span class="p">]</span>
+
+        <span class="n">_ll</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">norm</span><span class="o">.</span><span class="n">logcdf</span><span class="p">(</span><span class="n">non_detected_upper_limits</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">model_non_detected_flux</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">non_detected_err</span><span class="p">))</span>
+        <span class="n">log_likelihood</span> <span class="o">+=</span> <span class="n">_ll</span>
+        <span class="k">return</span> <span class="n">log_likelihood</span></div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Eliza Diggins.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
