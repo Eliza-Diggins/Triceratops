@@ -1,0 +1,24 @@
+models.transients.GRBs
+======================
+
+.. automodule:: models.transients.GRBs
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

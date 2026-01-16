@@ -1,0 +1,34 @@
+GaussianPhotometryLikelihood
+=========================================================================
+
+.. currentmodule:: inference.likelihood.single_epoch_photometry
+
+.. autoclass:: inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~GaussianPhotometryLikelihood.__init__
+      ~GaussianPhotometryLikelihood.log_likelihood
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~GaussianPhotometryLikelihood.COMPATIBLE_DATA_CONTAINERS
+      ~GaussianPhotometryLikelihood.COMPATIBLE_MODELS
+      ~GaussianPhotometryLikelihood.n_sigma_upper_limit
+   
+   

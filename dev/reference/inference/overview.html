@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Parameter Inference and Model Comparison &#8212; Triceratops  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/inference/overview';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="triceratops.inference.likelihood.base.Likelihood" href="triceratops.inference.likelihood.base.Likelihood.html" />
+    <link rel="prev" title="Triceratops Models" href="../models/overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Triceratops  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="../user_guide.html">
+    Triceratops User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../auto_examples/index.html">
+    Triceratops Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../data/overview.html">Data Loading, Handling, and Visualization</a></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../models/overview.html">Triceratops Models</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Parameter Inference and Model Comparison</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="triceratops.inference.likelihood.base.Likelihood.html">triceratops.inference.likelihood.base.Likelihood</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood.html">triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood</a></li>
+</ul>
+</details></li>
+</ul>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../physics/shocks/overview.html">Shocks in Triceratops</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../physics/radiation/overview.html">Radiation Processes in Triceratops</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../physics/radiation/synchrotron/synchrotron_core.html">Core Synchrotron Tools</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../physics/radiation/synchrotron/synchrotron_microphysics.html">Synchrotron Microphysics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_electron_gamma_PL_moment.html">triceratops.radiation.synchrotron.microphysics.compute_electron_gamma_PL_moment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_electron_energy_PL_moment.html">triceratops.radiation.synchrotron.microphysics.compute_electron_energy_PL_moment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_mean_gamma_PL.html">triceratops.radiation.synchrotron.microphysics.compute_mean_gamma_PL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_mean_energy_PL.html">triceratops.radiation.synchrotron.microphysics.compute_mean_energy_PL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_PL_total_number_density.html">triceratops.radiation.synchrotron.microphysics.compute_PL_total_number_density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_PL_effective_number_density.html">triceratops.radiation.synchrotron.microphysics.compute_PL_effective_number_density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.swap_electron_PL_normalization.html">triceratops.radiation.synchrotron.microphysics.swap_electron_PL_normalization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_PL_norm_from_magnetic_field.html">triceratops.radiation.synchrotron.microphysics.compute_PL_norm_from_magnetic_field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_PL_norm_from_thermal_energy_density.html">triceratops.radiation.synchrotron.microphysics.compute_PL_norm_from_thermal_energy_density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_equipartition_magnetic_field.html">triceratops.radiation.synchrotron.microphysics.compute_equipartition_magnetic_field</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_bol_emissivity.html">triceratops.radiation.synchrotron.microphysics.compute_bol_emissivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../_as_gen/triceratops.radiation.synchrotron.microphysics.compute_bol_emissivity_from_thermal_energy_density.html">triceratops.radiation.synchrotron.microphysics.compute_bol_emissivity_from_thermal_energy_density</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/radiation/synchrotron/synchrotron_seds.html">Synchrotron Spectral Energy Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../physics/radiation/synchrotron/synchrotron_theory.html">Synchrotron Radiation Theory</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../user_guide.html" class="nav-link">Triceratops User Guide</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Parameter Inference and Model Comparison</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="parameter-inference-and-model-comparison">
+<span id="inference"></span><h1>Parameter Inference and Model Comparison<a class="headerlink" href="#parameter-inference-and-model-comparison" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Triceratops designed for plugging the models from <code class="xref py py-mod docutils literal notranslate"><span class="pre">models</span></code> into inference pipelines.</p></li>
+<li><p>parameter estimation, MCMC, nested sampling, model comparison.</p></li>
+<li><p>inference modules provide tools for setting up and running inference analyses using various sampling algorithms.</p></li>
+<li><p>integrates with third-party libraries like <code class="xref py py-mod docutils literal notranslate"><span class="pre">emcee</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">dynesty</span></code>, and <code class="xref py py-mod docutils literal notranslate"><span class="pre">bilby</span></code>.</p></li>
+<li><p>supports custom likelihood functions and priors.</p></li>
+<li><p>flexible configuration options for tailoring inference analyses to specific scientific goals.</p></li>
+</ul>
+<section id="the-triceratops-inference-pipeline">
+<h2>The Triceratops Inference Pipeline<a class="headerlink" href="#the-triceratops-inference-pipeline" title="Link to this heading">#</a></h2>
+digraph TriceratopsInference {
+
+    rankdir=BT;
+    fontsize=12;
+    fontname=&quot;Helvetica&quot;;
+    nodesep=0.6;
+    ranksep=0.9;
+    bgcolor=&quot;transparent&quot;;
+
+    node [
+        shape=box,
+        style=&quot;rounded,filled&quot;,
+        fontname=&quot;Helvetica&quot;,
+        fontsize=10,
+        penwidth=1.2
+    ];
+
+    edge [
+        fontname=&quot;Helvetica&quot;,
+        fontsize=9,
+        color=&quot;#555555&quot;
+    ];
+
+    # ===================== RANKS ===================== #
+    { rank=same; ModelParameter; Model; Data }
+    { rank=same; InferenceParameter; Prior; Likelihood }
+    { rank=same; InferenceProblem; Sampler }
+    { rank=same; SamplingResult }
+
+    # ===================== NODES ===================== #
+    Data [
+        label=&quot;Data\n(Container)&quot;,
+        fillcolor=&quot;#ECEFF1&quot;,
+        URL=&quot;#triceratops.data&quot;
+    ];
+
+    ModelParameter [
+        label=&quot;ModelParameter&quot;,
+        fillcolor=&quot;#F3E5F5&quot;,
+        URL=&quot;#triceratops.model.ModelParameter&quot;
+    ];
+
+    Model [
+        label=&quot;Model\n(Physics)&quot;,
+        fillcolor=&quot;#E1F5FE&quot;,
+        URL=&quot;#triceratops.model.Model&quot;
+    ];
+
+    Prior [
+        label=&quot;Prior&quot;,
+        fillcolor=&quot;#FFF3E0&quot;,
+        URL=&quot;#triceratops.prior.Prior&quot;
+    ];
+
+    InferenceParameter [
+        label=&quot;InferenceParameter&quot;,
+        fillcolor=&quot;#FFFDE7&quot;,
+        URL=&quot;#triceratops.problem.InferenceParameter&quot;
+    ];
+
+    Likelihood [
+        label=&quot;Likelihood\n(Data + Noise)&quot;,
+        fillcolor=&quot;#E8F5E9&quot;,
+        URL=&quot;#triceratops.likelihood.Likelihood&quot;
+    ];
+
+    InferenceProblem [
+        label=&quot;InferenceProblem\n(Statistical Model)&quot;,
+        fillcolor=&quot;#BBDEFB&quot;,
+        URL=&quot;#triceratops.problem.InferenceProblem&quot;
+    ];
+
+    Sampler [
+        label=&quot;Sampler\n(MCMC / Nested)&quot;,
+        fillcolor=&quot;#C8E6C9&quot;,
+        URL=&quot;#triceratops.sampling.Sampler&quot;
+    ];
+
+    SamplingResult [
+        label=&quot;SamplingResult&quot;,
+        shape=ellipse,
+        fillcolor=&quot;#FFF9C4&quot;
+    ];
+
+    # ===================== ALIGNMENT ===================== #
+    ModelParameter -&gt; Model -&gt; Data [style=invis];
+    InferenceParameter -&gt; Prior -&gt; Likelihood [style=invis];
+    InferenceProblem -&gt; Sampler -&gt; SamplingResult [style=invis];
+
+    # ===================== EDGES ===================== #
+    ModelParameter -&gt; Model        [label=&quot;binds&quot;];
+    ModelParameter -&gt; InferenceParameter [label=&quot;maps&quot;];
+
+    Prior -&gt; InferenceParameter    [label=&quot;applies&quot;];
+
+    Data -&gt; Likelihood             [label=&quot;feeds&quot;];
+    Model -&gt; Likelihood            [label=&quot;predicts&quot;];
+
+    InferenceParameter -&gt; InferenceProblem [label=&quot;defines&quot;];
+    Likelihood -&gt; InferenceProblem [label=&quot;composes&quot;];
+
+    Model -&gt; InferenceProblem [
+        style=&quot;dashed&quot;,
+        label=&quot;parameterizes&quot;,
+        color=&quot;#888888&quot;,
+        constraint=false
+    ];
+
+    InferenceProblem -&gt; Sampler    [label=&quot;passed to&quot;, minlen=2];
+    Sampler -&gt; SamplingResult      [label=&quot;yields&quot;, minlen=2];
+}
+<hr class="docutils" />
+<p>As with any robust statistical pipeline, there are a lot of options and configurations that make the inference
+pipeline look more complicated than it actually is. Before introducing any of the specifics about inference,
+its worth taking a step back and looking at the overall structure of the inference pipeline in Triceratops.
+The diagram above provides a high-level overview of the inference pipeline in Triceratops. We’ll discuss them
+step by step:</p>
+<ol class="arabic">
+<li><p><strong>The Model</strong>: The first step in any inference pipeline in Triceratops is the model. This can either be
+a model that’s already built into the <code class="xref py py-mod docutils literal notranslate"><span class="pre">models</span></code> module, or it can be a custom model. In effect, this provides
+a mapping from some input variables <span class="math notranslate nohighlight">\({\bf x}\)</span> and some set of parameters <span class="math notranslate nohighlight">\(\boldsymbol{\Theta}\)</span> to
+some set of observables <span class="math notranslate nohighlight">\({\bf y}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[{\bf y} = \mathcal{M}({\bf x}; \boldsymbol{\Theta})\]</div>
+<p>The parameters of each model are defined by the model class.</p>
+</li>
+<li><p><strong>The Dataset</strong>: With the model in hand, we also need the data we want to fit too. The idea is to find the
+parameters of the model which best predict the dataset. Thus, the dataset provides a set of observed
+<span class="math notranslate nohighlight">\({\bf x}_{\rm obs}\)</span> and <span class="math notranslate nohighlight">\({\bf y}_{\rm obs}\)</span> values. These are typically loaded using the
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code> module.</p></li>
+<li><p><strong>The Likelihood Function</strong>: The likelihood function quantifies how well the model predictions match
+the observed data for a given set of parameters. In Triceratops, these are <a class="reference internal" href="../../_as_gen/inference.likelihood.base.Likelihood.html#inference.likelihood.base.Likelihood" title="inference.likelihood.base.Likelihood"><code class="xref py py-class docutils literal notranslate"><span class="pre">inference.likelihood.base.Likelihood</span></code></a>
+objects, which provide a function <span class="math notranslate nohighlight">\(\mathcal{L}(\boldsymbol{\Theta} | {\bf x}_{\rm obs}, {\bf y}_{\rm obs})\)</span> that
+computes the likelihood of the observed data given the model parameters. Triceratops provides a variety of
+built-in likelihood functions, and users can also define custom likelihoods as needed.</p></li>
+<li><p><strong>Inference Problems</strong>: The likelihood alone isn’t enough to completely specify an inference problem. We also need
+to provide priors on the model parameters. In Triceratops, an inference problem is defined by a combination of a
+model, a dataset, a likelihood function, and a set of priors. This is encapsulated in the
+<a class="reference internal" href="../../_as_gen/inference.problem.InferenceProblem.html#inference.problem.InferenceProblem" title="inference.problem.InferenceProblem"><code class="xref py py-class docutils literal notranslate"><span class="pre">InferenceProblem</span></code></a>.</p></li>
+<li><p><strong>Samplers</strong>: With the inference problem defined, we can now use a sampling algorithm to explore the parameter
+space and estimate the posterior distribution of the model parameters. Triceratops integrates with several
+third-party sampling libraries, including <code class="xref py py-mod docutils literal notranslate"><span class="pre">emcee</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">dynesty</span></code>, and <code class="xref py py-mod docutils literal notranslate"><span class="pre">bilby</span></code>. Each of these
+samplers has its own strengths and weaknesses, and Triceratops provides a unified interface for using them through the
+<a class="reference internal" href="../../_as_gen/inference.sampling.base.Sampler.html#inference.sampling.base.Sampler" title="inference.sampling.base.Sampler"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sampler</span></code></a> class and its subclasses.</p></li>
+<li><p><strong>Results</strong>: After running the sampler, we obtain a set of samples from the posterior distribution of the
+model parameters. These samples can be analyzed to compute summary statistics, generate plots, and perform
+model comparison. Triceratops provides tools for working with the results of inference analyses, which are specific
+to each sampler used.</p></li>
+</ol>
+<p>This is the standard workflow for performing inference in Triceratops. The following sections will provide more details
+on each of these components, along with examples of how to use them in practice.</p>
+</section>
+<hr class="docutils" />
+<section id="likelihoods">
+<h2>Likelihoods<a class="headerlink" href="#likelihoods" title="Link to this heading">#</a></h2>
+<section id="the-likelihood-class">
+<h3>The Likelihood Class<a class="headerlink" href="#the-likelihood-class" title="Link to this heading">#</a></h3>
+<p>In Triceratops, <strong>likelihood functions</strong> quantify how well a physical model reproduces a
+dataset under a particular statistical noise model. Conceptually, a likelihood defines</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{L}(\boldsymbol{\Theta}\mid \mathcal{D}),\]</div>
+<p>the probability of observing the dataset <span class="math notranslate nohighlight">\(\mathcal{D}\)</span> given model parameters
+<span class="math notranslate nohighlight">\(\boldsymbol{\Theta}\)</span>.</p>
+<p>Rather than treating likelihoods as opaque black boxes, Triceratops implements them as
+<strong>structured objects</strong> that explicitly bind together:</p>
+<ul class="simple">
+<li><p>a <strong>model</strong> (from <code class="xref py py-mod docutils literal notranslate"><span class="pre">models</span></code>),</p></li>
+<li><p>a <strong>data container</strong> (from <code class="xref py py-mod docutils literal notranslate"><span class="pre">data</span></code>),</p></li>
+<li><p>and a <strong>noise/statistical assumption</strong> (implemented by the likelihood subclass).</p></li>
+</ul>
+<p>All likelihoods inherit from <a class="reference internal" href="../../_as_gen/inference.likelihood.base.Likelihood.html#inference.likelihood.base.Likelihood" title="inference.likelihood.base.Likelihood"><code class="xref py py-class docutils literal notranslate"><span class="pre">Likelihood</span></code></a>.</p>
+<section id="creating-a-likelihood-object">
+<h4>Creating a Likelihood Object<a class="headerlink" href="#creating-a-likelihood-object" title="Link to this heading">#</a></h4>
+<p>A likelihood object is constructed by combining a model instance with a data container.
+In most workflows, you will do this once, and then reuse the likelihood many times during
+sampling.</p>
+<p>A typical initialization pattern looks like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyModel</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">RadioLightCurveContainer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">triceratops.inference.likelihood</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyLikelihood</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">RadioLightCurveContainer</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span>
+    <span class="s2">&quot;my_lightcurve.ecsv&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="o">=</span><span class="mf">6.0</span><span class="p">,</span>   <span class="c1"># GHz if unitless</span>
+    <span class="n">band</span><span class="o">=</span><span class="s2">&quot;VLA C-band&quot;</span>
+<span class="p">)</span>
+
+<span class="n">like</span> <span class="o">=</span> <span class="n">MyLikelihood</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>During initialization, likelihoods typically do three things:</p>
+<ol class="arabic simple">
+<li><p><strong>Compatibility validation</strong>
+Likelihoods enforce that the provided model/data pairing is meaningful (e.g., a time-domain
+likelihood should not accept a heterogeneous-frequency dataset). This failure mode is
+intentionally <em>eager</em>: it is better to raise during construction than after thousands of
+sampler calls.</p></li>
+<li><p><strong>Dataset retention (for provenance)</strong>
+The original <a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table" title="(in Astropy v7.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">astropy.table.Table</span></code></a> and/or container object is retained internally so
+that the likelihood can be inspected, serialized, or re-plotted later.</p></li>
+<li><p><strong>Preprocessing for performance</strong>
+Repeated operations like unit conversion, sorting, masking detections vs. upper limits, and
+building dense numerical arrays are performed once via <code class="xref py py-meth docutils literal notranslate"><span class="pre">Likelihood._process_input_data()</span></code>.
+This prepares cached arrays that the optimized backend can consume with minimal overhead.</p></li>
+</ol>
+</section>
+<section id="the-likelihood-function">
+<h4>The Likelihood Function<a class="headerlink" href="#the-likelihood-function" title="Link to this heading">#</a></h4>
+<p>Likelihood evaluation is split into two layers: a public wrapper and an optimized backend.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+High-Level API</label><div class="sd-tab-content docutils">
+<p>The high-level interface is <a class="reference internal" href="../../_as_gen/inference.likelihood.base.Likelihood.log_likelihood.html#inference.likelihood.base.Likelihood.log_likelihood" title="inference.likelihood.base.Likelihood.log_likelihood"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Likelihood.log_likelihood()</span></code></a>. This method is designed
+to be called by user code. It accepts model parameters as kwargs, performs coercion of unit-bearing
+quantities, and validates that inputs are well-formed.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example parameterization (exact signature depends on your model / likelihood)</span>
+<span class="n">lnL</span> <span class="o">=</span> <span class="n">like</span><span class="o">.</span><span class="n">log_likelihood</span><span class="p">(</span>
+    <span class="n">theta_E</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span>
+    <span class="n">epsilon_B</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span>
+    <span class="n">n0</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>This is generally the nice way to call the likelihood if you don’t need to do so many many times. If
+you are making a call to the likelihood inside of a tight loop (e.g., inside a sampler), you may want to
+consider using the low-level API instead.</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Low-Level API</label><div class="sd-tab-content docutils">
+<p>The low-level backend is <code class="xref py py-meth docutils literal notranslate"><span class="pre">Likelihood._log_likelihood()</span></code>. This method should be written
+for performance: it assumes all inputs are already validated and coerced into the expected
+internal representation (e.g., floats/NumPy arrays in a consistent unit system).</p>
+<p>This method is where you should implement the actual statistical model (Gaussian errors,
+censored likelihood for upper limits, correlated noise, etc.).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Inside a Likelihood subclass:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">pars</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="c1"># assumes pars already validated and in internal form</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_prediction</span><span class="p">(</span><span class="o">**</span><span class="n">pars</span><span class="p">)</span>
+    <span class="n">resid</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sigma</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">resid</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>While it is not common to need to implement a custom likelihood, we recognize that some users
+may wish / need to do so. For that purpose, see the separate documentation on building likelihood
+functions: <span class="xref std std-ref">likelihood_development</span>.</p>
+</section>
+</section>
+<section id="existing-likelihoods">
+<h3>Existing Likelihoods<a class="headerlink" href="#existing-likelihoods" title="Link to this heading">#</a></h3>
+<p>In most cases, a likelihood function has already been implemented for your use case / data type. Below are
+the various likelihoods that are currently available in Triceratops. For more details on each likelihood,
+see the corresponding documentation pages.</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="triceratops.inference.likelihood.base.Likelihood.html#triceratops.inference.likelihood.base.Likelihood" title="triceratops.inference.likelihood.base.Likelihood"><code class="xref py py-obj docutils literal notranslate"><span class="pre">base.Likelihood</span></code></a>(model, data, **kwargs)</p></td>
+<td><p>Abstract base class for likelihood functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood.html#triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood" title="triceratops.inference.likelihood.single_epoch_photometry.GaussianPhotometryLikelihood"><code class="xref py py-obj docutils literal notranslate"><span class="pre">single_epoch_photometry.GaussianPhotometryLikelihood</span></code></a>(...)</p></td>
+<td><p>A Gaussian likelihood model for fitting single-epoch photometric data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="inference-problems">
+<h2>Inference Problems<a class="headerlink" href="#inference-problems" title="Link to this heading">#</a></h2>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For more information about inference problem development, implementation, and parameter management,
+see <a class="reference internal" href="inference_problem_dev.html#inference-problem-dev"><span class="std std-ref">Inference Problem Development Guide</span></a>.</p>
+</div>
+<p>Once you have a model, data, and likelihood function, you can combine them into an
+<strong>inference problem</strong>. An inference problem bundles together all the ingredients needed to
+perform parameter estimation or model comparison.</p>
+<section id="the-parts-of-an-inference-problem">
+<h3>The Parts of an Inference Problem<a class="headerlink" href="#the-parts-of-an-inference-problem" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The model</p></li>
+<li><p>The likelihood</p></li>
+<li><p>The data</p></li>
+<li><p>The parameters, priors, initial values, bounds, etc.</p></li>
+</ul>
+<p>point to them all being defined in the <a class="reference internal" href="../../_as_gen/inference.problem.InferenceProblem.html#inference.problem.InferenceProblem" title="inference.problem.InferenceProblem"><code class="xref py py-class docutils literal notranslate"><span class="pre">InferenceProblem</span></code></a> class.</p>
+</section>
+<section id="the-inferenceproblem-class">
+<h3>The InferenceProblem Class<a class="headerlink" href="#the-inferenceproblem-class" title="Link to this heading">#</a></h3>
+<p>Introduce the class as the container for everything.</p>
+<section id="initializing-an-inference-problem">
+<h4>Initializing an Inference Problem<a class="headerlink" href="#initializing-an-inference-problem" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>Simply provide a likelihood to the inference problem object.</p></li>
+<li><p>There may be additional kwargs if needed, but not usually.</p></li>
+</ul>
+</section>
+<section id="working-with-parameters">
+<h4>Working with Parameters<a class="headerlink" href="#working-with-parameters" title="Link to this heading">#</a></h4>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For more information about priors, including custom priors, see <a class="reference internal" href="priors_dev.html#priors-dev"><span class="std std-ref">Prior Development Guide</span></a>.</p>
+</div>
+<ul class="simple">
+<li><p>How to access the parameters and see their properties</p></li>
+<li><p>Setting initial values</p></li>
+<li><p>Setting priors</p></li>
+<li><p>Setting bounds</p></li>
+<li><p>freezing and free parameters</p></li>
+<li><p>etc.</p></li>
+</ul>
+</section>
+<section id="computing-the-prior-and-posterior">
+<h4>Computing the Prior and Posterior<a class="headerlink" href="#computing-the-prior-and-posterior" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>How to compute the log likelihood, log prior, and log posterior for a given set of parameters.</p></li>
+<li><p>How to view the initial values of these various parameters</p></li>
+<li><p>etc.</p></li>
+</ul>
+</section>
+<section id="validating-for-inference">
+<h4>Validating for Inference<a class="headerlink" href="#validating-for-inference" title="Link to this heading">#</a></h4>
+</section>
+</section>
+</section>
+<section id="samplers">
+<h2>Samplers<a class="headerlink" href="#samplers" title="Link to this heading">#</a></h2>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For more information about sampler development, implementation, and integration, see <span class="xref std std-ref">sampler_dev</span>.</p>
+</div>
+<p>What is a sampler: a way to explore the parameter space and find the minimum of the posterior distribution.
+Triceratops provides interfaces to several popular sampling libraries, including <code class="xref py py-mod docutils literal notranslate"><span class="pre">emcee</span></code>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">dynesty</span></code>, and <code class="xref py py-mod docutils literal notranslate"><span class="pre">bilby</span></code>.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../models/overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Triceratops Models</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="triceratops.inference.likelihood.base.Likelihood.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">triceratops.inference.likelihood.base.Likelihood</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-triceratops-inference-pipeline">The Triceratops Inference Pipeline</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#likelihoods">Likelihoods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-class">The Likelihood Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-likelihood-object">Creating a Likelihood Object</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#the-likelihood-function">The Likelihood Function</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#existing-likelihoods">Existing Likelihoods</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inference-problems">Inference Problems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-parts-of-an-inference-problem">The Parts of an Inference Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-inferenceproblem-class">The InferenceProblem Class</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#initializing-an-inference-problem">Initializing an Inference Problem</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#working-with-parameters">Working with Parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-prior-and-posterior">Computing the Prior and Posterior</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#validating-for-inference">Validating for Inference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#samplers">Samplers</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/reference/inference/overview.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Eliza Diggins.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

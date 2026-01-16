@@ -1,0 +1,34 @@
+models.transients.general
+=========================
+
+.. automodule:: models.transients.general
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      synchotron_shock
+   
+   
+
+   
+   
+   
+
+   
+   
+   
