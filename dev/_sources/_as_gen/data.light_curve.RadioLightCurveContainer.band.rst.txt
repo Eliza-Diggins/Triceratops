@@ -1,6 +1,0 @@
-data.light\_curve.RadioLightCurveContainer.band
-===============================================
-
-.. currentmodule:: data.light_curve
-
-.. autoproperty:: RadioLightCurveContainer.band

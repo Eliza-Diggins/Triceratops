@@ -1,6 +1,0 @@
-inference.likelihood.single\_epoch\_photometry.GaussianPhotometryLikelihood.\_\_init\_\_
-========================================================================================
-
-.. currentmodule:: inference.likelihood.single_epoch_photometry
-
-.. automethod:: GaussianPhotometryLikelihood.__init__
