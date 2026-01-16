@@ -9,10 +9,12 @@ free parameters, priors, and other problem-specific settings.
 
 from collections.abc import Callable
 from dataclasses import dataclass
-from typing import TYPE_CHECKING, Optional, Union
+from typing import TYPE_CHECKING, Optional
 
 import numpy as np
 from astropy import units as u
+
+from triceratops.utils.misc_utils import ensure_in_units
 
 from .prior import (
     HalfNormalPrior,
@@ -23,8 +25,8 @@ from .prior import (
 )
 
 # Handle type checking and special aliases.
-_UnitBearingFloat = Union[float, u.Quantity]
 if TYPE_CHECKING:
+    from triceratops._typing import _UnitBearingScalarLike
     from triceratops.inference.likelihood.base import Likelihood
     from triceratops.models._typing import _ModelParametersInput
     from triceratops.models.core.base import Model
@@ -108,14 +110,48 @@ class InferenceParameter:
     """Callable: A callable to inverse-transform the parameter value back to its original scale."""
     transform_jacobian: Callable = None
     """Callable: A callable to compute the Jacobian of the transform, if needed."""
-    initial_value: float = None
+
+    # --- Private Attributes --- #
+    _initial_value: float = None
     """float: An initial value for the parameter to start inference from."""
 
-    def __post_init__(self):
-        # Handle the initial value so that it defaults to the model parameter's default.
-        if self.initial_value is None:
-            self.initial_value = self.model_parameter.default
+    # ------------------------------------------------- #
+    # Initialization and Post-Initialization            #
+    # ------------------------------------------------- #
+    def __init__(
+        self,
+        model_parameter: "ModelParameter",
+        freeze: bool = False,
+        prior: "Prior" = None,
+        transform: Callable = None,
+        inverse_transform: Callable = None,
+        transform_jacobian: Callable = None,
+        initial_value: float = None,
+    ):
+        # Set all of the attributes.
+        self.model_parameter = model_parameter
+        self.freeze = freeze
+        self.prior = prior
+        self.transform = transform
+        self.inverse_transform = inverse_transform
+        self.transform_jacobian = transform_jacobian
 
+        # Handle the initial value so that it (a) defaults
+        # to the model parameter's default and (b) performs
+        # unit coercion to the model's base unit.
+        if initial_value is None:
+            self._initial_value = model_parameter.default
+        else:
+            try:
+                self._initial_value = ensure_in_units(initial_value, model_parameter.base_units)
+            except Exception as exp:
+                raise ValueError(
+                    f"Initial value for parameter '{model_parameter.name}' could not be "
+                    f"coerced to required units '{model_parameter.base_units}': {exp}"
+                ) from exp
+
+        # Now handle the post-initialization checks for
+        # the transforms.
         # Ensure that the transform and inverse_transform are both provided or both None.
         if (self.transform is None) != (self.inverse_transform is None):
             raise ValueError("Both 'transform' and 'inverse_transform' must be provided together.")
@@ -139,6 +175,42 @@ class InferenceParameter:
     def model_base_unit(self) -> u.Unit:
         """`astropy.units.Unit`: The base unit of the parameter from the model."""
         return self.model_parameter.base_units
+
+    @property
+    def initial_value(self) -> float:
+        """float: The initial value for the parameter to start inference from.
+
+        This is in the model's base units.
+        """
+        return self._initial_value
+
+    @initial_value.setter
+    def initial_value(self, value: "_UnitBearingScalarLike"):
+        """
+        Set the initial value of this parameter.
+
+        Parameters
+        ----------
+        value: float or `astropy.units.Quantity` or array-like
+            The new initial value for the parameter. This will be coerced to the model's base
+            units.
+
+        Returns
+        -------
+        None
+        """
+        try:
+            self._initial_value = ensure_in_units(value, self.model_base_unit)
+        except Exception as exp:
+            raise ValueError(
+                f"Initial value for parameter '{self.name}' could not be "
+                f"coerced to required units '{self.model_base_unit}': {exp}"
+            ) from exp
+
+    @property
+    def initial_quantity(self) -> u.Quantity:
+        """`astropy.units.Quantity`: The initial value as an Astropy Quantity."""
+        return self.initial_value * self.model_base_unit
 
     # ------------------------------------------------- #
     # Serialization Methods                             #
@@ -417,6 +489,16 @@ class InferenceProblem:
         """
         return item in self.__parameters__
 
+    def __getitem__(self, item: str) -> "InferenceParameter":
+        if item in self.__parameters__:
+            return self.__parameters__[item]
+        else:
+            raise KeyError(f"Parameter '{item}' not found in InferenceProblem.")
+
+    def __iter__(self):
+        """Iterate over parameter names."""
+        return iter(self.__parameters__)
+
     def _repr_html_(self) -> str:
         """Rich HTML representation for Jupyter notebooks."""
 
@@ -486,6 +568,21 @@ class InferenceProblem:
                 lines.append(f"  - {name}: value={p.initial_value}")
 
         return "\n".join(lines)
+
+    # ------------------------------------------------- #
+    # Basic Access Utilities                            #
+    # ------------------------------------------------- #
+    def keys(self) -> list[str]:
+        """Return a list of parameter names in the inference problem."""
+        return list(self.__parameters__.keys())
+
+    def values(self) -> list["InferenceParameter"]:
+        """Return a list of inference parameters in the inference problem."""
+        return list(self.__parameters__.values())
+
+    def items(self) -> list[tuple[str, "InferenceParameter"]]:
+        """Return a list of (name, inference parameter) tuples in the inference problem."""
+        return list(self.__parameters__.items())
 
     # ------------------------------------------------- #
     # Likelihood / Inference Methods                    #
@@ -1162,7 +1259,7 @@ class InferenceProblem:
     def _coerce_to_base_units(
         self,
         parameter: str,
-        values: dict[str, _UnitBearingFloat],
+        values: dict[str, "_UnitBearingScalarLike"],
     ) -> dict[str, float]:
         """Coerce unit-bearing values into the model parameter's base units."""
         p = self.__parameters__.get(parameter)
@@ -1215,3 +1312,40 @@ class InferenceProblem:
 
         # Assign prior
         self.__parameters__[parameter].prior = prior_cls(**final_params)
+
+    # ------------------------------------------------- #
+    # Freezing and Unfreezing Parameters                #
+    # ------------------------------------------------- #
+    def freeze_parameters(self, parameters):
+        """
+        Freeze (fix) specified parameters in the inference problem.
+
+        Parameters
+        ----------
+        parameters : list or str
+            Parameter name or list of parameter names to freeze.
+        """
+        if isinstance(parameters, str):
+            parameters = [parameters]
+
+        for name in parameters:
+            if name not in self.__parameters__:
+                raise KeyError(f"Parameter '{name}' not found in inference problem.")
+            self.__parameters__[name].freeze = True
+
+    def unfreeze_parameters(self, parameters):
+        """
+        Unfreeze (free) specified parameters in the inference problem.
+
+        Parameters
+        ----------
+        parameters : list or str
+            Parameter name or list of parameter names to unfreeze.
+        """
+        if isinstance(parameters, str):
+            parameters = [parameters]
+
+        for name in parameters:
+            if name not in self.__parameters__:
+                raise KeyError(f"Parameter '{name}' not found in inference problem.")
+            self.__parameters__[name].freeze = False
