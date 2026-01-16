@@ -160,16 +160,19 @@ class GaussianPhotometryLikelihood(Likelihood):
         ``self._data`` for efficient reuse during likelihood evaluations. All data is coerced
         into consistent base units during this step.
         """
-        # Pass off to the base class initializer.
-        super().__init__(model, data, **kwargs)
+        self._validate_input_model_and_data(model, data)
 
-        # Store the upper limit sigma level.
+        self._model = model
+        self._data_container = data
         self.n_sigma_upper_limit = n_sigma_upper_limit
         """float: Number of standard deviations above the noise level to consider as the upper limit for non-detections.
 
         This value is used in the likelihood evaluation to handle non-detections
         appropriately. See the class notes (:class:`GaussianPhotometryLikelihood`) for more details.
         """
+
+        # Process and cache numerical data needed for likelihood evaluation.
+        self._data: SimpleNamespace = self._process_input_data(**kwargs)
 
     # ============================================================ #
     # Data Processing                                              #
