@@ -134,8 +134,7 @@ def compute_gyrofrequency(
     synchrotron emission from electrons of Lorentz factor ``gamma`` in
     a magnetic field ``B``.
     """
-    if hasattr(B, "units"):
-        B = B.to_value(u.Gauss)
+    B = ensure_in_units(B, u.Gauss)
 
     return _optimized_compute_nu_gyro(gamma, B) * u.Hz
 
@@ -176,8 +175,7 @@ def compute_nu_critical(
     synchrotron emission from electrons of Lorentz factor ``gamma`` in
     a magnetic field ``B``.
     """
-    if hasattr(B, "units"):
-        B = B.to_value(u.Gauss)
+    B = ensure_in_units(B, u.Gauss)
 
     return _optimized_compute_nu_critical(gamma, B) * u.Hz
 
@@ -360,7 +358,7 @@ def compute_first_kernel_interp(x_values: np.ndarray, F_values: np.ndarray, **kw
 
         # Handle the lower bound
         _lmsk = _x < x_min
-        _y[_lmsk] = 1.25 * _x[_lmsk] ** (1 / 3)
+        _y[_lmsk] = 2.14952824153447863671029 * _x[_lmsk] ** (1 / 3)
 
         # Handle the upper bound
         _rmsk = _x > x_max

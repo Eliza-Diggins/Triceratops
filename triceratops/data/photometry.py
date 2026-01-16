@@ -720,6 +720,9 @@ class RadioPhotometryContainer:
         fig=None,
         axes=None,
         show_upper_limits=True,
+        color=None,
+        cmap=None,
+        show_colorbar=True,
         **kwargs,
     ):
         """
@@ -733,21 +736,27 @@ class RadioPhotometryContainer:
             Axes to plot on. If None, axes will be created or retrieved from the figure
         show_upper_limits: bool, optional
             Whether to show upper limits in the plot. Default is True.
+        color: str, optional
+            If provided, use this color for all points instead of a colormap.
+        cmap: str, optional
+            Colormap to use for coloring points by time. Ignored if `color` is provided.
+        show_colorbar: bool, optional
+            Whether to show a colorbar when using a colormap. Default is True.
         kwargs:
             Additional keyword arguments for customizing the plot appearance.
             Supported kwargs include:
 
-                - detection_fmt: Format string for detection markers (default: 'o').
-                - detection_capsize: Capsize for detection error bars (default: 3).
-                - detection_ms: Marker size for detections (default: 5).
-                - detection_mec: Marker edge color for detections (default: 'none').
-                - upper_limit_fmt: Format string for upper limit markers (default: 'v').
-                - upper_limit_capsize: Capsize for upper limit error bars (default: 3).
-                - upper_limit_ms: Marker size for upper limits (default: 5).
-                - upper_limit_mec: Marker edge color for upper limits (default: 'none').
-                - colorbar_label: Label for the colorbar (default: 'Observation Time (days)').
-                - xlabel: Label for the x-axis (default: 'Frequency (GHz)').
-                - ylabel: Label for the y-axis (default: 'Flux Density (mJy)').
+            - ``detection_fmt``: Format string for detection markers (default: 'o').
+            - ``detection_capsize``: Capsize for detection error bars (default: 3).
+            - ``detection_ms: Marker size for detections (default: 5).
+            - ``detection_mec: Marker edge color for detections (default: 'none').
+            - ``upper_limit_fmt: Format string for upper limit markers (default: 'v').
+            - ``upper_limit_capsize: Capsize for upper limit error bars (default: 3).
+            - ``upper_limit_ms: Marker size for upper limits (default: 5).
+            - ``upper_limit_mec: Marker edge color for upper limits (default: 'none').
+            - ``colorbar_label: Label for the colorbar (default: 'Observation Time (days)').
+            - ``xlabel: Label for the x-axis (default: 'Frequency (GHz)').
+            - ``ylabel: Label for the y-axis (default: 'Flux Density (mJy)').
 
         Returns
         -------
@@ -756,6 +765,7 @@ class RadioPhotometryContainer:
         axes: matplotlib.axes.Axes
             The axes containing the plot.
         """
+        # Import matplotlib and our various plotting utilities.
         import matplotlib.pyplot as plt
 
         from triceratops.utils.plot_utils import (
@@ -769,21 +779,37 @@ class RadioPhotometryContainer:
         set_plot_style()
         fig, axes = resolve_fig_axes(fig=fig, axes=axes, fig_size=(8, 6))
 
-        # Convert the times to colors with normalization to the top and bottom of
-        # the time range.
-        times = self.time.to(u.day).value
-        min_time, max_time = times.min(), times.max()
-        norm = plt.Normalize(min_time, max_time)
+        # --- Color Management --- #
+        # We handle color with two mechanisms: ``cmap`` and ``color``. If
+        # ``color`` is provided, we use that color for all points. If ``color`` is
+        # not provided, we default to the color map and color by time.
+        if color is not None:
+            # We're going to run with a solid color for all points.
+            show_colorbar = False
 
-        # Determine the colormap and get the colors.
-        cmap = kwargs.get("cmap", get_default_cmap())
-        cmap = get_cmap(cmap)  # Ensure we have an actual colormap instance.
-        colors = cmap(norm(times))
+            # set colors to a single color array for all of the
+            # points.
+            colors = np.array([color] * self.n_obs)
+        else:
+            # We're going to use a colormap to color by whichever field
+            # is specified (default is time).
+            cmap = cmap if cmap is not None else get_default_cmap()
+            cmap = get_cmap(cmap)
 
-        # Plot the detections with the specified markers and colors determined by the times.
+            # Extract the time field to use as the cmap values. If we don't
+            # have a norm provided, we create one. Always use days.
+            norm = kwargs.get("norm", None)
+            if norm is None:
+                times = self.time.to(u.day).value
+                min_time, max_time = times.min(), times.max()
+                norm = plt.Normalize(min_time, max_time)
+
+            # create the color array.
+            colors = cmap(norm(self.time.to(u.day).value))
+
+        # Now plot the detections with the specified markers and colors.
         detection_mask = self.detection_mask
-        # Each detection point needs to be done separately because
-        # we cannot have varying colors in a single errorbar call.
+
         for i in np.where(detection_mask)[0]:
             axes.errorbar(
                 self.freq[i].to(u.GHz).value,
@@ -795,7 +821,6 @@ class RadioPhotometryContainer:
                 ms=kwargs.get("detection_ms", 5),
                 mec=kwargs.get("detection_mec", "none"),
             )
-
         # Plot the upper limits if requested.
         if show_upper_limits:
             non_detection_mask = self.non_detection_mask
@@ -813,13 +838,96 @@ class RadioPhotometryContainer:
                 )
 
         # configure the colorbar.
-        sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
-        fig.colorbar(sm, ax=axes, label=kwargs.get("colorbar_label", r"Observation Time (days)"))
+        if show_colorbar:
+            sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+            fig.colorbar(sm, ax=axes, label=kwargs.get("colorbar_label", r"Observation Time (days)"))
 
         # Configure the axes and the labels.
         axes.set_xscale("log")
         axes.set_yscale("log")
         axes.set_xlabel(kwargs.get("xlabel", r"Frequency (GHz)"))
         axes.set_ylabel(kwargs.get("ylabel", r"Flux Density (mJy)"))
+
+        return fig, axes
+
+    def plot_epoch(
+        self,
+        epoch_id,
+        *,
+        fig=None,
+        axes=None,
+        label=None,
+        color=None,
+        show_upper_limits=True,
+        detection_style=None,
+        upper_limit_style=None,
+    ):
+        """
+        Plot photometry for a single epoch onto an existing axes.
+
+        This method plots detections and (optionally) upper limits for a given
+        epoch using a single color and adds a single legend entry.
+
+        Parameters
+        ----------
+        epoch_id : int
+            Epoch identifier to plot.
+        fig : matplotlib.figure.Figure, optional
+            Figure to plot on.
+        axes : matplotlib.axes.Axes, optional
+            Axes to plot on.
+        label : str, optional
+            Label for the legend entry corresponding to this epoch.
+        color : str or tuple, optional
+            Color to use for this epoch. If None, Matplotlib will assign one.
+        show_upper_limits : bool, optional
+            Whether to plot upper limits.
+        detection_style : dict, optional
+            Matplotlib style kwargs for detections.
+        upper_limit_style : dict, optional
+            Matplotlib style kwargs for upper limits.
+        """
+        import matplotlib.pyplot as plt
+        import numpy as np
+
+        from triceratops.utils.plot_utils import resolve_fig_axes, set_plot_style
+
+        # Set the plot style and resolve the figure and axes.
+        set_plot_style()
+        fig, axes = resolve_fig_axes(fig=fig, axes=axes)
+
+        # Defaults
+        detection_style = detection_style or {}
+        upper_limit_style = upper_limit_style or {}
+        color = color or plt.rcParams["axes.prop_cycle"].by_key()["color"][0]
+
+        # Select epoch
+        mask = self.get_epoch_mask(epoch_id)
+        det_mask = mask & self.detection_mask
+        ul_mask = mask & self.non_detection_mask
+
+        # Plot detections
+        if det_mask.any():
+            for i in np.where(det_mask)[0]:
+                axes.errorbar(
+                    self.freq[i].to_value(self.freq.unit),
+                    self.flux_density[i].to_value(self.flux_density.unit),
+                    yerr=self.flux_density_error[i].to_value(self.flux_density_error.unit),
+                    color=color,
+                    label=label if i == np.where(det_mask)[0][0] else None,
+                    **detection_style,
+                )
+
+        # Plot upper limits
+        if show_upper_limits and ul_mask.any():
+            for i in np.where(ul_mask)[0]:
+                axes.errorbar(
+                    self.freq[i].to_value(self.freq.unit),
+                    self.flux_upper_limit[i].to_value(self.flux_upper_limit.unit),
+                    yerr=0.2 * self.flux_upper_limit[i].to_value(self.flux_upper_limit.unit),
+                    uplims=True,
+                    color=color,
+                    **upper_limit_style,
+                )
 
         return fig, axes
