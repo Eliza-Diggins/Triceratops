@@ -381,8 +381,8 @@ class DataContainer(ABC):
 
         return np.stack(_array_items, axis=-1)
 
-    @abstractmethod
     @classmethod
+    @abstractmethod
     def from_table(cls, table: Table, **kwargs):
         """
         Create a DataContainer from an Astropy Table.
@@ -758,6 +758,14 @@ class XYDataContainer(DataContainer, ABC):
         col = self.__table__[self.Y_UPPER_LIMIT_COLUMN]
         return col.quantity.copy()
 
+    def y_lower_limit(self) -> Union[u.Quantity, None]:
+        """astropy.units.Quantity or None: The y-axis lower limit data, if provided."""
+        if self.Y_LOWER_LIMIT_COLUMN is None:
+            return None
+
+        col = self.__table__[self.Y_LOWER_LIMIT_COLUMN]
+        return col.quantity.copy()
+
     @property
     def x_error(self) -> Union[u.Quantity, None]:
         """astropy.units.Quantity or None: The x-axis error data, if provided."""
@@ -774,6 +782,15 @@ class XYDataContainer(DataContainer, ABC):
             return None
 
         col = self.__table__[self.X_UPPER_LIMIT_COLUMN]
+        return col.quantity.copy()
+
+    @property
+    def x_lower_limit(self) -> Union[u.Quantity, None]:
+        """astropy.units.Quantity or None: The x-axis lower limit data, if provided."""
+        if self.X_LOWER_LIMIT_COLUMN is None:
+            return None
+
+        col = self.__table__[self.X_LOWER_LIMIT_COLUMN]
         return col.quantity.copy()
 
     @property

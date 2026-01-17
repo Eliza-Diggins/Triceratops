@@ -11,16 +11,15 @@ from types import SimpleNamespace
 from typing import TYPE_CHECKING
 
 import numpy as np
-from scipy.stats import norm
 
 from triceratops.data.photometry import RadioPhotometryContainer
 from triceratops.models.core.base import Model
 
-from .base import Likelihood
+from .base import GaussianCensoredLikelihoodStencil
 
 # Type checking imports
 if TYPE_CHECKING:
-    from triceratops.models._typing import _ModelParametersInputRaw
+    pass
 
 # Defining the __all__ variable.
 __all__ = [
@@ -31,7 +30,7 @@ __all__ = [
 # ============================================================ #
 # Likelihood Classes                                           #
 # ============================================================ #
-class GaussianPhotometryLikelihood(Likelihood):
+class GaussianPhotometryLikelihood(GaussianCensoredLikelihoodStencil):
     r"""
     A Gaussian likelihood model for fitting single-epoch photometric data.
 
@@ -160,19 +159,26 @@ class GaussianPhotometryLikelihood(Likelihood):
         ``self._data`` for efficient reuse during likelihood evaluations. All data is coerced
         into consistent base units during this step.
         """
-        self._validate_input_model_and_data(model, data)
+        super().__init__(model=model, data=data, **{**kwargs, "n_sigma_upper_limit": n_sigma_upper_limit})
 
-        self._model = model
-        self._data_container = data
-        self.n_sigma_upper_limit = n_sigma_upper_limit
-        """float: Number of standard deviations above the noise level to consider as the upper limit for non-detections.
-
-        This value is used in the likelihood evaluation to handle non-detections
-        appropriately. See the class notes (:class:`GaussianPhotometryLikelihood`) for more details.
+    def _configure(self, n_sigma_upper_limit: float = 3.0, **kwargs):
         """
+        Configure the likelihood with specific options.
 
-        # Process and cache numerical data needed for likelihood evaluation.
-        self._data: SimpleNamespace = self._process_input_data(**kwargs)
+        Parameters
+        ----------
+        n_sigma_upper_limit : float, optional
+            The number of standard deviations above the noise level to consider
+            as the upper limit for non-detections. Default is 3.0.
+        **kwargs
+            Additional keyword arguments (unused).
+        """
+        self.n_sigma_upper_limit = n_sigma_upper_limit
+        """float: Number of standard deviations for upper limit treatment of non-detections."""
+
+    def _validate_model_and_data(self):
+        # TODO: This could be better?
+        super()._validate_model_and_data()
 
     # ============================================================ #
     # Data Processing                                              #
@@ -223,73 +229,18 @@ class GaussianPhotometryLikelihood(Likelihood):
             # Fill them in.
             err[missing_errors_mask & ~detection_mask] = inferred_errors
 
+        # Create an empty lower-limits array (not used here, but required by the base class).
+        # We just fill it with NaNs.
+        lower_lim = np.full_like(upper_lim, np.nan)
+        lower_lim_mask = np.full_like(upper_lim, False, dtype=bool)
+
         # Now fill everything into the namespace and return it.
         return SimpleNamespace(
-            frequency=freq,
-            flux_density=flux,
-            flux_density_err=err,
-            flux_density_upper_limits=upper_lim,
-            detection_mask=detection_mask,
+            x={"frequency": freq},
+            y=flux,
+            y_err=err,
+            y_upper=upper_lim,
+            y_lower=lower_lim,
+            y_upper_mask=~detection_mask,
+            y_lower_mask=lower_lim_mask,
         )
-
-    # ============================================================ #
-    # Likelihood Evaluation                                        #
-    # ============================================================ #
-    def _log_likelihood(
-        self,
-        parameters: dict[str, "_ModelParametersInputRaw"],
-    ) -> float:
-        """
-        Compute the total log-likelihood for the given model parameters.
-
-        The likelihood is composed of two parts:
-
-        1. **Detections**
-           Gaussian likelihood using measured flux densities and errors.
-
-        2. **Non-detections (upper limits)**
-           Censored Gaussian likelihood computed via the normal CDF.
-
-        Parameters
-        ----------
-        parameters : dict
-            Dictionary mapping model parameter names to values in base units.
-
-        Returns
-        -------
-        float
-            Log-likelihood value.
-        """
-        # Allocate the log likelihood variable.
-        log_likelihood = 0.0
-
-        # --- Perform the forward modeling step --- #
-        # We send parameters down to the model to compute the forward
-        # modeling step. This provides the model flux densities at the
-        # observed frequencies.
-        model_flux_density = self._model._forward_model({"frequency": self._data.frequency}, parameters)["flux_density"]
-
-        # --- Compute the detection log-likelihood component --- #
-        # We start with the log-likelihood for the detected bands. This is
-        # a standard Gaussian log-likelihood.
-        detected_flux = self._data.flux_density[self._data.detection_mask]
-        detected_err = self._data.flux_density_err[self._data.detection_mask]
-        model_detected_flux = model_flux_density[self._data.detection_mask]
-
-        # Compute the exponential term first.
-        _ll = -0.5 * np.sum(((detected_flux - model_detected_flux) / detected_err) ** 2)
-        # Now add the normalization term.
-        _ll += -0.5 * np.sum(np.log(2 * np.pi * detected_err**2))
-
-        # Accumulate before moving on to the upper limits.
-        log_likelihood += _ll
-
-        # --- Handle the upper limit log-likelihood component --- #
-        # We use the error function CDF to compute the log-likelihood for the upper limits.
-        non_detected_upper_limits = self._data.flux_density_upper_limits[~self._data.detection_mask]
-        non_detected_err = self._data.flux_density_err[~self._data.detection_mask]
-        model_non_detected_flux = model_flux_density[~self._data.detection_mask]
-
-        _ll = np.sum(norm.logcdf(non_detected_upper_limits, loc=model_non_detected_flux, scale=non_detected_err))
-        log_likelihood += _ll
-        return log_likelihood

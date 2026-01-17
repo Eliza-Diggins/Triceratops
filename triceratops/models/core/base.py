@@ -170,6 +170,36 @@ class Model(ABC):
         """
         pass
 
+    def _forward_model_tupled(
+        self, variables: _ModelVariablesInputRaw, parameters: _ModelParametersInputRaw
+    ) -> tuple[np.ndarray, ...]:
+        """
+        Compute the model's outputs as a tuple based on the provided variables and parameters.
+
+        This is a convenience method that wraps around :meth:`_forward_model` to return
+        the outputs as a tuple in the order defined by :attr:`OUTPUTS`.
+
+        Parameters
+        ----------
+        variables: dict of str, array-like
+            The model's input variables. Each variable must be provided as a key-value pair in the
+            dictionary, where the key is the variable name and the value is the variable's value. Each element
+            must either be a float or an array-like object. Standard numpy broadcasting rules are applied
+            throughout.
+        parameters: dict of str, array-like
+            The model's parameters. Each parameter must be provided as a key-value pair in the
+            dictionary, where the key is the parameter name and the value is the parameter's value. Each element
+            must either be a float or an array-like object. Standard numpy broadcasting rules are applied
+            throughout. All parameters must be provided; there are no default values at this level.
+
+        Returns
+        -------
+        outputs: tuple of array-like
+            The model's outputs as a tuple, ordered according to :attr:`OUTPUTS`.
+        """
+        raw_outputs = self._forward_model(variables, parameters)
+        return tuple(raw_outputs[output_name] for output_name in self.OUTPUTS)
+
     def forward_model(
         self,
         variables: _ModelVariablesInput,
