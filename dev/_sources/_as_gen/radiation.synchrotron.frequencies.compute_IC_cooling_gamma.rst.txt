@@ -1,6 +1,0 @@
-radiation.synchrotron.frequencies.compute\_IC\_cooling\_gamma
-=============================================================
-
-.. currentmodule:: radiation.synchrotron.frequencies
-
-.. autofunction:: compute_IC_cooling_gamma
