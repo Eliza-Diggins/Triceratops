@@ -1,0 +1,6 @@
+profiles.broken\_power\_law
+===========================
+
+.. currentmodule:: profiles
+
+.. autofunction:: broken_power_law

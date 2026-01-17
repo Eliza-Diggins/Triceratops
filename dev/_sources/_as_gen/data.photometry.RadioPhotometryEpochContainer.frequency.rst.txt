@@ -1,0 +1,6 @@
+data.photometry.RadioPhotometryEpochContainer.frequency
+=======================================================
+
+.. currentmodule:: data.photometry
+
+.. autoproperty:: RadioPhotometryEpochContainer.frequency
