@@ -16,8 +16,10 @@ from astropy.table import Table
 
 from triceratops.utils.log import triceratops_logger
 
+from .core import DataContainer, XYDataContainer
 
-class RadioPhotometryContainer:
+
+class RadioPhotometryContainer(DataContainer):
     """
     Immutable container for radio photometric observations.
 
@@ -170,8 +172,17 @@ class RadioPhotometryContainer:
 
     # ========================= Initialization ========================= #
     def __init__(self, table: Table):
-        # Validate the input table and then set the self.__table__ attribute
-        self.__table__ = self._validate_table(table.copy())
+        """
+        Initialize the RadioPhotometryContainer.
+
+        Parameters
+        ----------
+        table: astropy.table.Table
+            Input table containing radio photometry data. The input data must conform
+            to the schema defined in ``COLUMNS``.
+        """
+        # Instantiate at the super class level.
+        super().__init__(table)
 
         # With the table validation complete, identify the detection and non-detection masks
         self.__detection_mask__ = np.isnan(np.asarray(self.__table__["flux_upper_limit"].data))
@@ -223,106 +234,8 @@ class RadioPhotometryContainer:
 
         return table
 
-    # ========================= Dunder Methods ========================= #
-    # The scheme for dunder implementation in this class is as follows:
-    #
-    # - Effectively, we delegate everything to the underlying Astropy Table, this
-    #   ensures users are not caught off-guard by missing functionality.
-    # - However, we need to set a high __array_priority__ to ensure that
-    #   operations involving both RadioPhotometryContainer and numpy arrays
-    #   defer to the container's methods.
-    # - We also implement __eq__ to allow for equality comparisons between
-    #   two RadioPhotometryContainer instances.
-    # - Finally, we are now an immutable container, so we do not implement
-    #   any methods that would allow mutation of the underlying table.
-    __array_priority__ = 1000
-
-    def __len__(self):
-        return self.__table__.__len__()
-
-    def __getitem__(self, item):
-        result = self.__table__.__getitem__(item)
-        if isinstance(result, Table):
-            return result.copy()
-        else:
-            return result.copy()
-
-    def __iter__(self):
-        return iter(self.__table__.copy())
-
-    def __str__(self):
-        return str(self.__table__)
-
-    def __repr__(self):
-        return f"<RadioPhotometryContainer n_obs={len(self)}>"
-
-    def __contains__(self, item):
-        return self.__table__.__contains__(item)
-
-    def __bool__(self):
-        return len(self) > 0
-
-    def __eq__(self, other):
-        if not isinstance(other, RadioPhotometryContainer):
-            return NotImplemented
-        return self.__table__ == other.__table__
-
-    def __array__(self):
-        """
-        Convert the container to a NumPy structured array.
-
-        This method is invoked by NumPy when coercing the container via
-        ``np.asarray(container)``. Only columns marked as ``required=True`` in the
-        schema and having numerical dtypes are included. Values are returned in the
-        units specified by the schema (i.e. *not* automatically converted to CGS).
-
-        The returned array is a copy and does not share writable memory with the
-        internal table.
-
-        Returns
-        -------
-        numpy.ndarray
-            Structured NumPy array containing required numerical columns in schema
-            units.
-        """
-        # Allocate a list to store each of the subarrays as we process them.
-        _array_items = []
-
-        # For each column in the dataset, we're going to go and
-        # process it to a numerical array if it's required.
-        for colspec in self.__class__.COLUMNS:
-            if not colspec.get("required", False):
-                continue
-
-            name = colspec["name"]
-            dtype = colspec["dtype"]
-
-            # Skip non-numerical required columns (e.g. strings, identifiers)
-            if not np.issubdtype(np.dtype(dtype), np.number):
-                continue
-
-            col = self.__table__[name]
-
-            if col.unit is not None:
-                values = col.quantity.to_value(col.unit)
-            else:
-                values = np.asarray(col)
-
-            _array_items.append(values)
-
-        return np.stack(_array_items, axis=-1)
-
     # ========================= Core Properties ========================= #
     # These are core properties and basic task methods.
-    @property
-    def table(self) -> Table:
-        """
-        Return a copy of the underlying Astropy table.
-
-        This prevents mutation of the internal container state.
-        """
-        return self.__table__.copy()
-
     @property
     def detection_table(self) -> Table:
         """Return a table containing only detections."""
@@ -376,6 +289,11 @@ class RadioPhotometryContainer:
     def get_epoch_table(self, epoch: int) -> Table:
         """Return a table containing only observations in the specified epoch."""
         return self.__table__[self.get_epoch_mask(epoch)].copy()
+
+    def get_epoch(self, epoch: int) -> "RadioPhotometryEpochContainer":
+        """Return a RadioPhotometryContainer for the specified epoch."""
+        epoch_table = self.get_epoch_table(epoch)
+        return RadioPhotometryEpochContainer(epoch_table)
 
     @property
     def n_detections(self) -> int:
@@ -439,55 +357,6 @@ class RadioPhotometryContainer:
         if "comments" not in self.__table__.colnames:
             raise AttributeError("Column 'comments' not found in the table.")
         return self.__table__["comments"].data
-
-    def copy(self):
-        """Create a copy of this container."""
-        return RadioPhotometryContainer(self.__table__.copy())
-
-    def to_cgs_array(self):
-        """
-        Convert the container to a NumPy array, converted to CGS base units.
-
-        This method mirrors ``__array__`` but explicitly converts all unit-bearing
-        columns to their CGS equivalents. The output is intended for numerical backends such as
-        likelihood evaluation and samplers.
-
-        The returned array is a copy and does not share writable memory with the
-        internal table.
-
-        Returns
-        -------
-        numpy.ndarray
-            Dense NumPy array of shape (n_obs, n_required_numeric_columns) with all
-            values expressed in CGS base units.
-        """
-        import numpy as np
-        from astropy import units as u
-
-        _array_items = []
-
-        for colspec in self.__class__.COLUMNS:
-            if not colspec.get("required", False):
-                continue
-
-            name = colspec["name"]
-            dtype = colspec["dtype"]
-
-            # Skip non-numerical required columns
-            if not np.issubdtype(np.dtype(dtype), np.number):
-                continue
-
-            col = self.__table__[name]
-
-            if col.unit is not None:
-                # Convert to CGS base units
-                values = col.quantity.to(u.Unit(col.unit).cgs).value
-            else:
-                values = np.asarray(col)
-
-            _array_items.append(np.asarray(values))
-
-        return np.stack(_array_items, axis=-1)
 
     # ========================= Epoch Generation ========================= #
     def set_epochs_from_indices(self, indices):
@@ -931,3 +800,218 @@ class RadioPhotometryContainer:
                 )
 
         return fig, axes
+
+
+class RadioPhotometryEpochContainer(XYDataContainer):
+    """
+    Container for single-epoch, multi-frequency radio photometry.
+
+    A :class:`RadioPhotometryEpochContainer` represents a collection of radio
+    flux density measurements taken at a *single epoch in time* but potentially
+    across multiple observing frequencies or bands. Each row corresponds to one
+    frequency-channel measurement and may represent either a detection or a
+    non-detection (upper limit).
+
+    This container is designed to support **spectral modeling and inference**
+    (e.g., fitting synchrotron spectra, SEDs, or phenomenological spectral models)
+    where frequency is treated as the independent variable and flux density as
+    the dependent variable.
+
+    The container inherits from :class:`XYDataContainer`, exposing a standardized
+    ``(x, y)`` interface with optional uncertainties and censoring while retaining
+    domain-specific column semantics relevant to radio astronomy.
+
+    Key features
+    ------------
+    - **Frequency-domain data**:
+      The independent variable is observing frequency (``freq``), exposed via
+      the :attr:`x` and :attr:`frequency` properties.
+
+    - **Detection-aware**:
+      Non-detections are represented via a flux density upper-limit column
+      (``flux_upper_limit``). Detection and non-detection masks are computed
+      automatically and exposed through convenience properties.
+
+    - **Unit-aware and validated**:
+      All physical quantities are validated and stored with Astropy units at
+      construction time.
+
+    - **Immutable by design**:
+      The underlying data table cannot be modified in place. All accessors return
+      copies to ensure reproducibility during inference.
+
+    Intended use
+    ------------
+    This container is intended to be consumed by likelihood classes that compare
+    model-predicted spectra to observed radio photometry, including:
+
+    - synchrotron spectral energy distribution (SED) fitting,
+    - broadband spectral index estimation,
+    - forward modeling of physical emission models,
+    - inference with censored data (upper limits).
+
+    Notes
+    -----
+    - All rows are assumed to correspond to the same observing epoch.
+      Time information, if needed, should be handled by a higher-level container
+      (e.g., a light curve or epoch-grouping container).
+    - Detection status is inferred from finite values in
+      ``flux_upper_limit``; rows with finite upper limits are treated as
+      non-detections.
+    - This class makes no assumptions about the statistical treatment of
+      detections or upper limits; such logic is handled entirely by the
+      corresponding likelihood.
+
+    See Also
+    --------
+    XYDataContainer
+        Base class providing generic ``(x, y)`` data access and censoring logic.
+    RadioLightCurveContainer
+        Container for single-frequency, time-domain radio observations.
+    triceratops.inference.likelihood
+        Likelihood implementations that operate on photometry containers.
+    """
+
+    # ========================= SCHEMA DEFINITION ========================= #
+    # This ``COLUMNS`` dictionary contains the core schema requirements for the input
+    # table in order to ensure that the radio photometry input is valid. This is then
+    # enforced in ``_validate_table``.
+    COLUMNS = [
+        {
+            "name": "obs_name",
+            "dtype": str,
+            "description": "Observation identifier (e.g. telescope + epoch).",
+            "required": False,
+        },
+        {
+            "name": "flux_density",
+            "dtype": float,
+            "unit": u.Jy,
+            "description": "Measured flux density for detections.",
+            "required": True,
+        },
+        {
+            "name": "flux_density_error",
+            "dtype": float,
+            "unit": u.Jy,
+            "description": "1-Sigma uncertainty on ``flux_density``.",
+            "required": True,
+        },
+        {
+            "name": "flux_upper_limit",
+            "dtype": float,
+            "unit": u.Jy,
+            "description": "Upper limit on flux density for non-detections.",
+            "required": True,
+        },
+        {
+            "name": "freq",
+            "dtype": float,
+            "unit": u.GHz,
+            "description": "Central observing frequency.",
+            "required": True,
+        },
+        {
+            "name": "band",
+            "dtype": int,
+            "description": "Integer band identifier (instrument-specific).",
+            "required": False,
+        },
+        {
+            "name": "comments",
+            "dtype": str,
+            "description": "Free-form comments or metadata.",
+            "required": False,
+        },
+    ]
+
+    # ========================= SPECIAL COLUMNS ========================= #
+    X_COLUMN = "freq"
+    Y_COLUMN = "flux_density"
+    Y_ERROR_COLUMN = "flux_density_error"
+    Y_UPPER_LIMIT_COLUMN = "flux_upper_limit"
+
+    # ========================= METADATA ========================= #
+    @property
+    def frequency(self) -> u.Quantity:
+        """Observing frequency of the light curve."""
+        return self.x
+
+    # ========================= DATA ACCESS ========================= #
+    @property
+    def flux_density(self) -> u.Quantity:
+        """Flux density measurements."""
+        return self.table["flux_density"].quantity
+
+    @property
+    def flux_density_error(self) -> u.Quantity:
+        """Flux density uncertainties."""
+        return self.table["flux_density_error"].quantity
+
+    @property
+    def flux_upper_limit(self) -> u.Quantity:
+        """Flux density upper limits."""
+        return self.table["flux_upper_limit"].quantity
+
+    # ========================= DETECTION LOGIC ========================= #
+    @property
+    def detection_mask(self) -> np.ndarray:
+        """Boolean mask selecting detections."""
+        return ~self.y_lim_mask
+
+    @property
+    def non_detection_mask(self) -> np.ndarray:
+        """Boolean mask selecting upper limits."""
+        return self.y_lim_mask
+
+    @property
+    def n_detections(self) -> int:
+        """Return the number of detections."""
+        return int(self.detection_mask.sum())
+
+    @property
+    def n_non_detections(self) -> int:
+        """Return the number of non-detections (upper limits)."""
+        return int(self.non_detection_mask.sum())
+
+    @property
+    def detection_table(self) -> Table:
+        """Return a table containing only detections."""
+        return self.__table__[self.detection_mask].copy()
+
+    @property
+    def non_detection_table(self) -> Table:
+        """Return a table containing only non-detections (upper limits)."""
+        return self.__table__[self.non_detection_mask].copy()
+
+    @property
+    def n_obs(self) -> int:
+        """Number of observations."""
+        return len(self)
+
+    # ========================= CONSTRUCTORS ========================= #
+    @classmethod
+    def from_table(
+        cls,
+        table: Table,
+        *,
+        column_map: Optional[dict] = None,
+    ):
+        """Construct a :class:`RadioPhotometryEpochContainer` from an Astropy table."""
+        if column_map is not None:
+            table = table.copy()
+            table.rename_columns(list(column_map.keys()), list(column_map.values()))
+
+        return cls(table)
+
+    @classmethod
+    def from_file(
+        cls,
+        path: Union[str, Path],
+        **kwargs,
+    ):
+        """Construct a :class:`RadioPhotometryEpochContainer` from a file on disk."""
+        table = Table.read(path, **kwargs)
+        return cls(
+            table,
+        )
