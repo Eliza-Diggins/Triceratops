@@ -133,6 +133,8 @@ class ModelParameter:
     # ===================================================
     def _parse_base_units(self, base_units: Union[str, u.Unit]) -> u.Unit:
         """Parse and validate base units."""
+        if base_units is None:
+            return u.Unit("")
         if isinstance(base_units, str):
             try:
                 return u.Unit(base_units)

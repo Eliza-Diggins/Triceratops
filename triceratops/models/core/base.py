@@ -119,9 +119,20 @@ class Model(ABC):
 
         # Ensure the class's output units are actually converted to
         # astropy units.
+        _new_units = []
         for i, unit in enumerate(cls.UNITS):
-            if not isinstance(unit, u.UnitBase):
-                raise TypeError(f"UNITS[{i}] is not an astropy Unit.")
+            if unit is None:
+                _new_units.append(u.Unit(""))
+            elif isinstance(unit, str):
+                try:
+                    _new_units.append(u.Unit(unit))
+                except Exception as exc:
+                    raise ValueError(f"Invalid unit string '{unit}' for model variable {i}.") from exc
+            elif isinstance(unit, u.UnitBase):
+                _new_units.append(unit)
+            else:
+                raise TypeError(f"UNITS must be a str or astropy Unit, got {type(unit)}.")
+        cls.UNITS = tuple(_new_units)
 
     @abstractmethod
     def __init__(self, *args, **kwargs):
