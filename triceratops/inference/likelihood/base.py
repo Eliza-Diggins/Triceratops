@@ -5,6 +5,7 @@ from types import SimpleNamespace
 from typing import TYPE_CHECKING
 
 import numpy as np
+from astropy import units as u
 from scipy.stats import norm
 
 from triceratops.data.core import DataContainer
@@ -312,39 +313,39 @@ class GaussianCensoredLikelihoodStencil(Likelihood, ABC):
     data container compatibility via multiple inheritance to create concrete
     likelihood implementations.
 
-    Formally, we assume a forward model :math:`M({\bf x}; \boldsymbol{\\Theta}) \to y`,
-    where :math:`{\bf x}` are the independent variable(s), :math:`\boldsymbol{\\Theta}` are the model parameters,
-    and :math:`y \\in \\mathbb{R}` is the predicted dependent variable. Given observational data
-    :math:`\\{(x_i, y_i, \\sigma_i)\\}_{i=1}^N`, where :math:`\\sigma_i` are the measurement uncertainties,
+    Formally, we assume a forward model :math:`M({\bf x}; \boldsymbol{\Theta}) \to y`,
+    where :math:`{\bf x}` are the independent variable(s), :math:`\boldsymbol{\Theta}` are the model parameters,
+    and :math:`y \in \mathbb{R}` is the predicted dependent variable. Given observational data
+    :math:`\{(x_i, y_i, \sigma_i)\}_{i=1}^N`, where :math:`\sigma_i` are the measurement uncertainties,
     the Gaussian likelihood is given by:
 
     .. math::
 
-        \\ln \\mathcal{L}(\boldsymbol{\\Theta}) = -\frac{1}{2} \\sum_{i=1}^N \\left[
-            \frac{(y_i - M(x_i; \boldsymbol{\\Theta}))^
-            {2}}{\\sigma_i^2} + \\ln(2 \\pi \\sigma_i^2)
+        \ln \mathcal{L}(\boldsymbol{\Theta}) = -\frac{1}{2} \sum_{i=1}^N \left[
+            \frac{(y_i - M(x_i; \boldsymbol{\Theta}))^
+            {2}}{\sigma_i^2} + \ln(2 \pi \sigma_i^2)
         \right].
 
     Additionally, data for which only upper and / or lower limits are provided
     are treated as censored observations. For a data point with an upper limit
-    :math:`y_i^{\rm upper}` and uncertainty :math:`\\sigma_i`, the contribution to the log-likelihood is:
+    :math:`y_i^{\rm upper}` and uncertainty :math:`\sigma_i`, the contribution to the log-likelihood is:
 
     .. math::
 
-        \\ln \\mathcal{L}_i^{\rm upper}(\boldsymbol{\\Theta}) = \\ln \\left[
-            \frac{1}{2} \\left( 1 + \\operatorname{erf} \\left(
-                \frac{y_i^{\rm upper} - M(x_i; \boldsymbol{\\Theta})}
-                {\\sigma_i \\sqrt{2}}
+        \ln \mathcal{L}_i^{\rm upper}(\boldsymbol{\Theta}) = \ln \left[
+            \frac{1}{2} \left( 1 + \operatorname{erf} \left(
+                \frac{y_i^{\rm upper} - M(x_i; \boldsymbol{\Theta})}
+                {\sigma_i \sqrt{2}}
             \right) \right) \right].
 
     Similarly, for a data point with a lower limit :math:`y_i^{\rm lower}`, the contribution is:
 
     .. math::
 
-        \\ln \\mathcal{L}_i^{\rm lower}(\boldsymbol{\\Theta}) = \\ln \\left[
-            \frac{1}{2} \\left( 1 - \\operatorname{erf} \\left(
-                \frac{y_i^{\rm lower} - M(x_i; \boldsymbol{\\Theta})}
-                {\\sigma_i \\sqrt{2}}
+        \ln \mathcal{L}_i^{\rm lower}(\boldsymbol{\Theta}) = \ln \left[
+            \frac{1}{2} \left( 1 - \operatorname{erf} \left(
+                \frac{y_i^{\rm lower} - M(x_i; \boldsymbol{\Theta})}
+                {\sigma_i \sqrt{2}}
             \right) \right) \right].
     """
 
@@ -594,10 +595,12 @@ class GaussianLikelihoodXY(
                 "Likelihood class `GaussianLikelihoodXY` only supports models with a single independent variable."
             )
 
+    def _configure(self, **kwargs):
+        pass
+
     # ============================================================ #
     # Data Processing                                              #
     # ============================================================ #
-    @abstractmethod
     def _process_input_data(self, **kwargs) -> SimpleNamespace:
         """
         Process the input data.
@@ -631,18 +634,21 @@ class GaussianLikelihoodXY(
         model_x_unit = self._model.VARIABLES[0].base_units
         model_y_unit = self._model.UNITS[0]
 
+        x_units = model_x_unit if model_x_unit != u.dimensionless_unscaled else self._data_container.x.unit
+        y_units = model_y_unit if model_y_unit != u.dimensionless_unscaled else self._data_container.y.unit
+
         # Pull X and Y from the data container. We ensure that they get
         # converted into the correct base units.
-        x = ensure_in_units(self._data_container.x, model_x_unit)
-        y = ensure_in_units(self._data_container.y, model_y_unit)
-        y_err = ensure_in_units(self._data_container.y_err, model_y_unit)
+        x = ensure_in_units(self._data_container.x, x_units)
+        y = ensure_in_units(self._data_container.y, y_units)
+        y_err = ensure_in_units(self._data_container.y_error, y_units)
 
         if self._data_container.Y_UPPER_LIMIT_COLUMN is not None:
             y_upper = ensure_in_units(
                 self._data_container.y_upper_limit,
-                model_y_unit,
+                y_units,
             )
-            y_upper_mask = self._data_container.y_upper_limit_mask
+            y_upper_mask = self._data_container.y_upper_lim_mask
         else:
             y_upper = np.full_like(y, np.nan)
             y_upper_mask = np.zeros_like(y, dtype=bool)
@@ -650,16 +656,16 @@ class GaussianLikelihoodXY(
         if self._data_container.Y_LOWER_LIMIT_COLUMN is not None:
             y_lower = ensure_in_units(
                 self._data_container.y_lower_limit,
-                model_y_unit,
+                y_units,
             )
-            y_lower_mask = self._data_container.y_lower_limit_mask
+            y_lower_mask = self._data_container.y_lower_lim_mask
         else:
             y_lower = np.full_like(y, np.nan)
             y_lower_mask = np.zeros_like(y, dtype=bool)
 
         # Now combine the processed data into a namespace and return it.
         return SimpleNamespace(
-            x=x,
+            x={self._model.VARIABLES[0].name: x},
             y=y,
             y_err=y_err,
             y_upper=y_upper,
