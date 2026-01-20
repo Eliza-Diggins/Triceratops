@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     )
 
 # Defining the __all__ variable.
-__all__ = ["Likelihood", "GaussianCensoredLikelihoodStencil"]
+__all__ = ["Likelihood", "GaussianCensoredLikelihoodStencil", "GaussianLikelihoodXY"]
 
 
 # ============================================================ #
