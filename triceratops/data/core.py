@@ -202,7 +202,10 @@ class DataContainer(ABC):
             # while "None" means we just don't care what unit is on the data.
             expected_unit = column.get("unit", None)
             if expected_unit is not None:
+                # We have an expected unit that we're now going to check
+                # for compatibility with the underlying data.
                 expected_unit = u.Unit(expected_unit)
+
                 col = table[name]
                 if col.unit is None:
                     triceratops_logger.warning(
@@ -214,8 +217,11 @@ class DataContainer(ABC):
                         f"Column '{name}' has unit '{col.unit}', "
                         f"which is not compatible with expected unit '{expected_unit}'."
                     )
+
+                # We have no reason to believe the conversion will fail. Attempt
+                # to execute the conversion.
                 try:
-                    table[name].unit = expected_unit
+                    table[name] = table[name].to(expected_unit)
                 except Exception as e:
                     raise ValueError(f"Column '{name}' cannot be assigned expected unit '{expected_unit}': {e}") from e
 
@@ -353,9 +359,6 @@ class DataContainer(ABC):
             Dense NumPy array of shape (n_obs, n_required_numeric_columns) with all
             values expressed in CGS base units.
         """
-        import numpy as np
-        from astropy import units as u
-
         _array_items = []
 
         for colspec in self.__class__.COLUMNS:
