@@ -589,11 +589,15 @@ class SSA_SED_PowerLaw(SynchrotronSED):
 
         # Compute the radius following equation (17) of DeMarchi+22. We break this into parts as well on the same
         # basis as above.
+        print(distance, F_nu_brk, nu_brk)
+
         _R_coeff = (2.50e9**-1) * c_1 * (nu_brk / 5) ** -1
         _R_t1 = (12 * epsilon_B) * (c_5 ** (-6 - p)) * (c_6 ** (5 + p))
         _R_t2 = (9.52e25) ** (6 + p) * np.sin(theta) ** 2 * np.pi ** (-5 - p) * distance ** (12 + 2 * p)
         _R_t3 = E_l ** (2 - p) * F_nu_brk ** (6 + p)
         _R_t4 = (epsilon_E * (p_norm) * (f / 0.5)) ** -1
+
+        print(c_5, c_6, _R_t1, _R_t2, _R_t3, _R_t4)
 
         R = _R_coeff * (_R_t1 * _R_t2 * _R_t3 * _R_t4) ** (1 / (13 + 2 * p))
 
@@ -744,12 +748,9 @@ class SSA_SED_PowerLaw(SynchrotronSED):
         """
         # Validate units of all unit bearing quantities and coerce them to the expected
         # units for the optimized backend.
-        if hasattr(nu_brk, "units"):
-            nu_brk = nu_brk.to_value(u.GHz)
-        if hasattr(F_nu_brk, "units"):
-            F_nu_brk = F_nu_brk.to_value(u.Jy)
-        if hasattr(distance, "units"):
-            distance = distance.to_value(u.Mpc)
+        nu_brk = ensure_in_units(nu_brk, u.GHz)
+        F_nu_brk = ensure_in_units(F_nu_brk, u.Jy)
+        distance = ensure_in_units(distance, u.Mpc)
 
         # Check the validity of p values. We need to ensure that ``p`` behaves as an array at
         # this point, so we cast it explicitly.
