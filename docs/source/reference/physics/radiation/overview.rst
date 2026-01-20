@@ -42,7 +42,8 @@ synchrotron radiation in Triceratops:
     :caption: Synchrotron Theory References
 
     synchrotron/synchrotron_theory
-    synchrotron/synch_sed_theory
+    synchrotron/synchrotron_sed_theory
+    synchrotron/synchrotron_cooling_theory
 
 Free-Free Radiation
 --------------------

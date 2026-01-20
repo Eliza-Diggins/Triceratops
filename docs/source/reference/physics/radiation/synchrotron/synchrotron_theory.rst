@@ -993,97 +993,13 @@ From equipartition, we know :math:`N_0` in terms of :math:`U_{\rm thermal}` and 
 Cooling of Electrons
 ^^^^^^^^^^^^^^^^^^^^
 
+.. hint::
+
+    For a much more detailed discussion of electron cooling, including all of the relevant theory which
+    is applied in Triceratops, see :ref:`synchrotron_cooling_theory`.
+
 As a population, relativistic electrons will cool and thereby evolve away from their injected energy distribution.
 This evolution can imprint additional spectral breaks and modify the normalization of the synchrotron emission.
-
-Let :math:`P(\gamma,t)` denote the differential electron distribution (number or number density per unit Lorentz factor),
-so that :math:`P(\gamma,t)\,d\gamma` is the number of electrons in :math:`(\gamma,\gamma+d\gamma)`. Suppose electrons are
-injected at a rate :math:`Q(\gamma)` (per unit time per unit :math:`\gamma`) and cool according to
-
-.. math::
-
-    \dot{\gamma} \equiv \frac{d\gamma}{dt} = H(\gamma),
-
-with :math:`H(\gamma) < 0` for radiative cooling. Conservation of particle number in energy space implies that, for any
-interval :math:`\gamma\in[\gamma_1,\gamma_2]`,
-
-.. math::
-
-    \frac{d}{dt}\int_{\gamma_1}^{\gamma_2} P(\gamma,t)\,d\gamma
-    =
-    \int_{\gamma_1}^{\gamma_2} Q(\gamma)\,d\gamma
-    - \left[ H(\gamma)\,P(\gamma,t)\right]_{\gamma_1}^{\gamma_2}.
-
-Taking :math:`\gamma_2\to\gamma_1` yields the continuity equation
-
-.. math::
-
-    \frac{\partial P(\gamma,t)}{\partial t}
-    +
-    \frac{\partial}{\partial\gamma}\!\left[H(\gamma)\,P(\gamma,t)\right]
-    =
-    Q(\gamma).
-
-.. note::
-
-    This first-order PDE is solvable by the method of characteristics for general :math:`H(\gamma)` and :math:`Q(\gamma)`.
-    In this documentation we focus on steady-state solutions commonly used in synchrotron modeling.
-
-.. note::
-
-    We have here ignored the effects of adiabatic cooling, which can be important in expanding systems.
-
-Steady-state power-law injection with power-law cooling
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In steady state (:math:`\partial P/\partial t=0`), the continuity equation reduces to
-
-.. math::
-
-    \frac{d}{d\gamma}\!\left[H(\gamma)\,P(\gamma)\right] = Q(\gamma).
-
-Assuming :math:`P(\gamma)\to 0` sufficiently fast as :math:`\gamma\to\infty`, integration gives
-
-.. math::
-
-    H(\gamma)\,P(\gamma) = -\int_{\gamma}^{\infty} Q(\gamma')\,d\gamma'.
-
-Now take a power-law injection spectrum
-
-.. math::
-
-    Q(\gamma) = Q_0\,\gamma^{-p}, \qquad p>1,
-
-and a power-law cooling law
-
-.. math::
-
-    H(\gamma) = -\Lambda\,\gamma^k, \qquad \Lambda>0.
-
-Then
-
-.. math::
-
-    \int_{\gamma}^{\infty} Q(\gamma')\,d\gamma'
-    =
-    \frac{Q_0}{p-1}\,\gamma^{-(p-1)},
-
-and the steady-state distribution becomes
-
-.. math::
-
-    \boxed{
-    P_{\rm SS}(\gamma)
-    =
-    \frac{Q_0}{\Lambda\,(p-1)}\,\gamma^{-(p+k-1)}.
-    }
-
-Thus, radiative cooling steepens the injected spectrum by :math:`k-1`. For synchrotron/Thomson IC cooling,
-:math:`\dot{\gamma}\propto -\gamma^2` (i.e. :math:`k=2`), so the steady-state slope steepens by one:
-:math:`P\propto \gamma^{-(p+1)}` above the cooling break.
-
-Cooling break at :math:`\gamma_c`
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In many applications, only electrons above a critical Lorentz factor :math:`\gamma_c` cool efficiently within the
 relevant timescale (often the dynamical time). A common phenomenological approximation is:
