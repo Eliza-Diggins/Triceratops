@@ -1,10 +1,11 @@
 """
-====================================
-Fit Radio Photometry to a BPL
-====================================
+=======================================
+Fit Censored Radio Photometry to a BPL
+=======================================
 
-In this example, we'll do the simplest possible SED fit to radio photometry data using a broken power-law (BPL) model.
-This is an excellent place to start for understanding how to fit models to data using the Triceratops library.
+In this example, we'll do consider the relatively simple task of fitting a single epoch of
+censored radio photometry data using a broken power-law (BPL) model. This is an excellent
+example of the robust data handling and likelihood construction of the Triceratops library.
 
 We'll use the :class:`~models.emission.synchrotron.Synchrotron_SSA_SBPL_SED` model to generate some synthetic
 data with a fixed noise threshold and then we'll invert that data to recover the original parameters using MCMC.
@@ -58,16 +59,25 @@ sed_model = Synchrotron_SSA_SBPL_SED()
 true_params = {"norm": 5.0 * u.mJy, "nu_break": 4.0 * u.GHz, "p": 3.0, "s": -1.0}
 
 # Define the noise level as a fraction of the flux density.
-noise_fraction = 0.1  # 5% noise
+noise_fraction = 0.3  # 5% noise
 
 # Generate the frequencies to use for the synthetic data.
 frequencies = u.Quantity([0.1, 0.5, 1.0, 3.0, 5.0, 7.0, 10.0, 15.0, 20.0, 30.0], u.GHz)
+
+# Create the fake flux limit
+flux_floor = 0.5 * u.mJy
 
 # Generate the synthetic flux densities with noise.
 synthetic_flux = sed_model.forward_model({"frequency": frequencies}, true_params)["flux_density"]
 synthetic_flux += (
     np.random.normal(size=synthetic_flux.shape, scale=noise_fraction * synthetic_flux.to_value("mJy")) * u.mJy
 )
+
+# Apply the flux floor to create censored data
+synthetic_flux = np.where(synthetic_flux < flux_floor, flux_floor, synthetic_flux)
+
+# create masks for the censored data
+censored_mask = synthetic_flux <= flux_floor
 
 # %%
 # Let's go ahead and look at the plot of the true model and the synthetic data points.
@@ -83,18 +93,29 @@ ax.plot(freqs_plot.to_value(u.GHz), true_flux_plot.to_value(u.mJy), label="True 
 
 # Add our synthetic data points.
 ax.errorbar(
-    frequencies.to_value(u.GHz),
-    synthetic_flux.to_value(u.mJy),
-    yerr=noise_fraction * synthetic_flux.to_value(u.mJy),
+    frequencies[~censored_mask].to_value(u.GHz),
+    synthetic_flux[~censored_mask].to_value(u.mJy),
+    yerr=noise_fraction * synthetic_flux[~censored_mask].to_value(u.mJy),
     fmt="o",
     label="Synthetic Data",
     color="red",
 )
+# Add censored points
+ax.scatter(
+    frequencies[censored_mask].to_value(u.GHz),
+    synthetic_flux[censored_mask].to_value(u.mJy),
+    marker="v",
+    color="blue",
+    label="Censored Data",
+)
+
+ax.axhline(flux_floor.to_value("mJy"), color="black", ls="--", label="Flux Limit")
 
 ax.set_xlabel("Frequency [Hz]")
 ax.set_ylabel("Flux Density [mJy]")
 ax.set_xscale("log")
 ax.set_yscale("log")
+ax.legend()
 
 plt.show()
 
@@ -107,6 +128,10 @@ plt.show()
 # To start, we'll need to create a data container object to hold our synthetic data. We'll use
 # a :class:`~astropy.table.Table` object and then feed it into the
 # :class:`~data.photometry.RadioPhotometryEpochContainer`.
+#
+# Inside of the data container, we'll put our frequencies, flux densities, flux density errors, and upper limits. We'll
+# place the detections above our ``flux_floor`` and we'll set our upper limits to the cases where the flux density
+# plus noise would have fallen below that threshold.
 from astropy.table import Table
 
 from triceratops.data.photometry import RadioPhotometryEpochContainer
@@ -118,6 +143,12 @@ data_table["freq"] = frequencies
 data_table["flux_density"] = synthetic_flux
 data_table["flux_density_error"] = noise_fraction * synthetic_flux
 data_table["flux_upper_limit"] = np.full((frequencies.size,), np.nan) * u.mJy  # No upper limits
+
+# Swap in upper limits where appropriate
+data_table["flux_upper_limit"][censored_mask] = synthetic_flux[censored_mask]
+data_table["flux_density"][censored_mask] = np.nan * u.mJy
+data_table["flux_density_error"][censored_mask] = flux_floor / 3  # dummy error for censored points
+
 
 # Create the RadioPhotometryContainer from the table.
 photometry_data = RadioPhotometryEpochContainer(data_table)
@@ -197,6 +228,8 @@ for i in idx:
 
 # Plot true model
 true_flux_plot = sed_model.forward_model({"frequency": freqs_plot}, true_params)["flux_density"]
+
+ax.axhline(flux_floor.to_value("mJy"), color="black", ls="--", label="Flux Limit")
 
 ax.plot(freqs_plot.to_value(u.GHz), true_flux_plot.to_value(u.mJy), color="black", lw=2, label="True Model")
 
