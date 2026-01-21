@@ -544,8 +544,8 @@ the overall normalization.
     adiabatic losses to operate.
 
 
-Summary of Cooling Regimes
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+Summary of Cooling Mechanisms
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The dominant cooling mechanisms encountered in synchrotron-emitting systems are:
 
@@ -559,6 +559,7 @@ The dominant cooling mechanisms encountered in synchrotron-emitting systems are:
 The competition between these processes determines the structure of the electron
 population and, ultimately, the observed synchrotron spectral energy
 distribution.
+
 
 Computational Implementation
 -----------------------------

@@ -1176,6 +1176,11 @@ In this section, we'll discuss both processes and derive the critical results.
 Synchrotron Self-Absorption
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. note::
+
+    The presentation given here ignores the effects of extreme electron cooling on SSA. A theory note
+    on this particular phenomenon is presented in :ref:`stratified_absorption`.
+
 At sufficiently low frequencies, synchrotron photons emitted by a population of relativistic
 electrons may be re-absorbed by the *same* electrons that produced them. This process is known as
 **synchrotron self-absorption (SSA)** and leads to a suppression of the emergent radiation below a
@@ -1349,6 +1354,87 @@ With this, the absorption coefficient for a power-law distribution of electrons 
             c_6(p)\,N_{0,E}
             (B\sin\alpha)^{(p+2)/2}
             \left(\frac{\nu}{2 c_1}\right)^{-(p+4)/2}.
+
+.. dropdown:: Aside: What electrons contribute to SSA?
+
+    A common source of confusion in synchrotron self-absorption theory is the question of *which electrons*
+    actually contribute to the absorption coefficient at a given frequency. It is important to distinguish
+    between (i) the **frequency scaling** of :math:`\alpha_\nu` and (ii) the **support of the integral**
+    defining :math:`\alpha_\nu` in Lorentz factor.
+
+    Starting from the exact expression,
+
+    .. math::
+
+        \alpha_\nu
+        =
+        -\frac{1}{8\pi m_e \nu^2}
+        \int d\gamma \;
+        P(\nu,\gamma)\,
+        \gamma^2
+        \frac{\partial}{\partial\gamma}
+        \left[
+            \frac{1}{\gamma^2}
+            \frac{dN}{d\gamma}
+        \right],
+
+    the contribution of electrons at Lorentz factor :math:`\gamma` is controlled entirely by the
+    single–electron synchrotron kernel :math:`P(\nu,\gamma)`.
+
+    For a fixed observing frequency :math:`\nu`, define :math:`\gamma_\nu` implicitly by
+
+    .. math::
+
+        \nu = \nu_c(\gamma_\nu).
+
+    The synchrotron kernel has two qualitatively distinct regimes:
+
+    1. **High-frequency regime** (:math:`\nu \gg \nu_c(\gamma)`):
+
+       In this case the kernel is exponentially suppressed,
+
+       .. math::
+
+           P(\nu,\gamma) \propto
+           \exp\!\left[-\frac{\nu}{\nu_c(\gamma)}\right],
+
+       and electrons with :math:`\gamma < \gamma_\nu` contribute negligibly to the integral,
+       regardless of their number density or the shape of :math:`dN/d\gamma`.
+       No physically reasonable electron distribution can overcome this exponential cutoff.
+
+    2. **Low-frequency regime** (:math:`\nu \ll \nu_c(\gamma)`):
+
+       In this regime the kernel follows a power law,
+
+       .. math::
+
+           P(\nu,\gamma) \propto \nu^{1/3}\,\gamma^{-2/3},
+
+       so electrons with :math:`\gamma > \gamma_\nu` contribute efficiently to absorption.
+
+    As a result, the *support* of the absorption integral is confined to
+
+    .. math::
+
+        \gamma \gtrsim \gamma_\nu,
+
+    while electrons with :math:`\gamma \ll \gamma_\nu` are exponentially ineffective absorbers at
+    frequency :math:`\nu`, even if they dominate the total number density.
+
+    Within the contributing region :math:`\gamma > \gamma_\nu`, both the synchrotron kernel
+    :math:`P(\nu,\gamma)` and physically relevant electron distributions :math:`dN/d\gamma`
+    decrease with increasing :math:`\gamma`. Consequently, the dominant contribution to
+    :math:`\alpha_\nu` arises from electrons near the lower boundary of this region,
+
+    .. math::
+
+        \gamma \sim \gamma_\nu,
+        \qquad
+        \nu \sim \nu_m(\gamma).
+
+    This is the precise sense in which synchrotron self-absorption at frequency :math:`\nu`
+    is said to be “dominated” by electrons satisfying :math:`\nu \sim \nu_m(\gamma)`. The statement
+    refers to the *support of the absorption integral*, not to the emission spectrum of those electrons.
 
 Recalling that the emissivity for a power-law distribution of electrons is
 
