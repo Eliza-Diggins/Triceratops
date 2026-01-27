@@ -19,10 +19,10 @@ __all__ = [
     "InferenceProblem",
     "EmceeSampler",
     "Likelihood",
-    "GaussianPhotometryLikelihood",
+    "GaussianLikelihoodXY",
 ]
 
-from .likelihood import GaussianPhotometryLikelihood, Likelihood
+from .likelihood import GaussianLikelihoodXY, Likelihood
 from .prior import (
     BetaPrior,
     GammaPrior,

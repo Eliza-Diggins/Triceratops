@@ -1496,6 +1496,110 @@ The details of how :math:`\ell` should be determined are a matter of dynamics an
     any set of assumptions about the behavior of the underlying electrons, the corresponding SSA frequency may be quite
     different.
 
+Approximate Methods
+~~~~~~~~~~~~~~~~~~~
+
+While the above treatment of the SSA frequency is precise, it is complicated by the fact that one must specify
+the detailed electron distribution (including any stratification due to radiative cooling) in order to evaluate
+:math:`\tau_\nu = \int \alpha_\nu\,d\ell`.  A widely used alternative is therefore to determine the self-absorption
+frequency :math:`\nu_a` by matching the asymptotic optically thin and optically thick fluxes across the turnover
+(e.g. CITATIONS).
+
+The key observation is that at frequencies where the source is optically thick (:math:`\tau_\nu \gg 1`), the
+emergent intensity approaches the local synchrotron source function,
+
+.. math::
+
+    I_\nu \approx S_\nu \equiv \frac{j_\nu}{\alpha_\nu},
+
+evaluated at the depth where :math:`\tau_\nu \sim 1`.  At a fixed observing frequency :math:`\nu`, synchrotron
+emission and absorption are dominated by electrons in a narrow range of Lorentz factors.  Motivated by this,
+we first consider a mono-energetic electron population with Lorentz factor :math:`\gamma_0` and number density
+:math:`n_e`, i.e.
+
+.. math::
+
+    N(\gamma) = n_e\,\delta(\gamma-\gamma_0).
+
+For an isotropic distribution, the synchrotron emissivity and absorption coefficient may be written (RL / CITATION)
+
+.. math::
+
+    j_\nu = \frac{1}{4\pi}\int d\gamma\,N(\gamma)\,P_\nu(\gamma),
+
+.. math::
+
+    \alpha_\nu = -\frac{1}{8\pi m_e \nu^2}\int d\gamma\,P_\nu(\gamma)\,\gamma^2
+    \frac{\partial}{\partial\gamma}\left[\frac{N(\gamma)}{\gamma^2}\right],
+
+where :math:`P_\nu(\gamma)` is the single-electron synchrotron power per unit frequency.  Substituting the
+mono-energetic form yields
+
+.. math::
+
+    j_\nu = \frac{n_e}{4\pi}\,P_\nu(\gamma_0),
+
+and
+
+.. math::
+
+    \alpha_\nu
+    =
+    \frac{n_e}{8\pi m_e \nu^2}
+    \left[
+      \frac{\partial P_\nu}{\partial\gamma}
+      +\frac{2}{\gamma}P_\nu
+    \right]_{\gamma=\gamma_0}.
+
+The corresponding source function is therefore
+
+.. math::
+
+    S_\nu \equiv \frac{j_\nu}{\alpha_\nu}
+    =
+    2 m_e \nu^2\,
+    \frac{P_\nu(\gamma_0)}
+    {\left[\frac{\partial P_\nu}{\partial\gamma}+\frac{2}{\gamma}P_\nu\right]_{\gamma=\gamma_0}}.
+
+For a smooth synchrotron kernel :math:`P_\nu(\gamma)`, the combination in the denominator varies on a fractional
+Lorentz-factor scale :math:`\Delta\gamma/\gamma \sim \mathcal{O}(1)`, implying
+:math:`\partial P_\nu/\partial\gamma \sim P_\nu/\gamma` up to factors of order unity.  Hence the ratio above is
+:math:`\sim \gamma_0` (again up to factors of order unity), and we may write the optically thick source function as
+
+.. math::
+
+    S_\nu(\gamma_0) \sim C_S\,\nu^2\,\gamma_0\,m_e c^2,
+
+where :math:`C_S = \mathcal{O}(1)` absorbs kernel- and pitch-angle-dependent constants.  This is simply the
+Rayleigh--Jeans form with an effective (brightness) temperature :math:`kT_{\rm eff}\sim \gamma_0 m_e c^2`.
+
+If the emitting region subtends projected area :math:`A` on the sky, the optically thick flux at :math:`\nu`
+is then
+
+.. math::
+
+    F_\nu^{\rm (thick)}(\nu)
+    \approx
+    \frac{A}{D^2}\,S_\nu
+    \sim
+    C_{\rm thick}\,\frac{A}{D^2}\,\nu^2\,\gamma_0\,m_e c^2,
+
+with :math:`C_{\rm thick}=\mathcal{O}(1)`.
+
+To apply this to synchrotron self-absorption, we identify :math:`\gamma_0` with the characteristic electron
+Lorentz factor dominating emission and absorption at :math:`\nu=\nu_a` (denoted :math:`\gamma_a`), so that
+:math:`F_\nu^{\rm (thick)}(\nu_a)` is determined by :math:`S_\nu(\gamma_a)`.  The self-absorption frequency
+may then be obtained by matching the optically thick and optically thin asymptotic fluxes at the turnover,
+
+.. math::
+
+    F_\nu^{\rm (thick)}(\nu_a) \approx F_\nu^{\rm (thin)}(\nu_a),
+
+where :math:`F_\nu^{\rm (thin)}` is computed from the appropriate optically thin spectral segment for the
+problem at hand.  This yields an algebraic equation for :math:`\nu_a`.
+
+
+
 References
 -----------
 .. footbibliography::

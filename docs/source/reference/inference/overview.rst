@@ -195,7 +195,7 @@ see the corresponding documentation pages.
     :toctree:
 
     base.Likelihood
-    single_epoch_photometry.GaussianPhotometryLikelihood
+    base.GaussianLikelihoodXY
 
 ----
 
