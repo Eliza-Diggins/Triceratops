@@ -128,8 +128,8 @@ While seemingly a simple undertaking, the normalization of the SEDs is a complex
 part, because various approaches have been used in the literature ranging from exact calculations using numerical quadrature
 to a variety of approximate schemes. In our case, we select a scheme based off of that described in
 :footcite:t:`1998ApJ...497L..17S`, which is an approximate scheme based off the notion that, at an (optically thin) break frequency
-:math:`\nu_{\rm brk}`, the synchrotron emission is dominated a single set of electrons with lorentz factors :math:`\gamma_{\brk}`
-and number density :math:`n_e(\gamma_{\rm brk}`. One may, therefore, use this approximation to estimate the normalization
+:math:`\nu_{\rm brk}`, the synchrotron emission is dominated a single set of electrons with lorentz factors :math:`\gamma_{\rm brk}`
+and number density :math:`n_e(\gamma_{\rm brk})`. One may, therefore, use this approximation to estimate the normalization
 to within a factor of order unity.
 
 To be more precise, consider a population of electrons with a distribution of Lorentz factors :math:`dN/d\gamma(\gamma)`. The
@@ -201,14 +201,13 @@ for each case:
 
         .. math::
 
-            \frac{dN}{d\gamma} = \begin{cases}
+            \frac{dN}{d\gamma} = K_0\begin{cases}
                 0, & \gamma < \gamma_c \\
-                K_c  \left(\frac{\gamma}{\gamma_c}\right)^{-2}, & \gamma_c \le \gamma < \gamma_{\min} \\
-                K_c  \left(\frac{\gamma_{\rm min}}{\gamma_c}\right)^{-2}
-                     \left(\frac{\gamma}{\gamma_{\rm min}}\right)^{-(p+1)}, & \gamma \ge \gamma_{\min}
+                  \left(\frac{\gamma}{\gamma_c}\right)^{-2}, & \gamma_c \le \gamma < \gamma_{\min} \\
+                  \left(\frac{\gamma}{\gamma_{\rm min}}\right)^{-(p+1)}, & \gamma \ge \gamma_{\min}
             \end{cases},
 
-        where :math:`K_c` is the normalization constant of the cooled electron distribution. The correct optically thin flux
+        where :math:`K_0` is the normalization constant of the cooled electron distribution. The correct optically thin flux
         is therefore
 
         .. math::
@@ -216,7 +215,7 @@ for each case:
             F_{c,0} \approx \left[\left(\frac{3 \sqrt{3}}{32\pi^2}\right)
                                 \frac{m_e c^2}{q}\,\sigma_T\,
                                 (B\sin\alpha)\,
-                                K_c
+                                K_0
                                 \gamma_c\right]\frac{V}{D_L^2},
 
         or, letting :math:`\gamma = (2\pi m_e c \nu / 3 q B \sin\alpha)^{1/2}`,
@@ -228,13 +227,28 @@ for each case:
                                 \left(\frac{4\pi}{3}\right)^{1/2}
                                 \frac{m_e^{3/2} c^{5/2}}{q^{3/2}}\,\sigma_T\,
                                 (B\sin\alpha)^{1/2}\,
-                                K_c
+                                K_0
                                 \nu_c^{1/2}
                                 \right]\frac{V}{D_L^2}.
 
+        For the sake of brevity, we let
+
+        .. math::
+
+            \chi_c(p) = \left[\left(\frac{3 \sqrt{3}}{32\pi^2}\right)
+                        \left(\frac{4\pi}{3}\right)^{1/2}
+                        \frac{m_e^{3/2} c^{5/2}}{q^{3/2}}
+                        \sigma_T\right]
+
+        so that
+
+        .. math::
+
+            F_{c,0} \approx \chi_c(p) (B\sin\alpha)^{1/2}\,K_0\,\nu_c^{1/2} \frac{V}{D_L^2}.
+
     .. tab-item:: Slow Cooling
 
-        When **slow-cooling** applies, i.e. :math:`\gamma_c > \gamma_{\min}`, the peak emission is at
+        When **slow-cooling** (or no cooling) applies, i.e. :math:`\gamma_c > \gamma_{\min}`, the peak emission is at
         :math:`\nu_m = \nu_c(\gamma_{\min})` and the electron population follows
         :math:`dN/d\gamma = N_0 \gamma^{-p}`. Evaluating the emissivity at
         :math:`\gamma=\gamma_{\min}` therefore yields
@@ -261,6 +275,21 @@ for each case:
             (B\sin\alpha)^{(p+1)/2}\,
             N_0\,\nu_m^{(1-p)/2}
             \right]\frac{V}{D_L^2}.
+
+        For the sake of brevity, we let
+
+        .. math::
+
+            \chi_m(p) = \left[\left(\frac{3 \sqrt{3}}{32\pi^2}\right)
+                        \left(\frac{4\pi}{3}\right)^{(1-p)/2}
+                        \frac{m_e^{(3-p)/2} c^{(5-p)/2}}{q^{(3-p)/2}}
+                        \sigma_T\right]
+
+        so that
+
+        .. math::
+
+            F_{m,0} \approx \chi_m(p) (B\sin\alpha)^{(p+1)/2}\,N_0\,\nu_m^{(1-p)/2} \frac{V}{D_L^2}.
 
 Break Frequencies
 ^^^^^^^^^^^^^^^^^

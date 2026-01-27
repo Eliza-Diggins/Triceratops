@@ -1568,7 +1568,7 @@ Lorentz-factor scale :math:`\Delta\gamma/\gamma \sim \mathcal{O}(1)`, implying
 
 .. math::
 
-    S_\nu(\gamma_0) \sim C_S\,\nu^2\,\gamma_0\,m_e c^2,
+    S_\nu(\gamma_0) \sim \frac{2C_s}{c^2} \nu^2 \gamma_0 m_e c^2,
 
 where :math:`C_S = \mathcal{O}(1)` absorbs kernel- and pitch-angle-dependent constants.  This is simply the
 Rayleigh--Jeans form with an effective (brightness) temperature :math:`kT_{\rm eff}\sim \gamma_0 m_e c^2`.
@@ -1582,7 +1582,7 @@ is then
     \approx
     \frac{A}{D^2}\,S_\nu
     \sim
-    C_{\rm thick}\,\frac{A}{D^2}\,\nu^2\,\gamma_0\,m_e c^2,
+    \frac{2\nu^2}{c^2}\gamma_0 m_e c^2 \frac{A}{D^2},
 
 with :math:`C_{\rm thick}=\mathcal{O}(1)`.
 
