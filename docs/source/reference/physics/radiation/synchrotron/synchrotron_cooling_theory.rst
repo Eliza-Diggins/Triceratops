@@ -560,6 +560,101 @@ The competition between these processes determines the structure of the electron
 population and, ultimately, the observed synchrotron spectral energy
 distribution.
 
+.. _equipart_cooling_theory:
+Equipartition for Cooled Electron Populations
+---------------------------------------------
+
+As described in :ref:`synchrotron_theory`, it is generally not possible to get a direct constraint on
+the structure of the electron population from synchrotron observations alone. Instead, one typically
+relies on **equipartition assumptions** to relate the energy density in relativistic electrons to
+that in the magnetic field. This approach is also used when modeling the synchrotron emission from cooled
+electron populations.
+
+.. hint::
+
+    For background on the equipartition formalism, see the relevant section in :ref:`synchrotron_theory`.
+
+The equipartition analysis of cooled electron populations roughly follows that of the uncooled
+case, with some important modifications to account for the altered electron distribution.
+
+We begin by considering a **fast-cooling** electron population, where the cooling Lorentz factor
+:math:`\gamma_c` lies below the injection minimum :math:`\gamma_m`. In this regime, all injected electrons cool
+efficiently. For notational convenience, we define the **normalization parameter** :math:`K_{\rm 0}` such that
+
+.. math::
+
+    N(\gamma)
+    =
+    K_{\rm 0}
+    \begin{cases}
+    \left(\frac{\gamma}{\gamma_m}\right)^{-2}, & \gamma_c \leq \gamma < \gamma_m, \\
+    \left(\frac{\gamma}{\gamma_m}\right)^{-(p+1)}, & \gamma_m \leq \gamma < \gamma_{\max},\\
+    0 & \text{elsewhere}.
+    \end{cases}
+
+.. hint::
+
+    Note that this convention **differs** from that used for the uncooled electron distribution in which we used
+    :math:`N = N_0 \gamma^{-p}` above :math:`\gamma_m`. Here, to allow for easier manipulation of the broken-power-law,
+    we normalize to :math:`\gamma_m` and include the appropriate scaling in each segment.
+
+As in the case of uncooled electrons, we can also write this distribution in terms of the **energy**:
+
+.. math::
+
+    N(E)
+    =
+    K_{\rm E,0}
+    \begin{cases}
+    \left(\frac{E}{E_m}\right)^{-2}, & E_c \leq E < E_m, \\
+    \left(\frac{E}{E_m}\right)^{-(p+1)}, & E_m \leq E < E_{\max},\\
+    0 & \text{elsewhere}.
+    \end{cases}
+
+For a **slow-cooling** population, where :math:`\gamma_m < \gamma_c`, only the highest-energy electrons cool
+efficiently. The distribution is then
+
+.. math::
+
+    N(\gamma)
+    =
+    H_{\rm 0}
+    \begin{cases}
+    \left(\frac{\gamma}{\gamma_c}\right)^{-p}, & \gamma_m \leq \gamma < \gamma_c, \\
+    \left(\frac{\gamma}{\gamma_c}\right)^{-(p+1)}, & \gamma_c \leq \gamma < \gamma_{\max},\\
+    0 & \text{elsewhere}.
+    \end{cases}
+
+or, in terms of energy,
+
+.. math::
+
+    N(E)
+    =
+    H_{\rm E,0}
+    \begin{cases}
+    \left(\frac{E}{E_c}\right)^{-p}, & E_m \leq E < E_c, \\
+    \left(\frac{E}{E_c}\right)^{-(p+1)}, & E_c \leq E < E_{\max},\\
+    0 & \text{elsewhere}.
+    \end{cases}
+
+
+Following our approach in :ref:`synchrotron_theory`, we can compute moments of the distribution as
+
+.. math::
+
+    M_\gamma^{(k)} = K_{\rm 0} \int_{\gamma_c}^{\gamma_{\max}} \gamma^k N(\gamma) d\gamma,
+
+or, in terms of energy,
+
+.. math::
+
+    M_E^{(k)} = K_{\rm E,0} \int_{E_c}^{E_{\max}} E^k N(E) dE.
+
+The equipartition analysis then proceeds in exactly the same manner as described in :ref:`synchrotron_theory`, with
+the modified electron distribution used to compute the the relevant moments and corresponding energy densities.
+
+
 
 Computational Implementation
 -----------------------------

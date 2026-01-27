@@ -4,14 +4,17 @@ Synchrotron Spectral Energy Distributions
 =========================================
 
 In Triceratops, synchrotron radiation plays a key role in the emission from various transient sources. The spectral
-energy distribution (SED) of this emission depends on a number of factors as described in the documentation on
-`synchrotron theory <synchrotron_theory>`__. In this document, we'll discuss the various SEDs that are implemented
-in Triceratops and the tools available to work with them when building models.
+energy distribution (SED) of this emission depends on a number of factors as described in our document on
+`synchrotron theory <synchrotron_theory>`__, and in all its gruesome detail in
+`synchrotron SED theory <synch_sed_theory>`__. In this document, we'll discuss how Triceratops implements all of the
+various synchrotron SEDs commonly used in the literature and how to use them in your own modeling.
 
 .. important::
 
     This guide assumes familiarity with the theory of synchrotron radiation as described in the
-    :ref:`synchrotron_theory` section of the documentation.
+    :ref:`synchrotron_theory` section of the documentation. Likewise, it is recommended that users read the
+    :ref:`synch_sed_theory` document for a more in-depth understanding of the various SEDs implemented here, their
+    derivations, and their applications.
 
 .. contents::
     :local:
@@ -20,100 +23,143 @@ in Triceratops and the tools available to work with them when building models.
 Overview
 ---------
 
-The observed SED from synchrotron radiation is, in general, a complicated function of the underlying dynamics, the
-constituent microphysics, and the environment surrounding the source. It is therefore **NOT** the intention of this
-module to provide an exhaustive implementation of **ALL** possible synchrotron SEDs. Nonetheless, there are a number
-of SEDs which appear frequently in the literature and are widely application to use in supernova modeling, GRBs, and
-TDEs. We therefore provide implementations of these commonly used SEDs.
+The core functionality for synchrotron SEDs in Triceratops is encapsulated in the
+:mod:`~radiation.synchrotron.SEDs` module.
+Triceratops represents synchrotron SEDs as compositions of scale-free, log-space shape functions,
+which are assembled into physically meaningful spectra based on frequency ordering and theoretical asymptotes.
+These spectra are exposed through lightweight SED classes that optionally implement analytic closure relations,
+cleanly separating numerical stability, spectral theory, and physical interpretation. Broadly speaking, there
+are 2 levels of abstraction available in the module:
 
-For a given SED, :mod:`~radiation.synchrotron.SEDs` provides (a) functions for simply calculating the expected
-flux as a function of frequency and (b), when possible, closure relations which allow for the calculation of the
-spectral parameters from the underlying dynamics and microphysics or vice-versa.
+- **Low-Level**:
+- **High-Level** (Object Oriented):
+
+The High Level Interface
+-------------------------
+
+- High level view of the trickiness of the operation: compute frequencies, order them, select SED shape, normalize,
+  etc. (Many functions)! These can be encapsulated in a class.
+- Discuss the idea of the high level interface.
+- Wrap the various SEDs in relevant classes which isolate the logic of determining
+  SED shape from the ordering of break frequencies.
+- We choose a class based on the physics we want included (cooling, SSA, etc.)
+- Each class implements the details of its normalization, SED shape, etc. as well as certain closures for
+  physical parameters where possible.
 
 The Synchrotron SED Class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Because of the variety of SEDs which arise in practice and the fact that they are easily confused with one
-another, Triceratops opts for a class-based SED implementation. Each SED is a subclass of the
-:class:`~radiation.synchrotron.SEDs.SynchrotronSED` base class which provides a common interface for
-calculating fluxes and spectral parameters. Each subclass implements the specific details of the SED it represents.
+- Why we encapsulate the SEDs in classes.
+- The core functionality of the class and its intention.
+- Encapsulation and simplification.
 
-Each SED class has a number of important methods which can be used when constructing models and
-complies with Triceratops' standard public / private API design. The central functionality of the SED class is to
+- Example usage of the class
 
-1. Provide the generic SED function :math:`F_\nu(\nu) = f(\nu, \boldsymbol{\Theta})`, where
-   :math:`\boldsymbol{\Theta}` is the set of spectral parameters for the SED. These are generally things like
-   :math:`\nu_c`, :math:`\nu_m`, :math:`\nu_a`, and :math:`F_{\nu, \mathrm{max}}`.
-2. Provide bi-directional closure methods to relate the *spectral* parameters (critical fluxes, normalization, etc.)
-   to the *physical* parameters (energy, density, microphysical parameters, etc.) of the system.
+Available SED Classes
+^^^^^^^^^^^^^^^^^^^^^
 
-A particular SED class may implement many closures or none at all, depending on the intent of the SED and
-its implementation.
+Power Law SED
+~~~~~~~~~~~~~~~~~~
 
-.. important::
+Power Law + Cooling SED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    **Developer Note**: For documentation regarding implementing custom SEDs, please see the
-    class documentation ::class:`~radiation.synchrotron.SEDs.SynchrotronSED`.
+Power Law + SSA SED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. rubric:: Synchrotron SED API
+Power Law + Cooling + SSA SED
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As with all of Triceratops, each SED class provides both a high-level and low-level API for interacting with it.
+The Low-Level Interface
+------------------------
+
+The low-level interface provides a more direct way to access the individual components that make up the synchrotron
+SEDs. For the most part, this interface is of greatest utility to those defining custom SEDs or wishing to understand
+the inner workings of the Triceratops synchrotron SED implementation. The low-level interface is organized into
+several key categories of functions:
+
+- **Shape Functions**: These functions define the scale-free shapes of the components of the SEDs. This includes
+  the smoothed broken power law (SBPL) shapes used to model transitions between different spectral regimes and
+  the scale-free SBPL functions that define allow for smooth transitions between asymptotic power-law segments.
+- **SED Functions**: These functions implement the various SED shapes (broken power law, smoothed broken power law,
+  etc.) used in the modeling of synchrotron emission. For each physical scenario (e.g., with or without cooling,
+  with or without synchrotron self-absorption), there may be a **number of relevant SEDs** that can be constructed
+  based on the ordering of characteristic frequencies. Each of these is implemented (at the low level) as a separate
+  function.
+- **Normalization Functions**: These functions handle the normalization of the SEDs based on physical parameters such as
+  the peak flux density, characteristic frequencies, and electron distribution properties.
+- **Regime Determination Functions**: These functions determine the ordering of characteristic frequencies and
+  select the appropriate SED shape function to use based on the physical scenario being modeled.
+
+These are generally combined to produce the high-level interface for the SED calculations. In the documentation below,
+we'll discuss the various functions available in each of these categories.
+
+Shape Functions
+^^^^^^^^^^^^^^^
 
 .. currentmodule:: radiation.synchrotron.SEDs
 
-.. tab-set::
+.. rubric:: Shape Function API
+.. autosummary::
+    :toctree: ../../../../_as_gen
+    :nosignatures:
 
-    .. tab-item:: High Level API
+    log_smoothed_BPL
+    log_smoothed_SFBPL
+    log_exp_cutoff_sed
 
-        At the high level, each SED class provides :meth:`SynchrotronSED.sed` method which calculates the flux
-        density at a given frequency for a set of spectral parameters. This method is designed to be used in model construction and
-        provides a simple interface for calculating fluxes.
+SED Functions (BPL and SBPL)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+As described in :ref:`synch_sed_theory`, each physical scenario (e.g., with or without cooling, with or without
+synchrotron self-absorption) can give rise to multiple possible SED shapes depending on the ordering of characteristic
+frequencies. In Triceratops, these various SED shapes are implemented as individual functions within the
+:mod:`~radiation.synchrotron.SEDs` module. Each function corresponds to a specific SED shape and is named
+according to the physical scenario it represents and the spectrum number as defined in the theory documentation.
 
-        Example usage:
+Because there are so many possible SED shapes, we organize adopt a standardized naming convention for each:
 
-        .. code-block:: python
+.. code-block::
 
-            from radiation.synchrotron.SEDs import ExampleSED
+    _log_<electron_pop_type>_<SED_func_type>_sed_<physics tags ...>_<spectrum number>_<truncation tag>,
 
-            # Define spectral parameters
-            spectral_params = {
-                'nu_c': 1e14,  # Cooling frequency in Hz
-                'nu_m': 1e12,  # Minimum frequency in Hz
-                'nu_a': 1e10,  # Self-absorption frequency in Hz
-                'F_nu_max': 1.0  # Maximum flux density in mJy
-            }
+where:
 
-            # Create an instance of the FastCoolingSED class
-            sed = ExampleSED()
+- `<electron_pop_type>` indicates what type of electron population is being modeled. In all of the current SEDs, this is
+  simply ``powerlaw`` to indicate that we are assuming a standard DSA informed power-law distribution of electrons.
+- `<SED_func_type>` indicates the type of SED function being used. This is either ``bpl`` for broken power law
+  functions or ``sbpl`` for smoothed broken power law functions.
+- `<physics tags ...>` is a series of tags indicating the physical processes included in the SED. Currently, the
+  following tags are used:
 
-            # Calculate flux density at a specific frequency
-            frequency = 1e11  # Frequency in Hz
-            flux_density = sed.sed(frequency, **spectral_params)
-            print(f"Flux Density at {frequency} Hz: {flux_density} mJy")
+  - ``cool``: Indicates that cooling effects are included in the SED.
+  - ``ssa``: Indicates that synchrotron self-absorption effects are included in the SED.
 
-        If available, these classes will also implement :meth:`SynchrotronSED.from_params_to_physics` and
-        :meth:`SynchrotronSED.from_physics_to_params` methods for converting between spectral and physical parameters.
-        These are not required to be implemented in every SED class, however.
-
-    .. tab-item:: Low Level API
-
-        At the low level, each SED class provides a method for computing the flux density directly without
-        unit coercion or validation. This method is named ``_opt_sed`` and is intended for internal use or for developers
-        who need more control over the calculation. Likewise, the forward and backward parameter closures are
-        implemented as ``_opt_from_params_to_physics`` and ``_opt_from_physics_to_params`` methods.
-
-Available SEDs
----------------
-
-While it may be necessary for some users to implement custom SEDs for their specific applications, Triceratops
-provides a number of commonly used SEDs out-of-the-box. These include:
-
-- :class:`~radiation.synchrotron.SEDs.SSA_SED_PowerLaw`: The de-facto standard synchrotron SED with self-absorption
-  included for power-law distributed electrons (see e.g. :footcite:t:`demarchiRadioAnalysisSN2004C2022`).
+- `<spectrum number>` is an integer indicating which specific spectrum (based on frequency ordering) is being
+  implemented. This is directly taken from :ref:`synch_sed_theory`.
+- `<truncation tag>` indicates whether or not the SED includes an exponential cutoff at high frequencies. If the
+  ``trunc`` tag is present, then the SED function takes an additional :math:`\nu_{\rm max}` parameter
+  and applies an exponential cutoff beyond that frequency in accordance with the high frequency behavior described
+  in the theory documentation.
 
 
-In depth descriptions of each of the SED classes, including references and derivation of their forms, can be found
-in their respective class documentation.
+
+SBPL SED Functions
+~~~~~~~~~~~~~~~~~~
+
+BPL SED Functions
+~~~~~~~~~~~~~~~~~~
+
+Normalization Functions
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Regime Determination Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
 
 References
 ----------

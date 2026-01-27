@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:03.834** total execution time for 7 files **from all galleries**:
+**00:23.205** total execution time for 8 files **from all galleries**:
 
 .. container::
 
@@ -32,24 +32,27 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_auto_examples_e_physics_synchro_plot_PL_sed.py` (``galleries/examples/e_physics_synchro/plot_PL_sed.py``)
-     - 00:03.834
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_a_data_plot_epoch_photometry.py` (``galleries/examples/a_data/plot_epoch_photometry.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_a_data_plot_photometry_data.py` (``galleries/examples/a_data/plot_photometry_data.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_a_data_plot_specific_epochs.py` (``galleries/examples/a_data/plot_specific_epochs.py``)
-     - 00:00.000
+   * - :ref:`sphx_glr_auto_examples_b_inference_plot_censored_SED_fit.py` (``galleries/examples/b_inference/plot_censored_SED_fit.py``)
+     - 00:11.803
      - 0.0
    * - :ref:`sphx_glr_auto_examples_b_inference_plot_SED_fit.py` (``galleries/examples/b_inference/plot_SED_fit.py``)
-     - 00:00.000
+     - 00:06.201
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_c_models_plot_chevalier_shock_synchrotron.py` (``galleries/examples/c_models/plot_chevalier_shock_synchrotron.py``)
-     - 00:00.000
+   * - :ref:`sphx_glr_auto_examples_e_physics_synchro_plot_PL_sed.py` (``galleries/examples/e_physics_synchro/plot_PL_sed.py``)
+     - 00:03.838
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_a_data_plot_epoch_photometry.py` (``galleries/examples/a_data/plot_epoch_photometry.py``)
+     - 00:00.505
      - 0.0
    * - :ref:`sphx_glr_auto_examples_d_physics_shocks_plot_numerical_shock_engine.py` (``galleries/examples/d_physics_shocks/plot_numerical_shock_engine.py``)
-     - 00:00.000
+     - 00:00.405
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_a_data_plot_photometry_data.py` (``galleries/examples/a_data/plot_photometry_data.py``)
+     - 00:00.211
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_c_models_plot_chevalier_shock_synchrotron.py` (``galleries/examples/c_models/plot_chevalier_shock_synchrotron.py``)
+     - 00:00.164
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_a_data_plot_specific_epochs.py` (``galleries/examples/a_data/plot_specific_epochs.py``)
+     - 00:00.077
      - 0.0

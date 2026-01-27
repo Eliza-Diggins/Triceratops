@@ -876,16 +876,25 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
 Our final set of spectral breaks occur as one ventures into the asymptotic high-frequency regime beyond the
 maximum electron frequency :math:`\nu_{\max}`. In this regime, the SED transitions from any of the optically thin
 segments (SPL F, SPL G, or SPL H) to the exponential cutoff segment (SPL I). Because the
-exponential cutoff is not a power law, we do not provide SBPL representations for these breaks.
-Instead, we append a truncation factor
+exponential cutoff is not a power law, we do not provide SBPL representations for these breaks, but instead
+provide **exponential cutoff functions**. For discrete (non-smooth) representations of SEDs, we use the function
+:math:`\Phi(\nu,\nu_{\rm max})` to denote the cutoff:
 
 .. math::
 
     \Phi(\nu,\nu_{\rm max}) = \left(\frac{\nu}{\nu_{\max}}\right)^{1/2}
-                \exp\left(1 - \frac{\nu}{\nu_{\max}}\right).
+    \exp\left(1 -\frac{\nu}{\nu_{\max}}\right).
 
-This prevents the exponential cutoff from introducing discontinuities in the SED at
-:math:`\nu = \nu_{\max}`.
+In the smoothed case described above, we instead need a **scale-free exponential cutoff function** which does
+not interfere with the normalization of the SED at lower frequencies. We therefore define:
+
+.. math::
+
+    \tilde{\Phi}(\nu,\nu_{\max}) = \begin{cases}
+        1, & \nu < \nu_{\max} \\
+        \left(\frac{\nu}{\nu_{\max}}\right)^{1/2}
+        \exp\left(1 -\frac{\nu}{\nu_{\max}}\right), & \nu \geq \nu_{\max}.
+    \end{cases}
 
 
 Broadband SEDs
@@ -906,7 +915,7 @@ to segments of SPL H, SPL F, and SPL D. The smoothed SED may be constructed as:
 
 .. math::
 
-    F_\nu = F^{(D,G)}_\nu \tilde{F}_{\rm exp, \nu_{\max}}(\nu).
+    F_\nu = F^{(D,G)}_\nu \tilde{\Phi}(\nu,\nu_{\max}),
 
 The discrete SED segments are:
 
@@ -974,7 +983,7 @@ We now progress to the case with SSA but no cooling. In this case, there are 2(3
         .. math::
 
             F_\nu = \tilde{F}^{(B,D)}_\nu F^{(D,G)}_\nu
-                    \tilde{F}_{\rm exp, \nu_{\max}}(\nu),
+                    \tilde{\Phi}(\nu,\nu_{\max}),
 
         where we have selected to normalize at the (D,G) break at :math:`\nu_m`. The discrete SED segments are:
 
@@ -1030,7 +1039,7 @@ We now progress to the case with SSA but no cooling. In this case, there are 2(3
         .. math::
 
             F_\nu = F^{(B,A)}_\nu \tilde{F}^{(A,G)}_\nu
-                    \tilde{F}_{\rm exp, \nu_{\max}}(\nu),
+                    \tilde{\Phi}(\nu,\nu_{\max}),
 
         where we have selected to normalize at the (B,A) break at :math:`\nu_m`. The discrete SED segments are:
 
@@ -1111,7 +1120,7 @@ and no SSA. In this case, the three relevant break frequencies are :math:`\nu_m`
         .. math::
 
             F_\nu = F^{(E,F)}_\nu \tilde{F}^{(F,H)}_\nu
-                    \tilde{F}_{\rm exp, \nu_{\max}}(\nu),
+                    \tilde{\Phi}(\nu,\nu_{\max}),
 
         where we will normalize at :math:`\nu_c` using the cooled population and corresponding electron
         distribution function. The discrete SED segments are:
@@ -1170,7 +1179,7 @@ and no SSA. In this case, the three relevant break frequencies are :math:`\nu_m`
         .. math::
 
             F_\nu = F^{(D,G)}_\nu \tilde{F}^{(G,H)}_\nu
-                    \tilde{F}_{\rm exp, \nu_{\max}}(\nu),
+                    \tilde{\Phi}(\nu,\nu_{\max}),
 
         where we have selected to normalize at the (D,G) break at :math:`\nu_m`. The discrete SED segments are:
 
@@ -1219,14 +1228,7 @@ The resulting spectra are
 7. :math:`(\nu_c, \nu_m < \nu_a < \nu_{\rm max})`: This is the **extremely thick, fast cooling** spectrum.
 
 In the tab set below, we'll go through each of these and discuss the normalization and the corresponding SEDs for the
-various cases. For the sake of brevity, we define the **cut-off function** as
-
-.. math::
-
-    \Phi(\nu,\nu_{\rm max}) = \left(\frac{\nu}{\nu_{\max}}\right)^{1/2}
-                \exp\left(1-\frac{\nu}{\nu_{\rm max}}\right),
-
-matching our conventions above.
+various cases.
 
 .. tab-set::
 
@@ -1269,7 +1271,7 @@ matching our conventions above.
         .. math::
 
             F_\nu = \tilde{F}^{(B,D)}_\nu F^{(D,G)}_\nu
-                    \tilde{F}_{\rm exp, \nu_{\max}}(\nu),
+                    \tilde{\Phi}(\nu,\nu_{\max}),
 
         where we have selected to normalize at the (D,G) break at :math:`\nu_m`. The discrete SED segments are:
 
@@ -1330,7 +1332,7 @@ matching our conventions above.
         .. math::
 
             F_\nu = F^{(B,A)}_\nu \tilde{F}^{(A,G)}_\nu
-                    \tilde{F}_{\rm exp, \nu_{\max}}(\nu),
+                    \tilde{\Phi}(\nu,\nu_{\max}),
 
         where we have selected to normalize at the (B,A) break at :math:`\nu_m`. The discrete SED segments are:
 
@@ -1406,6 +1408,22 @@ matching our conventions above.
               - SPL I
               - cutoff
 
+        The SBPL SED may be constructed as:
+
+        .. math::
+
+            F_\nu
+            =
+            F_{\nu_m,0}
+            \,
+            \tilde{F}_\nu^{(B,D)}(\nu;\nu_a)
+            \,
+            F_\nu^{(D,G)}(\nu;\nu_m)
+            \,
+            \tilde{F}_\nu^{(G,H)}(\nu;\nu_c)
+            \,
+            \tilde{\Phi}(\nu;\nu_{\max})
+
         The corresponding discrete SED takes the form
 
         .. math::
@@ -1472,6 +1490,22 @@ matching our conventions above.
 
         .. math::
 
+            F_\nu
+            =
+            F_{\nu_m,0}
+            \,
+            F_\nu^{(B,A)}(\nu;\nu_m)
+            \,
+            \tilde{F}_\nu^{(A,G)}(\nu;\nu_a)
+            \,
+            \tilde{F}_\nu^{(G,H)}(\nu;\nu_c)
+            \,
+            \tilde{\Phi}(\nu;\nu_{\max})
+
+        The corresponding discrete SED takes the form
+
+        .. math::
+
             F_\nu = F_{\nu,0}\begin{cases}
             \left(\frac{\nu}{\nu_m}\right)^2,&\nu<\nu_m \quad \text{(SPL B)}\\
             \left(\frac{\nu}{\nu_m}\right)^{5/2},&\nu_m<\nu<\nu_a \quad \text{(SPL A)}\\
@@ -1494,7 +1528,7 @@ matching our conventions above.
         .. math::
 
             F_{\nu,0} = F_{\nu_m,0}
-            \right]\left(\frac{\nu_a}{\nu_m}\right)^{-(p-1)/2}
+            \left(\frac{\nu_a}{\nu_m}\right)^{-(p-1)/2}
             \left(\frac{\nu_m}{\nu_a}\right)^{5/2}\frac{V}{D^2}
 
 
@@ -1536,6 +1570,23 @@ matching our conventions above.
               - :math:`\nu \ge \nu_{\max}`
               - SPL I
               - cutoff
+
+        The SBPL SED may be constructed as:
+
+        .. math::
+
+            F_\nu
+            =
+            \,
+            \tilde{F}_\nu^{(B,C)}(\nu;\nu_{\rm ac})
+            \,
+            \tilde{F}_\nu^{(C,E)}(\nu;\nu_a)
+            \,
+            F_\nu^{(E,F)}(\nu;\nu_c)
+            \,
+            \tilde{F}_\nu^{(F,H)}(\nu;\nu_m)
+            \,
+            \tilde{\Phi}(\nu;\nu_{\max})
 
         Piecewise spectrum (normalized at :math:`\nu_c`):
 
@@ -1600,6 +1651,21 @@ matching our conventions above.
               - :math:`\nu \ge \nu_{\max}`
               - SPL I
               - cutoff
+
+        The SBPL SED may be constructed as:
+
+        .. math::
+
+            F_\nu
+            =
+            \,
+            \tilde{F}_\nu^{(B,C)}(\nu;\nu_{\rm ac})
+            \,
+            F_\nu^{(C,F)}(\nu;\nu_a)
+            \,
+            \tilde{F}_\nu^{(F,H)}(\nu;\nu_m)
+            \,
+            \tilde{\Phi}(\nu;\nu_{\max})
 
         The corresponding discrete SED is
 
@@ -1671,6 +1737,20 @@ matching our conventions above.
               - :math:`\nu \ge \nu_{\rm max}`
               - SPL I
               - cutoff
+
+        The SBPL SED may be constructed as:
+
+        .. math::
+
+            F_\nu
+            =
+            F_{\nu_m,0}
+            \,
+            F_\nu^{(B,A)}(\nu;\nu_m)
+            \,
+            \tilde{F}_\nu^{(A,H)}(\nu;\nu_a)
+            \,
+            \tilde{\Phi}(\nu;\nu_{\max})
 
         The discrete SED is therefore
 
