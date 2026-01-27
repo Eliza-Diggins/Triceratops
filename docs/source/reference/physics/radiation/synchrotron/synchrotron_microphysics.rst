@@ -165,6 +165,158 @@ corresponding Lorentz factor normalization, one could use the following code:
         N0_energy, p=p, mode='energy')
     print(f"Power-law normalization in gamma: {N0_gamma:.2e} cm^-3")
 
+Broken Power-Law Electron Distributions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In many astrophysical environments, a single power-law electron distribution is insufficient to
+accurately describe the non-thermal particle population. In such cases, a **broken power-law (BPL)**
+distribution provides a more flexible and physically motivated model.
+
+In this framework, the number density of electrons per unit Lorentz factor :math:`\gamma` is given by:
+
+.. math::
+
+    \frac{dN}{d\gamma} =
+    \begin{cases}
+        N_0 \left(\dfrac{\gamma}{\gamma_b}\right)^{-a_1},
+        & \gamma_{\min} \le \gamma < \gamma_b, \\[1em]
+        N_0 \left(\dfrac{\gamma}{\gamma_b}\right)^{-a_2},
+        & \gamma_b \le \gamma \le \gamma_{\max},
+    \end{cases}
+
+where:
+
+- :math:`a_1` and :math:`a_2` are the power-law indices below and above the break,
+- :math:`\gamma_b` is the break Lorentz factor,
+- :math:`\gamma_{\min}` and :math:`\gamma_{\max}` define the support of the distribution,
+- :math:`N_0` is the normalization constant, defined at :math:`\gamma = \gamma_b`.
+
+Broken power-law distributions arise naturally in scenarios where particle acceleration,
+cooling, or escape processes modify the electron spectrum, such as radiative cooling breaks
+in synchrotron-emitting plasmas or multi-stage acceleration mechanisms.
+
+As with the single power-law case, essentially all synchrotron observables depend on **moments**
+of the distribution rather than its detailed shape. Triceratops therefore provides a comprehensive
+set of utilities for computing these moments directly.
+
+.. note::
+
+    As with power-law distributions, Triceratops consistently treats the Lorentz factor
+    :math:`\gamma` as the independent variable for broken power-law distributions. Support
+    for energy-space representations is provided internally, and conversion utilities
+    are available where appropriate.
+
+.. hint::
+
+    From a modeling perspective, broken power-law distributions should be viewed as a
+    *minimal extension* of the single-slope case. All high-level synchrotron quantities
+    (e.g., emissivities, characteristic frequencies, and cooling rates) can be expressed
+    in terms of a small set of distribution moments.
+
+
+.. rubric:: API Reference
+
+*current module*: :mod:`radiation.synchrotron.microphysics`
+
+.. tab-set::
+
+    .. tab-item:: High-Level API
+
+        The following high-level helper functions are provided for working with broken
+        power-law electron distributions:
+
+        .. currentmodule:: triceratops.radiation.synchrotron.microphysics
+        .. autosummary::
+           :toctree: ../../../../_as_gen
+           :nosignatures:
+
+           compute_electron_gamma_BPL_moment
+           compute_electron_energy_BPL_moment
+           compute_mean_gamma_BPL
+           compute_mean_energy_BPL
+           compute_BPL_total_number_density
+           compute_BPL_effective_number_density
+           swap_electron_BPL_normalization
+
+    .. tab-item:: Low-Level API
+
+        Mirroring the high-level interface, the following low-level functions are provided
+        for direct manipulation of broken power-law electron distributions:
+
+        - ``_opt_compute_BPL_moment``, which computes the generic moment of a broken
+          power-law distribution:
+
+          .. math::
+
+              I = \int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^n \, N(\gamma)\, d\gamma.
+
+        - ``_opt_compute_BPL_n_total``, which computes the total number density of electrons:
+
+          .. math::
+
+              N_{\rm total} = \int_{\gamma_{\min}}^{\gamma_{\max}} N(\gamma)\, d\gamma.
+
+        - ``_opt_compute_BPL_n_eff``, which computes the effective number of radiating electrons
+          contributing to synchrotron emission:
+
+          .. math::
+
+              N_{\rm eff} = \int_{\gamma_{\min}}^{\gamma_{\max}} N(\gamma)\, \gamma^2 \, d\gamma.
+
+        - ``_opt_convert_BPL_norm_energy_to_gamma``, which converts the normalization of a
+          broken power-law electron energy distribution to its Lorentz factor representation.
+        - ``_opt_convert_BPL_norm_gamma_to_energy``, which performs the inverse conversion.
+
+.. rubric:: Examples
+
+As with power-law distributions, broken power-law utilities are primarily intended for use
+by higher-level modeling routines. However, they can also be used directly for custom analyses.
+
+For example, to compute the mean Lorentz factor of a broken power-law electron distribution
+with :math:`a_1 = 2.0`, :math:`a_2 = 3.5`, :math:`\gamma_b = 10^4`,
+:math:`\gamma_{\min} = 10^2`, and :math:`\gamma_{\max} = 10^7`, one could write:
+
+.. code-block:: python
+
+    from triceratops.radiation.synchrotron.microphysics import compute_mean_gamma_BPL
+
+    a1 = 2.0
+    a2 = 3.5
+    gamma_b = 1e4
+    gamma_min = 1e2
+    gamma_max = 1e7
+
+    mean_gamma = compute_mean_gamma_BPL(
+        a1, a2, gamma_b,
+        gamma_min=gamma_min,
+        gamma_max=gamma_max,
+    )
+
+    print(f"Mean Lorentz factor: {mean_gamma:.2e}")
+
+Similarly, to compute the effective number density of radiating electrons in a broken
+power-law distribution with normalization :math:`N_0 = 10^5 \, \rm cm^{-3}`, one could use:
+
+.. code-block:: python
+
+    from triceratops.radiation.synchrotron.microphysics import (
+        compute_BPL_effective_number_density
+    )
+
+    N0 = 1e5  # cm^-3
+
+    n_eff = compute_BPL_effective_number_density(
+        N0,
+        a1=2.0,
+        a2=3.5,
+        gamma_b=1e4,
+        gamma_min=1e2,
+        gamma_max=1e7,
+    )
+
+    print(f"Effective radiating density: {n_eff:.2e}")
+
+
 ----
 
 Equipartition Closure
@@ -208,6 +360,11 @@ the API in the tab-set below:
            compute_equipartition_magnetic_field
            compute_bol_emissivity
            compute_bol_emissivity_from_thermal_energy_density
+           compute_bol_emissivity_BPL_from_thermal_energy_density
+           compute_BPL_norm_from_thermal_energy_density
+           compute_bol_emissivity_BPL
+           compute_BPL_norm_from_magnetic_field
+
 
     .. tab-item:: Low-Level API
 
@@ -236,6 +393,8 @@ the API in the tab-set below:
         - ``_opt_compute_bol_emiss_from_thermal_energy_density_full``, which computes the bolometric synchrotron
           emissivity given a thermal energy density and the equipartition parameters :math:`\epsilon_e` and
           :math:`\epsilon_B`, **without requiring knowledge of the PL normalization**.
+
+        There are corresponding BPL functions for each of these as well.
 
 The most important of these functions is :func:`compute_PL_norm_from_thermal_energy_density`, which computes
 the normalization of a power-law
