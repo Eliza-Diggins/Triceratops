@@ -47,6 +47,22 @@ References
 c_1_cgs: float = c_1.cgs.value
 """float: Synchrotron radiation constant :math:`c_1` in CGS units."""
 
+# Cooling normalization constants.
+chi_c = (
+    (3 * np.sqrt(3) / (32 * np.pi**2))
+    * (4 * np.pi / 3) ** (1 / 2)
+    * (constants.m_e**3 * constants.c**5 / constants.e.esu**3) ** (1 / 2)
+    * constants.sigma_T
+)
+r"""astropy.units.Quantity: Constant :math:`\chi_c` in synchrotron normalization calculations.
+
+For more details on this parameter, see :ref:`synch_sed_theory`.
+"""
+chi_c_cgs: float = chi_c.cgs.value
+r"""float: Constant :math:`\chi_c` in CGS units."""
+log_chi_c_cgs = np.log(chi_c_cgs)
+r"""float: Natural logarithm of the constant :math:`\chi_c` in CGS units."""
+
 
 # =========================================== #
 # C5 AND C6 PARAMETERS                        #
@@ -224,3 +240,60 @@ def compute_c6_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
 
     # Scale by the standard coefficient and return.
     return _c6_coefficient_cgs * dimensionless_part
+
+
+def compute_chi_m_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
+    r"""
+    Compute the :math:`\chi_m(p)` coefficient for synchrotron normalization calculations.
+
+    :math:`\chi_m(p)` is used in the calculation of the minimum electron Lorentz factor
+    normalization in synchrotron SEDs. It takes the form
+
+    .. math::
+
+        \chi_m(p) = \left[\left(\frac{3 \sqrt{3}}{32\pi^2}\right)
+                    \left(\frac{4\pi}{3}\right)^{(1-p)/2}
+                    \frac{m_e^{(3-p)/2} c^{(5-p)/2}}{q^{(3-p)/2}}
+                    \sigma_T\right]
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz factor distribution,
+        :math:`N(\Gamma) \propto \Gamma^{-p}`. Default is 3.0.
+
+    Returns
+    -------
+    float
+        The synchrotron normalization coefficient :math:`\chi_m(p)` in CGS units.
+
+    Notes
+    -----
+    See :ref:`synch_sed_theory` for more details on this parameter.
+    """
+    _coef = (3 * np.sqrt(3) / (32 * np.pi**2)) * (4 * np.pi / 3) ** ((1 - p) / 2) * constants.sigma_T
+    dimless_part = (
+        constants.m_e ** ((3 - p) / 2) * constants.c ** ((5 - p) / 2) / constants.e.esu ** ((3 - p) / 2)
+    ).cgs.value
+
+    return _coef.cgs.value * dimless_part
+
+
+def compute_log_chi_m_parameter(p: Union[float, np.ndarray] = 3.0) -> float:
+    r"""
+    Compute the natural logarithm of the :math:`\chi_m(p)` coefficient for synchrotron normalization calculations.
+
+    See :func:`compute_chi_m_parameter` for details on :math:`\chi_m(p)`.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz factor distribution,
+        :math:`N(\Gamma) \propto \Gamma^{-p}`. Default is 3.0.
+
+    Returns
+    -------
+    float
+        The natural logarithm of the synchrotron normalization coefficient :math:`\chi_m(p)` in CGS units.
+    """
+    return np.log(compute_chi_m_parameter(p))

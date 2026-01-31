@@ -178,6 +178,7 @@ frequency** as
 Expressed as a linear frequency, this becomes
 
 .. math::
+    :label: eq_synch_frequency
 
     \boxed{
     \nu_c
@@ -199,6 +200,39 @@ It is common to introduce the constant :math:`c_1`:footcite:p:`1970ranp.book....
     **characteristic synchrotron frequency**. In the context of *populations* of electrons, conventions diverge;
     however, we prefer to contain those differences of convention to that context. See the section on
     electron populations for more details.
+
+To provide a thorough and consistent theoretical foundation, it is here useful to introduce equivalent notation
+for :math:`c_1` in terms of the :math:`\gamma` instead of :math:`E`. We therefore define
+
+.. math::
+
+    c_{1,\gamma} = \frac{3}{4\pi} \frac{e}{m_e c} = 8.59 \times 10^6\;{\rm cm^{1/2}\;g^{-1/2}}.
+
+As a useful reference, for :math:`\gamma = 1` is a 1 Gauss field, the characteristic synchrotron frequency is therefore
+
+.. math::
+
+    \nu_c(\gamma=1, B=1\,{\rm G}, \sin\varphi=1) = c_{1,\gamma} = 8.59 \times 10^6\;{\rm Hz}.
+
+For a :math:`\gamma = 10^2`,
+
+.. math::
+
+    \nu_c(\gamma=10^2, B=1\,{\rm G}, \sin\varphi=1) = 8.59 \times 10^{10}\;{\rm Hz}.
+
+Thus, one expects that, in many scenarios, synchrotron emission from relativistic electrons will peak in the radio
+band.
+
+.. dropdown:: Pitch-Angle Averaging
+
+    Throughout Triceratops, we provide two standard options for handing the pitch angle dependence of synchrotron
+    emission: (a) assume a fixed pitch angle, or (b) perform a pitch-angle average assuming an isotropic
+    distribution of pitch angles.
+
+    To perform the pitch angle averaged calculations, we perform this averaging when computing the *emissivity*,
+    *absorption*, and related representations of the ensemble synchrotron emission. We therefore **DO NOT** define
+    a quantity :math:`\nu_{\rm m,iso}` or similar, instead opting to perform the averaging directly on the relevant
+    quantities.
 
 The Single Electron Synchrotron Spectrum
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1365,6 +1399,7 @@ With this, the absorption coefficient for a power-law distribution of electrons 
     Starting from the exact expression,
 
     .. math::
+        :label: eq:ssa_exact
 
         \alpha_\nu
         =
@@ -1598,6 +1633,10 @@ may then be obtained by matching the optically thick and optically thin asymptot
 where :math:`F_\nu^{\rm (thin)}` is computed from the appropriate optically thin spectral segment for the
 problem at hand.  This yields an algebraic equation for :math:`\nu_a`.
 
+.. note::
+
+    Given that this approach is only approximate, it is often customary to absorb the various order-unity
+    constants into a single fudge factor as described above. This **includes** pitch averaging effects.
 
 
 References

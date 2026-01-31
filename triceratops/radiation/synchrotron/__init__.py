@@ -9,6 +9,19 @@ These tools can be integrated with dynamical models of astrophysical transients 
 produce comprehensive simulations of radiation from events like supernovae and gamma-ray bursts.
 """
 
-__all__ = ["microphysics", "frequencies", "SEDs", "utils"]
+__all__ = [
+    "microphysics",
+    "frequencies",
+    "SEDs",
+    "utils",
+    "PowerLaw_Cooling_SSA_SynchrotronSED",
+    "PowerLaw_Cooling_SynchrotronSED",
+    "PowerLaw_SSA_SynchrotronSED",
+]
 
 from . import SEDs, frequencies, microphysics, utils
+from .SEDs import (
+    PowerLaw_Cooling_SSA_SynchrotronSED,
+    PowerLaw_Cooling_SynchrotronSED,
+    PowerLaw_SSA_SynchrotronSED,
+)

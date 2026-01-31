@@ -2507,6 +2507,58 @@ class PowerLaw_Cooling_SynchrotronSED(MultiSpectrumSynchrotronSED):
     # ------------------------------------------------------------ #
     # User-facing API                                             #
     # ------------------------------------------------------------ #
+    def _log_opt_sed(self, log_nu, log_nu_m, log_nu_c, log_nu_max, log_F_peak, p, s):
+        r"""
+        Optimized log-space SED evaluation with regime determination.
+
+        This method orchestrates the full SED evaluation by:
+
+        1. Determining the global spectral regime,
+        2. Dispatching to the appropriate regime-specific kernel.
+
+        All inputs are assumed to be in **natural logarithmic CGS units**.
+
+        Parameters
+        ----------
+        log_nu : "_ArrayLike"
+            Natural logarithm of the evaluation frequencies.
+        log_nu_m : float
+            Natural logarithm of the injection frequency.
+        log_nu_c : float
+            Natural logarithm of the cooling frequency.
+        log_nu_max : float
+            Natural logarithm of the maximum synchrotron frequency.
+        log_F_peak : float
+            Natural logarithm of the peak flux density.
+        p : float
+            Electron power-law index.
+        s : float
+            Smoothing parameter for spectral breaks.
+
+
+        Returns
+        -------
+        array-like
+            Natural logarithm of the synchrotron SED evaluated at ``log_nu``.
+        """
+        # Determine the regime
+        regime, _ = self._compute_sed_regime(
+            log_nu_m,
+            log_nu_c,
+            log_nu_max,
+        )
+        # Dispatch to the appropriate regime function
+        return self._log_opt_sed_from_regime(
+            log_nu,
+            regime,
+            log_nu_m,
+            log_nu_c,
+            log_nu_max,
+            log_F_peak,
+            p,
+            s,
+        )
+
     def sed(
         self,
         nu: "_UnitBearingArrayLike",
@@ -2798,6 +2850,57 @@ class PowerLaw_SSA_SynchrotronSED(MultiSpectrumSynchrotronSED):
     # ============================================================ #
     # User-facing API                                             #
     # ============================================================ #
+    def _log_opt_sed(
+        self,
+        log_nu: "_ArrayLike",
+        log_nu_m: float,
+        log_nu_max: float,
+        log_F_peak: float,
+        log_omega: float,
+        log_gamma_m: float,
+        p: float = 3.0,
+        s: float = -1.0,
+    ):
+        r"""
+        Optimized log-space SED evaluation with regime determination.
+
+        This method orchestrates the full SED evaluation by:
+
+        1. Computing the self-absorption frequency,
+        2. Determining the global spectral regime,
+        3. Dispatching to the appropriate regime-specific kernel.
+
+        All inputs are assumed to be in **natural logarithmic CGS units**.
+
+        Returns
+        -------
+        array-like
+            Natural logarithm of the synchrotron SED evaluated at ``log_nu``.
+        """
+        # Compute the self-absorption frequency
+        log_nu_a = self._compute_log_nu_a(
+            log_F_peak,
+            log_nu_m,
+            log_omega,
+            log_gamma_m,
+        )
+        # Determine the regime
+        regime, _ = self._compute_sed_regime(
+            log_nu_m=log_nu_m,
+            log_nu_a=log_nu_a,
+        )
+        # Dispatch to the appropriate regime function
+        return self._log_opt_sed_from_regime(
+            log_nu,
+            regime,
+            log_nu_m,
+            log_nu_a,
+            log_nu_max,
+            log_F_peak,
+            p,
+            s,
+        )
+
     def sed(
         self,
         nu: "_UnitBearingArrayLike",
@@ -2823,17 +2926,15 @@ class PowerLaw_SSA_SynchrotronSED(MultiSpectrumSynchrotronSED):
         log_omega = np.log(omega)
         log_gamma_m = np.log(gamma_m)
 
-        log_nu_a = self._compute_log_nu_a(log_F_peak, log_nu_m, log_omega, log_gamma_m)
-
-        log_sed = self._log_opt_sed_from_regime(
-            *self._compute_sed_regime(log_nu_m, log_nu_a),
+        log_sed = self._log_opt_sed(
             log_nu,
-            log_nu_m,
-            log_nu_a,
-            log_nu_max,
-            log_F_peak,
-            p,
-            s,
+            log_nu_m=log_nu_m,
+            log_nu_max=log_nu_max,
+            log_F_peak=log_F_peak,
+            log_omega=log_omega,
+            log_gamma_m=log_gamma_m,
+            p=p,
+            s=s,
         )
 
         return np.exp(log_sed) * u.erg / (u.s * u.cm**2 * u.Hz)
