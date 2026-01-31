@@ -67,6 +67,7 @@ def _optimized_compute_nu_gyro(
 def _optimized_compute_nu_critical(
     gamma: Union[float, np.ndarray],
     B: Union[float, np.ndarray],
+    sin_alpha: Union[float, np.ndarray] = 1.0,
 ):
     r"""
     Compute the synchrotron critical frequency (CGS, optimized).
@@ -78,6 +79,9 @@ def _optimized_compute_nu_critical(
 
     B : float or array-like
         Magnetic field strength in Gauss.
+    sin_alpha : float or array-like
+        Sine of the pitch angle. Default is 1.0 (i.e., alpha
+        = pi/2).
 
     Returns
     -------
@@ -90,11 +94,11 @@ def _optimized_compute_nu_critical(
 
     .. math::
 
-        \nu_{critical} = \frac{3 e B \gamma^2}{4 \pi m_e c}
+        \nu_{critical} = \frac{3 e B \sin \alpha \gamma^2}{4 \pi m_e c}
 
     No unit validation is performed.
     """
-    return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * gamma**2
+    return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * sin_alpha * gamma**2
 
 
 # --- High-Level API --- #
@@ -124,7 +128,7 @@ def compute_gyrofrequency(
 
     Notes
     -----
-    The gyrofrequency for a relativistic electron is given by
+    The gyrofrequency for a relativistic electron is given by :footcite:p:`RybickiLightman`
 
     .. math::
 
@@ -133,6 +137,10 @@ def compute_gyrofrequency(
     This function computes the gyrofrequency associated with
     synchrotron emission from electrons of Lorentz factor ``gamma`` in
     a magnetic field ``B``.
+
+    References
+    ----------
+    .. footbibliography::
     """
     B = ensure_in_units(B, u.Gauss)
 
@@ -142,6 +150,7 @@ def compute_gyrofrequency(
 def compute_nu_critical(
     gamma: Union[float, np.ndarray],
     B: Union[float, np.ndarray, u.Quantity],
+    alpha: float = np.pi / 2,
 ) -> u.Quantity:
     r"""
     Compute the synchrotron critical frequency for relativistic electrons.
@@ -157,6 +166,8 @@ def compute_nu_critical(
 
     B : float, array-like, or astropy.units.Quantity
         Magnetic field strength. Default units are Gauss.
+    alpha: float
+        Pitch angle in radians. Default is ``pi/2``.
 
     Returns
     -------
@@ -165,24 +176,35 @@ def compute_nu_critical(
 
     Notes
     -----
-    The critical frequency for a relativistic electron is given by
+    The critical frequency for a relativistic electron is given by :footcite:p:`RybickiLightman`
 
     .. math::
 
-        \nu_{critical} = \frac{3 e B \gamma^2}{4 \pi m_e c}
+        \nu_{critical} = \frac{3 e B\sin \alpha \gamma^2}{4 \pi m_e c}
 
     This function computes the critical frequency associated with
     synchrotron emission from electrons of Lorentz factor ``gamma`` in
     a magnetic field ``B``.
+
+    References
+    ----------
+    .. footbibliography::
     """
     B = ensure_in_units(B, u.Gauss)
 
-    return _optimized_compute_nu_critical(gamma, B) * u.Hz
+    # compute sin(alpha) factor
+    sin_alpha = np.sin(alpha)
+
+    return _optimized_compute_nu_critical(gamma, B, sin_alpha) * u.Hz
 
 
 # ============================================ #
 # Synchrotron Kernels                          #
 # ============================================ #
+# These functions implement the synchrotron kernel functions F(x) and G(x) in
+# various ways, including direct integration and interpolation-based approximations.
+
+
 def first_synchrotron_kernel(x: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
     r"""
     Compute the first synchrotron kernel function :math:`F(x)`.
