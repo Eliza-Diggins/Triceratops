@@ -305,5 +305,5 @@ class SynchrotronShockModel(Model):
         # 1e-23 erg/s/cm^2/Hz = 1 Jy
         return {
             "flux_density": 1e-23
-            * self._SED._opt_sed(variables["frequency"], nu_brk, F_brk, parameters["p"], parameters["s"])
+            * self._SED._log_opt_sed(variables["frequency"], nu_brk, F_brk, parameters["p"], parameters["s"])
         }
