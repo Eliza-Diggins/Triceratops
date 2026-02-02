@@ -33,6 +33,7 @@ system:
   # project-specific or user-specific configurations.
   appearance:
     disable_progress_bars: false  # Disable progress bars in the console.
+    progress_bar_format: "{percentage:3.0f}% |{bar}| 🦖 {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
 
 # ---------------------------------------------------
 # PHYSICS CONFIGURATION

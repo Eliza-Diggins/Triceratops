@@ -15,7 +15,9 @@ from astropy import units as u
 from scipy.integrate import quad
 from scipy.interpolate import interp1d
 from scipy.special import kv
+from tqdm.auto import tqdm
 
+from triceratops.utils.config import triceratops_config
 from triceratops.utils.misc_utils import ensure_in_units
 
 if TYPE_CHECKING:
@@ -99,6 +101,102 @@ def _optimized_compute_nu_critical(
     No unit validation is performed.
     """
     return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * sin_alpha * gamma**2
+
+
+def _opt_compute_synch_frequency(
+    gamma: Union[float, np.ndarray],
+    B: Union[float, np.ndarray],
+    sin_alpha: Union[float, np.ndarray] = 1.0,
+    pitch_average: bool = True,
+):
+    r"""
+    Compute the synchrotron injection frequency (CGS, optimized).
+
+    Parameters
+    ----------
+    gamma : float or array-like
+        Electron Lorentz factor.
+
+    B : float or array-like
+        Magnetic field strength in Gauss.
+    sin_alpha : float or array-like
+        Sine of the pitch angle. Default is 1.0 (i.e., alpha
+        = pi/2). This is only used if ``pitch_average`` is False.
+    pitch_average : bool
+        Whether to use pitch-angle averaged value. Default is True.
+
+    Returns
+    -------
+    nu_injection : float or array-like
+        Synchrotron injection frequency in Hz (CGS-equivalent).
+
+    Notes
+    -----
+    Implements the injection frequency formula:
+
+    .. math::
+
+        \nu_m = \gamma^2 \frac{3 eB\sin\alpha}{4 \pi m_e c},
+
+    where, in the case of pitch-angle averaging, :math:`\langle \sin \alpha \rangle = 2/\pi`:
+
+    .. math::
+
+        \nu_m = \gamma^2 \frac{3 eB}{2 \pi^2 m_e c}
+
+    No unit validation is performed.
+    """
+    if pitch_average:
+        sin_alpha_factor = 2 / np.pi
+    else:
+        sin_alpha_factor = sin_alpha
+
+    return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * sin_alpha_factor * gamma**2
+
+
+def _opt_compute_synch_gamma(
+    nu: Union[float, np.ndarray],
+    B: Union[float, np.ndarray],
+    sin_alpha: Union[float, np.ndarray] = 1.0,
+    pitch_average: bool = True,
+):
+    r"""
+    Compute the electron Lorentz factor corresponding to a given synchrotron frequency (CGS, optimized).
+
+    Parameters
+    ----------
+    nu : float or array-like
+        Synchrotron frequency in Hz.
+
+    B : float or array-like
+        Magnetic field strength in Gauss.
+
+    sin_alpha : float or array-like
+        Sine of the pitch angle. Only used if ``pitch_average=False``.
+
+    pitch_average : bool
+        Whether to use pitch-angle averaged value.
+        Uses :math:`\left<\sin\alpha\right> = 2/\pi` if True.
+
+    Returns
+    -------
+    gamma : float or array-like
+        Electron Lorentz factor.
+
+    Notes
+    -----
+    Inverts the synchrotron characteristic frequency relation:
+
+    .. math::
+
+        \nu = \gamma^2 \frac{3 e B \sin\alpha}{4\pi m_e c}
+    """
+    if pitch_average:
+        sin_alpha_factor = 2 / np.pi
+    else:
+        sin_alpha_factor = sin_alpha
+
+    return np.sqrt((4 * np.pi / 3) * nu / (_gyrofrequency_coefficient_cgs * B * sin_alpha_factor))
 
 
 # --- High-Level API --- #
@@ -198,13 +296,141 @@ def compute_nu_critical(
     return _optimized_compute_nu_critical(gamma, B, sin_alpha) * u.Hz
 
 
+def compute_synchrotron_frequency(
+    gamma: Union[float, np.ndarray],
+    B: Union[float, np.ndarray, u.Quantity],
+    alpha: float = np.pi / 2,
+    pitch_average: bool = True,
+) -> u.Quantity:
+    r"""
+    Compute the synchrotron characteristic (injection / critical) frequency for relativistic electrons.
+
+    This function provides a high-level, unit-safe wrapper around the optimized
+    CGS implementation, with optional pitch-angle averaging.
+
+    Parameters
+    ----------
+    gamma : float or array-like
+        Electron Lorentz factor.
+
+    B : float, array-like, or astropy.units.Quantity
+        Magnetic field strength. Default units are Gauss.
+
+    alpha : float
+        Pitch angle in radians. Only used if ``pitch_average=False``.
+        Default is ``pi/2``.
+
+    pitch_average : bool
+        Whether to use the pitch-angle averaged value
+        :math:`\langle \sin \alpha \rangle = 2/\pi`.
+        Default is True.
+
+    Returns
+    -------
+    nu_synch : astropy.units.Quantity
+        Synchrotron characteristic frequency in Hz.
+
+    Notes
+    -----
+    The synchrotron characteristic frequency is given by
+    :footcite:p:`RybickiLightman`
+
+    .. math::
+
+        \nu = \frac{3 e B \sin \alpha \gamma^2}{4 \pi m_e c}
+
+    When pitch-angle averaging is enabled, this becomes
+
+    .. math::
+
+        \nu = \gamma^2 \frac{3 e B}{2 \pi^2 m_e c}
+
+    References
+    ----------
+    .. footbibliography::
+    """
+    # Ensure magnetic field is in Gauss
+    B = ensure_in_units(B, u.Gauss)
+
+    # Compute sin(alpha) only if needed
+    if pitch_average:
+        sin_alpha = 1.0  # placeholder; ignored downstream
+    else:
+        sin_alpha = np.sin(alpha)
+
+    return (
+        _opt_compute_synch_frequency(
+            gamma=gamma,
+            B=B,
+            sin_alpha=sin_alpha,
+            pitch_average=pitch_average,
+        )
+        * u.Hz
+    )
+
+
+def compute_synchrotron_gamma(
+    nu: Union[float, np.ndarray, u.Quantity],
+    B: Union[float, np.ndarray, u.Quantity],
+    alpha: float = np.pi / 2,
+    pitch_average: bool = True,
+) -> u.Quantity:
+    r"""
+    Compute the electron Lorentz factor corresponding to a given synchrotron characteristic frequency.
+
+    Parameters
+    ----------
+    nu : float, array-like, or astropy.units.Quantity
+        Synchrotron frequency. Default units are Hz.
+
+    B : float, array-like, or astropy.units.Quantity
+        Magnetic field strength. Default units are Gauss.
+
+    alpha : float
+        Pitch angle in radians. Only used if ``pitch_average=False``.
+
+    pitch_average : bool
+        Whether to use pitch-angle averaged value
+        :math:`\left<\sin\alpha\right> = 2/\pi`. Default is True.
+
+    Returns
+    -------
+    gamma : astropy.units.Quantity
+        Electron Lorentz factor (dimensionless).
+
+    Notes
+    -----
+    This function inverts the synchrotron characteristic frequency relation
+    (see :footcite:p:`RybickiLightman`).
+
+    References
+    ----------
+    .. footbibliography::
+    """
+    nu = ensure_in_units(nu, u.Hz)
+    B = ensure_in_units(B, u.Gauss)
+
+    if pitch_average:
+        sin_alpha = 1.0  # ignored downstream
+    else:
+        sin_alpha = np.sin(alpha)
+
+    return (
+        _opt_compute_synch_gamma(
+            nu=nu,
+            B=B,
+            sin_alpha=sin_alpha,
+            pitch_average=pitch_average,
+        )
+        * u.dimensionless_unscaled
+    )
+
+
 # ============================================ #
 # Synchrotron Kernels                          #
 # ============================================ #
 # These functions implement the synchrotron kernel functions F(x) and G(x) in
 # various ways, including direct integration and interpolation-based approximations.
-
-
 def first_synchrotron_kernel(x: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
     r"""
     Compute the first synchrotron kernel function :math:`F(x)`.
@@ -232,7 +458,12 @@ def first_synchrotron_kernel(x: Union[float, np.ndarray]) -> Union[float, np.nda
     x = np.atleast_1d(x).astype(float)
     F_x = np.empty_like(x)
 
-    for i, xi in enumerate(x):
+    for i, xi in tqdm(
+        enumerate(x),
+        total=len(x),
+        bar_format=triceratops_config["system.appearance.progress_bar_format"],
+        desc="Integrating Synchrotron Kernel",
+    ):
         integral = quad(
             lambda z: kv(5 / 3, z),
             xi,
