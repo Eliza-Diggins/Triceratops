@@ -2003,11 +2003,32 @@ various cases.
             \nu_a = \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5} \nu_m^{1/5}.
             }
 
-
-
+----
 
 SED Normalization
-^^^^^^^^^^^^^^^^^
+------------------
+
+We have, at this stage, fully developed the framework through which synchrotron SEDs are constructed it is worth
+discussing how one connects these SEDs to physical parameters. This is generically **not possible without some
+concession of additional information** because the SEDs themselves are scale-free. In other words, given a set of break
+frequencies and a normalization flux density, there are an infinite number of physical configurations which can produce the same
+observed SED. Therefore, to connect the SEDs to physical parameters, we must **adopt a normalization / closure**.
+
+The most common such closure is that of **equipartition** between the energy in relativistic electrons and magnetic fields.
+This approach is widely used in the literature (see, e.g., :footcite:t:`demarchiRadioAnalysisSN2004C2022`,
+:footcite:t:`Margutti2019COW`, :footcite:t:`chevalierSelfsimilarSolutionsInteraction1982`, :footcite:t:`ChevalierXRayRadioEmission1982`,
+among others) and is often justified on the grounds that it minimizes the total energy budget of the system. However, it is
+important to note that this is an **assumption** rather than a physical requirement. In other words, there is no guarantee that
+the system will actually be in equipartition, and indeed there is evidence from some systems that it is not.
+
+In Triceratops, we implement the SEDs in a **scale-free** manner such that the user may select **any normalization scheme** they
+wish. This is achieved by separating the calculation of the break frequencies and spectral shapes from the normalization
+itself. The user may then implement any desired closure scheme to connect the SEDs to physical parameters. For example, one may
+choose to implement equipartition, or one may choose to implement a different closure based on, e.g., observations or theoretical
+considerations.
+
+For convenience, we do provide a normalization scheme implemented directly in the SED classes of :mod:`radiation.synchrotron.SEDs`
+which is based on Equipartition and is described here.
 
 .. admonition:: Convention Note
 
@@ -2226,190 +2247,6 @@ for each case:
             :label: slow_cooling_norm_iso
 
             F_{m0,{\rm iso}} \approx \chi_{\rm iso} B N_0 \gamma_{\rm m}^{1-p}  \frac{V}{D_L^2}.
-
-Parameter Inversion
-^^^^^^^^^^^^^^^^^^^^
-
-.. hint::
-
-    SEDs in :mod:`~radiation.synchrotron.SEDs` are parameterized in terms of the relevant break frequencies
-    (:math:`\nu_m`, :math:`\nu_c`, and :math:`\nu_{\max}`) and the **peak flux density** :math:`F_{\nu,\rm pk}`.
-    If SSA is present, the geometric parameters are also required.
-
-    As such, a new approach for microphysical closure can be implemented simply by producing a prescription
-    for :math:`F_{\nu,\rm pk}` and the break frequencies in terms of the physical parameters of interest.
-
-It is clear that, given some :math:`\nu_m` (or :math:`\gamma_m`), :math:`\nu_c` (or :math:`\gamma_c`), :math:`V`,
-:math:`D_L`, and :math:`N_0` (or :math:`K_0` depending on the case), one may compute the normalization of the SED using
-the corresponding parameters. It is, however, convenient to be able to invert this process and compute the microphysical
-parameters given some observed SED normalization. This is particularly useful in fitting scenarios where one may wish to
-deduce the magnetic field strength or electron distribution normalization from an observed SED.
-
-In practice, there are too many parameters to invert the problem uniquely without a closure relation. Assuming such
-a relation requires additional physical assumptions, hence our choice to leave the normalization of the SEDs
-(dependent on microphysics) separate from the evaluation of the SED shape (dependent on break frequencies and power-law slopes).
-
-.. note::
-
-    In cases where the peaks are obscured by absorption, the inversion process becomes more complex as one must
-    account for the extrapolation of the optically thin peak to the absorption frequency. This is not discussed
-    here, but may be implemented in a similar manner dependent on the SED shape. Notably, :math:`\nu_{\rm a}` is
-    a property known from the SED shape and geometry, so it does not depend independently on the microphysical closure.
-
-    This is similar for :math:`\nu_m`, where, because it is determined by the fit, it acts as a known
-    quantity from which to constrain :math:`B` and not the other way around.
-
-In this section, we'll discuss inversion in specific cases of interest.
-
-Equipartition Inversion
-~~~~~~~~~~~~~~~~~~~~~~~
-
-In the equipartition closure, one assumes that the normalization of the electron distribution (:math:`N_0` or :math:`K_0`)
-is a function of the magnetic field strength :math:`B` in the form
-
-.. math::
-
-    N_0, K_0 = \frac{\epsilon_e B^2}{8\pi \epsilon_B m_e c^2 M_\gamma^{(1)}},
-
-where, critically, :math:`M_\gamma^{(1)}` is the first moment of the electron distribution.
-
-.. note::
-
-    The same equation holds for **both distributions**; however, the interpretation of :math:`M_\gamma^{(1)}` is
-    different in each case. In the fast-cooling case, :math:`M_\gamma^{(1)}` is computed from the steady-state
-    distribution, while in the slow-cooling case, it is computed from the injection distribution.
-
-    In the case of **slow-cooling**, one uses :math:`\gamma_{\rm m}`, :math:`\gamma_{\rm max}`, and :math:`p` to compute
-    the moment, while in the **fast-cooling** case, one uses :math:`\gamma_{\rm c}`, :math:`\gamma_m`, and
-    :math:`\gamma_{\rm max}`.
-
-Schematically, the **optically thin flux** from a population of electrons with this property should be those
-described above in the context of normalization. Let
-
-.. math::
-
-    F_{\nu,\rm norm} = g(B,V,D_L,\epsilon_e,\epsilon_B, M_\gamma^{(1)}),
-
-where :math:`g` is the appropriate function from either :eq:`fast_cooling_norm` or :eq:`slow_cooling_norm`
-(depending on the cooling regime) which computes the normalization flux given the physical parameters and
-:math:`M_\gamma^{(1)}` is the residual dependence on the electron distribution (having eliminated :math:`N_0` or :math:`K_0`).
-
-Given another constraint from the definition of :math:`\nu_{\rm max}, \nu_m` or :math:`\nu_c` (depending on the case / physics),
-one may then solve for :math:`B` and :math:`V` in terms of the observed **peak flux** :math:`F_{\nu,\rm pk}` and
-the relevant break frequency.
-
-Let's consider the two cases in which absorption does **NOT** obscure the peak frequency. In that case, we may
-directly apply the normalization described above and solve for :math:`B` and :math:`V`. We do so in the below tabs.
-
-(*In the following discussion, we maintain explicit reference to the pitch angle; however, we report both
-the fixed pitch angle and isotropic pitch angle averaged results.*)
-
-.. tab-set::
-
-    .. tab-item:: Fast Cooling
-
-        In this case, the **peak flux** corresponds directly to the **normalization flux** at :math:`\nu_c`:
-
-        .. math::
-
-            F_{c,0} \approx \chi (B\sin\alpha) K_0 \left(\frac{\gamma_m}{\gamma_c}\right)^2\,\gamma_{c} \frac{V}{D_L^2}.
-
-        Now, it is generally the case that :math:`\gamma_c` is some function of :math:`B` and (potentially) other fixed parameters.
-        If :math:`\gamma_c` depends on other parameters, one may need additional closures to solve for :math:`B` and :math:`V` uniquely.
-        Assume that :math:`\gamma_c` is a known function of :math:`B` (e.g., synchrotron cooling) and additional hyper-parameters
-        (e.g. time since acceleration, external radiation field energy density, etc.).
-
-        Under this assumption, we can write the **effective radiating volume** as
-
-        .. math::
-
-            V = \gamma_c(B) \gamma_m^{-2} \frac{D_L^2 F_{\nu, \rm pk} }{\chi (B\sin \alpha) K_0}.
-
-        Of course, :math:`K_0` is known from closure:
-
-        .. math::
-
-            V = \gamma_c(B) \gamma_m^{-2} \frac{D_L^2 F_{\nu, \rm pk} }{\chi (B\sin \alpha)}
-            \frac{8\pi \epsilon_B m_e c^2 M_{\gamma}^{(1)}}{\epsilon_e B^2}.
-
-        Thus,
-
-        .. math::
-
-            V = 8\pi m_e c^2 M_{\gamma}^{(1)} \gamma_c(B) \gamma_m^{-2}
-            \frac{F_{\nu, \rm pk} D_L^2 \epsilon_B}{\chi \epsilon_e \sin \alpha} B^{-3}.
-
-        The isotropic pitch-angle averaged case is similar:
-
-        .. math::
-
-            V_{\rm iso} = 8\pi m_e c^2 M_{\gamma}^{(1)} \gamma_c(B) \gamma_m^{-2}
-            \frac{F_{\nu, \rm pk} D_L^2 \epsilon_B}{\chi_{\rm iso}\epsilon_e} B^{-3}.
-
-        Similarly, the magnetic field may be obtained from the frequency as
-
-        .. math::
-
-            B = \left[\frac{4\pi m_e c \nu_m}{3q \gamma_m^2 \sin \alpha}\right]
-
-        or, equivalently,
-
-        .. math::
-
-            B_{\rm iso} = \left[\frac{2\pi^2 m_e c \nu_m}{3q \gamma_m^2}\right].
-
-
-    .. tab-item:: Slow Cooling
-
-        In this case, the **peak flux** corresponds directly to the **normalization flux** at :math:`\nu_m`:
-
-        .. math::
-
-            F_{\nu,\rm pk} = F_{\nu_m,0} = \chi \left(B\sin \alpha\right) N_0 \gamma_m^{1-p} \frac{V}{D_L^2},
-
-        Using the equipartition closure for :math:`N_0`, one has
-
-        .. math::
-            :label: slow_cooling_equipartition_V
-
-            \boxed{
-            V = 8\pi m_e c^2 M_{\gamma}^{(1)} \gamma_{m}^{1-p}
-            \frac{F_{\nu, \rm pk} D_L^2 \epsilon_B}{\chi \epsilon_e \sin \alpha} B^{-3}.
-            }
-
-        .. math::
-            :label: slow_cooling_equipartition_V_iso
-
-            \boxed{
-            V_{\rm iso} = 8\pi m_e c^2 M_{\gamma}^{(1)} \gamma_{m}^{1-p}
-            \frac{F_{\nu, \rm pk} D_L^2 \epsilon_B}{\chi_{\rm iso}\epsilon_e} B^{-3}.
-            }
-
-        In the isotropic case, the scaling goes like
-
-        .. math::
-
-            V_{\rm iso} \sim 8.3\times 10^{44}\left(\frac{\gamma_m}{1}\right)^{1-p}
-                             \left(\frac{F_{\nu, \rm pk}}{1\,\rm mJy}\right)
-                            \left(\frac{D_L}{100\;{\rm Mpc}}\right)^{2}
-                            \left(\frac{\epsilon_B}{0.01}\right)
-                            \left(\frac{\epsilon_e}{0.1}\right)^{-1}
-                            \left(\frac{B}{1\,\rm G}\right)^{-3}
-                                \rm cm^{3}.
-
-
-        Similarly, the magnetic field may be obtained from the frequency as
-
-        .. math::
-
-            B = \left[\frac{4\pi m_e c \nu_m}{3q \gamma_m^2 \sin \alpha}\right]
-
-        or, equivalently,
-
-        .. math::
-
-            B_{\rm iso} = \left[\frac{2\pi^2 m_e c \nu_m}{3q \gamma_m^2}\right].
-
 
 References
 ----------
