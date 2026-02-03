@@ -43,7 +43,6 @@ from typing import TYPE_CHECKING, Any, Union
 import numpy as np
 from astropy import units as u
 
-from triceratops.profiles import smoothed_BPL
 from triceratops.radiation.constants import (
     electron_rest_energy_cgs,
     electron_rest_mass_cgs,
@@ -204,6 +203,43 @@ def log_exp_cutoff_sed(
     - Implemented entirely in log-space for numerical stability.
     """
     return np.where(log_x > 0, 0.5 * log_x + (1.0 - np.exp(log_x)), 0.0)
+
+
+def smoothed_BPL(nu, F_nu, nu_brk, alpha_1, alpha_2, smoothing):
+    r"""
+    Smoothed broken power-law (BPL) SED.
+
+    This function constructs a smoothed broken power-law SED by combining
+    two power-law segments with a smooth transition at a specified break
+    frequency.
+
+    Parameters
+    ----------
+    nu : array-like
+        Frequencies at which to evaluate the SED.
+    F_nu : float
+        Normalization of the SED at the break frequency.
+    nu_brk : float
+        Break frequency where the spectral slope changes.
+    alpha_1 : float
+        Spectral slope for frequencies below the break.
+    alpha_2 : float
+        Spectral slope for frequencies above the break.
+    smoothing : float
+        Smoothness parameter controlling the width of the transition.
+
+    Returns
+    -------
+    array-like
+        The smoothed broken power-law SED evaluated at ``nu``.
+
+    Notes
+    -----
+    - The SED is normalized such that :math:`F_\nu(\nu_{\rm brk}) = F_{\nu}`.
+    - The smoothness parameter controls how gradual the transition is between
+      the two power-law segments.
+    """
+    return F_nu * ((nu / nu_brk) ** (alpha_1 / smoothing) + (nu / nu_brk) ** (alpha_2 / smoothing)) ** smoothing
 
 
 # --- Power-Law No-Cooling No-SSA SEDs --- #
