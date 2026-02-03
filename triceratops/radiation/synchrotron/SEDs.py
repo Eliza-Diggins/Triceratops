@@ -4162,6 +4162,14 @@ class PowerLaw_SSA_SynchrotronSED(MultiSpectrumSynchrotronSED):
                 * - Regime identifier
                   - Discrete spectral branch selector
 
+    See Also
+    --------
+    :class:`SynchrotronSED` : Base class for synchrotron SED implementations.
+    :class:`MultiSpectrumSynchrotronSED` : Base class for multi-regime synchrotron SEDs.
+    :class:`PowerLaw_Cooling_SynchrotronSED` : Synchrotron SED with cooling break.
+    :class:`PowerLaw_Cooling_SSA_SynchrotronSED` : Synchrotron SED with cooling and SSA.
+    :class:`PowerLaw_SynchrotronSED` : Canonical optically-thin power-law synchrotron SED.
+
     Example
     --------
 
