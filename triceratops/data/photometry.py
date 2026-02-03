@@ -231,6 +231,8 @@ class RadioPhotometryContainer(DataContainer):
                         f"Column '{name}' has unit '{col.unit}', "
                         f"which is not compatible with expected unit '{expected_unit}'."
                     )
+                else:
+                    col = col.to(expected_unit)
 
         return table
 
@@ -933,7 +935,7 @@ class RadioPhotometryEpochContainer(XYDataContainer):
 
     # ========================= METADATA ========================= #
     @property
-    def frequency(self) -> u.Quantity:
+    def freq(self) -> u.Quantity:
         """Observing frequency of the light curve."""
         return self.x
 
@@ -1015,3 +1017,81 @@ class RadioPhotometryEpochContainer(XYDataContainer):
         return cls(
             table,
         )
+
+    # ======================== PLOTTING METHODS ======================== #
+    def plot(
+        self,
+        *,
+        fig=None,
+        axes=None,
+        label=None,
+        color=None,
+        show_upper_limits=True,
+        detection_style=None,
+        upper_limit_style=None,
+    ):
+        """
+        Plot this photometry epoch onto an existing axes.
+
+        This method plots detections and (optionally) upper limits for a given
+        epoch using a single color and adds a single legend entry.
+
+        Parameters
+        ----------
+        fig : matplotlib.figure.Figure, optional
+            Figure to plot on.
+        axes : matplotlib.axes.Axes, optional
+            Axes to plot on.
+        label : str, optional
+            Label for the legend entry corresponding to this epoch.
+        color : str or tuple, optional
+            Color to use for this epoch. If None, Matplotlib will assign one.
+        show_upper_limits : bool, optional
+            Whether to plot upper limits.
+        detection_style : dict, optional
+            Matplotlib style kwargs for detections.
+        upper_limit_style : dict, optional
+            Matplotlib style kwargs for upper limits.
+        """
+        import matplotlib.pyplot as plt
+
+        from triceratops.utils.plot_utils import resolve_fig_axes, set_plot_style
+
+        # Set the plot style and resolve the figure and axes.
+        set_plot_style()
+        fig, axes = resolve_fig_axes(fig=fig, axes=axes)
+
+        # Defaults
+        detection_style = detection_style or {}
+        upper_limit_style = upper_limit_style or {}
+        color = color or plt.rcParams["axes.prop_cycle"].by_key()["color"][0]
+
+        # Select epoch
+        det_mask = self.detection_mask
+        ul_mask = self.non_detection_mask
+
+        # Plot detections
+        if det_mask.any():
+            for i in np.where(det_mask)[0]:
+                axes.errorbar(
+                    self.freq[i].to_value(self.freq.unit),
+                    self.flux_density[i].to_value(self.flux_density.unit),
+                    yerr=self.flux_density_error[i].to_value(self.flux_density_error.unit),
+                    color=color,
+                    label=label if i == np.where(det_mask)[0][0] else None,
+                    **detection_style,
+                )
+
+        # Plot upper limits
+        if show_upper_limits and ul_mask.any():
+            for i in np.where(ul_mask)[0]:
+                axes.errorbar(
+                    self.freq[i].to_value(self.freq.unit),
+                    self.flux_upper_limit[i].to_value(self.flux_upper_limit.unit),
+                    yerr=0.2 * self.flux_upper_limit[i].to_value(self.flux_upper_limit.unit),
+                    uplims=True,
+                    color=color,
+                    **upper_limit_style,
+                )
+
+        return fig, axes
