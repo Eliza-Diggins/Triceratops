@@ -21,14 +21,6 @@ from triceratops.utils.misc_utils import ensure_in_units
 if TYPE_CHECKING:
     from triceratops._typing import _ArrayLike, _UnitBearingArrayLike
 
-__all__ = [
-    "compute_electron_gamma_PL_moment",
-    "compute_PL_norm_from_magnetic_field",
-    "compute_PL_norm_from_thermal_energy_density",
-    "compute_equipartition_magnetic_field",
-    "compute_bol_emissivity",
-]
-
 
 # ============================================================= #
 # Distribution Calculations                                     #
