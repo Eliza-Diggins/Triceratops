@@ -78,7 +78,7 @@ Parameters, Hyper-Parameters, and Physical Quantities
 This document contains a great deal of mathematical notation describing the various SEDs and their construction. It is
 therefore worthwhile to provide a **bird's-eye view** of the various types of quantities used herein.
 
-At it's core, an **SED** is a function :math:`F(\nu, F_pk, \boldsymbol{\nu}_{\rm brk}, \boldsymbol{\Theta})` which
+At it's core, an **SED** is a function :math:`F(\nu, F_{\rm pk}, \boldsymbol{\nu}_{\rm brk}, \boldsymbol{\Theta})` which
 provides the **flux density** :math:`F_\nu` at a given frequency :math:`\nu` given a set of **break frequencies**
 :math:`\boldsymbol{\nu}_{\rm brk} = (\nu_1, \nu_2, \ldots)`, a normalization at the SED's peak, and a set of
 **hyper-parameters** :math:`\boldsymbol{\Theta} = (\theta_1, \theta_2, \ldots)`.
@@ -107,7 +107,7 @@ In the tables below, we summarize the various types of quantities used in this d
 
     * - Parameter
       - Description
-    * - :math:`F_{\nu, \rm pk}`
+    * - :math:`F_{\rm pk}`
       - The flux density at the peak of the SED.
     * - :math:`\nu_m`
       - The minimum injection frequency. See :ref:`synchrotron_sed_injection_frequencies` for details.
@@ -2005,6 +2005,7 @@ various cases.
 
 ----
 
+.. _sed_normalization:
 SED Normalization
 ------------------
 
@@ -2247,6 +2248,658 @@ for each case:
             :label: slow_cooling_norm_iso
 
             F_{m0,{\rm iso}} \approx \chi_{\rm iso} B N_0 \gamma_{\rm m}^{1-p}  \frac{V}{D_L^2}.
+
+Given a selected normalizing population (:math:`F_{c,0}` at :math:`\nu_c` for fast-cooling or :math:`F_{m,0}` at :math:`\nu_m` for slow-cooling),
+one may then use equipartition to compute the relevant coefficients in the flux normalization expressions above. In the sections
+below, we'll go through each of the SED cases and describe how to connect the normalization frequency to the peak emission frequency
+and thus the full SED normalization.
+
+The Power-Law SED Normalization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We begin with the **canonical synchrotron spectral energy distribution (SED)**: a power-law SED in the absence
+of radiative cooling or synchrotron self-absorption. In this regime, the emitting plasma is optically thin
+at all frequencies of interest, and the electron distribution retains its injected power-law form.
+
+Under these assumptions, the only spectral breaks present in the SED occur at the characteristic synchrotron
+frequencies associated with the minimum and maximum electron Lorentz factors,
+:math:`\nu_m` and :math:`\nu_{\max}`, respectively. The peak of the broadband SED occurs at the
+**injection frequency** :math:`\nu_m`, corresponding to synchrotron emission from electrons with
+Lorentz factor :math:`\gamma_{\rm min}`.
+
+.. rubric:: Parameters
+
+The normalization of the canonical SED is fixed by the following physical parameters:
+
+.. list-table::
+    :widths: 10 35 85
+    :header-rows: 1
+
+    * - Parameter
+      - Name
+      - Notes
+    * - :math:`B`
+      - Magnetic Field Strength
+      - Magnetic field strength in the emission region. Determines the characteristic synchrotron
+        frequencies and enters the SED normalization.
+    * - :math:`V_{\rm eff}`
+      - Effective Emitting Volume
+      - Volume over which relativistic electrons radiate efficiently.
+    * - :math:`D_L`
+      - Luminosity Distance
+      - Luminosity distance to the source.
+    * - :math:`p`
+      - Electron Power-Law Index
+      - Power-law index of the injected electron distribution.
+    * - :math:`\gamma_{\rm min}`
+      - Minimum Lorentz Factor
+      - Lower cutoff of the electron Lorentz factor distribution.
+    * - :math:`\gamma_{\rm max}`
+      - Maximum Lorentz Factor
+      - Upper cutoff of the electron Lorentz factor distribution.
+    * - :math:`\epsilon_e`
+      - Electron Energy Fraction
+      - Fraction of post-shock internal energy carried by relativistic electrons.
+    * - :math:`\epsilon_B`
+      - Magnetic Energy Fraction
+      - Fraction of post-shock internal energy stored in magnetic fields.
+    * - :math:`\sin\alpha`
+      - Pitch Angle Factor
+      - Pitch angle dependence of synchrotron emission. Triceratops supports either fixed pitch
+        angles or isotropic pitch-angle averaging.
+
+.. rubric:: Method
+
+The normalization of the power-law SED is most naturally anchored at the injection frequency
+:math:`\nu_m`, defined as the characteristic synchrotron frequency of electrons with
+Lorentz factor :math:`\gamma_{\rm min}`:
+
+.. math::
+
+    \nu_m \equiv \nu_{\rm synch}(\gamma_{\rm min}).
+
+For a given choice of pitch-angle treatment, the magnetic field strength :math:`B` therefore
+uniquely determines the location of the spectral peak.
+
+The flux density at this frequency sets the overall normalization of the SED. For the case of a
+fixed pitch angle, the flux normalization at :math:`\nu_m` is given by
+:eq:`slow_cooling_norm` as
+
+.. math::
+
+    F_{m,0} \approx
+    \chi \, (B \sin\alpha)\,
+    N_0 \,
+    \gamma_{\rm min}^{\,1-p}
+    \frac{V_{\rm eff}}{D_L^2},
+
+where :math:`N_0` is the normalization of the electron distribution and :math:`\chi` is a numerical
+coefficient arising from the synchrotron kernel and fundamental constants.
+
+For isotropically distributed pitch angles, this expression becomes
+
+.. math::
+
+    F_{m,0}^{\rm (iso)} \approx
+    \chi_{\rm iso}\,
+    B\,
+    N_0 \,
+    \gamma_{\rm min}^{\,1-p}
+    \frac{V_{\rm eff}}{D_L^2},
+
+where :math:`\chi_{\rm iso}` incorporates the pitch-angle averaging.
+
+The electron normalization :math:`N_0` is not a free parameter. Instead, it is determined by
+equipartition arguments through the choice of :math:`\epsilon_e` and :math:`\epsilon_B`, which
+relate the electron and magnetic energy densities to the post-shock internal energy density.
+Once :math:`N_0` is fixed in this manner, the flux at :math:`\nu_m` — and hence the normalization
+of the entire canonical synchrotron SED — is fully specified.
+
+All remaining portions of the SED then follow from simple power-law propagation away from
+:math:`\nu_m` until the high-energy cutoff at :math:`\nu_{\max}`.
+
+
+The SSA Power Law SED
+^^^^^^^^^^^^^^^^^^^^^^
+Normalization is made trickier in the SSA case because the peak of the SED may occur at either :math:`\nu_m` or
+:math:`\nu_a`, depending on the relative ordering of these frequencies. Additionally, the exact value of the absorption
+frequency :math:`\nu_a` depends on the normalization itself, requiring a somewhat more careful treatment.
+
+.. rubric:: Parameters
+
+The normalization of the canonical SED is fixed by the following physical parameters:
+
+.. list-table::
+    :widths: 10 35 85
+    :header-rows: 1
+
+    * - Parameter
+      - Name
+      - Notes
+    * - :math:`B`
+      - Magnetic Field Strength
+      - Magnetic field strength in the emission region. Determines the characteristic synchrotron
+        frequencies and enters the SED normalization.
+    * - :math:`V_{\rm eff}`
+      - Effective Emitting Volume
+      - Volume over which relativistic electrons radiate efficiently.
+    * - :math:`D_L`
+      - Luminosity Distance
+      - Luminosity distance to the source.
+    * - :math:`p`
+      - Electron Power-Law Index
+      - Power-law index of the injected electron distribution.
+    * - :math:`\gamma_{\rm min}`
+      - Minimum Lorentz Factor
+      - Lower cutoff of the electron Lorentz factor distribution.
+    * - :math:`\gamma_{\rm max}`
+      - Maximum Lorentz Factor
+      - Upper cutoff of the electron Lorentz factor distribution.
+    * - :math:`\epsilon_e`
+      - Electron Energy Fraction
+      - Fraction of post-shock internal energy carried by relativistic electrons.
+    * - :math:`\epsilon_B`
+      - Magnetic Energy Fraction
+      - Fraction of post-shock internal energy stored in magnetic fields.
+    * - :math:`\sin\alpha`
+      - Pitch Angle Factor
+      - Pitch angle dependence of synchrotron emission. Triceratops supports either fixed pitch
+        angles or isotropic pitch-angle averaging.
+    * - :math:`\Omega`
+      - Angular Size
+      - Angular size of the emitting region. Required to compute the SSA frequency.
+
+.. rubric:: Method
+
+We begin by computing the characteristic synchrotron frequencies
+:math:`\nu_m` and :math:`\nu_{\rm max}` from the magnetic field strength
+and electron distribution parameters. We then compute the *equivalent
+optically thin* flux normalization at :math:`\nu_m`, denoted
+:math:`F_{m,0}`, using :eq:`slow_cooling_norm` or
+:eq:`slow_cooling_norm_iso`. This quantity represents the flux at
+:math:`\nu_m` implied by the assumed optically thin power-law segments
+for a given trial SED ordering.
+
+If :math:`\nu_a < \nu_m`, then :math:`\nu_m` corresponds to the true peak
+of the emission and the normalization is complete. If instead
+:math:`\nu_a > \nu_m`, the true peak of the SED occurs at
+:math:`\nu_a`, and the normalization must be propagated from
+:math:`\nu_m` up to :math:`\nu_a` along the appropriate optically thin
+power-law segment in order to determine the true peak flux
+:math:`F_{\nu,\rm pk}`.
+
+This procedure is complicated by the fact that the absorption frequency
+:math:`\nu_a` itself depends on the peak flux. To resolve this
+self-consistently, we compute :math:`\nu_a` assuming each possible
+ordering of :math:`\nu_a` relative to :math:`\nu_m`, and then determine
+which ordering satisfies its own consistency conditions.
+
+The relationship between the normalization flux :math:`F_{m,0}` at
+:math:`\nu_m` and the true peak flux :math:`F_{\nu,\rm pk}` therefore
+depends on the ordering of :math:`\nu_a` relative to :math:`\nu_m`. We
+treat each case in turn below.
+
+.. tab-set::
+
+    .. tab-item:: Spectrum 1 (:math:`\nu_a < \nu_m < \nu_{\rm max}`)
+
+        In this case, the absorption frequency lies below the injection
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_m`. The presumed optically thin normalization
+        :math:`F_{m,0}` therefore directly corresponds to the true peak
+        flux,
+
+        .. math::
+
+            F_{\nu,\rm pk} = F_{m,0}.
+
+        The absorption frequency is precisely that derived previously since the
+        peak and the normalization are coincident:
+
+        .. math::
+
+            \nu_a
+            =
+            \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5}
+            \nu_m^{1/5}.
+
+
+    .. tab-item:: Spectrum 2 (:math:`\nu_m < \nu_a < \nu_{\rm max}`)
+
+        In this case, the absorption frequency lies above the injection
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_a`. The normalization must therefore be propagated
+        from :math:`\nu_m` up to :math:`\nu_a` along the optically thin
+        segment :math:`F_\nu \propto \nu^{-(p-1)/2}`.
+
+        The relationship between the presumed optically thin
+        normalization at :math:`\nu_m` and the true peak flux at
+        :math:`\nu_a` is
+
+        .. math::
+
+            F_{\nu,\rm pk}
+            =
+            F_{m,0}
+            \left(\frac{\nu_a}{\nu_m}\right)^{-(p-1)/2}.
+
+        The absorption frequency in this regime is given by the SSA
+        matching condition derived above,
+
+        .. math::
+
+            \nu_a
+            =
+            \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5}
+            \nu_m^{1/5}.
+
+        Combining these expressions and solving self-consistently for
+        :math:`\nu_a` yields
+
+        .. math::
+
+            \boxed{
+            \nu_a
+            =
+            \left(\frac{F_{m,0}}{2 m_e \Omega \gamma_m}\right)^{2/(p+4)}
+            \nu_m^{(p+2)/(p+4)}.
+            }
+
+        One may compute this candidate value :math:`\nu_a^{(2)}` and
+        verify that :math:`\nu_m < \nu_a^{(2)} < \nu_{\rm max}` to confirm
+        that this regime applies.
+
+Cooling Power Law SEDs
+^^^^^^^^^^^^^^^^^^^^^^
+
+In the case of cooling without SSA, normalization becomes (once again) a relatively simple task of anchoring
+the SED at the appropriate peak frequency. In the case of **fast-cooling** electrons, the peak of the SED occurs
+at the **cooling frequency** :math:`\nu_c`, while in the case of **slow-cooling** electrons, the peak occurs
+at the **injection frequency** :math:`\nu_m`. In both cases, the SED remains optically thin at all
+frequencies of interest, and so no complications arise from absorption effects.
+
+Unlike the uncooled case in which we always anchored the SED normalization at :math:`\nu_m`, here we
+must distinguish between the two cooling regimes to determine the appropriate normalization frequency. In fast
+cooling case, we use **equipartition** to fix the normalization of the steady-state electron distribution
+(see :ref:`synchrotron_cooling_theory`).
+
+.. rubric:: Parameters
+
+The normalization of the canonical SED is fixed by the following physical parameters:
+
+.. list-table::
+    :widths: 10 35 85
+    :header-rows: 1
+
+    * - Parameter
+      - Name
+      - Notes
+    * - :math:`B`
+      - Magnetic Field Strength
+      - Magnetic field strength in the emission region. Determines the characteristic synchrotron
+        frequencies and enters the SED normalization.
+    * - :math:`V_{\rm eff}`
+      - Effective Emitting Volume
+      - Volume over which relativistic electrons radiate efficiently.
+    * - :math:`D_L`
+      - Luminosity Distance
+      - Luminosity distance to the source.
+    * - :math:`p`
+      - Electron Power-Law Index
+      - Power-law index of the injected electron distribution.
+    * - :math:`\gamma_{\rm min}`
+      - Minimum Lorentz Factor
+      - Lower cutoff of the electron Lorentz factor distribution.
+    * - :math:`\gamma_{\rm max}`
+      - Maximum Lorentz Factor
+      - Upper cutoff of the electron Lorentz factor distribution.
+    * - :math:`\gamma_c`
+      - Cooling Lorentz Factor
+      - Lorentz factor above which electrons cool efficiently within the dynamical time.
+    * - :math:`\epsilon_e`
+      - Electron Energy Fraction
+      - Fraction of post-shock internal energy carried by relativistic electrons.
+    * - :math:`\epsilon_B`
+      - Magnetic Energy Fraction
+      - Fraction of post-shock internal energy stored in magnetic fields.
+    * - :math:`\sin\alpha`
+      - Pitch Angle Factor
+      - Pitch angle dependence of synchrotron emission. Triceratops supports either fixed pitch
+        angles or isotropic pitch-angle averaging.
+
+.. rubric:: Method
+
+We begin by computing the characteristic Lorentz factors :math:`\gamma_{\rm min}` and
+:math:`\gamma_c`, along with their associated synchrotron frequencies
+:math:`\nu_m` and :math:`\nu_c`. The cooling regime is then determined by their ordering:
+
+- **Slow cooling**: :math:`\gamma_c > \gamma_{\rm min}` (equivalently :math:`\nu_c > \nu_m`)
+- **Fast cooling**: :math:`\gamma_c < \gamma_{\rm min}` (equivalently :math:`\nu_c < \nu_m`)
+
+In the slow-cooling regime, the dominant population of emitting electrons is that at
+:math:`\gamma_{\rm min}`, and the SED is normalized at :math:`\nu_m` using the optically thin
+normalization described in :ref:`sed_normalization`.
+
+In the fast-cooling regime, the steady-state electron distribution is modified by radiative
+losses above :math:`\gamma_c`. In this case, equipartition arguments are used to normalize the
+cooled electron distribution (see :ref:`synchrotron_cooling_theory`), and the SED is anchored
+at the cooling frequency :math:`\nu_c`.
+
+Once the appropriate normalization frequency is identified and the corresponding flux
+normalization is computed, the remainder of the SED follows directly by propagating the
+normalization across the relevant optically thin power-law segments.
+
+Cooling+SSA Power Law SEDs
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In combining the two cases of cooling and SSA, normalization becomes a mixture of both cases. As in the
+SSA case above, if the peak is optically thick, one must correctly propagate the normalization to the
+absorption break before continuing. However, the location of the peak itself is determined by the cooling
+regime as in the cooling-only case. In other words, in the fast-cooling case, the peak occurs at
+:math:`\nu_c`, while in the slow-cooling case, the peak occurs at :math:`\nu_m`. Nonetheless, the infrastructure
+remains the same as in the SSA case above, with the added complexity of determining the cooling regime
+first.
+
+
+.. rubric:: Parameters
+
+The normalization of the canonical SED is fixed by the following physical parameters:
+
+.. list-table::
+    :widths: 10 35 85
+    :header-rows: 1
+
+    * - Parameter
+      - Name
+      - Notes
+    * - :math:`B`
+      - Magnetic Field Strength
+      - Magnetic field strength in the emission region. Determines the characteristic synchrotron
+        frequencies and enters the SED normalization.
+    * - :math:`V_{\rm eff}`
+      - Effective Emitting Volume
+      - Volume over which relativistic electrons radiate efficiently.
+    * - :math:`D_L`
+      - Luminosity Distance
+      - Luminosity distance to the source.
+    * - :math:`p`
+      - Electron Power-Law Index
+      - Power-law index of the injected electron distribution.
+    * - :math:`\gamma_{\rm min}`
+      - Minimum Lorentz Factor
+      - Lower cutoff of the electron Lorentz factor distribution.
+    * - :math:`\gamma_{\rm max}`
+      - Maximum Lorentz Factor
+      - Upper cutoff of the electron Lorentz factor distribution.
+    * - :math:`\gamma_c`
+      - Cooling Lorentz Factor
+      - Lorentz factor above which electrons cool efficiently within the dynamical time.
+    * - :math:`\epsilon_e`
+      - Electron Energy Fraction
+      - Fraction of post-shock internal energy carried by relativistic electrons.
+    * - :math:`\epsilon_B`
+      - Magnetic Energy Fraction
+      - Fraction of post-shock internal energy stored in magnetic fields.
+    * - :math:`\sin\alpha`
+      - Pitch Angle Factor
+      - Pitch angle dependence of synchrotron emission. Triceratops supports either fixed pitch
+        angles or isotropic pitch-angle averaging.
+    * - :math:`\Omega`
+      - Angular Size
+      - Angular size of the emitting region. Required to compute the SSA frequency.
+
+.. rubric:: Method
+
+.. tab-set::
+
+    .. tab-item:: Spectrum 1 :math:`(\nu_a <\nu_m <\nu_{\rm max} <\nu_c)`
+
+        In this case, the absorption frequency lies below the injection
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_m`. The presumed optically thin normalization
+        :math:`F_{m,0}` therefore directly corresponds to the true peak
+        flux,
+
+        .. math::
+
+            F_{\nu,\rm pk} = F_{m,0}.
+
+        The absorption frequency is precisely that derived previously since the
+        peak and the normalization are coincident:
+
+        .. math::
+
+            \boxed{
+            \nu_a = \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{6/13} \nu_m^{1/13}.
+            }
+
+    .. tab-item:: Spectrum 2 :math:`(\nu_m < \nu_a < \nu_{\rm max} < \nu_c)`
+
+        In this case, the absorption frequency lies above the injection
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_a`. The normalization must therefore be propagated
+        from :math:`\nu_m` up to :math:`\nu_a` along the optically thin
+        segment :math:`F_\nu \propto \nu^{-(p-1)/2}`.
+
+        The relationship between the presumed optically thin
+        normalization at :math:`\nu_m` and the true peak flux at
+        :math:`\nu_a` is
+
+        .. math::
+
+            F_{\nu,\rm pk}
+            =
+            F_{m,0}
+            \left(\frac{\nu_a}{\nu_m}\right)^{-(p-1)/2}.
+
+        The absorption frequency in this regime is given by the SSA
+        matching condition derived above,
+
+        .. math::
+
+            \nu_a
+            =
+            \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5}
+            \nu_m^{1/5}.
+
+        Combining these expressions and solving self-consistently for
+        :math:`\nu_a` yields
+
+        .. math::
+
+            \boxed{
+            \nu_a
+            =
+            \left(\frac{F_{m,0}}{2 m_e \Omega \gamma_m}\right)^{2/(p+4)}
+            \nu_m^{(p+2)/(p+4)}.
+            }
+
+        One may compute this candidate value :math:`\nu_a^{(2)}` and
+        verify that :math:`\nu_m < \nu_a^{(2)} < \nu_{\rm max}` to confirm
+        that this regime applies.
+
+    .. tab-item:: Spectrum 3 :math:`(\nu_a < \nu_m < \nu_c < \nu_{\rm max})`
+
+        In this case, the absorption frequency lies below the injection
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_m`. The presumed optically thin normalization
+        :math:`F_{m,0}` therefore directly corresponds to the true peak
+        flux,
+
+        .. math::
+
+            F_{\nu,\rm pk} = F_{m,0}.
+
+        The absorption frequency is precisely that derived previously since the
+        peak and the normalization are coincident:
+
+        .. math::
+
+            \boxed{
+            \nu_a = \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{6/13} \nu_m^{1/13}.
+            }
+
+    .. tab-item:: Spectrum 4 :math:`(\nu_m < \nu_a < \nu_c < \nu_{\rm max})`
+
+        In this case, the absorption frequency lies above the injection
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_a`. The normalization must therefore be propagated
+        from :math:`\nu_m` up to :math:`\nu_a` along the optically thin
+        segment :math:`F_\nu \propto \nu^{-(p-1)/2}`.
+
+        The relationship between the presumed optically thin
+        normalization at :math:`\nu_m` and the true peak flux at
+        :math:`\nu_a` is
+
+        .. math::
+
+            F_{\nu,\rm pk}
+            =
+            F_{m,0}
+            \left(\frac{\nu_a}{\nu_m}\right)^{-(p-1)/2}.
+
+        The absorption frequency in this regime is given by the SSA
+        matching condition derived above,
+
+        .. math::
+
+            \nu_a
+            =
+            \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5}
+            \nu_m^{1/5}.
+
+        Combining these expressions and solving self-consistently for
+        :math:`\nu_a` yields
+
+        .. math::
+
+            \boxed{
+            \nu_a
+            =
+            \left(\frac{F_{m,0}}{2 m_e \Omega \gamma_m}\right)^{2/(p+4)}
+            \nu_m^{(p+2)/(p+4)}.
+            }
+
+        One may compute this candidate value :math:`\nu_a^{(2)}` and
+        verify that :math:`\nu_m < \nu_a^{(2)} < \nu_{\rm max}` to confirm
+        that this regime applies.
+
+    .. tab-item:: Spectrum 5 :math:`(\nu_a < \nu_c < \nu_m < \nu_{\rm max})`
+
+        In this case, the absorption frequency lies below the cooling
+        frequency, so the true peak of the SED occurs at
+        :math:`\nu_c`. The presumed optically thin normalization
+        :math:`F_{c,0}` therefore directly corresponds to the true peak
+        flux,
+
+        .. math::
+
+            F_{\nu,\rm pk} = F_{c,0}.
+
+        The absorption frequency is precisely that derived previously since the
+        peak and the normalization are coincident:
+
+        .. math::
+
+            \boxed{
+            \nu_a
+            =
+            \left(\frac{F_{c,0}}{2 m_e \Omega \gamma_m}\right)^{6/13}
+            \nu_m^{3/13}
+            \nu_c^{-2/13}.
+            }
+
+    .. tab-item:: Spectrum 6 :math:`(\nu_c < \nu_a < \nu_m < \nu_{\rm max})`
+
+        In this case, the absorption frequency lies above the cooling frequency,
+        :math:`\nu_a`. The normalization must therefore be propagated
+        from :math:`\nu_c` up to :math:`\nu_a` along the optically thin
+        segment :math:`F_\nu \propto \nu^{-p/2}`.
+
+        The relationship between the presumed optically thin
+        normalization at :math:`\nu_c` and the true peak flux at
+        :math:`\nu_a` is
+
+        .. math::
+
+            F_{\nu,\rm pk}
+            =
+            F_{c,0}
+            \left(\frac{\nu_a}{\nu_c}\right)^{-1/2}.
+
+        The absorption frequency in this regime is given by the SSA
+        matching condition derived above,
+
+        .. math::
+
+            \nu_a
+            =
+            \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5}
+            \nu_m^{1/5}.
+
+        Combining these expressions and solving self-consistently for
+        :math:`\nu_a` yields
+
+        .. math::
+
+            \boxed{
+            \nu_a
+            =
+            \left(\frac{F_{m,0}}{2 m_e \Omega \gamma_m}\right)^{1/3}
+            \nu_m^{1/6} \nu_c^{1/6}.
+            }
+
+    .. tab-item:: Spectrum 7 :math:`(\nu_c, \nu_m < \nu_a < \nu_{\rm max})`
+
+        In this case, the absorption frequency lies above both the cooling and
+        the injection frequencies. Therefore, the true peak of the SED occurs at
+        :math:`\nu_a` and the normalization must be propagated. It turns out that,
+        by coincidence, the propagation is identical whether we are fast cooling or
+        slow cooling; however, the normalization of the underlying electron population
+        is different in each case (as is the resulting normalization flux).
+
+        Let :math:`F_{0}` be the appropriate normalization at either :math:`\nu_c` (fast cooling)
+        or :math:`\nu_m` (slow cooling). In either case, the true peak of the SED occurs at
+        :math:`\nu_a` and the normalization must be propagated from
+        :math:`\nu_c` or :math:`\nu_m` up to :math:`\nu_a`. In the fast-cooling case,
+
+        .. math::
+
+            F_{\rm pk} = F_{c,0} \left(\frac{nu_m}{nu_c}\right)^{-1/2}
+                                         \left(\frac{\nu_a}{\nu_m}\right)^{-p/2}
+                               = F_{c,0} \nu_m^{(p-1)/2} \nu_c^{1/2} \nu_a^{-p/2}.
+
+        In the slow-cooling case,
+
+        .. math::
+
+            F_{\rm pk} = F_{m,0} \left(\frac{\nu_c}{\nu_m}\right)^{-(p-1)/2}
+                                         \left(\frac{\nu_a}{\nu_c}\right)^{-p/2}
+                               = F_{m,0} \nu_m^{(p-1)/2} \nu_c^{1/2} \nu_a^{-p/2}.
+
+        Since the propagation is identical in both cases, we may simply write
+
+        .. math::
+
+            F_{\rm pk} = F_{0} \nu_m^{(p-1)/2} \nu_c^{1/2} \nu_a^{-p/2}.
+
+        The absorption frequency in this regime is given by the SSA
+        matching condition derived above,
+
+        .. math::
+
+            \nu_a
+            =
+            \left(\frac{F_{\nu,\rm pk}}{2 m_e \Omega \gamma_m}\right)^{2/5}
+            \nu_m^{1/5}.
+
+        With these expressions, we may solve self-consistently for
+        :math:`\nu_a`:
+
+        .. math::
+
+            \nu_a = \left(\frac{F_0}{2 m_e \Omega \gamma_m}\right)^{4/(10+p)}
+                     \nu_m^{2p/(10+p)} \nu_c^{1/(10+p)}.
 
 References
 ----------

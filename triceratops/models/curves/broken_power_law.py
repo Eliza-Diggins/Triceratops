@@ -204,9 +204,9 @@ class SmoothedBrokenPowerLaw(Model):
         ),
         ModelParameter(
             name="s",
-            default=0.1,
+            default=-0.1,
             base_units=u.dimensionless_unscaled,
-            bounds=(1e-3, 10.0),
+            bounds=(None, 0),
             description="Smoothing parameter (smaller → sharper transition).",
             latex=r"$s$",
         ),
