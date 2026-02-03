@@ -30,6 +30,7 @@ if TYPE_CHECKING:
 # --- CGS CONSTANTS --- #
 # These are hard coded so we don't need to do unit conversions repeatedly.
 _gyrofrequency_coefficient_cgs = (constants.e.esu / (constants.m_e * constants.c)).cgs.value
+_log_gyrofrequency_coefficient_cgs = np.log(_gyrofrequency_coefficient_cgs)
 
 
 # --- Low-Level API --- #
@@ -64,6 +65,38 @@ def _optimized_compute_nu_gyro(
     No unit validation is performed.
     """
     return _gyrofrequency_coefficient_cgs * B / gamma
+
+
+def _opt_compute_log_nu_gyro(
+    log_gamma: Union[float, np.ndarray],
+    log_B: Union[float, np.ndarray],
+):
+    r"""
+    Compute the logarithm of the synchrotron gyrofrequency (CGS, optimized).
+
+    Parameters
+    ----------
+    log_gamma : float or array-like
+        Natural logarithm of the electron Lorentz factor.
+    log_B : float or array-like
+        Natural logarithm of the magnetic field strength in Gauss.
+
+    Returns
+    -------
+    log_nu_g : float or array-like
+        Natural logarithm of the synchrotron gyrofrequency in Hz.
+
+    Notes
+    -----
+    Implements
+
+    .. math::
+
+        \nu_g = \frac{e B}{m_e c \gamma}
+
+    in logarithmic form.
+    """
+    return _log_gyrofrequency_coefficient_cgs + log_B - log_gamma
 
 
 def _optimized_compute_nu_critical(
@@ -101,6 +134,31 @@ def _optimized_compute_nu_critical(
     No unit validation is performed.
     """
     return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * sin_alpha * gamma**2
+
+
+def _opt_compute_log_nu_critical(
+    log_gamma: Union[float, np.ndarray],
+    log_B: Union[float, np.ndarray],
+    sin_alpha: Union[float, np.ndarray] = 1.0,
+):
+    r"""
+    Compute the logarithm of the synchrotron critical frequency (CGS, optimized).
+
+    Parameters
+    ----------
+    log_gamma : float or array-like
+        Natural logarithm of the electron Lorentz factor.
+    log_B : float or array-like
+        Natural logarithm of the magnetic field strength in Gauss.
+    sin_alpha : float or array-like
+        Sine of the pitch angle.
+
+    Returns
+    -------
+    log_nu_critical : float or array-like
+        Natural logarithm of the synchrotron critical frequency in Hz.
+    """
+    return np.log(3 / (4 * np.pi)) + _log_gyrofrequency_coefficient_cgs + log_B + np.log(sin_alpha) + (2.0 * log_gamma)
 
 
 def _opt_compute_synch_frequency(
@@ -152,6 +210,39 @@ def _opt_compute_synch_frequency(
         sin_alpha_factor = sin_alpha
 
     return (3 / (4 * np.pi)) * _gyrofrequency_coefficient_cgs * B * sin_alpha_factor * gamma**2
+
+
+def _opt_compute_log_synch_frequency(
+    log_gamma: Union[float, np.ndarray],
+    log_B: Union[float, np.ndarray],
+    sin_alpha: Union[float, np.ndarray] = 1.0,
+    pitch_average: bool = True,
+):
+    r"""
+    Compute the logarithm of the synchrotron injection frequency (CGS, optimized).
+
+    Parameters
+    ----------
+    log_gamma : float or array-like
+        Natural logarithm of the electron Lorentz factor.
+    log_B : float or array-like
+        Natural logarithm of the magnetic field strength in Gauss.
+    sin_alpha : float or array-like
+        Sine of the pitch angle (used only if ``pitch_average=False``).
+    pitch_average : bool
+        Whether to use pitch-angle averaged value.
+
+    Returns
+    -------
+    log_nu_injection : float or array-like
+        Natural logarithm of the synchrotron injection frequency in Hz.
+    """
+    if pitch_average:
+        log_sin_alpha_factor = np.log(2 / np.pi)
+    else:
+        log_sin_alpha_factor = np.log(sin_alpha)
+
+    return np.log(3 / (4 * np.pi)) + _log_gyrofrequency_coefficient_cgs + log_B + log_sin_alpha_factor + 2.0 * log_gamma
 
 
 def _opt_compute_synch_gamma(
