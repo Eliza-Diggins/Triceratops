@@ -33,6 +33,7 @@ theory in the :ref:`synchrotron_theory` section of the documentation.
     synchrotron/synchrotron_core
     synchrotron/synchrotron_microphysics
     synchrotron/synchrotron_seds
+    synchrotron/synchrotron_cooling
 
 Additionally, there are a few additional theory documents which provide further context for the implementation of
 synchrotron radiation in Triceratops:
