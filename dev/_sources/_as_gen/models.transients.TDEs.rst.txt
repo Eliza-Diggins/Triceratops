@@ -1,0 +1,24 @@
+models.transients.TDEs
+======================
+
+.. automodule:: models.transients.TDEs
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

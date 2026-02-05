@@ -1,0 +1,34 @@
+﻿inference.likelihood
+====================
+
+.. automodule:: inference.likelihood
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      base
+   
+   
+
+   
+   
+   
+
+   
+   
+   
