@@ -16,7 +16,11 @@ from triceratops.models._typing import (
     _ModelVariablesInputRaw,
 )
 from triceratops.models.core import Model, ModelParameter, ModelVariable
-from triceratops.profiles import smoothed_BPL
+
+
+def smoothed_BPL(x, norm, x_break, alpha_1, alpha_2, s):
+    """Compute a smoothed broken power-law function."""
+    return norm * ((x / x_break) ** (alpha_1 / s) + (x / x_break) ** (alpha_2 / s)) ** s
 
 
 class Synchrotron_SSA_SBPL_SED(Model):

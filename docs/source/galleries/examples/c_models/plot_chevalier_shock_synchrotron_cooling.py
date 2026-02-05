@@ -591,15 +591,35 @@ ax.grid(True, which="both", ls="--", alpha=0.4)
 plt.tight_layout()
 plt.show()
 
+# %%
+# Interpretation of the Break Frequencies
+# ---------------------------------------
+#
+# The evolution of the characteristic synchrotron frequencies
+# :math:`(\nu_m, \nu_c, \nu_a)` encapsulates the changing physical conditions
+# behind the shock.
+#
+# - The injection frequency :math:`\nu_m` decreases with time as the shock
+#   decelerates and the characteristic Lorentz factor of newly accelerated
+#   electrons remains fixed while the magnetic field weakens.
+#
+# - The cooling frequency :math:`\nu_c` typically increases with time, reflecting
+#   the declining synchrotron loss rate as the post-shock magnetic field decays.
+#
+# - The self-absorption frequency :math:`\nu_a` traces the competition between
+#   decreasing density, expanding geometry, and the evolving normalization of the
+#   optically thin spectrum. Its behavior is especially sensitive to the emitting
+#   volume and projected area.
+#
+# The relative ordering of these frequencies determines the **global spectral
+# regime** at each epoch and controls both the shape and normalization of the
+# observed spectrum.
+#
+# With the time-dependent break frequencies in hand, we now turn to the full
+# synchrotron spectral energy distributions and examine how the broadband spectrum
+# evolves across epochs.
 
-# --------------------------------------------------
-# Synchrotron SED evolution
-# --------------------------------------------------
 from matplotlib.colors import LogNorm
-
-# --------------------------------------------------
-# Synchrotron SED evolution with time-coded colors
-# --------------------------------------------------
 
 frequencies = np.logspace(7, 12, 1000) * u.Hz
 
