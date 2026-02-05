@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:01.775** total execution time for 10 files **from all galleries**:
+**00:01.039** total execution time for 9 files **from all galleries**:
 
 .. container::
 
@@ -32,11 +32,8 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_auto_examples_c_models_plot_chevalier_shock_synchrotron_cooling.py` (``galleries/examples/c_models/plot_chevalier_shock_synchrotron_cooling.py``)
-     - 00:00.971
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_c_models_plot_chevalier_shock_synchrotron.py` (``galleries/examples/c_models/plot_chevalier_shock_synchrotron.py``)
-     - 00:00.805
+   * - :ref:`sphx_glr_auto_examples_e_physics_synchro_plot_chevalier_shock_synchrotron_cooling.py` (``galleries/examples/e_physics_synchro/plot_chevalier_shock_synchrotron_cooling.py``)
+     - 00:01.039
      - 0.0
    * - :ref:`sphx_glr_auto_examples_a_data_plot_epoch_photometry.py` (``galleries/examples/a_data/plot_epoch_photometry.py``)
      - 00:00.000
