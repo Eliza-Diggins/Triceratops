@@ -14,11 +14,6 @@ from astropy import constants as const
 from astropy import units as u
 from scipy.special import gamma as gamma_func
 
-__all__ = [
-    "compute_c5_parameter",
-    "compute_c6_parameter",
-]
-
 # =========================================== #
 # CGS CONSTANTS FOR SYNCHROTRON CALCULATIONS  #
 # =========================================== #
@@ -47,16 +42,66 @@ References
 c_1_cgs: float = c_1.cgs.value
 """float: Synchrotron radiation constant :math:`c_1` in CGS units."""
 
-# Normalization constants (chi)
+# ------------------------------------------------------------------
+# Synchrotron normalization constants (chi)
+# ------------------------------------------------------------------
+
 chi_cgs = 4 * _c5_coefficient_cgs
-r"""float: Synchrotron power normalization constant :math:`\chi = 4 c_5`. """
+r"""
+float
+    Numerical synchrotron normalization coefficient
+    :math:`\chi \equiv 4 c_5`.
+
+    This constant represents **only the coefficient prefactor** extracted from
+    the standard synchrotron emissivity constant :math:`c_5` (in CGS units).
+    It is used as a bookkeeping convenience in SED normalization expressions
+    and does **not** by itself represent a physical power, emissivity, or flux.
+
+    In particular, :math:`\chi` does *not* include:
+
+    - electron distribution normalization,
+    - magnetic-field or frequency dependence,
+    - pitch-angle averaging,
+    - geometric or distance factors.
+
+    These contributions are applied explicitly elsewhere in the SED
+    construction.
+"""
+
 _log_chi_cgs = np.log(chi_cgs)
-r"""float: Natural logarithm of the synchrotron power normalization constant :math:`\chi = 4 c_5`. """
+r"""
+float
+    Natural logarithm of the synchrotron normalization coefficient
+    :math:`\chi = 4 c_5`.
+
+    Stored separately to support numerically stable, log-space SED
+    normalization and inference workflows.
+"""
 
 chi_cgs_iso = (2 / np.pi) * chi_cgs
-r"""float: Synchrotron power normalization constant for isotropic pitch angle distribution. """
+r"""
+float
+    Synchrotron normalization coefficient for an **isotropic pitch-angle
+    distribution**.
+
+    This quantity applies the standard isotropic pitch-angle averaging factor
+    :math:`2 / \pi` to the coefficient-only normalization constant
+    :math:`\chi = 4 c_5`.
+
+    As with ``chi_cgs``, this constant represents only the numerical prefactor
+    and must be combined with additional physical factors to construct a full
+    synchrotron emissivity or SED normalization.
+"""
+
 _log_chi_cgs_iso = np.log(chi_cgs_iso)
-"""float: Natural logarithm of the synchrotron power normalization constant for isotropic pitch angle distribution."""
+r"""
+float
+    Natural logarithm of the isotropic-pitch-angle synchrotron normalization
+    coefficient.
+
+    Used internally for log-space normalization and inference when
+    pitch-angle-averaged synchrotron emissivities are assumed.
+"""
 
 
 # =========================================== #
