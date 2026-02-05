@@ -14,7 +14,7 @@ population are often included to better match observed spectra (e.g. :footcite:t
     :ref:`synchrotron_theory`.
 
 In Triceratops, we have implemented the general synchrotron SED including both SSA and cooling
-effects in the class :class:`~triceratops.radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED`.
+effects in the class :class:`~radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED`.
 
 In this example, we're going to simply demonstrate the shapes of the different spectra using
 contrived values of the various break frequencies. In practice, models relying on these
@@ -26,10 +26,10 @@ Setup
 -------
 
 To get started, we'll need to import the
-:class:`~triceratops.radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED` class
+:class:`~radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED` class
 from Triceratops, along with some standard packages for numerical work and plotting.
 
-Synchrotron SEDs (all descended from :class:`~triceratops.radiation.synchrotron.SEDs.SynchrotronSED`) need
+Synchrotron SEDs (all descended from :class:`~radiation.synchrotron.SEDs.SynchrotronSED`) need
 to be instantiated before use (so that hyper-parameters and flags for various choices can be set). Once instantiated
 we can define a frequency grid and some fixed phenomenological parameters for the spectra and then evaluate
 the SED for different values of the relevant frequencies.
@@ -61,10 +61,10 @@ nu = np.geomspace(1e7, 1e20, 1000) * u.Hz
 # nu_c: cooling frequency
 # nu_max: maximum frequency cutoff
 # F_peak: peak flux density
-nu_m = 1e12 * u.Hz  # Injection frequency
+nu_m = 1e7 * u.Hz  # Injection frequency
 nu_max = 1e18 * u.Hz  # High-frequency cutoff
 nu_c = 1e14 * u.Hz  # Cooling frequency
-F_peak = 1 * u.mJy  # Peak flux density
+F_peak = 100 * u.mJy  # Peak flux density
 
 # Hyper-parameters
 # There are a couple parameters that control the shape of the spectrum
