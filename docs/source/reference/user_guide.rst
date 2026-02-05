@@ -11,10 +11,20 @@ understand the codebase in detail.
 Topics in this guide are broken down by subject area, with each section providing
 a comprehensive overview of the relevant components and their usage.
 
+.. figure:: ../images/index/TriceratopsCodeStructure.svg
+    :align: center
+    :alt: Triceratops Code Structure
+
+    The structure of the Triceratops codebase, showing the main modules and their relationships. The user guide covers the
+    data, models, inference, and physics modules, which are the core components of the library. The extensions and
+    analysis sections cover additional functionality and workflows that leverage these core components.
+
+----
+
 Getting Started
 ---------------
 
-To get started with triceratops, check out the :ref:`getting_started` guide which walks through installation,
+To get started with triceratops, check out :ref:`getting_started` guide which walks through installation,
 basic usage, and a simple example. This is a great place to begin if you're new to triceratops or scientific
 Python in general. You can also explore the :ref:`examples` section for more in-depth tutorials and use cases.
 

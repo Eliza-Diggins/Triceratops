@@ -8,16 +8,25 @@ Triceratops
 
 |RUFF| |PRE-COMMIT| |NUMPYDOC| |COMMITIZEN| |CONVENTIONAL-COMMITS| |LAST-COMMIT| |CONTRIBUTORS| |DOCS| |ASTROPY|
 
-Welcome to TRICERATOPS, the **T**\ransient **R**\adio **I**\nteraction **C**\ode for **E**\jecta, **R**\emnants, **A**\nd
-**T**\ime-domain **O**\bservables from **P**\lasma **S**\hocks. TRICERATOPS is a powerful computational tool designed to
-simulate and analyze the complex interactions between transient radio sources and their surrounding environments.
-It provides researchers with the ability to model plasma shocks, ejecta dynamics, and the resulting time-domain
-observables with high precision.
+The **TR**\ ansient **I**\ nteraction **C**\ ode for **E**\ jecta, **R**\ emnants, **A**\ and
+**T**\ ime-domain **O**\ bservables from **P**\ lasma **S**\ hocks (**TRICERATOPS**) is a powerful, modular computational
+library for modeling the interaction of transient astrophysical outflows with their surrounding environments.
 
-The software can be used to fit models of transient outflows to observation data from radio telescopes, enabling
-astronomers to better understand the physical processes driving these phenomena. TRICERATOPS is built with a focus on
-flexibility and user-friendliness, making it accessible to both novices and experienced researchers in the field of
-astrophysics.
+TRICERATOPS is designed to simulate the coupled dynamics, radiation processes, and observational signatures that arise
+when ejecta-driven shocks propagate through ambient media. It enables researchers to model plasma shocks, ejecta
+dynamics, and broadband time-domain observables in a physically self-consistent way, with particular emphasis on radio
+and millimeter transients.
+
+The library supports both **forward modeling** and **parameter inference**, allowing users to connect physically
+motivated shock models directly to observational data from modern radio telescopes. By combining shock dynamics,
+microphysical prescriptions, and radiative transfer into a unified framework, TRICERATOPS helps bridge the gap between
+theory and observation in time-domain astrophysics.
+
+Built with flexibility and extensibility in mind, TRICERATOPS is suitable for a wide range of users; from newcomers
+exploring transient shock physics to experienced researchers developing custom models or extending the codebase.
+Its modular architecture makes it straightforward to swap in alternative physical prescriptions, add new radiation
+processes, or integrate with external inference and analysis tools.
+
 
 .. raw:: html
 

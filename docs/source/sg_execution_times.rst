@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.494** total execution time for 9 files **from all galleries**:
+**00:00.501** total execution time for 9 files **from all galleries**:
 
 .. container::
 
@@ -33,7 +33,7 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_e_physics_synchro_plot_SSA_cooling_SED.py` (``galleries/examples/e_physics_synchro/plot_SSA_cooling_SED.py``)
-     - 00:00.494
+     - 00:00.501
      - 0.0
    * - :ref:`sphx_glr_auto_examples_a_data_plot_epoch_photometry.py` (``galleries/examples/a_data/plot_epoch_photometry.py``)
      - 00:00.000

@@ -1,9 +1,9 @@
-.. _getting_started:
 
 .. image:: ./images/logo.png
    :width: 200px
    :align: center
 
+.. _getting_started:
 ==================
 Quickstart Guide
 ==================

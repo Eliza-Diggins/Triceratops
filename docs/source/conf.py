@@ -43,6 +43,7 @@ extensions = [
     "matplotlib.sphinxext.plot_directive",
     "sphinxcontrib.bibtex",
     "sphinx_gallery.gen_gallery",
+    "sphinx_copybutton",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,6 +60,29 @@ exclude_patterns = []
 # a list of builtin themes.
 #
 html_theme = "pydata_sphinx_theme"
+
+html_theme_options = {
+    "logo": {
+        "text": "Triceratops",
+        "image_light": "images/logo.png",
+        "image_dark": "images/logo.png",
+        "alt_text": "Triceratops logo",
+    },
+    "icon_links": [
+        {
+            # Label for this link
+            "name": "GitHub",
+            # URL where the link will redirect
+            "url": "https://github.com/eliza-diggins/Triceratops",  # required
+            # Icon class (if "type": "fontawesome"), or path to local image (if "type": "local")
+            "icon": "fa-brands fa-square-github",
+            # The type of image to be used (see below for details)
+            "type": "fontawesome",
+        }
+    ],
+}
+
+html_favicon = "images/logo.png"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

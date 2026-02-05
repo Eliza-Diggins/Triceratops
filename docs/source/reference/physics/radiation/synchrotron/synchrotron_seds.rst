@@ -397,43 +397,58 @@ transient shocks, GRB afterglows, radio supernovae, or similar systems.
 Because of the large number of possible spectral orderings, users are strongly
 encouraged to consult :ref:`synch_sed_theory` when interpreting the resulting
 spectral shapes.
+
+----
+
 The Low-Level Interface
-----------------------
+------------------------
 
 While most users will interact with synchrotron spectra through the high-level
 SED classes, Triceratops also exposes a comprehensive **low-level interface**
-for constructing, inspecting, and extending synchrotron SEDs at a finer level
-of control.
+that provides direct access to the numerical and conceptual building blocks from
+which those SEDs are constructed.
 
-This interface is primarily intended for:
+This interface is intentionally more granular and assumes familiarity with both
+synchrotron theory and the internal structure of the SED system. It is primarily
+intended for advanced use cases, including:
 
-- Defining **custom SEDs** not covered by the built-in classes,
-- Implementing or testing **new physical regimes**,
-- Inspecting the **numerical building blocks** underlying the high-level API,
-- Reproducing or validating results from the literature at the level of
-  individual spectral segments.
+- Defining **custom synchrotron SEDs** not covered by the built-in classes,
+- Implementing or testing **new physical regimes** or closure relations,
+- Inspecting and validating the **numerical components** underlying the
+  high-level API,
+- Reproducing analytic results from the literature at the level of individual
+  spectral segments,
+- Debugging or benchmarking normalization and regime-selection logic.
 
 The low-level interface reflects the internal architecture of the synchrotron
 SED system: complex spectra are assembled from small, scale-free components
 whose behavior is well-defined in logarithmic space. These components are then
-combined, ordered, and normalized by the high-level classes.
+combined, ordered, and normalized by the high-level SED classes.
 
 Conceptually, the low-level interface is organized into four categories:
-**shape functions**, **SED functions**, **normalization utilities**, and
-**regime-determination logic**. Together, these form the substrate from which
-all high-level SED classes are built.
+
+1. **Shape functions**, which define smooth, scale-free spectral transitions,
+2. **SED functions**, which encode complete synchrotron spectra for specific
+   physical regimes,
+3. **Normalization utilities**, which connect scale-free spectra to physical
+   flux densities,
+4. **Regime-determination logic**, which selects the globally consistent spectral
+   configuration.
+
+Together, these form the substrate from which all high-level synchrotron SEDs
+in Triceratops are built.
 
 Shape Functions
 ^^^^^^^^^^^^^^^
 
 Shape functions define the **mathematical form of spectral transitions**
 independently of any specific physical scenario. They operate entirely in
-logarithmic space and are designed to be numerically stable across many decades
-in frequency.
+logarithmic space and are designed to remain numerically stable across many
+decades in frequency.
 
 These functions do *not* encode synchrotron physics themselves. Instead, they
 provide reusable, scale-free primitives that are composed into physical SEDs
-elsewhere.
+elsewhere in the codebase.
 
 The most important shape functions are:
 
@@ -444,105 +459,122 @@ The most important shape functions are:
     :toctree: ../../../../_as_gen
     :nosignatures:
 
-    log_smoothed_BPL
     log_smoothed_SFBPL
     log_exp_cutoff_sed
 
 In brief:
 
-- ``log_smoothed_BPL`` implements a two-segment broken power law with a smooth
-  transition.
-- ``log_smoothed_SFBPL`` generalizes this to multiple breaks in a scale-free
-  manner.
+- ``log_smoothed_SFBPL`` implements a scale-free smoothed broken power law,
+  allowing multiple spectral breaks to be connected smoothly while preserving
+  asymptotic power-law behavior.
 - ``log_exp_cutoff_sed`` applies a smooth exponential truncation at high
-  frequencies.
+  frequencies and is used to model finite maximum electron energies.
 
-These functions are used internally by essentially all synchrotron SEDs in
-Triceratops.
+These functions return **unnormalized spectral shapes in log-space** and are
+not intended to be used directly in most workflows.
 
-SED Functions (BPL and SBPL)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SED Functions
+^^^^^^^^^^^^^
 
-SED functions encode **complete synchrotron spectra for specific physical
-scenarios and frequency orderings**. Each function corresponds to a single,
-well-defined spectrum as derived in :ref:`synch_sed_theory`.
+SED functions encode **complete synchrotron spectral shapes** corresponding to
+specific physical scenarios and frequency orderings. Each function implements
+a single, well-defined spectrum as derived in :ref:`synch_sed_theory`.
 
-For example, a power-law electron population with cooling and SSA can produce
-multiple distinct spectral shapes depending on the ordering of
-:math:`\nu_m`, :math:`\nu_c`, :math:`\nu_a`, and :math:`\nu_{\max}`. Each of
-those possibilities is implemented as a *separate* low-level SED function.
+For example, a power-law electron population with radiative cooling and
+synchrotron self-absorption can produce multiple distinct spectral shapes
+depending on the ordering of :math:`\nu_m`, :math:`\nu_c`, :math:`\nu_a`, and
+:math:`\nu_{\max}`. Each of these possibilities is implemented as a separate
+low-level SED function.
+To keep this manageable and explicit, Triceratops adopts a standardized naming
+convention for low-level SED functions:
 
-To keep this manageable, Triceratops adopts a standardized naming convention:
+.. code-block:: text
 
-.. code-block::
+    _log_<electron_pop>_<sed_type>_sed_<physics tags>_<spectrum number>
 
-    _log_<electron_pop_type>_<SED_func_type>_sed_<physics tags ...>_<spectrum number>
+In practice, this expands to names such as:
+
+.. code-block:: text
+
+    _log_powerlaw_sbpl_sed_cool_4
+    _log_powerlaw_sbpl_sed_ssa_2
+    _log_powerlaw_sbpl_sed_cool_ssa_7
 
 where:
 
-- ``<electron_pop_type>`` indicates the assumed electron distribution.
-  Currently this is always ``powerlaw``.
-- ``<SED_func_type>`` specifies whether the spectrum is implemented as a broken
-  power law (``bpl``) or a smoothed broken power law (``sbpl``).
-- ``<physics tags ...>`` indicate which physical processes are included:
-
-  - ``cool`` for radiative cooling,
-  - ``ssa`` for synchrotron self-absorption.
-
+- ``<electron_pop>`` indicates the assumed electron distribution
+  (currently always ``powerlaw``),
+- ``<sed_type>`` specifies the mathematical representation of the spectrum:
+  ``bpl`` for a sharp broken power law or ``sbpl`` for a smoothed broken power law,
+- ``<physics tags>`` indicate which physical processes are included, in
+  **order-independent form** (e.g. ``cool``, ``ssa``, or ``cool_ssa``),
 - ``<spectrum number>`` labels the specific frequency ordering as defined in
   :ref:`synch_sed_theory`.
 
-Each of these functions:
+Each SED function:
 
 - Operates entirely in **logarithmic space**,
 - Assumes all inputs are already validated and dimensionless,
-- Returns the **logarithm of the spectral shape**, unnormalized.
+- Returns the **logarithm of the scale-free spectral shape**,
+- Applies *no normalization*.
 
-They are not intended to be called directly in most workflows; instead, they are
-selected and combined by the high-level SED classes.
+These functions are selected and composed automatically by the high-level SED
+classes and are rarely called directly by users.
 
-Normalization Functions
-^^^^^^^^^^^^^^^^^^^^^^^^
+.. dropdown:: Available Low-Level SED Functions
 
-Normalization utilities handle the mapping between **scale-free spectral
-shapes** and physically meaningful flux densities.
+   The following low-level SED functions are implemented in
+   :mod:`radiation.synchrotron.SEDs`. Each corresponds to a unique spectral
+   regime defined in :ref:`synch_sed_theory`.
 
-In Triceratops, all synchrotron SEDs are normalized using the **peak flux
-density** :math:`F_{\rm peak}`. Low-level normalization functions encode the
-analytic relationships between:
+   .. rubric:: Power Law (No Cooling, No SSA)
 
-- :math:`F_{\rm peak}`,
-- Characteristic break frequencies,
-- Electron distribution parameters,
-- Geometric factors such as the emitting solid angle.
+   .. autosummary::
+      :toctree: ../../../../_as_gen
+      :nosignatures:
 
-These functions are used internally by SED classes when computing derived
-quantities such as the self-absorption frequency or when enforcing physical
-closure relations.
+        _log_powerlaw_sbpl_sed
 
-Regime Determination Functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   .. rubric:: Power Law + Cooling
 
-Regime-determination logic identifies which SED function applies to a given set
-of physical parameters. At the low level, this consists of simple comparisons
-between characteristic frequencies expressed in log-space.
+   .. autosummary::
+      :toctree: ../../../../_as_gen
+      :nosignatures:
 
-High-level SED classes wrap this logic to ensure that:
+      _log_powerlaw_sbpl_sed_cool_2
+      _log_powerlaw_sbpl_sed_cool_1
 
-- Exactly one spectral regime is selected,
-- Any required **derived break frequencies** are computed self-consistently,
-- The resulting spectrum is internally consistent.
+   .. rubric:: Power Law + SSA
 
-Users defining custom SEDs may find it useful to reuse or adapt this logic when
-implementing new physical scenarios.
+   .. autosummary::
+      :toctree: ../../../../_as_gen
+      :nosignatures:
+
+      _log_powerlaw_sbpl_sed_ssa_1
+      _log_powerlaw_sbpl_sed_ssa_2
+
+   .. rubric:: Power Law + Cooling + SSA
+
+   .. autosummary::
+      :toctree: ../../../../_as_gen
+      :nosignatures:
+
+      _log_powerlaw_sbpl_sed_ssa_cool_3
+      _log_powerlaw_sbpl_sed_ssa_cool_4
+      _log_powerlaw_sbpl_sed_ssa_cool_5
+      _log_powerlaw_sbpl_sed_ssa_cool_6
+      _log_powerlaw_sbpl_sed_ssa_cool_7
+
+
+
 
 Relationship to the High-Level Interface
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The low-level interface is best thought of as the **implementation layer** of
-the synchrotron SED system. High-level SED classes orchestrate these components
-to provide a clean, stable, and physically meaningful user-facing API.
+The low-level interface should be viewed as the **implementation layer** of the
+synchrotron SED system. High-level SED classes orchestrate these components to
+provide a stable, physically meaningful, and easy-to-use user-facing API.
 
-Most users should not need to interact with these functions directly. However,
-they are fully documented and exposed to enable transparency, extensibility,
-and rigorous testing of synchrotron spectral models.
+Most users will never need to interact with the low-level functions directly.
+However, they are fully documented and exposed to support transparency,
+extensibility, and rigorous validation of synchrotron spectral models.

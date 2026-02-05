@@ -76,6 +76,7 @@ docs = [
   'sphinxcontrib-qthelp>=2.0.0',
   'sphinxcontrib-serializinghtml>=2.0.0',
   'sphinxcontrib-tikz>=0.4.20',
+  'sphinx-copybutton',
   "numpydoc",
 ]
 test = [
