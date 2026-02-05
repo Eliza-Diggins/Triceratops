@@ -78,9 +78,9 @@ Parameters, Hyper-Parameters, and Physical Quantities
 This document contains a great deal of mathematical notation describing the various SEDs and their construction. It is
 therefore worthwhile to provide a **bird's-eye view** of the various types of quantities used herein.
 
-At it's core, an **SED** is a function :math:`F(\nu, F_{\rm pk}, \boldsymbol{\nu}_{\rm brk}, \boldsymbol{\Theta})` which
+At it's core, an **SED** is a function :math:`F(\nu, F_{\rm norm}, \boldsymbol{\nu}_{\rm brk}, \boldsymbol{\Theta})` which
 provides the **flux density** :math:`F_\nu` at a given frequency :math:`\nu` given a set of **break frequencies**
-:math:`\boldsymbol{\nu}_{\rm brk} = (\nu_1, \nu_2, \ldots)`, a normalization at the SED's peak, and a set of
+:math:`\boldsymbol{\nu}_{\rm brk} = (\nu_1, \nu_2, \ldots)`, a normalization, and a set of
 **hyper-parameters** :math:`\boldsymbol{\Theta} = (\theta_1, \theta_2, \ldots)`.
 
 - The **break frequencies** are the critical frequencies which define the transitions between different
@@ -107,8 +107,9 @@ In the tables below, we summarize the various types of quantities used in this d
 
     * - Parameter
       - Description
-    * - :math:`F_{\rm pk}`
-      - The flux density at the peak of the SED.
+    * - :math:`F_{\rm norm}`
+      - The normalization of the SED. This is taken to be the expected flux of the dominant power-law
+        segment at the dominant break frequency. See :ref:`sed_normalization` for details.
     * - :math:`\nu_m`
       - The minimum injection frequency. See :ref:`synchrotron_sed_injection_frequencies` for details.
     * - :math:`\nu_{\rm max}`
@@ -150,10 +151,10 @@ In the tables below, we summarize the various types of quantities used in this d
       - Description
     * - :math:`\nu_a`
       - The self-absorption frequency. See :ref:`synchrotron_abs_frequency` for details.
+    * - :math:`F_{\rm pk}`
+      - The peak flux density of the SED. This is determined by the normalization and the break frequencies. See :ref:`sed_normalization` for details.
 
-
-
-
+.. _sed_surgery:
 The Shape of SEDs
 ^^^^^^^^^^^^^^^^^
 
@@ -202,6 +203,17 @@ at :math:`\nu_1, \nu_2, \ldots, \nu_n`, the full SED may be written as:
     :label: full_sed_surgery
 
     F_\nu = F_{\nu,0} \prod_{i=0}^{n-1} \tilde{F}_{\nu}^{(i,i+1)}.
+
+.. important::
+
+    In the :mod:`~radiation.synchrotron.SEDs` module, each of these SED surgery products is implemented
+    as a single function in the low-level API. In that case, we universally require that the curve be unity
+    at its maximum (corresponding to one of the break frequencies) in the limit that :math:`|s_{(i,j)}| \to 0`
+    (i.e., the discrete limit). This allows for a single normalization to be applied to the entire SED.
+
+    In the high-level Object-Oriented API, we instead use the :math:`F_{\rm norm}` convention described in
+    :ref:`sed_normalization` to normalize the SEDs. This is because self-consistent solutions for the internal
+    parameters are not guaranteed with phenomenological normalization.
 
 Break Frequencies
 ^^^^^^^^^^^^^^^^^
@@ -352,6 +364,12 @@ frequency as
     t_{\rm dyn}^2}\right).
     }
 
+.. hint::
+
+    In general, one selects a cooling mechanism (see :ref:`synchrotron_theory` and :ref:`synchrotron_microphysics`)
+    and computes :math:`\gamma_c(t)` as a function of time and provides that to the SED. Cooling is implemented in
+    :mod:`~radiation.synchrotron.cooling`.
+
 .. _synchrotron_abs_frequency:
 The Absorption Frequency
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -415,7 +433,14 @@ approximation described above:
 
 .. math::
 
-    F_\nu = 2\nu^2 m_e \gamma_\nu \Omega = F_{\nu, \rm thin}(\nu_a).
+    F_\nu = 2\nu^2 m_e \gamma_\nu \Omega = F_{\nu, \rm thin}(\nu_a),
+
+where :math:`F_{\nu, \rm thin}(\nu_a)` is the flux density at :math:`\nu_a` computed from the optically thin SED,
+and :math:`\gamma_\nu` is the Lorentz factor of the **dominant absorbing electrons**:
+
+.. math::
+
+    \gamma_\nu = {\rm max}\left(\gamma_a, {\rm min}\left(\gamma_c,\gamma_m\right)\right).
 
 This defines an implicit equation for :math:`\nu_a` which may be solved algebraically (or numerically if necessary).
 Thus, for any set of break frequencies and hyper-parameters, one may compute :math:`\nu_a` by solving the equation
@@ -563,11 +588,6 @@ the naming convention of :footcite:t:`GranotSari2002SpectralBreaks`.
 
     .. tab-item:: SPL F (:math:`F_\nu \propto \nu^{-1/2}`)
 
-        .. admonition:: TODO
-
-            Are there concerns here about the electron population actually cooling like this? We need to touch base
-            with Raf.
-
         SPL E occurs in the optically thin regime above the cooling frequency :math:`\nu_c` but
         below the minimum electron frequency :math:`\nu_m`. In this regime, the SED is dominated by
         synchrotron emission from the cooled portion of the electron distribution. Because this population has
@@ -670,7 +690,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_3_SBPL
 
-            \tilde{F}_{\nu}^{(G,H)} = F^{(G,H)}_{\nu,0} \left[
+            F_{\nu}^{(G,H)} = F^{(G,H)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_c}\right)^{-(p-1)/2s_{(G,H)}}
                 +
                 \left(\frac{\nu}{\nu_c}\right)^{-p/2s_{(G,H)}}
@@ -698,7 +718,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_4_SBPL
 
-            \tilde{F}_{\nu}^{(B,A)} = F^{(B,A)}_{\nu,0} \left[
+            F_{\nu}^{(B,A)} = F^{(B,A)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_a}\right)^{2/s_{(B,A)}}
                 +
                 \left(\frac{\nu}{\nu_a}\right)^{5/2s_{(B,A)}}
@@ -726,7 +746,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_5_SBPL
 
-            \tilde{F}_{\nu}^{(A,G)} = F^{(A,G)}_{\nu,0} \left[
+            F_{\nu}^{(A,G)} = F^{(A,G)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_a}\right)^{5/2s_{(A,G)}}
                 +
                 \left(\frac{\nu}{\nu_a}\right)^{-(p-1)/2s_{(A,G)}}
@@ -754,7 +774,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_6_SBPL
 
-            \tilde{F}_{\nu}^{(A,H)} = F^{(A,H)}_{\nu,0} \left[
+            F_{\nu}^{(A,H)} = F^{(A,H)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_a}\right)^{5/2s_{(A,H)}}
                 +
                 \left(\frac{\nu}{\nu_a}\right)^{-p/2s_{(A,H)}}
@@ -782,7 +802,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_7_SBPL
 
-            \tilde{F}_{\nu}^{(B,C)} = F^{(B,C)}_{\nu,0} \left[
+            F_{\nu}^{(B,C)} = F^{(B,C)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_{ac}}\right)^{2/s_{(B,C)}}
                 +
                 \left(\frac{\nu}{\nu_{ac}}\right)^{(11/8)/s_{(B,C)}}
@@ -810,7 +830,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_8_SBPL
 
-            \tilde{F}_{\nu}^{(C,F)} = F^{(C,F)}_{\nu,0} \left[
+            F_{\nu}^{(C,F)} = F^{(C,F)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_a}\right)^{(11/8)/s_{(C,F)}}
                 +
                 \left(\frac{\nu}{\nu_a}\right)^{-1/2s_{(C,F)}}
@@ -838,7 +858,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_9_SBPL
 
-            \tilde{F}_{\nu}^{(F,H)} = F^{(F,H)}_{\nu,0} \left[
+            F_\nu}^{(F,H)} = F^{(F,H)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_m}\right)^{-1/2s_{(F,H)}}
                 +
                 \left(\frac{\nu}{\nu_m}\right)^{-p/2s_{(F,H)}}
@@ -866,7 +886,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_10_SBPL
 
-            \tilde{F}_{\nu}^{(C,E)} = F^{(C,E)}_{\nu,0} \left[
+            F_{\nu}^{(C,E)} = F^{(C,E)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_a}\right)^{(11/8)/s_{(C,E)}}
                 +
                 \left(\frac{\nu}{\nu_a}\right)^{(1/3)/s_{(C,E)}}
@@ -895,7 +915,7 @@ a given break frequency. Again, we follow the naming convention of :footcite:t:`
         .. math::
             :label: break_11_SBPL
 
-            \tilde{F}_{\nu}^{(E,F)} = F^{(E,F)}_{\nu,0} \left[
+            F_{\nu}^{(E,F)} = F^{(E,F)}_{\nu,0} \left[
                 \left(\frac{\nu}{\nu_c}\right)^{(1/3)/s_{(E,F)}}
                 +
                 \left(\frac{\nu}{\nu_c}\right)^{-1/2s_{(E,F)}}
@@ -941,9 +961,7 @@ Broadband SEDs
 
 For each of the broadband SEDs described below, we provide two different formulations of the SED: one utilizing
 the smoothed broken power-law (SBPL) construction described in :ref:`sed_surgery`, and one providing the full piecewise
-definition of the SED. In each case, the normalization of the SED is provided according to the LKIN scheme described
-in :ref:`sed_normalization`. We report two different normalizations for the SED: one for a **single pitch angle** and
-one for an **isotropic pitch angle distribution**. The difference between these two normalizations is an averaging factor.
+definition of the SED. The normalization procedure is described in :ref:`sed_normalization`.
 
 The Power Law SED
 ~~~~~~~~~~~~~~~~~

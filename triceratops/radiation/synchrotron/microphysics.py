@@ -233,7 +233,7 @@ def _opt_compute_BPL_n_total(
     """
     N0 = np.asarray(N0, dtype="f8")
 
-    moment_0 = _opt_compute_BPL_moment(
+    moment_0 = gamma_b * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -295,7 +295,7 @@ def _opt_compute_BPL_n_eff(
     """
     N0 = np.asarray(N0, dtype="f8")
 
-    moment_2 = _opt_compute_BPL_moment(
+    moment_2 = gamma_b**3 * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -532,7 +532,7 @@ def compute_electron_gamma_BPL_moment(
         raise ValueError("gamma_min must be strictly positive.")
 
     # Track scalar return
-    result = _opt_compute_BPL_moment(
+    result = gamma_b ** (order + 1) * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -1149,7 +1149,7 @@ def _opt_normalize_BPL_from_magnetic_field(
     u_B = B**2 / (8.0 * np.pi)
 
     # Energy moment of the BPL distribution
-    moment = _opt_compute_BPL_moment(
+    moment = gamma_b**2 * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -1158,6 +1158,7 @@ def _opt_normalize_BPL_from_magnetic_field(
     )
 
     N0 = (epsilon_E / epsilon_B) * u_B / (electron_rest_energy_cgs * moment)
+
     return N0.reshape(()) if N0.ndim == 0 else N0
 
 
@@ -1211,7 +1212,7 @@ def _opt_normalize_BPL_from_thermal_energy_density(
     u_therm = np.asarray(u_therm, dtype="f8")
     epsilon_E = np.asarray(epsilon_E, dtype="f8")
 
-    moment = _opt_compute_BPL_moment(
+    moment = gamma_b**2 * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -1403,7 +1404,7 @@ def _opt_compute_bol_emiss_BPL_from_magnetic_field(
     U_B = B**2 / (8.0 * np.pi)
 
     # Radiative weighting moment (∫ γ^2 N(γ) dγ / N0 factor handled by moment definition)
-    moment_2 = _opt_compute_BPL_moment(
+    moment_2 = gamma_b**3 * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -1541,7 +1542,7 @@ def _opt_compute_bol_emiss_BPL_from_thermal_energy_density_full(
     gamma_max = np.asarray(gamma_max, dtype="f8")
 
     # Moments
-    M1 = _opt_compute_BPL_moment(
+    M1 = gamma_b**2 * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -1549,7 +1550,7 @@ def _opt_compute_bol_emiss_BPL_from_thermal_energy_density_full(
         order=1,
     )
 
-    M2 = _opt_compute_BPL_moment(
+    M2 = gamma_b**3 * _opt_compute_BPL_moment(
         a1=a1,
         a2=a2,
         x_min=gamma_min / gamma_b,
@@ -1617,8 +1618,7 @@ def compute_PL_norm_from_magnetic_field(
         If ``mode='energy'``, units are :math:`\mathrm{cm^{-3}\ erg^{p-1}}`.
     """
     # Enforce units on the B-field.
-    if hasattr(B, "units"):
-        B = B.to_value(u.Gauss)
+    B = ensure_in_units(B, u.G)
 
     # Validate inputs before passing off to the low-level callable. This
     # includes checking for convergence of the energy integral.
