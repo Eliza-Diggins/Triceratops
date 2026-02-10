@@ -6,12 +6,13 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 from astropy import units as u
-from scipy.stats import norm
 
 from triceratops.data.core import DataContainer
 from triceratops.models.core.base import Model
 from triceratops.utils.log import triceratops_logger
 from triceratops.utils.misc_utils import ensure_in_units
+
+from .gaussian import censored_gaussian_loglikelihood, gaussian_loglikelihood
 
 if TYPE_CHECKING:
     from triceratops.models._typing import (
@@ -304,221 +305,251 @@ class Likelihood(ABC):
 
 
 class GaussianCensoredLikelihoodStencil(Likelihood, ABC):
-    r"""
-    Gaussian likelihood class.
+    """
+    Stencil for Gaussian likelihoods with censored observations.
 
-    The :class:`_GaussianLikelihoodStencil` class implements a standard Gaussian
-    likelihood function, assuming that the observational data have normally
-    distributed errors. This class can be combined with specific model and
-    data container compatibility via multiple inheritance to create concrete
-    likelihood implementations.
+    This class defines the *linkage layer* between three components:
 
-    Formally, we assume a forward model :math:`M({\bf x}; \boldsymbol{\Theta}) \to y`,
-    where :math:`{\bf x}` are the independent variable(s), :math:`\boldsymbol{\Theta}` are the model parameters,
-    and :math:`y \in \mathbb{R}` is the predicted dependent variable. Given observational data
-    :math:`\{(x_i, y_i, \sigma_i)\}_{i=1}^N`, where :math:`\sigma_i` are the measurement uncertainties,
-    the Gaussian likelihood is given by:
+    1. A forward model, which maps independent variables and model parameters
+       to predicted dependent-variable values.
+    2. A preprocessed observational dataset stored in ``self._data``, produced
+       exactly once during initialization by :meth:`_process_input_data`.
+    3. A low-level, stateless numerical backend,
+       :func:`censored_gaussian_loglikelihood`, which evaluates the Gaussian
+       log-likelihood given raw NumPy arrays.
 
-    .. math::
+    This stencil intentionally implements **no statistical logic** itself.
+    Instead, it exists to:
 
-        \ln \mathcal{L}(\boldsymbol{\Theta}) = -\frac{1}{2} \sum_{i=1}^N \left[
-            \frac{(y_i - M(x_i; \boldsymbol{\Theta}))^
-            {2}}{\sigma_i^2} + \ln(2 \pi \sigma_i^2)
-        \right].
+    - Declare model–data compatibility,
+    - Specify the required numerical data contract,
+    - Perform the forward-model evaluation,
+    - Delegate likelihood evaluation to the numerical backend.
 
-    Additionally, data for which only upper and / or lower limits are provided
-    are treated as censored observations. For a data point with an upper limit
-    :math:`y_i^{\rm upper}` and uncertainty :math:`\sigma_i`, the contribution to the log-likelihood is:
-
-    .. math::
-
-        \ln \mathcal{L}_i^{\rm upper}(\boldsymbol{\Theta}) = \ln \left[
-            \frac{1}{2} \left( 1 + \operatorname{erf} \left(
-                \frac{y_i^{\rm upper} - M(x_i; \boldsymbol{\Theta})}
-                {\sigma_i \sqrt{2}}
-            \right) \right) \right].
-
-    Similarly, for a data point with a lower limit :math:`y_i^{\rm lower}`, the contribution is:
-
-    .. math::
-
-        \ln \mathcal{L}_i^{\rm lower}(\boldsymbol{\Theta}) = \ln \left[
-            \frac{1}{2} \left( 1 - \operatorname{erf} \left(
-                \frac{y_i^{\rm lower} - M(x_i; \boldsymbol{\Theta})}
-                {\sigma_i \sqrt{2}}
-            \right) \right) \right].
+    Subclasses should focus *exclusively* on translating a concrete data
+    container into the required numerical representation.
     """
 
-    # ============================================================ #
-    # Class Semantics                                              #
-    # ============================================================ #
-    # Here we establish the permissible models and data structures which
-    # can be initialized in this likelihood model. This permits some degree
-    # of reduced boilerplate when constructing specific likelihood implementations,
-    # but still ensures we cannot cross inconsistent models and data.
-    #
-    # When writing custom likelihoods, it is often acceptable to have MANY
-    # compatible models but only ONE compatible data container (e.g. a
-    # photometry likelihood that works with any SED model, but only
-    # photometry data). In other cases, one may have a SINGLE compatible
-    # model that works with multiple data containers.
-    #
-    # For this reason, both compatibility declarations are tuples.
+    # ------------------------------------------------------------------
+    # Compatibility declarations
+    # ------------------------------------------------------------------
     COMPATIBLE_MODELS: tuple[type[Model], ...] = (Model,)
-    """tuple of :class:`~triceratops.models.core.base.Model`
-
-    Model classes compatible with this likelihood. The provided model instance
-    must be an instance of one of these classes. Because this likelihood is
-    an agnostic base-class, we accept any :class:`~triceratops.models.core.base.Model`.
-    """
+    """Model classes compatible with this likelihood stencil."""
 
     COMPATIBLE_DATA_CONTAINERS: tuple[type, ...] = (DataContainer,)
-    """tuple of types
+    """Data container classes compatible with this likelihood stencil."""
 
-    Data container classes compatible with this likelihood. For the standard
-    Gaussian likelihood, we require :class:`~triceratops.data.core.XYDataContainer`,
-    so that we have both x and y data with associated uncertainties.
-    """
-
-    # ============================================================ #
-    # Data Processing                                              #
-    # ============================================================ #
+    # ------------------------------------------------------------------
+    # Required data contract
+    # ------------------------------------------------------------------
     @abstractmethod
     def _process_input_data(self, **kwargs) -> SimpleNamespace:
         """
-        Process the input data.
+        Convert the input data container into the numerical form required by the log likelihood function.
 
-        For the gaussian likelihood, we require that the following in the namespace:
+        This method is called **exactly once** during initialization. The
+        returned namespace is cached as ``self._data`` and treated as immutable
+        thereafter.
 
-        - ``x``: array-like dict of str, array (shapes (N, ), ...)
-            Independent variable data points. These should be in base units.
-        - ``y_err``: array-like (N,)
-            Uncertainties on the dependent variable data points. These should be in base units. These
-            must be complete. We do not accept censored data without uncertainties attached.
-        - ``y_upper``: array-like (N,)
-            Upper limits on the dependent variable data points. These should be in base units.
-            Entries without upper limits should be set to ``np.nan``.
-        - ``y_lower``: array-like (N,)
-            Lower limits on the dependent variable data points. These should be in base units.
-            Entries without lower limits should be set to ``np.nan``.
-        - ``y_lower_mask``: array-like (N,)
-            Boolean mask indicating which entries in ``y_lower`` are valid lower limits.
-        - ``y_upper_mask``: array-like (N,)
-            Boolean mask indicating which entries in ``y_upper`` are valid upper limits.
+        The returned :class:`types.SimpleNamespace` **must** define the
+        following fields:
 
-        With these quantities defined, the Gaussian likelihood can be computed
-        in the :meth:`_log_likelihood` method. As such, new subclasses of this likelihood
-        need only ensure that they correctly implement this and the machinery will be complete.
+        - ``x`` : dict[str, np.ndarray]
+            Independent variable arrays keyed by the corresponding model
+            variable names. This dictionary is passed directly to the model’s
+            forward evaluation method.
+        - ``y`` : np.ndarray
+            Observed dependent-variable values. Entries corresponding to
+            censored observations are ignored by the likelihood backend.
+        - ``y_err`` : np.ndarray
+            One-sigma uncertainties associated with each data point. These must
+            be defined for *all* points, including censored observations.
+        - ``y_upper`` : np.ndarray
+            Upper limits for upper-censored observations. Values are only
+            accessed where ``y_upper_mask`` is ``True``.
+        - ``y_lower`` : np.ndarray
+            Lower limits for lower-censored observations. Values are only
+            accessed where ``y_lower_mask`` is ``True``.
+        - ``y_upper_mask`` : np.ndarray of bool
+            Boolean mask indicating upper-censored observations.
+        - ``y_lower_mask`` : np.ndarray of bool
+            Boolean mask indicating lower-censored observations.
+
+        Subclasses are responsible for unit coercion, shape validation, and
+        mask construction.
         """
         raise NotImplementedError
 
-    # ============================================================ #
-    # Likelihood Evaluation                                        #
-    # ============================================================ #
+    # ------------------------------------------------------------------
+    # Likelihood evaluation
+    # ------------------------------------------------------------------
     def _log_likelihood(
         self,
         parameters: dict[str, "_ModelParametersInputRaw"],
     ) -> float:
         """
-        Compute the Gaussian log-likelihood for the given model parameters.
+        Evaluate the Gaussian log-likelihood for the given model parameters.
+
+        This method:
+        1. Evaluates the forward model at the supplied parameter values,
+        2. Extracts the predicted dependent-variable values,
+        3. Delegates the statistical computation to
+           :func:`censored_gaussian_loglikelihood`.
 
         Parameters
         ----------
         parameters : dict
-            Dictionary mapping model parameter names to values in base units,
-            as defined by the model.
+            Dictionary mapping model parameter names to values in the model’s
+            raw (unit-consistent) format.
 
         Returns
         -------
         float
             Log-likelihood value.
         """
-        # ------------------------------------------------------------
-        # Forward model evaluation
-        # ------------------------------------------------------------
-        # We assume the model returns the dependent variable as the
-        # first element of the tuple.
-        model_y = self._model._forward_model_tupled(self._data.x, parameters)[0]
+        # Evaluate the forward model. By convention, the first element of the
+        # returned tuple corresponds to the dependent variable.
+        model_y = self._model._forward_model_tupled(
+            self._data.x,
+            parameters,
+        )[0]
 
-        # ------------------------------------------------------------
-        # Split data by detection / censoring type
-        # ------------------------------------------------------------
-        det_mask = ~self._data.y_upper_mask & ~self._data.y_lower_mask
-        ul_mask = self._data.y_upper_mask
-        ll_mask = self._data.y_lower_mask
-
-        # Detections
-        y_det = self._data.y[det_mask]
-        y_err_det = self._data.y_err[det_mask]
-        model_y_det = model_y[det_mask]
-
-        # Upper limits (y < y_ul)
-        y_ul = self._data.y_upper[ul_mask]
-        y_err_ul = self._data.y_err[ul_mask]
-        model_y_ul = model_y[ul_mask]
-
-        # Lower limits (y > y_ll)
-        y_ll = self._data.y_lower[ll_mask]
-        y_err_ll = self._data.y_err[ll_mask]
-        model_y_ll = model_y[ll_mask]
-
-        log_likelihood = 0.0
-
-        # ------------------------------------------------------------
-        # Gaussian likelihood for detections
-        # ------------------------------------------------------------
-        if y_det.size > 0:
-            resid = (y_det - model_y_det) / y_err_det
-            log_likelihood += -0.5 * (np.sum(resid**2) + np.sum(np.log(2.0 * np.pi * y_err_det**2)))
-
-        # ------------------------------------------------------------
-        # Upper limits: P(y < y_ul)
-        # ------------------------------------------------------------
-        if y_ul.size > 0:
-            logcdf = norm.logcdf(
-                y_ul,
-                loc=model_y_ul,
-                scale=y_err_ul,
-            )
-            # Guard against numerical underflow
-            log_likelihood += np.sum(np.where(np.isfinite(logcdf), logcdf, -np.inf))
-
-        # ------------------------------------------------------------
-        # Lower limits: P(y > y_ll)
-        # ------------------------------------------------------------
-        if y_ll.size > 0:
-            logsf = norm.logsf(
-                y_ll,
-                loc=model_y_ll,
-                scale=y_err_ll,
-            )
-            # Guard against numerical underflow
-            log_likelihood += np.sum(np.where(np.isfinite(logsf), logsf, -np.inf))
-
-        return log_likelihood
+        # Delegate all statistical computation to the numerical backend.
+        return censored_gaussian_loglikelihood(
+            data_y=self._data.y,
+            model_y=model_y,
+            y_err=self._data.y_err,
+            y_upper=self._data.y_upper,
+            y_lower=self._data.y_lower,
+            y_upper_mask=self._data.y_upper_mask,
+            y_lower_mask=self._data.y_lower_mask,
+        )
 
     def log_likelihood(self, parameters: dict[str, "_ModelParametersInput"]) -> float:
         """
-        Compute the log-likelihood for the given model parameters.
+        Evaluate the log-likelihood for the given model parameters.
+
+        This is the **public entry point** for likelihood evaluation. It accepts
+        model parameters in any format supported by the model (e.g. quantities
+        with units, scalars, or array-like objects), coerces them into the model’s
+        internal raw representation, and then evaluates the likelihood.
 
         Parameters
         ----------
-        parameters: dict
-            Dictionary mapping model parameter names to values. These parameters
-            may be in any acceptable format for the model; they will be coerced
-            into the raw format by this method.
+        parameters : dict
+            Dictionary mapping model parameter names to values in any format
+            accepted by the model. These values are converted internally to the
+            model’s raw, unit-consistent representation before likelihood
+            evaluation.
 
         Returns
         -------
         float
-            Log-likelihood value.
-
+            Log-likelihood value for the supplied parameters.
 
         Notes
         -----
-        For inference, the private method :meth:`_log_likelihood` should be used,
-        as it assumes that the parameters are already in the correct raw format. This is a user-facing
-        wrapper that performs the necessary coercion.
+        This method is intended for **interactive use and high-level workflows**.
+
+        For performance-critical applications such as inference backends
+        (e.g. MCMC or nested sampling), prefer calling :meth:`_log_likelihood`
+        directly with parameters already in the model’s raw format, as this
+        avoids repeated parameter coercion.
+        """
+        return self._log_likelihood(self._model.coerce_model_parameters(parameters))
+
+
+class GaussianLikelihoodStencil(Likelihood, ABC):
+    """
+    Stencil for standard (uncensored) Gaussian likelihoods.
+
+    This class provides the same linkage pattern as
+    :class:`GaussianCensoredLikelihoodStencil`, but assumes that **all data
+    points are detections** and that no censoring is present.
+
+    It delegates statistical evaluation to the low-level numerical function
+    :func:`~inference.likelihood.gaussian.gaussian_loglikelihood`.
+    """
+
+    # ------------------------------------------------------------------
+    # Compatibility declarations
+    # ------------------------------------------------------------------
+    COMPATIBLE_MODELS: tuple[type[Model], ...] = (Model,)
+    """Model classes compatible with this likelihood stencil."""
+
+    COMPATIBLE_DATA_CONTAINERS: tuple[type, ...] = (DataContainer,)
+    """Data container classes compatible with this likelihood stencil."""
+
+    # ------------------------------------------------------------------
+    # Required data contract
+    # ------------------------------------------------------------------
+    @abstractmethod
+    def _process_input_data(self, **kwargs) -> SimpleNamespace:
+        """
+        Convert the input data container into the numerical form required by :func:`gaussian_loglikelihood`.
+
+        The returned namespace **must** define:
+
+        - ``x`` : dict[str, np.ndarray]
+            Independent variable arrays keyed by model variable name.
+        - ``y`` : np.ndarray
+            Observed dependent-variable values.
+        - ``y_err`` : np.ndarray
+            One-sigma uncertainties associated with each data point.
+
+        Subclasses are responsible for unit coercion and validation.
+        """
+        raise NotImplementedError
+
+    # ------------------------------------------------------------------
+    # Likelihood evaluation
+    # ------------------------------------------------------------------
+    def _log_likelihood(
+        self,
+        parameters: dict[str, "_ModelParametersInputRaw"],
+    ) -> float:
+        """Evaluate the Gaussian log-likelihood for the given model parameters."""
+        model_y = self._model._forward_model_tupled(
+            self._data.x,
+            parameters,
+        )[0]
+
+        return gaussian_loglikelihood(
+            data_y=self._data.y,
+            model_y=model_y,
+            y_err=self._data.y_err,
+        )
+
+    def log_likelihood(self, parameters: dict[str, "_ModelParametersInput"]) -> float:
+        """
+        Evaluate the log-likelihood for the given model parameters.
+
+        This is the **public entry point** for likelihood evaluation. It accepts
+        model parameters in any format supported by the model (e.g. quantities
+        with units, scalars, or array-like objects), coerces them into the model’s
+        internal raw representation, and then evaluates the likelihood.
+
+        Parameters
+        ----------
+        parameters : dict
+            Dictionary mapping model parameter names to values in any format
+            accepted by the model. These values are converted internally to the
+            model’s raw, unit-consistent representation before likelihood
+            evaluation.
+
+        Returns
+        -------
+        float
+            Log-likelihood value for the supplied parameters.
+
+        Notes
+        -----
+        This method is intended for **interactive use and high-level workflows**.
+
+        For performance-critical applications such as inference backends
+        (e.g. MCMC or nested sampling), prefer calling :meth:`_log_likelihood`
+        directly with parameters already in the model’s raw format, as this
+        avoids repeated parameter coercion.
         """
         return self._log_likelihood(self._model.coerce_model_parameters(parameters))
 
@@ -538,10 +569,31 @@ class GaussianLikelihoodXY(
     """
     Gaussian likelihood for XY data.
 
-    This class combines the standard Gaussian likelihood with compatibility
-    for :class:`~triceratops.data.core.XYDataContainer`, allowing for
-    straightforward construction of Gaussian likelihoods for XY data. This avoids
-    needing to write boilerplate code for common use cases.
+    This class provides a concrete Gaussian likelihood implementation for
+    datasets stored in :class:`~triceratops.data.core.XYDataContainer`. It serves
+    as a **convenience adapter**, handling the extraction, validation, and unit
+    coercion of one-dimensional ``(x, y)`` data with associated uncertainties,
+    and wiring the result into the Gaussian likelihood machinery.
+
+    Key features
+    ------------
+    - Supports models with a **single independent variable**,
+    - Requires Gaussian uncertainties on the dependent variable,
+    - Optionally supports **censored observations** (upper and/or lower limits)
+      on the dependent variable,
+    - Ignores uncertainties on the independent variable (with a warning).
+
+    This class does **not** implement any statistical logic itself. Instead, it:
+
+    1. Validates compatibility between the model and the data container,
+    2. Converts the data into the numerical format required by the Gaussian
+       likelihood stencil,
+    3. Delegates likelihood evaluation to the underlying low-level Gaussian
+       backend.
+
+    As a result, this class eliminates boilerplate for the common case of fitting
+    one-dimensional ``(x, y)`` data with Gaussian errors, while remaining fully
+    compatible with Triceratops’ inference framework.
     """
 
     COMPATIBLE_DATA_CONTAINERS: tuple[type, ...] = (DataContainer,)
