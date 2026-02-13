@@ -3,12 +3,34 @@
 Parameter Inference and Model Comparison
 ========================================
 
-- Triceratops designed for plugging the models from :mod:`models` into inference pipelines.
-- parameter estimation, MCMC, nested sampling, model comparison.
-- inference modules provide tools for setting up and running inference analyses using various sampling algorithms.
-- integrates with third-party libraries like :mod:`emcee`, :mod:`dynesty`, and :mod:`bilby`.
-- supports custom likelihood functions and priors.
-- flexible configuration options for tailoring inference analyses to specific scientific goals.
+Triceratops is designed to seamlessly connect the physical models defined in
+:mod:`models` with modern Bayesian inference pipelines. In practice, this means
+you can take any compatible model and:
+
+- perform **parameter estimation** using MCMC or nested sampling,
+- compute **posterior distributions** and credible intervals,
+- carry out **Bayesian model comparison**,
+- and explore structured parameter spaces with custom priors and constraints.
+
+The :mod:`inference` subpackage provides a flexible and modular framework for
+constructing and running inference analyses. It supports:
+
+- integration with third-party samplers such as :mod:`emcee`,
+  :mod:`dynesty`, and :mod:`bilby`,
+- user-defined likelihood functions and prior distributions,
+- consistent parameter management and unit handling,
+- and configurable workflows tailored to specific scientific goals.
+
+The overall design philosophy is separation of concerns:
+
+- **Models** describe the physics.
+- **Likelihoods** describe the statistical assumptions.
+- **Inference problems** combine models, data, and priors into a sampler-ready object.
+- **Samplers** explore the resulting posterior distribution.
+
+This modular structure allows users to move cleanly from forward modeling
+to statistically rigorous parameter estimation and model comparison,
+without rewriting core logic for each new scientific application.
 
 The Triceratops Inference Pipeline
 -----------------------------------
@@ -66,11 +88,25 @@ on each of these components, along with examples of how to use them in practice.
 
 ----
 
+.. _likelihoods:
 Likelihoods
 ------------
 
+*Module:* :mod:`inference.likelihood`
+
+The likelihood is where the statistical assumptions of the inference problem are encoded. It defines how well
+the model predictions match the observed data for a given set of parameters. In Triceratops,
+likelihoods are implemented as structured objects that bind together a model,
+a dataset, and a noise/statistical assumption.
+
 The Likelihood Class
 ^^^^^^^^^^^^^^^^^^^^
+
+.. hint::
+
+        For more information about likelihood development, implementation details,
+        and advanced features, see :ref:`likelihood_dev`.
+
 
 In Triceratops, **likelihood functions** quantify how well a physical model reproduces a
 dataset under a particular statistical noise model. Conceptually, a likelihood defines
@@ -660,7 +696,7 @@ Samplers
 
 .. hint::
 
-    For more information about sampler development, implementation, and integration, see :ref:`sampler_dev`.
+    For more information about sampler development, implementation, and integration, see :ref:`samplers_dev`.
 
 What is a sampler: a way to explore the parameter space and find the minimum of the posterior distribution.
 Triceratops provides interfaces to several popular sampling libraries, including :mod:`emcee`, :mod:`dynesty`, and :mod:`bilby`.
