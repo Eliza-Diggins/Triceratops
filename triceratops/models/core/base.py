@@ -11,7 +11,7 @@ based on those parameters and variables.
 """
 
 from abc import ABC, abstractmethod
-from typing import Union
+from typing import Optional, Union
 
 import numpy as np
 from astropy import units as u
@@ -75,23 +75,72 @@ class Model(ABC):
     # Model Metadata Declarations                     #
     # =============================================== #
     # Each model must declare its parameters and variables as class-level attributes.
-    OUTPUTS: tuple[str, ...] = ()
-    """tuple of str: The names of the model's outputs.
-
-    Each element of :attr:`OUTPUTS` is a string that defines the name of a single output of the model.
-    These names correspond to the keys in the dictionary returned by the model's evaluation method.
+    OUTPUTS: Optional[tuple] = None
     """
-    UNITS: tuple[u.Unit, ...] = ()
-    """tuple of :class:`astropy.units.Unit`: The units of the model's outputs.
+    NamedTuple: Structured declaration of the model outputs.
 
-    Each element of :attr:`UNITS` is an :class:`astropy.units.Unit` instance that defines the units of a single
-    output of the model. The order of the units in :attr:`UNITS` corresponds to the order of the output names
-    in :attr:`OUTPUTS`.
+    ``OUTPUTS`` must be a NamedTuple instance whose field names define the
+    names of the model outputs. These names must match the keys returned by
+    the model's :meth:`_forward_model` evaluation method.
+
+    Each field value should be a string representing the output name. The
+    field ordering defines the canonical ordering of outputs throughout the
+    framework (e.g., for unit alignment and serialization).
+
+    Example
+    -------
+    >>> class Outputs(NamedTuple):
+    ...     y: str
+    ...
+    >>> OUTPUTS = Outputs(y="y")
+
+    Notes
+    -----
+    The field names of :attr:`OUTPUTS` must exactly match those of
+    :attr:`UNITS`.
+    """
+    UNITS: Optional[tuple] = None
+    """
+    NamedTuple: Structured declaration of output units.
+
+    ``UNITS`` must be a NamedTuple instance with the same field names and
+    ordering as :attr:`OUTPUTS`. Each field value must be either:
+
+    - an :class:`astropy.units.Unit` instance,
+    - a valid unit string convertible via :func:`astropy.units.Unit`,
+    - or ``None`` (interpreted as dimensionless).
+
+    The ordering of fields in :attr:`UNITS` must correspond exactly to
+    :attr:`OUTPUTS`.
+
+    Example
+    -------
+    >>> class Units(NamedTuple):
+    ...     y: u.Unit
+    ...
+    >>> UNITS = Units(y=u.dimensionless_unscaled)
+
+    Notes
+    -----
+    Units are validated and coerced to proper Astropy units at class
+    definition time via :meth:`__init_subclass__`.
     """
     DESCRIPTION: str = ""
-    """str: A brief description of the model."""
+    """
+    str: Short human-readable summary of the model.
+
+    This should briefly describe the physical or phenomenological
+    behavior of the model. It is intended for documentation generation,
+    model inspection, and reproducibility metadata.
+    """
     REFERENCE: str = ""
-    """str: A reference for the model, e.g., a journal article or textbook."""
+    """
+    str: Citation or bibliographic reference for the model.
+
+    This may include a journal reference, DOI, arXiv identifier,
+    textbook citation, or other authoritative source describing
+    the model's origin or usage.
+    """
 
     # =============================================== #
     # Initialization and Instantiation                #
@@ -102,43 +151,56 @@ class Model(ABC):
         # done there is not skipped.
         super().__init_subclass__(**kwargs)
 
-        # Ensure that the parameters and variables are properly defined
-        # and compatible.
         if len(cls.VARIABLES) == 0:
             raise ValueError("At least one VARIABLE must be defined.")
 
-        # Ensure that the model parameters and variables are of the correct type.
         if not all(isinstance(param, ModelParameter) for param in cls.PARAMETERS):
             raise TypeError("All PARAMETERS must be instances of ModelParameter.")
+
         if not all(isinstance(var, ModelVariable) for var in cls.VARIABLES):
             raise TypeError("All VARIABLES must be instances of ModelVariable.")
 
-        # Validate that OUTPUTS and UNITS have the same length
-        if len(cls.OUTPUTS) != len(cls.UNITS):
-            raise ValueError("OUTPUTS and UNITS must have the same length.")
+        # -------------------------------------------------- #
+        # Validate OUTPUTS and UNITS (namedtuple-based)      #
+        # -------------------------------------------------- #
+        if not isinstance(cls.OUTPUTS, tuple) or not hasattr(cls.OUTPUTS, "_fields"):
+            raise TypeError("OUTPUTS must be a namedtuple instance.")
 
-        # Ensure the class's output units are actually converted to
-        # astropy units.
-        _new_units = []
-        for i, unit in enumerate(cls.UNITS):
+        if not isinstance(cls.UNITS, tuple) or not hasattr(cls.UNITS, "_fields"):
+            raise TypeError("UNITS must be a namedtuple instance.")
+
+        # Ensure field names match exactly
+        if cls.OUTPUTS._fields != cls.UNITS._fields:
+            raise ValueError("OUTPUTS and UNITS must have identical field names and ordering.")
+
+        # Convert unit specifications safely while preserving namedtuple structure
+        unit_values = []
+
+        for name in cls.UNITS._fields:
+            unit = getattr(cls.UNITS, name)
+
             if unit is None:
-                _new_units.append(u.Unit(""))
+                unit_values.append(u.Unit(""))
+
             elif isinstance(unit, str):
                 try:
-                    _new_units.append(u.Unit(unit))
+                    unit_values.append(u.Unit(unit))
                 except Exception as exc:
-                    raise ValueError(f"Invalid unit string '{unit}' for model variable {i}.") from exc
-            elif isinstance(unit, u.UnitBase):
-                _new_units.append(unit)
-            else:
-                raise TypeError(f"UNITS must be a str or astropy Unit, got {type(unit)}.")
-        cls.UNITS = tuple(_new_units)
+                    raise ValueError(f"Invalid unit string '{unit}' for output '{name}'.") from exc
 
-    @abstractmethod
+            elif isinstance(unit, u.UnitBase):
+                unit_values.append(unit)
+
+            else:
+                raise TypeError(f"Unit for output '{name}' must be str or astropy Unit, got {type(unit)}.")
+
+        # Rebuild namedtuple with validated units
+        cls.UNITS = type(cls.UNITS)(*unit_values)
+
     def __init__(self, *args, **kwargs):
         """Initialize the model with given parameters and variables."""
         # At the base class level, there is no specific initialization logic.
-        pass
+        super().__init__()
 
     # =============================================== #
     # Model Evaluation                                #
@@ -209,7 +271,7 @@ class Model(ABC):
             The model's outputs as a tuple, ordered according to :attr:`OUTPUTS`.
         """
         raw_outputs = self._forward_model(variables, parameters)
-        return tuple(raw_outputs[output_name] for output_name in self.OUTPUTS)
+        return tuple(raw_outputs[output_name] for output_name in self.OUTPUTS._fields)
 
     def forward_model(
         self,
@@ -269,8 +331,10 @@ class Model(ABC):
         # each of the outputs defined in ``OUTPUTS`` and ``UNITS`` and attach units where
         # defined.
         _final_outputs: _ModelOutput = {}
-        for output_name, output_unit in zip(self.OUTPUTS, self.UNITS, strict=False):
+        for output_name in self.OUTPUTS._fields:
+            output_unit = getattr(self.UNITS, output_name)
             raw_value = _raw_outputs[output_name]
+
             if output_unit is not None:
                 _final_outputs[output_name] = raw_value * output_unit
             else:
@@ -560,4 +624,4 @@ class Model(ABC):
     @property
     def output_names(self) -> tuple[str, ...]:
         """str: The names of the model's outputs."""
-        return self.OUTPUTS
+        return self.OUTPUTS._fields

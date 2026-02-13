@@ -6,5 +6,4 @@ of astrophysical transient events such as supernovae, gamma-ray bursts, and tida
 are distributed across several submodules for better organization and maintainability.
 """
 
-__all__ = ["core", "transients", "emission", "curves"]
-from . import core, curves, emission, transients
+__all__ = ["core", "generic", "GRBs", "supernovae", "TDEs"]
