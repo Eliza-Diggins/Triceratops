@@ -62,10 +62,6 @@ __all__ = [
 ]
 
 
-_FREDOutputs = namedtuple("FREDOutputs", ["flux"])
-_FREDUnits = namedtuple("FREDUnits", ["flux"])
-
-
 class FRED(Model):
     r"""
     Fast Rise, Exponential Decay (FRED) lightcurve model.
@@ -180,8 +176,8 @@ class FRED(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled, bounds=(None, None)),
     )
 
-    OUTPUTS = _FREDOutputs(flux="flux")
-    UNITS = _FREDUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = namedtuple("FREDOutputs", ["flux"])
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Fast rise, exponential decay flare model with constant background."
     REFERENCE = "Common phenomenological GRB pulse model."
@@ -205,11 +201,7 @@ class FRED(Model):
 
         y[mask] += A * rise * decay
 
-        return {"flux": y}
-
-
-_GenFREDOutputs = namedtuple("GenFREDOutputs", ["flux"])
-_GenFREDUnits = namedtuple("GenFREDUnits", ["flux"])
+        return self.OUTPUTS(flux=y)
 
 
 class GeneralizedFRED(Model):
@@ -330,8 +322,8 @@ class GeneralizedFRED(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _GenFREDOutputs(flux="flux")
-    UNITS = _GenFREDUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = namedtuple("GenFREDOutputs", ["flux"])
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Generalized FRED with power-law rise and constant background."
     REFERENCE = "Extended phenomenological GRB pulse model."
@@ -356,11 +348,10 @@ class GeneralizedFRED(Model):
 
         y[mask] += A * rise * decay
 
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 _PulseOutputs = namedtuple("PulseOutputs", ["flux"])
-_PulseUnits = namedtuple("PulseUnits", ["flux"])
 
 
 class GaussianPulse(Model):
@@ -465,8 +456,8 @@ class GaussianPulse(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Symmetric Gaussian pulse."
     REFERENCE = "Standard analytic Gaussian."
@@ -481,7 +472,7 @@ class GaussianPulse(Model):
         )
 
         y = A * np.exp(-0.5 * ((t - t0) / sigma) ** 2) + C
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 class LogNormalPulse(Model):
@@ -587,8 +578,8 @@ class LogNormalPulse(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Asymmetric log-normal pulse."
     REFERENCE = "Common GRB pulse model."
@@ -608,7 +599,7 @@ class LogNormalPulse(Model):
         dt = t[mask] - t0
 
         y[mask] += A * np.exp(-((np.log(dt) - mu) ** 2) / (2 * sigma**2))
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 class BrokenPowerLawTime(Model):
@@ -702,9 +693,8 @@ class BrokenPowerLawTime(Model):
         ModelParameter("alpha_2", -2.0, base_units=u.dimensionless_unscaled),
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
-
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Sharp broken power-law in time."
     REFERENCE = "Standard afterglow fitting form."
@@ -723,7 +713,7 @@ class BrokenPowerLawTime(Model):
         mask = t < tb
         y[mask] += A * (t[mask] / tb) ** a1
         y[~mask] += A * (t[~mask] / tb) ** a2
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 class SmoothedBrokenPowerLawTime(Model):
@@ -822,8 +812,8 @@ class SmoothedBrokenPowerLawTime(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Smooth broken power-law in time."
     REFERENCE = "Standard smooth break prescription."
@@ -840,8 +830,7 @@ class SmoothedBrokenPowerLawTime(Model):
         )
 
         term = ((t / tb) ** (a1 / s) + (t / tb) ** (a2 / s)) ** s
-
-        return {"flux": A * term + C}
+        return self.OUTPUTS(flux=A * term + C)
 
 
 class ExponentialRisePowerLawDecay(Model):
@@ -935,8 +924,8 @@ class ExponentialRisePowerLawDecay(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Exponential rise with power-law decay."
     REFERENCE = "Common transient decay model."
@@ -959,7 +948,7 @@ class ExponentialRisePowerLawDecay(Model):
         decay = dt ** (-alpha)
 
         y[mask] += A * rise * decay
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 class NorrisPulse(Model):
@@ -1054,8 +1043,8 @@ class NorrisPulse(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Classic Norris GRB pulse."
     REFERENCE = "Norris et al. (1996, 2005)."
@@ -1075,7 +1064,7 @@ class NorrisPulse(Model):
         dt = t[mask] - ts
 
         y[mask] += A * np.exp(-tau1 / dt - dt / tau2)
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 class WeibullPulse(Model):
@@ -1167,8 +1156,8 @@ class WeibullPulse(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Weibull pulse profile."
     REFERENCE = "Generalized statistical pulse form."
@@ -1188,7 +1177,7 @@ class WeibullPulse(Model):
         dt = t[mask] - t0
 
         y[mask] += A * (k / lam) * (dt / lam) ** (k - 1) * np.exp(-((dt / lam) ** k))
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)
 
 
 class LogisticPulse(Model):
@@ -1276,8 +1265,8 @@ class LogisticPulse(Model):
         ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
     )
 
-    OUTPUTS = _PulseOutputs(flux="flux")
-    UNITS = _PulseUnits(flux=u.dimensionless_unscaled)
+    OUTPUTS = _PulseOutputs
+    UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
 
     DESCRIPTION = "Logistic rise pulse."
     REFERENCE = "Sigmoid transient model."
@@ -1292,4 +1281,4 @@ class LogisticPulse(Model):
         )
 
         y = A / (1 + np.exp(-(t - t0) / tau)) + C
-        return {"flux": y}
+        return self.OUTPUTS(flux=y)

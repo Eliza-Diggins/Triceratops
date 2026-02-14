@@ -42,7 +42,6 @@ __all__ = [
 # Shared Output Definitions
 # ============================================================
 _BPLOutputs = namedtuple("BPLOutputs", ["y"])
-_BPLUnits = namedtuple("BPLUnits", ["y"])
 
 # ============================================================
 # Sharp Broken Power Law
@@ -112,8 +111,8 @@ class BrokenPowerLaw(Model):
         ModelParameter("alpha_2", -2.0, base_units=u.dimensionless_unscaled, bounds=(-20, 20)),
     )
 
-    OUTPUTS = _BPLOutputs(y="y")
-    UNITS = _BPLUnits(y=u.dimensionless_unscaled)
+    OUTPUTS = _BPLOutputs
+    UNITS = OUTPUTS(y=u.dimensionless_unscaled)
 
     DESCRIPTION = "Sharp two-segment broken power law."
     REFERENCE = "Standard phenomenological broken power law."
@@ -132,7 +131,7 @@ class BrokenPowerLaw(Model):
         y[mask] = A * (x[mask] / xb) ** a1
         y[~mask] = A * (x[~mask] / xb) ** a2
 
-        return {"y": y}
+        return self.OUTPUTS(y=y)
 
 
 # ============================================================
@@ -202,8 +201,8 @@ class SmoothedBrokenPowerLaw(Model):
         ModelParameter("s", 0.1, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
     )
 
-    OUTPUTS = _BPLOutputs(y="y")
-    UNITS = _BPLUnits(y=u.dimensionless_unscaled)
+    OUTPUTS = _BPLOutputs
+    UNITS = OUTPUTS(y=u.dimensionless_unscaled)
 
     DESCRIPTION = "Smooth two-segment broken power law."
     REFERENCE = "Standard smooth break prescription."
@@ -218,7 +217,7 @@ class SmoothedBrokenPowerLaw(Model):
         s = parameters["s"]
 
         term = ((x / xb) ** (a1 / s) + (x / xb) ** (a2 / s)) ** s
-        return {"y": A * term}
+        return self.OUTPUTS(y=A * term)
 
 
 # ============================================================
@@ -282,8 +281,8 @@ class TripleBrokenPowerLaw(Model):
         ModelParameter("alpha_3", -2.5, base_units=u.dimensionless_unscaled, bounds=(-20, 20)),
     )
 
-    OUTPUTS = _BPLOutputs(y="y")
-    UNITS = _BPLUnits(y=u.dimensionless_unscaled)
+    OUTPUTS = _BPLOutputs
+    UNITS = OUTPUTS(y=u.dimensionless_unscaled)
 
     DESCRIPTION = "Sharp three-segment broken power law."
     REFERENCE = "Standard multi-break phenomenological model."
@@ -308,7 +307,7 @@ class TripleBrokenPowerLaw(Model):
         y[m2] = A * (x[m2] / b1) ** a2
         y[m3] = A * (b2 / b1) ** a2 * (x[m3] / b2) ** a3
 
-        return {"y": y}
+        return self.OUTPUTS(y=y)
 
 
 # ============================================================
@@ -376,8 +375,8 @@ class SmoothedTripleBrokenPowerLaw(Model):
         ModelParameter("s", 0.1, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
     )
 
-    OUTPUTS = _BPLOutputs(y="y")
-    UNITS = _BPLUnits(y=u.dimensionless_unscaled)
+    OUTPUTS = _BPLOutputs
+    UNITS = OUTPUTS(y=u.dimensionless_unscaled)
 
     DESCRIPTION = "Smooth three-segment broken power law."
     REFERENCE = "Nested smooth break prescription."
@@ -398,4 +397,4 @@ class SmoothedTripleBrokenPowerLaw(Model):
 
         y = A * t12 * (t23 / (x / b2) ** a2)
 
-        return {"y": y}
+        return self.OUTPUTS(y=y)

@@ -176,7 +176,7 @@ class ChevalierShockModel(Model):
     Each element of :attr:`OUTPUTS` is a string that defines the name of a single output of the model.
     These names correspond to the keys in the dictionary returned by the model's evaluation method.
     """
-    UNITS: OUTPUTS(flux_density=u.Jy)
+    UNITS = OUTPUTS(flux_density=u.Jy)
     """tuple of :class:`astropy.units.Unit`: The units of the model's outputs.
 
     Each element of :attr:`UNITS` is an :class:`astropy.units.Unit` instance that defines the units of a single

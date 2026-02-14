@@ -10,6 +10,7 @@ effectively declares a set of ``parameters``, a set of ``variables``, and a meth
 based on those parameters and variables.
 """
 
+import inspect
 from abc import ABC, abstractmethod
 from typing import Optional, Union
 
@@ -18,7 +19,6 @@ from astropy import units as u
 
 from .._typing import (
     _ModelOutput,
-    _ModelOutputRaw,
     _ModelParametersInput,
     _ModelParametersInputRaw,
     _ModelVariablesInput,
@@ -163,15 +163,16 @@ class Model(ABC):
         # -------------------------------------------------- #
         # Validate OUTPUTS and UNITS (namedtuple-based)      #
         # -------------------------------------------------- #
-        if not isinstance(cls.OUTPUTS, tuple) or not hasattr(cls.OUTPUTS, "_fields"):
-            raise TypeError("OUTPUTS must be a namedtuple instance.")
+        # Ensure OUTPUTS is a NamedTuple class
+        if not inspect.isclass(cls.OUTPUTS):
+            raise TypeError("OUTPUTS must be a NamedTuple class.")
 
-        if not isinstance(cls.UNITS, tuple) or not hasattr(cls.UNITS, "_fields"):
-            raise TypeError("UNITS must be a namedtuple instance.")
+        if not issubclass(cls.OUTPUTS, tuple):
+            raise TypeError("OUTPUTS must inherit from NamedTuple.")
 
-        # Ensure field names match exactly
-        if cls.OUTPUTS._fields != cls.UNITS._fields:
-            raise ValueError("OUTPUTS and UNITS must have identical field names and ordering.")
+        # Ensure UNITS is instance of OUTPUTS
+        if not isinstance(cls.UNITS, cls.OUTPUTS):
+            raise TypeError("UNITS must be an instance of OUTPUTS.")
 
         # Convert unit specifications safely while preserving namedtuple structure
         unit_values = []
@@ -216,7 +217,7 @@ class Model(ABC):
         self,
         variables: _ModelVariablesInputRaw,
         parameters: _ModelParametersInputRaw,
-    ) -> _ModelOutputRaw:
+    ) -> "OUTPUTS":
         """
         Compute the model's outputs based on the provided variables and parameters.
 
@@ -276,7 +277,7 @@ class Model(ABC):
         self,
         variables: _ModelVariablesInput,
         parameters: _ModelParametersInput,
-    ) -> _ModelOutput:
+    ) -> "OUTPUTS":
         """
         Compute the model's outputs based on the provided variables and parameters.
 
@@ -335,7 +336,10 @@ class Model(ABC):
             raw_value = _raw_outputs[output_name]
 
             if output_unit is not None:
-                _final_outputs[output_name] = raw_value * output_unit
+                if hasattr(raw_value, "unit"):
+                    _final_outputs[output_name] = raw_value.to(output_unit)
+                else:
+                    _final_outputs[output_name] = raw_value * output_unit
             else:
                 _final_outputs[output_name] = raw_value
 

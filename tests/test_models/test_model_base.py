@@ -11,7 +11,6 @@ from triceratops.models.core import Model, ModelParameter, ModelVariable
 
 # Reusable namedtuple definitions
 SimpleOutputs = namedtuple("SimpleOutputs", ["y"])
-SimpleUnits = namedtuple("SimpleUnits", ["y"])
 
 
 # ============================================================
@@ -39,8 +38,8 @@ class SimpleModel(Model):
         ),
     )
 
-    OUTPUTS = SimpleOutputs(y="y")
-    UNITS = SimpleUnits(y=u.dimensionless_unscaled)
+    OUTPUTS = SimpleOutputs
+    UNITS = SimpleOutputs(y=u.dimensionless_unscaled)
 
     def _forward_model(self, variables, parameters):
         return {"y": parameters["a"] * variables["x"]}
@@ -73,18 +72,15 @@ def test_model_requires_variables():
 def test_outputs_units_field_mismatch():
     """OUTPUTS and UNITS must have identical field names."""
 
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
 
         class _BadModel(Model):
             PARAMETERS = (ModelParameter("a", 1.0, base_units=u.dimensionless_unscaled),)
 
             VARIABLES = (ModelVariable("x", base_units=u.dimensionless_unscaled),)
 
-            Outputs = namedtuple("BadOutputs", ["y"])
-            Units = namedtuple("BadUnits", ["z"])  # mismatched name
-
-            OUTPUTS = Outputs(y="y")
-            UNITS = Units(z=u.dimensionless_unscaled)
+            OUTPUTS = SimpleOutputs
+            UNITS = SimpleOutputs(y=u.dimensionless_unscaled, z=u.dimensionless_unscaled)
 
             def _forward_model(self, variables, parameters):
                 return {"y": 0.0}
