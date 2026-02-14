@@ -9,6 +9,8 @@ References
 .. footbibliography::
 """
 
+from collections import namedtuple
+
 import numpy as np
 from astropy import units as u
 
@@ -19,6 +21,10 @@ from triceratops.dynamics.supernovae.shock_dynamics import (
 from triceratops.models.core.base import Model
 from triceratops.models.core.parameters import ModelParameter, ModelVariable
 from triceratops.radiation.synchrotron.SEDs import SSA_SED_PowerLaw
+
+__all__ = [
+    "ChevalierShockModel",
+]
 
 
 # noinspection PyProtectedMember
@@ -164,13 +170,13 @@ class ChevalierShockModel(Model):
     # Model Metadata Declarations                     #
     # =============================================== #
     # Each model must declare its parameters and variables as class-level attributes.
-    OUTPUTS: tuple[str, ...] = ("flux_density",)
+    OUTPUTS = namedtuple("ChevalierShockOutputs", ["flux_density"])
     """tuple of str: The names of the model's outputs.
 
     Each element of :attr:`OUTPUTS` is a string that defines the name of a single output of the model.
     These names correspond to the keys in the dictionary returned by the model's evaluation method.
     """
-    UNITS: tuple[u.Unit, ...] = (u.Jy,)
+    UNITS: OUTPUTS(flux_density=u.Jy)
     """tuple of :class:`astropy.units.Unit`: The units of the model's outputs.
 
     Each element of :attr:`UNITS` is an :class:`astropy.units.Unit` instance that defines the units of a single

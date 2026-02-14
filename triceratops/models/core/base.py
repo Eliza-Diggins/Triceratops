@@ -199,8 +199,7 @@ class Model(ABC):
 
     def __init__(self, *args, **kwargs):
         """Initialize the model with given parameters and variables."""
-        # At the base class level, there is no specific initialization logic.
-        super().__init__()
+        pass
 
     # =============================================== #
     # Model Evaluation                                #

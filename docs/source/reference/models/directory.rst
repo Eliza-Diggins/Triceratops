@@ -19,13 +19,38 @@ The first set of models we'll highlight are the curve-fitting models. These mode
 using various mathematical functions and techniques. They are particularly useful for analyzing light curves, spectra,
 and other time-series data during the early stages of analysis to get a quick understanding of the underlying trends.
 
-.. currentmodule:: triceratops.models.curves
+.. rubric:: Generic Curve-Fitting Models
+
+.. currentmodule:: models.generic
 
 .. autosummary::
    :nosignatures:
 
-   BrokenPowerLawModel
-   SmoothedBrokenPowerLawModel
+    bpl.BrokenPowerLaw
+    bpl.SmoothedBrokenPowerLaw
+    bpl.TripleBrokenPowerLaw
+    bpl.SmoothedTripleBrokenPowerLaw
+
+.. rubric:: Generic Light Curve Models
+
+.. currentmodule:: models.generic.light_curve
+
+.. autosummary::
+    :nosignatures:
+    :toctree: ../../_as_gen
+
+   FRED
+   GeneralizedFRED
+   GaussianPulse
+   LogNormalPulse
+   BrokenPowerLawTime
+   SmoothedBrokenPowerLawTime
+   ExponentialRisePowerLawDecay
+   NorrisPulse
+   WeibullPulse
+   LogisticPulse
+
+
 
 Transient-Specific Models
 --------------------------

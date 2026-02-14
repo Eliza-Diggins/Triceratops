@@ -6,3 +6,12 @@ events. These models incorporate the unique physical characteristics and behavio
 of supernovae, allowing researchers to study their radio emissions, shock dynamics,
 and other relevant phenomena.
 """
+
+__all__ = [
+    "chevalier_shock",
+]
+
+from . import chevalier_shock
+from .chevalier_shock import *
+
+__all__.extend(chevalier_shock.__all__)

@@ -7,3 +7,19 @@ are distributed across several submodules for better organization and maintainab
 """
 
 __all__ = ["core", "generic", "GRBs", "supernovae", "TDEs"]
+
+# Import the core submodules.
+from . import GRBs, TDEs, core, generic, supernovae
+
+# Add all of the individual models to the top-level namespace for easier access.
+from .generic import *
+from .GRBs import *
+from .supernovae import *
+from .TDEs import *
+
+# Add everything to __all__
+__all__.extend(core.__all__)
+__all__.extend(generic.__all__)
+__all__.extend(GRBs.__all__)
+__all__.extend(supernovae.__all__)
+__all__.extend(TDEs.__all__)

@@ -23,9 +23,9 @@ in different scenarios. These models can be used to simulate observations, fit d
     :recursive:
     :template: module.rst
 
-    models.transients
+    models.supernovae
     models.core
-    models.emission
+    models.generic
 
 Data Modules
 ------------

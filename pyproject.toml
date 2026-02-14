@@ -151,6 +151,7 @@ lint.ignore = [
   "UP007", # Do not use Union in type annotations (use | instead)
   "UP038", # Use | in isinstance checks (e.g. isinstance(x, int | str))
   "NPY201", # We use Numpy<2.0, so this is not relevant.
+  "F403", # Allow wildcard imports in __init__.py to re-export symbols (e.g. from .core import *)
 
 ]
 
