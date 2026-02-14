@@ -249,8 +249,8 @@ class ChevalierShockModel(Model):
 
         # Return the flux density in Jy
         # 1e-23 erg/s/cm^2/Hz = 1 Jy
-        return {
-            "flux_density": 1e-23
+        return self.OUTPUTS(
+            flux_density=1e-23
             * self.sed._log_opt_sed(
                 variables["frequency"],
                 nu_brk,
@@ -258,4 +258,4 @@ class ChevalierShockModel(Model):
                 parameters["p"],
                 parameters["smoothing_s"],
             )
-        }
+        )

@@ -211,6 +211,13 @@ class ModelParameter:
 
     def to_base_value(self, value: Union[float, u.Quantity]) -> float:
         """Convert a value into base units (float)."""
+        # Catch the unitless case.
+        if self.base_units == u.dimensionless_unscaled:
+            if isinstance(value, u.Quantity):
+                return value.value
+            return value
+
+        # Otherwise, convert to base units if it's a Quantity.
         if isinstance(value, u.Quantity):
             return value.to(self.base_units).value
         return float(value)
@@ -327,6 +334,8 @@ class ModelVariable:
                 raise ValueError(f"Invalid unit string '{base_units}' for variable '{self.name}'.") from exc
         elif isinstance(base_units, u.UnitBase):
             return base_units
+        elif base_units is None:
+            return u.Unit("")
         else:
             raise TypeError(f"base_units must be a str or astropy Unit, got {type(base_units)}.")
 
@@ -347,8 +356,16 @@ class ModelVariable:
         float or numpy.ndarray
             Value expressed in base units.
         """
+        # Catch the unitless case.
+        if self.base_units == u.dimensionless_unscaled:
+            if isinstance(value, u.Quantity):
+                return value.value
+            return value
+
+        # Otherwise, convert to base units if it's a Quantity.
         if isinstance(value, u.Quantity):
             return value.to(self.base_units).value
+
         return value
 
     def to_quantity(self, value: Union[float, np.ndarray, u.Quantity]) -> u.Quantity:

@@ -162,18 +162,18 @@ class FRED(Model):
     VARIABLES = (
         ModelVariable(
             name="t",
-            base_units=u.dimensionless_unscaled,
+            base_units=None,
             description="Time.",
             latex=r"$t$",
         ),
     )
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled, bounds=(0.0, None)),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("tau_r", 0.1, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("tau_d", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled, bounds=(None, None)),
+        ModelParameter("A", 1.0, base_units=None, bounds=(0.0, None)),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("tau_r", 0.1, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("tau_d", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("C", 0.0, base_units=None, bounds=(None, None)),
     )
 
     OUTPUTS = namedtuple("FREDOutputs", ["flux"])
@@ -311,15 +311,15 @@ class GeneralizedFRED(Model):
     radiative transfer consistency.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled, bounds=(0.0, None)),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("tau_r", 0.1, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("tau_d", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("n", 2.0, base_units=u.dimensionless_unscaled, bounds=(0.0, 10.0)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None, bounds=(0.0, None)),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("tau_r", 0.1, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("tau_d", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("n", 2.0, base_units=None, bounds=(0.0, 10.0)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = namedtuple("GenFREDOutputs", ["flux"])
@@ -447,13 +447,13 @@ class GaussianPulse(Model):
     slow-decay morphology typical of GRB pulses or shock-powered flares.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled, bounds=(0.0, None)),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("sigma", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None, bounds=(0.0, None)),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("sigma", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs
@@ -568,14 +568,14 @@ class LogNormalPulse(Model):
     prompt emission pulse fitting.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled, bounds=(0.0, None)),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("mu", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("sigma", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None, bounds=(0.0, None)),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("mu", 0.0, base_units=None),
+        ModelParameter("sigma", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs
@@ -684,14 +684,14 @@ class BrokenPowerLawTime(Model):
     not differentiable at the break.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("t_b", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("alpha_1", -1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("alpha_2", -2.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None),
+        ModelParameter("t_b", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("alpha_1", -1.0, base_units=None),
+        ModelParameter("alpha_2", -2.0, base_units=None),
+        ModelParameter("C", 0.0, base_units=None),
     )
     OUTPUTS = _PulseOutputs
     UNITS = OUTPUTS(flux=u.dimensionless_unscaled)
@@ -801,15 +801,15 @@ class SmoothedBrokenPowerLawTime(Model):
     :math:`t > 0`.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("t_b", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("alpha_1", -1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("alpha_2", -2.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("s", 0.1, base_units=u.dimensionless_unscaled, bounds=(1e-3, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None),
+        ModelParameter("t_b", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("alpha_1", -1.0, base_units=None),
+        ModelParameter("alpha_2", -2.0, base_units=None),
+        ModelParameter("s", 0.1, base_units=None, bounds=(1e-3, None)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs
@@ -914,14 +914,14 @@ class ExponentialRisePowerLawDecay(Model):
     :math:`F(t) \propto t^{-\alpha}`.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("tau_r", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("alpha", 2.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("tau_r", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("alpha", 2.0, base_units=None),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs
@@ -1033,14 +1033,14 @@ class NorrisPulse(Model):
         t_{\rm peak} = t_s + \sqrt{\tau_1 \tau_2}.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("t_s", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("tau_1", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("tau_2", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None),
+        ModelParameter("t_s", 0.0, base_units=None),
+        ModelParameter("tau_1", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("tau_2", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs
@@ -1146,14 +1146,14 @@ class WeibullPulse(Model):
     For :math:`k = 1`, this reduces to an exponential distribution.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("k", 2.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("lambda_", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("k", 2.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("lambda_", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs
@@ -1256,13 +1256,13 @@ class LogisticPulse(Model):
     It is not suitable for isolated pulse modeling.
     """
 
-    VARIABLES = (ModelVariable("t", base_units=u.dimensionless_unscaled),)
+    VARIABLES = (ModelVariable("t", base_units=None),)
 
     PARAMETERS = (
-        ModelParameter("A", 1.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("t_0", 0.0, base_units=u.dimensionless_unscaled),
-        ModelParameter("tau", 1.0, base_units=u.dimensionless_unscaled, bounds=(1e-6, None)),
-        ModelParameter("C", 0.0, base_units=u.dimensionless_unscaled),
+        ModelParameter("A", 1.0, base_units=None),
+        ModelParameter("t_0", 0.0, base_units=None),
+        ModelParameter("tau", 1.0, base_units=None, bounds=(1e-6, None)),
+        ModelParameter("C", 0.0, base_units=None),
     )
 
     OUTPUTS = _PulseOutputs

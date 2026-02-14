@@ -333,7 +333,7 @@ class Model(ABC):
         _final_outputs: _ModelOutput = {}
         for output_name in self.OUTPUTS._fields:
             output_unit = getattr(self.UNITS, output_name)
-            raw_value = _raw_outputs[output_name]
+            raw_value = getattr(_raw_outputs, output_name)
 
             if output_unit is not None:
                 if hasattr(raw_value, "unit"):
@@ -343,7 +343,7 @@ class Model(ABC):
             else:
                 _final_outputs[output_name] = raw_value
 
-        return _final_outputs
+        return self.OUTPUTS(**_final_outputs)
 
     def __call__(self, variables, parameters):
         """

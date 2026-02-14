@@ -1,23 +1,142 @@
-from collections import namedtuple
+"""
+Base tests for the Triceratops Model abstraction.
+
+This module verifies:
+
+- Proper subclass validation
+- Forward model behavior
+- Default parameter handling
+- Bounds enforcement
+- Metadata properties
+- Tupled output ordering
+"""
+
+from typing import NamedTuple
 
 import pytest
 from astropy import units as u
 
 from triceratops.models.core import Model, ModelParameter, ModelVariable
 
-# ============================================================
-# Helpers
-# ============================================================
-
-# Reusable namedtuple definitions
-SimpleOutputs = namedtuple("SimpleOutputs", ["y"])
-
 
 # ============================================================
-# Minimal Valid Model
+# Reusable Output Structure
 # ============================================================
+class SimpleOutputs(NamedTuple):
+    y: str
 
 
+import matplotlib.pyplot as plt
+
+# ============================================================
+# Reusable Test Structure
+# ============================================================
+import numpy as np
+import pytest
+
+
+class BaseModelTest:
+    """
+    Reusable pytest base class for testing Model subclasses.
+
+    Subclasses must define:
+
+    - MODEL: the model class
+    - VARIABLES: dict of input variables
+    - PARAMETERS: dict of input parameters
+
+    Optional plotting configuration:
+
+    - LOG_X: bool
+    - LOG_Y: bool
+    """
+
+    MODEL = None
+    VARIABLES = None
+    PARAMETERS = None
+
+    LOG_X = False
+    LOG_Y = False
+
+    # ---------------------------------- #
+    # Sanity Checks                      #
+    # ---------------------------------- #
+
+    def test_model_initializes(self):
+        """Model can be instantiated."""
+        model = self.MODEL()
+        assert model is not None
+
+    def test_model_evaluates(self):
+        """Model produces outputs with correct structure."""
+        model = self.MODEL()
+
+        outputs = model(self.VARIABLES, self.PARAMETERS)
+
+        assert isinstance(outputs, self.MODEL.OUTPUTS)
+
+        for value in outputs:
+            assert value is not None
+
+    # ---------------------------------- #
+    # Optional Diagnostic Plotting       #
+    # ---------------------------------- #
+
+    def test_model_diagnostic_plot(
+        self,
+        diagnostic_plots,
+        diagnostic_plots_dir,
+    ):
+        """
+        Generate diagnostic plot if enabled via CLI.
+        """
+
+        if not diagnostic_plots:
+            pytest.skip("Diagnostic plots disabled.")
+
+        model = self.MODEL()
+        outputs = model(self.VARIABLES, self.PARAMETERS)
+
+        x_name = model.variable_names[0]
+        x = self.VARIABLES[x_name]
+
+        # Strip units for plotting if necessary
+        if hasattr(x, "value"):
+            x = x.value
+
+        for name in outputs._fields:
+            y = getattr(outputs, name)
+
+            if hasattr(y, "value"):
+                y_plot = y.value
+            else:
+                y_plot = y
+
+            plt.figure()
+
+            # --- Flexible log scaling ---
+            if self.LOG_X and self.LOG_Y:
+                plt.loglog(x, y_plot)
+            elif self.LOG_X:
+                plt.semilogx(x, y_plot)
+            elif self.LOG_Y:
+                plt.semilogy(x, y_plot)
+            else:
+                plt.plot(x, y_plot)
+
+            plt.xlabel(x_name)
+            plt.ylabel(name)
+            plt.title(f"{self.MODEL.__name__} – {name}")
+            plt.tight_layout()
+
+            fname = f"{self.MODEL.__name__}_{name}.png"
+            plt.savefig(diagnostic_plots_dir / fname)
+            plt.close()
+
+
+# ============================================================
+# Minimal Valid Concrete Model
+# ============================================================
 class SimpleModel(Model):
     """
     Minimal valid concrete model for base-class testing.
@@ -59,18 +178,18 @@ def test_model_requires_variables():
             PARAMETERS = ()
             VARIABLES = ()
 
-            Outputs = namedtuple("BadOutputs", ["y"])
-            Units = namedtuple("BadUnits", ["y"])
+            class Outputs(NamedTuple):
+                y: str
 
-            OUTPUTS = Outputs(y="y")
-            UNITS = Units(y=u.dimensionless_unscaled)
+            OUTPUTS = Outputs
+            UNITS = Outputs(y=u.dimensionless_unscaled)
 
             def _forward_model(self, variables, parameters):
                 return {"y": 0.0}
 
 
 def test_outputs_units_field_mismatch():
-    """OUTPUTS and UNITS must have identical field names."""
+    """UNITS must structurally match OUTPUTS."""
 
     with pytest.raises(TypeError):
 
@@ -79,15 +198,24 @@ def test_outputs_units_field_mismatch():
 
             VARIABLES = (ModelVariable("x", base_units=u.dimensionless_unscaled),)
 
-            OUTPUTS = SimpleOutputs
-            UNITS = SimpleOutputs(y=u.dimensionless_unscaled, z=u.dimensionless_unscaled)
+            class Outputs(NamedTuple):
+                y: str
+
+            OUTPUTS = Outputs
+
+            # Invalid: wrong field structure
+            class BadUnits(NamedTuple):
+                y: u.Unit
+                z: u.Unit
+
+            UNITS = BadUnits(y=u.dimensionless_unscaled, z=u.dimensionless_unscaled)
 
             def _forward_model(self, variables, parameters):
                 return {"y": 0.0}
 
 
 # ============================================================
-# Basic Forward Model Behavior
+# Forward Model Behavior
 # ============================================================
 
 
@@ -127,7 +255,6 @@ def test_forward_model_missing_variable_raises():
 def test_parameter_bounds_violation():
     """Parameter bounds should be enforced."""
 
-    # Define bounded model
     class BoundedModel(SimpleModel):
         PARAMETERS = (
             ModelParameter(
@@ -150,7 +277,7 @@ def test_parameter_bounds_violation():
 
 
 def test_metadata_properties():
-    """parameter_names, variable_names, and output_names should be correct."""
+    """parameter_names, variable_names, and output_names should match definitions."""
 
     model = SimpleModel()
 
