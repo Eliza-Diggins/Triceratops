@@ -14,10 +14,11 @@ from trilobite.radiation.constants import (
 )
 from trilobite.radiation.synchrotron.cooling import (
     _synchrotron_cooling_time_coefficient_cgs,
+    _synchrotron_cooling_time_coefficient_pa_cgs,
 )
-from trilobite.radiation.synchrotron.microphysics import (
-    _opt_BPL_moment,
-    _opt_PL_moment,
+from trilobite.radiation.synchrotron.electron_distributions import (
+    BrokenPowerLaw,
+    PowerLaw,
 )
 from trilobite.radiation.synchrotron.utils import (
     _log_c_1_gamma_cgs,
@@ -425,12 +426,9 @@ def compute_log_N0_fast_cooling(
 
     The first moment is computed in scaled units x = γ / γ_c.
     """
-    # Dimensionless bounds
-    x_min = gamma_c / gamma_min
-    x_max = gamma_max / gamma_min
-
-    # First moment of BPL
-    log_moment = np.log(_opt_BPL_moment(-2.0, -(p + 1), x_min, x_max)) + 2 * np.log(gamma_min)
+    log_moment = np.log(
+        BrokenPowerLaw.moment(1, p1=2.0, p2=p + 1.0, gamma_b=gamma_min, gamma_min=gamma_c, gamma_max=gamma_max)
+    )
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 
     return log_prefactor - log_moment
@@ -451,9 +449,9 @@ def compute_log_N0_slow_cooling(
         slope -p for γ_min < γ < γ_c
         slope -(p+1) for γ > γ_c
     """
-    x_min, x_max = gamma_min / gamma_c, gamma_max / gamma_c
-
-    log_moment = np.log(_opt_BPL_moment(-p, -(p + 1.0), x_min, x_max)) + 2 * np.log(gamma_c)
+    log_moment = np.log(
+        BrokenPowerLaw.moment(1, p1=p, p2=p + 1.0, gamma_b=gamma_c, gamma_min=gamma_min, gamma_max=gamma_max)
+    )
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 
     return log_prefactor - log_moment
@@ -472,7 +470,7 @@ def compute_log_N0_no_cooling(
     Distribution:
         slope -p for γ_min < γ < γ_max
     """
-    log_moment = np.log(_opt_PL_moment(p, gamma_min, gamma_max, order=1))
+    log_moment = np.log(PowerLaw.moment(1, p=p, gamma_min=gamma_min, gamma_max=gamma_max))
 
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 
@@ -1372,6 +1370,7 @@ def _inv_log_powerlaw_sbpl_sed_ssa_implicit_cool_7(
     if sin_alpha is None:
         # Calculate the necessary (agnostic) constants before moving into the branching for fast vs. slow cooling.
         log_P0 = compute_log_P0_cgs_iso(f_A, log_DA)
+        log_THETA = np.log(_synchrotron_cooling_time_coefficient_pa_cgs)
 
         # Compute the Q and A arrays.
         log_Q = compute_log_Qm_no_cgs_iso(
@@ -1385,6 +1384,7 @@ def _inv_log_powerlaw_sbpl_sed_ssa_implicit_cool_7(
     else:
         # Calculate the necessary (agnostic) constants before moving into the branching for fast vs. slow cooling.
         log_P0 = compute_log_P0_cgs(f_A, log_DA, sin_alpha)
+        log_THETA = np.log(_synchrotron_cooling_time_coefficient_cgs)
 
         # Compute the Q and A arrays.
         log_Q = compute_log_Qm_no_cgs(
@@ -1402,7 +1402,6 @@ def _inv_log_powerlaw_sbpl_sed_ssa_implicit_cool_7(
     # ------ INVERSION LOGIC ------ #
     # We now simply assemble to coefficients and start getting
     # the inversion done.
-    log_THETA = np.log(_synchrotron_cooling_time_coefficient_cgs)
 
     # Compute log R and log B. We will reduce out the exponents so that it's crystal clear
     # how these play out for easy debugging.
