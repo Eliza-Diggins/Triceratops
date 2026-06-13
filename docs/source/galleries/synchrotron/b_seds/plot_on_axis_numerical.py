@@ -33,7 +33,7 @@ from trilobite.radiation.synchrotron.SEDs.numerical import (
 )
 from trilobite.radiation.synchrotron.microphysics import (
     compute_PL_norm_from_magnetic_field,
-    get_power_law_distribution,
+    get_PL_distribution,
 )
 from trilobite.utils.plot_utils import set_plot_style
 
@@ -153,7 +153,7 @@ norm = compute_PL_norm_from_magnetic_field(
     gamma_max=gamma_max,
 )
 
-distribution = get_power_law_distribution(
+distribution = get_PL_distribution(
     gamma_min=gamma_min,
     gamma_max=gamma_max,
     p=p,

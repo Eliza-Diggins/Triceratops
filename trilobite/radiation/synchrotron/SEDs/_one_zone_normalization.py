@@ -9,8 +9,8 @@ import numpy as np
 
 from trilobite.radiation.synchrotron.core import _opt_compute_log_synch_frequency
 from trilobite.radiation.synchrotron.microphysics import (
-    _opt_normalize_BPL_from_magnetic_field,
-    _opt_normalize_PL_from_magnetic_field,
+    _opt_BPL_norm_from_magnetic_field,
+    _opt_PL_norm_from_magnetic_field,
 )
 from trilobite.radiation.synchrotron.utils import _log_chi_cgs, _log_chi_cgs_iso
 
@@ -686,7 +686,7 @@ def _log_normalize_powerlaw_sbpl_sed(
     # Electron distribution normalization
     # ---------------------------------------------------------
 
-    N0 = _opt_normalize_PL_from_magnetic_field(
+    N0 = _opt_PL_norm_from_magnetic_field(
         np.exp(log_B),
         p=p,
         epsilon_E=epsilon_E,
@@ -863,7 +863,7 @@ def _log_normalize_powerlaw_sbpl_sed_ssa_cool(
 
     if is_fast_cooling:
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            _opt_BPL_norm_from_magnetic_field(
                 np.exp(log_B),
                 -2.0,
                 -(p + 1),
@@ -891,7 +891,7 @@ def _log_normalize_powerlaw_sbpl_sed_ssa_cool(
         # This is now the slow (but not no) cooling regime, so we use the BPL normalization with
         # the break at gamma_c and the low-energy slope fixed at -p.
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            _opt_BPL_norm_from_magnetic_field(
                 np.exp(log_B),
                 -p,
                 -(p + 1),
@@ -917,7 +917,7 @@ def _log_normalize_powerlaw_sbpl_sed_ssa_cool(
     else:
         # This is the no-cooling case.
         log_electron_norm = np.log(
-            _opt_normalize_PL_from_magnetic_field(
+            _opt_PL_norm_from_magnetic_field(
                 np.exp(log_B),
                 p,
                 gamma_min=np.exp(log_gamma_min),
@@ -1147,7 +1147,7 @@ def _log_normalize_powerlaw_sbpl_sed_cool(
         regime = "fast_cooling"
 
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            _opt_BPL_norm_from_magnetic_field(
                 np.exp(log_B),
                 -2.0,
                 -(p + 1.0),
@@ -1176,7 +1176,7 @@ def _log_normalize_powerlaw_sbpl_sed_cool(
         regime = "slow_cooling"
 
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            _opt_BPL_norm_from_magnetic_field(
                 np.exp(log_B),
                 -p,
                 -(p + 1.0),
@@ -1203,7 +1203,7 @@ def _log_normalize_powerlaw_sbpl_sed_cool(
         regime = "no_cooling"
 
         log_electron_norm = np.log(
-            _opt_normalize_PL_from_magnetic_field(
+            _opt_PL_norm_from_magnetic_field(
                 np.exp(log_B),
                 p,
                 gamma_min=np.exp(log_gamma_min),
@@ -1402,7 +1402,7 @@ def _log_normalize_powerlaw_sbpl_sed_ssa(
     # ---------------------------------------------------------
     # Electron distribution normalization
     # ---------------------------------------------------------
-    N0 = _opt_normalize_PL_from_magnetic_field(
+    N0 = _opt_PL_norm_from_magnetic_field(
         np.exp(log_B),
         p=p,
         epsilon_E=epsilon_E,

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.004** total execution time for 55 files **from all galleries**:
+**00:00.663** total execution time for 57 files **from all galleries**:
 
 .. container::
 
@@ -32,8 +32,29 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
+   * - :ref:`sphx_glr_auto_examples_data_plot_radio_photometry.py` (``galleries/data/plot_radio_photometry.py``)
+     - 00:00.213
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_radio_light_curve.py` (``galleries/data/plot_radio_light_curve.py``)
+     - 00:00.126
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_optical_light_curve.py` (``galleries/data/plot_optical_light_curve.py``)
+     - 00:00.081
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_multiband_radio.py` (``galleries/data/plot_multiband_radio.py``)
+     - 00:00.077
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_inference_data.py` (``galleries/data/plot_inference_data.py``)
+     - 00:00.063
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_optical_photometry.py` (``galleries/data/plot_optical_photometry.py``)
+     - 00:00.060
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_multiband_optical.py` (``galleries/data/plot_multiband_optical.py``)
+     - 00:00.041
+     - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
-     - 00:00.003
+     - 00:00.002
      - 0.0
    * - :ref:`sphx_glr_auto_examples_modeling_plot_fred_blackbody_optical_lc.py` (``galleries/modeling/plot_fred_blackbody_optical_lc.py``)
      - 00:00.001
@@ -60,21 +81,6 @@ Computation times
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_tde_disk_observables.py` (``galleries/accretion/plot_tde_disk_observables.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_epoch_photometry.py` (``galleries/data/plot_epoch_photometry.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_inference_workflow.py` (``galleries/data/plot_inference_workflow.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_optical_light_curve.py` (``galleries/data/plot_optical_light_curve.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_photometry_data.py` (``galleries/data/plot_photometry_data.py``)
-     - 00:00.000
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_specific_epochs.py` (``galleries/data/plot_specific_epochs.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_plot_chevalier_shock_structure.py` (``galleries/dynamics/plot_chevalier_shock_structure.py``)

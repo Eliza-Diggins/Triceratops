@@ -16,8 +16,8 @@ from trilobite.radiation.synchrotron.cooling import (
     _synchrotron_cooling_time_coefficient_cgs,
 )
 from trilobite.radiation.synchrotron.microphysics import (
-    _opt_compute_BPL_moment,
-    _opt_compute_PL_moment,
+    _opt_BPL_moment,
+    _opt_PL_moment,
 )
 from trilobite.radiation.synchrotron.utils import (
     _log_c_1_gamma_cgs,
@@ -430,7 +430,7 @@ def compute_log_N0_fast_cooling(
     x_max = gamma_max / gamma_min
 
     # First moment of BPL
-    log_moment = np.log(_opt_compute_BPL_moment(-2.0, -(p + 1), x_min, x_max)) + 2 * np.log(gamma_min)
+    log_moment = np.log(_opt_BPL_moment(-2.0, -(p + 1), x_min, x_max)) + 2 * np.log(gamma_min)
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 
     return log_prefactor - log_moment
@@ -453,7 +453,7 @@ def compute_log_N0_slow_cooling(
     """
     x_min, x_max = gamma_min / gamma_c, gamma_max / gamma_c
 
-    log_moment = np.log(_opt_compute_BPL_moment(-p, -(p + 1.0), x_min, x_max)) + 2 * np.log(gamma_c)
+    log_moment = np.log(_opt_BPL_moment(-p, -(p + 1.0), x_min, x_max)) + 2 * np.log(gamma_c)
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 
     return log_prefactor - log_moment
@@ -472,7 +472,7 @@ def compute_log_N0_no_cooling(
     Distribution:
         slope -p for γ_min < γ < γ_max
     """
-    log_moment = np.log(_opt_compute_PL_moment(p, gamma_min, gamma_max, order=1))
+    log_moment = np.log(_opt_PL_moment(p, gamma_min, gamma_max, order=1))
 
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 

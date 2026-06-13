@@ -78,9 +78,9 @@ from trilobite.utils.log import trilobite_logger
 from trilobite.utils.misc_utils import ensure_in_units
 
 from ..microphysics import (
-    _opt_normalize_MJD_and_PL_from_magnetic_field,
-    _opt_normalize_MJD_from_magnetic_field,
-    _opt_normalize_PL_from_magnetic_field,
+    _opt_mixed_norm_from_magnetic_field,
+    _opt_MJD_norm_from_magnetic_field,
+    _opt_PL_norm_from_magnetic_field,
 )
 from ._one_zone_closure import SSA_INV_FUNCTION_REGISTRY
 from ._one_zone_functions import (
@@ -6205,7 +6205,7 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
 
     where :math:`N_0` is fixed by :math:`\epsilon_E / \epsilon_B` and the
     magnetic energy density
-    (see :func:`~trilobite.radiation.synchrotron.microphysics._opt_normalize_PL_from_magnetic_field`).
+    (see :func:`~trilobite.radiation.synchrotron.microphysics._opt_PL_norm_from_magnetic_field`).
 
     Parameters
     ----------
@@ -6326,7 +6326,7 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         """
         # Electron distribution normalization via equipartition.
         N0 = np.asarray(
-            _opt_normalize_PL_from_magnetic_field(
+            _opt_PL_norm_from_magnetic_field(
                 B=B,
                 p=p,
                 epsilon_B=epsilon_B,
@@ -6516,7 +6516,7 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
 
     where :math:`\Theta = kT/(m_e c^2)` is the dimensionless electron
     temperature and :math:`N_{\rm therm}` is fixed by equipartition (see
-    :func:`~trilobite.radiation.synchrotron.microphysics._opt_normalize_MJD_from_magnetic_field`).
+    :func:`~trilobite.radiation.synchrotron.microphysics._opt_MJD_norm_from_magnetic_field`).
 
     Parameters
     ----------
@@ -6628,7 +6628,7 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
             (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
         """
         N_therm = np.asarray(
-            _opt_normalize_MJD_from_magnetic_field(
+            _opt_MJD_norm_from_magnetic_field(
                 B=B,
                 Theta=Theta,
                 epsilon_B=epsilon_B,
@@ -6808,7 +6808,7 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
     where the thermal fraction :math:`\delta` splits the total electron energy
     budget: :math:`\epsilon_{E,\rm therm} = \delta\,\epsilon_E` and
     :math:`\epsilon_{E,\rm PL} = (1-\delta)\,\epsilon_E` (see
-    :func:`~trilobite.radiation.synchrotron.microphysics._opt_normalize_MJD_and_PL_from_magnetic_field`).
+    :func:`~trilobite.radiation.synchrotron.microphysics._opt_mixed_norm_from_magnetic_field`).
 
     Parameters
     ----------
@@ -6934,7 +6934,7 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
             :math:`\ln F_\nu` in CGS
             (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
         """
-        N_therm, N0_pl = _opt_normalize_MJD_and_PL_from_magnetic_field(
+        N_therm, N0_pl = _opt_mixed_norm_from_magnetic_field(
             B=B,
             Theta=Theta,
             p=p,
