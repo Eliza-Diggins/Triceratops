@@ -956,6 +956,17 @@ A common choice throughout the modern literature (e.g. :footcite:t:`Margutti2019
 the parameters :math:`\epsilon_e` and :math:`\epsilon_B`, which represent the fraction of the thermal energy density
 that goes into relativistic electrons and magnetic fields, respectively.
 
+.. important::
+
+    In the case of :math:`\epsilon_e`, we follow the typical convention in the literature
+    (e.g. :footcite:t:`Margutti2019COW`,
+    :footcite:t:`demarchiRadioAnalysisSN2004C2022`, :footcite:t:`wuDelayedRadioEmission2025`, etc.) and
+    define :math:`U_e = \epsilon_e U_{\rm th}` such that :math:`U_e` is the
+    **total energy density in relativistic electrons**. In some cases, authors have instead defined :math:`\epsilon_e` such
+    that :math:`U_e = \epsilon_e U_{\rm th}` is the
+    **kinetic energy density in relativistic electrons**. This latter convention is less common, but it is
+    important to be aware of it when comparing results across the literature.
+
 Given a thermal energy density :math:`U_{\rm thermal}`, we can then write the energy densities in relativistic electrons
 and magnetic fields as:
 
@@ -1132,7 +1143,7 @@ Thermal Electron Distributions
 
 In the rare cases where thermal electrons contribute to the synchrotron emission, we can also derive the normalization of the
 distribution from equipartition. The procedure is similar to that described above for power-law distributions,
-but with the **Maxwell-Juttner** distribution instead.
+but with the **Maxwell-Juttner** distribution instead\ :footcite:p:`juttner1911maxwellsche`.
 
 We write the electron distribution function as
 
@@ -1174,28 +1185,31 @@ This integral is\ :footcite:p:`1998ApJ...498..313G, 2000ApJ...541..234O, chandra
 
 .. math::
 
-    U_e = N_0 m_e c^2 \left[\frac{3K_3(1/\Theta) + K_1(1/\Theta)}{4K_2(1/\Theta)} -1 \right],
+    U_e = N_0 m_e c^2 \left[\frac{3K_3(1/\Theta) + K_1(1/\Theta)}{4K_2(1/\Theta)}\right],
+
+where :math:`K_1` and :math:`K_3` are the modified Bessel functions of the second kind. *In the literature, this
+result is more commonly presented in terms of the kinetic energy density*.
 
 which, in turn, is well approximated by\ :footcite:p:`1998ApJ...498..313G`
 
 .. math::
 
-    U_e \approx N_0 m_e c^2 \Theta \left(\frac{6+15\Theta}{4+5\Theta}\right)
+    U_e \approx N_0 m_e c^2 \frac{15\Theta^2 + 11\Theta + 4}{4 + 5 \Theta}
 
 Solving for :math:`N_0`, we find
 
 .. math::
 
     \boxed{
-    N_0 = \frac{\epsilon_e U_{\rm thermal}}{m_e c^2 \Theta} \left(\frac{4+5\Theta}{6+15\Theta}\right).
+    N_0 = \frac{\epsilon_e U_{\rm thermal}}{m_e c^2} \left(\frac{4+5\Theta}{15\Theta^2 + 11\Theta + 4}\right).
     }
 
 In terms of the magnetic field, we also have
 
 .. math::
 
-    B = \sqrt{8 \pi \epsilon_B U_{\rm thermal}} \implies N_0 =\frac{B^2}{8 \pi m_e c^2 \Theta}\frac{\epsilon_e}{\epsilon_B}
-    \left(\frac{4+5\Theta}{6+15\Theta}\right).
+    B = \sqrt{8 \pi \epsilon_B U_{\rm thermal}} \implies N_0 =\frac{B^2}{8 \pi m_e c^2}\frac{\epsilon_e}{\epsilon_B}
+     \left(\frac{4+5\Theta}{15\Theta^2 + 11\Theta + 4}\right).
 
 .. hint::
 
@@ -1222,8 +1236,8 @@ In this case, the normalization of the thermal and non-thermal electron distribu
 .. math::
 
     \begin{aligned}
-    N_{0,\;thermal} &= \frac{\delta \epsilon_e U_{\rm thermal}}{m_e c^2 \Theta} \left(\frac{4+5\Theta}{6+15\Theta}\right), \\
-    N_{0,\;non-thermal} &= \frac{(1-\delta) \epsilon_e U_{\rm thermal}}{m_e c^2 M^{(1)}_{\gamma}}.
+    N_{0,\rm \;thermal} &= \frac{\delta \epsilon_e U_{\rm thermal}}{m_e c^2 } \left(\frac{4+5\Theta}{15\Theta^2 + 11\Theta + 4}\right), \\
+    N_{0,\rm \;non-thermal} &= \frac{(1-\delta) \epsilon_e U_{\rm thermal}}{m_e c^2 M^{(1)}_{\gamma}}.
     \end{aligned}
 
 and, in terms of the :math:`B` field,
@@ -1231,8 +1245,8 @@ and, in terms of the :math:`B` field,
 .. math::
 
     \begin{aligned}
-    N_{0,\;thermal} &= \frac{B^2}{8 \pi m_e c^2 \Theta}\frac{\delta \epsilon_e}{\epsilon_B} \left(\frac{4+5\Theta}{6+15\Theta}\right), \\
-    N_{0,\;non-thermal} &= \frac{B^2}{8 \pi m_e c^2}\frac{(1-\delta) \epsilon_e}{\epsilon_B} \left(\frac{1}{M^{(1)}_{\gamma}}\right).
+    N_{0,\rm \;thermal} &= \frac{B^2}{8 \pi m_e c^2 }\frac{\delta \epsilon_e}{\epsilon_B} \left(\frac{4+5\Theta}{15\Theta^2 + 11\Theta + 4}\right), \\
+    N_{0,\rm \;non-thermal} &= \frac{B^2}{8 \pi m_e c^2}\frac{(1-\delta) \epsilon_e}{\epsilon_B} \left(\frac{1}{M^{(1)}_{\gamma}}\right).
     \end{aligned}
 
 ----
