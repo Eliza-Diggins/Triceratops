@@ -7,8 +7,9 @@ compute the synchrotron cooling time and the energy loss rate for electrons
 in a given magnetic field strength.
 """
 
+import warnings
 from abc import ABC, abstractmethod
-from typing import Union
+from typing import Optional, Union
 
 import numpy as np
 from astropy import constants
@@ -25,28 +26,27 @@ from .core import _opt_compute_synch_frequency
 _cooling_frequency_coefficient_cgs = (
     (18 * np.pi * constants.m_e * constants.c * constants.e.esu) / (constants.sigma_T**2)
 ).cgs.value
-_synchrotron_cooling_rate_coefficient_cgs = (1 / 6 * np.pi) * constants.sigma_T.cgs.value * constants.c.cgs.value
-_synchrotron_cooling_time_coefficient_cgs = (
-    6 * np.pi * constants.m_e.cgs.value * constants.c.cgs.value
-) / constants.sigma_T.cgs.value
 
-_IC_cooling_rate_coefficient_cgs = constants.sigma_T.cgs.value / (3 * np.pi)
-_IC_cooling_time_coefficient_cgs = (
-    3 * constants.m_e.cgs.value * constants.c.cgs.value**3
-) / constants.sigma_T.cgs.value
 
 # ========================================================= #
 # Optimized Low-Level Callables                             #
 # ========================================================= #
+# These are simple functions that are implemented at the most bare-bones level
+# to ensure efficient computation. They are not intended to be used directly by users, but rather
+# are called by the methods of the cooling engine classes defined below. They operate in CGS units
+# and do not perform any unit coercion or validation. This design allows the public methods of the cooling engines
+# to handle units and validation separately from the core physics calculations, which can be optimized for performance.
 
 
-# --- Generic Functions --- #
 def _opt_compute_cooling_time(
     gamma: Union[float, np.ndarray],
     cooling_rate: Union[float, np.ndarray],
 ):
-    """
+    r"""
     Compute the radiative cooling time from an energy loss rate.
+
+    This computes :math:`E/\dot{E}`, where :math:`E = \gamma m_e c^2` is the electron energy and
+    :math:`\dot{E}` is the energy loss rate.
 
     Parameters
     ----------
@@ -64,35 +64,61 @@ def _opt_compute_cooling_time(
     return electron_rest_mass_cgs * gamma / cooling_rate
 
 
-# --- Synchrotron Cooling --- #
+# -------------------------------------------------------- #
+# Synchrotron Cooling                                      #
+# -------------------------------------------------------- #
+# The following functions implement the standard synchrotron cooling formulas under the assumptions
+# of an isotropic pitch-angle distribution and the Thomson regime.
+# These are the core physics calculations that will be used by the
+# SynchrotronRadiativeCoolingEngine class defined below.
+_synchrotron_cooling_rate_coefficient_cgs = constants.sigma_T.cgs.value * constants.c.cgs.value / (6 * np.pi)
+"""The coefficient for synchrotron cooling of a single-electron (CGS)."""
+_synchrotron_cooling_rate_coefficient_pa_cgs = constants.sigma_T.cgs.value * constants.c.cgs.value / (9 * np.pi)
+"""The coefficient for synchrotron cooling of a single-electron (CGS) with isotropic PA."""
+_synchrotron_cooling_time_coefficient_cgs = (
+    6 * np.pi * constants.m_e.cgs.value * constants.c.cgs.value
+) / constants.sigma_T.cgs.value
+"""The coefficient for synchrotron cooling time (CGS)."""
+_synchrotron_cooling_time_coefficient_pa_cgs = (
+    9 * np.pi * constants.m_e.cgs.value * constants.c.cgs.value / constants.sigma_T.cgs.value
+)
+"""The coefficient for synchrotron cooling time (CGS) with isotropic PA."""
+
+
 def _opt_compute_synchrotron_cooling_rate(
     B: Union[float, np.ndarray],
     gamma: Union[float, np.ndarray],
+    sin_alpha: Optional[float] = None,
 ) -> Union[float, np.ndarray]:
     r"""
     Compute the synchrotron energy loss rate dE/dt (CGS, optimized).
-
-    Assumes an isotropic pitch-angle distribution and the Thomson regime.
 
     Parameters
     ----------
     B : float or array-like
         Magnetic field strength in Gauss.
-
     gamma : float or array-like
         Electron Lorentz factor.
+    sin_alpha : float, optional
+        The sine of the electron pitch angle. If ``None`` (default), the result is
+        averaged over an isotropic pitch-angle distribution. Otherwise, the result is computed for
+        the specified pitch angle only.
 
     Returns
     -------
     dEdt : float or array-like
         Synchrotron cooling rate in erg/s (CGS).
     """
-    return _synchrotron_cooling_rate_coefficient_cgs * B**2 * gamma**2
+    if sin_alpha is not None:
+        return _synchrotron_cooling_rate_coefficient_cgs * B**2 * gamma**2 * sin_alpha**2
+    else:
+        return _synchrotron_cooling_rate_coefficient_pa_cgs * B**2 * gamma**2
 
 
 def _opt_compute_synchrotron_cooling_time(
     B: Union[float, np.ndarray],
     gamma: Union[float, np.ndarray],
+    sin_alpha: Optional[float] = None,
 ) -> Union[float, np.ndarray]:
     r"""
     Compute the synchrotron cooling time t_cool (CGS, optimized).
@@ -105,6 +131,11 @@ def _opt_compute_synchrotron_cooling_time(
     gamma : float or array-like
         Electron Lorentz factor.
 
+    sin_alpha : float, optional
+        The sine of the electron pitch angle. If ``None`` (default), the result is
+        averaged over an isotropic pitch-angle distribution. Otherwise, the result is computed for
+        the specified pitch angle only.
+
     Returns
     -------
     t_cool : float or array-like
@@ -116,14 +147,24 @@ def _opt_compute_synchrotron_cooling_time(
 
     .. math::
 
-        t_{cool} = \frac{6\pi m_e c}{\sigma_T B^2 \gamma}
+        t_{cool} = \frac{6\pi m_e c}{\sigma_T B^2 \gamma \sin^2\alpha}.
+
+    In the PA averaged case,
+
+    .. math::
+
+        t_{cool} = \frac{9\pi m_e c}{\sigma_T B^2 \gamma}.
     """
-    return _synchrotron_cooling_time_coefficient_cgs / (B**2 * gamma)
+    if sin_alpha is not None:
+        return _synchrotron_cooling_time_coefficient_cgs / (B**2 * gamma * sin_alpha**2)
+    else:
+        return _synchrotron_cooling_time_coefficient_pa_cgs / (B**2 * gamma)
 
 
 def _opt_compute_synchrotron_cooling_gamma(
     B: Union[float, np.ndarray],
     t: Union[float, np.ndarray],
+    sin_alpha: Optional[float] = None,
 ) -> Union[float, np.ndarray]:
     r"""
     Compute the synchrotron cooling Lorentz factor gamma_c (CGS, optimized).
@@ -139,6 +180,11 @@ def _opt_compute_synchrotron_cooling_gamma(
     t : float or array-like
         Dynamical time in seconds.
 
+    sin_alpha : float, optional
+        The sine of the electron pitch angle. If ``None`` (default), the result is
+        averaged over an isotropic pitch-angle distribution. Otherwise, the result is computed for
+        the specified pitch angle only.
+
     Returns
     -------
     gamma_c : float or array-like
@@ -146,16 +192,38 @@ def _opt_compute_synchrotron_cooling_gamma(
 
     Notes
     -----
-    The analytic expression is
+    The analytic expression follows from :math:`t_{\rm cool}(\gamma_c) = t`:
 
     .. math::
 
-        \gamma_c = \frac{6\pi m_e c}{\sigma_T B^2 t}
+        \gamma_c = \frac{6\pi m_e c}{\sigma_T B^2 t \sin^2\alpha}.
+
+    In the PA averaged case,
+
+    .. math::
+
+        \gamma_c = \frac{9\pi m_e c}{\sigma_T B^2 t}.
     """
-    return _synchrotron_cooling_time_coefficient_cgs / (B**2 * t)
+    if sin_alpha is not None:
+        return _synchrotron_cooling_time_coefficient_cgs / (B**2 * t * sin_alpha**2)
+    else:
+        return _synchrotron_cooling_time_coefficient_pa_cgs / (B**2 * t)
 
 
-# --- IC Cooling --- #
+# -------------------------------------------------------- #
+# Inverse Compton Cooling                                  #
+# -------------------------------------------------------- #
+# The following functions implement the standard inverse Compton cooling formulas under the assumptions
+# of an isotropic radiation field and the Thomson regime. These are the core physics calculations that will
+# be used by the
+# InverseComptonCoolingEngine class defined below.
+_IC_cooling_rate_coefficient_cgs = constants.sigma_T.cgs.value / (3 * np.pi)
+
+_IC_cooling_time_coefficient_cgs = (
+    3 * np.pi * constants.m_e.cgs.value * constants.c.cgs.value**2
+) / constants.sigma_T.cgs.value
+
+
 def _opt_compute_IC_cooling_rate(
     L_bol: Union[float, np.ndarray],
     R: Union[float, np.ndarray],
@@ -429,12 +497,10 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
     cooling Lorentz factors, and the associated characteristic
     synchrotron frequency for relativistic electrons in a magnetic field.
 
-    Cooling rates and cooling times are always **ensemble-averaged**
-    (isotropic pitch-angle distribution, Thomson regime).
-
-    The pitch-angle treatment only affects the mapping from Lorentz
-    factor :math:`\gamma` to the characteristic synchrotron frequency
-    :math:`\nu`.
+    By default, cooling rates, cooling times, and cooling Lorentz factors are
+    **ensemble-averaged** over an isotropic pitch-angle distribution (Thomson
+    regime). A specific pitch angle may be supplied via ``sin_alpha`` to any of
+    the ``compute_*`` methods to override this behaviour.
 
     See :ref:`synchrotron_theory` for the full physical derivation.
     """
@@ -477,24 +543,27 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         *,
         B: Union[float, np.ndarray],
         gamma: Union[float, np.ndarray],
+        sin_alpha: Optional[float] = None,
     ) -> Union[float, np.ndarray]:
-        return _opt_compute_synchrotron_cooling_rate(B, gamma)
+        return _opt_compute_synchrotron_cooling_rate(B, gamma, sin_alpha=sin_alpha)
 
     def _compute_cooling_time(
         self,
         *,
         B: Union[float, np.ndarray],
         gamma: Union[float, np.ndarray],
+        sin_alpha: Optional[float] = None,
     ) -> Union[float, np.ndarray]:
-        return _opt_compute_synchrotron_cooling_time(B, gamma)
+        return _opt_compute_synchrotron_cooling_time(B, gamma, sin_alpha=sin_alpha)
 
     def _compute_cooling_gamma(
         self,
         *,
         B: Union[float, np.ndarray],
         t: Union[float, np.ndarray],
+        sin_alpha: Optional[float] = None,
     ) -> Union[float, np.ndarray]:
-        return _opt_compute_synchrotron_cooling_gamma(B, t)
+        return _opt_compute_synchrotron_cooling_gamma(B, t, sin_alpha=sin_alpha)
 
     def _compute_characteristic_frequency(
         self,
@@ -518,25 +587,30 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         *,
         B: Union[float, np.ndarray, u.Quantity],
         gamma: Union[float, np.ndarray],
+        sin_alpha: Optional[float] = None,
     ) -> u.Quantity:
         r"""
         Compute the synchrotron energy loss rate.
 
         Parameters
         ----------
-        B : float, array-like, or astropy.units.Quantity
+        B : float, array-like, or ~astropy.units.Quantity
             Magnetic field strength. Default units are Gauss.
 
         gamma : float or array-like
             Electron Lorentz factor.
 
+        sin_alpha : float, optional
+            Sine of the electron pitch angle. If ``None`` (default), the result
+            is averaged over an isotropic pitch-angle distribution.
+
         Returns
         -------
-        dEdt : astropy.units.Quantity
+        dEdt : ~astropy.units.Quantity
             Synchrotron cooling rate in erg/s.
         """
         B = ensure_in_units(B, u.G)
-        rate = self._compute_cooling_rate(B=B, gamma=gamma)
+        rate = self._compute_cooling_rate(B=B, gamma=gamma, sin_alpha=sin_alpha)
         return rate * (u.erg / u.s)
 
     def compute_cooling_time(
@@ -544,25 +618,30 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         *,
         B: Union[float, np.ndarray, u.Quantity],
         gamma: Union[float, np.ndarray],
+        sin_alpha: Optional[float] = None,
     ) -> u.Quantity:
         r"""
         Compute the synchrotron cooling time.
 
         Parameters
         ----------
-        B : float, array-like, or astropy.units.Quantity
+        B : float, array-like, or ~astropy.units.Quantity
             Magnetic field strength. Default units are Gauss.
 
         gamma : float or array-like
             Electron Lorentz factor.
 
+        sin_alpha : float, optional
+            Sine of the electron pitch angle. If ``None`` (default), the result
+            is averaged over an isotropic pitch-angle distribution.
+
         Returns
         -------
-        t_cool : astropy.units.Quantity
+        t_cool : ~astropy.units.Quantity
             Synchrotron cooling time in seconds.
         """
         B = ensure_in_units(B, u.G)
-        t_cool = self._compute_cooling_time(B=B, gamma=gamma)
+        t_cool = self._compute_cooling_time(B=B, gamma=gamma, sin_alpha=sin_alpha)
         return t_cool * u.s
 
     def compute_cooling_gamma(
@@ -570,17 +649,22 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         *,
         B: Union[float, np.ndarray, u.Quantity],
         t: Union[float, np.ndarray, u.Quantity],
+        sin_alpha: Optional[float] = None,
     ) -> Union[float, np.ndarray]:
         r"""
         Compute the synchrotron cooling Lorentz factor.
 
         Parameters
         ----------
-        B : float, array-like, or astropy.units.Quantity
+        B : float, array-like, or ~astropy.units.Quantity
             Magnetic field strength. Default units are Gauss.
 
-        t : float, array-like, or astropy.units.Quantity
+        t : float, array-like, or ~astropy.units.Quantity
             Dynamical time. Default units are seconds.
+
+        sin_alpha : float, optional
+            Sine of the electron pitch angle. If ``None`` (default), the result
+            is averaged over an isotropic pitch-angle distribution.
 
         Returns
         -------
@@ -589,7 +673,14 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         """
         B = ensure_in_units(B, u.G)
         t = ensure_in_units(t, u.s)
-        return self._compute_cooling_gamma(B=B, t=t)
+        gamma_c = self._compute_cooling_gamma(B=B, t=t, sin_alpha=sin_alpha)
+        if np.any(gamma_c < 1):
+            warnings.warn(
+                "Synchrotron cooling Lorentz factor gamma_c < 1 (unphysical). Check that B and t are physical.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+        return gamma_c
 
     def compute_characteristic_frequency(
         self,
@@ -907,11 +998,15 @@ class InverseComptonCoolingEngine(SynchrotronCoolingEngine):
         R = ensure_in_units(R, u.cm)
         t = ensure_in_units(t, u.s)
 
-        return self._compute_cooling_gamma(
-            L_bol=L_bol,
-            R=R,
-            t=t,
-        )
+        gamma_IC = self._compute_cooling_gamma(L_bol=L_bol, R=R, t=t)
+        if np.any(gamma_IC < 1):
+            warnings.warn(
+                "Inverse Compton cooling Lorentz factor gamma_IC < 1 (unphysical). "
+                "Check that L_bol, R, and t are physical.",
+                RuntimeWarning,
+                stacklevel=2,
+            )
+        return gamma_IC
 
     def compute_characteristic_frequency(
         self,
