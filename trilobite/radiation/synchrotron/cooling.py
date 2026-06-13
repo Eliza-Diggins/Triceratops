@@ -508,32 +508,9 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
     # --------------------------------------------------------- #
     # Initialization                                           #
     # --------------------------------------------------------- #
-    def __init__(self, pitch_averaged: bool = True):
-        r"""
-        Initialize the synchrotron cooling engine.
-
-        Parameters
-        ----------
-        pitch_averaged : bool, optional
-            Whether to use the pitch-angle–averaged synchrotron
-            characteristic frequency.
-
-            If True (default), the mapping uses
-
-            .. math::
-
-                \langle \sin\alpha \rangle = \frac{2}{\pi}
-
-            If False, a specific pitch angle must be supplied via
-            ``sin_alpha`` when computing the characteristic frequency.
-
-        Notes
-        -----
-        This flag **does not** affect cooling rates or cooling times,
-        which are always ensemble-averaged.
-        """
+    def __init__(self):
+        r"""Initialize the synchrotron cooling engine."""
         super().__init__()
-        self._pitch_average = pitch_averaged
 
     # --------------------------------------------------------- #
     # Core Computation Methods (CGS, no units)                  #
@@ -570,14 +547,12 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         *,
         B: Union[float, np.ndarray],
         gamma: Union[float, np.ndarray],
-        sin_alpha: Union[float, np.ndarray] = np.pi / 2,
+        sin_alpha: Optional[Union[float, np.ndarray]] = None,
     ) -> Union[float, np.ndarray]:
-        return _opt_compute_synch_frequency(
-            gamma=gamma,
-            B=B,
-            sin_alpha=sin_alpha,
-            pitch_average=self._pitch_average,
-        )
+        if sin_alpha is not None:
+            return _opt_compute_synch_frequency(gamma, B, sin_alpha=sin_alpha)
+        else:
+            return _opt_compute_synch_frequency(gamma, B)
 
     # --------------------------------------------------------- #
     # Public Interface Methods                                  #
