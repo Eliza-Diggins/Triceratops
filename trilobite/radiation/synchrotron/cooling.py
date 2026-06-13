@@ -1057,4 +1057,4 @@ class InverseComptonCoolingEngine(SynchrotronCoolingEngine):
             t=t,
             sin_alpha=sin_alpha,
         )
-        return nu
+        return nu * u.Hz
