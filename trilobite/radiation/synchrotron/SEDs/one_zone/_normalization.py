@@ -2,7 +2,7 @@
 Normalization functions for 1-zone synchrotron SEDs.
 
 This module contains the low-level structure for the synchrotron normalization logic implemented
-in :mod:`one_zone`.
+in :mod:`trilobite.radiation.synchrotron.SEDs.one_zone`.
 """
 
 import numpy as np
@@ -14,7 +14,7 @@ from trilobite.radiation.synchrotron.electron_distributions import (
 )
 from trilobite.radiation.synchrotron.utils import _log_chi_cgs, _log_chi_cgs_iso
 
-from ._one_zone_ssa import (
+from ._ssa import (
     compute_ssa_frequencies_with_cooling,
     compute_ssa_frequencies_without_cooling,
     select_ssa_sed_regime_from_candidates_with_cooling,
