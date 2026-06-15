@@ -642,13 +642,3 @@ Table-based Opacity
 
     OPALOpacity
     load_opal_opacity
-
-Opacity Tables
-~~~~~~~~~~~~~~
-
-.. currentmodule:: trilobite.radiation.opacity
-
-.. autosummary::
-    :toctree: ../../../../_as_gen
-
-    OPALOpacityTable

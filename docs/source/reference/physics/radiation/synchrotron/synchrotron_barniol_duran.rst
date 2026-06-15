@@ -133,7 +133,7 @@ Implementation
 --------------
 
 The coasting-phase inversion described above is implemented in Trilobite as
-:func:`~trilobite.radiation.synchrotron.SEDs.one_zone_closure.invert_barniol_duran_coasting`.
+:func:`~trilobite.radiation.synchrotron.SEDs.one_zone.closure.invert_barniol_duran_coasting`.
 Given an observed peak flux density, peak frequency, and observer time, it returns the
 equipartition radius :math:`R`, bulk Lorentz factor :math:`\Gamma`, total energy :math:`E`,
 and the derived microphysical quantities :math:`\gamma_e`, :math:`N_e`, and :math:`B`.

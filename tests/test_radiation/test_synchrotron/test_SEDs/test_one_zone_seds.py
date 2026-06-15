@@ -13,7 +13,7 @@ from trilobite.radiation.synchrotron.SEDs import (
     PowerLaw_SynchrotronSED,
 )
 
-from trilobite.radiation.synchrotron.SEDs.one_zone_closure import (
+from trilobite.radiation.synchrotron.SEDs.one_zone.closure import (
     invert_powerlaw_implicit_cooling_sed,
     invert_powerlaw_implicit_cooling_ssa_sed,
     invert_powerlaw_ssa_sed_demarchi,
@@ -535,7 +535,7 @@ def test_demarchi_equivalence(diagnostic_plots, diagnostic_plots_dir):
     and compares the inferred B(t) and R(t) from the two methods.
     """
 
-    from trilobite.radiation.synchrotron.SEDs.one_zone_closure import (
+    from trilobite.radiation.synchrotron.SEDs.one_zone.closure import (
         invert_powerlaw_ssa_sed_demarchi,
     )
 

@@ -80,7 +80,7 @@ from trilobite.radiation.synchrotron.SEDs import (
     PowerLaw_SSA_SynchrotronSED,
     PowerLaw_SynchrotronSED,
 )
-from trilobite.radiation.synchrotron.SEDs._one_zone_functions import smoothed_BPL
+from trilobite.radiation.synchrotron.SEDs.one_zone._functions import smoothed_BPL
 
 __all__ = [
     "SSA_Cooling_SynchrotronSEDModel",

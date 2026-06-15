@@ -459,6 +459,164 @@ for a sphere) and :math:`D_A` is the angular diameter distance to the source. Th
 handles distance resolution (including conversion from luminosity distance, proper distance, or redshift) via
 :func:`~trilobite.physics_utils.resolve_cosmological_distances`.
 
+.. important::
+
+    In the case of **ultra-relativistic outflows** (e.g. gamma-ray burst jets), extra care must be taken to account
+    for differences in the light-travel time across the source, meaning that the observed emission at a given time may '
+    not correspond to a single rest-frame snapshot of the source. In this model, we assume that the depth of the
+    slab is **sufficiently small** that the light-travel time across it is negligible compared to the timescale of
+    evolution of the
+    source and therefore ignore EATS effects.
+
+----
+
+Classical Models
+-----------------
+
+The *classical* synchrotron SED models (see :ref:`synchrotron_seds`) are widely used throughout the literature as
+a convenient, analytically tractable approach for modeling synchrotron emission from astrophysical sources. While these
+models are a staple of modern analysis and are implemented in Trilobite, it is occasionally useful to produce analogous
+models using the more accurate and flexible numerical methods described here. For this reason, a number of
+these "classical models" are here described again in the context of our numerical engine.
+
+In all of these models, we are concerned with emission from a homogeneous spherical region with radius :math:`R`,
+magnetic field :math:`B`, and an electron distribution :math:`N(\gamma)`, which is usually chosen to be a power-law.
+Additionally, the surface of the source may be expanding with bulk Lorentz-factor :math:`\Gamma_{\rm bulk}` and
+the source may be at a cosmological redshift :math:`z`.
+
+Tradiationally, (see :ref:`synch_sed_theory`) the SEDs in this scenario are computed analytically by means of
+a fairly complex case-by-case analysis of the relative ordering of the characteristic frequencies
+:math:`\nu_a`, :math:`\nu_m`, and :math:`\nu_c`. In contrast, the numerical engine described here computes
+the SEDs by directly evaluating the emissivity and absorption coefficient at each frequency and then applying
+the radiative transfer solution, without any assumptions about the relative ordering of the characteristic frequencies.
+This means that the numerical SEDs are more accurate and flexible than the classical models, but they also
+require more computational resources to evaluate.
+
+The Non-Relativistic Model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the non-relativistic limit, we consider a spherical region which appears on the sky as a disk with solid angle
+
+.. math::
+
+    \Omega = \frac{\pi R^2 f_A}{D_A^2},
+
+where :math:`D_A` is the angular diameter distance to the source, and :f:`f_A` is a geometric factor which accounts for
+the fact that the effective area of the source may be smaller than :math:`\pi R^2` (e.g. if the source is a
+thin shell rather than a filled sphere).
+
+As is done in the analytic case, we ignore limb-darkening effects and assume that every sightline through the
+source has the same depth :math:`\ell`. To compute the depth :math:`\ell`, we assume that the source is a sphere of
+radius :math:`R` with a volume filling factor :math:`f_V` (i.e. the emitting plasma fills a fraction :math:`f_V` of
+the volume of the sphere). The depth is then given by
+
+.. math::
+
+    \ell = f_V^{1/3} R.
+
+From this, the specific intensity at the surface of the source may be computed and used to determine
+the flux density as described above. In the non-relativistic limit, we ignore bulk motion of the source.
+
+
+The Ultra-Relativistic Model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+Composite Models
+------------------
+
+Having now described the physics of the one-zone slab model in detail, we may now consider how to use this formalism
+to build more complex models. These models are referred to as **composite models** in the codebase, and they are built
+by summing together multiple instances of the single-zone slab model described above.
+
+The Inhomogeneous Cylinder Model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+One very simple instance of a composite model is that of the so-called **inhomogeneous cylinder**. In this model,
+we consider an emitting region composed of **edge-on, nested cylinders** of varying radii, each with its own
+electron distribution, depth, and magnetic field strength.
+
+.. note::
+
+    For clarity, we restrict the bulk-velocity in this case to be perpendicular to the line of sight, corresponding
+    to expansion of the different shells. This will, of course, mean that for ultra-relativistic outflows, the observer
+    will see a vanishingly small flux.
+
+As before, for a specific radius :math:`r`, one can easily compute the specific intensity :math:`I_\nu(r)` as described
+above. The corresponding flux density contribution from this radius is just
+
+.. math::
+
+    dF_\nu = \frac{2\pi r\,dr}{D_A^2}\,I_\nu(r),
+
+and the total flux density is then given by integrating over the radius:
+
+.. math::
+
+    F_\nu = \int_0^R \frac{2\pi r}{D_A^2}\,I_\nu(r)\,dr.
+
+By discretizing the radius into a set of :math:`n_r` annuli, this integral can be evaluated as a sum:
+
+.. math::
+
+    F_\nu \approx \sum_{j=1}^{n_r} \frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j).
+
+.. dropdown:: Algorithmic Details
+
+    Algorithmically, we implement this model using a single grid of :math:`\gamma_i` values shared among all radii.
+    The user may then supply a grid of radii, :math:`r_k`, along with values for the magnetic field :math:`B_k`,
+    the electron distribution :math:`N_{ik} = N(\gamma_i, r_k)`, and the depth :math:`\ell_k` at each radius.
+
+    We then compute the specific intensity :math:`I_\nu(r_k)` at each radius using the single-zone slab model
+    described above, and sum over radii to get the total flux density.
+
+The Aspherical Shell Model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Another simple case in which the composite model formalism is useful is that of an aspherical shell. Consider
+an emitting surface such that, for any angular position relative to the observer :math:`(\theta, \phi)`, the depth
+of the emitting region, its magnetic field strength, and its electron distribution are all
+functions of :math:`\theta` and :math:`\phi`.
+
+Assuming the observer is located at :math:`\theta = 0`, a region at :math:`(\theta, \phi)` will contribute a
+surface element of area :math:`dA = R^2 \sin\theta\,d\theta\,d\phi` to the observed flux density, and the specific
+intensity from this region can be computed using the single-zone slab model as described above. The total flux
+density is then given by integrating over the surface of the shell:
+
+.. math::
+
+    F_\nu = \int_0^{2\pi} \int_0^\pi \frac{R^2 \sin\theta}{D_A^2}\,I_\nu(\theta, \phi)\,d\theta\,d\phi.
+
+To be as efficient as possible, we recognize that this integral may be written as
+
+.. math::
+
+    F_\nu = \int_{-1}^{1} d\mu \int_0^{2\pi} \frac{R^2}{D_A^2}\,I_\nu(\mu, \phi)\,d\phi,
+
+and we may therefore introduce Gauss-Legendre quadrature in :math:`\mu = \cos\theta` to evaluate the integral
+over :math:`\theta` with high accuracy using a small number of points. The integral over :math:`\phi` is
+then evaluated using a simple trapezoidal rule.
+
+In cases where there is an axis of symmetry, the memory load of the algorithm may be reduced; however,
+one still generally needs to compute the full 2D grid of :math:`I_\nu(\theta, \phi)` values to perform the integration,
+so the computational cost is not significantly reduced.
+
+The Axisymmetric Shell Model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A minor modification of the above model is that of an **axisymmetric shell**, where the observer is on-axis with
+the symmetry axis of the shell. In this case, the specific intensity is independent of :math:`\phi`, and the flux
+density is given by
+
+.. math::
+
+    F_\nu = \int_0^\pi \frac{2\pi R^2 \sin\theta}{D_A^2}\,I_\nu(\theta)\,d\theta.
+
+This integral can again be evaluated using Gauss-Legendre quadrature in :math:`\mu = \cos\theta` as described above.
+
+
 .. rubric:: References
 
 .. footbibliography::
