@@ -427,7 +427,7 @@ def compute_log_N0_fast_cooling(
     The first moment is computed in scaled units x = γ / γ_c.
     """
     log_moment = np.log(
-        BrokenPowerLaw.moment(1, p1=2.0, p2=p + 1.0, gamma_b=gamma_min, gamma_min=gamma_c, gamma_max=gamma_max)
+        BrokenPowerLaw.moment(1, p1=2.0, p2=p + 1.0, gamma_c=gamma_min, gamma_min=gamma_c, gamma_max=gamma_max)
     )
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 
@@ -450,7 +450,7 @@ def compute_log_N0_slow_cooling(
         slope -(p+1) for γ > γ_c
     """
     log_moment = np.log(
-        BrokenPowerLaw.moment(1, p1=p, p2=p + 1.0, gamma_b=gamma_c, gamma_min=gamma_min, gamma_max=gamma_max)
+        BrokenPowerLaw.moment(1, p1=p, p2=p + 1.0, gamma_c=gamma_c, gamma_min=gamma_min, gamma_max=gamma_max)
     )
     log_prefactor = np.log(epsilon_e) - np.log(epsilon_B) - np.log(8.0 * np.pi) - np.log(electron_rest_energy_cgs)
 

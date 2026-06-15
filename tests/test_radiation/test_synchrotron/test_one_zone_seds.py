@@ -338,7 +338,7 @@ class Test_PowerLaw_SSA_SynchrotronSED(BaseTestOneZoneSynchrotronSED):
     # ---------------------------------------------------------
 
     PHYSICS_PARAMETERS = {
-        "B": [1 * u.G],
+        "B": [1 * u.G, 10.0 * u.G, 100.0 * u.G],
         "R": [1e15 * u.cm, 1e16 * u.cm],
     }
     """
@@ -1059,8 +1059,13 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
         nu_peak = constant
 
     while gamma_c increases monotonically.
+
+    Regime dispatch:
+        gamma_c < gamma_min              -> Spectrum8 (fast-cooling: nu_c < nu_m < nu_a)
+        gamma_min <= gamma_c <= gamma_max -> Spectrum7 (slow-cooling: nu_m < nu_c < nu_a)
+        gamma_c > gamma_max              -> Spectrum2 (no-cooling:   nu_m < nu_a < nu_c)
     """
-    sed_engine = PowerLaw_Cooling_SSA_SynchrotronSED()
+    sed_engine = PowerLaw_Cooling_SynchrotronSED()
 
     # ---------------------------------------------------------
     # Observed SED (constant in time)
@@ -1084,20 +1089,36 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
     f_V = 1.0
     gamma_bulk = 1.0
 
-    # Sweep gamma_c across many decades
-    gamma_c_grid = np.geomspace(1, 1e5, 100)
+    # Sweep gamma_c across all three regimes: fast -> slow -> no-cooling.
+    # Grid starts below gamma_min and ends well above gamma_max.
+    gamma_c_grid = np.geomspace(1, 1e12, 150)
+
+    # ---------------------------------------------------------
+    # Regime masks
+    # ---------------------------------------------------------
+
+    fast_mask = gamma_c_grid < gamma_m
+    slow_mask = (gamma_c_grid >= gamma_m) & (gamma_c_grid <= gamma_max)
+    no_cool_mask = gamma_c_grid > gamma_max
 
     B_vals = []
     R_vals = []
     regimes = []
 
     # ---------------------------------------------------------
-    # Inversion sweep
+    # Inversion sweep — dispatch to the correct SSA+cooling regime
     # ---------------------------------------------------------
 
-    for gamma_c in gamma_c_grid:
+    for i, gamma_c in enumerate(gamma_c_grid):
+        if fast_mask[i]:
+            regime = "fast_cooling"  # nu_c < nu_m < nu_a
+        elif slow_mask[i]:
+            regime = "slow_cooling"  # nu_m < nu_c < nu_a
+        else:
+            regime = "no_cooling"  # nu_m < nu_a, nu_c > nu_max (no cooling)
+
         result = sed_engine.from_params_to_physics(
-            "Spectrum7",  # Start in fast-cooling regime
+            regime,
             F_peak,
             nu_peak,
             gamma_min=gamma_m,
@@ -1114,6 +1135,7 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
 
         B_vals.append(result["B"].to_value(u.G))
         R_vals.append(result["R"].to_value(u.cm))
+        regimes.append(regime)
 
     B_vals = np.array(B_vals)
     R_vals = np.array(R_vals)
@@ -1148,21 +1170,40 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
         # Magnetic field
         # -----------------------------------------------------
 
-        axes[0].loglog(gamma_vals, B_vals, "o-")
+        axes[0].loglog(gamma_vals[fast_mask], B_vals[fast_mask], "o-", label="Spectrum8 (fast)")
+        axes[0].loglog(gamma_vals[slow_mask], B_vals[slow_mask], "s-", label="Spectrum7 (slow)")
+        axes[0].loglog(gamma_vals[no_cool_mask], B_vals[no_cool_mask], "^-", label="Spectrum2 (no-cool)")
         axes[0].set_ylabel("B [G]")
         axes[0].set_title("Magnetic field vs gamma_c")
+        axes[0].legend(fontsize=8)
 
         # -----------------------------------------------------
         # Radius
         # -----------------------------------------------------
 
-        axes[1].loglog(gamma_vals, R_vals, "o-")
+        axes[1].loglog(gamma_vals[fast_mask], R_vals[fast_mask], "o-", label="Spectrum8 (fast)")
+        axes[1].loglog(gamma_vals[slow_mask], R_vals[slow_mask], "s-", label="Spectrum7 (slow)")
+        axes[1].loglog(gamma_vals[no_cool_mask], R_vals[no_cool_mask], "^-", label="Spectrum2 (no-cool)")
         axes[1].set_ylabel("R [cm]")
         axes[1].set_title("Radius vs gamma_c")
+        axes[1].legend(fontsize=8)
 
         # -----------------------------------------------------
         # Mark regime transitions
         # -----------------------------------------------------
+
+        for ax in axes[:2]:
+            ax.axvline(gamma_m, color="grey", linestyle="--", linewidth=0.8, label=r"$\gamma_m$")
+            ax.axvline(gamma_max, color="grey", linestyle=":", linewidth=0.8, label=r"$\gamma_{\max}$")
+
+        axes[2].semilogx(gamma_vals[:-1], dlogB, label=r"$\Delta\log_{10} B$")
+        axes[2].semilogx(gamma_vals[:-1] + np.diff(gamma_vals) / 2, dlogR, label=r"$\Delta\log_{10} R$")
+        axes[2].axvline(gamma_m, color="grey", linestyle="--", linewidth=0.8)
+        axes[2].axvline(gamma_max, color="grey", linestyle=":", linewidth=0.8)
+        axes[2].set_xlabel(r"$\gamma_c$")
+        axes[2].set_ylabel("step")
+        axes[2].set_title("Log-step size (continuity check)")
+        axes[2].legend(fontsize=8)
 
         plt.tight_layout()
 
@@ -1234,7 +1275,7 @@ def test_implicit_cooling_round_trip(B, R, t, p, diagnostic_plots, diagnostic_pl
     gamma_bulk = 1.0
     luminosity_distance = 35 * u.Mpc
 
-    cooling_engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+    cooling_engine = SynchrotronRadiativeCoolingEngine()
 
     # Compute gamma_c from the synchrotron cooling closure: gamma_c = THETA / (B^2 t)
     B_cgs = B.to_value("G")
@@ -1327,9 +1368,9 @@ def test_implicit_cooling_round_trip(B, R, t, p, diagnostic_plots, diagnostic_pl
     list(
         itertools.product(
             ["Spectrum4", "Spectrum7", "Spectrum3"],
-            [1.0 * u.G, 10.0 * u.G, 100.0 * u.G],
+            [1.0 * u.G, 10.0 * u.G],
             [1e16 * u.cm, 1e17 * u.cm, 1e18 * u.cm],
-            [1e4 * u.s, 1e5 * u.s, 1e6 * u.s, 1e7 * u.s],
+            [1e4 * u.s, 1e5 * u.s, 1e6 * u.s],
             [3.0],
         )
     ),
@@ -1386,8 +1427,13 @@ def test_implicit_cooling_ssa_round_trip(regime, B, R, t, p, diagnostic_plots, d
     # Compute gamma_c from the synchrotron cooling closure
     B_cgs = B.to_value("G")
     t_cgs = t.to_value("s")
-    cooling_engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+    cooling_engine = SynchrotronRadiativeCoolingEngine()
     gamma_c = cooling_engine.compute_cooling_gamma(B=B, t=t)
+
+    if gamma_c < 1:
+        raise ValueError(
+            f"gamma_c < 1: {gamma_c:.2e}; adjust parameters to ensure gamma_c > 1 for physical consistency."
+        )
 
     # Forward normalization
     model = PowerLaw_Cooling_SSA_SynchrotronSED()

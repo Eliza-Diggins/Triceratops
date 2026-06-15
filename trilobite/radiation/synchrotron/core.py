@@ -9,8 +9,8 @@ kernels, and other low-level building blocks that are used across the codebase.
 
     :mod:`~trilobite.radiation.synchrotron.SEDs`: SEDs for synchrotron emitting regions.
 
-    :mod:`~trilobite.radiation.synchrotron.microphysics`: Microphysical distribution functions for
-    synchrotron-emitting electrons.
+    :mod:`~trilobite.radiation.synchrotron.electron_distributions`: Electron distribution classes
+    (power law, broken power law, Maxwell-Jüttner, mixed) for synchrotron-emitting electrons.
 
     :mod:`~trilobite.radiation.synchrotron.cooling`: Synchrotron cooling calculations and timescales.
 

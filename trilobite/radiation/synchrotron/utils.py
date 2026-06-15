@@ -3,7 +3,8 @@ General utilities for synchrotron radiation calculations.
 
 This module contains some catch-all utility functions for synchrotron radiation
 calculations, including functions to compute the :math:`c_5(p)` and :math:`c_6(p)` coefficients
-for synchrotron emissivity and absorption from a power-law population of electrons.
+for synchrotron emissivity and absorption from a power-law population of electrons. Most of the
+available utilities here are related to constants required for various synchrotron computations.
 """
 
 from typing import Union

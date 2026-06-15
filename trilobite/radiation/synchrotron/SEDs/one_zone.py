@@ -77,11 +77,7 @@ from trilobite.radiation.synchrotron.utils import (
 from trilobite.utils.log import trilobite_logger
 from trilobite.utils.misc_utils import ensure_in_units
 
-from ..microphysics import (
-    _opt_mixed_norm_from_magnetic_field,
-    _opt_MJD_norm_from_magnetic_field,
-    _opt_PL_norm_from_magnetic_field,
-)
+from ..electron_distributions import MaxwellJuettner, PowerLaw
 from ._one_zone_closure import SSA_INV_FUNCTION_REGISTRY
 from ._one_zone_functions import (
     COOLING_SED_FUNCTION_REGISTRY,
@@ -6205,7 +6201,7 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
 
     where :math:`N_0` is fixed by :math:`\epsilon_E / \epsilon_B` and the
     magnetic energy density
-    (see :func:`~trilobite.radiation.synchrotron.microphysics._opt_PL_norm_from_magnetic_field`).
+    (see :meth:`~trilobite.radiation.synchrotron.electron_distributions.PowerLaw._normalize_from_magnetic_field`).
 
     Parameters
     ----------
@@ -6326,11 +6322,11 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         """
         # Electron distribution normalization via equipartition.
         N0 = np.asarray(
-            _opt_PL_norm_from_magnetic_field(
-                B=B,
+            PowerLaw._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                epsilon_E,
                 p=p,
-                epsilon_B=epsilon_B,
-                epsilon_E=epsilon_E,
                 gamma_min=gamma_min,
                 gamma_max=gamma_max,
             ),
@@ -6516,7 +6512,7 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
 
     where :math:`\Theta = kT/(m_e c^2)` is the dimensionless electron
     temperature and :math:`N_{\rm therm}` is fixed by equipartition (see
-    :func:`~trilobite.radiation.synchrotron.microphysics._opt_MJD_norm_from_magnetic_field`).
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner._normalize_from_magnetic_field`).
 
     Parameters
     ----------
@@ -6628,11 +6624,11 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
             (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
         """
         N_therm = np.asarray(
-            _opt_MJD_norm_from_magnetic_field(
-                B=B,
+            MaxwellJuettner._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                epsilon_E,
                 Theta=Theta,
-                epsilon_B=epsilon_B,
-                epsilon_E=epsilon_E,
             ),
             dtype="f8",
         )
@@ -6808,7 +6804,7 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
     where the thermal fraction :math:`\delta` splits the total electron energy
     budget: :math:`\epsilon_{E,\rm therm} = \delta\,\epsilon_E` and
     :math:`\epsilon_{E,\rm PL} = (1-\delta)\,\epsilon_E` (see
-    :func:`~trilobite.radiation.synchrotron.microphysics._opt_mixed_norm_from_magnetic_field`).
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.MixedDistribution._normalize_from_magnetic_field`).
 
     Parameters
     ----------
@@ -6934,18 +6930,27 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
             :math:`\ln F_\nu` in CGS
             (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
         """
-        N_therm, N0_pl = _opt_mixed_norm_from_magnetic_field(
-            B=B,
-            Theta=Theta,
-            p=p,
-            delta=delta,
-            epsilon_B=epsilon_B,
-            epsilon_E=epsilon_E,
-            gamma_min=gamma_min,
-            gamma_max=gamma_max,
+        delta_arr = np.asarray(delta, dtype="f8")
+        N_therm = np.asarray(
+            MaxwellJuettner._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                delta_arr * epsilon_E,
+                Theta=Theta,
+            ),
+            dtype="f8",
         )
-        N_therm = np.asarray(N_therm, dtype="f8")
-        N0_pl = np.asarray(N0_pl, dtype="f8")
+        N0_pl = np.asarray(
+            PowerLaw._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                (1.0 - delta_arr) * epsilon_E,
+                p=p,
+                gamma_min=gamma_min,
+                gamma_max=gamma_max,
+            ),
+            dtype="f8",
+        )
 
         # Thermal component: Maxwell-Jüttner evaluated over the full grid.
         log_N_mjd = (
