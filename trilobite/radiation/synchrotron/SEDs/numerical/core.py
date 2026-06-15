@@ -73,8 +73,11 @@ from trilobite.utils.misc_utils import ensure_in_units
 # ================================================ #
 # CGS Constants                                    #
 # ================================================ #
-_log_c_cgs = consts.c.cgs.value
-_log_k_B_cgs = consts.k_B.cgs.value
+_log_c_cgs = np.log(consts.c.cgs.value)
+_log_k_B_cgs = np.log(consts.k_B.cgs.value)
+_FLOAT64_TINY = np.finfo("f8").tiny
+_LOG2 = np.log(2.0)
+_LOG_4PI = np.log(4.0 * np.pi)
 
 
 # ================================================ #
@@ -917,7 +920,7 @@ class NumericalSynchrotronEngine:
         log_sa_v = log_sin_alpha.reshape((1,) * n_nu_dims + zone_shape + (1,))
         log_g_v = log_gamma.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
 
-        log_x = log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs - log_sa_v
+        log_x = np.ascontiguousarray(log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs - log_sa_v)
 
         # Perform the interpolation step.
         log_F = np.interp(log_x.ravel(), self._log_x_first_kernel, self._log_first_kernel)
@@ -1029,7 +1032,7 @@ class NumericalSynchrotronEngine:
         log_sa_v = log_sin_alpha.reshape((1,) * n_nu_dims + zone_shape + (1,))
         log_g_v = log_gamma.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
 
-        log_x = log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs - log_sa_v
+        log_x = np.ascontiguousarray(log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs - log_sa_v)
 
         # Perform the interpolation step.
         log_F = np.interp(log_x.ravel(), self._log_x_first_kernel, self._log_first_kernel)
@@ -1037,7 +1040,7 @@ class NumericalSynchrotronEngine:
         d_log_F_d_log_x = np.interp(log_x.ravel(), self._log_x_first_kernel, self._log_dfirst_kernel_dlog_x)
         d_log_F_d_log_x = d_log_F_d_log_x.reshape(nu_shape + zone_shape + (n_gamma,))
 
-        log_kernel = log_F + np.log(np.maximum(1.0 - d_log_F_d_log_x, np.finfo("f8").tiny))
+        log_kernel = log_F + np.log(np.maximum(1.0 - d_log_F_d_log_x, _FLOAT64_TINY))
 
         # log_weights - log_gamma = log(d_log_gamma); integrand uses d_log_gamma measure.
         log_dloggamma = (log_weights - log_gamma).reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
@@ -1049,6 +1052,82 @@ class NumericalSynchrotronEngine:
         log_sa_bc = log_sin_alpha.reshape((1,) * n_nu_dims + zone_shape)
 
         return _log_chi_abs_cgs + log_B_bc + log_sa_bc - 2.0 * log_nu_bc + logsumexp(log_integrand, axis=-1)
+
+    def _compute_log_emissivity_and_absorption(
+        self,
+        log_nu: Union[float, np.ndarray],
+        log_B: Union[float, np.ndarray],
+        log_N: Union[float, np.ndarray],
+        log_gamma: Union[float, np.ndarray],
+        log_weights: Union[float, np.ndarray],
+        sin_alpha: Union[float, np.ndarray],
+    ) -> tuple[np.ndarray, np.ndarray]:
+        r"""
+        Compute :math:`\log j_\nu` and :math:`\log|\alpha_\nu|` in a single pass.
+
+        Fused version of :meth:`_compute_log_emissivity` and
+        :meth:`_compute_log_absorption_coefficient` that builds ``log_x`` and
+        evaluates both kernel interpolations once, eliminating the redundant array
+        construction relative to calling the two methods separately. Parameters and
+        return semantics match those of the constituent methods.
+
+        Returns
+        -------
+        log_emissivity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+            :math:`\log j_\nu` in CGS.
+        log_absorption : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+            :math:`\log|\alpha_\nu|` in CGS.
+        """
+        log_nu = np.asarray(log_nu, dtype="f8")
+        log_B = np.asarray(log_B, dtype="f8")
+        log_gamma = np.asarray(log_gamma, dtype="f8")
+        log_N = np.asarray(log_N, dtype="f8")
+        log_weights = np.asarray(log_weights, dtype="f8")
+        log_sin_alpha = np.log(np.asarray(sin_alpha, dtype="f8"))
+
+        nu_shape = log_nu.shape
+        zone_shape = log_N.shape[:-1]
+        n_gamma = log_gamma.size
+        n_nu_dims = len(nu_shape)
+        n_zone_dims = len(zone_shape)
+
+        log_B = np.broadcast_to(log_B, zone_shape)
+        log_sin_alpha = np.broadcast_to(log_sin_alpha, zone_shape)
+
+        log_nu_v = log_nu.reshape(nu_shape + (1,) * n_zone_dims + (1,))
+        log_B_v = log_B.reshape((1,) * n_nu_dims + zone_shape + (1,))
+        log_sa_v = log_sin_alpha.reshape((1,) * n_nu_dims + zone_shape + (1,))
+        log_g_v = log_gamma.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
+
+        log_x = np.ascontiguousarray(log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs - log_sa_v)
+        log_x_flat = log_x.ravel()
+
+        log_F = np.interp(log_x_flat, self._log_x_first_kernel, self._log_first_kernel).reshape(
+            nu_shape + zone_shape + (n_gamma,)
+        )
+        d_log_F_d_log_x = np.interp(log_x_flat, self._log_x_first_kernel, self._log_dfirst_kernel_dlog_x).reshape(
+            nu_shape + zone_shape + (n_gamma,)
+        )
+
+        log_N_v = log_N.reshape((1,) * n_nu_dims + zone_shape + (n_gamma,))
+        log_w_v = log_weights.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
+        log_B_bc = log_B.reshape((1,) * n_nu_dims + zone_shape)
+        log_sa_bc = log_sin_alpha.reshape((1,) * n_nu_dims + zone_shape)
+
+        log_emissivity = logsumexp(log_F + log_N_v + log_w_v, axis=-1) + _log_chi_cgs + log_B_bc + log_sa_bc
+
+        log_kernel = log_F + np.log(np.maximum(1.0 - d_log_F_d_log_x, _FLOAT64_TINY))
+        log_dloggamma = (log_weights - log_gamma).reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
+        log_nu_bc = log_nu.reshape(nu_shape + (1,) * n_zone_dims)
+        log_absorption = (
+            _log_chi_abs_cgs
+            + log_B_bc
+            + log_sa_bc
+            - 2.0 * log_nu_bc
+            + logsumexp(log_kernel + log_N_v + log_dloggamma, axis=-1)
+        )
+
+        return log_emissivity, log_absorption
 
     def _compute_log_rf_specific_intensity(
         self,
@@ -1169,8 +1248,7 @@ class NumericalSynchrotronEngine:
         log_nu = np.asarray(log_nu, dtype="f8")
         log_slab_depth = np.asarray(log_slab_depth, dtype="f8")
 
-        log_emissivity = self._compute_log_emissivity(log_nu, log_B, log_N, log_gamma, log_weights, sin_alpha)
-        log_absorption = self._compute_log_absorption_coefficient(
+        log_emissivity, log_absorption = self._compute_log_emissivity_and_absorption(
             log_nu, log_B, log_N, log_gamma, log_weights, sin_alpha
         )
 
@@ -1598,7 +1676,7 @@ class NumericalSynchrotronEngine:
             sin_alpha,
         )
 
-        return 2.0 * _log_c_cgs + log_intensity - np.log(2.0) - _log_k_B_cgs - 2.0 * log_nu
+        return 2.0 * _log_c_cgs + log_intensity - _LOG2 - _log_k_B_cgs - 2.0 * log_nu
 
     def _compute_log_rf_brightness_temperature(
         self,
@@ -1694,7 +1772,7 @@ class NumericalSynchrotronEngine:
             sin_alpha,
         )
 
-        return 2.0 * _log_c_cgs + log_rf_intensity - np.log(2.0) - _log_k_B_cgs - 2.0 * log_nu
+        return 2.0 * _log_c_cgs + log_rf_intensity - _LOG2 - _log_k_B_cgs - 2.0 * log_nu
 
     def _compute_log_pa_emissivity(
         self,
@@ -1770,7 +1848,7 @@ class NumericalSynchrotronEngine:
         log_B_v = log_B.reshape((1,) * n_nu_dims + zone_shape + (1,))
         log_g_v = log_gamma.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
 
-        log_x = log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs
+        log_x = np.ascontiguousarray(log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs)
 
         log_F = np.interp(log_x.ravel(), self._log_x_avg_first_kernel, self._log_avg_first_kernel)
         log_F = log_F.reshape(nu_shape + zone_shape + (n_gamma,))
@@ -1873,14 +1951,14 @@ class NumericalSynchrotronEngine:
         log_B_v = log_B.reshape((1,) * n_nu_dims + zone_shape + (1,))
         log_g_v = log_gamma.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
 
-        log_x = log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs
+        log_x = np.ascontiguousarray(log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs)
 
         log_F = np.interp(log_x.ravel(), self._log_x_avg_first_kernel, self._log_avg_first_kernel)
         log_F = log_F.reshape(nu_shape + zone_shape + (n_gamma,))
         d_log_F_d_log_x = np.interp(log_x.ravel(), self._log_x_avg_first_kernel, self._log_davg_first_kernel_dlog_x)
         d_log_F_d_log_x = d_log_F_d_log_x.reshape(nu_shape + zone_shape + (n_gamma,))
 
-        log_kernel = log_F + np.log(np.maximum(1.0 - d_log_F_d_log_x, np.finfo("f8").tiny))
+        log_kernel = log_F + np.log(np.maximum(1.0 - d_log_F_d_log_x, _FLOAT64_TINY))
 
         log_dloggamma = (log_weights - log_gamma).reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
         log_N_v = log_N.reshape((1,) * n_nu_dims + zone_shape + (n_gamma,))
@@ -1890,6 +1968,73 @@ class NumericalSynchrotronEngine:
         log_B_bc = log_B.reshape((1,) * n_nu_dims + zone_shape)
 
         return _log_chi_abs_cgs + log_B_bc - 2.0 * log_nu_bc + logsumexp(log_integrand, axis=-1)
+
+    def _compute_log_pa_emissivity_and_absorption(
+        self,
+        log_nu: Union[float, np.ndarray],
+        log_B: Union[float, np.ndarray],
+        log_N: Union[float, np.ndarray],
+        log_gamma: Union[float, np.ndarray],
+        log_weights: Union[float, np.ndarray],
+    ) -> tuple[np.ndarray, np.ndarray]:
+        r"""
+        Compute pitch-angle-averaged :math:`\log j_\nu` and :math:`\log|\alpha_\nu|` in a single pass.
+
+        Fused version of :meth:`_compute_log_pa_emissivity` and
+        :meth:`_compute_log_pa_absorption_coefficient` that builds ``log_x`` and
+        evaluates both averaged-kernel interpolations once, eliminating the redundant
+        array construction relative to calling the two methods separately. Parameters
+        and return semantics match those of the constituent methods.
+
+        Returns
+        -------
+        log_emissivity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+            :math:`\log j_\nu` in CGS.
+        log_absorption : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+            :math:`\log|\alpha_\nu|` in CGS.
+        """
+        log_nu = np.asarray(log_nu, dtype="f8")
+        log_B = np.asarray(log_B, dtype="f8")
+        log_gamma = np.asarray(log_gamma, dtype="f8")
+        log_N = np.asarray(log_N, dtype="f8")
+        log_weights = np.asarray(log_weights, dtype="f8")
+
+        nu_shape = log_nu.shape
+        zone_shape = log_N.shape[:-1]
+        n_gamma = log_gamma.size
+        n_nu_dims = len(nu_shape)
+        n_zone_dims = len(zone_shape)
+
+        log_B = np.broadcast_to(log_B, zone_shape)
+
+        log_nu_v = log_nu.reshape(nu_shape + (1,) * n_zone_dims + (1,))
+        log_B_v = log_B.reshape((1,) * n_nu_dims + zone_shape + (1,))
+        log_g_v = log_gamma.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
+
+        log_x = np.ascontiguousarray(log_nu_v - 2.0 * log_g_v - log_B_v - _log_c_1_gamma_cgs)
+        log_x_flat = log_x.ravel()
+
+        log_F = np.interp(log_x_flat, self._log_x_avg_first_kernel, self._log_avg_first_kernel).reshape(
+            nu_shape + zone_shape + (n_gamma,)
+        )
+        d_log_F_d_log_x = np.interp(
+            log_x_flat, self._log_x_avg_first_kernel, self._log_davg_first_kernel_dlog_x
+        ).reshape(nu_shape + zone_shape + (n_gamma,))
+
+        log_N_v = log_N.reshape((1,) * n_nu_dims + zone_shape + (n_gamma,))
+        log_w_v = log_weights.reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
+        log_B_bc = log_B.reshape((1,) * n_nu_dims + zone_shape)
+
+        log_emissivity = logsumexp(log_F + log_N_v + log_w_v, axis=-1) + _log_chi_cgs + log_B_bc
+
+        log_kernel = log_F + np.log(np.maximum(1.0 - d_log_F_d_log_x, _FLOAT64_TINY))
+        log_dloggamma = (log_weights - log_gamma).reshape((1,) * (n_nu_dims + n_zone_dims) + (n_gamma,))
+        log_nu_bc = log_nu.reshape(nu_shape + (1,) * n_zone_dims)
+        log_absorption = (
+            _log_chi_abs_cgs + log_B_bc - 2.0 * log_nu_bc + logsumexp(log_kernel + log_N_v + log_dloggamma, axis=-1)
+        )
+
+        return log_emissivity, log_absorption
 
     def _compute_log_pa_rf_specific_intensity(
         self,
@@ -1976,8 +2121,9 @@ class NumericalSynchrotronEngine:
         log_nu = np.asarray(log_nu, dtype="f8")
         log_slab_depth = np.asarray(log_slab_depth, dtype="f8")
 
-        log_emissivity = self._compute_log_pa_emissivity(log_nu, log_B, log_N, log_gamma, log_weights)
-        log_absorption = self._compute_log_pa_absorption_coefficient(log_nu, log_B, log_N, log_gamma, log_weights)
+        log_emissivity, log_absorption = self._compute_log_pa_emissivity_and_absorption(
+            log_nu, log_B, log_N, log_gamma, log_weights
+        )
 
         log_sd_v = log_slab_depth[(np.newaxis,) * log_nu.ndim]
 
@@ -2248,7 +2394,7 @@ class NumericalSynchrotronEngine:
             log_weights,
         )
 
-        return 2.0 * _log_c_cgs + log_rf_intensity - np.log(2.0) - _log_k_B_cgs - 2.0 * log_nu
+        return 2.0 * _log_c_cgs + log_rf_intensity - _LOG2 - _log_k_B_cgs - 2.0 * log_nu
 
     def _compute_log_pa_brightness_temperature(
         self,
@@ -2316,7 +2462,7 @@ class NumericalSynchrotronEngine:
             cos_theta,
         )
 
-        return 2.0 * _log_c_cgs + log_intensity - np.log(2.0) - _log_k_B_cgs - 2.0 * log_nu
+        return 2.0 * _log_c_cgs + log_intensity - _LOG2 - _log_k_B_cgs - 2.0 * log_nu
 
     # ------------------------------------------ #
     # Grid and Distribution Helpers
@@ -2356,9 +2502,10 @@ class NumericalSynchrotronEngine:
         """
         if gamma is not None:
             log_gamma = np.log(np.asarray(gamma, dtype="f8"))
+            log_weights = log_gamma + np.log(np.gradient(log_gamma))
         else:
             log_gamma = np.linspace(np.log(gamma_min), np.log(gamma_max), n_gamma)
-        log_weights = log_gamma + np.log(np.gradient(log_gamma))
+            log_weights = log_gamma + np.log(log_gamma[1] - log_gamma[0])
         return log_gamma, log_weights
 
     def _resolve_log_N(
@@ -2603,14 +2750,7 @@ class NumericalSynchrotronEngine:
 
         if alpha is None:
             self.ensure_avg_first_kernel_loaded()
-            log_j = self._compute_log_pa_emissivity(
-                np.log(nu_cgs),
-                np.log(B_cgs),
-                log_N,
-                log_gamma,
-                log_weights,
-            )
-            log_a = self._compute_log_pa_absorption_coefficient(
+            log_j, log_a = self._compute_log_pa_emissivity_and_absorption(
                 np.log(nu_cgs),
                 np.log(B_cgs),
                 log_N,
@@ -2620,15 +2760,7 @@ class NumericalSynchrotronEngine:
         else:
             self.ensure_first_kernel_loaded()
             sin_alpha = np.sin(ensure_in_units(alpha, u.rad))
-            log_j = self._compute_log_emissivity(
-                np.log(nu_cgs),
-                np.log(B_cgs),
-                log_N,
-                log_gamma,
-                log_weights,
-                sin_alpha,
-            )
-            log_a = self._compute_log_absorption_coefficient(
+            log_j, log_a = self._compute_log_emissivity_and_absorption(
                 np.log(nu_cgs),
                 np.log(B_cgs),
                 log_N,
@@ -3219,7 +3351,7 @@ class NumericalSynchrotronEngine:
             )
 
         log_A_v = log_A[(np.newaxis,) * log_nu.ndim]
-        log_L = np.log(4.0 * np.pi) + log_A_v + log_I
+        log_L = _LOG_4PI + log_A_v + log_I
         return np.exp(log_L) * (u.erg / (u.s * u.Hz))
 
     def compute_luminosity_density(
@@ -3351,7 +3483,7 @@ class NumericalSynchrotronEngine:
             )
 
         log_A_v = log_A[(np.newaxis,) * log_nu.ndim]
-        log_L_rf = np.log(4.0 * np.pi) + log_A_v + log_I_rf
+        log_L_rf = _LOG_4PI + log_A_v + log_I_rf
         log_L = log_L_rf + 3.0 * log_correction_factor
         return np.exp(log_L) * (u.erg / (u.s * u.Hz))
 
@@ -3506,5 +3638,5 @@ class NumericalSynchrotronEngine:
                 sin_alpha=sin_alpha,
             )
 
-        log_L_iso = np.log(4.0 * np.pi) + 2.0 * np.log(D_L_cgs) + log_F
+        log_L_iso = _LOG_4PI + 2.0 * np.log(D_L_cgs) + log_F
         return np.exp(log_L_iso) * (u.erg / (u.s * u.Hz))
