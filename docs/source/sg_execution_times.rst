@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:01.047** total execution time for 57 files **from all galleries**:
+**00:00.003** total execution time for 57 files **from all galleries**:
 
 .. container::
 
@@ -32,9 +32,6 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_on_axis_numerical.py` (``galleries/synchrotron/b_seds/plot_on_axis_numerical.py``)
-     - 00:01.043
-     - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
      - 00:00.003
      - 0.0
@@ -177,6 +174,9 @@ Computation times
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py` (``galleries/synchrotron/b_seds/plot_multi_component_numerical_SED.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_on_axis_numerical.py` (``galleries/synchrotron/b_seds/plot_on_axis_numerical.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_sed_model_comparison.py` (``galleries/synchrotron/b_seds/plot_sed_model_comparison.py``)

@@ -39,7 +39,34 @@ Overview
 
 Even in the **analytical theory** of synchrotron emission, the fundamental building blocks are the emissivity and
 absorption coefficients, which can be represented as **integrals over fundamental kernels** (see :ref:`synchrotron_theory`).
-For a population of relativistic electrons with number density :math:`dN/d\gamma = N(\gamma)` spiraling in a magnetic
+
+To be as specific as possible in our construction, we will first consider the case of emission from a **single region**
+subject to the following geometric / physical assumptions:
+
+1. The source is a **homogeneous slab** of thickness :math:`\ell` along the line of sight with a uniform magnetic field
+   strength :math:`B`.
+2. The electron distribution is **homogeneous** throughout the source and is described by a distribution function
+   :math:`N(\gamma)`, where :math:`\gamma` is the electron Lorentz factor.
+3. The source moves with a **bulk Lorentz** factor :math:`\Gamma_{\rm bulk}` at an angle :math:`\theta_{\rm obs}` to the
+   line of sight, resulting in a Doppler factor :math:`\delta = [\Gamma (1 - \beta \cos \theta_{\rm obs})]^{-1}`.
+4. The source is located at a **luminosity distance** :math:`d_L` from the observer and is observed at a corresponding
+   redshift :math:`z`. This also implies an angular diameter distance :math:`d_A = d_L / (1 + z)^2` and **corresponding
+   angular size** :math:`d\Omega = A / d_A^2`, where :math:`A` is the physical area of the source on the plane of the sky.
+
+Under these assumptions, the observed SED can be computed by integrating the radiative transfer equation along
+the line of sight through the source, which reduces to a simple expression in terms of the emissivity :math:`j_\nu`
+and absorption coefficient :math:`\alpha_\nu`. This will be the starting point for our model.
+
+
+Absorption and Emission Coefficients
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. note::
+
+    Unless otherwise stated, we will work in the comoving frame of the source, where the bulk motion
+    is zero. Relativistic transformations to the observer frame will be applied at the end of the calculation.
+
+For a population of relativistic electrons with (rest-frame) number density :math:`dN/d\gamma = N(\gamma)` spiraling in a magnetic
 field :math:`B` at a pitch angle :math:`\alpha` to the field, the emissivity is given by (see e.g. :footcite:t:`RybickiLightman`,
 Chapter 6; :footcite:t:`lu_2026_18603474`, Chapter 8;
 :footcite:t:`ghisellini2013radiative`, Chapter 4):
@@ -77,6 +104,8 @@ so efficient computation demands that it be pre-tabulated and interpolated.
 The following sections describe the methods by which Trilobite achieves these calculations with a high
 degree of fidelity and numerical stability, including the handling of asymptotic regimes, the use of log-space quadrature,
 and the application of integration by parts to simplify the absorption coefficient integral.
+
+----
 
 Synchrotron Kernels
 -------------------
@@ -213,14 +242,22 @@ In Trilobite, the exact Bessel-function form is used in the intermediate
 regime, while the asymptotic limits are applied at small and large
 :math:`x` to ensure numerical stability and efficiency.
 
-.. _sec_emissivity:
 
-Computing the Emissivity
--------------------------
+
+Computing Radiative Quantities
+--------------------------------
 
 To avoid repeated evaluation of the synchrotron kernels, Trilobite precomputes a table of these values on
-a configurable grid of :math:`x` values. Then for any given frequency :math:`\nu`, magnetic field strength :math:`B`, and pitch angle :math:`\alpha`,
-the kernel can be interpolated rapidly to determine the correct value of :math:`F(x)` for each electron Lorentz factor :math:`\gamma` in the distribution.
+a configurable grid of :math:`x` values. Then for any given frequency :math:`\nu`, magnetic field
+strength :math:`B`, and pitch angle :math:`\alpha`,
+the kernel can be interpolated rapidly to determine the correct value of :math:`F(x)` for each electron
+Lorentz factor :math:`\gamma` in the distribution.
+From this, we can rapidly evaluate various radiative quantities of interest.
+
+.. _sec_emissivity:
+
+Emissivity
+^^^^^^^^^^^
 
 With the kernel interpolator in hand, the emissivity integral
 
@@ -246,8 +283,8 @@ serves as the **quadrature weight** and is precomputed once for a given grid.
 
 .. _sec_absorption:
 
-Computing the Absorption Coefficient
--------------------------------------
+Absorption
+^^^^^^^^^^
 
 The standard expression for the self-absorption coefficient,
 
@@ -329,7 +366,7 @@ where the additional :math:`-\ln\gamma_i` converts the quadrature weights :math:
 into pure :math:`d\!\ln\gamma` spacings :math:`\Delta\!\ln\gamma_i`, as required by the IBP form of the integral.
 
 The Radiative Transfer Solution
---------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once the emissivity and absorption coefficient have been evaluated at each frequency, the specific intensity
 emerging from a homogeneous, spherical source is given by the solution to the one-dimensional radiative transfer
@@ -371,14 +408,14 @@ redshift of the source. The relativistic Doppler factor is
 
 .. math::
 
-    \mathcal{D} = \frac{1}{\Gamma_{\rm bulk}\,\bigl(1 + \beta\cos\theta\bigr)},
+    \mathcal{D} = \frac{1}{\Gamma_{\rm bulk}\,\bigl(1 - \beta\cos\theta\bigr)},
 
 where :math:`\Gamma_{\rm bulk} = (1 - \beta^2)^{-1/2}` is the bulk Lorentz factor. The combined
 Doppler-plus-redshift correction factor is
 
 .. math::
 
-    \mathcal{C} = \frac{\mathcal{D}}{1 + z} = \frac{1}{\Gamma_{\rm bulk}\,(1+\beta\cos\theta)\,(1+z)}.
+    \mathcal{C} = \frac{\mathcal{D}}{1 + z} = \frac{1}{\Gamma_{\rm bulk}\,(1-\beta\cos\theta)\,(1+z)}.
 
 The relationship between the **observed** frequency :math:`\nu_{\rm obs}` and the **rest-frame** frequency
 :math:`\nu_{\rm rf}` is
