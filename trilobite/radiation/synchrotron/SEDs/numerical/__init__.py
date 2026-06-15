@@ -12,26 +12,20 @@ See Also
 :mod:`trilobite.radiation.synchrotron.SEDs.numerical.aspherical`
     On-axis axisymmetric (aspherical) multi-zone engine.
 :mod:`trilobite.radiation.synchrotron.SEDs.numerical.one_zone`
-    Spherical one-zone geometry wrappers and high-level SED classes.
+    Non-relativistic and ultra-relativistic spherical geometry wrappers.
 :mod:`trilobite.radiation.synchrotron.SEDs.one_zone`
-    Analytic one-zone SED models for power-law electron populations.
+    Analytic and numerical one-zone SED models.
 """
 
 from .aspherical import OnAxisAsymmetricSynchrotronEngine
 from .core import NumericalSynchrotronEngine
 from .one_zone import (
     NonRelativisticSphericalSynchrotronEngine,
-    Numerical_PL_SSA_SED,
-    Numerical_Thermal_PL_SSA_SED,
-    Numerical_Thermal_SSA_SED,
     UltraRelativisticSphericalSynchrotronEngine,
 )
 
 __all__ = [
     "NumericalSynchrotronEngine",
-    "Numerical_PL_SSA_SED",
-    "Numerical_Thermal_SSA_SED",
-    "Numerical_Thermal_PL_SSA_SED",
     "NonRelativisticSphericalSynchrotronEngine",
     "UltraRelativisticSphericalSynchrotronEngine",
     "OnAxisAsymmetricSynchrotronEngine",
