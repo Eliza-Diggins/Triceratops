@@ -1,5 +1,3 @@
-.. _synchrotron_gallery:
-
 *****************************
 Synchrotron Emission Examples
 *****************************

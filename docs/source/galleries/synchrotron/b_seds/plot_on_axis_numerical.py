@@ -1,6 +1,6 @@
 r"""
 On-Axis Asymmetric Synchrotron SEDs
-==================================
+=====================================
 
 Most synchrotron models treat the emitting region as a single homogeneous
 zone. The
@@ -31,10 +31,7 @@ from matplotlib.colors import Normalize
 from trilobite.radiation.synchrotron.SEDs.numerical import (
     OnAxisAsymmetricSynchrotronEngine,
 )
-from trilobite.radiation.synchrotron.microphysics import (
-    compute_PL_norm_from_magnetic_field,
-    get_PL_distribution,
-)
+from trilobite.radiation.synchrotron.electron_distributions import PowerLaw
 from trilobite.utils.plot_utils import set_plot_style
 
 # %%
@@ -144,25 +141,18 @@ gamma_max = 1e8
 epsilon_e = 0.1
 epsilon_B = 0.1
 
-norm = compute_PL_norm_from_magnetic_field(
+norm = PowerLaw.normalize_from_magnetic_field(
     B,
-    p,
-    epsilon_e,
     epsilon_B,
-    gamma_min=gamma_min,
-    gamma_max=gamma_max,
-)
-
-distribution = get_PL_distribution(
-    gamma_min=gamma_min,
-    gamma_max=gamma_max,
+    epsilon_e,
     p=p,
-    norm=norm,
+    gamma_min=gamma_min,
+    gamma_max=gamma_max,
 )
 
 gamma = np.geomspace(gamma_min, gamma_max, 1000)
 
-N_gamma = distribution(gamma[:, None]).T
+N_gamma = norm.to_value(u.cm**-3)[:, None] * PowerLaw.pdf(gamma, p=p, gamma_min=gamma_min, gamma_max=gamma_max)
 
 # %%
 # Computing the SED
