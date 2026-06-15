@@ -784,7 +784,7 @@ Letting
 
 .. math::
 
-    c_{5,\rm ISO}(p) = c_5(p) \Gamma\left(\frac{p+5}{4}\right) \Gamma^{-1}\left(\frac{p+7}{4}\right),
+    c_{5,\rm ISO}(p) = c_5(p) \frac{\sqrt{\pi}}{2} \Gamma\left(\frac{p+5}{4}\right) \Gamma^{-1}\left(\frac{p+7}{4}\right),
 
 the angle-averaged emissivity for an isotropic distribution of pitch angles is
 
@@ -1703,6 +1703,15 @@ With this, the absorption coefficient for a power-law distribution of electrons 
     is said to be “dominated” by electrons satisfying :math:`\nu \sim \nu_m(\gamma)`. The statement
     refers to the *support of the absorption integral*, not to the emission spectrum of those electrons.
 
+.. hint::
+
+    As we did for the emission coefficient, the absorption can be modified to account for an isotropic distribution of
+    pitch angles by averaging over the distribution. This results in a modified :math:`c_6(p)` constant:
+
+    .. math::
+
+        c_{6,\rm ISO}(p) = c_6(p) \frac{\sqrt{\pi}}{2} \frac{\Gamma\left(\frac{p+6}{4}\right)}{\Gamma\left(\frac{p+8}{4}\right)}.
+
 Recalling that the emissivity for a power-law distribution of electrons is
 
 .. math::
@@ -1717,6 +1726,26 @@ We have the all-important source function
 
     S_\nu = \frac{j_\nu}{\alpha_\nu} =
     \frac{c_5(p)}{c_6(p)} (B\sin\alpha)^{-1/2} \left(\frac{\nu}{2 c_1}\right)^{5/2}.
+
+.. hint::
+
+    In the pitch-angle averaged case, the *effective* source function
+    entering the radiative-transfer equation is the ratio of the
+    pitch-angle averaged emissivity and absorption coefficient,
+
+    .. math::
+
+        \overline{S}_\nu
+        =
+        \frac{\left<j_\nu\right>}{\left<\alpha_\nu\right>}
+        =
+        \frac{c_{5,\rm ISO}(p)}{c_{6,\rm ISO}(p)}
+        B^{-1/2}
+        \left(\frac{\nu}{2 c_1}\right)^{5/2}.
+
+    This is not, in general, the same as the pitch-angle average of the
+    fixed-angle source function, :math:`\left<S_\nu(\alpha)\right>`.
+
 
 From our discussion in the previous section, we know that
 
