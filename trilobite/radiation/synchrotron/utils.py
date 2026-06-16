@@ -500,3 +500,40 @@ def compute_c6_parameter(
         return float(c6)
 
     return c6
+
+
+def compute_c5c6_ratio(
+    p: Union[float, np.ndarray] = 3.0,
+    pitch_average: bool = False,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the ratio of the synchrotron emissivity and absorption coefficients :math:`c_5(p)/c_6(p)`.
+
+    This ratio appears in expressions for the synchrotron source function of a power-law electron distribution
+    and is useful for computing the SSA frequency in terms of the SED normalization and other physical parameters.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz-factor distribution,
+
+        .. math::
+
+            N(\Gamma) \propto \Gamma^{-p}.
+
+        Default is ``3.0``.
+    pitch_average : bool, optional
+        If ``False``, the computed ratio does not include the effect of isotropic pitch-angle averaging. If
+        ``True``, the ratio includes the isotropic pitch-angle averaging factors for both :math:`c_5(p)` and
+        :math:`c_6(p)`, so that the returned value is appropriate for use
+        when pitch-angle-averaged synchrotron emissivities and absorption coefficients are assumed.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The ratio :math:`c_5(p)/c_6(p)` in CGS units. If ``p`` is array-like, the returned value has the broadcast
+        shape of ``p``.
+    """
+    c5 = compute_c5_parameter(p=p, pitch_average=pitch_average)
+    c6 = compute_c6_parameter(p=p, pitch_average=pitch_average)
+    return c5 / c6
