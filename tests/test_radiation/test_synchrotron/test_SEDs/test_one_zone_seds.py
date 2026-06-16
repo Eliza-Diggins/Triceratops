@@ -7,6 +7,8 @@ from astropy import units as u
 
 from trilobite.radiation.synchrotron.cooling import SynchrotronRadiativeCoolingEngine
 from trilobite.radiation.synchrotron.SEDs import (
+    Numerical_PowerLaw_Cooling_SSA_SynchrotronSED,
+    Numerical_PowerLaw_SSA_SynchrotronSED,
     PowerLaw_Cooling_SSA_SynchrotronSED,
     PowerLaw_Cooling_SynchrotronSED,
     PowerLaw_SSA_SynchrotronSED,
@@ -1651,3 +1653,237 @@ def test_demarchi_round_trip(B, R, d, p, diagnostic_plots, diagnostic_plots_dir)
         fname = f"demarchi_rt_B{B.to_value('G'):.2e}_R{R.to_value('cm'):.2e}_d{d.to_value('Mpc'):.0f}Mpc_p{p}.png"
         plt.savefig(diagnostic_plots_dir / fname)
         plt.close()
+
+
+# ── Analytic vs Numerical SED comparison ─────────────────────────────────────
+# These four tests compare analytic (closed-form) one-zone SEDs against the
+# numerical radiative-transfer engine.  The analytic models use the
+# delta-function synchrotron kernel; the numerical engine integrates the full
+# Bessel-function kernel.  Both use the same equipartition normalization, so
+# differences isolate the kernel approximation (and, where applicable, the
+# treatment of SSA).
+#
+# All four tests are marked xfail(strict=False): failure is expected but
+# diagnostic plots are always saved so the discrepancies can be inspected.
+
+_CMP_D_L = 10.0 * u.Mpc
+_CMP_P = 3.0
+_CMP_GAMMA_MIN = 1
+_CMP_GAMMA_MAX = 1e7
+_CMP_EPS_E = 0.1
+_CMP_EPS_B = 0.1
+_CMP_F_V = 1.0
+_CMP_F_A = 1.0
+_CMP_GAMMA_BULK = 1.0
+_CMP_FREQ_GRID = np.logspace(7, 18, 300) * u.Hz
+
+_CMP_BR_PARAMS = [
+    (0.1 * u.G, 1e17 * u.cm),
+    (1.0 * u.G, 1e16 * u.cm),
+    (0.5 * u.G, 5e16 * u.cm),
+]
+_CMP_BRT_PARAMS = [
+    (0.1 * u.G, 1e17 * u.cm, 1e7 * u.s),
+    (1.0 * u.G, 1e16 * u.cm, 1e5 * u.s),
+    (0.5 * u.G, 5e16 * u.cm, 1e6 * u.s),
+]
+
+
+def _cmp_plot(axes, nu, F_analytic, F_numeric, title, label_a, label_n, diagnostic_plots_dir, fname):
+    from trilobite.utils.plot_utils import set_plot_style
+
+    set_plot_style()
+
+    nu_Hz = nu.to_value(u.Hz)
+    F_a = F_analytic.to_value(u.Jy)
+    F_n = F_numeric.to_value(u.Jy)
+
+    axes[0].loglog(nu_Hz, F_a, label=label_a, lw=2)
+    axes[0].loglog(nu_Hz, F_n, label=label_n, lw=2, ls="--")
+    axes[0].set_ylabel("Flux [Jy]")
+    axes[0].set_title(title)
+    axes[0].legend()
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = np.where(F_n > 0, F_a / F_n, np.nan)
+    axes[1].semilogx(nu_Hz, ratio)
+    axes[1].axhline(1.0, color="k", ls="--", lw=0.8)
+    axes[1].set_xlabel("Frequency [Hz]")
+    axes[1].set_ylabel("Analytic / Numeric")
+    axes[1].set_ylim(0, 10)
+
+    plt.tight_layout()
+    plt.savefig(diagnostic_plots_dir / fname)
+    plt.close()
+
+
+@pytest.mark.xfail(
+    strict=False, reason="Analytic vs numerical comparison; disagreement expected due to kernel approximation"
+)
+@pytest.mark.parametrize(
+    "B,R",
+    _CMP_BR_PARAMS,
+    ids=["B0.1_R1e17", "B1.0_R1e16", "B0.5_R5e16"],
+)
+def test_analytic_vs_numeric_ssa(B, R, diagnostic_plots, diagnostic_plots_dir):
+    r"""
+    Compare :class:`PowerLaw_SSA_SynchrotronSED` (analytic) against
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED` (full numerical RT).
+
+    Both models include synchrotron self-absorption but differ in the
+    synchrotron emissivity kernel: the analytic model uses the delta-function
+    (monochromatic) approximation, while the numerical engine integrates the
+    full Bessel function.  The SSA frequency :math:`\nu_a` is fed to the
+    analytic model via the ``omega`` solid-angle parameter returned by
+    :meth:`~PowerLaw_SSA_SynchrotronSED.from_physics_to_params`.
+    """
+    nu = _CMP_FREQ_GRID
+
+    analytic = PowerLaw_SSA_SynchrotronSED()
+    phys_params = analytic.from_physics_to_params(
+        B,
+        R,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_max=_CMP_GAMMA_MAX,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_E=_CMP_EPS_E,
+        epsilon_B=_CMP_EPS_B,
+        gamma_bulk=_CMP_GAMMA_BULK,
+        luminosity_distance=_CMP_D_L,
+        pitch_average=True,
+    )
+    F_analytic = analytic.sed(
+        nu,
+        nu_m=phys_params["nu_m"],
+        F_norm=phys_params["F_norm"],
+        omega=phys_params["omega"],
+        gamma_m=_CMP_GAMMA_MIN,
+        p=_CMP_P,
+    )
+
+    numeric = Numerical_PowerLaw_SSA_SynchrotronSED()
+    F_numeric = numeric.sed(
+        nu,
+        B,
+        R,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_B=_CMP_EPS_B,
+        epsilon_E=_CMP_EPS_E,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_max=_CMP_GAMMA_MAX,
+        luminosity_distance=_CMP_D_L,
+    )
+
+    if diagnostic_plots:
+        fig, axes = plt.subplots(2, 1, figsize=(8, 8), sharex=True)
+        _cmp_plot(
+            axes,
+            nu,
+            F_analytic,
+            F_numeric,
+            title=f"SSA: B={B:.2g}, R={R:.2g}",
+            label_a="Analytic SSA",
+            label_n="Numerical SSA",
+            diagnostic_plots_dir=diagnostic_plots_dir,
+            fname=f"cmp_ssa_B{B.to_value('G'):.2e}_R{R.to_value('cm'):.2e}.png",
+        )
+
+    assert np.allclose(
+        F_analytic.to_value(u.Jy),
+        F_numeric.to_value(u.Jy),
+        rtol=0.2,
+    ), "Analytic and numerical SSA SEDs disagree by more than 20%."
+
+
+@pytest.mark.xfail(
+    strict=False, reason="Analytic vs numerical comparison; disagreement expected due to kernel approximation"
+)
+@pytest.mark.parametrize(
+    "B,R,t",
+    _CMP_BRT_PARAMS,
+    ids=["B0.1_R1e17_t1e7", "B1.0_R1e16_t1e5", "B0.5_R5e16_t1e6"],
+)
+def test_analytic_vs_numeric_ssa_cooling(B, R, t, diagnostic_plots, diagnostic_plots_dir):
+    r"""
+    Compare :class:`PowerLaw_Cooling_SSA_SynchrotronSED` (analytic) against
+    :class:`Numerical_PowerLaw_Cooling_SSA_SynchrotronSED` (full numerical RT).
+
+    Both models include SSA and a cooling break.  The analytic model uses the
+    delta-function synchrotron kernel; the numerical engine integrates the full
+    Bessel function.  :math:`\gamma_c` is derived from ``t`` via
+    :math:`\gamma_c = \Theta / (B^2 t)`.  The solid-angle ``omega`` needed by
+    the analytic SED is taken directly from
+    :meth:`~PowerLaw_Cooling_SSA_SynchrotronSED.from_physics_to_params`.
+    """
+    nu = _CMP_FREQ_GRID
+
+    cooling_engine = SynchrotronRadiativeCoolingEngine()
+    gamma_c = cooling_engine.compute_cooling_gamma(B=B, t=t)
+    if gamma_c < 1.0:
+        pytest.skip(f"gamma_c={gamma_c:.2e} < 1; unphysical combination.")
+
+    analytic = PowerLaw_Cooling_SSA_SynchrotronSED()
+    phys_params = analytic.from_physics_to_params(
+        B,
+        R,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_c=gamma_c,
+        gamma_max=_CMP_GAMMA_MAX,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_E=_CMP_EPS_E,
+        epsilon_B=_CMP_EPS_B,
+        gamma_bulk=_CMP_GAMMA_BULK,
+        luminosity_distance=_CMP_D_L,
+        pitch_average=True,
+    )
+    F_analytic = analytic.sed(
+        nu,
+        nu_m=phys_params["nu_m"],
+        nu_c=phys_params["nu_c"],
+        F_norm=phys_params["F_norm"],
+        omega=phys_params["omega"],
+        gamma_m=_CMP_GAMMA_MIN,
+        p=_CMP_P,
+    )
+
+    numeric = Numerical_PowerLaw_Cooling_SSA_SynchrotronSED()
+    F_numeric = numeric.sed(
+        nu,
+        t,
+        B,
+        R,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_B=_CMP_EPS_B,
+        epsilon_E=_CMP_EPS_E,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_max=_CMP_GAMMA_MAX,
+        luminosity_distance=_CMP_D_L,
+    )
+
+    if diagnostic_plots:
+        fig, axes = plt.subplots(2, 1, figsize=(8, 8), sharex=True)
+        _cmp_plot(
+            axes,
+            nu,
+            F_analytic,
+            F_numeric,
+            title=f"SSA+Cooling: B={B:.2g}, R={R:.2g}, t={t:.2g}, regime={phys_params['regime']}",
+            label_a="Analytic SSA+cooling",
+            label_n="Numerical SSA+cooling",
+            diagnostic_plots_dir=diagnostic_plots_dir,
+            fname=f"cmp_ssa_cooling_B{B.to_value('G'):.2e}_R{R.to_value('cm'):.2e}_t{t.to_value('s'):.2e}.png",
+        )
+
+    assert np.allclose(
+        F_analytic.to_value(u.Jy),
+        F_numeric.to_value(u.Jy),
+        rtol=0.2,
+    ), f"Analytic and numerical SSA+cooling SEDs disagree by more than 20%. regime={phys_params['regime']}"
