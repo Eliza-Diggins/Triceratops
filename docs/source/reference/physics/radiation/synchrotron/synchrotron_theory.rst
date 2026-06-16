@@ -509,7 +509,7 @@ and :math:`x = \frac{\omega}{\omega_c}`.
 .. note::
 
     This is *not* a typo: :math:`\eta = \frac{\omega}{2\omega_c}` in the previous section, but here we have
-    :math::`x = \frac{\omega}{\omega_c}`.
+    :math:`x = \frac{\omega}{\omega_c}`.
 
 Summing these two contributions, the total power radiated per unit frequency is
 
@@ -809,6 +809,226 @@ the angle-averaged emissivity for an isotropic distribution of pitch angles is
             c_{\rm 5, ISO}(p)\,N_{0,E}
             \left(B\right)^{(p+1)/2}
             \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}.
+
+Asymptotic Limits
+~~~~~~~~~~~~~~~~~~
+
+So far, we have actually ignored the presence of :math:`\gamma_{\min}` and :math:`\gamma_{\max}` in the electron
+distribution. In practice, these cutoffs can have a significant effect on the observed synchrotron spectrum,
+especially if the observing frequency is near the characteristic frequencies associated with these cutoffs.
+
+Let's consider the emissivity in the **low-frequency limit** where :math:`\nu \ll \nu_{m}`, where :math:`\nu_{m}` is
+the characteristic frequency associated with electrons at the minimum Lorentz factor :math:`\gamma_{\min}`. The resulting
+emissivity is
+
+.. math::
+
+    j_\nu = c_5^{(L)}(p) N_0 (m_e c^2)^{-1} \left(B \sin \alpha\right)^{2/3} \gamma_{\rm min}^{(1-3p)/3} \nu^{1/3},
+
+where
+
+.. math::
+
+    c_5^{(L)}(p) = \frac{e^3 c_{1,\gamma}^{-1/3}}{(p-1/3) 2^{1/3} \Gamma(1/3)}
+
+.. dropdown:: Derivation
+
+    We start from the general expression for the emissivity:
+
+    .. math::
+
+        j_{\nu}
+        =
+        \frac{\sqrt{3} e^3 B \sin \alpha}{4\pi m_e c^2}
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        N(\gamma)
+        F\!\left(\frac{\nu}{\nu_c}\right)
+        d\gamma,
+
+    where
+
+    .. math::
+
+        \nu_c
+        =
+        c_{1,\gamma} B \sin\alpha\,\gamma^2
+
+    is the characteristic synchrotron frequency for an electron with Lorentz factor
+    :math:`\gamma`. For a power-law electron distribution,
+
+    .. math::
+
+        N(\gamma) = N_0 \gamma^{-p},
+
+    so
+
+    .. math::
+
+        j_{\nu}
+        =
+        \frac{\sqrt{3} e^3 B \sin \alpha}{4\pi m_e c^2}
+        N_0
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p}
+        F\!\left(
+        \frac{\nu}
+        {c_{1,\gamma} B\sin\alpha\,\gamma^2}
+        \right)
+        d\gamma.
+
+    We now specialize to the low-frequency limit
+    :math:`\nu \ll \nu_m`, where
+
+    .. math::
+
+        \nu_m = c_{1,\gamma}B\sin\alpha\,\gamma_{\min}^2.
+
+    In this regime,
+
+    .. math::
+
+        \frac{\nu}{\nu_c(\gamma)} \ll 1
+
+    for all electrons in the distribution. We may therefore use the low-frequency
+    asymptotic form of the synchrotron kernel,
+
+    .. math::
+
+        F(x) \simeq
+        \frac{2^{5/3}\pi}{\sqrt{3}\Gamma(1/3)}
+        x^{1/3},
+        \qquad x\ll 1.
+
+    Substituting
+
+    .. math::
+
+        x =
+        \frac{\nu}
+        {c_{1,\gamma}B\sin\alpha\,\gamma^2}
+
+    gives
+
+    .. math::
+
+        F\!\left(
+        \frac{\nu}
+        {c_{1,\gamma}B\sin\alpha\,\gamma^2}
+        \right)
+        \simeq
+        \frac{2^{5/3}\pi}{\sqrt{3}\Gamma(1/3)}
+        \left(
+        \frac{\nu}
+        {c_{1,\gamma}B\sin\alpha\,\gamma^2}
+        \right)^{1/3}.
+
+    The emissivity therefore becomes
+
+    .. math::
+
+        j_{\nu}
+        \simeq
+        \frac{\sqrt{3} e^3 B \sin \alpha}{4\pi m_e c^2}
+        N_0
+        \frac{2^{5/3}\pi}{\sqrt{3}\Gamma(1/3)}
+        \left(
+        \frac{\nu}
+        {c_{1,\gamma}B\sin\alpha}
+        \right)^{1/3}
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-2/3}
+        d\gamma.
+
+    Collecting the frequency and magnetic-field factors,
+
+    .. math::
+
+        j_{\nu}
+        \simeq
+        \frac{e^3}{m_e c^2}
+        \frac{c_{1,\gamma}^{-1/3}}
+        {2^{1/3}\Gamma(1/3)}
+        N_0
+        \left(B\sin\alpha\right)^{2/3}
+        \nu^{1/3}
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-2/3}
+        d\gamma.
+
+    The remaining Lorentz-factor integral is
+
+    .. math::
+
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-2/3}
+        d\gamma
+        =
+        \frac{
+        \gamma_{\min}^{1/3-p}
+        -
+        \gamma_{\max}^{1/3-p}
+        }
+        {p - 1/3}.
+
+    Thus,
+
+    .. math::
+
+        j_{\nu}
+        \simeq
+        \frac{e^3}{m_e c^2}
+        \frac{c_{1,\gamma}^{-1/3}}
+        {2^{1/3}\Gamma(1/3)}
+        \frac{
+        \gamma_{\min}^{1/3-p}
+        -
+        \gamma_{\max}^{1/3-p}
+        }
+        {p - 1/3}
+        N_0
+        \left(B\sin\alpha\right)^{2/3}
+        \nu^{1/3}.
+
+    For :math:`p>1/3` and :math:`\gamma_{\max}\gg\gamma_{\min}`, the upper-limit
+    term is negligible, leaving
+
+    .. math::
+
+        j_{\nu}
+        \simeq
+        \frac{e^3 c_{1,\gamma}^{-1/3}}
+        {(p-1/3)2^{1/3}\Gamma(1/3)}
+        N_0
+        (m_e c^2)^{-1}
+        \left(B\sin\alpha\right)^{2/3}
+        \gamma_{\min}^{1/3-p}
+        \nu^{1/3}.
+
+    Identifying the coefficient multiplying the dimensional factors gives
+
+    .. math::
+
+        c_5^{(L)}(p)
+        =
+        \frac{e^3 c_{1,\gamma}^{-1/3}}
+        {(p-1/3)2^{1/3}\Gamma(1/3)},
+
+    and therefore
+
+    .. math::
+
+        j_\nu
+        =
+        c_5^{(L)}(p)
+        N_0
+        (m_e c^2)^{-1}
+        \left(B \sin \alpha\right)^{2/3}
+        \gamma_{\min}^{(1-3p)/3}
+        \nu^{1/3}.
+
+In practice, one is most often interested in scenarios where only the :math:`\nu^{1/3}` scaling is relevant; however,
+we will see that this result arises again in the context of synchrotron self-absorption.
+
 
 Thermal Electrons
 ^^^^^^^^^^^^^^^^^
@@ -1792,6 +2012,290 @@ The details of how :math:`\ell` should be determined are a matter of dynamics an
     any set of assumptions about the behavior of the underlying electrons, the corresponding SSA frequency may be quite
     different.
 
+It is also worth mentioning the case for :math:`\nu \ll nu_{\rm min}`` where
+:math:`\nu_{\rm min} = \nu_m(\gamma_{\rm min})` is the characteristic synchrotron frequency of the
+lowest-energy electrons in the distribution. In this case, it can be shown that
+
+.. math::
+
+    \alpha_\nu = c_6^{(L)}(p) N_0 (m_e^2 c^2)^{-1} (B\sin\alpha)^{2/3} \gamma_{\rm min}^{-(3p+2)/3)} \nu^{-5/3}.
+
+.. dropdown:: Derivation
+
+    We start from the general expression for the synchrotron self-absorption
+    coefficient,
+
+    .. math::
+
+        \alpha_\nu
+        =
+        -\frac{1}{8\pi m_e \nu^2}
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        P_\nu(\gamma)\,
+        \gamma^2
+        \frac{\partial}{\partial\gamma}
+        \left[
+            \frac{N(\gamma)}{\gamma^2}
+        \right]
+        d\gamma.
+
+    For a power-law electron distribution,
+
+    .. math::
+
+        N(\gamma) = N_0 \gamma^{-p},
+
+    the derivative term becomes
+
+    .. math::
+
+        \gamma^2
+        \frac{\partial}{\partial\gamma}
+        \left[
+            \frac{N_0\gamma^{-p}}{\gamma^2}
+        \right]
+        =
+        \gamma^2
+        \frac{\partial}{\partial\gamma}
+        \left[
+            N_0\gamma^{-p-2}
+        \right]
+        =
+        -(p+2)N_0\gamma^{-p-1}.
+
+    Therefore,
+
+    .. math::
+
+        \alpha_\nu
+        =
+        \frac{(p+2)N_0}{8\pi m_e\nu^2}
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        P_\nu(\gamma)\gamma^{-p-1}\,d\gamma.
+
+    We now specialize to the low-frequency limit
+    :math:`\nu \ll \nu_{\min}`, where
+
+    .. math::
+
+        \nu_{\min}
+        =
+        c_{1,\gamma}B\sin\alpha\,\gamma_{\min}^2.
+
+    In this regime, every electron in the distribution is observed on the
+    low-frequency tail of its single-electron synchrotron spectrum, so
+
+    .. math::
+
+        \frac{\nu}{\nu_c(\gamma)} \ll 1
+
+    for all :math:`\gamma \geq \gamma_{\min}`. We may therefore use the
+    asymptotic form of the synchrotron kernel,
+
+    .. math::
+
+        F(x)
+        \simeq
+        \frac{2^{5/3}\pi}{\sqrt{3}\Gamma(1/3)}
+        x^{1/3},
+        \qquad x\ll 1.
+
+    The single-electron synchrotron power is
+
+    .. math::
+
+        P_\nu(\gamma)
+        =
+        \frac{\sqrt{3}e^3B\sin\alpha}{m_ec^2}
+        F\!\left(
+            \frac{\nu}{c_{1,\gamma}B\sin\alpha\,\gamma^2}
+        \right).
+
+    Substituting the low-frequency kernel gives
+
+    .. math::
+
+        P_\nu(\gamma)
+        \simeq
+        \frac{\sqrt{3}e^3B\sin\alpha}{m_ec^2}
+        \frac{2^{5/3}\pi}{\sqrt{3}\Gamma(1/3)}
+        \left(
+            \frac{\nu}
+            {c_{1,\gamma}B\sin\alpha\,\gamma^2}
+        \right)^{1/3}.
+
+    Rearranging the frequency, magnetic-field, and Lorentz-factor dependence,
+
+    .. math::
+
+        P_\nu(\gamma)
+        \simeq
+        \frac{2^{5/3}\pi e^3}{m_ec^2\Gamma(1/3)}
+        c_{1,\gamma}^{-1/3}
+        \left(B\sin\alpha\right)^{2/3}
+        \nu^{1/3}
+        \gamma^{-2/3}.
+
+    Inserting this into the absorption coefficient yields
+
+    .. math::
+
+        \alpha_\nu
+        \simeq
+        \frac{(p+2)N_0}{8\pi m_e\nu^2}
+        \frac{2^{5/3}\pi e^3}{m_ec^2\Gamma(1/3)}
+        c_{1,\gamma}^{-1/3}
+        \left(B\sin\alpha\right)^{2/3}
+        \nu^{1/3}
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-1}\gamma^{-2/3}\,d\gamma.
+
+    The remaining integral is
+
+    .. math::
+
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-5/3}\,d\gamma
+        =
+        \frac{
+            \gamma_{\min}^{-(p+2/3)}
+            -
+            \gamma_{\max}^{-(p+2/3)}
+        }
+        {p+2/3}.
+
+    Equivalently,
+
+    .. math::
+
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-5/3}\,d\gamma
+        =
+        \frac{3}{3p+2}
+        \left[
+            \gamma_{\min}^{-(3p+2)/3}
+            -
+            \gamma_{\max}^{-(3p+2)/3}
+        \right].
+
+    For :math:`p>-2/3` and :math:`\gamma_{\max}\gg\gamma_{\min}`, the
+    upper-limit term is negligible, giving
+
+    .. math::
+
+        \int_{\gamma_{\min}}^{\gamma_{\max}}
+        \gamma^{-p-5/3}\,d\gamma
+        \simeq
+        \frac{3}{3p+2}
+        \gamma_{\min}^{-(3p+2)/3}.
+
+    Thus,
+
+    .. math::
+
+        \alpha_\nu
+        \simeq
+        \frac{
+            e^3 c_{1,\gamma}^{-1/3} 3(p+2)
+        }{
+            2^{4/3}\Gamma(1/3)(3p+2)
+        }
+        N_0
+        (m_e^2c^2)^{-1}
+        \left(B\sin\alpha\right)^{2/3}
+        \gamma_{\min}^{-(3p+2)/3}
+        \nu^{-5/3}.
+
+    Identifying the coefficient multiplying the dimensional factors,
+
+    .. math::
+
+        c_6^{(L)}(p)
+        =
+        \frac{
+            e^3 c_{1,\gamma}^{-1/3} 3(p+2)
+        }{
+            2^{4/3}\Gamma(1/3)(3p+2)
+        },
+
+    we obtain
+
+    .. math::
+
+        \alpha_\nu
+        =
+        c_6^{(L)}(p)
+        N_0
+        (m_e^2 c^2)^{-1}
+        \left(B\sin\alpha\right)^{2/3}
+        \gamma_{\min}^{-(3p+2)/3}
+        \nu^{-5/3}.
+
+    Combining this with the corresponding low-frequency emissivity,
+
+    .. math::
+
+        j_\nu
+        =
+        c_5^{(L)}(p)
+        N_0
+        (m_ec^2)^{-1}
+        \left(B\sin\alpha\right)^{2/3}
+        \gamma_{\min}^{(1-3p)/3}
+        \nu^{1/3},
+
+    the source function is
+
+    .. math::
+
+        S_\nu
+        =
+        \frac{j_\nu}{\alpha_\nu}
+        =
+        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
+        m_e
+        \gamma_{\min}
+        \nu^2.
+
+    Evaluating the ratio of constants gives
+
+    .. math::
+
+        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
+        =
+        \frac{2(3p+2)}{(p+2)(3p-1)},
+
+    and therefore
+
+    .. math::
+
+        S_\nu
+        =
+        \frac{2(3p+2)}{(p+2)(3p-1)}
+        m_e
+        \gamma_{\min}
+        \nu^2.
+
+    This is the expected :math:`S_\nu\propto\nu^2` source function for
+    the optically thick spectrum below the characteristic frequency of the
+    lowest-energy electrons.
+
+The corresponding source function is
+
+.. math::
+
+    S_\nu = \frac{j_\nu}{\alpha_\nu} = \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)} m_e \gamma_{\rm min} \nu^2,
+
+which (on evaluating the constants) is
+
+.. math::
+
+    S_\nu = \frac{2(3p+2)}{(p+2)(3p-1)} m_e \gamma_{\rm min} \nu^2.
+
+.. hint::
+
+    It can be shown that this is also the case for isotropic pitch-angle distributions.
+
 SSA In Thermal Electron Distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1853,108 +2357,59 @@ Approximate Methods
 ~~~~~~~~~~~~~~~~~~~
 
 While the above treatment of the SSA frequency is precise, it is complicated by the fact that one must specify
-the detailed electron distribution (including any stratification due to radiative cooling) in order to evaluate
-:math:`\tau_\nu = \int \alpha_\nu\,d\ell`.  A widely used alternative is therefore to determine the self-absorption
-frequency :math:`\nu_a` by matching the asymptotic optically thin and optically thick fluxes across the turnover
-(e.g. CITATIONS).
-
-The key observation is that at frequencies where the source is optically thick (:math:`\tau_\nu \gg 1`), the
-emergent intensity approaches the local synchrotron source function,
+the detailed electron distribution, including any cooling breaks or spatial stratification, in order to evaluate
 
 .. math::
 
-    I_\nu \approx S_\nu \equiv \frac{j_\nu}{\alpha_\nu},
+    \tau_\nu = \int \alpha_\nu\,d\ell.
 
-evaluated at the depth where :math:`\tau_\nu \sim 1`.  At a fixed observing frequency :math:`\nu`, synchrotron
-emission and absorption are dominated by electrons in a narrow range of Lorentz factors.  Motivated by this,
-we first consider a mono-energetic electron population with Lorentz factor :math:`\gamma_0` and number density
-:math:`n_e`, i.e.
+A common alternative is to estimate the self-absorption frequency by matching the asymptotic optically thin and
+optically thick fluxes across the turnover. This approach does not attempt to compute the full absorption
+coefficient directly. Instead, it uses an approximate source function for the optically thick side and determines
+the frequency at which that optically thick branch intersects the optically thin SED.
 
-.. math::
+In Trilobite, we implement this idea using an **effective power-law approximation**. The central assumption is that
+the electrons which dominate synchrotron absorption near :math:`\nu_a` sample a single local segment of the electron
+distribution. We therefore replace the true distribution, only for the purpose of estimating :math:`\nu_a`, by an
+effective power law with index :math:`p_{\rm eff}`.
 
-    N(\gamma) = n_e\,\delta(\gamma-\gamma_0).
-
-For an isotropic distribution, the synchrotron emissivity and absorption coefficient may be written (RL / CITATION)
-
-.. math::
-
-    j_\nu = \frac{1}{4\pi}\int d\gamma\,N(\gamma)\,P_\nu(\gamma),
+For an uncooled population, or when :math:`\nu_a` lies below the cooling break, we take
 
 .. math::
 
-    \alpha_\nu = -\frac{1}{8\pi m_e \nu^2}\int d\gamma\,P_\nu(\gamma)\,\gamma^2
-    \frac{\partial}{\partial\gamma}\left[\frac{N(\gamma)}{\gamma^2}\right],
+    p_{\rm eff} = p.
 
-where :math:`P_\nu(\gamma)` is the single-electron synchrotron power per unit frequency.  Substituting the
-mono-energetic form yields
-
-.. math::
-
-    j_\nu = \frac{n_e}{4\pi}\,P_\nu(\gamma_0),
-
-and
+When :math:`\nu_a` lies above the cooling break and the absorbing electrons are expected to sample the cooled portion
+of the distribution, we instead take
 
 .. math::
 
-    \alpha_\nu
+    p_{\rm eff} = p + 1,
+
+for standard synchrotron cooling.
+
+With this approximation, the optically thick flux is estimated from the power-law synchrotron source function,
+
+.. math::
+
+    F_\nu^{\rm thick}
     =
-    \frac{n_e}{8\pi m_e \nu^2}
-    \left[
-      \frac{\partial P_\nu}{\partial\gamma}
-      +\frac{2}{\gamma}P_\nu
-    \right]_{\gamma=\gamma_0}.
+    \Omega S_\nu(p_{\rm eff}),
 
-The corresponding source function is therefore
+where :math:`\Omega` is the effective angular emitting area. The absorption frequency is then obtained from the
+matching condition
 
 .. math::
 
-    S_\nu \equiv \frac{j_\nu}{\alpha_\nu}
+    F_{\nu}^{\rm thin}(\nu_a)
     =
-    2 m_e \nu^2\,
-    \frac{P_\nu(\gamma_0)}
-    {\left[\frac{\partial P_\nu}{\partial\gamma}+\frac{2}{\gamma}P_\nu\right]_{\gamma=\gamma_0}}.
+    \Omega S_{\nu_a}(p_{\rm eff}).
 
-For a smooth synchrotron kernel :math:`P_\nu(\gamma)`, the combination in the denominator varies on a fractional
-Lorentz-factor scale :math:`\Delta\gamma/\gamma \sim \mathcal{O}(1)`, implying
-:math:`\partial P_\nu/\partial\gamma \sim P_\nu/\gamma` up to factors of order unity.  Hence the ratio above is
-:math:`\sim \gamma_0` (again up to factors of order unity), and we may write the optically thick source function as
-
-.. math::
-
-    S_\nu(\gamma_0) \sim \frac{2C_s}{c^2} \nu^2 \gamma_0 m_e c^2,
-
-where :math:`C_S = \mathcal{O}(1)` absorbs kernel- and pitch-angle-dependent constants.  This is simply the
-Rayleigh--Jeans form with an effective (brightness) temperature :math:`kT_{\rm eff}\sim \gamma_0 m_e c^2`.
-
-If the emitting region subtends projected area :math:`A` on the sky, the optically thick flux at :math:`\nu`
-is then
-
-.. math::
-
-    F_\nu^{\rm (thick)}(\nu)
-    \approx
-    \frac{A}{D^2}\,S_\nu
-    \sim
-    \frac{2\nu^2}{c^2}\gamma_0 m_e c^2 \frac{A}{D^2},
-
-with :math:`C_{\rm thick}=\mathcal{O}(1)`.
-
-To apply this to synchrotron self-absorption, we identify :math:`\gamma_0` with the characteristic electron
-Lorentz factor dominating emission and absorption at :math:`\nu=\nu_a` (denoted :math:`\gamma_a`), so that
-:math:`F_\nu^{\rm (thick)}(\nu_a)` is determined by :math:`S_\nu(\gamma_a)`.  The self-absorption frequency
-may then be obtained by matching the optically thick and optically thin asymptotic fluxes at the turnover,
-
-.. math::
-
-    F_\nu^{\rm (thick)}(\nu_a) \approx F_\nu^{\rm (thin)}(\nu_a),
-
-where :math:`F_\nu^{\rm (thin)}` is computed from the appropriate optically thin spectral segment for the
-problem at hand.  This yields an algebraic equation for :math:`\nu_a`.
-
-.. note::
-
-    Given that this approach is only approximate, it is often customary to absorb the various order-unity
-    constants into a single fudge factor as described above. This **includes** pitch averaging effects.
+This procedure should be interpreted as an asymptotic estimate of the self-absorption break, not as an exact
+solution of the radiative-transfer problem. It is expected to be most accurate when :math:`\nu_a` lies well inside a
+single power-law segment of the electron distribution. It becomes less reliable when :math:`\nu_a` lies close to
+another spectral break, such as :math:`\nu_m` or :math:`\nu_c`, or when cooling produces strong spatial
+stratification in the absorbing material.
 
 
 References
