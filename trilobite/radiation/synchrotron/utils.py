@@ -540,3 +540,263 @@ def compute_c5c6_ratio(
     c5 = compute_c5_parameter(p=p, pitch_average=pitch_average)
     c6 = compute_c6_parameter(p=p, pitch_average=pitch_average)
     return c5 / c6
+
+
+def compute_c5_low_frequency_parameter(
+    p: Union[float, np.ndarray] = 3.0,
+    pitch_average: bool = False,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the low-frequency synchrotron emissivity coefficient :math:`c_5^{(L)}(p)`.
+
+    This coefficient appears in the asymptotic emissivity below the
+    characteristic frequency of the lowest-energy electrons,
+
+    .. math::
+
+        \nu \ll \nu_m,
+
+    where
+
+    .. math::
+
+        \nu_m = c_{1,\gamma} B\sin\alpha\,\gamma_{\min}^2.
+
+    For a truncated power-law electron population,
+
+    .. math::
+
+        N(\gamma) = N_0 \gamma^{-p},
+        \qquad
+        \gamma_{\min} \leq \gamma \leq \gamma_{\max},
+
+    the low-frequency emissivity is
+
+    .. math::
+
+        j_\nu
+        =
+        c_5^{(L)}(p)
+        N_0
+        (m_e c^2)^{-1}
+        \left(B\sin\alpha\right)^{2/3}
+        \gamma_{\min}^{(1-3p)/3}
+        \nu^{1/3},
+
+    assuming :math:`\gamma_{\max}\gg\gamma_{\min}` and :math:`p>1/3`.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz-factor distribution.
+        Default is ``3.0``.
+    pitch_average : bool, optional
+        If ``False``, return the fixed-pitch-angle coefficient, leaving the
+        factor :math:`(B\sin\alpha)^{2/3}` explicit.
+
+        If ``True``, multiply by the isotropic pitch-angle average of
+        :math:`\sin^{2/3}\alpha`, so that the emissivity should be written
+        with :math:`B^{2/3}` rather than :math:`(B\sin\alpha)^{2/3}`.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The low-frequency emissivity coefficient :math:`c_5^{(L)}(p)` in CGS
+        units. If ``p`` is array-like, the returned value has the broadcast
+        shape of ``p``.
+    """
+    p = np.asarray(p)
+
+    c5_low = (
+        constants.e.esu.cgs.value**3
+        * c_1_gamma_cgs ** (-1.0 / 3.0)
+        / ((p - 1.0 / 3.0) * 2.0 ** (1.0 / 3.0) * gamma_func(1.0 / 3.0))
+    )
+
+    if pitch_average:
+        # Isotropic pitch-angle average of sin(alpha)^(2/3).
+        pitch_angle_factor = 0.5 * np.sqrt(np.pi) * gamma_func(4.0 / 3.0) / gamma_func(11.0 / 6.0)
+        c5_low *= pitch_angle_factor
+
+    if c5_low.ndim == 0:
+        return float(c5_low)
+
+    return c5_low
+
+
+def compute_c6_low_frequency_parameter(
+    p: Union[float, np.ndarray] = 3.0,
+    pitch_average: bool = False,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the low-frequency synchrotron self-absorption coefficient :math:`c_6^{(L)}(p)`.
+
+    This coefficient appears in the asymptotic self-absorption coefficient
+    below the characteristic frequency of the lowest-energy electrons,
+
+    .. math::
+
+        \nu \ll \nu_m.
+
+    For a truncated power-law electron population,
+
+    .. math::
+
+        N(\gamma) = N_0 \gamma^{-p},
+        \qquad
+        \gamma_{\min} \leq \gamma \leq \gamma_{\max},
+
+    the low-frequency absorption coefficient is
+
+    .. math::
+
+        \alpha_\nu
+        =
+        c_6^{(L)}(p)
+        N_0
+        (m_e^2 c^2)^{-1}
+        \left(B\sin\alpha\right)^{2/3}
+        \gamma_{\min}^{-(3p+2)/3}
+        \nu^{-5/3},
+
+    assuming :math:`\gamma_{\max}\gg\gamma_{\min}` and :math:`p>-2/3`.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz-factor distribution.
+        Default is ``3.0``.
+    pitch_average : bool, optional
+        If ``False``, return the fixed-pitch-angle coefficient, leaving the
+        factor :math:`(B\sin\alpha)^{2/3}` explicit.
+
+        If ``True``, multiply by the isotropic pitch-angle average of
+        :math:`\sin^{2/3}\alpha`, so that the absorption coefficient should be
+        written with :math:`B^{2/3}` rather than
+        :math:`(B\sin\alpha)^{2/3}`.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The low-frequency absorption coefficient :math:`c_6^{(L)}(p)` in CGS
+        units. If ``p`` is array-like, the returned value has the broadcast
+        shape of ``p``.
+    """
+    p = np.asarray(p)
+
+    c6_low = (
+        constants.e.esu.cgs.value**3
+        * c_1_gamma_cgs ** (-1.0 / 3.0)
+        * 3.0
+        * (p + 2.0)
+        / (2.0 ** (4.0 / 3.0) * gamma_func(1.0 / 3.0) * (3.0 * p + 2.0))
+    )
+
+    if pitch_average:
+        # Isotropic pitch-angle average of sin(alpha)^(2/3).
+        pitch_angle_factor = 0.5 * np.sqrt(np.pi) * gamma_func(4.0 / 3.0) / gamma_func(11.0 / 6.0)
+        c6_low *= pitch_angle_factor
+
+    if c6_low.ndim == 0:
+        return float(c6_low)
+
+    return c6_low
+
+
+def compute_c5c6_low_frequency_ratio(
+    p: Union[float, np.ndarray] = 3.0,
+    pitch_average: bool = False,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the low-frequency source-function coefficient ratio :math:`c_5^{(L)}(p)/c_6^{(L)}(p)`.
+
+    This ratio appears in the low-frequency synchrotron source function,
+
+    .. math::
+
+        S_\nu^{(L)}
+        =
+        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
+        m_e \gamma_{\min} \nu^2.
+
+    Evaluating the ratio gives
+
+    .. math::
+
+        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
+        =
+        \frac{2(3p+2)}{(p+2)(3p-1)}.
+
+    The result is independent of pitch-angle averaging because the same
+    :math:`\langle\sin^{2/3}\alpha\rangle` factor multiplies both
+    :math:`c_5^{(L)}` and :math:`c_6^{(L)}`.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz-factor distribution.
+        Default is ``3.0``.
+    pitch_average : bool, optional
+        Accepted for API consistency with :func:`compute_c5_parameter` and
+        :func:`compute_c6_parameter`. The returned ratio is unchanged by this
+        argument.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The ratio :math:`c_5^{(L)}(p)/c_6^{(L)}(p)`.
+        If ``p`` is array-like, the returned value has the broadcast shape of
+        ``p``.
+    """
+    p = np.asarray(p)
+
+    ratio = 2.0 * (3.0 * p + 2.0) / ((p + 2.0) * (3.0 * p - 1.0))
+
+    if ratio.ndim == 0:
+        return float(ratio)
+
+    return ratio
+
+
+def compute_c6c5_low_frequency_ratio(
+    p: Union[float, np.ndarray] = 3.0,
+    pitch_average: bool = False,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the inverse low-frequency coefficient ratio :math:`c_6^{(L)}(p)/c_5^{(L)}(p)`.
+
+    This ratio is useful when solving the low-frequency SSA matching condition,
+
+    .. math::
+
+        F_{\rm norm}
+        \left(\frac{\nu_a}{\nu_m}\right)^{1/3}
+        =
+        \Omega
+        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
+        m_e\gamma_{\min}\nu_a^2,
+
+    for :math:`\nu_a`.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz-factor distribution.
+        Default is ``3.0``.
+    pitch_average : bool, optional
+        Accepted for API consistency. The returned ratio is unchanged by this
+        argument.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The ratio :math:`c_6^{(L)}(p)/c_5^{(L)}(p)`.
+    """
+    p = np.asarray(p)
+
+    ratio = ((p + 2.0) * (3.0 * p - 1.0)) / (2.0 * (3.0 * p + 2.0))
+
+    if ratio.ndim == 0:
+        return float(ratio)
+
+    return ratio
