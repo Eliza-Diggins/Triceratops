@@ -102,7 +102,7 @@ def log_smoothed_SFBPL(
     In all cases, the multiplicative factor produces a net slope change of
     :math:`\Delta a = a_2-a_1` across the transition.
     """
-    return smoothing * (np.logaddexp(0, ((a2 - a1) / smoothing) * log_x) - np.log(2))
+    return smoothing * (np.logaddexp(0, ((a2 - a1) / smoothing) * log_x))
 
 
 def log_exp_cutoff_sed(
