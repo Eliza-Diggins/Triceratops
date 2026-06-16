@@ -259,6 +259,7 @@ class ElectronDistribution(ABC):
         >>> pdf(10.0)
         array(0.001)
         """
+        norm = ensure_in_units(norm, u.cm**-3)
 
         def _pdf(gamma):
             return cls.pdf(gamma, norm=norm, **params)
@@ -1424,11 +1425,11 @@ class PowerLaw(ElectronDistribution):
     def pdf(
         cls,
         gamma: "_ArrayLike",
+        norm: float = 1.0,
         *,
         p: float,
         gamma_min: float = 1.0,
         gamma_max: float = np.inf,
-        norm: float = 1.0,
         **_,
     ) -> np.ndarray:
         r"""
@@ -1450,14 +1451,14 @@ class PowerLaw(ElectronDistribution):
         gamma : float or array-like
             Lorentz factor or Lorentz factors at which to evaluate the
             distribution.
+        norm : float, optional
+            Distribution amplitude :math:`N_0`. Default is ``1.0``.
         p : float
             Power-law index.
         gamma_min : float, optional
             Minimum Lorentz factor. Default is ``1.0``.
         gamma_max : float, optional
             Maximum Lorentz factor. Default is ``numpy.inf``.
-        norm : float, optional
-            Distribution amplitude :math:`N_0`. Default is ``1.0``.
         **_
             Ignored keyword arguments, accepted for API compatibility.
 
@@ -1472,7 +1473,6 @@ class PowerLaw(ElectronDistribution):
         p = float(p)
         gamma_min = float(gamma_min)
         gamma_max = float(gamma_max)
-        norm = float(norm)
 
         inside_support = (gamma_array >= gamma_min) & (gamma_array <= gamma_max)
 
@@ -1968,13 +1968,13 @@ class BrokenPowerLaw(ElectronDistribution):
     def pdf(
         cls,
         gamma: "_ArrayLike",
+        norm: float = 1.0,
         *,
         p1: float,
         p2: float,
         gamma_c: float,
         gamma_min: float = 1.0,
         gamma_max: float = np.inf,
-        norm: float = 1.0,
         **_,
     ) -> np.ndarray:
         r"""
@@ -2001,6 +2001,8 @@ class BrokenPowerLaw(ElectronDistribution):
         gamma : float or array-like
             Lorentz factor or Lorentz factors at which to evaluate the
             distribution.
+        norm : float, optional
+            Distribution amplitude :math:`N_0`. Default is ``1.0``.
         p1 : float
             Power-law index below the break.
         p2 : float
@@ -2011,8 +2013,6 @@ class BrokenPowerLaw(ElectronDistribution):
             Minimum Lorentz factor. Default is ``1.0``.
         gamma_max : float, optional
             Maximum Lorentz factor. Default is ``numpy.inf``.
-        norm : float, optional
-            Distribution amplitude :math:`N_0`. Default is ``1.0``.
         **_
             Ignored keyword arguments, accepted for API compatibility.
 
@@ -2030,22 +2030,28 @@ class BrokenPowerLaw(ElectronDistribution):
         )
 
         gamma_array = np.asarray(gamma, dtype="f8")
+        scalar_input = gamma_array.ndim == 0
+        gamma_flat = np.atleast_1d(gamma_array)
 
         p1 = float(p1)
         p2 = float(p2)
         gamma_c = float(gamma_c)
         gamma_min = float(gamma_min)
         gamma_max = float(gamma_max)
-        norm = float(norm)
 
-        below = (gamma_array >= gamma_min) & (gamma_array < gamma_c)
-        above = (gamma_array >= gamma_c) & (gamma_array <= gamma_max)
+        below = (gamma_flat >= gamma_min) & (gamma_flat < gamma_c)
+        above = (gamma_flat >= gamma_c) & (gamma_flat <= gamma_max)
+        gamma_safe = np.maximum(gamma_flat, gamma_min)
 
-        result = np.zeros_like(gamma_array, dtype="f8")
-        result[below] = norm * (gamma_array[below] / gamma_c) ** (-p1)
-        result[above] = norm * (gamma_array[above] / gamma_c) ** (-p2)
+        result = np.where(
+            below,
+            norm * (gamma_safe / gamma_c) ** (-p1),
+            np.where(above, norm * (gamma_safe / gamma_c) ** (-p2), 0.0),
+        )
 
-        return result.reshape(()) if result.ndim == 0 else result
+        if scalar_input:
+            return result.reshape(())[()]
+        return result
 
     @classmethod
     def support(
@@ -2310,13 +2316,14 @@ class BrokenPowerLaw(ElectronDistribution):
 
         gamma_array = np.asarray(gamma, dtype="f8")
         scalar_input = gamma_array.ndim == 0
+        gamma_flat = np.atleast_1d(gamma_array)
 
         gamma_c = float(gamma_c)
         gamma_min = float(gamma_min)
         gamma_max = float(gamma_max)
         norm = float(norm)
 
-        gamma_clipped = np.clip(gamma_array, gamma_min, gamma_max)
+        gamma_clipped = np.clip(gamma_flat, gamma_min, gamma_max)
 
         lower_total = cls._branch_moment(
             0,
@@ -2356,12 +2363,12 @@ class BrokenPowerLaw(ElectronDistribution):
             result[above_break] = lower_total + upper_contrib
 
         result = norm * result
-        result = np.where(gamma_array <= gamma_min, 0.0, result)
+        result = np.where(gamma_flat <= gamma_min, 0.0, result)
 
         if scalar_input:
             return result.reshape(())[()]
 
-        return result
+        return result.reshape(gamma_array.shape)
 
 
 class MaxwellJuettner(ElectronDistribution):
@@ -2571,28 +2578,31 @@ class MaxwellJuettner(ElectronDistribution):
         scalar_input = gamma_array.ndim == 0
 
         Theta = float(Theta)
-        norm = float(norm)
 
-        result = np.zeros_like(gamma_array, dtype="f8")
-        inside_support = gamma_array >= 1.0
+        gamma_flat = np.atleast_1d(gamma_array)
+        inside_support = gamma_flat >= 1.0
+        # Clamp to 1.0 so sqrt(1 - gamma^{-2}) is defined for out-of-support elements;
+        # np.where selects 0.0 for those positions anyway.
+        gamma_safe = np.maximum(gamma_flat, 1.0)
+        beta = np.sqrt(1.0 - gamma_safe**-2)
 
-        if np.any(inside_support):
-            gamma_valid = gamma_array[inside_support]
-            beta = np.sqrt(1.0 - gamma_valid**-2)
+        # Use exponentially scaled K_2 for numerical stability:
+        #
+        #   K_2(1/Theta) = exp(-1/Theta) * kve(2, 1/Theta)
+        #
+        # Therefore
+        #
+        #   exp(-gamma/Theta) / K_2(1/Theta)
+        #   =
+        #   exp((1 - gamma)/Theta) / kve(2, 1/Theta).
+        x = 1.0 / Theta
+        normalization = Theta * kve(2, x)
 
-            # Use exponentially scaled K_2 for numerical stability:
-            #
-            #   K_2(1/Theta) = exp(-1/Theta) * kve(2, 1/Theta)
-            #
-            # Therefore
-            #
-            #   exp(-gamma/Theta) / K_2(1/Theta)
-            #   =
-            #   exp((1 - gamma)/Theta) / kve(2, 1/Theta).
-            x = 1.0 / Theta
-            normalization = Theta * kve(2, x)
-
-            result[inside_support] = norm * gamma_valid**2 * beta * np.exp((1.0 - gamma_valid) / Theta) / normalization
+        result = np.where(
+            inside_support,
+            norm * gamma_safe**2 * beta * np.exp((1.0 - gamma_safe) / Theta) / normalization,
+            0.0,
+        )
 
         if scalar_input:
             return result.reshape(())[()]
@@ -2625,9 +2635,9 @@ class MaxwellJuettner(ElectronDistribution):
         return 1, np.inf
 
     @classmethod
-    def moment(cls, order: int, *, Theta: float = 1.0, **_) -> float:
+    def moment(cls, order: float, *, Theta: float = 1.0, **_) -> float:
         r"""
-        Evaluate selected raw moments of the Maxwell-Jüttner distribution.
+        Evaluate raw moments of the Maxwell-Jüttner distribution.
 
         The distribution is
 
@@ -2657,13 +2667,15 @@ class MaxwellJuettner(ElectronDistribution):
             \qquad
             z = \frac{1}{\Theta}.
 
-        This implementation provides exact closed forms for ``order = 0``,
-        ``order = 1``, and ``order = 2``.
+        Exact closed forms are provided for ``order = 0``, ``order = 1``, and
+        ``order = 2``.  All other non-negative orders fall back to numerical
+        quadrature over :meth:`pdf`.
 
         Parameters
         ----------
-        order : int
-            Moment order. Must be one of ``0``, ``1``, or ``2``.
+        order : float
+            Moment order. Closed-form results are returned for ``0``, ``1``,
+            and ``2``; all other non-negative values use numerical quadrature.
         Theta : float, optional
             Dimensionless electron temperature. Default is ``1.0``.
         **_
@@ -2674,9 +2686,6 @@ class MaxwellJuettner(ElectronDistribution):
         moment_order : float
             Raw moment :math:`\langle \gamma^n \rangle`.
         """
-        if not isinstance(order, int):
-            raise ValueError("Moment order `order` must be an integer.")
-
         if order < 0:
             raise ValueError("Moment order `order` must be non-negative.")
 
@@ -2695,9 +2704,12 @@ class MaxwellJuettner(ElectronDistribution):
         if order == 2:
             return 1.0 + 12.0 * Theta**2 + 3.0 * Theta * k1_over_k2
 
-        raise NotImplementedError(
-            "Exact Maxwell-Jüttner moments are currently implemented only for orders 0, 1, and 2."
+        result, _ = quad(
+            lambda g: g**order * cls.pdf(g, norm=1.0, Theta=Theta),
+            1.0,
+            np.inf,
         )
+        return result
 
     @classmethod
     def approx_first_moment(cls, Theta: float = 1.0, **_) -> float:
@@ -2834,6 +2846,75 @@ class MaxwellJuettner(ElectronDistribution):
         Theta = float(Theta)
 
         return Theta * (6.0 + 15.0 * Theta) / (4.0 + 5.0 * Theta)
+
+    @classmethod
+    def cdf(
+        cls,
+        gamma: "_ArrayLike",
+        norm: float = 1.0,
+        *,
+        Theta: float = 1.0,
+        **_,
+    ) -> np.ndarray:
+        r"""
+        Evaluate the Maxwell-Jüttner cumulative distribution function.
+
+        .. math::
+
+            F(\gamma)
+            =
+            N_0 \int_1^\gamma f(\gamma')\,d\gamma'
+
+        This override uses a vectorized trapezoidal integration on a log-spaced
+        grid followed by linear interpolation, avoiding the per-element
+        :func:`~scipy.integrate.quad` loop of the base-class implementation.
+
+        Parameters
+        ----------
+        gamma : float or array-like
+            Lorentz factor or Lorentz factors at which to evaluate the CDF.
+        norm : float, optional
+            Distribution amplitude :math:`N_0`. Default is ``1.0``.
+        Theta : float, optional
+            Dimensionless electron temperature. Default is ``1.0``.
+        **_
+            Ignored keyword arguments, accepted for API compatibility.
+
+        Returns
+        -------
+        F_gamma : float or ~numpy.ndarray
+            Cumulative distribution evaluated at ``gamma``.
+        """
+        cls._validate_parameters(Theta)
+
+        gamma_array = np.asarray(gamma, dtype="f8")
+        scalar_input = gamma_array.ndim == 0
+        gamma_flat = np.atleast_1d(gamma_array).ravel()
+
+        Theta = float(Theta)
+        norm = float(norm)
+
+        # Practical upper limit: MJ PDF decays exponentially above ~20 Theta
+        g_upper = max(float(gamma_flat.max()), 1.0) * 1.01
+        g_upper = max(g_upper, 1.0 + 20.0 * Theta)
+
+        # Log-spaced grid is dense near gamma=1 (where the PDF rises steeply)
+        # and sparser at high gamma (where the PDF is negligible)
+        g_grid = np.exp(np.linspace(0.0, np.log(g_upper), 10_000))
+        pdf_grid = cls.pdf(g_grid, norm=1.0, Theta=Theta)
+
+        # Vectorized cumulative trapezoidal rule; no additional imports needed
+        dg = np.diff(g_grid)
+        cdf_increments = 0.5 * (pdf_grid[:-1] + pdf_grid[1:]) * dg
+        cdf_grid = np.concatenate([[0.0], np.cumsum(cdf_increments)])
+
+        # Interpolate to requested values; clamp below gamma_min=1 to 0
+        result = np.interp(gamma_flat, g_grid, cdf_grid, left=0.0, right=cdf_grid[-1])
+        result = norm * np.where(gamma_flat <= 1.0, 0.0, result)
+
+        if scalar_input:
+            return float(result[0])
+        return result.reshape(gamma_array.shape)
 
     # ------------------------------------------------------------------ #
     # Normalization (Private)                                            #
@@ -3036,7 +3117,6 @@ class MixedThermalNonThermal(ElectronDistribution):
         cls._validate_non_thermal_distribution()
 
         delta = float(delta)
-        norm = float(norm)
 
         thermal_pdf = cls.THERMAL_DISTRIBUTION.pdf(
             gamma,
@@ -3090,7 +3170,7 @@ class MixedThermalNonThermal(ElectronDistribution):
     @classmethod
     def moment(
         cls,
-        order: int,
+        order: float,
         *,
         delta: float,
         **params,
@@ -3122,7 +3202,7 @@ class MixedThermalNonThermal(ElectronDistribution):
 
         Parameters
         ----------
-        order : int
+        order : float
             Moment order :math:`k`.
         delta : float
             Mixture weight of the thermal Maxwell-Jüttner component.
@@ -3139,6 +3219,9 @@ class MixedThermalNonThermal(ElectronDistribution):
 
         delta = float(delta)
 
+        if order == 0:
+            return 1.0
+
         thermal_moment = cls.THERMAL_DISTRIBUTION.moment(
             order,
             **params,
@@ -3152,7 +3235,7 @@ class MixedThermalNonThermal(ElectronDistribution):
     @classmethod
     def moment_between(
         cls,
-        order: int,
+        order: float,
         a: float,
         b: float,
         *,

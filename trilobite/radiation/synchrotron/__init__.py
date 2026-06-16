@@ -19,10 +19,14 @@ __all__ = [
     "InverseComptonCoolingEngine",
     "SynchrotronCoolingEngine",
     "equipartition_magnetic_field",
-    "BrokenPowerLaw",
-    "PowerLaw",
-    "MaxwellJuettner",
+    "equipartition_electron_energy",
     "ElectronDistribution",
+    "PowerLaw",
+    "BrokenPowerLaw",
+    "MaxwellJuettner",
+    "MixedThermalNonThermal",
+    "MaxwellJuettnerPowerLaw",
+    "MaxwellJuettnerBrokenPowerLaw",
 ]
 
 # Import the various core module items.
@@ -42,7 +46,11 @@ from .electron_distributions import (
     BrokenPowerLaw,
     ElectronDistribution,
     MaxwellJuettner,
+    MaxwellJuettnerBrokenPowerLaw,
+    MaxwellJuettnerPowerLaw,
+    MixedThermalNonThermal,
     PowerLaw,
+    equipartition_electron_energy,
     equipartition_magnetic_field,
 )
 
