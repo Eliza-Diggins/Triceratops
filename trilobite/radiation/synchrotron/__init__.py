@@ -14,11 +14,8 @@ __all__ = [
     "compute_nu_critical",
     "compute_synchrotron_frequency",
     "compute_synchrotron_gamma",
-    "PowerLaw_SSA_SynchrotronSED",
     "compute_averaged_first_synchrotron_kernel",
     "compute_first_synchrotron_kernel",
-    "PowerLaw_Cooling_SSA_SynchrotronSED",
-    "PowerLaw_Cooling_SynchrotronSED",
     "InverseComptonCoolingEngine",
     "SynchrotronCoolingEngine",
     "equipartition_magnetic_field",
@@ -29,11 +26,8 @@ __all__ = [
 ]
 
 # Import the various core module items.
-from trilobite.radiation.synchrotron.SEDs import (
-    PowerLaw_Cooling_SSA_SynchrotronSED,
-    PowerLaw_Cooling_SynchrotronSED,
-    PowerLaw_SSA_SynchrotronSED,
-)
+from trilobite.radiation.synchrotron import SEDs
+from trilobite.radiation.synchrotron.SEDs import *
 
 from .cooling import InverseComptonCoolingEngine, SynchrotronCoolingEngine
 from .core import (
@@ -51,3 +45,5 @@ from .electron_distributions import (
     PowerLaw,
     equipartition_magnetic_field,
 )
+
+__all__ += SEDs.__all__
