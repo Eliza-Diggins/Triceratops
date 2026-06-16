@@ -21,6 +21,25 @@ from scipy.special import gamma as gamma_func
 _c5_coefficient_cgs = (np.sqrt(3) / (16 * np.pi)) * (constants.e.esu**3 / (constants.m_e * constants.c**2)).cgs.value
 _c6_coefficient_cgs = np.sqrt(3) * (np.pi / 72) * (constants.e.esu * constants.m_e**5 * constants.c**10).cgs.value
 
+# ======================================= #
+# NORMALIZATION CONSTANTS                 #
+# ======================================= #
+chi = (np.sqrt(3) / (4 * np.pi)) * (const.e.esu**3 / (const.m_e * const.c**2))
+""" ~astropy.units.Quantity: Normalization constant for power-law synchrotron emission."""
+chi_iso = (np.sqrt(3) / 16) * (const.e.esu**3 / (const.m_e * const.c**2))
+
+chi_cgs = chi.cgs.value
+chi_cgs_iso = chi_iso.cgs.value
+_log_chi_cgs = np.log(chi_cgs)
+_log_chi_cgs_iso = np.log(chi_cgs_iso)
+
+_chi_abs_cgs = chi_cgs / constants.m_e.cgs.value
+_log_chi_abs_cgs = np.log(_chi_abs_cgs)
+
+
+# =========================================================== #
+# PACHOLZYK COEFFICIENTS FOR POWER-LAW ELECTRON DISTRIBUTIONS #
+# =========================================================== #
 c_1: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e**3 * const.c**5))
 r"""astropy.units.Quantity: Synchrotron radiation constant :math:`c_1`.
 
@@ -41,7 +60,6 @@ References
 .. footbibliography::
 """
 c_1_cgs: float = c_1.cgs.value
-"""float: Synchrotron radiation constant :math:`c_1` in CGS units."""
 
 c_1_gamma: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e * const.c))
 r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}`.
@@ -54,10 +72,9 @@ The :math:`c_{1,\gamma}` constant is the coefficient appearing in the synchrotro
     \nu_c = \frac{3e}{4\pi m_e c} B\sin \alpha \Gamma^2 = c_{1,\gamma} B \sin \alpha \Gamma^2.
 """
 c_1_gamma_cgs: float = c_1_gamma.cgs.value
-r"""float: Synchrotron constant :math:`c_{1,\gamma}` in CGS units."""
 _log_c_1_gamma_cgs = np.log(c_1_gamma_cgs)
 
-c_1_gamma_iso: u.Quantity = (3 / (2 * np.pi**2)) * (const.e.esu / (const.m_e * const.c))
+c_1_gamma_iso: u.Quantity = (3 / (16)) * (const.e.esu / (const.m_e * const.c))
 r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}^{\mathrm{iso}}` for isotropic distributions.
 
 The :math:`c_{1,\gamma}^{\mathrm{iso}}` constant is the coefficient appearing in the synchrotron frequency when
@@ -68,82 +85,12 @@ frequency for an isotropic distribution can be written as
 
 .. math::
 
-    \nu_c^{\mathrm{iso}} = \frac{3e}{2\pi^2 m_e c} B \Gamma^2 = c_{1,\gamma}^{\mathrm{iso}} B \Gamma^2.
+    \nu_c^{\mathrm{iso}} = \frac{3e}{16 m_e c} B \Gamma^2 = c_{1,\gamma}^{\mathrm{iso}} B \Gamma^2.
 """
 c_1_gamma_iso_cgs: float = c_1_gamma_iso.cgs.value
-r"""float: Synchrotron constant :math:`c_{1,\gamma}^{\mathrm{iso}}` for isotropic distributions in CGS units."""
 _log_c_1_gamma_iso_cgs = np.log(c_1_gamma_iso.cgs.value)
-# ------------------------------------------------------------------
-# Synchrotron normalization constants (chi)
-# ------------------------------------------------------------------
-chi_cgs = 4 * _c5_coefficient_cgs
-r"""
-float
-    Numerical synchrotron normalization coefficient
-    :math:`\chi \equiv 4 c_5`.
-
-    This constant represents **only the coefficient prefactor** extracted from
-    the standard synchrotron emissivity constant :math:`c_5` (in CGS units).
-    It is used as a bookkeeping convenience in SED normalization expressions
-    and does **not** by itself represent a physical power, emissivity, or flux.
-
-    In particular, :math:`\chi` does *not* include:
-
-    - electron distribution normalization,
-    - magnetic-field or frequency dependence,
-    - pitch-angle averaging,
-    - geometric or distance factors.
-
-    These contributions are applied explicitly elsewhere in the SED
-    construction.
-"""
-
-_log_chi_cgs = np.log(chi_cgs)
-
-_chi_abs_cgs = chi_cgs / constants.m_e.cgs.value
-r"""float: SSA prefactor :math:`\chi/m_e = \sqrt{3}e^3/(4\pi m_e^2 c^2)` in CGS."""
-_log_chi_abs_cgs = np.log(_chi_abs_cgs)
-r"""float: Natural log of the SSA prefactor :math:`\chi/m_e`."""
-r"""
-float
-    Natural logarithm of the synchrotron normalization coefficient
-    :math:`\chi = 4 c_5`.
-
-    Stored separately to support numerically stable, log-space SED
-    normalization and inference workflows.
-"""
-
-chi_cgs_iso = (2 / np.pi) * chi_cgs
-r"""
-float
-    Synchrotron normalization coefficient for an **isotropic pitch-angle
-    distribution**.
-
-    This quantity applies the standard isotropic pitch-angle averaging factor
-    :math:`2 / \pi` to the coefficient-only normalization constant
-    :math:`\chi = 4 c_5`.
-
-    As with ``chi_cgs``, this constant represents only the numerical prefactor
-    and must be combined with additional physical factors to construct a full
-    synchrotron emissivity or SED normalization.
-"""
-
-_log_chi_cgs_iso = np.log(chi_cgs_iso)
-r"""
-float
-    Natural logarithm of the isotropic-pitch-angle synchrotron normalization
-    coefficient.
-
-    Used internally for log-space normalization and inference when
-    pitch-angle-averaged synchrotron emissivities are assumed.
-"""
 
 
-# =========================================== #
-# C5 AND C6 PARAMETERS                        #
-# =========================================== #
-# These are the c5 and c6 coefficients as defined in Pacholczyk (1970) and used in
-# deMarchi+22 which are common in radio supernova modeling.
 def compute_c5_parameter(
     p: Union[float, np.ndarray] = 3.0,
     pitch_average: bool = False,
@@ -500,3 +447,105 @@ def compute_c6_parameter(
         return float(c6)
 
     return c6
+
+
+def compute_c5c6_ratio(
+    p: Union[float, np.ndarray] = 3.0,
+    pitch_average: bool = False,
+) -> Union[float, np.ndarray]:
+    r"""
+    Compute the ratio of the synchrotron emissivity and self-absorption coefficients, :math:`c_5(p)/c_6(p)`.
+
+    This ratio is useful for computing the synchrotron source function of a
+    power-law electron population,
+
+    .. math::
+
+        S_\nu
+        =
+        \frac{j_\nu}{\alpha_\nu}
+        =
+        \frac{c_5(p)}{c_6(p)}
+        \left(m_e c^2\right)^{1-p}
+        \left(\frac{\nu}{2c_1}\right)^{5/2}
+        \left(B\sin\alpha\right)^{-1/2},
+
+    where :math:`j_\nu` is the synchrotron emissivity and :math:`\alpha_\nu` is
+    the synchrotron self-absorption coefficient.  When ``pitch_average=True``
+    the :math:`\sin\alpha` factor is replaced by unity and :math:`B` stands
+    alone.
+
+    Parameters
+    ----------
+    p : float or array-like, optional
+        Power-law index of the electron Lorentz-factor distribution,
+
+        .. math::
+
+            N(\Gamma) \propto \Gamma^{-p}.
+
+        Default is ``3.0``.
+    pitch_average : bool, optional
+        If `True`, pass ``pitch_average=True`` to both
+        :func:`compute_c5_parameter` and :func:`compute_c6_parameter` so
+        that the returned ratio already incorporates the isotropic
+        pitch-angle averages.  The source function then reads
+
+        .. math::
+
+            S_\nu
+            =
+            \frac{c_5^{\mathrm{iso}}(p)}{c_6^{\mathrm{iso}}(p)}
+            \left(m_e c^2\right)^{1-p}
+            \left(\frac{\nu}{2c_1}\right)^{5/2}
+            B^{-1/2}.
+
+        Default is `False`.
+
+    Returns
+    -------
+    float or numpy.ndarray
+        The dimensionless ratio :math:`c_5(p)/c_6(p)` in CGS units.
+        If ``p`` is array-like, the returned value has the broadcast shape of
+        ``p``.
+
+    Notes
+    -----
+    The ratio follows directly from the Pacholczyk forms of the emissivity
+    and absorption coefficient.  Dividing the emissivity
+
+    .. math::
+
+        j_\nu
+        =
+        c_5(p)\,N_0\,(m_e c^2)^{p-1}
+        (B\sin\alpha)^{(p+1)/2}
+        \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}
+
+    by the absorption coefficient
+
+    .. math::
+
+        \alpha_\nu
+        =
+        c_6(p)\,N_0\,(m_e c^2)^{p-1}
+        (B\sin\alpha)^{(p+2)/2}
+        \left(\frac{\nu}{2c_1}\right)^{-(p+4)/2}
+
+    gives
+
+    .. math::
+
+        S_\nu
+        =
+        \frac{c_5(p)}{c_6(p)}
+        (B\sin\alpha)^{-1/2}
+        \left(\frac{\nu}{2c_1}\right)^{5/2}.
+
+    References
+    ----------
+    .. footbibliography::
+    """
+    c5 = compute_c5_parameter(p, pitch_average=pitch_average)
+    c6 = compute_c6_parameter(p, pitch_average=pitch_average)
+    return c5 / c6
