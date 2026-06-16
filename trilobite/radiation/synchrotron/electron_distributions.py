@@ -15,7 +15,7 @@ See Also
 """
 
 from abc import ABC, abstractmethod
-from typing import TYPE_CHECKING, ClassVar
+from typing import TYPE_CHECKING, ClassVar, Optional
 
 import numpy as np
 from astropy import units as u
@@ -881,7 +881,9 @@ class ElectronDistribution(ABC):
         m0 = cls.moment(0, **params)
         if m0 == 0.0:
             return np.nan
-        return cls.moment(2, **params) / m0 - (cls.moment(1, **params) / m0) ** 2
+        m1 = cls.moment(1, **params)
+        m2 = cls.moment(2, **params)
+        return m2 / m0 - (m1 / m0) ** 2
 
     @classmethod
     def std(cls, **params) -> float:
@@ -1110,6 +1112,57 @@ class ElectronDistribution(ABC):
         """
         u_cgs = ensure_in_units(u_therm, u.erg / u.cm**3)
         return cls._normalize_from_energy_density(u_cgs, epsilon_E, **params) * u.cm**-3
+
+    # ------------------------------------------------------------------ #
+    # Power-law integral helper                                          #
+    # ------------------------------------------------------------------ #
+    @staticmethod
+    def _integral_power_law(
+        exponent: float,
+        lower: float,
+        upper: float,
+    ) -> float:
+        r"""
+        Evaluate a scalar definite power-law integral.
+
+        Computes
+
+        .. math::
+
+            I(q; a, b)
+            =
+            \int_a^b \gamma^{q-1}\,d\gamma
+            =
+            \begin{cases}
+            \dfrac{b^q - a^q}{q}, & q \neq 0, \\\\
+            \ln(b/a), & q = 0.
+            \end{cases}
+
+        Parameters
+        ----------
+        exponent : float
+            Integral exponent :math:`q`.
+        lower : float
+            Lower integration bound.
+        upper : float
+            Upper integration bound.
+
+        Returns
+        -------
+        integral : float
+            Returns ``0.0`` if ``upper <= lower``.
+        """
+        exponent = float(exponent)
+        lower = float(lower)
+        upper = float(upper)
+
+        if upper <= lower:
+            return 0.0
+
+        if np.isclose(exponent, 0.0, rtol=0.0, atol=1e-14):
+            return float(np.log(upper / lower))
+
+        return float((upper**exponent - lower**exponent) / exponent)
 
     # ------------------------------------------------------------------ #
     # Bolometric emissivity (Private)                                    #
@@ -1361,62 +1414,6 @@ class PowerLaw(ElectronDistribution):
 
         if gamma_max <= gamma_min:
             raise ValueError("`gamma_max` must be greater than `gamma_min`.")
-
-    @staticmethod
-    def _integral_power_law(
-        exponent: float,
-        lower: float,
-        upper: float,
-    ) -> float:
-        r"""
-        Evaluate a scalar definite power-law integral.
-
-        This helper computes
-
-        .. math::
-
-            I(q; a, b)
-            =
-            \int_a^b \gamma^{q-1}\,d\gamma,
-
-        where ``exponent`` is :math:`q`, ``lower`` is :math:`a`, and ``upper``
-        is :math:`b`. The result is
-
-        .. math::
-
-            I(q; a, b)
-            =
-            \begin{cases}
-            \dfrac{b^q - a^q}{q}, & q \neq 0, \\\\
-            \ln(b/a), & q = 0.
-            \end{cases}
-
-        Parameters
-        ----------
-        exponent : float
-            Integral exponent :math:`q`.
-        lower : float
-            Lower integration bound.
-        upper : float
-            Upper integration bound.
-
-        Returns
-        -------
-        integral : float
-            Definite integral from ``lower`` to ``upper``. Returns ``0.0`` if
-            ``upper <= lower``.
-        """
-        exponent = float(exponent)
-        lower = float(lower)
-        upper = float(upper)
-
-        if upper <= lower:
-            return 0.0
-
-        if np.isclose(exponent, 0.0, rtol=0.0, atol=1e-14):
-            return float(np.log(upper / lower))
-
-        return float((upper**exponent - lower**exponent) / exponent)
 
     # ------------------------------------------------------------------ #
     # Distribution Interface                                             #
@@ -1877,53 +1874,6 @@ class BrokenPowerLaw(ElectronDistribution):
 
         if gamma_c >= gamma_max:
             raise ValueError("`gamma_c` must be less than `gamma_max`.")
-
-    @staticmethod
-    def _integral_power_law(
-        exponent: float,
-        lower: float,
-        upper: float,
-    ) -> float:
-        r"""
-        Evaluate a scalar definite power-law integral.
-
-        This helper computes
-
-        .. math::
-
-            I(q; a, b)
-            =
-            \int_a^b \gamma^{q-1}\,d\gamma,
-
-        where ``exponent`` is :math:`q`, ``lower`` is :math:`a`, and ``upper``
-        is :math:`b`.
-
-        Parameters
-        ----------
-        exponent : float
-            Integral exponent :math:`q`.
-        lower : float
-            Lower integration bound.
-        upper : float
-            Upper integration bound.
-
-        Returns
-        -------
-        integral : float
-            Definite integral from ``lower`` to ``upper``. Returns ``0.0`` if
-            ``upper <= lower``.
-        """
-        exponent = float(exponent)
-        lower = float(lower)
-        upper = float(upper)
-
-        if upper <= lower:
-            return 0.0
-
-        if np.isclose(exponent, 0.0, rtol=0.0, atol=1e-14):
-            return float(np.log(upper / lower))
-
-        return float((upper**exponent - lower**exponent) / exponent)
 
     @classmethod
     def _branch_moment(
@@ -3000,7 +2950,7 @@ class MixedThermalNonThermal(ElectronDistribution):
     """
 
     THERMAL_DISTRIBUTION: ClassVar[type[ElectronDistribution]] = MaxwellJuettner
-    NON_THERMAL_DISTRIBUTION: ClassVar[type[ElectronDistribution] | None] = None
+    NON_THERMAL_DISTRIBUTION: ClassVar[Optional[type[ElectronDistribution]]] = None
 
     # ------------------------------------------------------------------ #
     # Helper Methods                                                     #

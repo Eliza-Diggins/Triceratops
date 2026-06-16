@@ -56,7 +56,7 @@ from trilobite.utils.plot_utils import set_plot_style
 # Engine Instantiation
 # --------------------
 
-synch_engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+synch_engine = SynchrotronRadiativeCoolingEngine()
 ic_engine = InverseComptonCoolingEngine(pitch_averaged=True)
 
 gamma_arr = np.geomspace(10, 1e7, 500)

@@ -60,10 +60,11 @@ from trilobite.utils.plot_utils import set_plot_style
 #
 # The :class:`~radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine`
 # is a stateless engine: physical parameters are passed at call time, not stored
-# at construction.  The only configuration choice at instantiation is whether to
-# use the pitch-angle averaged loss rate (default, ``pitch_averaged=True``).
+# at construction.  All cooling rates are ensemble-averaged over an isotropic
+# pitch-angle distribution by default; a specific pitch angle may be supplied
+# via ``sin_alpha`` to any ``compute_*`` method.
 
-engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+engine = SynchrotronRadiativeCoolingEngine()
 
 # Lorentz factor grid
 gamma_arr = np.geomspace(10, 1e8, 500)

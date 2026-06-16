@@ -23,10 +23,6 @@ from .core import _opt_compute_synch_frequency
 # ========================================================= #
 # CGS Constants and Coefficients                            #
 # ========================================================= #
-_cooling_frequency_coefficient_cgs = (
-    (18 * np.pi * constants.m_e * constants.c * constants.e.esu) / (constants.sigma_T**2)
-).cgs.value
-
 
 # ========================================================= #
 # Optimized Low-Level Callables                             #
@@ -284,7 +280,7 @@ def _opt_compute_IC_cooling_time(
     .. math::
 
         t_{cool}
-        = \frac{3 m_e c^3 R^2}{\sigma_T L_{bol} \gamma}
+        = \frac{3 \pi m_e c^2 R^2}{\sigma_T L_{bol} \gamma}
     """
     return _IC_cooling_time_coefficient_cgs * (R**2 / L_bol) / gamma
 
@@ -323,7 +319,7 @@ def _opt_compute_IC_cooling_gamma(
     .. math::
 
         \gamma_{IC}
-        = \frac{3 m_e c^3 R^2}{\sigma_T L_{bol} t}
+        = \frac{3 \pi m_e c^2 R^2}{\sigma_T L_{bol} t}
     """
     return _IC_cooling_time_coefficient_cgs * (R**2 / L_bol) / t
 
@@ -550,7 +546,7 @@ class SynchrotronRadiativeCoolingEngine(SynchrotronCoolingEngine):
         sin_alpha: Optional[Union[float, np.ndarray]] = None,
     ) -> Union[float, np.ndarray]:
         if sin_alpha is not None:
-            return _opt_compute_synch_frequency(gamma, B, sin_alpha=sin_alpha)
+            return _opt_compute_synch_frequency(gamma, B, sin_alpha=sin_alpha, pitch_average=False)
         else:
             return _opt_compute_synch_frequency(gamma, B)
 
@@ -791,7 +787,7 @@ class InverseComptonCoolingEngine(SynchrotronCoolingEngine):
         .. math::
 
             t_{\rm cool}(\gamma)
-            = \frac{3 m_e c^3 R^2}{\sigma_T L_{\rm bol}\,\gamma}
+            = \frac{3 \pi m_e c^2 R^2}{\sigma_T L_{\rm bol}\,\gamma}
         """
         return _opt_compute_IC_cooling_time(L_bol, R, gamma)
 
@@ -816,7 +812,7 @@ class InverseComptonCoolingEngine(SynchrotronCoolingEngine):
         .. math::
 
             \gamma_{\rm IC}
-            = \frac{3 m_e c^3 R^2}{\sigma_T L_{\rm bol} t}
+            = \frac{3 \pi m_e c^2 R^2}{\sigma_T L_{\rm bol} t}
         """
         return _opt_compute_IC_cooling_gamma(L_bol, R, t)
 
@@ -843,7 +839,7 @@ class InverseComptonCoolingEngine(SynchrotronCoolingEngine):
         .. math::
 
             \gamma_{\rm IC}
-            = \frac{3 m_e c^3 R^2}{\sigma_T L_{\rm bol} t}
+            = \frac{3 \pi m_e c^2 R^2}{\sigma_T L_{\rm bol} t}
 
             \nu_{\rm syn, IC}
             = \nu_{\rm syn}(\gamma_{\rm IC}, B)

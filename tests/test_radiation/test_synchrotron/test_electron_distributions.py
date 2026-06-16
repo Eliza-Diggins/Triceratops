@@ -7,17 +7,21 @@ electron distribution functions behave as expected under various conditions, inc
 normalization, energy limits, and consistency with theoretical predictions.
 """
 
-import pytest
+import astropy.constants as const
 import numpy as np
+import pytest
 from scipy.integrate import quad
+
 from trilobite.radiation.synchrotron.electron_distributions import (
-    ElectronDistribution,
-    PowerLaw,
     BrokenPowerLaw,
+    ElectronDistribution,
     MaxwellJuettner,
-    MaxwellJuettnerPowerLaw,
     MaxwellJuettnerBrokenPowerLaw,
+    MaxwellJuettnerPowerLaw,
+    PowerLaw,
 )
+
+_m_e_c2_cgs = (const.m_e * const.c**2).cgs.value
 
 
 class BaseTestElectronDistribution:
@@ -506,3 +510,76 @@ class TestMaxwellJuettnerBrokenPowerLaw(BaseTestElectronDistribution):
                 f"quadrature for parameters {params}: expected "
                 f"{expected_moment}, got {computed_moment}."
             )
+
+
+# ---------------------------------------------------------------------------
+# Cross-distribution energy-budget consistency
+# ---------------------------------------------------------------------------
+@pytest.mark.parametrize(
+    "pl_params",
+    [
+        {"p": 2.0, "gamma_min": 10.0, "gamma_max": 1e6},
+        {"p": 2.5, "gamma_min": 10.0, "gamma_max": 1e5},
+        {"p": 3.0, "gamma_min": 1.0, "gamma_max": 1e7},
+    ],
+)
+def test_pl_normalization_energy_budget(pl_params):
+    """PowerLaw.normalize_from_magnetic_field satisfies the equipartition energy constraint.
+
+    Verifies N0 * m_e c^2 * M1 == (epsilon_E / epsilon_B) * B^2 / (8 pi).
+    """
+    B_cgs = 1.0
+    epsilon_B = 0.1
+    epsilon_E = 0.3
+    expected = (epsilon_E / epsilon_B) * B_cgs**2 / (8.0 * np.pi)
+
+    N0 = PowerLaw._normalize_from_magnetic_field(B_cgs, epsilon_B, epsilon_E, **pl_params)
+    energy_density = N0 * _m_e_c2_cgs * PowerLaw.moment(1, **pl_params)
+
+    assert energy_density == pytest.approx(expected, rel=1.0e-10)
+
+
+@pytest.mark.parametrize(
+    "bpl_params",
+    [
+        {"p1": 2.0, "p2": 3.0, "gamma_c": 100.0, "gamma_min": 10.0, "gamma_max": 1e6},
+        {"p1": 2.5, "p2": 3.5, "gamma_c": 500.0, "gamma_min": 10.0, "gamma_max": 1e5},
+        {"p1": 1.5, "p2": 2.5, "gamma_c": 50.0, "gamma_min": 1.0, "gamma_max": 1e4},
+    ],
+)
+def test_bpl_normalization_energy_budget(bpl_params):
+    """BrokenPowerLaw.normalize_from_magnetic_field satisfies the equipartition energy constraint.
+
+    Verifies N0 * m_e c^2 * M1 == (epsilon_E / epsilon_B) * B^2 / (8 pi).
+    """
+    B_cgs = 1.0
+    epsilon_B = 0.1
+    epsilon_E = 0.3
+    expected = (epsilon_E / epsilon_B) * B_cgs**2 / (8.0 * np.pi)
+
+    N0 = BrokenPowerLaw._normalize_from_magnetic_field(B_cgs, epsilon_B, epsilon_E, **bpl_params)
+    energy_density = N0 * _m_e_c2_cgs * BrokenPowerLaw.moment(1, **bpl_params)
+
+    assert energy_density == pytest.approx(expected, rel=1.0e-10)
+
+
+def test_pl_bpl_energy_budget_consistency():
+    """PL and BPL normalizations both satisfy the equipartition energy constraint independently.
+
+    For any distribution, N0 * m_e c^2 * M1 must equal (epsilon_E / epsilon_B) * B^2 / (8 pi).
+    """
+    B_cgs = 0.5
+    epsilon_B = 0.05
+    epsilon_E = 0.1
+    expected = (epsilon_E / epsilon_B) * B_cgs**2 / (8.0 * np.pi)
+
+    pl_params = {"p": 2.5, "gamma_min": 10.0, "gamma_max": 1e5}
+    N0_pl = PowerLaw._normalize_from_magnetic_field(B_cgs, epsilon_B, epsilon_E, **pl_params)
+    e_pl = N0_pl * _m_e_c2_cgs * PowerLaw.moment(1, **pl_params)
+
+    bpl_params = {"p1": 2.5, "p2": 3.5, "gamma_c": 1e3, "gamma_min": 10.0, "gamma_max": 1e5}
+    N0_bpl = BrokenPowerLaw._normalize_from_magnetic_field(B_cgs, epsilon_B, epsilon_E, **bpl_params)
+    e_bpl = N0_bpl * _m_e_c2_cgs * BrokenPowerLaw.moment(1, **bpl_params)
+
+    assert e_pl == pytest.approx(expected, rel=1.0e-10)
+    assert e_bpl == pytest.approx(expected, rel=1.0e-10)
