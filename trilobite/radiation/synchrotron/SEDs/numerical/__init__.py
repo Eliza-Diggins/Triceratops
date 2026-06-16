@@ -19,6 +19,7 @@ See Also
 
 from .aspherical import OnAxisAsymmetricSynchrotronEngine
 from .core import NumericalSynchrotronEngine
+from .inhomogeneous import InhomogeneousCylinderSynchrotronEngine
 from .one_zone import (
     NonRelativisticSphericalSynchrotronEngine,
     UltraRelativisticSphericalSynchrotronEngine,
@@ -29,4 +30,5 @@ __all__ = [
     "NonRelativisticSphericalSynchrotronEngine",
     "UltraRelativisticSphericalSynchrotronEngine",
     "OnAxisAsymmetricSynchrotronEngine",
+    "InhomogeneousCylinderSynchrotronEngine",
 ]

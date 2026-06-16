@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.005** total execution time for 57 files **from all galleries**:
+**00:00.426** total execution time for 58 files **from all galleries**:
 
 .. container::
 
@@ -32,6 +32,9 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
+   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_inhomogeneous_cylinder.py` (``galleries/synchrotron/b_seds/plot_inhomogeneous_cylinder.py``)
+     - 00:00.422
+     - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
      - 00:00.004
      - 0.0
