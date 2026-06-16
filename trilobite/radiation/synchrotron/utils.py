@@ -21,58 +21,6 @@ from scipy.special import gamma as gamma_func
 _c5_coefficient_cgs = (np.sqrt(3) / (16 * np.pi)) * (constants.e.esu**3 / (constants.m_e * constants.c**2)).cgs.value
 _c6_coefficient_cgs = np.sqrt(3) * (np.pi / 72) * (constants.e.esu * constants.m_e**5 * constants.c**10).cgs.value
 
-c_1: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e**3 * const.c**5))
-r"""astropy.units.Quantity: Synchrotron radiation constant :math:`c_1`.
-
-The :math:`c_1` constant is the coefficient appearing in the synchrotron frequency :footcite:p:`1970ranp.book.....P`
-
-.. math::
-
-    \nu_c = \frac{3e}{4\pi m_e c} B\sin \alpha \Gamma^2 = c_1 B \sin \alpha E^2.
-
-Thus,
-
-.. math::
-
-    c_1 = \frac{3}{4\pi} \frac{e}{m_e^3 c^5}.
-
-References
-----------
-.. footbibliography::
-"""
-c_1_cgs: float = c_1.cgs.value
-"""float: Synchrotron radiation constant :math:`c_1` in CGS units."""
-
-c_1_gamma: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e * const.c))
-r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}`.
-
-The :math:`c_{1,\gamma}` constant is the coefficient appearing in the synchrotron frequency when expressed
- in terms of the electron Lorentz factor :math:`\Gamma` rather than energy:
-
- .. math::
-
-    \nu_c = \frac{3e}{4\pi m_e c} B\sin \alpha \Gamma^2 = c_{1,\gamma} B \sin \alpha \Gamma^2.
-"""
-c_1_gamma_cgs: float = c_1_gamma.cgs.value
-r"""float: Synchrotron constant :math:`c_{1,\gamma}` in CGS units."""
-_log_c_1_gamma_cgs = np.log(c_1_gamma_cgs)
-
-c_1_gamma_iso: u.Quantity = (3 / (2 * np.pi**2)) * (const.e.esu / (const.m_e * const.c))
-r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}^{\mathrm{iso}}` for isotropic distributions.
-
-The :math:`c_{1,\gamma}^{\mathrm{iso}}` constant is the coefficient appearing in the synchrotron frequency when
-expressed
-in terms of the electron Lorentz factor :math:`\Gamma` and assuming an isotropic distribution of pitch angles.
-The isotropic pitch-angle averaging factor :math:`2/\pi` is included in this constant, so that the critical
-frequency for an isotropic distribution can be written as
-
-.. math::
-
-    \nu_c^{\mathrm{iso}} = \frac{3e}{2\pi^2 m_e c} B \Gamma^2 = c_{1,\gamma}^{\mathrm{iso}} B \Gamma^2.
-"""
-c_1_gamma_iso_cgs: float = c_1_gamma_iso.cgs.value
-r"""float: Synchrotron constant :math:`c_{1,\gamma}^{\mathrm{iso}}` for isotropic distributions in CGS units."""
-_log_c_1_gamma_iso_cgs = np.log(c_1_gamma_iso.cgs.value)
 # ------------------------------------------------------------------
 # Synchrotron normalization constants (chi)
 # ------------------------------------------------------------------
@@ -139,11 +87,66 @@ float
 """
 
 
-# =========================================== #
-# C5 AND C6 PARAMETERS                        #
-# =========================================== #
-# These are the c5 and c6 coefficients as defined in Pacholczyk (1970) and used in
-# deMarchi+22 which are common in radio supernova modeling.
+# ============================================================ #
+# PACHOLCZYK SYNCHROTRON COEFFICIENTS                          #
+# ============================================================ #
+# These are the various coefficients appearing in the Pacholczyk (1970) expressions for synchrotron
+# emissivity and absorption from a power-law population of electrons. See the docstrings
+# of the following functions for details and references.
+#
+# These are used throughout the codebase for various synchrotron computations.
+c_1: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e**3 * const.c**5))
+r"""astropy.units.Quantity: Synchrotron radiation constant :math:`c_1`.
+
+The :math:`c_1` constant is the coefficient appearing in the synchrotron frequency :footcite:p:`1970ranp.book.....P`
+
+.. math::
+
+    \nu_c = \frac{3e}{4\pi m_e c} B\sin \alpha \Gamma^2 = c_1 B \sin \alpha E^2.
+
+Thus,
+
+.. math::
+
+    c_1 = \frac{3}{4\pi} \frac{e}{m_e^3 c^5}.
+
+References
+----------
+.. footbibliography::
+"""
+c_1_cgs: float = c_1.cgs.value
+_log_c_1_cgs: float = np.log(c_1_cgs)
+
+c_1_gamma: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e * const.c))
+r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}`.
+
+The :math:`c_{1,\gamma}` constant is the coefficient appearing in the synchrotron frequency when expressed
+ in terms of the electron Lorentz factor :math:`\Gamma` rather than energy:
+
+ .. math::
+
+    \nu_c = \frac{3e}{4\pi m_e c} B\sin \alpha \Gamma^2 = c_{1,\gamma} B \sin \alpha \Gamma^2.
+"""
+c_1_gamma_cgs: float = c_1_gamma.cgs.value
+_log_c_1_gamma_cgs = np.log(c_1_gamma_cgs)
+
+c_1_gamma_iso: u.Quantity = (3 / 16) * (const.e.esu / (const.m_e * const.c))
+r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}^{\mathrm{iso}}` for isotropic distributions.
+
+The :math:`c_{1,\gamma}^{\mathrm{iso}}` constant is the coefficient appearing in the synchrotron frequency when
+expressed
+in terms of the electron Lorentz factor :math:`\Gamma` and assuming an isotropic distribution of pitch angles.
+The isotropic pitch-angle averaging factor :math:`pi/4` is included in this constant, so that the critical
+frequency for an isotropic distribution can be written as
+
+.. math::
+
+    \nu_c^{\mathrm{iso}} = \frac{3e}{16 m_e c} B \Gamma^2 = c_{1,\gamma}^{\mathrm{iso}} B \Gamma^2.
+"""
+c_1_gamma_iso_cgs: float = c_1_gamma_iso.cgs.value
+_log_c_1_gamma_iso_cgs = np.log(c_1_gamma_iso.cgs.value)
+
+
 def compute_c5_parameter(
     p: Union[float, np.ndarray] = 3.0,
     pitch_average: bool = False,
