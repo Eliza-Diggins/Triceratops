@@ -391,7 +391,7 @@ class SSA_Cooling_SynchrotronSEDModel(Model):
         ),
         ModelParameter(
             "log_gamma_c",
-            0.0,
+            1.0,
             description="Logarithm of the cooling Lorentz factor",
             base_units=None,
             latex=r"\log \gamma_c",
@@ -1251,7 +1251,7 @@ class Cooling_SynchrotronSEDModel(Model):
         ),
         ModelParameter(
             "log_gamma_c",
-            0.0,
+            1.0,
             description="Logarithm of the cooling Lorentz factor",
             base_units=None,
             latex=r"\log \gamma_c",
