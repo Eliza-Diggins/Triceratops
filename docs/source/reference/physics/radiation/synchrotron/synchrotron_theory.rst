@@ -1027,7 +1027,7 @@ Outside this range, the distribution is assumed to vanish.
         \frac{dN}{dE} = N_{E,0} E^{-p}.
 
     Trilobite adopts the **Lorentz factor** formulation as the **canonical standard**; however, both are
-    implemented in the relevant API (see :mod:`trilobite.radiation.synchrotron.microphysics`).
+    implemented in the relevant API (see :mod:`trilobite.radiation.synchrotron.electron_distributions`).
 
 .. note::
 
@@ -1040,8 +1040,8 @@ Equipartition for Power-Law Distributions
 
 .. hint::
 
-    The relevant API in Trilobite is in the :mod:`trilobite.radiation.synchrotron.microphysics` module. See
-    :ref:`synchrotron_microphysics` for details on use.
+    The relevant API in Trilobite is in the :mod:`trilobite.radiation.synchrotron.electron_distributions` module. See
+    :ref:`synchrotron_electron_distributions` for details on use.
 
 Assuming a power-law distribution of electrons, we can derive normalization of the distribution
 from our closure relationship. Here, we describe the procedure when assuming equipartition with some
@@ -1102,7 +1102,7 @@ In terms of the magnetic field, we also have
 .. important::
 
     This is the canonical way to convert dynamics into synchrotron emission in Trilobite when assuming
-    equipartition and a power-law distribution of electrons. See :mod:`trilobite.radiation.synchrotron.microphysics`
+    equipartition and a power-law distribution of electrons. See :mod:`trilobite.radiation.synchrotron.electron_distributions`
     for the relevant API.
 
 Another useful computation which is made possible with equipartition is the **total emitted power** from synchrotron.
@@ -1165,8 +1165,8 @@ Equipartition for Thermal Electron Distributions
 
 .. hint::
 
-    The relevant API in Trilobite is in the :mod:`trilobite.radiation.synchrotron.microphysics` module. See
-    :ref:`synchrotron_microphysics` for details on use.
+    The relevant API in Trilobite is in the :mod:`trilobite.radiation.synchrotron.electron_distributions` module. See
+    :ref:`synchrotron_electron_distributions` for details on use.
 
 Given a thermal energy density :math:`U_{\rm thermal}`, the energy density in relativistic electrons is (by
 equipartition)
