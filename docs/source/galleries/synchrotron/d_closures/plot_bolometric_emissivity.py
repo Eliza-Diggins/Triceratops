@@ -71,12 +71,6 @@ Combining this with the intrinsic synchrotron scaling
 
 This scaling is independent of the power-law index :math:`p`.
 
-Relevant API References
------------------------
-
-- :class:`~radiation.synchrotron.electron_distributions.PowerLaw`
-- :class:`~radiation.synchrotron.electron_distributions.BrokenPowerLaw`
-- :func:`~radiation.synchrotron.electron_distributions.equipartition_magnetic_field`
 """
 
 import matplotlib.pyplot as plt
@@ -262,13 +256,10 @@ plt.show()
 # Section 3: Equipartition Magnetic Field
 # ---------------------------------------
 #
-# The equipartition magnetic field follows directly from
-#
-# .. math::
-#
-#     u_B = \frac{B^2}{8\pi} = \epsilon_B u_{\rm therm}.
-#
-# Therefore
+# Solving :math:`u_B = B^2/(8\pi) = \epsilon_B u_{\rm therm}` for :math:`B`
+# gives :math:`B_{\rm eq} \propto u_{\rm therm}^{1/2}`, independent of
+# :math:`\epsilon_B` in slope (only the intercept shifts).  Below we confirm
+# this for several values of :math:`\epsilon_B`.
 
 u_therm = np.geomspace(1e-4, 1e6, 200) * u.erg / u.cm**3
 

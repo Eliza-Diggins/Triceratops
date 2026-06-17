@@ -3,8 +3,8 @@ On-Axis Asymmetric Synchrotron SEDs
 =====================================
 
 Most synchrotron models treat the emitting region as a single homogeneous
-zone. The
-:class:`~trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine`
+zone.
+:class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine`
 generalizes this picture by assigning independent physical conditions to
 each polar-angle sightline :math:`\theta \in [0,\pi/2]`.
 
@@ -180,13 +180,9 @@ sightline_flux = engine.compute_sightline_flux_density(
     **common_kwargs,
 )
 
-ring_flux = sightline_flux
-
 total_sed = engine.compute_flux_density(nu, **common_kwargs)
 
-# Verify: ring_flux sums to total_sed to floating-point precision.
-# total = Σᵢ w_i ξ_i F_sightline_i  (Gauss-Legendre quadrature identity)
-ring_sum = ring_flux.sum(axis=-1)
+ring_sum = sightline_flux.sum(axis=-1)
 
 # %%
 # Spectral Decomposition
@@ -204,7 +200,7 @@ nu_ghz = nu.to_value(u.GHz)
 cmap = plt.cm.viridis
 colors = cmap(np.linspace(0, 1, engine.n_theta))
 for i in range(engine.n_theta):
-    ax.loglog(nu_ghz, ring_flux[:, i].to_value(u.mJy), color=colors[::-1][i], lw=0.9, alpha=0.75)
+    ax.loglog(nu_ghz, sightline_flux[:, i].to_value(u.mJy), color=colors[::-1][i], lw=0.9, alpha=0.75)
 
 ax.loglog(nu_ghz, ring_sum.to_value(u.mJy), color="0.5", lw=2, ls="--", label=r"$\Sigma$ rings")
 ax.loglog(nu_ghz, total_sed.to_value(u.mJy), color="k", lw=2.5, label="Total")
