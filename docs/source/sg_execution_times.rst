@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.004** total execution time for 58 files **from all galleries**:
+**00:00.002** total execution time for 58 files **from all galleries**:
 
 .. container::
 
@@ -33,7 +33,7 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
-     - 00:00.004
+     - 00:00.002
      - 0.0
    * - :ref:`sphx_glr_auto_examples_modeling_plot_fred_blackbody_optical_lc.py` (``galleries/modeling/plot_fred_blackbody_optical_lc.py``)
      - 00:00.001
@@ -83,28 +83,28 @@ Computation times
    * - :ref:`sphx_glr_auto_examples_data_plot_radio_photometry.py` (``galleries/data/plot_radio_photometry.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_chevalier_shock_structure.py` (``galleries/dynamics/plot_chevalier_shock_structure.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_a_fundamentals_plot_rh_jump_conditions.py` (``galleries/dynamics/a_fundamentals/plot_rh_jump_conditions.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_mechanical_shock_cooling.py` (``galleries/dynamics/plot_mechanical_shock_cooling.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_a_fundamentals_plot_rh_jump_weak_conditions.py` (``galleries/dynamics/a_fundamentals/plot_rh_jump_weak_conditions.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_mechanical_shock_model.py` (``galleries/dynamics/plot_mechanical_shock_model.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_shock_structure.py` (``galleries/dynamics/b_models/plot_chevalier_shock_structure.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_numerical_shock_engine.py` (``galleries/dynamics/plot_numerical_shock_engine.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shock_cooling.py` (``galleries/dynamics/c_engines/plot_mechanical_shock_cooling.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_numerical_shocks_csms.py` (``galleries/dynamics/plot_numerical_shocks_csms.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shock_model.py` (``galleries/dynamics/c_engines/plot_mechanical_shock_model.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_relativistic_thin_shell_convergence.py` (``galleries/dynamics/plot_relativistic_thin_shell_convergence.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_numerical_shock_engine.py` (``galleries/dynamics/c_engines/plot_numerical_shock_engine.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_rh_jump_conditions.py` (``galleries/dynamics/plot_rh_jump_conditions.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_numerical_shocks_csms.py` (``galleries/dynamics/c_engines/plot_numerical_shocks_csms.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_plot_rh_jump_weak_conditions.py` (``galleries/dynamics/plot_rh_jump_weak_conditions.py``)
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_relativistic_thin_shell_convergence.py` (``galleries/dynamics/c_engines/plot_relativistic_thin_shell_convergence.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_free_free_a_gaunt_factors_plot_gaunt_factor_comparison.py` (``galleries/free_free/a_gaunt_factors/plot_gaunt_factor_comparison.py``)
