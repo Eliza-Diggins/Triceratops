@@ -521,8 +521,65 @@ the flux density as described above. In the non-relativistic limit, we ignore bu
 The Ultra-Relativistic Model
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+In the ultra-relativistic limit the emitting shell expands with a bulk Lorentz factor :math:`\Gamma \gg 1`.
+Relativistic beaming confines the observable emission to a forward cone of half-opening angle
+:math:`\sim 1/\Gamma` around the line of sight. The model therefore replaces the full spherical surface
+with the **beamed cap** — the small patch of the shell whose emission is directed toward the on-axis observer
+— and neglects equal-arrival-time-surface (EATS) corrections, treating the entire cap as a single
+homogeneous slab evaluated at one instant in the observer frame.
 
+Under the beamed-cap approximation the effective projected area and comoving slab depth are
 
+.. math::
+
+    A_\mathrm{eff} = \frac{\pi R^2 f_A}{\Gamma^2}, \qquad
+    \ell' = \frac{f_V R}{\Gamma},
+
+where :math:`R` is the lab-frame blast-wave radius, :math:`f_A` and :math:`f_V` are the area and volume
+filling factors respectively, and :math:`\Gamma` enters both expressions because the beaming solid angle
+scales as :math:`1/\Gamma^2` and the comoving depth is Lorentz-contracted by one factor of :math:`\Gamma`.
+The bulk velocity follows self-consistently from the Lorentz factor,
+
+.. math::
+
+    \beta = \sqrt{1 - \Gamma^{-2}},
+
+and the observer is fixed on-axis (:math:`\theta = 0`). With :math:`\theta = 0` the relativistic Doppler
+factor reduces to
+
+.. math::
+
+    \mathcal{D} = \frac{1}{\Gamma(1-\beta)} \approx 2\Gamma \quad (\Gamma \gg 1),
+
+giving the combined correction factor
+
+.. math::
+
+    \mathcal{C} = \frac{\mathcal{D}}{1+z} \approx \frac{2\Gamma}{1+z}.
+
+The comoving emissivity and absorption coefficient are computed from the effective depth :math:`\ell'`
+using the same slab radiative transfer described above. The observed specific intensity then follows from
+the standard relativistic transformation
+
+.. math::
+
+    I_{\nu_\mathrm{obs}} = \mathcal{C}^3\,I_{\nu_\mathrm{rf}}\!\left(\frac{\nu_\mathrm{obs}}{\mathcal{C}}\right),
+
+and the flux density is obtained by integrating over the effective solid angle
+
+.. math::
+
+    F_\nu = \frac{A_\mathrm{eff}}{D_A^2}\,I_{\nu_\mathrm{obs}}
+          = \frac{\pi R^2 f_A}{\Gamma^2 D_A^2}\,I_{\nu_\mathrm{obs}}.
+
+.. important::
+
+    The beamed-cap approximation is valid only while the ejecta are highly relativistic
+    (:math:`\Gamma \gg 1`). As :math:`\Gamma` decreases toward unity the cap widens and the
+    EATS corrections grow; for :math:`\Gamma \lesssim \mathrm{few}` the non-relativistic
+    engine is the more appropriate choice. Additionally, the model ignores the finite
+    light-travel time across the cap itself; see the note in the `Relativistic Corrections`_
+    section for further discussion.
 
 Composite Models
 ------------------

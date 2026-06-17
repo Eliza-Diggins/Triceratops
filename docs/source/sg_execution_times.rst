@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.005** total execution time for 57 files **from all galleries**:
+**00:00.004** total execution time for 58 files **from all galleries**:
 
 .. container::
 
@@ -167,10 +167,13 @@ Computation times
    * - :ref:`sphx_glr_auto_examples_photometry_plot_svo_filters.py` (``galleries/photometry/plot_svo_filters.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_synchrotron_a_fundamentals_plot_frequency_gamma_relation.py` (``galleries/synchrotron/a_fundamentals/plot_frequency_gamma_relation.py``)
+   * - :ref:`sphx_glr_auto_examples_synchrotron_a_fundamentals_plot_electron_distributions.py` (``galleries/synchrotron/a_fundamentals/plot_electron_distributions.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_SSA_cooling_SED.py` (``galleries/synchrotron/b_seds/plot_SSA_cooling_SED.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_inhomogeneous_cylinder.py` (``galleries/synchrotron/b_seds/plot_inhomogeneous_cylinder.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py` (``galleries/synchrotron/b_seds/plot_multi_component_numerical_SED.py``)

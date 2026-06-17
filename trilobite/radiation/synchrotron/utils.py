@@ -21,80 +21,25 @@ from scipy.special import gamma as gamma_func
 _c5_coefficient_cgs = (np.sqrt(3) / (16 * np.pi)) * (constants.e.esu**3 / (constants.m_e * constants.c**2)).cgs.value
 _c6_coefficient_cgs = np.sqrt(3) * (np.pi / 72) * (constants.e.esu * constants.m_e**5 * constants.c**10).cgs.value
 
-# ------------------------------------------------------------------
-# Synchrotron normalization constants (chi)
-# ------------------------------------------------------------------
-chi_cgs = 4 * _c5_coefficient_cgs
-r"""
-float
-    Numerical synchrotron normalization coefficient
-    :math:`\chi \equiv 4 c_5`.
+# ======================================= #
+# NORMALIZATION CONSTANTS                 #
+# ======================================= #
+chi = (np.sqrt(3) / (4 * np.pi)) * (const.e.esu**3 / (const.m_e * const.c**2))
+""" ~astropy.units.Quantity: Normalization constant for power-law synchrotron emission."""
+chi_iso = (np.sqrt(3) / 16) * (const.e.esu**3 / (const.m_e * const.c**2))
 
-    This constant represents **only the coefficient prefactor** extracted from
-    the standard synchrotron emissivity constant :math:`c_5` (in CGS units).
-    It is used as a bookkeeping convenience in SED normalization expressions
-    and does **not** by itself represent a physical power, emissivity, or flux.
-
-    In particular, :math:`\chi` does *not* include:
-
-    - electron distribution normalization,
-    - magnetic-field or frequency dependence,
-    - pitch-angle averaging,
-    - geometric or distance factors.
-
-    These contributions are applied explicitly elsewhere in the SED
-    construction.
-"""
-
+chi_cgs = chi.cgs.value
+chi_cgs_iso = chi_iso.cgs.value
 _log_chi_cgs = np.log(chi_cgs)
+_log_chi_cgs_iso = np.log(chi_cgs_iso)
 
 _chi_abs_cgs = chi_cgs / constants.m_e.cgs.value
-r"""float: SSA prefactor :math:`\chi/m_e = \sqrt{3}e^3/(4\pi m_e^2 c^2)` in CGS."""
 _log_chi_abs_cgs = np.log(_chi_abs_cgs)
-r"""float: Natural log of the SSA prefactor :math:`\chi/m_e`."""
-r"""
-float
-    Natural logarithm of the synchrotron normalization coefficient
-    :math:`\chi = 4 c_5`.
-
-    Stored separately to support numerically stable, log-space SED
-    normalization and inference workflows.
-"""
-
-chi_cgs_iso = (2 / np.pi) * chi_cgs
-r"""
-float
-    Synchrotron normalization coefficient for an **isotropic pitch-angle
-    distribution**.
-
-    This quantity applies the standard isotropic pitch-angle averaging factor
-    :math:`2 / \pi` to the coefficient-only normalization constant
-    :math:`\chi = 4 c_5`.
-
-    As with ``chi_cgs``, this constant represents only the numerical prefactor
-    and must be combined with additional physical factors to construct a full
-    synchrotron emissivity or SED normalization.
-"""
-
-_log_chi_cgs_iso = np.log(chi_cgs_iso)
-r"""
-float
-    Natural logarithm of the isotropic-pitch-angle synchrotron normalization
-    coefficient.
-
-    Used internally for log-space normalization and inference when
-    pitch-angle-averaged synchrotron emissivities are assumed.
-"""
 
 
-# ============================================================ #
-# PACHOLCZYK SYNCHROTRON COEFFICIENTS                          #
-# ============================================================ #
-# These are the various coefficients appearing in the Pacholczyk (1970) expressions for synchrotron
-# emissivity and absorption from a power-law population of electrons. See the docstrings
-# of the following functions for details and references.
-#
-# These are used throughout the codebase for various synchrotron computations.
+# =========================================================== #
+# PACHOLZYK COEFFICIENTS FOR POWER-LAW ELECTRON DISTRIBUTIONS #
+# =========================================================== #
 c_1: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e**3 * const.c**5))
 r"""astropy.units.Quantity: Synchrotron radiation constant :math:`c_1`.
 
@@ -115,7 +60,6 @@ References
 .. footbibliography::
 """
 c_1_cgs: float = c_1.cgs.value
-_log_c_1_cgs: float = np.log(c_1_cgs)
 
 c_1_gamma: u.Quantity = (3 / (4 * np.pi)) * (const.e.esu / (const.m_e * const.c))
 r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}`.
@@ -130,13 +74,13 @@ The :math:`c_{1,\gamma}` constant is the coefficient appearing in the synchrotro
 c_1_gamma_cgs: float = c_1_gamma.cgs.value
 _log_c_1_gamma_cgs = np.log(c_1_gamma_cgs)
 
-c_1_gamma_iso: u.Quantity = (3 / 16) * (const.e.esu / (const.m_e * const.c))
+c_1_gamma_iso: u.Quantity = (3 / (16)) * (const.e.esu / (const.m_e * const.c))
 r"""astropy.units.Quantity: Synchrotron constant :math:`c_{1,\gamma}^{\mathrm{iso}}` for isotropic distributions.
 
 The :math:`c_{1,\gamma}^{\mathrm{iso}}` constant is the coefficient appearing in the synchrotron frequency when
 expressed
 in terms of the electron Lorentz factor :math:`\Gamma` and assuming an isotropic distribution of pitch angles.
-The isotropic pitch-angle averaging factor :math:`pi/4` is included in this constant, so that the critical
+The isotropic pitch-angle averaging factor :math:`2/\pi` is included in this constant, so that the critical
 frequency for an isotropic distribution can be written as
 
 .. math::
@@ -510,10 +454,26 @@ def compute_c5c6_ratio(
     pitch_average: bool = False,
 ) -> Union[float, np.ndarray]:
     r"""
-    Compute the ratio of the synchrotron emissivity and absorption coefficients :math:`c_5(p)/c_6(p)`.
+    Compute the ratio of the synchrotron emissivity and self-absorption coefficients, :math:`c_5(p)/c_6(p)`.
 
-    This ratio appears in expressions for the synchrotron source function of a power-law electron distribution
-    and is useful for computing the SSA frequency in terms of the SED normalization and other physical parameters.
+    This ratio is useful for computing the synchrotron source function of a
+    power-law electron population,
+
+    .. math::
+
+        S_\nu
+        =
+        \frac{j_\nu}{\alpha_\nu}
+        =
+        \frac{c_5(p)}{c_6(p)}
+        \left(m_e c^2\right)^{1-p}
+        \left(\frac{\nu}{2c_1}\right)^{5/2}
+        \left(B\sin\alpha\right)^{-1/2},
+
+    where :math:`j_\nu` is the synchrotron emissivity and :math:`\alpha_\nu` is
+    the synchrotron self-absorption coefficient.  When ``pitch_average=True``
+    the :math:`\sin\alpha` factor is replaced by unity and :math:`B` stands
+    alone.
 
     Parameters
     ----------
@@ -526,277 +486,66 @@ def compute_c5c6_ratio(
 
         Default is ``3.0``.
     pitch_average : bool, optional
-        If ``False``, the computed ratio does not include the effect of isotropic pitch-angle averaging. If
-        ``True``, the ratio includes the isotropic pitch-angle averaging factors for both :math:`c_5(p)` and
-        :math:`c_6(p)`, so that the returned value is appropriate for use
-        when pitch-angle-averaged synchrotron emissivities and absorption coefficients are assumed.
+        If `True`, pass ``pitch_average=True`` to both
+        :func:`compute_c5_parameter` and :func:`compute_c6_parameter` so
+        that the returned ratio already incorporates the isotropic
+        pitch-angle averages.  The source function then reads
+
+        .. math::
+
+            S_\nu
+            =
+            \frac{c_5^{\mathrm{iso}}(p)}{c_6^{\mathrm{iso}}(p)}
+            \left(m_e c^2\right)^{1-p}
+            \left(\frac{\nu}{2c_1}\right)^{5/2}
+            B^{-1/2}.
+
+        Default is `False`.
 
     Returns
     -------
     float or numpy.ndarray
-        The ratio :math:`c_5(p)/c_6(p)` in CGS units. If ``p`` is array-like, the returned value has the broadcast
-        shape of ``p``.
-    """
-    c5 = compute_c5_parameter(p=p, pitch_average=pitch_average)
-    c6 = compute_c6_parameter(p=p, pitch_average=pitch_average)
-    return c5 / c6
+        The dimensionless ratio :math:`c_5(p)/c_6(p)` in CGS units.
+        If ``p`` is array-like, the returned value has the broadcast shape of
+        ``p``.
 
-
-def compute_c5_low_frequency_parameter(
-    p: Union[float, np.ndarray] = 3.0,
-    pitch_average: bool = False,
-) -> Union[float, np.ndarray]:
-    r"""
-    Compute the low-frequency synchrotron emissivity coefficient :math:`c_5^{(L)}(p)`.
-
-    This coefficient appears in the asymptotic emissivity below the
-    characteristic frequency of the lowest-energy electrons,
-
-    .. math::
-
-        \nu \ll \nu_m,
-
-    where
-
-    .. math::
-
-        \nu_m = c_{1,\gamma} B\sin\alpha\,\gamma_{\min}^2.
-
-    For a truncated power-law electron population,
-
-    .. math::
-
-        N(\gamma) = N_0 \gamma^{-p},
-        \qquad
-        \gamma_{\min} \leq \gamma \leq \gamma_{\max},
-
-    the low-frequency emissivity is
+    Notes
+    -----
+    The ratio follows directly from the Pacholczyk forms of the emissivity
+    and absorption coefficient.  Dividing the emissivity
 
     .. math::
 
         j_\nu
         =
-        c_5^{(L)}(p)
-        N_0
-        (m_e c^2)^{-1}
-        \left(B\sin\alpha\right)^{2/3}
-        \gamma_{\min}^{(1-3p)/3}
-        \nu^{1/3},
+        c_5(p)\,N_0\,(m_e c^2)^{p-1}
+        (B\sin\alpha)^{(p+1)/2}
+        \left(\frac{\nu}{2c_1}\right)^{-(p-1)/2}
 
-    assuming :math:`\gamma_{\max}\gg\gamma_{\min}` and :math:`p>1/3`.
-
-    Parameters
-    ----------
-    p : float or array-like, optional
-        Power-law index of the electron Lorentz-factor distribution.
-        Default is ``3.0``.
-    pitch_average : bool, optional
-        If ``False``, return the fixed-pitch-angle coefficient, leaving the
-        factor :math:`(B\sin\alpha)^{2/3}` explicit.
-
-        If ``True``, multiply by the isotropic pitch-angle average of
-        :math:`\sin^{2/3}\alpha`, so that the emissivity should be written
-        with :math:`B^{2/3}` rather than :math:`(B\sin\alpha)^{2/3}`.
-
-    Returns
-    -------
-    float or numpy.ndarray
-        The low-frequency emissivity coefficient :math:`c_5^{(L)}(p)` in CGS
-        units. If ``p`` is array-like, the returned value has the broadcast
-        shape of ``p``.
-    """
-    p = np.asarray(p)
-
-    c5_low = (
-        constants.e.esu.cgs.value**3
-        * c_1_gamma_cgs ** (-1.0 / 3.0)
-        / ((p - 1.0 / 3.0) * 2.0 ** (1.0 / 3.0) * gamma_func(1.0 / 3.0))
-    )
-
-    if pitch_average:
-        # Isotropic pitch-angle average of sin(alpha)^(2/3).
-        pitch_angle_factor = 0.5 * np.sqrt(np.pi) * gamma_func(4.0 / 3.0) / gamma_func(11.0 / 6.0)
-        c5_low *= pitch_angle_factor
-
-    if c5_low.ndim == 0:
-        return float(c5_low)
-
-    return c5_low
-
-
-def compute_c6_low_frequency_parameter(
-    p: Union[float, np.ndarray] = 3.0,
-    pitch_average: bool = False,
-) -> Union[float, np.ndarray]:
-    r"""
-    Compute the low-frequency synchrotron self-absorption coefficient :math:`c_6^{(L)}(p)`.
-
-    This coefficient appears in the asymptotic self-absorption coefficient
-    below the characteristic frequency of the lowest-energy electrons,
-
-    .. math::
-
-        \nu \ll \nu_m.
-
-    For a truncated power-law electron population,
-
-    .. math::
-
-        N(\gamma) = N_0 \gamma^{-p},
-        \qquad
-        \gamma_{\min} \leq \gamma \leq \gamma_{\max},
-
-    the low-frequency absorption coefficient is
+    by the absorption coefficient
 
     .. math::
 
         \alpha_\nu
         =
-        c_6^{(L)}(p)
-        N_0
-        (m_e^2 c^2)^{-1}
-        \left(B\sin\alpha\right)^{2/3}
-        \gamma_{\min}^{-(3p+2)/3}
-        \nu^{-5/3},
+        c_6(p)\,N_0\,(m_e c^2)^{p-1}
+        (B\sin\alpha)^{(p+2)/2}
+        \left(\frac{\nu}{2c_1}\right)^{-(p+4)/2}
 
-    assuming :math:`\gamma_{\max}\gg\gamma_{\min}` and :math:`p>-2/3`.
-
-    Parameters
-    ----------
-    p : float or array-like, optional
-        Power-law index of the electron Lorentz-factor distribution.
-        Default is ``3.0``.
-    pitch_average : bool, optional
-        If ``False``, return the fixed-pitch-angle coefficient, leaving the
-        factor :math:`(B\sin\alpha)^{2/3}` explicit.
-
-        If ``True``, multiply by the isotropic pitch-angle average of
-        :math:`\sin^{2/3}\alpha`, so that the absorption coefficient should be
-        written with :math:`B^{2/3}` rather than
-        :math:`(B\sin\alpha)^{2/3}`.
-
-    Returns
-    -------
-    float or numpy.ndarray
-        The low-frequency absorption coefficient :math:`c_6^{(L)}(p)` in CGS
-        units. If ``p`` is array-like, the returned value has the broadcast
-        shape of ``p``.
-    """
-    p = np.asarray(p)
-
-    c6_low = (
-        constants.e.esu.cgs.value**3
-        * c_1_gamma_cgs ** (-1.0 / 3.0)
-        * 3.0
-        * (p + 2.0)
-        / (2.0 ** (4.0 / 3.0) * gamma_func(1.0 / 3.0) * (3.0 * p + 2.0))
-    )
-
-    if pitch_average:
-        # Isotropic pitch-angle average of sin(alpha)^(2/3).
-        pitch_angle_factor = 0.5 * np.sqrt(np.pi) * gamma_func(4.0 / 3.0) / gamma_func(11.0 / 6.0)
-        c6_low *= pitch_angle_factor
-
-    if c6_low.ndim == 0:
-        return float(c6_low)
-
-    return c6_low
-
-
-def compute_c5c6_low_frequency_ratio(
-    p: Union[float, np.ndarray] = 3.0,
-    pitch_average: bool = False,
-) -> Union[float, np.ndarray]:
-    r"""
-    Compute the low-frequency source-function coefficient ratio :math:`c_5^{(L)}(p)/c_6^{(L)}(p)`.
-
-    This ratio appears in the low-frequency synchrotron source function,
+    gives
 
     .. math::
 
-        S_\nu^{(L)}
+        S_\nu
         =
-        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
-        m_e \gamma_{\min} \nu^2.
+        \frac{c_5(p)}{c_6(p)}
+        (B\sin\alpha)^{-1/2}
+        \left(\frac{\nu}{2c_1}\right)^{5/2}.
 
-    Evaluating the ratio gives
-
-    .. math::
-
-        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
-        =
-        \frac{2(3p+2)}{(p+2)(3p-1)}.
-
-    The result is independent of pitch-angle averaging because the same
-    :math:`\langle\sin^{2/3}\alpha\rangle` factor multiplies both
-    :math:`c_5^{(L)}` and :math:`c_6^{(L)}`.
-
-    Parameters
+    References
     ----------
-    p : float or array-like, optional
-        Power-law index of the electron Lorentz-factor distribution.
-        Default is ``3.0``.
-    pitch_average : bool, optional
-        Accepted for API consistency with :func:`compute_c5_parameter` and
-        :func:`compute_c6_parameter`. The returned ratio is unchanged by this
-        argument.
-
-    Returns
-    -------
-    float or numpy.ndarray
-        The ratio :math:`c_5^{(L)}(p)/c_6^{(L)}(p)`.
-        If ``p`` is array-like, the returned value has the broadcast shape of
-        ``p``.
+    .. footbibliography::
     """
-    p = np.asarray(p)
-
-    ratio = 2.0 * (3.0 * p + 2.0) / ((p + 2.0) * (3.0 * p - 1.0))
-
-    if ratio.ndim == 0:
-        return float(ratio)
-
-    return ratio
-
-
-def compute_c6c5_low_frequency_ratio(
-    p: Union[float, np.ndarray] = 3.0,
-    pitch_average: bool = False,
-) -> Union[float, np.ndarray]:
-    r"""
-    Compute the inverse low-frequency coefficient ratio :math:`c_6^{(L)}(p)/c_5^{(L)}(p)`.
-
-    This ratio is useful when solving the low-frequency SSA matching condition,
-
-    .. math::
-
-        F_{\rm norm}
-        \left(\frac{\nu_a}{\nu_m}\right)^{1/3}
-        =
-        \Omega
-        \frac{c_5^{(L)}(p)}{c_6^{(L)}(p)}
-        m_e\gamma_{\min}\nu_a^2,
-
-    for :math:`\nu_a`.
-
-    Parameters
-    ----------
-    p : float or array-like, optional
-        Power-law index of the electron Lorentz-factor distribution.
-        Default is ``3.0``.
-    pitch_average : bool, optional
-        Accepted for API consistency. The returned ratio is unchanged by this
-        argument.
-
-    Returns
-    -------
-    float or numpy.ndarray
-        The ratio :math:`c_6^{(L)}(p)/c_5^{(L)}(p)`.
-    """
-    p = np.asarray(p)
-
-    ratio = ((p + 2.0) * (3.0 * p - 1.0)) / (2.0 * (3.0 * p + 2.0))
-
-    if ratio.ndim == 0:
-        return float(ratio)
-
-    return ratio
+    c5 = compute_c5_parameter(p, pitch_average=pitch_average)
+    c6 = compute_c6_parameter(p, pitch_average=pitch_average)
+    return c5 / c6

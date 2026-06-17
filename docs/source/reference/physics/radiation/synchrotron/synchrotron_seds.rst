@@ -392,9 +392,9 @@ routines where unit overhead must be minimized.
 Inspecting the Spectral Regime
 -------------------------------
 
-For :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.MultiSpectrumSynchrotronSED` subclasses, you
+For :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED` subclasses, you
 can query which spectral regime was selected for a given set of parameters via
-:meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.MultiSpectrumSynchrotronSED.determine_sed_regime`:
+:meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.determine_sed_regime`:
 
 .. code-block:: python
 
@@ -431,10 +431,10 @@ Quadrature SEDs
 
 .. seealso::
 
-    - :ref:`synch_numerical_theory` for the mathematics underlying the quadrature algorithm,
+    - :ref:`synch_numerical_sed_theory` for the mathematics underlying the quadrature algorithm,
       including kernel tabulation, the integration-by-parts form of the absorption coefficient,
       and the radiative transfer solution.
-    - The gallery example :ref:`sphx_glr_galleries_synchrotron_b_seds_plot_multi_component_numerical_SED.py`
+    - The gallery example :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py`
       for a worked example with a mixed thermal and power-law electron distribution.
 
 The analytical SED classes described above are highly efficient, but they rest on the assumption that the
@@ -651,6 +651,7 @@ API Reference
 
 .. autosummary::
    :nosignatures:
+   :toctree: ../../../../_as_gen
 
    SynchrotronSED
    MultiSpectrumSynchrotronSED
@@ -666,6 +667,7 @@ API Reference
 
 .. autosummary::
    :nosignatures:
+   :toctree: ../../../../_as_gen
 
    NumericalSynchrotronEngine
    NumericalSynchrotronEngine.load_first_kernel
@@ -676,9 +678,6 @@ API Reference
    NumericalSynchrotronEngine.compute_rest_frame_specific_intensity
    NumericalSynchrotronEngine.compute_specific_intensity
    NumericalSynchrotronEngine.compute_flux_density
-   Numerical_PL_SSA_SED
-   Numerical_Thermal_SSA_SED
-   Numerical_Thermal_PL_SSA_SED
 
 ----
 
@@ -763,6 +762,7 @@ specific physical scenario. They operate entirely in logarithmic space.
 
 .. autosummary::
    :nosignatures:
+   :toctree: ../../../../_as_gen
 
    log_smoothed_SFBPL
    log_exp_cutoff_sed

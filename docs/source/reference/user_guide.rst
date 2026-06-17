@@ -24,9 +24,9 @@ a comprehensive overview of the relevant components and their usage.
 Getting Started
 ---------------
 
-To get started with trilobite, check out :ref:`getting_started` guide which walks through installation,
-basic usage, and a simple example. This is a great place to begin if you're new to trilobite or scientific
-Python in general. You can also explore the :ref:`examples` section for more in-depth tutorials and use cases.
+To get started with trilobite, check out the :doc:`Quickstart Guide </getting_started>` which walks through
+installation, basic usage, and a simple example. This is a great place to begin if you're new to trilobite or
+scientific Python in general. You can also explore the example galleries for more in-depth tutorials and use cases.
 
 Data Loading, Handling, and Visualization
 -----------------------------------------

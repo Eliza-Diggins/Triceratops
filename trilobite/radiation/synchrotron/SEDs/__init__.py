@@ -13,7 +13,13 @@ For documentation on synchrotron emission modeling in Trilobite, see :ref:`radia
 """
 
 from . import numerical, one_zone
+from .numerical import *
 from .one_zone import *
-from .one_zone import __all__ as _one_zone_all
 
-__all__ = ["one_zone", "numerical"] + _one_zone_all
+__all__ = [
+    "numerical",
+    "one_zone",
+]
+
+__all__.extend(one_zone.__all__)
+__all__.extend(numerical.__all__)
