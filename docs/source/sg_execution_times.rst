@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.002** total execution time for 58 files **from all galleries**:
+**00:01.299** total execution time for 61 files **from all galleries**:
 
 .. container::
 
@@ -32,6 +32,15 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_two_shock.py` (``galleries/dynamics/b_models/plot_chevalier_two_shock.py``)
+     - 00:01.025
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_wind_engine.py` (``galleries/dynamics/b_models/plot_chevalier_wind_engine.py``)
+     - 00:00.152
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_self_similar.py` (``galleries/dynamics/b_models/plot_chevalier_self_similar.py``)
+     - 00:00.119
+     - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
      - 00:00.002
      - 0.0
