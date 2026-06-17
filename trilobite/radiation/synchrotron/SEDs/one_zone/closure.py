@@ -57,7 +57,7 @@ from trilobite.radiation.synchrotron.utils import (
 )
 from trilobite.utils.misc_utils import ensure_in_units
 
-from ._one_zone_closure import (
+from ._closure import (
     COOLING_INV_FUNCTION_REGISTRY,
     SSA_COOLING_INV_FUNCTION_REGISTRY,
     SSA_INV_FUNCTION_REGISTRY,

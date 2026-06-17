@@ -339,19 +339,19 @@ Standalone Closure Functions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 All closure logic is also available as standalone functions in
-:mod:`~radiation.synchrotron.SEDs.one_zone_closure`. These are useful when the SED class
+:mod:`~trilobite.radiation.synchrotron.SEDs.one_zone.closure`. These are useful when the SED class
 interface is not needed, or for specialized closures (e.g. the implicit-cooling or De Marchi SSA
 inversions) that are not exposed through any SED class method.
 
 For **relativistic sources in the coasting phase**, the
-:func:`~trilobite.radiation.synchrotron.SEDs.one_zone_closure.invert_barniol_duran_coasting`
+:func:`~trilobite.radiation.synchrotron.SEDs.one_zone.closure.invert_barniol_duran_coasting`
 function implements the :footcite:t:`duran2013radius` equipartition inversion, which
 simultaneously solves for the radius :math:`R`, bulk Lorentz factor :math:`\Gamma`,
 equipartition energy :math:`E`, and the derived microphysical quantities
 :math:`\gamma_e`, :math:`N_e`, and :math:`B`.  See :ref:`barnoil_duran` for the
 theoretical background.
 
-.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone_closure
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone.closure
 
 .. rubric:: Public Inversion Functions
 
@@ -392,9 +392,9 @@ routines where unit overhead must be minimized.
 Inspecting the Spectral Regime
 -------------------------------
 
-For :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.MultiSpectrumSynchrotronSED` subclasses, you
+For :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED` subclasses, you
 can query which spectral regime was selected for a given set of parameters via
-:meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.MultiSpectrumSynchrotronSED.determine_sed_regime`:
+:meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.determine_sed_regime`:
 
 .. code-block:: python
 
@@ -431,10 +431,10 @@ Quadrature SEDs
 
 .. seealso::
 
-    - :ref:`synch_numerical_theory` for the mathematics underlying the quadrature algorithm,
+    - :ref:`synch_numerical_sed_theory` for the mathematics underlying the quadrature algorithm,
       including kernel tabulation, the integration-by-parts form of the absorption coefficient,
       and the radiative transfer solution.
-    - The gallery example :ref:`sphx_glr_galleries_synchrotron_b_seds_plot_multi_component_numerical_SED.py`
+    - The gallery example :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py`
       for a worked example with a mixed thermal and power-law electron distribution.
 
 The analytical SED classes described above are highly efficient, but they rest on the assumption that the
@@ -651,6 +651,7 @@ API Reference
 
 .. autosummary::
    :nosignatures:
+   :toctree: ../../../../_as_gen
 
    SynchrotronSED
    MultiSpectrumSynchrotronSED
@@ -666,6 +667,7 @@ API Reference
 
 .. autosummary::
    :nosignatures:
+   :toctree: ../../../../_as_gen
 
    NumericalSynchrotronEngine
    NumericalSynchrotronEngine.load_first_kernel
@@ -754,12 +756,13 @@ Shape Functions
 Shape functions define the mathematical form of spectral transitions independently of any
 specific physical scenario. They operate entirely in logarithmic space.
 
-.. currentmodule:: trilobite.radiation.synchrotron.SEDs._one_zone_functions
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone._functions
 
 .. rubric:: Shape Function API
 
 .. autosummary::
    :nosignatures:
+   :toctree: ../../../../_as_gen
 
    log_smoothed_SFBPL
    log_exp_cutoff_sed
@@ -777,7 +780,7 @@ specific physical scenario. They operate entirely in logarithmic space.
 .. code-block:: python
 
    import numpy as np
-   from trilobite.radiation.synchrotron.SEDs._one_zone_functions import (
+   from trilobite.radiation.synchrotron.SEDs.one_zone._functions import (
        log_smoothed_SFBPL,
        log_exp_cutoff_sed,
    )
@@ -821,7 +824,7 @@ For example: ``_log_powerlaw_sbpl_sed_ssa_cool_7``
 .. dropdown:: Available Low-Level SED Functions
 
    The following low-level SED functions are implemented in
-   :mod:`trilobite.radiation.synchrotron.SEDs._one_zone_functions`. Each corresponds
+   :mod:`trilobite.radiation.synchrotron.SEDs.one_zone._functions`. Each corresponds
    to a unique spectral regime defined in :ref:`synch_sed_theory`.
 
    .. rubric:: Power Law (No Cooling, No SSA)
@@ -867,7 +870,7 @@ SSA Utilities
 SSA utilities compute the self-absorption frequency :math:`\nu_a` and select the physically
 consistent SSA regime for a given set of input parameters.
 
-.. currentmodule:: trilobite.radiation.synchrotron.SEDs._one_zone_ssa
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone._ssa
 
 .. rubric:: SSA Utility API
 
@@ -890,7 +893,7 @@ regimes or physical processes can be incorporated without modifying existing cod
 **Step 1: Implement any new low-level SED functions**
 
 If the new SED requires spectral shapes not already provided, add them to
-:mod:`trilobite.radiation.synchrotron.SEDs._one_zone_functions` following the established naming
+:mod:`trilobite.radiation.synchrotron.SEDs.one_zone._functions` following the established naming
 convention. Each function should:
 
 - Accept ``log_nu`` (natural log of frequency in Hz) and regime-specific break frequencies in

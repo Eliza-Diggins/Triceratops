@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.004** total execution time for 55 files **from all galleries**:
+**00:00.004** total execution time for 58 files **from all galleries**:
 
 .. container::
 
@@ -33,7 +33,7 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
-     - 00:00.003
+     - 00:00.004
      - 0.0
    * - :ref:`sphx_glr_auto_examples_modeling_plot_fred_blackbody_optical_lc.py` (``galleries/modeling/plot_fred_blackbody_optical_lc.py``)
      - 00:00.001
@@ -62,19 +62,25 @@ Computation times
    * - :ref:`sphx_glr_auto_examples_accretion_plot_tde_disk_observables.py` (``galleries/accretion/plot_tde_disk_observables.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_epoch_photometry.py` (``galleries/data/plot_epoch_photometry.py``)
+   * - :ref:`sphx_glr_auto_examples_data_plot_inference_data.py` (``galleries/data/plot_inference_data.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_inference_workflow.py` (``galleries/data/plot_inference_workflow.py``)
+   * - :ref:`sphx_glr_auto_examples_data_plot_multiband_optical.py` (``galleries/data/plot_multiband_optical.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_multiband_radio.py` (``galleries/data/plot_multiband_radio.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_data_plot_optical_light_curve.py` (``galleries/data/plot_optical_light_curve.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_photometry_data.py` (``galleries/data/plot_photometry_data.py``)
+   * - :ref:`sphx_glr_auto_examples_data_plot_optical_photometry.py` (``galleries/data/plot_optical_photometry.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_specific_epochs.py` (``galleries/data/plot_specific_epochs.py``)
+   * - :ref:`sphx_glr_auto_examples_data_plot_radio_light_curve.py` (``galleries/data/plot_radio_light_curve.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_radio_photometry.py` (``galleries/data/plot_radio_photometry.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_plot_chevalier_shock_structure.py` (``galleries/dynamics/plot_chevalier_shock_structure.py``)
@@ -161,10 +167,13 @@ Computation times
    * - :ref:`sphx_glr_auto_examples_photometry_plot_svo_filters.py` (``galleries/photometry/plot_svo_filters.py``)
      - 00:00.000
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_synchrotron_a_fundamentals_plot_frequency_gamma_relation.py` (``galleries/synchrotron/a_fundamentals/plot_frequency_gamma_relation.py``)
+   * - :ref:`sphx_glr_auto_examples_synchrotron_a_fundamentals_plot_electron_distributions.py` (``galleries/synchrotron/a_fundamentals/plot_electron_distributions.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_SSA_cooling_SED.py` (``galleries/synchrotron/b_seds/plot_SSA_cooling_SED.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_inhomogeneous_cylinder.py` (``galleries/synchrotron/b_seds/plot_inhomogeneous_cylinder.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py` (``galleries/synchrotron/b_seds/plot_multi_component_numerical_SED.py``)

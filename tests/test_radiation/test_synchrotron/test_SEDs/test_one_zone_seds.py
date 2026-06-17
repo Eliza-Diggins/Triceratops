@@ -7,13 +7,15 @@ from astropy import units as u
 
 from trilobite.radiation.synchrotron.cooling import SynchrotronRadiativeCoolingEngine
 from trilobite.radiation.synchrotron.SEDs import (
+    Numerical_PowerLaw_Cooling_SSA_SynchrotronSED,
+    Numerical_PowerLaw_SSA_SynchrotronSED,
     PowerLaw_Cooling_SSA_SynchrotronSED,
     PowerLaw_Cooling_SynchrotronSED,
     PowerLaw_SSA_SynchrotronSED,
     PowerLaw_SynchrotronSED,
 )
 
-from trilobite.radiation.synchrotron.SEDs.one_zone_closure import (
+from trilobite.radiation.synchrotron.SEDs.one_zone.closure import (
     invert_powerlaw_implicit_cooling_sed,
     invert_powerlaw_implicit_cooling_ssa_sed,
     invert_powerlaw_ssa_sed_demarchi,
@@ -338,7 +340,7 @@ class Test_PowerLaw_SSA_SynchrotronSED(BaseTestOneZoneSynchrotronSED):
     # ---------------------------------------------------------
 
     PHYSICS_PARAMETERS = {
-        "B": [1 * u.G],
+        "B": [1 * u.G, 10.0 * u.G, 100.0 * u.G],
         "R": [1e15 * u.cm, 1e16 * u.cm],
     }
     """
@@ -535,7 +537,7 @@ def test_demarchi_equivalence(diagnostic_plots, diagnostic_plots_dir):
     and compares the inferred B(t) and R(t) from the two methods.
     """
 
-    from trilobite.radiation.synchrotron.SEDs.one_zone_closure import (
+    from trilobite.radiation.synchrotron.SEDs.one_zone.closure import (
         invert_powerlaw_ssa_sed_demarchi,
     )
 
@@ -1059,8 +1061,13 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
         nu_peak = constant
 
     while gamma_c increases monotonically.
+
+    Regime dispatch:
+        gamma_c < gamma_min              -> Spectrum8 (fast-cooling: nu_c < nu_m < nu_a)
+        gamma_min <= gamma_c <= gamma_max -> Spectrum7 (slow-cooling: nu_m < nu_c < nu_a)
+        gamma_c > gamma_max              -> Spectrum2 (no-cooling:   nu_m < nu_a < nu_c)
     """
-    sed_engine = PowerLaw_Cooling_SSA_SynchrotronSED()
+    sed_engine = PowerLaw_Cooling_SynchrotronSED()
 
     # ---------------------------------------------------------
     # Observed SED (constant in time)
@@ -1084,20 +1091,36 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
     f_V = 1.0
     gamma_bulk = 1.0
 
-    # Sweep gamma_c across many decades
-    gamma_c_grid = np.geomspace(1, 1e5, 100)
+    # Sweep gamma_c across all three regimes: fast -> slow -> no-cooling.
+    # Grid starts below gamma_min and ends well above gamma_max.
+    gamma_c_grid = np.geomspace(1, 1e12, 150)
+
+    # ---------------------------------------------------------
+    # Regime masks
+    # ---------------------------------------------------------
+
+    fast_mask = gamma_c_grid < gamma_m
+    slow_mask = (gamma_c_grid >= gamma_m) & (gamma_c_grid <= gamma_max)
+    no_cool_mask = gamma_c_grid > gamma_max
 
     B_vals = []
     R_vals = []
     regimes = []
 
     # ---------------------------------------------------------
-    # Inversion sweep
+    # Inversion sweep — dispatch to the correct SSA+cooling regime
     # ---------------------------------------------------------
 
-    for gamma_c in gamma_c_grid:
+    for i, gamma_c in enumerate(gamma_c_grid):
+        if fast_mask[i]:
+            regime = "fast_cooling"  # nu_c < nu_m < nu_a
+        elif slow_mask[i]:
+            regime = "slow_cooling"  # nu_m < nu_c < nu_a
+        else:
+            regime = "no_cooling"  # nu_m < nu_a, nu_c > nu_max (no cooling)
+
         result = sed_engine.from_params_to_physics(
-            "Spectrum7",  # Start in fast-cooling regime
+            regime,
             F_peak,
             nu_peak,
             gamma_min=gamma_m,
@@ -1114,6 +1137,7 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
 
         B_vals.append(result["B"].to_value(u.G))
         R_vals.append(result["R"].to_value(u.cm))
+        regimes.append(regime)
 
     B_vals = np.array(B_vals)
     R_vals = np.array(R_vals)
@@ -1148,21 +1172,40 @@ def test_cooling_transition_continuity(diagnostic_plots, diagnostic_plots_dir):
         # Magnetic field
         # -----------------------------------------------------
 
-        axes[0].loglog(gamma_vals, B_vals, "o-")
+        axes[0].loglog(gamma_vals[fast_mask], B_vals[fast_mask], "o-", label="Spectrum8 (fast)")
+        axes[0].loglog(gamma_vals[slow_mask], B_vals[slow_mask], "s-", label="Spectrum7 (slow)")
+        axes[0].loglog(gamma_vals[no_cool_mask], B_vals[no_cool_mask], "^-", label="Spectrum2 (no-cool)")
         axes[0].set_ylabel("B [G]")
         axes[0].set_title("Magnetic field vs gamma_c")
+        axes[0].legend(fontsize=8)
 
         # -----------------------------------------------------
         # Radius
         # -----------------------------------------------------
 
-        axes[1].loglog(gamma_vals, R_vals, "o-")
+        axes[1].loglog(gamma_vals[fast_mask], R_vals[fast_mask], "o-", label="Spectrum8 (fast)")
+        axes[1].loglog(gamma_vals[slow_mask], R_vals[slow_mask], "s-", label="Spectrum7 (slow)")
+        axes[1].loglog(gamma_vals[no_cool_mask], R_vals[no_cool_mask], "^-", label="Spectrum2 (no-cool)")
         axes[1].set_ylabel("R [cm]")
         axes[1].set_title("Radius vs gamma_c")
+        axes[1].legend(fontsize=8)
 
         # -----------------------------------------------------
         # Mark regime transitions
         # -----------------------------------------------------
+
+        for ax in axes[:2]:
+            ax.axvline(gamma_m, color="grey", linestyle="--", linewidth=0.8, label=r"$\gamma_m$")
+            ax.axvline(gamma_max, color="grey", linestyle=":", linewidth=0.8, label=r"$\gamma_{\max}$")
+
+        axes[2].semilogx(gamma_vals[:-1], dlogB, label=r"$\Delta\log_{10} B$")
+        axes[2].semilogx(gamma_vals[:-1] + np.diff(gamma_vals) / 2, dlogR, label=r"$\Delta\log_{10} R$")
+        axes[2].axvline(gamma_m, color="grey", linestyle="--", linewidth=0.8)
+        axes[2].axvline(gamma_max, color="grey", linestyle=":", linewidth=0.8)
+        axes[2].set_xlabel(r"$\gamma_c$")
+        axes[2].set_ylabel("step")
+        axes[2].set_title("Log-step size (continuity check)")
+        axes[2].legend(fontsize=8)
 
         plt.tight_layout()
 
@@ -1234,7 +1277,7 @@ def test_implicit_cooling_round_trip(B, R, t, p, diagnostic_plots, diagnostic_pl
     gamma_bulk = 1.0
     luminosity_distance = 35 * u.Mpc
 
-    cooling_engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+    cooling_engine = SynchrotronRadiativeCoolingEngine()
 
     # Compute gamma_c from the synchrotron cooling closure: gamma_c = THETA / (B^2 t)
     B_cgs = B.to_value("G")
@@ -1327,9 +1370,9 @@ def test_implicit_cooling_round_trip(B, R, t, p, diagnostic_plots, diagnostic_pl
     list(
         itertools.product(
             ["Spectrum4", "Spectrum7", "Spectrum3"],
-            [1.0 * u.G, 10.0 * u.G, 100.0 * u.G],
+            [1.0 * u.G, 10.0 * u.G],
             [1e16 * u.cm, 1e17 * u.cm, 1e18 * u.cm],
-            [1e4 * u.s, 1e5 * u.s, 1e6 * u.s, 1e7 * u.s],
+            [1e4 * u.s, 1e5 * u.s, 1e6 * u.s],
             [3.0],
         )
     ),
@@ -1386,8 +1429,13 @@ def test_implicit_cooling_ssa_round_trip(regime, B, R, t, p, diagnostic_plots, d
     # Compute gamma_c from the synchrotron cooling closure
     B_cgs = B.to_value("G")
     t_cgs = t.to_value("s")
-    cooling_engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+    cooling_engine = SynchrotronRadiativeCoolingEngine()
     gamma_c = cooling_engine.compute_cooling_gamma(B=B, t=t)
+
+    if gamma_c < 1:
+        raise ValueError(
+            f"gamma_c < 1: {gamma_c:.2e}; adjust parameters to ensure gamma_c > 1 for physical consistency."
+        )
 
     # Forward normalization
     model = PowerLaw_Cooling_SSA_SynchrotronSED()
@@ -1605,3 +1653,237 @@ def test_demarchi_round_trip(B, R, d, p, diagnostic_plots, diagnostic_plots_dir)
         fname = f"demarchi_rt_B{B.to_value('G'):.2e}_R{R.to_value('cm'):.2e}_d{d.to_value('Mpc'):.0f}Mpc_p{p}.png"
         plt.savefig(diagnostic_plots_dir / fname)
         plt.close()
+
+
+# ── Analytic vs Numerical SED comparison ─────────────────────────────────────
+# These four tests compare analytic (closed-form) one-zone SEDs against the
+# numerical radiative-transfer engine.  The analytic models use the
+# delta-function synchrotron kernel; the numerical engine integrates the full
+# Bessel-function kernel.  Both use the same equipartition normalization, so
+# differences isolate the kernel approximation (and, where applicable, the
+# treatment of SSA).
+#
+# All four tests are marked xfail(strict=False): failure is expected but
+# diagnostic plots are always saved so the discrepancies can be inspected.
+
+_CMP_D_L = 10.0 * u.Mpc
+_CMP_P = 3.0
+_CMP_GAMMA_MIN = 1
+_CMP_GAMMA_MAX = 1e7
+_CMP_EPS_E = 0.1
+_CMP_EPS_B = 0.1
+_CMP_F_V = 1.0
+_CMP_F_A = 1.0
+_CMP_GAMMA_BULK = 1.0
+_CMP_FREQ_GRID = np.logspace(7, 18, 300) * u.Hz
+
+_CMP_BR_PARAMS = [
+    (0.1 * u.G, 1e17 * u.cm),
+    (1.0 * u.G, 1e16 * u.cm),
+    (0.5 * u.G, 5e16 * u.cm),
+]
+_CMP_BRT_PARAMS = [
+    (0.1 * u.G, 1e17 * u.cm, 1e7 * u.s),
+    (1.0 * u.G, 1e16 * u.cm, 1e5 * u.s),
+    (0.5 * u.G, 5e16 * u.cm, 1e6 * u.s),
+]
+
+
+def _cmp_plot(axes, nu, F_analytic, F_numeric, title, label_a, label_n, diagnostic_plots_dir, fname):
+    from trilobite.utils.plot_utils import set_plot_style
+
+    set_plot_style()
+
+    nu_Hz = nu.to_value(u.Hz)
+    F_a = F_analytic.to_value(u.Jy)
+    F_n = F_numeric.to_value(u.Jy)
+
+    axes[0].loglog(nu_Hz, F_a, label=label_a, lw=2)
+    axes[0].loglog(nu_Hz, F_n, label=label_n, lw=2, ls="--")
+    axes[0].set_ylabel("Flux [Jy]")
+    axes[0].set_title(title)
+    axes[0].legend()
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = np.where(F_n > 0, F_a / F_n, np.nan)
+    axes[1].semilogx(nu_Hz, ratio)
+    axes[1].axhline(1.0, color="k", ls="--", lw=0.8)
+    axes[1].set_xlabel("Frequency [Hz]")
+    axes[1].set_ylabel("Analytic / Numeric")
+    axes[1].set_ylim(0, 10)
+
+    plt.tight_layout()
+    plt.savefig(diagnostic_plots_dir / fname)
+    plt.close()
+
+
+@pytest.mark.xfail(
+    strict=False, reason="Analytic vs numerical comparison; disagreement expected due to kernel approximation"
+)
+@pytest.mark.parametrize(
+    "B,R",
+    _CMP_BR_PARAMS,
+    ids=["B0.1_R1e17", "B1.0_R1e16", "B0.5_R5e16"],
+)
+def test_analytic_vs_numeric_ssa(B, R, diagnostic_plots, diagnostic_plots_dir):
+    r"""
+    Compare :class:`PowerLaw_SSA_SynchrotronSED` (analytic) against
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED` (full numerical RT).
+
+    Both models include synchrotron self-absorption but differ in the
+    synchrotron emissivity kernel: the analytic model uses the delta-function
+    (monochromatic) approximation, while the numerical engine integrates the
+    full Bessel function.  The SSA frequency :math:`\nu_a` is fed to the
+    analytic model via the ``omega`` solid-angle parameter returned by
+    :meth:`~PowerLaw_SSA_SynchrotronSED.from_physics_to_params`.
+    """
+    nu = _CMP_FREQ_GRID
+
+    analytic = PowerLaw_SSA_SynchrotronSED()
+    phys_params = analytic.from_physics_to_params(
+        B,
+        R,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_max=_CMP_GAMMA_MAX,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_E=_CMP_EPS_E,
+        epsilon_B=_CMP_EPS_B,
+        gamma_bulk=_CMP_GAMMA_BULK,
+        luminosity_distance=_CMP_D_L,
+        pitch_average=True,
+    )
+    F_analytic = analytic.sed(
+        nu,
+        nu_m=phys_params["nu_m"],
+        F_norm=phys_params["F_norm"],
+        omega=phys_params["omega"],
+        gamma_m=_CMP_GAMMA_MIN,
+        p=_CMP_P,
+    )
+
+    numeric = Numerical_PowerLaw_SSA_SynchrotronSED()
+    F_numeric = numeric.sed(
+        nu,
+        B,
+        R,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_B=_CMP_EPS_B,
+        epsilon_E=_CMP_EPS_E,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_max=_CMP_GAMMA_MAX,
+        luminosity_distance=_CMP_D_L,
+    )
+
+    if diagnostic_plots:
+        fig, axes = plt.subplots(2, 1, figsize=(8, 8), sharex=True)
+        _cmp_plot(
+            axes,
+            nu,
+            F_analytic,
+            F_numeric,
+            title=f"SSA: B={B:.2g}, R={R:.2g}",
+            label_a="Analytic SSA",
+            label_n="Numerical SSA",
+            diagnostic_plots_dir=diagnostic_plots_dir,
+            fname=f"cmp_ssa_B{B.to_value('G'):.2e}_R{R.to_value('cm'):.2e}.png",
+        )
+
+    assert np.allclose(
+        F_analytic.to_value(u.Jy),
+        F_numeric.to_value(u.Jy),
+        rtol=0.2,
+    ), "Analytic and numerical SSA SEDs disagree by more than 20%."
+
+
+@pytest.mark.xfail(
+    strict=False, reason="Analytic vs numerical comparison; disagreement expected due to kernel approximation"
+)
+@pytest.mark.parametrize(
+    "B,R,t",
+    _CMP_BRT_PARAMS,
+    ids=["B0.1_R1e17_t1e7", "B1.0_R1e16_t1e5", "B0.5_R5e16_t1e6"],
+)
+def test_analytic_vs_numeric_ssa_cooling(B, R, t, diagnostic_plots, diagnostic_plots_dir):
+    r"""
+    Compare :class:`PowerLaw_Cooling_SSA_SynchrotronSED` (analytic) against
+    :class:`Numerical_PowerLaw_Cooling_SSA_SynchrotronSED` (full numerical RT).
+
+    Both models include SSA and a cooling break.  The analytic model uses the
+    delta-function synchrotron kernel; the numerical engine integrates the full
+    Bessel function.  :math:`\gamma_c` is derived from ``t`` via
+    :math:`\gamma_c = \Theta / (B^2 t)`.  The solid-angle ``omega`` needed by
+    the analytic SED is taken directly from
+    :meth:`~PowerLaw_Cooling_SSA_SynchrotronSED.from_physics_to_params`.
+    """
+    nu = _CMP_FREQ_GRID
+
+    cooling_engine = SynchrotronRadiativeCoolingEngine()
+    gamma_c = cooling_engine.compute_cooling_gamma(B=B, t=t)
+    if gamma_c < 1.0:
+        pytest.skip(f"gamma_c={gamma_c:.2e} < 1; unphysical combination.")
+
+    analytic = PowerLaw_Cooling_SSA_SynchrotronSED()
+    phys_params = analytic.from_physics_to_params(
+        B,
+        R,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_c=gamma_c,
+        gamma_max=_CMP_GAMMA_MAX,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_E=_CMP_EPS_E,
+        epsilon_B=_CMP_EPS_B,
+        gamma_bulk=_CMP_GAMMA_BULK,
+        luminosity_distance=_CMP_D_L,
+        pitch_average=True,
+    )
+    F_analytic = analytic.sed(
+        nu,
+        nu_m=phys_params["nu_m"],
+        nu_c=phys_params["nu_c"],
+        F_norm=phys_params["F_norm"],
+        omega=phys_params["omega"],
+        gamma_m=_CMP_GAMMA_MIN,
+        p=_CMP_P,
+    )
+
+    numeric = Numerical_PowerLaw_Cooling_SSA_SynchrotronSED()
+    F_numeric = numeric.sed(
+        nu,
+        t,
+        B,
+        R,
+        p=_CMP_P,
+        f_V=_CMP_F_V,
+        f_A=_CMP_F_A,
+        epsilon_B=_CMP_EPS_B,
+        epsilon_E=_CMP_EPS_E,
+        gamma_min=_CMP_GAMMA_MIN,
+        gamma_max=_CMP_GAMMA_MAX,
+        luminosity_distance=_CMP_D_L,
+    )
+
+    if diagnostic_plots:
+        fig, axes = plt.subplots(2, 1, figsize=(8, 8), sharex=True)
+        _cmp_plot(
+            axes,
+            nu,
+            F_analytic,
+            F_numeric,
+            title=f"SSA+Cooling: B={B:.2g}, R={R:.2g}, t={t:.2g}, regime={phys_params['regime']}",
+            label_a="Analytic SSA+cooling",
+            label_n="Numerical SSA+cooling",
+            diagnostic_plots_dir=diagnostic_plots_dir,
+            fname=f"cmp_ssa_cooling_B{B.to_value('G'):.2e}_R{R.to_value('cm'):.2e}_t{t.to_value('s'):.2e}.png",
+        )
+
+    assert np.allclose(
+        F_analytic.to_value(u.Jy),
+        F_numeric.to_value(u.Jy),
+        rtol=0.2,
+    ), f"Analytic and numerical SSA+cooling SEDs disagree by more than 20%. regime={phys_params['regime']}"

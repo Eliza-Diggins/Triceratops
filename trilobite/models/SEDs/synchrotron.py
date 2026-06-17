@@ -80,7 +80,7 @@ from trilobite.radiation.synchrotron.SEDs import (
     PowerLaw_SSA_SynchrotronSED,
     PowerLaw_SynchrotronSED,
 )
-from trilobite.radiation.synchrotron.SEDs._one_zone_functions import smoothed_BPL
+from trilobite.radiation.synchrotron.SEDs.one_zone._functions import smoothed_BPL
 
 __all__ = [
     "SSA_Cooling_SynchrotronSEDModel",
@@ -391,7 +391,7 @@ class SSA_Cooling_SynchrotronSEDModel(Model):
         ),
         ModelParameter(
             "log_gamma_c",
-            0.0,
+            1.0,
             description="Logarithm of the cooling Lorentz factor",
             base_units=None,
             latex=r"\log \gamma_c",
@@ -1251,7 +1251,7 @@ class Cooling_SynchrotronSEDModel(Model):
         ),
         ModelParameter(
             "log_gamma_c",
-            0.0,
+            1.0,
             description="Logarithm of the cooling Lorentz factor",
             base_units=None,
             latex=r"\log \gamma_c",

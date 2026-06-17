@@ -382,9 +382,9 @@ frequency as
 
 .. hint::
 
-    In general, one selects a cooling mechanism (see :ref:`synchrotron_theory` and :ref:`synchrotron_microphysics`)
+    In general, one selects a cooling mechanism (see :ref:`synchrotron_theory` and :ref:`synchrotron_electron_distributions`)
     and computes :math:`\gamma_c(t)` as a function of time and provides that to the SED. Cooling is implemented in
-    :mod:`~radiation.synchrotron.cooling`.
+    :mod:`~trilobite.radiation.synchrotron.cooling`.
 
 .. _single_zone_ssa_frequency:
 
@@ -693,7 +693,7 @@ for each case:
     at which we anchor the normalization of the SED) and the **peak emission frequency** (i.e., the frequency at which
     the SED peaks).
 
-    In :mod:`~radiation.synchrotron.SEDs`, we **NEVER** refer directly to the **normalization frequency**. This is an
+    In :mod:`~trilobite.radiation.synchrotron.SEDs`, we **NEVER** refer directly to the **normalization frequency**. This is an
     internal conceptualization used to tie microphysics and dynamics to SED normalization. When parameterizing each
     SED, we normalize using the **peak emission frequency** which is *calculated* from the normalization frequency and
     power-law slopes of the SED.

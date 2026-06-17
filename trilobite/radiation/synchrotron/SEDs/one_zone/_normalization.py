@@ -2,19 +2,19 @@
 Normalization functions for 1-zone synchrotron SEDs.
 
 This module contains the low-level structure for the synchrotron normalization logic implemented
-in :mod:`one_zone`.
+in :mod:`trilobite.radiation.synchrotron.SEDs.one_zone`.
 """
 
 import numpy as np
 
 from trilobite.radiation.synchrotron.core import _opt_compute_log_synch_frequency
-from trilobite.radiation.synchrotron.microphysics import (
-    _opt_normalize_BPL_from_magnetic_field,
-    _opt_normalize_PL_from_magnetic_field,
+from trilobite.radiation.synchrotron.electron_distributions import (
+    BrokenPowerLaw,
+    PowerLaw,
 )
 from trilobite.radiation.synchrotron.utils import _log_chi_cgs, _log_chi_cgs_iso
 
-from ._one_zone_ssa import (
+from ._ssa import (
     compute_ssa_frequencies_with_cooling,
     compute_ssa_frequencies_without_cooling,
     select_ssa_sed_regime_from_candidates_with_cooling,
@@ -686,11 +686,11 @@ def _log_normalize_powerlaw_sbpl_sed(
     # Electron distribution normalization
     # ---------------------------------------------------------
 
-    N0 = _opt_normalize_PL_from_magnetic_field(
+    N0 = PowerLaw._normalize_from_magnetic_field(
         np.exp(log_B),
+        epsilon_B,
+        epsilon_E,
         p=p,
-        epsilon_E=epsilon_E,
-        epsilon_B=epsilon_B,
         gamma_min=np.exp(log_gamma_min),
         gamma_max=np.exp(log_gamma_max),
     )
@@ -863,15 +863,15 @@ def _log_normalize_powerlaw_sbpl_sed_ssa_cool(
 
     if is_fast_cooling:
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            BrokenPowerLaw._normalize_from_magnetic_field(
                 np.exp(log_B),
-                -2.0,
-                -(p + 1),
-                gamma_b=np.exp(log_gamma_min),
+                epsilon_B,
+                epsilon_E,
+                p1=2.0,
+                p2=p + 1.0,
+                gamma_c=np.exp(log_gamma_min),
                 gamma_min=np.exp(log_gamma_c),
                 gamma_max=np.exp(log_gamma_max),
-                epsilon_E=epsilon_E,
-                epsilon_B=epsilon_B,
             )
         )
         log_F_norm = (
@@ -891,15 +891,15 @@ def _log_normalize_powerlaw_sbpl_sed_ssa_cool(
         # This is now the slow (but not no) cooling regime, so we use the BPL normalization with
         # the break at gamma_c and the low-energy slope fixed at -p.
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            BrokenPowerLaw._normalize_from_magnetic_field(
                 np.exp(log_B),
-                -p,
-                -(p + 1),
-                gamma_b=np.exp(log_gamma_c),
+                epsilon_B,
+                epsilon_E,
+                p1=p,
+                p2=p + 1.0,
+                gamma_c=np.exp(log_gamma_c),
                 gamma_min=np.exp(log_gamma_min),
                 gamma_max=np.exp(log_gamma_max),
-                epsilon_E=epsilon_E,
-                epsilon_B=epsilon_B,
             )
         )
         log_F_norm = (
@@ -917,13 +917,13 @@ def _log_normalize_powerlaw_sbpl_sed_ssa_cool(
     else:
         # This is the no-cooling case.
         log_electron_norm = np.log(
-            _opt_normalize_PL_from_magnetic_field(
+            PowerLaw._normalize_from_magnetic_field(
                 np.exp(log_B),
-                p,
+                epsilon_B,
+                epsilon_E,
+                p=p,
                 gamma_min=np.exp(log_gamma_min),
                 gamma_max=np.exp(log_gamma_max),
-                epsilon_E=epsilon_E,
-                epsilon_B=epsilon_B,
             )
         )
         log_F_norm = (
@@ -1147,15 +1147,15 @@ def _log_normalize_powerlaw_sbpl_sed_cool(
         regime = "fast_cooling"
 
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            BrokenPowerLaw._normalize_from_magnetic_field(
                 np.exp(log_B),
-                -2.0,
-                -(p + 1.0),
-                gamma_b=np.exp(log_gamma_min),
+                epsilon_B,
+                epsilon_E,
+                p1=2.0,
+                p2=p + 1.0,
+                gamma_c=np.exp(log_gamma_min),
                 gamma_min=np.exp(log_gamma_c),
                 gamma_max=np.exp(log_gamma_max),
-                epsilon_E=epsilon_E,
-                epsilon_B=epsilon_B,
             )
         )
 
@@ -1176,15 +1176,15 @@ def _log_normalize_powerlaw_sbpl_sed_cool(
         regime = "slow_cooling"
 
         log_electron_norm = np.log(
-            _opt_normalize_BPL_from_magnetic_field(
+            BrokenPowerLaw._normalize_from_magnetic_field(
                 np.exp(log_B),
-                -p,
-                -(p + 1.0),
-                gamma_b=np.exp(log_gamma_c),
+                epsilon_B,
+                epsilon_E,
+                p1=p,
+                p2=p + 1.0,
+                gamma_c=np.exp(log_gamma_c),
                 gamma_min=np.exp(log_gamma_min),
                 gamma_max=np.exp(log_gamma_max),
-                epsilon_E=epsilon_E,
-                epsilon_B=epsilon_B,
             )
         )
         log_F_norm = (
@@ -1203,13 +1203,13 @@ def _log_normalize_powerlaw_sbpl_sed_cool(
         regime = "no_cooling"
 
         log_electron_norm = np.log(
-            _opt_normalize_PL_from_magnetic_field(
+            PowerLaw._normalize_from_magnetic_field(
                 np.exp(log_B),
-                p,
+                epsilon_B,
+                epsilon_E,
+                p=p,
                 gamma_min=np.exp(log_gamma_min),
                 gamma_max=np.exp(log_gamma_max),
-                epsilon_E=epsilon_E,
-                epsilon_B=epsilon_B,
             )
         )
 
@@ -1402,11 +1402,11 @@ def _log_normalize_powerlaw_sbpl_sed_ssa(
     # ---------------------------------------------------------
     # Electron distribution normalization
     # ---------------------------------------------------------
-    N0 = _opt_normalize_PL_from_magnetic_field(
+    N0 = PowerLaw._normalize_from_magnetic_field(
         np.exp(log_B),
+        epsilon_B,
+        epsilon_E,
         p=p,
-        epsilon_E=epsilon_E,
-        epsilon_B=epsilon_B,
         gamma_min=np.exp(log_gamma_min),
         gamma_max=np.exp(log_gamma_max),
     )

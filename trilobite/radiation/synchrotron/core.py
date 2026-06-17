@@ -9,8 +9,8 @@ kernels, and other low-level building blocks that are used across the codebase.
 
     :mod:`~trilobite.radiation.synchrotron.SEDs`: SEDs for synchrotron emitting regions.
 
-    :mod:`~trilobite.radiation.synchrotron.microphysics`: Microphysical distribution functions for
-    synchrotron-emitting electrons.
+    :mod:`~trilobite.radiation.synchrotron.electron_distributions`: Electron distribution classes
+    (power law, broken power law, Maxwell-Jüttner, mixed) for synchrotron-emitting electrons.
 
     :mod:`~trilobite.radiation.synchrotron.cooling`: Synchrotron cooling calculations and timescales.
 
@@ -226,7 +226,7 @@ def _opt_compute_synch_frequency(
     No unit validation is performed.
     """
     if pitch_average:
-        sin_alpha_factor = 2 / np.pi
+        sin_alpha_factor = np.pi / 4
     else:
         sin_alpha_factor = sin_alpha
 
@@ -259,7 +259,7 @@ def _opt_compute_log_synch_frequency(
         Natural logarithm of the synchrotron injection frequency in Hz.
     """
     if pitch_average:
-        log_sin_alpha_factor = np.log(2 / np.pi)
+        log_sin_alpha_factor = np.log(np.pi / 4)
     else:
         log_sin_alpha_factor = np.log(sin_alpha)
 
@@ -304,7 +304,7 @@ def _opt_compute_synch_gamma(
         \nu = \gamma^2 \frac{3 e B \sin\alpha}{4\pi m_e c}
     """
     if pitch_average:
-        sin_alpha_factor = 2 / np.pi
+        sin_alpha_factor = np.pi / 4
     else:
         sin_alpha_factor = sin_alpha
 

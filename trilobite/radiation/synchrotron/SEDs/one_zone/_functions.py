@@ -1,4 +1,11 @@
-"""Low-Level 1-Zone synchrotron SED functions."""
+"""
+Spectral shape functions for 1-zone synchrotron SEDs.
+
+This module provides all of the core spectrum shape functions for the various analytical
+synchrotron SED engines. These functions are designed to be used internally by the SED engines
+and are not intended for direct use by the user. They are not guaranteed to be stable or accurate
+outside of the context of the SED engines.
+"""
 
 import numpy as np
 
@@ -95,7 +102,7 @@ def log_smoothed_SFBPL(
     In all cases, the multiplicative factor produces a net slope change of
     :math:`\Delta a = a_2-a_1` across the transition.
     """
-    return smoothing * (np.logaddexp(0, ((a2 - a1) / smoothing) * log_x) - np.log(2))
+    return smoothing * (np.logaddexp(0, ((a2 - a1) / smoothing) * log_x))
 
 
 def log_exp_cutoff_sed(

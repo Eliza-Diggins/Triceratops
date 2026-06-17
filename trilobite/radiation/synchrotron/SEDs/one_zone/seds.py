@@ -69,6 +69,8 @@ from trilobite.physics_utils.cosmology import (
     resolve_cosmological_distances,
 )
 from trilobite.radiation.constants import electron_rest_energy_cgs
+from trilobite.radiation.synchrotron.cooling import SynchrotronRadiativeCoolingEngine
+from trilobite.radiation.synchrotron.electron_distributions import BrokenPowerLaw, MaxwellJuettner, PowerLaw
 from trilobite.radiation.synchrotron.utils import (
     c_1_cgs,
     compute_c5_parameter,
@@ -77,33 +79,28 @@ from trilobite.radiation.synchrotron.utils import (
 from trilobite.utils.log import trilobite_logger
 from trilobite.utils.misc_utils import ensure_in_units
 
-from ..microphysics import (
-    _opt_normalize_MJD_and_PL_from_magnetic_field,
-    _opt_normalize_MJD_from_magnetic_field,
-    _opt_normalize_PL_from_magnetic_field,
-)
-from ._one_zone_closure import SSA_INV_FUNCTION_REGISTRY
-from ._one_zone_functions import (
+from ..numerical.core import NumericalSynchrotronEngine
+from ._closure import SSA_INV_FUNCTION_REGISTRY
+from ._functions import (
     COOLING_SED_FUNCTION_REGISTRY,
     SSA_COOLING_SED_FUNCTION_REGISTRY,
     SSA_SED_FUNCTION_REGISTRY,
     _log_powerlaw_sbpl_sed,
     smoothed_BPL,
 )
-from ._one_zone_normalization import (
+from ._normalization import (
     _log_normalize_powerlaw_sbpl_sed,
     _log_normalize_powerlaw_sbpl_sed_cool,
     _log_normalize_powerlaw_sbpl_sed_ssa,
     _log_normalize_powerlaw_sbpl_sed_ssa_cool,
 )
-from ._one_zone_ssa import (
+from ._ssa import (
     compute_ssa_frequencies_with_cooling,
     compute_ssa_frequencies_without_cooling,
     select_ssa_sed_regime_from_candidates_with_cooling,
     select_ssa_sed_regime_from_candidates_without_cooling,
 )
-from .numerical import NumericalSynchrotronEngine
-from .one_zone_closure import (
+from .closure import (
     _invert_powerlaw_cooling_sed,
     _invert_powerlaw_cooling_ssa_sed,
     _invert_powerlaw_sed,
@@ -131,9 +128,10 @@ __all__ = [
     "PowerLaw_SSA_SynchrotronSED",
     "PowerLaw_Cooling_SynchrotronSED",
     "SSA_SED_PowerLaw",
-    "Numerical_PL_SSA_SED",
-    "Numerical_Thermal_SSA_SED",
-    "Numerical_Thermal_PL_SSA_SED",
+    "Numerical_PowerLaw_SSA_SynchrotronSED",
+    "Numerical_PowerLaw_Cooling_SSA_SynchrotronSED",
+    "Numerical_Thermal_SSA_SynchrotronSED",
+    "Numerical_Thermal_PowerLaw_SSA_SynchrotronSED",
 ]
 
 
@@ -6184,50 +6182,118 @@ class SSA_SED_PowerLaw(SynchrotronSED):
         return nu * u.Hz, F_nu * u.erg / (u.s * u.cm**2 * u.Hz)
 
 
-# ================================================= #
-# Numerical Standard Library SEDs                   #
-# ================================================= #
-class Numerical_PL_SSA_SED(SynchrotronSED):
+class Numerical_PowerLaw_SSA_SynchrotronSED(SynchrotronSED):
     r"""
-    Numerical one-zone power-law synchrotron SED with self-absorption.
+    Numerical one-zone power-law synchrotron SED with self-absorption (uncooled).
 
     Evaluates the synchrotron flux density by numerically integrating the
-    synchrotron kernel over a power-law electron distribution with full
-    radiative transfer (SSA included). Unlike the analytic
-    :class:`PowerLaw_SSA_SynchrotronSED`, no assumption is made about the
-    spectral regime.
+    synchrotron emissivity and absorption coefficient over a pure power-law
+    electron distribution, solving the plane-parallel radiative transfer equation
+    to include **synchrotron self-absorption (SSA)** self-consistently.
 
-    The electron number density is normalized via equipartition:
+    Unlike the analytic :class:`PowerLaw_SSA_SynchrotronSED`, which approximates
+    the spectrum using a regime-classified smoothed broken power law, this class
+    makes no assumption about the spectral regime. The result is therefore valid at
+    all frequencies, including the SSA transition region, and resolves the full
+    spectral shape without a fixed smoothing parameter.
+
+    .. rubric:: Electron Distribution
+
+    The electron energy distribution is a truncated power law:
 
     .. math::
 
-        N(\gamma) = N_0\,\gamma^{-p}, \quad \gamma_{\min} \le \gamma \le \gamma_{\max}
+        N(\gamma) = N_0\,\gamma^{-p}, \quad \gamma_{\min} \le \gamma \le \gamma_{\max},
 
-    where :math:`N_0` is fixed by :math:`\epsilon_E / \epsilon_B` and the
-    magnetic energy density
-    (see :func:`~trilobite.radiation.synchrotron.microphysics._opt_normalize_PL_from_magnetic_field`).
+    where :math:`N_0` is fixed by the equipartition prescription (see
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.PowerLaw._normalize_from_magnetic_field`):
 
-    Parameters
-    ----------
-    gamma : ~numpy.ndarray or None, optional
-        Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
-        built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
-    gamma_min : float, optional
-        Lower bound of the Lorentz factor grid. Default ``1.0``.
-    gamma_max : float, optional
-        Upper bound of the Lorentz factor grid. Default ``1e8``.
-    n_gamma : int, optional
-        Number of quadrature points on the Lorentz factor grid. Default ``200``.
-    x_min : float, optional
-        Lower bound of the synchrotron kernel :math:`x` grid. Default ``1e-5``.
-    x_max : float, optional
-        Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
-    num_points : int, optional
-        Number of points on the kernel grid. Default ``1000``.
-    spacing : {"log", "linear"}, optional
-        Kernel grid spacing. Default ``"log"``.
-    method : {"exact", "lu"}, optional
-        Kernel evaluation method. Default ``"exact"``.
+    .. math::
+
+        \epsilon_E\,\frac{B^2}{8\pi} = \int_{\gamma_{\min}}^{\gamma_{\max}}
+            N(\gamma)\,\gamma\,m_e c^2\,\mathrm{d}\gamma.
+
+    .. rubric:: Radiative Transfer
+
+    The emergent specific intensity from a homogeneous slab of depth
+    :math:`\ell = f_V^{1/3} R` is
+
+    .. math::
+
+        I_\nu = \frac{j_\nu}{\kappa_\nu}\left(1 - e^{-\tau_\nu}\right),
+        \quad \tau_\nu = \kappa_\nu\,\ell,
+
+    where :math:`j_\nu` and :math:`\kappa_\nu` are the synchrotron emissivity and
+    SSA absorption coefficient, both computed by integrating the appropriate kernel
+    over :math:`N(\gamma)` by log-space quadrature. The observed flux density is
+
+    .. math::
+
+        F_\nu = \frac{I_\nu\,f_A\,\pi R^2}{D_A^2}\,\mathcal{D}(\beta,\cos\theta)^4\,(1+z),
+
+    where :math:`\mathcal{D}` is the relativistic Doppler factor and :math:`D_A`
+    the angular diameter distance.
+
+    .. rubric:: Physical Parameters
+
+    .. list-table::
+        :widths: 25 15 60
+        :header-rows: 1
+
+        * - Parameter
+          - Symbol
+          - Description
+        * - Magnetic field
+          - :math:`B`
+          - Uniform magnetic field strength in the emitting region.
+        * - Outer radius
+          - :math:`R`
+          - Characteristic size of the emitting region. The effective
+            line-of-sight depth is :math:`\ell = f_V^{1/3}\,R`.
+        * - Electron power-law index
+          - :math:`p`
+          - Spectral index of the injected electron distribution,
+            :math:`N(\gamma) \propto \gamma^{-p}`.
+        * - Minimum Lorentz factor
+          - :math:`\gamma_{\min}`
+          - Lower cutoff of the active electron distribution on the quadrature
+            grid. Must lie within the grid range set at instantiation.
+        * - Maximum Lorentz factor
+          - :math:`\gamma_{\max}`
+          - Upper cutoff of the active electron distribution on the quadrature
+            grid. Must lie within the grid range set at instantiation.
+        * - Magnetic equipartition fraction
+          - :math:`\epsilon_B`
+          - Fraction of the post-shock energy density in magnetic fields.
+        * - Electron equipartition fraction
+          - :math:`\epsilon_E`
+          - Fraction of the post-shock energy density in relativistic electrons.
+        * - Volume filling factor
+          - :math:`f_V`
+          - Fraction of the sphere occupied by emitting material. Controls the
+            effective slab depth :math:`\ell = f_V^{1/3}\,R`.
+        * - Area filling factor
+          - :math:`f_A`
+          - Fraction of the projected area that is emitting; controls the
+            effective solid angle :math:`\Omega = f_A\,\pi R^2 / D_A^2`.
+
+    .. important::
+
+        This class does **not** account for radiative cooling of the electron
+        population. For a numerical model that includes cooling, use
+        :class:`Numerical_PowerLaw_Cooling_SSA_SynchrotronSED`. For analytic
+        (regime-classified) models with SSA, use :class:`PowerLaw_SSA_SynchrotronSED`.
+
+    See Also
+    --------
+    :class:`PowerLaw_SSA_SynchrotronSED` :
+        Analytic broken-power-law SED with SSA and regime classification.
+    :class:`Numerical_PowerLaw_Cooling_SSA_SynchrotronSED` :
+        Numerical power-law SED including radiative cooling.
+    :class:`Numerical_Thermal_SSA_SynchrotronSED` :
+        Numerical SED for a thermal (Maxwell-Jüttner) electron distribution.
+    :class:`Numerical_Thermal_PowerLaw_SSA_SynchrotronSED` :
+        Numerical SED for a composite thermal + power-law distribution.
     """
 
     def __init__(
@@ -6242,6 +6308,32 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         spacing: str = "log",
         method: str = "exact",
     ):
+        """
+        Initialize the numerical power-law synchrotron SED with self-absorption.
+
+        Parameters
+        ----------
+        gamma : ~numpy.ndarray or None, optional
+            Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
+            built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
+        gamma_min : float, optional
+            Lower bound of the Lorentz factor grid. Default ``1.0``.
+        gamma_max : float, optional
+            Upper bound of the Lorentz factor grid. Default ``1e8``.
+        n_gamma : int, optional
+            Number of quadrature points on the Lorentz factor grid. Default ``200``.
+        x_min : float, optional
+            Lower bound of the synchrotron kernel :math:`x` grid. Default ``1e-5``.
+        x_max : float, optional
+            Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
+        num_points : int, optional
+            Number of points on the kernel grid. Default ``1000``.
+        spacing : {"log", "linear"}, optional
+            Kernel grid spacing. Default ``"log"``.
+        method : {"exact", "lu"}, optional
+            Kernel evaluation method. Default ``"exact"``.
+        """
+        super().__init__()
         self._engine = NumericalSynchrotronEngine()
 
         self._log_gamma, self._log_weights = self._engine._build_gamma_grid(
@@ -6250,6 +6342,7 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
             gamma_max=gamma_max,
             n_gamma=n_gamma,
         )
+        self._gamma, self._weights = np.exp(self._log_gamma), np.exp(self._log_weights)
 
         kernel_kwargs = {"x_min": x_min, "x_max": x_max, "num_points": num_points, "spacing": spacing, "method": method}
         self._engine.load_avg_first_kernel(**kernel_kwargs)
@@ -6326,34 +6419,36 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         """
         # Electron distribution normalization via equipartition.
         N0 = np.asarray(
-            _opt_normalize_PL_from_magnetic_field(
-                B=B,
+            PowerLaw._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                epsilon_E,
                 p=p,
-                epsilon_B=epsilon_B,
-                epsilon_E=epsilon_E,
                 gamma_min=gamma_min,
                 gamma_max=gamma_max,
             ),
             dtype="f8",
         )
 
-        # Build log_N on the pre-built gamma grid, zeroing outside [gamma_min, gamma_max].
-        # Leading batch dims come from N0's shape (scalar → ()).
-        gamma_arr = np.exp(self._log_gamma)
-        mask = (gamma_arr >= gamma_min) & (gamma_arr <= gamma_max)
-        log_N = np.full(N0.shape + (len(self._log_gamma),), -np.inf)
-        log_N[..., mask] = np.log(N0)[..., np.newaxis] - p * self._log_gamma[mask]
-
+        # Coerce some inputs to log space for numerical stability.
+        log_gamma_min = np.log(gamma_min)
+        log_gamma_max = np.log(gamma_max)
         log_nu = np.log(np.asarray(nu, dtype="f8"))
         log_B = np.log(float(B))
-        log_R_eff = np.log(float(f_V) * float(R))
+        log_R_eff = np.log(float(f_V) ** (1 / 3) * float(R))
         log_A_eff = np.log(float(f_A) * np.pi * float(R) ** 2)
         log_D_A = np.log(float(D_A))
 
+        # Build the distribution function N(gamma) on the quadrature grid.
+        log_N = np.full(N0.shape + (len(self._log_gamma),), -np.inf)
+        mask = (self._log_gamma >= log_gamma_min) & (self._log_gamma <= log_gamma_max)
+        log_N[..., mask] = np.log(N0)[..., np.newaxis] - p * self._log_gamma[mask]
+
+        # Pass off to the engine for the computation.
         if sin_alpha is not None:
             return self._engine._compute_log_flux_density(
                 log_nu=log_nu,
-                log_R=log_R_eff,
+                log_slab_depth=log_R_eff,
                 log_B=log_B,
                 log_N=log_N,
                 log_gamma=self._log_gamma,
@@ -6368,7 +6463,7 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         else:
             return self._engine._compute_log_pa_flux_density(
                 log_nu=log_nu,
-                log_R=log_R_eff,
+                log_slab_depth=log_R_eff,
                 log_B=log_B,
                 log_N=log_N,
                 log_gamma=self._log_gamma,
@@ -6457,6 +6552,54 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         F_nu : ~astropy.units.Quantity
             Flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
+
+        Notes
+        -----
+        - Kernel tabulation is performed at instantiation time; only the
+          quadrature over :math:`N(\gamma)` occurs at call time. Repeated
+          evaluations over a fixed frequency grid are therefore efficient once
+          the object is constructed.
+        - The ``gamma_min`` and ``gamma_max`` arguments gate the active range of
+          the power-law distribution on the quadrature grid built at
+          instantiation. If these values fall outside
+          ``[gamma_min_grid, gamma_max_grid]``, contributions from outside the
+          active range are silently absent.
+        - In the optically thick limit (:math:`\tau_\nu \gg 1`) the spectrum
+          approaches the Rayleigh-Jeans slope :math:`F_\nu \propto \nu^{5/2}`,
+          which is reproduced correctly by the numerical radiative transfer.
+        - Distance resolution follows the hierarchy: if ``angular_diameter_distance``
+          is provided it is used directly; otherwise the distance is derived from
+          ``luminosity_distance``, ``proper_distance``, or ``redshift`` via
+          the configured cosmology (see :func:`~trilobite.physics_utils.cosmology.resolve_cosmological_distances`).
+
+        Examples
+        --------
+        Evaluate a power-law synchrotron SED at a nearby source:
+
+        .. code-block:: python
+
+            import numpy as np
+            import astropy.units as u
+            from trilobite.radiation.synchrotron import (
+                Numerical_PowerLaw_SSA_SynchrotronSED,
+            )
+
+            sed = Numerical_PowerLaw_SSA_SynchrotronSED(
+                n_gamma=200
+            )
+            nu = np.logspace(8, 18, 300) * u.Hz
+
+            F_nu = sed.sed(
+                nu=nu,
+                B=0.1 * u.G,
+                R=1e17 * u.cm,
+                p=2.4,
+                epsilon_B=0.1,
+                epsilon_E=0.1,
+                gamma_min=100.0,
+                gamma_max=1e7,
+                angular_diameter_distance=100 * u.Mpc,
+            )
         """
         # Resolve cosmological distances → angular diameter distance + redshift.
         _cosmology = get_cosmology(cosmology=cosmology)
@@ -6500,45 +6643,94 @@ class Numerical_PL_SSA_SED(SynchrotronSED):
         return np.exp(log_flux) * u.erg / (u.cm**2 * u.s * u.Hz)
 
 
-class Numerical_Thermal_SSA_SED(SynchrotronSED):
+class Numerical_PowerLaw_Cooling_SSA_SynchrotronSED(SynchrotronSED):
     r"""
-    Numerical one-zone thermal (Maxwell-Jüttner) synchrotron SED with self-absorption.
+    Numerical one-zone power-law synchrotron SED with radiative cooling and self-absorption.
 
     Evaluates the synchrotron flux density by numerically integrating the
-    synchrotron kernel over a Maxwell-Jüttner electron distribution with
-    full radiative transfer (SSA included).
+    synchrotron emissivity and absorption coefficient over a **cooled power-law
+    electron distribution**, solving the plane-parallel radiative transfer equation
+    to include SSA self-consistently.
 
-    The electron distribution is
+    Unlike :class:`Numerical_PowerLaw_SSA_SynchrotronSED`, this class accounts
+    for synchrotron radiative cooling by computing a characteristic cooling
+    Lorentz factor :math:`\gamma_c` from the elapsed time :math:`t` and magnetic
+    field :math:`B`:
 
     .. math::
 
-        N(\gamma) = \frac{N_{\rm therm}}{2\Theta^3}\,\gamma^2\,e^{-\gamma/\Theta},
+        \gamma_c = \frac{6\,\pi\,m_e\,c}{\sigma_T\,B^2\,t},
 
-    where :math:`\Theta = kT/(m_e c^2)` is the dimensionless electron
-    temperature and :math:`N_{\rm therm}` is fixed by equipartition (see
-    :func:`~trilobite.radiation.synchrotron.microphysics._opt_normalize_MJD_from_magnetic_field`).
+    and using it to construct the appropriate steady-state broken power-law
+    electron energy distribution.
 
-    Parameters
-    ----------
-    gamma : ~numpy.ndarray or None, optional
-        Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
-        built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
-    gamma_min : float, optional
-        Lower bound of the Lorentz factor grid. Default ``1.0``.
-    gamma_max : float, optional
-        Upper bound of the Lorentz factor grid. Default ``1e8``.
-    n_gamma : int, optional
-        Number of quadrature points. Default ``200``.
-    x_min : float, optional
-        Lower bound of the synchrotron kernel :math:`x` grid. Default ``1e-5``.
-    x_max : float, optional
-        Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
-    num_points : int, optional
-        Number of points on the kernel grid. Default ``1000``.
-    spacing : {"log", "linear"}, optional
-        Kernel grid spacing. Default ``"log"``.
-    method : {"exact", "lu"}, optional
-        Kernel evaluation method. Default ``"exact"``.
+    .. rubric:: Cooled Electron Distribution
+
+    The steady-state distribution is classified into three regimes depending on
+    the ordering of :math:`\gamma_c` relative to :math:`\gamma_{\min}` and
+    :math:`\gamma_{\max}`:
+
+    **Fast cooling** (:math:`\gamma_c < \gamma_{\min}`):
+        All injected electrons have cooled. The distribution forms a broken
+        power law with a break at :math:`\gamma_{\min}`:
+
+        .. math::
+
+            N(\gamma) \propto
+            \begin{cases}
+                \gamma^{-2}     & \gamma_c \le \gamma \le \gamma_{\min}, \\
+                \gamma^{-(p+1)} & \gamma_{\min} < \gamma \le \gamma_{\max}.
+            \end{cases}
+
+    **Slow cooling** (:math:`\gamma_{\min} \le \gamma_c < \gamma_{\max}`):
+        Electrons above :math:`\gamma_c` have cooled. The distribution breaks
+        at :math:`\gamma_c`:
+
+        .. math::
+
+            N(\gamma) \propto
+            \begin{cases}
+                \gamma^{-p}     & \gamma_{\min} \le \gamma \le \gamma_c, \\
+                \gamma^{-(p+1)} & \gamma_c < \gamma \le \gamma_{\max}.
+            \end{cases}
+
+    **No cooling** (:math:`\gamma_c \ge \gamma_{\max}`):
+        Cooling is negligible; the distribution is the unmodified injected
+        power law :math:`N(\gamma) \propto \gamma^{-p}`.
+
+    In all three regimes, the normalization is fixed by equipartition (see
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw._normalize_from_magnetic_field`
+    and
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.PowerLaw._normalize_from_magnetic_field`).
+
+    .. rubric:: Radiative Transfer
+
+    The emergent flux is computed identically to
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED`: a plane-parallel slab of
+    optical depth :math:`\tau_\nu = \kappa_\nu\,f_V^{1/3}\,R` is solved exactly,
+    giving the full transition from optically thin to optically thick without
+    any regime classification.
+
+    .. important::
+
+        The cooling break is computed from the current :math:`B` and elapsed
+        time :math:`t` under the **constant-field snapshot approximation**: it
+        represents the cooling history of electrons accumulated over time :math:`t`
+        under a steady magnetic field, and does not self-consistently evolve
+        the distribution. For analytic regime-classified models with cooling, use
+        :class:`PowerLaw_Cooling_SynchrotronSED` or
+        :class:`PowerLaw_Cooling_SSA_SynchrotronSED`.
+
+    See Also
+    --------
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED` :
+        Numerical power-law SED without radiative cooling.
+    :class:`PowerLaw_Cooling_SSA_SynchrotronSED` :
+        Analytic broken-power-law SED with cooling and SSA.
+    :class:`Numerical_Thermal_SSA_SynchrotronSED` :
+        Numerical SED for a thermal (Maxwell-Jüttner) electron distribution.
+    :class:`Numerical_Thermal_PowerLaw_SSA_SynchrotronSED` :
+        Numerical SED for a composite thermal + power-law distribution.
     """
 
     def __init__(
@@ -6553,6 +6745,539 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
         spacing: str = "log",
         method: str = "exact",
     ):
+        """
+        Initialize the numerical power-law synchrotron SED with self-absorption.
+
+        Parameters
+        ----------
+        gamma : ~numpy.ndarray or None, optional
+            Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
+            built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
+        gamma_min : float, optional
+            Lower bound of the Lorentz factor grid. Default ``1.0``.
+        gamma_max : float, optional
+            Upper bound of the Lorentz factor grid. Default ``1e8``.
+        n_gamma : int, optional
+            Number of quadrature points on the Lorentz factor grid. Default ``200``.
+        x_min : float, optional
+            Lower bound of the synchrotron kernel :math:`x` grid. Default ``1e-5``.
+        x_max : float, optional
+            Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
+        num_points : int, optional
+            Number of points on the kernel grid. Default ``1000``.
+        spacing : {"log", "linear"}, optional
+            Kernel grid spacing. Default ``"log"``.
+        method : {"exact", "lu"}, optional
+            Kernel evaluation method. Default ``"exact"``.
+        """
+        super().__init__()
+        self._engine = NumericalSynchrotronEngine()
+
+        self._log_gamma, self._log_weights = self._engine._build_gamma_grid(
+            gamma=gamma,
+            gamma_min=gamma_min,
+            gamma_max=gamma_max,
+            n_gamma=n_gamma,
+        )
+        self._gamma, self._weights = np.exp(self._log_gamma), np.exp(self._log_weights)
+
+        kernel_kwargs = {"x_min": x_min, "x_max": x_max, "num_points": num_points, "spacing": spacing, "method": method}
+        self._engine.load_avg_first_kernel(**kernel_kwargs)
+        self._engine.load_first_kernel(**kernel_kwargs)
+
+        # Set up the cooling engine if provided.
+        self._cooling_engine = SynchrotronRadiativeCoolingEngine()
+
+    def _log_opt_sed(
+        self,
+        nu: "_ArrayLike",
+        t: "_ArrayLike",
+        B: float,
+        R: float,
+        D_A: float,
+        *,
+        p: float = 3.0,
+        f_V: float = 1.0,
+        f_A: float = 1.0,
+        beta: float = 0.0,
+        cos_theta: float = 1.0,
+        sin_alpha: Union[float, None] = None,
+        z: float = 0.0,
+        epsilon_B: float = 0.1,
+        epsilon_E: float = 0.1,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e6,
+    ) -> "_ArrayLike":
+        r"""
+        Low-level numerical synchrotron SED evaluation with radiative cooling.
+
+        All inputs are plain CGS scalars; no unit handling is performed.
+
+        Parameters
+        ----------
+        nu : array-like
+            Observed frequency in Hz.
+        t : float
+            Elapsed time in seconds, used to compute the cooling Lorentz factor
+            :math:`\gamma_c = 6\pi m_e c / (\sigma_T B^2 t)`.
+        B : float
+            Magnetic field strength in Gauss.
+        R : float
+            Outer radius of the emitting region in cm.
+        D_A : float
+            Angular diameter distance in cm.
+        p : float, optional
+            Electron power-law index. Default ``3.0``.
+        f_V : float, optional
+            Volume filling factor. The effective LOS path length passed to
+            the radiative transfer is :math:`f_V^{1/3} R`. Default ``1.0``.
+        f_A : float, optional
+            Area filling factor. The effective projected area is
+            :math:`f_A \pi R^2`. Default ``1.0``.
+        beta : float, optional
+            Bulk velocity :math:`v/c`. Default ``0.0``.
+        cos_theta : float, optional
+            Cosine of the angle between the bulk velocity and the line of
+            sight (relativistic correction). Default ``1.0``.
+        sin_alpha : float or None, optional
+            Sine of the electron pitch angle. ``None`` selects the
+            pitch-angle-averaged kernel. Default ``None``.
+        z : float, optional
+            Source redshift. Default ``0.0``.
+        epsilon_B : float, optional
+            Magnetic equipartition fraction. Default ``0.1``.
+        epsilon_E : float, optional
+            Electron equipartition fraction. Default ``0.1``.
+        gamma_min : float, optional
+            Minimum electron Lorentz factor active in the power law.
+            Default ``1.0``.
+        gamma_max : float, optional
+            Maximum electron Lorentz factor active in the power law.
+            Default ``1e6``.
+
+        Returns
+        -------
+        log_flux : array-like
+            :math:`\ln F_\nu` in CGS
+            (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
+        """
+        # Coerce some inputs to log space for numerical stability.
+        log_gamma_min = np.log(gamma_min)
+        log_gamma_max = np.log(gamma_max)
+        log_nu = np.log(np.asarray(nu, dtype="f8"))
+        log_B = np.log(float(B))
+        log_R_eff = np.log(float(f_V) ** (1 / 3) * float(R))
+        log_A_eff = np.log(float(f_A) * np.pi * float(R) ** 2)
+        log_D_A = np.log(float(D_A))
+
+        # Using B, compute the current gamma_c and the cooling regime.
+        gamma_c = self._cooling_engine.compute_cooling_gamma(B=B, t=t, sin_alpha=sin_alpha)
+        log_gamma_c = np.log(gamma_c)
+
+        # Now perform the branching to normalize dependent on the the
+        # cooling regime.
+        if log_gamma_c < log_gamma_min:
+            # Compute masks.
+            mask_1 = self._log_gamma < log_gamma_c
+            mask_2 = (log_gamma_c <= self._log_gamma) & (self._log_gamma < log_gamma_max)
+
+            # Normalize the electron distribution in each segment.
+            N0 = np.asarray(
+                BrokenPowerLaw._normalize_from_magnetic_field(
+                    B,
+                    epsilon_B,
+                    epsilon_E,
+                    p1=2,
+                    p2=p - 1,
+                    gamma_min=gamma_c,
+                    gamma_c=gamma_min,
+                    gamma_max=gamma_max,
+                ),
+                dtype="f8",
+            )
+            log_N = np.full(N0.shape + (len(self._log_gamma),), -np.inf)
+
+            # Insert the values into each segment.
+            log_N[mask_1] = np.log(N0) - 2 * (self._log_gamma[mask_1] - log_gamma_min)
+            log_N[mask_2] = np.log(N0) - (p - 1) * (self._log_gamma[mask_2] - log_gamma_min)
+        elif log_gamma_min <= log_gamma_c < log_gamma_max:
+            # Compute masks.
+            mask_1 = self._log_gamma < log_gamma_c
+            mask_2 = (log_gamma_c <= self._log_gamma) & (self._log_gamma < log_gamma_max)
+
+            # Normalize the electron distribution in each segment.
+            N0 = np.asarray(
+                BrokenPowerLaw._normalize_from_magnetic_field(
+                    B,
+                    epsilon_B,
+                    epsilon_E,
+                    p1=p,
+                    p2=p + 1,
+                    gamma_min=gamma_min,
+                    gamma_c=gamma_c,
+                    gamma_max=gamma_max,
+                ),
+                dtype="f8",
+            )
+            log_N = np.full(N0.shape + (len(self._log_gamma),), -np.inf)
+
+            # Insert the values into each segment.
+            log_N[mask_1] = np.log(N0) - p * (self._log_gamma[mask_1] - log_gamma_c)
+            log_N[mask_2] = np.log(N0) - (p + 1) * (self._log_gamma[mask_2] - log_gamma_c)
+        else:
+            # Compute mask.
+            mask = (log_gamma_min <= self._log_gamma) & (self._log_gamma < log_gamma_max)
+
+            # Normalize the electron distribution.
+            N0 = np.asarray(
+                PowerLaw._normalize_from_magnetic_field(
+                    B,
+                    epsilon_B,
+                    epsilon_E,
+                    p=p,
+                    gamma_min=gamma_min,
+                    gamma_max=gamma_max,
+                ),
+                dtype="f8",
+            )
+            log_N = np.full(N0.shape + (len(self._log_gamma),), -np.inf)
+            log_N[mask] = np.log(N0) - p * (self._log_gamma[mask])
+
+        # Pass off to the engine for the computation.
+        if sin_alpha is not None:
+            return self._engine._compute_log_flux_density(
+                log_nu=log_nu,
+                log_slab_depth=log_R_eff,
+                log_B=log_B,
+                log_N=log_N,
+                log_gamma=self._log_gamma,
+                log_weights=self._log_weights,
+                log_A=log_A_eff,
+                log_D_A=log_D_A,
+                z=float(z),
+                beta=float(beta),
+                cos_theta=float(cos_theta),
+                sin_alpha=float(sin_alpha),
+            )
+        else:
+            return self._engine._compute_log_pa_flux_density(
+                log_nu=log_nu,
+                log_slab_depth=log_R_eff,
+                log_B=log_B,
+                log_N=log_N,
+                log_gamma=self._log_gamma,
+                log_weights=self._log_weights,
+                log_A_eff=log_A_eff,
+                log_D_A=log_D_A,
+                z=float(z),
+                beta=float(beta),
+                cos_theta=float(cos_theta),
+            )
+
+    def sed(
+        self,
+        nu: "_UnitBearingArrayLike",
+        t: "_UnitBearingArrayLike",
+        B: "_UnitBearingScalarLike",
+        R: "_UnitBearingScalarLike",
+        *,
+        p: float = 3.0,
+        f_V: float = 1.0,
+        f_A: float = 1.0,
+        beta: float = 0.0,
+        cos_theta: float = 1.0,
+        alpha: "_UnitBearingScalarLike" = None,
+        epsilon_B: float = 0.1,
+        epsilon_E: float = 0.1,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e6,
+        redshift: float = None,
+        luminosity_distance: "_UnitBearingScalarLike" = None,
+        angular_diameter_distance: "_UnitBearingScalarLike" = None,
+        proper_distance: "_UnitBearingScalarLike" = None,
+        cosmology: cosmo.Cosmology = None,
+    ) -> "_UnitBearingArrayLike":
+        r"""
+        Evaluate the numerical power-law synchrotron SED with radiative cooling and self-absorption.
+
+        Parameters
+        ----------
+        nu : array-like or ~astropy.units.Quantity
+            Observed frequency. Bare values are treated as Hz.
+        t : float or ~astropy.units.Quantity
+            Elapsed time used to compute the cooling Lorentz factor
+            :math:`\gamma_c = 6\pi m_e c / (\sigma_T B^2 t)`. Bare values
+            are treated as seconds.
+        B : float or ~astropy.units.Quantity
+            Magnetic field strength. Bare values are treated as Gauss.
+        R : float or ~astropy.units.Quantity
+            Outer radius of the emitting region. Bare values are treated as cm.
+        p : float, optional
+            Electron power-law index. Default ``3.0``.
+        f_V : float, optional
+            Volume filling factor; the effective LOS path length is
+            :math:`f_V^{1/3} R`. Default ``1.0``.
+        f_A : float, optional
+            Area filling factor; the effective projected area is
+            :math:`f_A \pi R^2`. Default ``1.0``.
+        beta : float, optional
+            Bulk velocity :math:`v/c`. Default ``0.0``.
+        cos_theta : float, optional
+            Cosine of the angle between the bulk velocity and the line of
+            sight. Default ``1.0``.
+        alpha : float, ~astropy.units.Quantity, or None, optional
+            Electron pitch angle. Bare values are treated as radians.
+            ``None`` selects the pitch-angle-averaged kernel. Default ``None``.
+        epsilon_B : float, optional
+            Fraction of post-shock energy in magnetic fields. Default ``0.1``.
+        epsilon_E : float, optional
+            Fraction of post-shock energy in relativistic electrons.
+            Default ``0.1``.
+        gamma_min : float, optional
+            Minimum electron Lorentz factor active in the power law.
+            Default ``1.0``.
+        gamma_max : float, optional
+            Maximum electron Lorentz factor active in the power law.
+            Default ``1e6``.
+        redshift : float, optional
+            Source redshift.
+        luminosity_distance : float or ~astropy.units.Quantity, optional
+            Luminosity distance. Bare values are treated as cm.
+        angular_diameter_distance : float or ~astropy.units.Quantity, optional
+            Angular diameter distance. Bare values are treated as cm.
+        proper_distance : float or ~astropy.units.Quantity, optional
+            Proper (comoving) distance. Bare values are treated as cm.
+        cosmology : ~astropy.cosmology.Cosmology, optional
+            Cosmology used to derive missing distance measures. Defaults to
+            the package-configured cosmology.
+
+        Returns
+        -------
+        F_nu : ~astropy.units.Quantity
+            Flux density in
+            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
+
+        Notes
+        -----
+        - The cooling regime (fast, slow, or none) is determined internally from
+          :math:`\gamma_c`, :math:`\gamma_{\min}`, and :math:`\gamma_{\max}` on
+          every call. No regime label is returned or required from the user.
+        - The cooling break is computed under the **constant-field snapshot
+          approximation**: it assumes steady-state injection and a time-invariant
+          :math:`B`, and does not evolve the distribution self-consistently. For
+          more accurate treatment of evolving systems, couple this model to a
+          dynamical engine.
+        - Distance resolution follows the same hierarchy as
+          :class:`Numerical_PowerLaw_SSA_SynchrotronSED`: ``angular_diameter_distance``
+          takes precedence, otherwise derived from ``luminosity_distance``,
+          ``proper_distance``, or ``redshift``.
+
+        Examples
+        --------
+        Evaluate a cooled power-law synchrotron SED in the slow-cooling regime:
+
+        .. code-block:: python
+
+            import numpy as np
+            import astropy.units as u
+            from trilobite.radiation.synchrotron import (
+                Numerical_PowerLaw_Cooling_SSA_SynchrotronSED,
+            )
+
+            sed = (
+                Numerical_PowerLaw_Cooling_SSA_SynchrotronSED(
+                    n_gamma=200
+                )
+            )
+            nu = np.logspace(8, 18, 300) * u.Hz
+
+            F_nu = sed.sed(
+                nu=nu,
+                t=10 * u.day,
+                B=0.1 * u.G,
+                R=1e17 * u.cm,
+                p=2.4,
+                epsilon_B=0.1,
+                epsilon_E=0.1,
+                gamma_min=100.0,
+                gamma_max=1e7,
+                angular_diameter_distance=100 * u.Mpc,
+            )
+        """
+        # Resolve cosmological distances → angular diameter distance + redshift.
+        _cosmology = get_cosmology(cosmology=cosmology)
+        distances = resolve_cosmological_distances(
+            redshift=redshift,
+            luminosity_distance=luminosity_distance,
+            angular_diameter_distance=angular_diameter_distance,
+            proper_distance=proper_distance,
+            cosmology=_cosmology,
+        )
+        D_A = ensure_in_units(distances["angular_diameter_distance"], "cm")
+        z = float(distances["redshift"])
+
+        # Convert physical inputs to raw CGS.
+        nu_cgs = ensure_in_units(nu, "Hz")
+        t_cgs = ensure_in_units(t, "s")
+        B_cgs = float(ensure_in_units(B, "G"))
+        R_cgs = float(ensure_in_units(R, "cm"))
+        D_A_cgs = float(D_A)
+
+        # Resolve pitch angle: None → pitch-averaged.
+        sin_alpha = float(np.sin(ensure_in_units(alpha, "rad"))) if alpha is not None else None
+
+        log_flux = self._log_opt_sed(
+            nu=nu_cgs,
+            t=t_cgs,
+            B=B_cgs,
+            R=R_cgs,
+            D_A=D_A_cgs,
+            p=p,
+            f_V=f_V,
+            f_A=f_A,
+            beta=beta,
+            cos_theta=cos_theta,
+            sin_alpha=sin_alpha,
+            z=z,
+            epsilon_B=epsilon_B,
+            epsilon_E=epsilon_E,
+            gamma_min=gamma_min,
+            gamma_max=gamma_max,
+        )
+
+        return np.exp(log_flux) * u.erg / (u.cm**2 * u.s * u.Hz)
+
+
+class Numerical_Thermal_SSA_SynchrotronSED(SynchrotronSED):
+    r"""
+    Numerical one-zone thermal (Maxwell-Jüttner) synchrotron SED with self-absorption.
+
+    Evaluates the synchrotron flux density by numerically integrating the
+    synchrotron emissivity and absorption coefficient over a relativistic
+    **Maxwell-Jüttner electron distribution**, solving the plane-parallel
+    radiative transfer equation to include SSA self-consistently.
+
+    Unlike power-law models, the Maxwell-Jüttner distribution has no sharp
+    spectral break. The emitted spectrum is therefore smooth across the SSA
+    turnover and does not require regime classification.
+
+    .. rubric:: Electron Distribution
+
+    The relativistic Maxwell-Jüttner distribution is
+
+    .. math::
+
+        N(\gamma) = \frac{N_{\rm therm}}{2\Theta^3}\,\gamma^2\,e^{-\gamma/\Theta},
+
+    where :math:`\Theta = kT/(m_e c^2)` is the dimensionless electron
+    temperature and :math:`N_{\rm therm}` is fixed by the equipartition
+    prescription (see
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner._normalize_from_magnetic_field`):
+
+    .. math::
+
+        \epsilon_E\,\frac{B^2}{8\pi} = \int_1^\infty
+            N(\gamma)\,\gamma\,m_e c^2\,\mathrm{d}\gamma.
+
+    The thermal peak of the distribution is at :math:`\gamma_{\rm peak} \approx 3\Theta`
+    for :math:`\Theta \gg 1`, so the quadrature grid should be wide enough to
+    capture energies up to several multiples of :math:`\Theta`.
+
+    .. rubric:: Radiative Transfer
+
+    The emergent flux is computed identically to
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED`: a plane-parallel slab of
+    depth :math:`\ell = f_V\,R` (no cube-root factor for the thermal geometry) is
+    solved for the full transition from optically thin to optically thick.
+
+    .. rubric:: Physical Parameters
+
+    .. list-table::
+        :widths: 25 15 60
+        :header-rows: 1
+
+        * - Parameter
+          - Symbol
+          - Description
+        * - Magnetic field
+          - :math:`B`
+          - Uniform magnetic field strength in the emitting region.
+        * - Outer radius
+          - :math:`R`
+          - Characteristic size of the emitting region. The effective
+            line-of-sight depth is :math:`\ell = f_V\,R`.
+        * - Dimensionless temperature
+          - :math:`\Theta`
+          - :math:`\Theta = kT/(m_e c^2)`; controls the peak of the
+            Maxwell-Jüttner distribution.
+        * - Magnetic equipartition fraction
+          - :math:`\epsilon_B`
+          - Fraction of the post-shock energy density in magnetic fields.
+        * - Electron equipartition fraction
+          - :math:`\epsilon_E`
+          - Fraction of the post-shock energy density in thermal electrons.
+        * - Volume filling factor
+          - :math:`f_V`
+          - Fraction of the sphere occupied by emitting material; controls
+            the effective slab depth :math:`\ell = f_V\,R`.
+        * - Area filling factor
+          - :math:`f_A`
+          - Fraction of the projected area that is emitting.
+
+    See Also
+    --------
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED` :
+        Numerical SED for a non-thermal power-law electron distribution.
+    :class:`Numerical_Thermal_PowerLaw_SSA_SynchrotronSED` :
+        Numerical SED for a composite thermal + power-law distribution.
+    :class:`PowerLaw_SSA_SynchrotronSED` :
+        Analytic broken-power-law SED with SSA and regime classification.
+    """
+
+    def __init__(
+        self,
+        gamma: Union[np.ndarray, None] = None,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+        x_min: float = 1e-5,
+        x_max: float = 1e2,
+        num_points: int = 1000,
+        spacing: str = "log",
+        method: str = "exact",
+    ):
+        r"""
+        Initialize the numerical thermal synchrotron SED.
+
+        Parameters
+        ----------
+        gamma : ~numpy.ndarray or None, optional
+            Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
+            built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
+        gamma_min : float, optional
+            Lower bound of the Lorentz factor grid. Default ``1.0``.
+        gamma_max : float, optional
+            Upper bound of the Lorentz factor grid. Default ``1e8``.
+            Should extend to several times :math:`\Theta` to capture the
+            Maxwell-Jüttner tail at the expected electron temperatures.
+        n_gamma : int, optional
+            Number of log-spaced quadrature points on the Lorentz factor
+            grid. Default ``200``.
+        x_min : float, optional
+            Lower bound of the synchrotron kernel :math:`x` grid,
+            where :math:`x = \nu/\nu_c(\gamma)`. Default ``1e-5``.
+        x_max : float, optional
+            Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
+        num_points : int, optional
+            Number of points on the kernel grid. Default ``1000``.
+        spacing : {"log", "linear"}, optional
+            Spacing of the kernel grid. Default ``"log"``.
+        method : {"exact", "lu"}, optional
+            Kernel evaluation method. ``"exact"`` evaluates the full modified
+            Bessel function; ``"lu"`` uses an LU-decomposed approximation.
+            Default ``"exact"``.
+        """
+        super().__init__()
         self._engine = NumericalSynchrotronEngine()
 
         self._log_gamma, self._log_weights = self._engine._build_gamma_grid(
@@ -6628,11 +7353,11 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
             (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
         """
         N_therm = np.asarray(
-            _opt_normalize_MJD_from_magnetic_field(
-                B=B,
+            MaxwellJuettner._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                epsilon_E,
                 Theta=Theta,
-                epsilon_B=epsilon_B,
-                epsilon_E=epsilon_E,
             ),
             dtype="f8",
         )
@@ -6655,7 +7380,7 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
         if sin_alpha is not None:
             return self._engine._compute_log_flux_density(
                 log_nu=log_nu,
-                log_R=log_R_eff,
+                log_slab_depth=log_R_eff,
                 log_B=log_B,
                 log_N=log_N,
                 log_gamma=self._log_gamma,
@@ -6670,7 +7395,7 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
         else:
             return self._engine._compute_log_pa_flux_density(
                 log_nu=log_nu,
-                log_R=log_R_eff,
+                log_slab_depth=log_R_eff,
                 log_B=log_B,
                 log_N=log_N,
                 log_gamma=self._log_gamma,
@@ -6750,6 +7475,47 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
         F_nu : ~astropy.units.Quantity
             Flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
+
+        Notes
+        -----
+        - The Maxwell-Jüttner peak is near :math:`\gamma \sim 3\Theta` for
+          relativistic temperatures. The quadrature grid constructed at
+          instantiation should therefore span at least up to :math:`10\,\Theta`
+          to avoid truncation of the high-energy tail.
+        - Because the thermal distribution has no sharp break, the spectrum
+          transitions smoothly from the self-absorbed to optically thin regime
+          without requiring regime classification.
+        - Distance resolution follows the same hierarchy as
+          :class:`Numerical_PowerLaw_SSA_SynchrotronSED`.
+
+        Examples
+        --------
+        Evaluate a thermal synchrotron SED for an electron temperature of
+        :math:`\Theta = 10`:
+
+        .. code-block:: python
+
+            import numpy as np
+            import astropy.units as u
+            from trilobite.radiation.synchrotron import (
+                Numerical_Thermal_SSA_SynchrotronSED,
+            )
+
+            sed = Numerical_Thermal_SSA_SynchrotronSED(
+                gamma_max=1e4,  # cover at least ~10 * Theta
+                n_gamma=300,
+            )
+            nu = np.logspace(8, 18, 300) * u.Hz
+
+            F_nu = sed.sed(
+                nu=nu,
+                B=0.1 * u.G,
+                R=1e17 * u.cm,
+                Theta=10.0,
+                epsilon_B=0.1,
+                epsilon_E=0.1,
+                angular_diameter_distance=100 * u.Mpc,
+            )
         """
         _cosmology = get_cosmology(cosmology=cosmology)
         distances = resolve_cosmological_distances(
@@ -6788,13 +7554,21 @@ class Numerical_Thermal_SSA_SED(SynchrotronSED):
         return np.exp(log_flux) * u.erg / (u.cm**2 * u.s * u.Hz)
 
 
-class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
+class Numerical_Thermal_PowerLaw_SSA_SynchrotronSED(SynchrotronSED):
     r"""
     Numerical one-zone mixed thermal + power-law synchrotron SED with self-absorption.
 
-    Evaluates the synchrotron flux density for a **composite electron
-    distribution** consisting of a Maxwell-Jüttner thermal component and a
-    non-thermal power-law component, with full radiative transfer (SSA included).
+    Evaluates the synchrotron flux density for a **composite electron distribution**
+    consisting of a Maxwell-Jüttner thermal component and a non-thermal power-law
+    component, with full radiative transfer (SSA included).
+
+    This class is appropriate for systems where both thermal and non-thermal
+    electrons contribute to the synchrotron emission, such as mildly relativistic
+    shocks or environments where the acceleration efficiency is uncertain. The
+    relative contribution of each component is controlled by the energy fraction
+    parameter :math:`\delta`.
+
+    .. rubric:: Composite Electron Distribution
 
     The total distribution is
 
@@ -6805,32 +7579,47 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
             +
             \underbrace{N_0\,\gamma^{-p}\,\mathbf{1}_{[\gamma_{\min},\gamma_{\max}]}(\gamma)}_{\text{non-thermal}},
 
-    where the thermal fraction :math:`\delta` splits the total electron energy
-    budget: :math:`\epsilon_{E,\rm therm} = \delta\,\epsilon_E` and
-    :math:`\epsilon_{E,\rm PL} = (1-\delta)\,\epsilon_E` (see
-    :func:`~trilobite.radiation.synchrotron.microphysics._opt_normalize_MJD_and_PL_from_magnetic_field`).
+    where the energy budget is split via the thermal fraction :math:`\delta`:
 
-    Parameters
-    ----------
-    gamma : ~numpy.ndarray or None, optional
-        Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
-        built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
-    gamma_min : float, optional
-        Lower bound of the Lorentz factor grid. Default ``1.0``.
-    gamma_max : float, optional
-        Upper bound of the Lorentz factor grid. Default ``1e8``.
-    n_gamma : int, optional
-        Number of quadrature points. Default ``200``.
-    x_min : float, optional
-        Lower bound of the synchrotron kernel :math:`x` grid. Default ``1e-5``.
-    x_max : float, optional
-        Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
-    num_points : int, optional
-        Number of points on the kernel grid. Default ``1000``.
-    spacing : {"log", "linear"}, optional
-        Kernel grid spacing. Default ``"log"``.
-    method : {"exact", "lu"}, optional
-        Kernel evaluation method. Default ``"exact"``.
+    .. math::
+
+        \epsilon_{E,\rm therm} = \delta\,\epsilon_E, \qquad
+        \epsilon_{E,\rm PL}    = (1-\delta)\,\epsilon_E.
+
+    Each component is normalized independently by equipartition against its
+    own energy budget (see
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner._normalize_from_magnetic_field`
+    and
+    :meth:`~trilobite.radiation.synchrotron.electron_distributions.PowerLaw._normalize_from_magnetic_field`).
+    The two distributions are then combined in log-space via
+    :func:`numpy.logaddexp` before being passed to the numerical engine.
+
+    .. rubric:: Spectral Properties
+
+    - In the limit :math:`\delta \to 1`, the SED reduces to the pure thermal
+      case (:class:`Numerical_Thermal_SSA_SynchrotronSED`).
+    - In the limit :math:`\delta \to 0`, the SED reduces to the pure power-law
+      case (:class:`Numerical_PowerLaw_SSA_SynchrotronSED`).
+    - For intermediate :math:`\delta`, the spectrum may exhibit features from
+      both components, with the low-frequency self-absorbed regime shaped
+      primarily by the thermal component and the high-frequency optically thin
+      tail dominated by the power law.
+
+    .. rubric:: Radiative Transfer
+
+    SSA is computed as in all numerical classes via plane-parallel radiative
+    transfer over the combined distribution (no regime classification required).
+
+    See Also
+    --------
+    :class:`Numerical_Thermal_SSA_SynchrotronSED` :
+        Numerical SED for a pure Maxwell-Jüttner electron distribution.
+    :class:`Numerical_PowerLaw_SSA_SynchrotronSED` :
+        Numerical SED for a pure power-law electron distribution.
+    :class:`Numerical_PowerLaw_Cooling_SSA_SynchrotronSED` :
+        Numerical power-law SED with radiative cooling.
+    :class:`PowerLaw_SSA_SynchrotronSED` :
+        Analytic broken-power-law SED with SSA and regime classification.
     """
 
     def __init__(
@@ -6845,6 +7634,39 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
         spacing: str = "log",
         method: str = "exact",
     ):
+        r"""
+        Initialize the numerical mixed thermal + power-law synchrotron SED.
+
+        Parameters
+        ----------
+        gamma : ~numpy.ndarray or None, optional
+            Explicit Lorentz factor grid. If ``None``, a log-uniform grid is
+            built from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
+        gamma_min : float, optional
+            Lower bound of the Lorentz factor grid. Default ``1.0``.
+        gamma_max : float, optional
+            Upper bound of the Lorentz factor grid. Default ``1e8``. Should be
+            wide enough to capture the Maxwell-Jüttner tail (at least
+            :math:`\sim 10\,\Theta`) as well as the non-thermal power-law
+            cutoff ``gamma_max`` passed at call time.
+        n_gamma : int, optional
+            Number of log-spaced quadrature points on the Lorentz factor
+            grid. Default ``200``.
+        x_min : float, optional
+            Lower bound of the synchrotron kernel :math:`x` grid,
+            where :math:`x = \nu/\nu_c(\gamma)`. Default ``1e-5``.
+        x_max : float, optional
+            Upper bound of the synchrotron kernel :math:`x` grid. Default ``1e2``.
+        num_points : int, optional
+            Number of points on the kernel grid. Default ``1000``.
+        spacing : {"log", "linear"}, optional
+            Spacing of the kernel grid. Default ``"log"``.
+        method : {"exact", "lu"}, optional
+            Kernel evaluation method. ``"exact"`` evaluates the full modified
+            Bessel function; ``"lu"`` uses an LU-decomposed approximation.
+            Default ``"exact"``.
+        """
+        super().__init__()
         self._engine = NumericalSynchrotronEngine()
 
         self._log_gamma, self._log_weights = self._engine._build_gamma_grid(
@@ -6934,18 +7756,27 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
             :math:`\ln F_\nu` in CGS
             (:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`).
         """
-        N_therm, N0_pl = _opt_normalize_MJD_and_PL_from_magnetic_field(
-            B=B,
-            Theta=Theta,
-            p=p,
-            delta=delta,
-            epsilon_B=epsilon_B,
-            epsilon_E=epsilon_E,
-            gamma_min=gamma_min,
-            gamma_max=gamma_max,
+        delta_arr = np.asarray(delta, dtype="f8")
+        N_therm = np.asarray(
+            MaxwellJuettner._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                delta_arr * epsilon_E,
+                Theta=Theta,
+            ),
+            dtype="f8",
         )
-        N_therm = np.asarray(N_therm, dtype="f8")
-        N0_pl = np.asarray(N0_pl, dtype="f8")
+        N0_pl = np.asarray(
+            PowerLaw._normalize_from_magnetic_field(
+                B,
+                epsilon_B,
+                (1.0 - delta_arr) * epsilon_E,
+                p=p,
+                gamma_min=gamma_min,
+                gamma_max=gamma_max,
+            ),
+            dtype="f8",
+        )
 
         # Thermal component: Maxwell-Jüttner evaluated over the full grid.
         log_N_mjd = (
@@ -6973,7 +7804,7 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
         if sin_alpha is not None:
             return self._engine._compute_log_flux_density(
                 log_nu=log_nu,
-                log_R=log_R_eff,
+                log_slab_depth=log_R_eff,
                 log_B=log_B,
                 log_N=log_N,
                 log_gamma=self._log_gamma,
@@ -6988,7 +7819,7 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
         else:
             return self._engine._compute_log_pa_flux_density(
                 log_nu=log_nu,
-                log_R=log_R_eff,
+                log_slab_depth=log_R_eff,
                 log_B=log_B,
                 log_N=log_N,
                 log_gamma=self._log_gamma,
@@ -7083,6 +7914,56 @@ class Numerical_Thermal_PL_SSA_SED(SynchrotronSED):
         F_nu : ~astropy.units.Quantity
             Flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
+
+        Notes
+        -----
+        - The thermal and power-law normalization constants are computed
+          independently from their respective energy fractions
+          :math:`\delta\,\epsilon_E` and :math:`(1-\delta)\,\epsilon_E`, then
+          combined in log-space before the radiative transfer integral. Setting
+          :math:`\delta = 1` recovers the pure thermal limit; :math:`\delta = 0`
+          recovers the pure power-law limit.
+        - The quadrature grid constructed at instantiation must span both the
+          Maxwell-Jüttner peak (:math:`\gamma \sim 3\Theta`) and the power-law
+          cutoff ``gamma_max``. Ensure the grid ``gamma_max`` set at instantiation
+          is at least :math:`\max(10\,\Theta, \gamma_{\max})`.
+        - Distance resolution follows the same hierarchy as
+          :class:`Numerical_PowerLaw_SSA_SynchrotronSED`.
+
+        Examples
+        --------
+        Evaluate a mixed thermal + power-law synchrotron SED with equal energy
+        fractions:
+
+        .. code-block:: python
+
+            import numpy as np
+            import astropy.units as u
+            from trilobite.radiation.synchrotron import (
+                Numerical_Thermal_PowerLaw_SSA_SynchrotronSED,
+            )
+
+            sed = (
+                Numerical_Thermal_PowerLaw_SSA_SynchrotronSED(
+                    gamma_max=1e6,
+                    n_gamma=300,
+                )
+            )
+            nu = np.logspace(8, 18, 300) * u.Hz
+
+            F_nu = sed.sed(
+                nu=nu,
+                B=0.1 * u.G,
+                R=1e17 * u.cm,
+                Theta=10.0,
+                p=2.4,
+                delta=0.5,
+                epsilon_B=0.1,
+                epsilon_E=0.1,
+                gamma_min=100.0,
+                gamma_max=1e5,
+                angular_diameter_distance=100 * u.Mpc,
+            )
         """
         _cosmology = get_cosmology(cosmology=cosmology)
         distances = resolve_cosmological_distances(
