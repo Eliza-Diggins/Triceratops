@@ -6,22 +6,22 @@ This example explores how a pressure-driven supernova shock evolves when the
 same ejecta model is launched into several different circumstellar medium
 (CSM) density profiles.  It uses the
 :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
-together with the CSM factory functions in
-:mod:`~trilobite.dynamics.shocks.utils`.
+together with the CSM profile classes in
+:mod:`~trilobite.dynamics.profiles`.
 
 The goal is not to fit a specific transient, but to build intuition for how
 density structure imprints itself on the shock dynamics. We compare shocks
 propagating into:
 
-- a low-density uniform ISM (:func:`~trilobite.dynamics.shocks.utils.get_uniform_csm_density_func`),
-- a dense uniform medium (:func:`~trilobite.dynamics.shocks.utils.get_uniform_csm_density_func`),
-- a steady wind (:func:`~trilobite.dynamics.shocks.utils.get_wind_csm_density_func`),
-- a wind with an outer ISM floor (:func:`~trilobite.dynamics.shocks.utils.get_wind_with_floor_csm_density_func`),
-- a sharply truncated wind (:func:`~trilobite.dynamics.shocks.utils.get_truncated_wind_csm_density_func`),
-- a smoothly truncated wind (:func:`~trilobite.dynamics.shocks.utils.get_smooth_truncated_wind_csm_density_func`),
-- a dense top-hat shell (:func:`~trilobite.dynamics.shocks.utils.get_shell_csm_density_func`),
-- a smooth Gaussian shell (:func:`~trilobite.dynamics.shocks.utils.get_gaussian_shell_csm_density_func`),
-- and a broken power-law CSM (:func:`~trilobite.dynamics.shocks.utils.get_broken_power_law_csm_density_func`).
+- a low-density uniform ISM (:class:`~trilobite.dynamics.profiles.UniformCSMProfile`),
+- a dense uniform medium (:class:`~trilobite.dynamics.profiles.UniformCSMProfile`),
+- a steady wind (:class:`~trilobite.dynamics.profiles.WindCSMProfile`),
+- a wind with an outer ISM floor (:class:`~trilobite.dynamics.profiles.WindWithFloorCSMProfile`),
+- a sharply truncated wind (:class:`~trilobite.dynamics.profiles.TruncatedWindCSMProfile`),
+- a smoothly truncated wind (:class:`~trilobite.dynamics.profiles.SmoothTruncatedWindCSMProfile`),
+- a dense top-hat shell (:class:`~trilobite.dynamics.profiles.ShellCSMProfile`),
+- a smooth Gaussian shell (:class:`~trilobite.dynamics.profiles.GaussianShellCSMProfile`),
+- and a broken power-law CSM (:class:`~trilobite.dynamics.profiles.BrokenPowerLawCSMProfile`).
 
 All models use the same homologous broken-power-law ejecta profile and the
 same initial shock conditions. This isolates the dynamical effect of the CSM
@@ -51,19 +51,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 from astropy import units as u
 
-from trilobite.dynamics.shocks.numerical import PressureDrivenThinShellShockEngine
-from trilobite.dynamics.shocks.utils import (
-    get_bpl_ejecta_kernel,
-    get_broken_power_law_csm_density_func,
-    get_gaussian_shell_csm_density_func,
-    get_shell_csm_density_func,
-    get_smooth_truncated_wind_csm_density_func,
-    get_truncated_wind_csm_density_func,
-    get_uniform_csm_density_func,
-    get_wind_csm_density_func,
-    get_wind_with_floor_csm_density_func,
-    make_homologous_stationary_sources,
+from trilobite.dynamics.profiles import (
+    BrokenPowerLawCSMProfile,
+    BrokenPowerLawEjectaProfile,
+    GaussianShellCSMProfile,
+    ShellCSMProfile,
+    SmoothTruncatedWindCSMProfile,
+    TruncatedWindCSMProfile,
+    UniformCSMProfile,
+    WindCSMProfile,
+    WindWithFloorCSMProfile,
 )
+from trilobite.dynamics.shocks.numerical import PressureDrivenThinShellShockEngine
+from trilobite.dynamics.shocks.utils import make_homologous_stationary_sources
 from trilobite.utils.plot_utils import set_plot_style
 
 
@@ -100,9 +100,10 @@ class CSMScenario:
 #     \rho_{\rm ej}(r,t) = t^{-3} G_{\rm ej}(r/t),
 #
 # with an outer velocity-space slope ``n=10`` and an inner slope ``delta=0``.
-# :func:`~trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel` computes
-# the normalization constants from the explosion energy and ejecta mass and
-# returns a callable :math:`G_{\rm ej}(v)`.
+# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# the kernel to the explosion energy and ejecta mass and returns a fast
+# unit-free :math:`\rho_{\rm ej}(r,t)` callable via
+# :meth:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.as_optimized_callable`.
 #
 # A single stateless
 # :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
@@ -112,12 +113,8 @@ class CSMScenario:
 E_ej = 1e50 * u.erg
 M_ej = 5.0 * u.M_sun
 
-G_ej = get_bpl_ejecta_kernel(
-    E_ej=E_ej,
-    M_ej=M_ej,
-    n=10,
-    delta=0,
-)
+K_ej, v_t_ej = BrokenPowerLawEjectaProfile.normalize(E_ej=E_ej, M_ej=M_ej, n=10, delta=0)
+G_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K_ej, v_t=v_t_ej, n=10, delta=0)
 
 engine = PressureDrivenThinShellShockEngine()
 
@@ -164,17 +161,17 @@ R_break = 1e17 * u.cm
 scenarios = [
     CSMScenario(
         label="Uniform ISM",
-        rho_csm=get_uniform_csm_density_func(rho_ism),
+        rho_csm=UniformCSMProfile.as_optimized_callable(rho_0=rho_ism),
         color="C0",
     ),
     CSMScenario(
         label="Dense uniform CSM",
-        rho_csm=get_uniform_csm_density_func(rho_dense),
+        rho_csm=UniformCSMProfile.as_optimized_callable(rho_0=rho_dense),
         color="C1",
     ),
     CSMScenario(
         label="RSG-like wind",
-        rho_csm=get_wind_csm_density_func(
+        rho_csm=WindCSMProfile.as_optimized_callable(
             mass_loss_rate=M_dot_rsg,
             wind_velocity=v_wind_rsg,
         ),
@@ -182,7 +179,7 @@ scenarios = [
     ),
     CSMScenario(
         label="Wind + ISM floor",
-        rho_csm=get_wind_with_floor_csm_density_func(
+        rho_csm=WindWithFloorCSMProfile.as_optimized_callable(
             mass_loss_rate=M_dot_rsg,
             wind_velocity=v_wind_rsg,
             density_floor=rho_ism,
@@ -191,7 +188,7 @@ scenarios = [
     ),
     CSMScenario(
         label="Truncated wind",
-        rho_csm=get_truncated_wind_csm_density_func(
+        rho_csm=TruncatedWindCSMProfile.as_optimized_callable(
             mass_loss_rate=M_dot_rsg,
             wind_velocity=v_wind_rsg,
             r_max=R_wind,
@@ -202,7 +199,7 @@ scenarios = [
     ),
     CSMScenario(
         label="Smooth truncated wind",
-        rho_csm=get_smooth_truncated_wind_csm_density_func(
+        rho_csm=SmoothTruncatedWindCSMProfile.as_optimized_callable(
             mass_loss_rate=M_dot_rsg,
             wind_velocity=v_wind_rsg,
             r_max=R_wind,
@@ -214,7 +211,7 @@ scenarios = [
     ),
     CSMScenario(
         label="Dense top-hat shell",
-        rho_csm=get_shell_csm_density_func(
+        rho_csm=ShellCSMProfile.as_optimized_callable(
             r_inner=R_shell_inner,
             r_outer=R_shell_outer,
             shell_density=3e-19 * u.g / u.cm**3,
@@ -225,7 +222,7 @@ scenarios = [
     ),
     CSMScenario(
         label="Gaussian shell",
-        rho_csm=get_gaussian_shell_csm_density_func(
+        rho_csm=GaussianShellCSMProfile.as_optimized_callable(
             background_density=rho_ism,
             shell_density=3e-19 * u.g / u.cm**3,
             shell_radius=R_shell_center,
@@ -236,7 +233,7 @@ scenarios = [
     ),
     CSMScenario(
         label="Broken power-law CSM",
-        rho_csm=get_broken_power_law_csm_density_func(
+        rho_csm=BrokenPowerLawCSMProfile.as_optimized_callable(
             density_break=1e-20 * u.g / u.cm**3,
             radius_break=R_break,
             slope_inner=0.0,
@@ -265,7 +262,7 @@ radius_cgs = radius_grid.to_value(u.cm)
 fig, ax = plt.subplots(figsize=(8, 5))
 
 for scenario in scenarios:
-    rho_vals = scenario.rho_csm(radius_cgs)
+    rho_vals = scenario.rho_csm(radius_cgs, 0.0)
     ax.loglog(
         radius_cgs,
         rho_vals,
@@ -321,10 +318,7 @@ plt.show()
 states = {}
 
 for scenario in scenarios:
-    rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
-        G_ej=G_ej,
-        rho_csm=scenario.rho_csm,
-    )
+    rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej, scenario.rho_csm)
 
     states[scenario.label] = engine.compute_shock_properties(
         time=time,
@@ -464,7 +458,7 @@ fig, ax = plt.subplots(figsize=(8, 5))
 for scenario in scenarios:
     state = states[scenario.label]
     shock_radius = state.radius.to_value(u.cm)
-    sampled_density = scenario.rho_csm(shock_radius)
+    sampled_density = scenario.rho_csm(shock_radius, 0.0)
 
     ax.loglog(
         t_days,

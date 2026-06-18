@@ -35,9 +35,6 @@ __all__ = [
     "RelativisticColdShockConditions",
     "UltraRelativisticShockConditions",
     "UltraRelativisticColdShockConditions",
-    "normalize_bpl_ejecta",
-    "get_bpl_ejecta_kernel",
-    "get_wind_csm_density_func",
     "make_homologous_stationary_sources",
 ]
 from trilobite.dynamics.shocks import numerical
@@ -73,9 +70,4 @@ from trilobite.dynamics.shocks.numerical import (
     ThinShellShockState,
 )
 from trilobite.dynamics.shocks.sedov_taylor import SedovTaylorShockEngine, SedovTaylorShockState, sedov_taylor_beta
-from trilobite.dynamics.shocks.utils import (
-    get_bpl_ejecta_kernel,
-    get_wind_csm_density_func,
-    make_homologous_stationary_sources,
-    normalize_bpl_ejecta,
-)
+from trilobite.dynamics.shocks.utils import make_homologous_stationary_sources

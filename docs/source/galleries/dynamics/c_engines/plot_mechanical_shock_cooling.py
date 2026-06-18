@@ -67,11 +67,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from astropy import units as u
 
-from trilobite.dynamics.shocks import (
-    MechanicalShockEngine,
-    get_bpl_ejecta_kernel,
-    make_homologous_stationary_sources,
-)
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
+from trilobite.dynamics.shocks import MechanicalShockEngine, make_homologous_stationary_sources
 from trilobite.utils.plot_utils import set_plot_style
 
 E_ej = 1e51 * u.erg
@@ -79,19 +76,11 @@ M_ej = 5.0 * u.M_sun
 M_dot = 1e-3 * u.M_sun / u.yr  # dense Type IIn wind
 v_wind = 100.0 * u.km / u.s
 
-G_ej = get_bpl_ejecta_kernel(E_ej, M_ej, n=10, delta=1)
+K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej, M_ej, n=10, delta=1)
+rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10, delta=1)
+rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=M_dot, wind_velocity=v_wind)
 
-A_cgs = (M_dot / (4 * np.pi * v_wind)).to_value(u.g / u.cm)
-
-
-def rho_csm(r):
-    return A_cgs / r**2
-
-
-rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
-    G_ej=G_ej,
-    rho_csm=rho_csm,
-)
+rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
 t_0_cgs = (1.0 * u.day).to_value(u.s)
 R_cd_0 = 1e14  # cm

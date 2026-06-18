@@ -52,7 +52,7 @@ from trilobite.dynamics.shocks.chevalier import (
     ChevalierSelfSimilarWindShockEngine,
     compute_self_similar_functions,
 )
-from trilobite.dynamics.shocks.utils import normalize_bpl_ejecta
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile
 from trilobite.utils.plot_utils import set_plot_style
 
 # %%
@@ -239,7 +239,7 @@ K_csm_cgs = (M_dot / (4.0 * np.pi * v_wind)).to(u.g / u.cm).value
 E_ej_cgs = E_ej.to(u.erg).value
 M_ej_cgs = M_ej.to(u.g).value
 
-v_t_q, K_inner_q = normalize_bpl_ejecta(E_ej=E_ej, M_ej=M_ej, n=n, delta=delta)
+K_inner_q, v_t_q = BrokenPowerLawEjectaProfile.normalize(E_ej=E_ej, M_ej=M_ej, n=n, delta=delta)
 v_t = v_t_q.to(u.cm / u.s).value
 K_inner = K_inner_q.to(u.g * u.cm ** (delta - 3) * u.s ** (3 - delta)).value
 K_ej_cgs = K_inner * v_t ** (n - delta)  # outer-ejecta normalization K_ej

@@ -104,53 +104,49 @@ density and bulk velocity just outside each shock face:
 .. hint::
 
     For the common case of **homologous ejecta in a stationary CSM** (the standard
-    assumption for young supernova ejecta) all four callables can be assembled from a
-    single ejecta kernel :math:`G(v)` and a one-argument CSM density function
-    :math:`\rho_{\rm CSM}(r)` using
+    assumption for young supernova ejecta) all four callables can be assembled from
+    ejecta and CSM density callables using
     :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`.  Under
     this approximation the homologous ejecta density follows
 
     .. math::
 
-        \rho_1(r,t) = t^{-3}\,G(r/t),
+        \rho_1(r,t) = \rho_{\rm ej}(r,t),
         \qquad
         u_1(r,t) = \frac{r}{t},
 
     while the CSM is stationary, :math:`u_4 = 0`.  See
-    :mod:`~trilobite.dynamics.shocks.utils` for the full catalogue of available ejecta
-    kernels and CSM profile factories.
+    :mod:`~trilobite.dynamics.profiles` for the full catalogue of available ejecta
+    and CSM profile classes.
 
 .. dropdown:: Example — profile and engine setup
 
     .. code-block:: python
 
         from astropy import units as u
+        from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
         from trilobite.dynamics.shocks import (
             PressureDrivenThinShellShockEngine,
-            get_bpl_ejecta_kernel,
-            get_wind_csm_density_func,
             make_homologous_stationary_sources,
         )
 
-        # Chevalier broken-power-law ejecta kernel G(v), normalized to E_ej and M_ej
-        G_ej = get_bpl_ejecta_kernel(
+        # Chevalier broken-power-law ejecta, normalized to E_ej and M_ej
+        K, v_t = BrokenPowerLawEjectaProfile.normalize(
             E_ej=1e51 * u.erg,
             M_ej=5.0  * u.Msun,
             n=10.0,
             delta=1.0,
         )
+        rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10.0, delta=1.0)
 
         # Steady wind CSM: rho(r) = A * r^-2, A = Mdot / (4 pi v_w)
-        rho_csm = get_wind_csm_density_func(
+        rho_csm = WindCSMProfile.as_optimized_callable(
             mass_loss_rate=1e-5 * u.Msun / u.yr,
             wind_velocity=100.0 * u.km / u.s,
         )
 
-        # Wrap into the four two-argument (r, t) source callables
-        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
-            G_ej=G_ej,
-            rho_csm=rho_csm,
-        )
+        # Assemble the four two-argument (r, t) source callables
+        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
         # The engine is stateless — a single instance can be reused
         engine = PressureDrivenThinShellShockEngine()
@@ -220,17 +216,17 @@ conditions.  The mean molecular weight ``mu`` can be changed at instantiation, e
         import matplotlib.pyplot as plt
         from astropy import units as u
 
+        from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
         from trilobite.dynamics.shocks import (
             PressureDrivenThinShellShockEngine,
-            get_bpl_ejecta_kernel,
-            get_wind_csm_density_func,
             make_homologous_stationary_sources,
         )
         from trilobite.utils.plot_utils import set_plot_style
 
-        G_ej    = get_bpl_ejecta_kernel(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
-        rho_csm = get_wind_csm_density_func(1e-5 * u.Msun / u.yr, 100.0 * u.km / u.s)
-        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej, rho_csm)
+        K, v_t  = BrokenPowerLawEjectaProfile.normalize(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
+        rho_ej  = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10.0, delta=1.0)
+        rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=1e-5 * u.Msun / u.yr, wind_velocity=100.0 * u.km / u.s)
+        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
         engine = PressureDrivenThinShellShockEngine()
         time   = np.geomspace(1, 1000, 500) * u.day
@@ -360,11 +356,11 @@ Problem Setup
 ~~~~~~~~~~~~~~
 
 The profile and source-function setup is identical to the pressure-driven thin-shell
-engine: build an ejecta kernel with
-:func:`~trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel` (or
-:func:`~trilobite.dynamics.shocks.utils.get_exponential_ejecta_kernel`), build a CSM
-profile with one of the factories in :mod:`~trilobite.dynamics.shocks.utils`, and
-assemble the four source callables with
+engine: build a ejecta density callable with
+:class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` (or
+:class:`~trilobite.dynamics.profiles.ExponentialEjectaProfile`), build a CSM
+density callable with one of the profile classes in :mod:`~trilobite.dynamics.profiles`,
+and assemble the four source callables with
 :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`.
 
 The additional step specific to this engine is deriving self-consistent **initial

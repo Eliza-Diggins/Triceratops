@@ -27,11 +27,11 @@ import pytest
 from astropy import units as u
 from numpy.testing import assert_allclose
 
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, UniformCSMProfile, WindCSMProfile
 from trilobite.dynamics.shocks import (
     ChevalierTwoShockSelfSimilarEngine,
     MechanicalShockEngine,
     SedovTaylorShockEngine,
-    get_bpl_ejecta_kernel,
     make_homologous_stationary_sources,
 )
 
@@ -92,16 +92,13 @@ class TestMechanicalShockEngine:
         M_dot = 1e-5 * u.M_sun / u.yr
         v_wind = 100.0 * u.km / u.s
 
-        # CSM normalization: ρ_csm(r) = A · r^{-2},  A = Ṁ / (4π v_w)
-        A_cgs = (M_dot / (4 * np.pi * v_wind)).cgs.value
         K_csm = (M_dot / (4 * np.pi * v_wind)).to(u.g / u.cm)
 
-        G_ej = get_bpl_ejecta_kernel(E_ej, M_ej, n=n, delta=0)
+        K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej, M_ej, n=n, delta=0)
+        rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=n, delta=0)
+        rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=M_dot, wind_velocity=v_wind)
 
-        def rho_csm(r):
-            return A_cgs * np.asarray(r, dtype=float) ** -2
-
-        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej=G_ej, rho_csm=rho_csm)
+        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
         # Four decades from 1 to 1e4 days.
         time = np.geomspace(1, 1e4, 512) * u.day
@@ -237,12 +234,11 @@ class TestMechanicalShockEngine:
 
         K_csm = rho_0 * u.g / u.cm**3
 
-        G_ej = get_bpl_ejecta_kernel(E_ej, M_ej, n=n, delta=0)
+        K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej, M_ej, n=n, delta=0)
+        rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=n, delta=0)
+        rho_csm = UniformCSMProfile.as_optimized_callable(rho_0=rho_0)
 
-        def rho_csm(r):
-            return np.full_like(np.asarray(r, dtype=float), rho_0)
-
-        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej=G_ej, rho_csm=rho_csm)
+        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
         # Six decades to capture both the Chevalier early phase and the ST late phase.
         time = np.geomspace(1, 1e6, 600) * u.day

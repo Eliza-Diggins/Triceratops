@@ -58,11 +58,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from astropy import units as u
 
-from trilobite.dynamics.shocks import (
-    MechanicalShockEngine,
-    get_bpl_ejecta_kernel,
-    make_homologous_stationary_sources,
-)
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
+from trilobite.dynamics.shocks import MechanicalShockEngine, make_homologous_stationary_sources
 from trilobite.utils.plot_utils import set_plot_style
 
 # %%
@@ -92,20 +89,16 @@ v_ej = np.sqrt(2 * E_ej / M_ej)
 # Ejecta Profile
 # --------------
 #
-# The engine works with the **homologous ejecta kernel** :math:`G(v)`, defined
-# so that the physical density at any time is recovered as
-# :math:`\rho_{\rm ej}(r,t) = t^{-3}\,G(r/t)`.  Separating the time
-# dependence this way makes the kernel time-independent, which is both
-# conceptually clean and numerically efficient inside ODE right-hand sides.
-#
-# :func:`~trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel` normalises
-# the Chevalier broken-power-law kernel to the requested mass and energy.
+# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# the Chevalier broken-power-law kernel to the requested mass and energy via
+# :meth:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.normalize`, then
+# returns a fast unit-free :math:`\rho_{\rm ej}(r,t)` callable via
+# :meth:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.as_optimized_callable`.
 # For an exponential ejecta profile, use
-# :func:`~trilobite.dynamics.shocks.utils.get_exponential_ejecta_kernel`
-# instead; a velocity-truncated variant is available via
-# :func:`~trilobite.dynamics.shocks.utils.get_truncated_bpl_ejecta_kernel`.
+# :class:`~trilobite.dynamics.profiles.ExponentialEjectaProfile` instead.
 
-G_ej = get_bpl_ejecta_kernel(E_ej, M_ej, n=10, delta=1)
+K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej, M_ej, n=10, delta=1)
+rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10, delta=1)
 
 # %%
 # CSM Profile
@@ -119,18 +112,12 @@ G_ej = get_bpl_ejecta_kernel(E_ej, M_ej, n=10, delta=1)
 #
 #     A = \frac{\dot{M}}{4\pi\,v_w}.
 #
-# We define this as a simple one-argument callable.  A ready-made factory for
-# this profile is also provided by
-# :func:`~trilobite.dynamics.shocks.utils.get_wind_csm_density_func`, which
-# additionally handles unit conversion.  Other common profiles (uniform ISM,
-# top-hat shell, smooth-truncated wind) are available in the same module.
+# :class:`~trilobite.dynamics.profiles.WindCSMProfile` handles the unit
+# conversion and returns a fast unit-free two-argument callable.  Other common
+# profiles (uniform ISM, top-hat shell, smooth-truncated wind) are available
+# in :mod:`trilobite.dynamics.profiles`.
 
-A_cgs = (M_dot / (4 * np.pi * v_wind)).to_value(u.g / u.cm)
-
-
-def rho_csm(r):
-    return A_cgs / r**2
-
+rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=M_dot, wind_velocity=v_wind)
 
 # %%
 # Source Functions
@@ -146,13 +133,9 @@ def rho_csm(r):
 # For homologous ejecta and a stationary CSM the velocity fields are
 # :math:`u_1 = r/t` and :math:`u_4 = 0`.
 # :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`
-# wraps the kernel :math:`G(v)` and the CSM profile into these four
-# two-argument callables automatically.
+# assembles all four from the ejecta and CSM density callables.
 
-rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
-    G_ej=G_ej,
-    rho_csm=rho_csm,
-)
+rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
 # %%
 # Initial Conditions

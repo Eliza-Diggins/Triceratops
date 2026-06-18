@@ -38,7 +38,7 @@ The following assumptions are shared by all Chevalier self-similar shock models:
    where :math:`v_t` is the transition velocity, :math:`K_{\rm ej}` is the ejecta
    normalization, :math:`\delta` is the inner density index, and :math:`n` is the
    outer density index. The helper function
-   :func:`trilobite.dynamics.shocks.utils.normalize_bpl_ejecta`
+   :meth:`trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.normalize`
    computes :math:`v_t` and :math:`K_{\rm ej}` from the total ejecta kinetic energy
    and mass.
 
@@ -72,9 +72,9 @@ import numpy as np
 from astropy import units as u
 
 from trilobite._typing import _ArrayLike, _UnitBearingArrayLike, _UnitBearingScalarLike
+from trilobite.dynamics.profiles.ejecta import _normalize_bpl_cgs as _normalize_BPL_ejecta_cgs
 from trilobite.dynamics.shocks.core.rankine_hugoniot import StrongColdShockConditions
 from trilobite.dynamics.shocks.core.shock_engine import ShockEngine
-from trilobite.dynamics.shocks.utils import _normalize_BPL_ejecta
 
 # ==================================================== #
 # Chevalier Solution Classes                           #
@@ -1182,12 +1182,7 @@ class ChevalierSelfSimilarShockEngine(ShockEngine):
 
         # Using the ``_compute_v_t_and_K_from_energetics_cgs`` static method to get v_t and K. We can
         # discard v_t, but K is necessary.
-        v_t, K = _normalize_BPL_ejecta(
-            E_ej=E_ej,
-            M_ej=M_ej,
-            n=n,
-            delta=delta,
-        )
+        K, v_t = _normalize_BPL_ejecta_cgs(E_ej, M_ej, n=n, delta=delta, v_max=np.inf)
 
         # Correct K since it needs to be multiplied by v_t^(n - delta) for the outer ejecta profile.
         K_EJ = K * v_t ** (n - delta)
@@ -1910,7 +1905,7 @@ class ChevalierTwoShockSelfSimilarEngine(ShockEngine):
         time = np.asarray(time, dtype=float)
 
         # Ejecta normalization: K_ej in g * cm^{n-3} * s^{3-n}
-        v_t, K_inner = _normalize_BPL_ejecta(E_ej=E_ej, M_ej=M_ej, n=n, delta=delta)
+        K_inner, v_t = _normalize_BPL_ejecta_cgs(E_ej, M_ej, n=n, delta=delta, v_max=np.inf)
         K_ej = K_inner * v_t ** (n - delta)
 
         _lambda = (n - 3.0) / (n - s)

@@ -36,12 +36,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from astropy import units as u
 
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, TruncatedWindCSMProfile
 from trilobite.dynamics.shocks.numerical import PressureDrivenThinShellShockEngine
-from trilobite.dynamics.shocks.utils import (
-    get_bpl_ejecta_kernel,
-    get_truncated_wind_csm_density_func,
-    make_homologous_stationary_sources,
-)
+from trilobite.dynamics.shocks.utils import make_homologous_stationary_sources
 from trilobite.utils.plot_utils import set_plot_style
 
 # %%
@@ -72,13 +69,13 @@ print(f"Wind termination radius: {R_wind.to(u.pc):.2f}")
 # The numerical thin-shell engine requires the CSM density profile to be provided
 # as a **callable function** returning the density in CGS units.
 #
-# Here we use :func:`~trilobite.dynamics.shocks.utils.get_truncated_wind_csm_density_func`
+# Here we use :class:`~trilobite.dynamics.profiles.TruncatedWindCSMProfile`
 # to construct a broken profile:
 #
 # - For :math:`r \le R_{\rm wind}`: a steady wind with :math:`\rho \propto r^{-2}`
 # - For :math:`r > R_{\rm wind}`: a uniform ISM floor density
 
-rho_csm = get_truncated_wind_csm_density_func(
+rho_csm = TruncatedWindCSMProfile.as_optimized_callable(
     mass_loss_rate=M_dot,
     wind_velocity=v_wind,
     r_max=R_wind,
@@ -91,7 +88,7 @@ rho_csm = get_truncated_wind_csm_density_func(
 set_plot_style()
 
 r = np.geomspace(1e15, 1e20, 500) * u.cm
-rho_vals = rho_csm(r)
+rho_vals = rho_csm(r.to_value(u.cm), 0.0)
 r_wind_cm = R_wind.to_value(u.cm)
 
 fig, ax = plt.subplots(figsize=(8, 4))
@@ -112,44 +109,33 @@ plt.show()
 #
 # .. math::
 #
-#     \rho_{\rm ej}(r, t) = t^{-3} G_{\rm ej}(r / t)
+#     \rho_{\rm ej}(r, t) = t^{-3}\,G_{\rm ej}(r/t).
 #
-# Rather than specifying :math:`\rho(r, t)` directly, the thin-shell engine
-# requires the kernel function :math:`G_{\rm ej}(v)`.
-#
-# Trilobite provides helper functions for constructing commonly used ejecta
-# profiles. Here we adopt a Chevalier-style broken power-law profile via
-# :func:`~trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel`.
+# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# the Chevalier broken-power-law kernel to the requested mass and energy and
+# returns a fast unit-free callable.
 
-G_ej = get_bpl_ejecta_kernel(
-    E_ej=E_ej,
-    M_ej=M_ej,
-    n=10,
-    delta=0,
-)
+K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej=E_ej, M_ej=M_ej, n=10, delta=0)
+rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10, delta=0)
 
 # %%
 # Upstream Source Functions
 # -------------------------
 #
-# The numerical shock engine expects four two-argument callables,
-# ``(rho_1, u_1, rho_4, u_4)``, representing the upstream ejecta density,
-# ejecta velocity, CSM density, and CSM velocity respectively. For the standard
-# case of homologous ejecta running into a stationary CSM,
+# The numerical shock engine expects four two-argument callables
+# ``(rho_1, u_1, rho_4, u_4)``. For the standard case of homologous ejecta
+# running into a stationary CSM,
 # :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`
-# builds all four from the kernel and the CSM profile:
+# assembles all four from the ejecta and CSM density callables:
 #
 # .. math::
 #
-#     \rho_1(r, t) = t^{-3} G_{\rm ej}(r/t), \quad
+#     \rho_1(r, t) = \rho_{\rm ej}(r, t), \quad
 #     u_1(r, t) = r/t, \quad
-#     \rho_4(r, t) = \rho_{\rm CSM}(r), \quad
+#     \rho_4(r, t) = \rho_{\rm CSM}(r, t), \quad
 #     u_4(r, t) = 0.
 
-rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
-    G_ej=G_ej,
-    rho_csm=rho_csm,
-)
+rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
 # %%
 # Shock Engine Initialization
