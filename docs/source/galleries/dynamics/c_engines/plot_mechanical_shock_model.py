@@ -165,7 +165,7 @@ rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
 # consistent with the Chevalier :math:`n=10`, :math:`s=2` self-similar
 # solution at that epoch.
 #
-# :meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.generate_initial_conditions`
+# :meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.infer_initial_conditions`
 # derives the remaining six components self-consistently from these two
 # inputs, eliminating the initial transient that would otherwise arise from
 # an inconsistency between the assumed shock speed and the sound-speed width
@@ -183,7 +183,9 @@ v_cd_0 = m * v_coord_0
 
 print(R_cd_0 / 1e14, v_cd_0 / 3e10)
 
-R0, v0, M2_0, M3_0, U2_0, U3_0, Dlt2_0, Dlt3_0 = MechanicalShockEngine.generate_initial_conditions(
+engine = MechanicalShockEngine()
+
+ic = engine.infer_initial_conditions(
     R_cd_0=R_cd_0,
     v_cd_0=v_cd_0,
     t_0=t_0_cgs,
@@ -203,22 +205,13 @@ R0, v0, M2_0, M3_0, U2_0, U3_0, Dlt2_0, Dlt3_0 = MechanicalShockEngine.generate_
 
 time = np.geomspace(1e-1, 1000000, 4000) * u.day
 
-engine = MechanicalShockEngine()
-
 state = engine.compute_shock_properties(
     time=time,
     rho_1=rho_1,
     rho_4=rho_4,
     u_1=u_1,
     u_4=u_4,
-    R_cd_0=R0,
-    v_cd_0=v0,
-    M2_0=M2_0,
-    M3_0=M3_0,
-    U2_0=U2_0,
-    U3_0=U3_0,
-    Delta2_0=Dlt2_0,
-    Delta3_0=Dlt3_0,
+    initial_conditions=ic,
     t_0=t_0_cgs,
     M1_total=M_ej,
 )

@@ -286,28 +286,67 @@ The engine integrates an 8-component state vector
 
 where :math:`R_{\rm cd}` and :math:`v_{\rm cd}` are the contact-discontinuity radius
 and velocity, :math:`M_i` and :math:`U_i` are the mass and internal energy of each
-shocked layer, and :math:`\Delta_i` are the effective layer widths evolved via a
-sound-speed closure.  The contact-discontinuity acceleration is driven by the pressure
-imbalance between the two layers,
+shocked layer, and :math:`\Delta_i` are the effective layer widths.  Internally the code
+evolves :math:`\Phi = v_{\rm cd}^2` rather than :math:`v_{\rm cd}` to avoid a stiff
+source term; :math:`v_{\rm cd}` is recovered as :math:`\sqrt{\Phi}` at each output step.
+
+The contact-discontinuity velocity is governed by **global energy conservation** for the
+shocked region.  Denoting the kinetic-energy flux advected into the shocked layers by the
+upstream material as
 
 .. math::
 
-    \dot{v}_{\rm cd}
-    = \frac{4\pi R_{\rm cd}^2\,(P_2 - P_3)}{M_2 + M_3},
-    \qquad
-    P_i = \frac{(\gamma_i - 1)\,U_i}{4\pi R_{\rm cd}^2\,\Delta_i}.
+    \dot{E}_{\rm adv}
+    = \tfrac{1}{2}
+      \bigl[
+          u_1^2(R_{\rm rs},t)\,\dot{M}_2
+          + u_4^2(R_{\rm fs},t)\,\dot{M}_3
+      \bigr],
+
+the governing equation for :math:`\Phi = v_{\rm cd}^2` is
+
+.. math::
+
+    \frac{d\Phi}{dt}
+    =
+    \frac{2}{M_2+M_3}
+    \Bigl[
+        \dot{E}_{\rm adv}
+        - \tfrac{1}{2}(\dot{M}_2+\dot{M}_3)\,\Phi
+        - \dot{U}_{{\rm sh},2} - \dot{U}_{{\rm ad},2}
+        - \dot{U}_{{\rm sh},3} - \dot{U}_{{\rm ad},3}
+    \Bigr].
+
+Radiative losses do not appear directly in this equation; they reduce the layer
+internal energies :math:`U_i` and therefore the layer pressures, but their energy
+comes from the internal budget — not the kinetic budget — so they cancel in the total
+energy balance.
 
 The shock faces sit at :math:`R_{\rm rs} = R_{\rm cd} - \Delta_2` and
-:math:`R_{\rm fs} = R_{\rm cd} + \Delta_3`, and advance at speeds
+:math:`R_{\rm fs} = R_{\rm cd} + \Delta_3`.  The two shocked layers use **different**
+width closures.  The forward-shocked CSM layer expands at its internal sound speed,
 
 .. math::
 
-    D_{\rm rs} = v_{\rm cd} - c_{s,2},
+    \dot{\Delta}_3 = c_{s,3} = \sqrt{\gamma_3(\gamma_3-1)\,\frac{U_3}{M_3}},
     \qquad
-    D_{\rm fs} = v_{\rm cd} + c_{s,3},
+    D_{\rm fs} = v_{\rm cd} + \dot{\Delta}_3.
 
-where the sound-speed width closure sets :math:`c_{s,i} = \sqrt{\gamma_i(\gamma_i-1)U_i/M_i}`.
-For the full theoretical derivation see :ref:`mechanical_internal_energy_model`.
+The reverse-shocked ejecta layer grows at the rate newly compressed ejecta is deposited
+behind the shock.  In the thin-shell limit (:math:`R_{\rm rs}\simeq R_{\rm cd}`) the
+general mass-deposition closure reduces to
+
+.. math::
+
+    \dot{\Delta}_2
+    \simeq \max\!\left(
+        \frac{u_1(R_{\rm rs},t) - v_{\rm cd}}{\chi_2 - 1},\;0
+    \right),
+    \qquad
+    D_{\rm rs} = v_{\rm cd} - \dot{\Delta}_2,
+
+where :math:`\chi_2 = (\gamma_2+1)/(\gamma_2-1)` is the strong-shock compression ratio.
+For the full derivation of both closures see :ref:`mechanical_internal_energy_model`.
 
 .. hint::
 
@@ -330,7 +369,7 @@ assemble the four source callables with
 
 The additional step specific to this engine is deriving self-consistent **initial
 conditions** for all eight state components.
-:meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.generate_initial_conditions`
+:meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.infer_initial_conditions`
 computes :math:`(M_{2,0},\,M_{3,0},\,U_{2,0},\,U_{3,0},\,\Delta_{2,0},\,\Delta_{3,0})`
 from the initial contact-discontinuity position :math:`R_{{\rm cd},0}`, velocity
 :math:`v_{{\rm cd},0}`, and start time :math:`t_0`.  Swept-up masses are obtained by
@@ -371,16 +410,17 @@ transient at the first ODE step.
             rho_csm=rho_csm,
         )
 
+        # The engine holds gamma_2, gamma_3, mu_2, mu_3 — create it first.
+        engine = MechanicalShockEngine()
+
         # Derive a self-consistent 8-component initial condition vector
         t_0 = 1.0 * u.day
-        R0, v0, M2_0, M3_0, U2_0, U3_0, Dlt2_0, Dlt3_0 = (
-            MechanicalShockEngine.generate_initial_conditions(
-                R_cd_0=1e14 * u.cm,
-                v_cd_0=1e9  * u.cm / u.s,
-                t_0=t_0,
-                rho_1=rho_1, rho_4=rho_4,
-                u_1=u_1,     u_4=u_4,
-            )
+        ic = engine.infer_initial_conditions(
+            R_cd_0=1e14 * u.cm,
+            v_cd_0=1e9  * u.cm / u.s,
+            t_0=t_0,
+            rho_1=rho_1, rho_4=rho_4,
+            u_1=u_1,     u_4=u_4,
         )
 
 
@@ -392,7 +432,7 @@ Call
 with a time array, the four source callables, and the 8-component initial condition
 vector.  The method returns a
 :class:`~trilobite.dynamics.shocks.numerical.MechanicalShockState` named tuple with
-twenty-two :class:`~astropy.units.Quantity` fields:
+thirty-two :class:`~astropy.units.Quantity` fields:
 
 .. dropdown:: Returned Mechanical Shock Properties
 
@@ -400,10 +440,10 @@ twenty-two :class:`~astropy.units.Quantity` fields:
     derived shock diagnostics. Region 2 denotes shocked ejecta, while Region 3 denotes
     shocked CSM.
 
-    **Kinematics and thermodynamics**
+    **Evolved ODE state**
 
-    These quantities are either direct ODE state variables or immediate thermodynamic
-    diagnostics computed from them.
+    These eight quantities are the direct output of the ODE integrator (note that
+    :math:`v_{\rm cd}` is reconstructed from the internally evolved :math:`\Phi = v_{\rm cd}^2`).
 
     .. list-table::
         :header-rows: 1
@@ -427,15 +467,59 @@ twenty-two :class:`~astropy.units.Quantity` fields:
           - Effective shocked-ejecta layer width :math:`\Delta_2`.
         * - ``width_3``
           - Effective shocked-CSM layer width :math:`\Delta_3`.
+
+    **Region-averaged layer thermodynamics**
+
+    These twelve quantities describe the bulk thermodynamic state of each shocked layer,
+    derived from the evolved masses, energies, and effective volumes.
+
+    .. list-table::
+        :header-rows: 1
+        :widths: 34 66
+
+        * - Key
+          - Description
+        * - ``volume_2``
+          - Effective shocked-ejecta volume :math:`V_2 \simeq 4\pi R_{\rm cd}^2\Delta_2`.
+        * - ``volume_3``
+          - Effective shocked-CSM volume :math:`V_3 \simeq 4\pi R_{\rm cd}^2\Delta_3`.
+        * - ``density_2``
+          - Layer-averaged shocked-ejecta density :math:`\bar{\rho}_2 = M_2/V_2`.
+        * - ``density_3``
+          - Layer-averaged shocked-CSM density :math:`\bar{\rho}_3 = M_3/V_3`.
         * - ``pressure_2``
-          - Layer-averaged shocked-ejecta pressure :math:`P_2`.
+          - Layer-averaged shocked-ejecta pressure :math:`P_2 = (\gamma_2-1)U_2/V_2`.
         * - ``pressure_3``
-          - Layer-averaged shocked-CSM pressure :math:`P_3`.
+          - Layer-averaged shocked-CSM pressure :math:`P_3 = (\gamma_3-1)U_3/V_3`.
+        * - ``temperature_2``
+          - Layer-averaged shocked-ejecta temperature
+            :math:`T_2 = \mu_2 m_p P_2 / (k_B \bar{\rho}_2)`.
+        * - ``temperature_3``
+          - Layer-averaged shocked-CSM temperature
+            :math:`T_3 = \mu_3 m_p P_3 / (k_B \bar{\rho}_3)`.
+        * - ``thermal_energy_density_2``
+          - Layer-averaged thermal energy density of shocked ejecta, :math:`e_2 = U_2/V_2`.
+        * - ``thermal_energy_density_3``
+          - Layer-averaged thermal energy density of shocked CSM, :math:`e_3 = U_3/V_3`.
+        * - ``sound_speed_2``
+          - Effective sound speed in the shocked ejecta,
+            :math:`c_{s,2} = \sqrt{\gamma_2(\gamma_2-1)U_2/M_2}`.
+        * - ``sound_speed_3``
+          - Effective sound speed in the shocked CSM,
+            :math:`c_{s,3} = \sqrt{\gamma_3(\gamma_3-1)U_3/M_3}`.
+
+    .. important::
+
+        The ``pressure_*``, ``temperature_*``, and ``density_*`` fields are
+        **layer-averaged** quantities determined by the internal-energy budget of
+        each shocked layer.  They are *not* instantaneous Rankine--Hugoniot
+        post-shock values; those are in the ``post_shock_*`` groups below.
 
     **Shock geometry**
 
     These quantities locate the reverse and forward shocks implied by the evolved
-    contact radius and layer widths.
+    contact radius and layer widths.  After ejecta crossing ``radius_rs`` is reported
+    as zero and ``velocity_rs`` as ``NaN``.
 
     .. list-table::
         :header-rows: 1
@@ -444,18 +528,21 @@ twenty-two :class:`~astropy.units.Quantity` fields:
         * - Key
           - Description
         * - ``radius_rs``
-          - Reverse-shock radius :math:`R_{\rm rs}`.
+          - Reverse-shock radius :math:`R_{\rm rs} = R_{\rm cd} - \Delta_2`. Zero after
+            ejecta crossing.
         * - ``radius_fs``
-          - Forward-shock radius :math:`R_{\rm fs}`.
+          - Forward-shock radius :math:`R_{\rm fs} = R_{\rm cd} + \Delta_3`.
         * - ``velocity_rs``
-          - Reverse-shock speed :math:`D_{\rm rs}`.
+          - Reverse-shock speed :math:`D_{\rm rs}`. ``NaN`` after ejecta crossing or when
+            the reverse shock is inactive.
         * - ``velocity_fs``
           - Forward-shock speed :math:`D_{\rm fs}`.
 
-    **Forward-shock post-shock thermodynamics**
+    **Forward-shock instantaneous jump diagnostics**
 
-    These diagnostics describe the immediate post-shock state on the CSM side
-    of the interaction region, i.e. Region 3.
+    These four quantities are the immediate post-shock state at the forward-shock face,
+    computed from the Rankine--Hugoniot jump conditions at each output time step.
+    Set to ``NaN`` when the forward shock is inactive (:math:`D_{\rm fs} \le u_4`).
 
     .. list-table::
         :header-rows: 1
@@ -472,13 +559,15 @@ twenty-two :class:`~astropy.units.Quantity` fields:
         * - ``post_shock_temperature_fs``
           - Immediate post-shock temperature :math:`T_{s,3}`, computed using mean molecular
             weight ``mu_3``. The default is ``0.5``.
-        * - ``thermal_energy_density_fs``
+        * - ``post_shock_thermal_energy_density_fs``
           - Post-shock thermal energy density :math:`e_{\rm th,3} = p_{s,3}/(\gamma_3 - 1)`.
 
-    **Reverse-shock post-shock thermodynamics**
+    **Reverse-shock instantaneous jump diagnostics**
 
-    These diagnostics describe the immediate post-shock state on the ejecta side
-    of the interaction region, i.e. Region 2.
+    These four quantities are the immediate post-shock state at the reverse-shock face,
+    computed from the Rankine--Hugoniot jump conditions at each output time step.
+    Set to ``NaN`` when the reverse shock is inactive (after ejecta crossing, or when
+    :math:`u_1(R_{\rm rs}, t) \le v_{\rm cd}`).
 
     .. list-table::
         :header-rows: 1
@@ -495,22 +584,57 @@ twenty-two :class:`~astropy.units.Quantity` fields:
         * - ``post_shock_temperature_rs``
           - Immediate post-shock temperature :math:`T_{s,2}`, computed using mean molecular
             weight ``mu_2``. The default is ``0.5``.
-        * - ``thermal_energy_density_rs``
+        * - ``post_shock_thermal_energy_density_rs``
           - Post-shock thermal energy density :math:`e_{\rm th,2} = p_{s,2}/(\gamma_2 - 1)`.
 
-The eight post-shock thermodynamic fields are evaluated at every output time step
-using
+The eight instantaneous Rankine--Hugoniot jump diagnostics (``post_shock_*`` fields)
+are evaluated using
 :class:`~trilobite.dynamics.shocks.core.rankine_hugoniot.StrongColdShockConditions`.
 The forward-shock call uses :math:`D_{\rm fs}` as the shock velocity with upstream
 conditions :math:`(\rho_4,u_4)` evaluated at :math:`R_{\rm fs}`; the reverse-shock
 call uses :math:`D_{\rm rs}` with upstream conditions :math:`(\rho_1,u_1)` evaluated
-at :math:`R_{\rm rs}`.  Mean molecular weights ``mu_2`` and ``mu_3`` are set at
-engine instantiation, e.g. ``MechanicalShockEngine(mu_2=0.62, mu_3=0.5)``.
+at :math:`R_{\rm rs}`.  These fields are set to ``NaN`` when the corresponding shock
+is inactive.  Mean molecular weights ``mu_2`` and ``mu_3`` are set at engine
+instantiation, e.g. ``MechanicalShockEngine(mu_2=0.62, mu_3=0.5)``.
 
 Optional radiative cooling in each layer is enabled by passing ``cooling_2`` and
 ``cooling_3`` callables of the signature
 ``cooling(R_cd, v_cd, M, U, Delta, t) -> dU/dt`` (negative for energy loss) to
 :meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.compute_shock_properties`.
+
+Ejecta Crossing and Finite Ejecta Mass
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Passing ``M1_total`` to
+:meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.compute_shock_properties`
+enables tracking of ejecta crossing.  When the swept-up ejecta mass :math:`M_2` reaches
+:math:`(1 - 10^{-4})\,M_{\rm ej}`, three things happen simultaneously:
+
+1. **Mass loading quenched**: :math:`\dot{M}_2 = 0`.
+2. **Shock heating quenched**: :math:`\dot{U}_{{\rm sh},2} = 0`.
+3. **Width closure switched**: :math:`\dot{\Delta}_2` changes from the velocity-ratio
+   form to :math:`v_{\rm cd}`, so Region 2 continues to expand adiabatically
+   consistent with the Region-3 treatment.
+
+After crossing, ``radius_rs`` is reported as zero and ``velocity_rs`` as ``NaN``.  The
+ODE integration is split into two phases at the exact crossing time — detected by an
+event function — so that Radau can restart cleanly across the right-hand-side
+discontinuity without unnecessary step-size reduction.
+
+Use the classmethod
+:meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.find_ejecta_crossing_time`
+to recover the crossing time from an already-computed state:
+
+.. code-block:: python
+
+    t_cross = MechanicalShockEngine.find_ejecta_crossing_time(
+        time=time,
+        state=state,
+        M1_total=5.0 * u.Msun,
+    )
+
+If :math:`M_2` never reaches the threshold within the supplied time grid, the method
+returns ``None``.
 
 .. dropdown:: Example — forward and reverse shock temperatures
 
@@ -535,22 +659,16 @@ Optional radiative cooling in each layer is enabled by passing ``cooling_2`` and
 
         engine = MechanicalShockEngine()
         t_0    = 1.0 * u.day
-        R0, v0, M2_0, M3_0, U2_0, U3_0, Dlt2_0, Dlt3_0 = (
-            MechanicalShockEngine.generate_initial_conditions(
-                R_cd_0=1e14 * u.cm, v_cd_0=1e9 * u.cm / u.s,
-                t_0=t_0, rho_1=rho_1, rho_4=rho_4, u_1=u_1, u_4=u_4,
-            )
+        ic = engine.infer_initial_conditions(
+            R_cd_0=1e14 * u.cm, v_cd_0=1e9 * u.cm / u.s,
+            t_0=t_0, rho_1=rho_1, rho_4=rho_4, u_1=u_1, u_4=u_4,
         )
 
         time  = np.geomspace(1, 1000, 300) * u.day
         state = engine.compute_shock_properties(
             time=time,
             rho_1=rho_1, rho_4=rho_4, u_1=u_1, u_4=u_4,
-            R_cd_0=R0 * u.cm, v_cd_0=v0 * u.cm / u.s,
-            M2_0=M2_0 * u.g, M3_0=M3_0 * u.g,
-            U2_0=U2_0 * u.erg, U3_0=U3_0 * u.erg,
-            Delta2_0=Dlt2_0 * u.cm, Delta3_0=Dlt3_0 * u.cm,
-            t_0=t_0,
+            initial_conditions=ic, t_0=t_0,
         )
 
         set_plot_style()

@@ -97,7 +97,9 @@ t_0_cgs = (1.0 * u.day).to_value(u.s)
 R_cd_0 = 1e14  # cm
 v_cd_0 = 1e9  # cm/s
 
-R0, v0, M2_0, M3_0, U2_0, U3_0, Dlt2_0, Dlt3_0 = MechanicalShockEngine.generate_initial_conditions(
+engine = MechanicalShockEngine()
+
+ic = engine.infer_initial_conditions(
     R_cd_0=R_cd_0,
     v_cd_0=v_cd_0,
     t_0=t_0_cgs,
@@ -183,7 +185,6 @@ labels = [
 ]
 colors = ["#808080", "#4C72B0", "#DD8452", "#C44E52"]
 
-engine = MechanicalShockEngine()
 states = []
 
 for Lambda in Lambda_vals:
@@ -194,14 +195,7 @@ for Lambda in Lambda_vals:
         rho_4=rho_4,
         u_1=u_1,
         u_4=u_4,
-        R_cd_0=R0,
-        v_cd_0=v0,
-        M2_0=M2_0,
-        M3_0=M3_0,
-        U2_0=U2_0,
-        U3_0=U3_0,
-        Delta2_0=Dlt2_0,
-        Delta3_0=Dlt3_0,
+        initial_conditions=ic,
         t_0=t_0_cgs,
         cooling_3=cooling_fn,
     )
