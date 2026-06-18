@@ -622,5 +622,5 @@ plt.show()
 #
 #     :ref:`shock_engines` — choosing between self-similar and numerical
 #     shock engines for a given modeling problem.
-
+#
 # sphinx_gallery_thumbnail_number = -1
