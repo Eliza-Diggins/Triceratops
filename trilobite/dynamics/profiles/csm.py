@@ -1264,7 +1264,29 @@ class TruncatedWindCSMProfile(StationaryCSMDensityProfile):
         return WindCSMProfile.normalize(mass_loss_rate, wind_velocity)
 
     @classmethod
-    def _validate_and_process_parameters(cls, *, A, r_max, density_floor=0.0, **_):
+    def _validate_and_process_parameters(
+        cls, *, A=None, A_star=None, mass_loss_rate=None, wind_velocity=None, r_max, density_floor=0.0, **_
+    ):
+        has_A = A is not None
+        has_A_star = A_star is not None
+        has_physical = mass_loss_rate is not None or wind_velocity is not None
+        n_routes = sum([has_A, has_A_star, has_physical])
+        if n_routes == 0:
+            raise ValueError(
+                "One parameterization route must be supplied: `A` (Route 1), "
+                "`A_star` (Route 2), or both `mass_loss_rate` and `wind_velocity` (Route 3)."
+            )
+        if n_routes > 1:
+            raise ValueError(
+                "Provide only one parameterization route: `A`, `A_star`, or (`mass_loss_rate` + `wind_velocity`)."
+            )
+        if has_physical:
+            if mass_loss_rate is None or wind_velocity is None:
+                raise ValueError("`mass_loss_rate` and `wind_velocity` must be supplied together (Route 3).")
+            A = cls.normalize(mass_loss_rate=mass_loss_rate, wind_velocity=wind_velocity)
+        elif has_A_star:
+            A = WindCSMProfile.normalize_from_A_star(A_star)
+
         A_cgs = float(ensure_in_units(A, u.g / u.cm))
         r_max_cgs = float(ensure_in_units(r_max, u.cm))
         rho_f = float(ensure_in_units(density_floor, u.g / u.cm**3))
@@ -1385,7 +1407,29 @@ class WindWithFloorCSMProfile(StationaryCSMDensityProfile):
         return WindCSMProfile.normalize(mass_loss_rate, wind_velocity)
 
     @classmethod
-    def _validate_and_process_parameters(cls, *, A, density_floor, **_):
+    def _validate_and_process_parameters(
+        cls, *, A=None, A_star=None, mass_loss_rate=None, wind_velocity=None, density_floor, **_
+    ):
+        has_A = A is not None
+        has_A_star = A_star is not None
+        has_physical = mass_loss_rate is not None or wind_velocity is not None
+        n_routes = sum([has_A, has_A_star, has_physical])
+        if n_routes == 0:
+            raise ValueError(
+                "One parameterization route must be supplied: `A` (Route 1), "
+                "`A_star` (Route 2), or both `mass_loss_rate` and `wind_velocity` (Route 3)."
+            )
+        if n_routes > 1:
+            raise ValueError(
+                "Provide only one parameterization route: `A`, `A_star`, or (`mass_loss_rate` + `wind_velocity`)."
+            )
+        if has_physical:
+            if mass_loss_rate is None or wind_velocity is None:
+                raise ValueError("`mass_loss_rate` and `wind_velocity` must be supplied together (Route 3).")
+            A = cls.normalize(mass_loss_rate=mass_loss_rate, wind_velocity=wind_velocity)
+        elif has_A_star:
+            A = WindCSMProfile.normalize_from_A_star(A_star)
+
         A_cgs = float(ensure_in_units(A, u.g / u.cm))
         rho_f = float(ensure_in_units(density_floor, u.g / u.cm**3))
 
@@ -1532,7 +1576,38 @@ class SmoothTruncatedWindCSMProfile(StationaryCSMDensityProfile):
         return WindCSMProfile.normalize(mass_loss_rate, wind_velocity)
 
     @classmethod
-    def _validate_and_process_parameters(cls, *, A, r_max, transition_width, density_floor=0.0, **_):
+    def _validate_and_process_parameters(
+        cls,
+        *,
+        A=None,
+        A_star=None,
+        mass_loss_rate=None,
+        wind_velocity=None,
+        r_max,
+        transition_width,
+        density_floor=0.0,
+        **_,
+    ):
+        has_A = A is not None
+        has_A_star = A_star is not None
+        has_physical = mass_loss_rate is not None or wind_velocity is not None
+        n_routes = sum([has_A, has_A_star, has_physical])
+        if n_routes == 0:
+            raise ValueError(
+                "One parameterization route must be supplied: `A` (Route 1), "
+                "`A_star` (Route 2), or both `mass_loss_rate` and `wind_velocity` (Route 3)."
+            )
+        if n_routes > 1:
+            raise ValueError(
+                "Provide only one parameterization route: `A`, `A_star`, or (`mass_loss_rate` + `wind_velocity`)."
+            )
+        if has_physical:
+            if mass_loss_rate is None or wind_velocity is None:
+                raise ValueError("`mass_loss_rate` and `wind_velocity` must be supplied together (Route 3).")
+            A = cls.normalize(mass_loss_rate=mass_loss_rate, wind_velocity=wind_velocity)
+        elif has_A_star:
+            A = WindCSMProfile.normalize_from_A_star(A_star)
+
         A_cgs = float(ensure_in_units(A, u.g / u.cm))
         r_max_cgs = float(ensure_in_units(r_max, u.cm))
         dr_cgs = float(ensure_in_units(transition_width, u.cm))
