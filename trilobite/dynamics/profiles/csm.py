@@ -2534,3 +2534,389 @@ class LogNormalCSMProfile(StationaryCSMDensityProfile):
     def _opt_eval(cls, r, _t=None, *, rho_0, r_peak, sigma, **_):
         x = np.log(np.maximum(r, 1e-300) / r_peak) / sigma
         return rho_0 * np.exp(-0.5 * x**2)
+
+
+class TwoWindCSMProfile(StationaryCSMDensityProfile):
+    r"""
+    Smooth two-wind CSM density profile.
+
+    This profile represents a stationary wind-like CSM whose density remains
+    proportional to :math:`r^{-2}`, but whose wind normalization transitions
+    smoothly from an inner wind value :math:`A_1` to an outer wind value
+    :math:`A_2`:
+
+    .. math::
+
+        \rho_{\mathrm{CSM}}(r)
+        =
+        \frac{A(r)}{r^2}.
+
+    The transition is controlled by a hyperbolic-tangent switch in logarithmic
+    radius,
+
+    .. math::
+
+        S(r)
+        =
+        \frac{1}{2}
+        \left[
+            1
+            +
+            \tanh\left(
+                \frac{\ln(r / r_{\rm transition})}{\Delta}
+            \right)
+        \right],
+
+    where :math:`r_{\rm transition}` is the characteristic transition radius
+    and :math:`\Delta` is the dimensionless transition width in
+    :math:`\ln r`.
+
+    The wind normalization is interpolated logarithmically,
+
+    .. math::
+
+        A(r)
+        =
+        A_1^{1-S(r)} A_2^{S(r)}.
+
+    This multiplicative interpolation preserves positivity and treats upward
+    and downward normalization changes symmetrically.
+
+    .. rubric:: Physical relevance
+
+    This profile is useful for modelling a progenitor wind whose mass-loss
+    normalization changed before explosion while retaining an approximately
+    steady-wind radial structure. Since material at larger radii was ejected
+    earlier, the transition from :math:`A_1` to :math:`A_2` can represent a
+    change in :math:`\dot{M}/v_w` at the lookback time corresponding to
+    :math:`r_{\rm transition}`.
+
+    .. rubric:: Wind parameterization
+
+    The inner and outer winds may each be supplied using one of three equivalent
+    parameterization routes:
+
+    1. Direct wind normalizations ``A_1`` and ``A_2``.
+    2. Dimensionless wind parameters ``A_star_1`` and ``A_star_2``.
+    3. Physical wind parameters
+       ``mass_loss_rate_1``, ``wind_velocity_1``,
+       ``mass_loss_rate_2``, and ``wind_velocity_2``.
+
+    The same route must be used for both winds in a single call. Mixing routes
+    raises a :class:`ValueError`.
+
+    .. rubric:: Parameters
+
+    .. list-table::
+       :header-rows: 1
+       :widths: 26 6 22 46
+
+       * - Parameter
+         - Opt.
+         - Type
+         - Description
+       * - ``A_1``
+         - ☐
+         - float or :class:`~astropy.units.Quantity`
+         - Inner wind-density normalization in
+           :math:`\mathrm{g\,cm^{-1}}`. Bare values interpreted as
+           :math:`\mathrm{g\,cm^{-1}}`. Must be positive.
+       * - ``A_2``
+         - ☐
+         - float or :class:`~astropy.units.Quantity`
+         - Outer wind-density normalization in
+           :math:`\mathrm{g\,cm^{-1}}`. Bare values interpreted as
+           :math:`\mathrm{g\,cm^{-1}}`. Must be positive.
+       * - ``A_star_1``
+         - ☐
+         - float
+         - Inner dimensionless wind-density parameter,
+           :math:`A_1 = 5\times10^{11} A_{*,1}\,\mathrm{g\,cm^{-1}}`.
+       * - ``A_star_2``
+         - ☐
+         - float
+         - Outer dimensionless wind-density parameter,
+           :math:`A_2 = 5\times10^{11} A_{*,2}\,\mathrm{g\,cm^{-1}}`.
+       * - ``mass_loss_rate_1``
+         - ☐
+         - float or :class:`~astropy.units.Quantity`
+         - Inner wind mass-loss rate. Bare values interpreted as
+           :math:`\mathrm{g\,s^{-1}}`.
+       * - ``wind_velocity_1``
+         - ☐
+         - float or :class:`~astropy.units.Quantity`
+         - Inner wind velocity. Bare values interpreted as
+           :math:`\mathrm{cm\,s^{-1}}`.
+       * - ``mass_loss_rate_2``
+         - ☐
+         - float or :class:`~astropy.units.Quantity`
+         - Outer wind mass-loss rate. Bare values interpreted as
+           :math:`\mathrm{g\,s^{-1}}`.
+       * - ``wind_velocity_2``
+         - ☐
+         - float or :class:`~astropy.units.Quantity`
+         - Outer wind velocity. Bare values interpreted as
+           :math:`\mathrm{cm\,s^{-1}}`.
+       * - ``r_transition``
+         - ✓
+         - float or :class:`~astropy.units.Quantity`
+         - Characteristic transition radius. Bare values interpreted as cm.
+           Must be positive.
+       * - ``transition_width``
+         - ✓
+         - float
+         - Dimensionless transition width in :math:`\ln r`. Must be
+           positive.
+
+    .. rubric:: Example
+
+    .. plot::
+
+       import numpy as np
+       import astropy.units as u
+       import matplotlib.pyplot as plt
+       from trilobite.dynamics.profiles.csm import TwoWindCSMProfile
+       from trilobite.utils.plot_utils import set_plot_style
+
+       set_plot_style()
+
+       r = np.geomspace(1e14, 1e18, 500) * u.cm
+
+       rho = TwoWindCSMProfile.eval(
+           r,
+           A_star_1=1.0,
+           A_star_2=100.0,
+           r_transition=1e16 * u.cm,
+           transition_width=0.25,
+       )
+
+       fig, ax = plt.subplots()
+       ax.loglog(r.value, rho.value)
+       ax.axvline(1e16, ls='--', color='gray', label=r'$r_{\rm transition}$')
+       ax.set_xlabel(r'$r\ [\mathrm{cm}]$')
+       ax.set_ylabel(r'$\rho\ [\mathrm{g\,cm^{-3}}]$')
+       ax.set_title('Smooth Two-Wind CSM Profile')
+       ax.legend()
+       plt.tight_layout()
+
+    Notes
+    -----
+    The density is asymptotically wind-like on both sides of the transition:
+
+    .. math::
+
+        \rho(r \ll r_{\rm transition}) \approx A_1 r^{-2},
+
+    and
+
+    .. math::
+
+        \rho(r \gg r_{\rm transition}) \approx A_2 r^{-2}.
+
+    Inside the transition region, the effective local slope differs from
+    :math:`-2` because :math:`A(r)` varies with radius.
+
+    See Also
+    --------
+    WindCSMProfile : Single steady-wind CSM profile.
+    SmoothTruncatedWindCSMProfile : Smooth transition from a wind to a floor.
+    SmoothBPLCSMProfile : Smooth transition between two power-law slopes.
+    """
+
+    @classmethod
+    def normalize(
+        cls,
+        mass_loss_rate: "_UnitBearingScalarLike",
+        wind_velocity: "_UnitBearingScalarLike",
+    ) -> u.Quantity:
+        r"""
+        Compute the wind-density normalization :math:`A = \dot{M}/(4\pi v_w)`.
+
+        Parameters
+        ----------
+        mass_loss_rate : float or ~astropy.units.Quantity
+            Progenitor mass-loss rate. Bare values interpreted as g/s.
+        wind_velocity : float or ~astropy.units.Quantity
+            Wind velocity. Bare values interpreted as cm/s.
+
+        Returns
+        -------
+        A : ~astropy.units.Quantity
+            Wind-density normalization in :math:`\mathrm{g\,cm^{-1}}`.
+        """
+        return WindCSMProfile.normalize(mass_loss_rate, wind_velocity)
+
+    @classmethod
+    def normalize_A_star(
+        cls,
+        mass_loss_rate: "_UnitBearingScalarLike",
+        wind_velocity: "_UnitBearingScalarLike",
+    ) -> float:
+        r"""Compute the dimensionless wind-density parameter :math:`A_*`."""
+        return WindCSMProfile.normalize_A_star(mass_loss_rate, wind_velocity)
+
+    @classmethod
+    def normalize_from_A_star(
+        cls,
+        A_star: float,
+    ) -> u.Quantity:
+        r"""Compute :math:`A` from the dimensionless wind-density parameter."""
+        return WindCSMProfile.normalize_from_A_star(A_star)
+
+    @classmethod
+    def _resolve_wind_normalizations(
+        cls,
+        *,
+        A_1=None,
+        A_2=None,
+        A_star_1=None,
+        A_star_2=None,
+        mass_loss_rate_1=None,
+        wind_velocity_1=None,
+        mass_loss_rate_2=None,
+        wind_velocity_2=None,
+    ) -> tuple[float, float]:
+        r"""Resolve the two wind parameterizations into CGS ``A_1`` and ``A_2``."""
+        has_A = A_1 is not None or A_2 is not None
+        has_A_star = A_star_1 is not None or A_star_2 is not None
+        has_physical = (
+            mass_loss_rate_1 is not None
+            or wind_velocity_1 is not None
+            or mass_loss_rate_2 is not None
+            or wind_velocity_2 is not None
+        )
+
+        n_routes = sum([has_A, has_A_star, has_physical])
+
+        if n_routes == 0:
+            raise ValueError(
+                "One wind parameterization route must be supplied: "
+                "(`A_1`, `A_2`), (`A_star_1`, `A_star_2`), or "
+                "(`mass_loss_rate_1`, `wind_velocity_1`, "
+                "`mass_loss_rate_2`, `wind_velocity_2`)."
+            )
+
+        if n_routes > 1:
+            raise ValueError(
+                "Provide only one wind parameterization route: "
+                "(`A_1`, `A_2`), (`A_star_1`, `A_star_2`), or "
+                "the physical mass-loss/velocity route."
+            )
+
+        if has_A:
+            if A_1 is None or A_2 is None:
+                raise ValueError("`A_1` and `A_2` must be supplied together.")
+
+        elif has_A_star:
+            if A_star_1 is None or A_star_2 is None:
+                raise ValueError("`A_star_1` and `A_star_2` must be supplied together.")
+
+            A_1 = cls.normalize_from_A_star(A_star_1)
+            A_2 = cls.normalize_from_A_star(A_star_2)
+
+        else:
+            missing = []
+            if mass_loss_rate_1 is None:
+                missing.append("mass_loss_rate_1")
+            if wind_velocity_1 is None:
+                missing.append("wind_velocity_1")
+            if mass_loss_rate_2 is None:
+                missing.append("mass_loss_rate_2")
+            if wind_velocity_2 is None:
+                missing.append("wind_velocity_2")
+
+            if missing:
+                missing_str = "`, `".join(missing)
+                raise ValueError(
+                    "The physical wind route requires all four parameters: "
+                    "`mass_loss_rate_1`, `wind_velocity_1`, "
+                    "`mass_loss_rate_2`, and `wind_velocity_2`. "
+                    f"Missing: `{missing_str}`."
+                )
+
+            A_1 = cls.normalize(
+                mass_loss_rate=mass_loss_rate_1,
+                wind_velocity=wind_velocity_1,
+            )
+            A_2 = cls.normalize(
+                mass_loss_rate=mass_loss_rate_2,
+                wind_velocity=wind_velocity_2,
+            )
+
+        A_1_cgs = float(ensure_in_units(A_1, u.g / u.cm))
+        A_2_cgs = float(ensure_in_units(A_2, u.g / u.cm))
+
+        if A_1_cgs <= 0:
+            raise ValueError("`A_1` must be positive.")
+        if A_2_cgs <= 0:
+            raise ValueError("`A_2` must be positive.")
+
+        return A_1_cgs, A_2_cgs
+
+    @classmethod
+    def _validate_and_process_parameters(
+        cls,
+        *,
+        A_1=None,
+        A_2=None,
+        A_star_1=None,
+        A_star_2=None,
+        mass_loss_rate_1=None,
+        wind_velocity_1=None,
+        mass_loss_rate_2=None,
+        wind_velocity_2=None,
+        r_transition,
+        transition_width,
+        **_,
+    ):
+        A_1_cgs, A_2_cgs = cls._resolve_wind_normalizations(
+            A_1=A_1,
+            A_2=A_2,
+            A_star_1=A_star_1,
+            A_star_2=A_star_2,
+            mass_loss_rate_1=mass_loss_rate_1,
+            wind_velocity_1=wind_velocity_1,
+            mass_loss_rate_2=mass_loss_rate_2,
+            wind_velocity_2=wind_velocity_2,
+        )
+
+        r_transition_cgs = float(ensure_in_units(r_transition, u.cm))
+        width = float(transition_width)
+
+        if r_transition_cgs <= 0:
+            raise ValueError("`r_transition` must be positive.")
+        if width <= 0:
+            raise ValueError("`transition_width` must be positive.")
+
+        return {
+            "A_1": A_1_cgs,
+            "A_2": A_2_cgs,
+            "r_transition": r_transition_cgs,
+            "transition_width": width,
+        }
+
+    @classmethod
+    def _opt_eval(
+        cls,
+        r,
+        _t=None,
+        *,
+        A_1,
+        A_2,
+        r_transition,
+        transition_width,
+        **_,
+    ):
+        # The transition is performed in log-radius so that the width is
+        # dimensionless and behaves naturally for wind profiles spanning many
+        # orders of magnitude in radius.
+        x = np.log(np.maximum(r, 1e-300) / r_transition) / transition_width
+        switch = 0.5 * (1.0 + np.tanh(x))
+
+        # Interpolate multiplicatively between the two wind normalizations.
+        # This preserves positivity and treats upward / downward changes in
+        # the mass-loading symmetrically.
+        log_A = (1.0 - switch) * np.log(A_1) + switch * np.log(A_2)
+        A = np.exp(log_A)
+
+        return A * r**-2
