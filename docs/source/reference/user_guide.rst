@@ -85,7 +85,7 @@ of the system being modeled. These building blocks can be combined in various wa
 capture the nuances of radio observations. Each major division of the building-block layer has its own landing page
 that provides an overview of the available modules and links to detailed user, theory, and developer documentation:
 
-.. grid:: 2 2 4 4
+.. grid:: 2 2 3 3
     :gutter: 2
 
     .. grid-item-card:: Shocks

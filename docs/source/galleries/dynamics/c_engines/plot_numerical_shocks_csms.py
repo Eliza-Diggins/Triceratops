@@ -13,15 +13,22 @@ The goal is not to fit a specific transient, but to build intuition for how
 density structure imprints itself on the shock dynamics. We compare shocks
 propagating into:
 
-- a low-density uniform ISM (:class:`~trilobite.dynamics.profiles.UniformCSMProfile`),
-- a dense uniform medium (:class:`~trilobite.dynamics.profiles.UniformCSMProfile`),
-- a steady wind (:class:`~trilobite.dynamics.profiles.WindCSMProfile`),
-- a wind with an outer ISM floor (:class:`~trilobite.dynamics.profiles.WindWithFloorCSMProfile`),
-- a sharply truncated wind (:class:`~trilobite.dynamics.profiles.TruncatedWindCSMProfile`),
-- a smoothly truncated wind (:class:`~trilobite.dynamics.profiles.SmoothTruncatedWindCSMProfile`),
-- a dense top-hat shell (:class:`~trilobite.dynamics.profiles.ShellCSMProfile`),
-- a smooth Gaussian shell (:class:`~trilobite.dynamics.profiles.GaussianShellCSMProfile`),
-- and a broken power-law CSM (:class:`~trilobite.dynamics.profiles.BrokenPowerLawCSMProfile`).
+- a low-density uniform ISM (:class:`~trilobite.dynamics.profiles.csm.UniformCSMProfile`),
+- a dense uniform medium (:class:`~trilobite.dynamics.profiles.csm.UniformCSMProfile`),
+- a steady wind (:class:`~trilobite.dynamics.profiles.csm.WindCSMProfile`),
+- a wind with an outer ISM floor (:class:`~trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile`),
+- a sharply truncated wind (:class:`~trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile`),
+- a smoothly truncated wind (:class:`~trilobite.dynamics.profiles.csm.SmoothTruncatedWindCSMProfile`),
+- a dense top-hat shell (:class:`~trilobite.dynamics.profiles.csm.ShellCSMProfile`),
+- a smooth Gaussian shell (:class:`~trilobite.dynamics.profiles.csm.GaussianShellCSMProfile`),
+- a broken power-law CSM (:class:`~trilobite.dynamics.profiles.csm.BrokenPowerLawCSMProfile`),
+- a general power-law CSM (:class:`~trilobite.dynamics.profiles.csm.PowerLawCSMProfile`),
+- an exponential CSM (:class:`~trilobite.dynamics.profiles.csm.ExponentialCSMProfile`),
+- a smooth broken power-law CSM (:class:`~trilobite.dynamics.profiles.csm.SmoothBPLCSMProfile`),
+- a cored power-law CSM (:class:`~trilobite.dynamics.profiles.csm.CoredPowerLawCSMProfile`),
+- a finite-duration wind (:class:`~trilobite.dynamics.profiles.csm.FiniteWindCSMProfile`),
+- a stellar wind bubble (:class:`~trilobite.dynamics.profiles.csm.WindBubbleCSMProfile`),
+- and a log-normal shell (:class:`~trilobite.dynamics.profiles.csm.LogNormalCSMProfile`).
 
 All models use the same homologous broken-power-law ejecta profile and the
 same initial shock conditions. This isolates the dynamical effect of the CSM
@@ -54,11 +61,18 @@ from astropy import units as u
 from trilobite.dynamics.profiles import (
     BrokenPowerLawCSMProfile,
     BrokenPowerLawEjectaProfile,
+    CoredPowerLawCSMProfile,
+    ExponentialCSMProfile,
+    FiniteWindCSMProfile,
     GaussianShellCSMProfile,
+    LogNormalCSMProfile,
+    PowerLawCSMProfile,
     ShellCSMProfile,
+    SmoothBPLCSMProfile,
     SmoothTruncatedWindCSMProfile,
     TruncatedWindCSMProfile,
     UniformCSMProfile,
+    WindBubbleCSMProfile,
     WindCSMProfile,
     WindWithFloorCSMProfile,
 )
@@ -100,10 +114,10 @@ class CSMScenario:
 #     \rho_{\rm ej}(r,t) = t^{-3} G_{\rm ej}(r/t),
 #
 # with an outer velocity-space slope ``n=10`` and an inner slope ``delta=0``.
-# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# :class:`~trilobite.dynamics.profiles.csm.BrokenPowerLawEjectaProfile` normalizes
 # the kernel to the explosion energy and ejecta mass and returns a fast
 # unit-free :math:`\rho_{\rm ej}(r,t)` callable via
-# :meth:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.as_optimized_callable`.
+# :meth:`~trilobite.dynamics.profiles.csm.BrokenPowerLawEjectaProfile.as_optimized_callable`.
 #
 # A single stateless
 # :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
@@ -130,23 +144,33 @@ M_0 = 1e-4 * u.M_sun
 # CSM Profile Gallery
 # -------------------
 #
-# We now define the CSM environments using the factory functions in
-# :mod:`~trilobite.dynamics.shocks.utils`. Each factory accepts physical
-# parameters as :class:`~astropy.units.Quantity` objects, converts units once
-# at call time, and returns a unit-free CGS callable suitable for evaluation
-# inside the ODE integrator. See :ref:`shock_engines` for a complete table of
-# available profiles.
+# We now define the CSM environments using the profile classes in
+# :mod:`~trilobite.dynamics.profiles`. Each profile's
+# :meth:`~trilobite.dynamics.profiles.csm.StationaryCSMDensityProfile.as_optimized_callable`
+# classmethod freezes the physical parameters once and returns a unit-free
+# ``(r, t)`` callable suitable for use inside the ODE integrator.
 #
-# The profiles include both smooth and discontinuous density structures. Sharp
-# structures — such as a top-hat shell or a sharply truncated wind — can
-# produce abrupt features in the shock velocity, while smooth profiles produce
-# gentler transitions.
+# The profiles span the full range of CSM morphologies available in
+# Trilobite:
+#
+# - **Power-law family**: uniform (:math:`s=0`), general power-law, wind
+#   (:math:`s=2`), broken power-law (sharp and smooth), and cored power-law.
+# - **Wind variants**: steady wind, wind with ISM floor, truncated (sharp and
+#   smooth), finite-duration, and WR wind-bubble (four-zone).
+# - **Shell structures**: top-hat shell, Gaussian shell, and log-normal shell.
+# - **Exponential**: falling exponential from a reference radius (AGB
+#   atmosphere or extended stellar envelope).
+#
+# Sharp structures — such as a top-hat shell or a sharply truncated wind —
+# can produce abrupt features in the shock velocity, while smooth profiles
+# produce gentler transitions.
 
 rho_ism = 1e-24 * u.g / u.cm**3
 rho_dense = 1e-21 * u.g / u.cm**3
 
 M_dot_rsg = 1e-5 * u.M_sun / u.yr
 v_wind_rsg = 10.0 * u.km / u.s
+A_wind = WindCSMProfile.normalize(mass_loss_rate=M_dot_rsg, wind_velocity=v_wind_rsg)
 
 R_wind = 3e17 * u.cm
 dR_wind = 5e16 * u.cm
@@ -157,6 +181,14 @@ R_shell_center = 8e16 * u.cm
 sigma_shell = 1.5e16 * u.cm
 
 R_break = 1e17 * u.cm
+R_core = 1e15 * u.cm
+
+R_finite_wind_min = 1e15 * u.cm
+R_finite_wind_max = 2e17 * u.cm
+
+R_wind_termination = 3e16 * u.cm
+R_bubble_shell_inner = 3e17 * u.cm
+R_bubble_shell_outer = 4e17 * u.cm
 
 scenarios = [
     CSMScenario(
@@ -242,6 +274,82 @@ scenarios = [
         color="C8",
         marker_radii=(R_break,),
     ),
+    CSMScenario(
+        label=r"Power-law CSM ($s=1.5$)",
+        rho_csm=PowerLawCSMProfile.as_optimized_callable(
+            rho_ref=1e-20 * u.g / u.cm**3,
+            r_ref=1e16 * u.cm,
+            slope=1.5,
+        ),
+        color="C9",
+    ),
+    CSMScenario(
+        label="Exponential CSM",
+        rho_csm=ExponentialCSMProfile.as_optimized_callable(
+            rho_0=1e-19 * u.g / u.cm**3,
+            r_0=0.0 * u.cm,
+            scale_height=1e16 * u.cm,
+            density_floor=rho_ism,
+        ),
+        color="#e377c2",
+    ),
+    CSMScenario(
+        label="Smooth BPL CSM",
+        rho_csm=SmoothBPLCSMProfile.as_optimized_callable(
+            density_break=1e-20 * u.g / u.cm**3,
+            radius_break=R_break,
+            slope_inner=0.0,
+            slope_outer=2.5,
+            smoothness=0.5,
+        ),
+        color="#7f7f7f",
+        marker_radii=(R_break,),
+    ),
+    CSMScenario(
+        label="Cored power-law CSM",
+        rho_csm=CoredPowerLawCSMProfile.as_optimized_callable(
+            rho_0=5e-22 * u.g / u.cm**3,
+            r_core=R_core,
+            slope=2.0,
+        ),
+        color="#bcbd22",
+        marker_radii=(R_core,),
+    ),
+    CSMScenario(
+        label="Finite wind",
+        rho_csm=FiniteWindCSMProfile.as_optimized_callable(
+            A=A_wind,
+            r_min=R_finite_wind_min,
+            r_max=R_finite_wind_max,
+            density_floor=rho_ism,
+        ),
+        color="#17becf",
+        marker_radii=(R_finite_wind_min, R_finite_wind_max),
+    ),
+    CSMScenario(
+        label="Wind bubble (WR)",
+        rho_csm=WindBubbleCSMProfile.as_optimized_callable(
+            A=A_wind,
+            r_wind_termination=R_wind_termination,
+            rho_bubble=1e-25 * u.g / u.cm**3,
+            r_shell_inner=R_bubble_shell_inner,
+            r_shell_outer=R_bubble_shell_outer,
+            rho_shell=1e-21 * u.g / u.cm**3,
+            rho_ism=rho_ism,
+        ),
+        color="#aec7e8",
+        marker_radii=(R_wind_termination, R_bubble_shell_inner, R_bubble_shell_outer),
+    ),
+    CSMScenario(
+        label="Log-normal shell",
+        rho_csm=LogNormalCSMProfile.as_optimized_callable(
+            rho_0=5e-19 * u.g / u.cm**3,
+            r_peak=R_shell_center,
+            sigma=0.5,
+        ),
+        color="#ffbb78",
+        marker_radii=(R_shell_center,),
+    ),
 ]
 
 
@@ -283,6 +391,7 @@ for scenario in scenarios:
 
 ax.set_xlabel("Radius (cm)")
 ax.set_ylabel(r"CSM Density ($\mathrm{g\,cm^{-3}}$)")
+ax.set_ylim([1e-25, 1e-14])
 ax.legend(fontsize=8, ncol=2)
 plt.tight_layout()
 plt.show()
@@ -374,9 +483,16 @@ plt.show()
 #   differently with radius (:math:`M_{\rm sw} \propto R` for a wind vs.
 #   :math:`M_{\rm sw} \propto R^3` for a uniform medium).
 # - Shells produce localized velocity drops when the shock crosses the
-#   overdense structure.
+#   overdense structure; the log-normal and Gaussian variants show smoother
+#   versions of this feature compared with the sharp top-hat shell.
 # - A truncated wind produces a clear inflection when the shock exits the wind
-#   and enters the lower-density ambient medium.
+#   and enters the lower-density ambient medium; the finite wind shows a
+#   similar re-acceleration after the outer truncation radius.
+# - The wind-bubble profile produces a two-stage signature: deceleration in
+#   the free-wind zone, acceleration through the low-density bubble, then
+#   deceleration again in the dense swept-up shell.
+# - The smooth BPL and cored power-law profiles produce gentler, more gradual
+#   transitions compared with their sharp-break counterparts.
 
 fig, ax = plt.subplots(figsize=(8, 5))
 
@@ -470,6 +586,7 @@ for scenario in scenarios:
 
 ax.set_xlabel("Time (days)")
 ax.set_ylabel(r"CSM Density at Shock ($\mathrm{g\,cm^{-3}}$)")
+ax.set_ylim([1e-25, 1e-14])
 ax.legend(fontsize=8, ncol=2)
 plt.tight_layout()
 plt.show()
@@ -480,8 +597,9 @@ plt.show()
 # -------
 #
 # This gallery demonstrates the qualitative behavior expected from launching
-# the same supernova ejecta into different CSM environments. The most
-# informative diagnostics are:
+# the same supernova ejecta into every CSM profile available in
+# :mod:`~trilobite.dynamics.profiles`. The most informative diagnostics
+# are:
 #
 # - **Shock velocity vs. time**: highlights when and how rapidly deceleration
 #   occurs.

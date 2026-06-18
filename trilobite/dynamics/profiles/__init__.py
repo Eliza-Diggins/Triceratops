@@ -11,14 +11,20 @@ freely expanding ejecta, and background flow fields.
 from .core import _DynamicalProfile
 from .csm import (
     BrokenPowerLawCSMProfile,
+    CoredPowerLawCSMProfile,
     CSMDensityProfile,
+    ExponentialCSMProfile,
+    FiniteWindCSMProfile,
     GaussianShellCSMProfile,
+    LogNormalCSMProfile,
     PowerLawCSMProfile,
     ShellCSMProfile,
+    SmoothBPLCSMProfile,
     SmoothTruncatedWindCSMProfile,
     StationaryCSMDensityProfile,
     TruncatedWindCSMProfile,
     UniformCSMProfile,
+    WindBubbleCSMProfile,
     WindCSMProfile,
     WindWithFloorCSMProfile,
 )
@@ -48,6 +54,12 @@ __all__ = [
     "TruncatedWindCSMProfile",
     "WindWithFloorCSMProfile",
     "SmoothTruncatedWindCSMProfile",
+    "ExponentialCSMProfile",
+    "SmoothBPLCSMProfile",
+    "CoredPowerLawCSMProfile",
+    "FiniteWindCSMProfile",
+    "WindBubbleCSMProfile",
+    "LogNormalCSMProfile",
     # Ejecta
     "EjectaDensityProfile",
     "BrokenPowerLawEjectaProfile",
