@@ -69,16 +69,361 @@ if TYPE_CHECKING:
 # Snowplow Closure Engines                                    #
 # =========================================================== #
 # These are numerical closures for the snowplow phase of shock evolutions.
-class MomentumConservingShockEngine(ShockEngine, ABC):
+class MomentumConservingShockState(NamedTuple):
+    r"""
+    Time-dependent state returned by :class:`MomentumConservingShockEngine`.
+
+    The low-level CGS interface returns plain :class:`numpy.ndarray` fields in
+    CGS units. The public unit-aware interface returns the same structure with
+    fields converted to :class:`astropy.units.Quantity`.
     """
-    Momentum conserving shock engine.
 
-    .. note::
+    radius: Union[np.ndarray, u.Quantity]
+    r"""Shell radius :math:`R_{\rm sh}` in cm."""
 
-        This engine is not yet implemented. It will be added in a future release.
+    velocity: Union[np.ndarray, u.Quantity]
+    r"""Shell velocity :math:`v_{\rm sh}` in cm/s."""
+
+    mass: Union[np.ndarray, u.Quantity]
+    r"""Accumulated shell mass :math:`M_{\rm sh}` in g."""
+
+    post_shock_density: Union[np.ndarray, u.Quantity]
+    r"""
+    Immediate post-shock density :math:`\rho_s` in :math:`\mathrm{g\,cm^{-3}}`,
+    derived from the strong cold-shock Rankine--Hugoniot relation applied at the
+    forward shock using the upstream CSM density :math:`\rho_4(R_{\rm sh},\,t)`.
     """
 
-    pass
+    post_shock_pressure: Union[np.ndarray, u.Quantity]
+    r"""
+    Immediate post-shock pressure :math:`p_s` in :math:`\mathrm{dyn\,cm^{-2}}`,
+    derived from the strong cold-shock Rankine--Hugoniot relation applied at the
+    forward shock.
+    """
+
+    post_shock_temperature: Union[np.ndarray, u.Quantity]
+    r"""
+    Immediate post-shock temperature :math:`T_s` in K, derived from the ideal-gas
+    relation applied at the forward shock.
+    """
+
+    thermal_energy_density: Union[np.ndarray, u.Quantity]
+    r"""
+    Post-shock thermal energy density
+    :math:`e_{\rm th} = p_s / (\gamma - 1)` in :math:`\mathrm{erg\,cm^{-3}}`,
+    evaluated at the forward shock.
+    """
+
+
+class MomentumConservingShockEngine(ShockEngine):
+    r"""
+    Momentum-conserving snowplow shock engine for arbitrary ejecta and CSM profiles.
+
+    This :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` subclass
+    implements the momentum-conserving (snowplow) limit of the ejecta--CSM interaction.
+    Post-shock pressure is neglected and shell acceleration is driven purely by the
+    momentum flux deposited by swept-up material from both sides.
+
+    Notes
+    -----
+    The engine integrates the 3-component state vector
+
+    .. math::
+
+        \mathbf{y} = (R_{\rm sh},\; M_{\rm sh},\; \Pi_{\rm sh})
+
+    governed by
+
+    .. math::
+
+        \begin{aligned}
+        \frac{dR_{\rm sh}}{dt}
+            &= v_{\rm sh} = \frac{\Pi_{\rm sh}}{M_{\rm sh}}, \\[4pt]
+        \frac{dM_{\rm sh}}{dt}
+            &= 4\pi R_{\rm sh}^2
+               \Bigl[
+                   \rho_1(R_{\rm sh},t)\,\bigl(u_1(R_{\rm sh},t) - v_{\rm sh}\bigr)
+                   +
+                   \rho_4(R_{\rm sh},t)\,\bigl(v_{\rm sh} - u_4(R_{\rm sh},t)\bigr)
+               \Bigr], \\[4pt]
+        \frac{d\Pi_{\rm sh}}{dt}
+            &= u_1(R_{\rm sh},t)\,\dot{M}_2
+               + u_4(R_{\rm sh},t)\,\dot{M}_3,
+        \end{aligned}
+
+    where
+
+    .. math::
+
+        \dot{M}_2 = 4\pi R_{\rm sh}^2\,\rho_1\bigl(u_1 - v_{\rm sh}\bigr),
+        \qquad
+        \dot{M}_3 = 4\pi R_{\rm sh}^2\,\rho_4\bigl(v_{\rm sh} - u_4\bigr)
+
+    are the ejecta and CSM mass-loading rates, clamped to be non-negative.
+
+    Post-shock thermodynamics at the forward shock are derived as a diagnostic from
+    the instantaneous strong cold-shock Rankine--Hugoniot conditions (they do not
+    feed back into the ODE).
+
+    See Also
+    --------
+    :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine` :
+        More accurate closure that includes post-shock pressure in the shell acceleration.
+    :class:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine` :
+        Most complete closure that evolves separate internal energies for each shocked layer.
+    """
+
+    _STATE_CLASS = MomentumConservingShockState
+
+    def __init__(self, mu: float = 0.5, **kwargs):
+        super().__init__(**kwargs)
+        self._mu = float(mu)
+
+    @staticmethod
+    def generate_evaluation_kernel(
+        rho_1: Callable,
+        rho_4: Callable,
+        u_1: Callable,
+        u_4: Callable,
+    ) -> Callable:
+        r"""
+        Build the ODE right-hand side for the momentum-conserving snowplow model.
+
+        Returns a function ``kernel(t, y)`` suitable for
+        :func:`scipy.integrate.solve_ivp`.
+
+        Parameters
+        ----------
+        rho_1 : callable
+            Upstream ejecta density :math:`\rho_1(r,\,t)` in CGS
+            (:math:`\mathrm{g\,cm^{-3}}`).
+        rho_4 : callable
+            Upstream CSM density :math:`\rho_4(r,\,t)` in CGS
+            (:math:`\mathrm{g\,cm^{-3}}`).
+        u_1 : callable
+            Upstream ejecta velocity :math:`u_1(r,\,t)` in cm/s.
+        u_4 : callable
+            Upstream CSM velocity :math:`u_4(r,\,t)` in cm/s.
+
+        Returns
+        -------
+        callable
+            ``kernel(t, y) -> dy/dt`` where
+            ``y = [R_sh, M_sh, Pi_sh]``.
+        """
+
+        def _kernel(t, y):
+            # Extract the current state variables.
+            SHOCK_RADIUS, SHOCK_MASS, SHOCK_MOMENTUM = y
+            SHOCK_VELOCITY = SHOCK_MOMENTUM / SHOCK_MASS
+
+            # Compute the upstream conditions at the shock location.
+            rho1 = rho_1(SHOCK_RADIUS, t)
+            rho4 = rho_4(SHOCK_RADIUS, t)
+            u1 = u_1(SHOCK_RADIUS, t)
+            u4 = u_4(SHOCK_RADIUS, t)
+
+            # Compute the SHOCK FRAME values of the upstream velocities.
+            u_1_rel = u1 - SHOCK_VELOCITY
+            u_4_rel = SHOCK_VELOCITY - u4
+
+            # Compute the mass loading rate.
+            dM2_dt = 4 * np.pi * SHOCK_RADIUS**2 * rho1 * u_1_rel
+            dM3_dt = 4 * np.pi * SHOCK_RADIUS**2 * rho4 * u_4_rel
+            dM_dt = dM2_dt + dM3_dt
+
+            dR_dt = SHOCK_VELOCITY
+            dP_dt = (u1 * dM2_dt) + (u4 * dM3_dt)
+
+            return np.array([dR_dt, dM_dt, dP_dt])
+
+        return _kernel
+
+    def compute_shock_properties(
+        self,
+        time: "_UnitBearingArrayLike",
+        rho_1: Callable = None,
+        rho_4: Callable = None,
+        u_1: Callable = None,
+        u_4: Callable = None,
+        R_0: "_UnitBearingScalarLike" = 1e11 * u.cm,
+        v_0: "_UnitBearingScalarLike" = 1e7 * u.cm / u.s,
+        M_0: "_UnitBearingScalarLike" = 1e28 * u.g,
+        t_0: "_UnitBearingScalarLike" = 1.0 * u.s,
+        gamma: float = 5 / 3,
+        **kwargs,
+    ) -> "MomentumConservingShockState":
+        r"""
+        Compute the shock properties at the given times.
+
+        Parameters
+        ----------
+        time : ~astropy.units.Quantity or array-like
+            Times at which to evaluate the solution. Unit-bearing inputs are
+            converted to seconds; bare floats are assumed to be in seconds.
+            Must be sorted and satisfy ``time >= t_0``.
+        rho_1 : callable
+            Upstream ejecta density :math:`\rho_1(r,\,t)` in CGS.
+        rho_4 : callable
+            Upstream CSM density :math:`\rho_4(r,\,t)` in CGS.
+        u_1 : callable
+            Upstream ejecta velocity :math:`u_1(r,\,t)` in cm/s.
+        u_4 : callable
+            Upstream CSM velocity :math:`u_4(r,\,t)` in cm/s.
+        R_0 : ~astropy.units.Quantity or float
+            Initial shock radius. Default ``1e11 cm``.
+        v_0 : ~astropy.units.Quantity or float
+            Initial shock velocity. Default ``1e7 cm/s``.
+        M_0 : ~astropy.units.Quantity or float
+            Initial shell mass. Default ``1e28 g``.
+        t_0 : ~astropy.units.Quantity or float
+            Initial time. Default ``1.0 s``.
+        gamma : float, optional
+            Adiabatic index used for the forward-shock post-shock diagnostics.
+            Default ``5/3``.
+        **kwargs
+            Forwarded to :func:`scipy.integrate.solve_ivp`.
+            ``method`` defaults to ``'Radau'``; ``rtol`` defaults to ``1e-10``.
+
+        Returns
+        -------
+        ~trilobite.dynamics.shocks.numerical.MomentumConservingShockState
+            Unit-bearing named tuple with fields ``radius``, ``velocity``,
+            ``mass``, ``post_shock_density``, ``post_shock_pressure``,
+            ``post_shock_temperature``, and ``thermal_energy_density``.
+        """
+        if isinstance(time, u.Quantity):
+            time = time.to(u.s).value
+        if isinstance(R_0, u.Quantity):
+            R_0 = R_0.to(u.cm).value
+        if isinstance(v_0, u.Quantity):
+            v_0 = v_0.to(u.cm / u.s).value
+        if isinstance(M_0, u.Quantity):
+            M_0 = M_0.to(u.g).value
+        if isinstance(t_0, u.Quantity):
+            t_0 = t_0.to(u.s).value
+
+        cgs = self._compute_shock_properties_cgs(
+            time=time,
+            rho_1=rho_1,
+            rho_4=rho_4,
+            u_1=u_1,
+            u_4=u_4,
+            R_0=R_0,
+            v_0=v_0,
+            M_0=M_0,
+            t_0=t_0,
+            gamma=gamma,
+            **kwargs,
+        )
+
+        return MomentumConservingShockState(
+            radius=cgs.radius * u.cm,
+            velocity=cgs.velocity * (u.cm / u.s),
+            mass=cgs.mass * u.g,
+            post_shock_density=cgs.post_shock_density * (u.g / u.cm**3),
+            post_shock_pressure=cgs.post_shock_pressure * (u.dyn / u.cm**2),
+            post_shock_temperature=cgs.post_shock_temperature * u.K,
+            thermal_energy_density=cgs.thermal_energy_density * (u.erg / u.cm**3),
+        )
+
+    def _compute_shock_properties_cgs(
+        self,
+        time: "_ArrayLike",
+        rho_1: Callable = None,
+        rho_4: Callable = None,
+        u_1: Callable = None,
+        u_4: Callable = None,
+        R_0: float = 1e11,
+        v_0: float = 1e7,
+        M_0: float = 1e28,
+        t_0: float = 1.0,
+        gamma: float = 5 / 3,
+        **kwargs,
+    ) -> "MomentumConservingShockState":
+        r"""
+        Integrate the momentum-conserving snowplow ODEs in CGS units.
+
+        Parameters
+        ----------
+        time : array-like
+            Evaluation times in seconds. Must be sorted and satisfy
+            ``time >= t_0``.
+        rho_1, rho_4, u_1, u_4 : callable
+            Upstream density and velocity functions in CGS.
+        R_0, v_0, M_0 : float
+            Initial shock radius (cm), velocity (cm/s), and shell mass (g).
+        t_0 : float
+            Initial time (s).
+        gamma : float
+            Adiabatic index used for the forward-shock post-shock diagnostics.
+        **kwargs
+            Forwarded to :func:`scipy.integrate.solve_ivp`.
+
+        Returns
+        -------
+        ~trilobite.dynamics.shocks.numerical.MomentumConservingShockState
+            CGS-valued named tuple.
+        """
+        if rho_1 is None:
+            raise ValueError("An upstream ejecta density function `rho_1` must be provided.")
+        if rho_4 is None:
+            raise ValueError("An upstream CSM density function `rho_4` must be provided.")
+        if u_1 is None:
+            raise ValueError("An upstream ejecta velocity function `u_1` must be provided.")
+        if u_4 is None:
+            raise ValueError("An upstream CSM velocity function `u_4` must be provided.")
+
+        time = np.atleast_1d(np.asarray(time, dtype=float))
+
+        kernel = self.generate_evaluation_kernel(
+            rho_1=rho_1,
+            rho_4=rho_4,
+            u_1=u_1,
+            u_4=u_4,
+        )
+
+        y0 = np.array([R_0, M_0, M_0 * v_0])
+        t_span = (t_0, float(np.amax(time)))
+
+        solver_kwargs = dict(kwargs)
+        rtol = solver_kwargs.pop("rtol", 1e-10)
+        method = solver_kwargs.pop("method", "Radau")
+
+        sol = solve_ivp(
+            fun=kernel,
+            t_span=t_span,
+            y0=y0,
+            t_eval=time,
+            rtol=rtol,
+            method=method,
+            **solver_kwargs,
+        )
+
+        if sol.status < 0:
+            raise RuntimeError(
+                f"ODE solver failed to integrate the momentum-conserving snowplow equations:\n{sol.message}"
+            )
+
+        R_sh, M_sh, Pi_sh = sol.y
+        v_sh = Pi_sh / M_sh
+
+        # Post-shock thermodynamics at the forward shock via strong cold-shock RH conditions.
+        # Evaluated element-by-element because the upstream callables accept scalar (r, t).
+        n_steps = len(time)
+        rho_4_arr = np.array([float(rho_4(R_sh[i], time[i])) for i in range(n_steps)])
+        u_4_arr = np.array([float(u_4(R_sh[i], time[i])) for i in range(n_steps)])
+        rh = StrongColdShockConditions._solve(v_sh, rho_4_arr, u_4_arr, gamma=gamma, mu=self._mu)
+
+        return MomentumConservingShockState(
+            radius=R_sh,
+            velocity=v_sh,
+            mass=M_sh,
+            post_shock_density=rh["post_shock_density"],
+            post_shock_pressure=rh["post_shock_pressure"],
+            post_shock_temperature=rh["post_shock_temperature"],
+            thermal_energy_density=rh["post_shock_thermal_energy_density"],
+        )
 
 
 class RelMomentumConservingShockEngine(ShockEngine, ABC):
