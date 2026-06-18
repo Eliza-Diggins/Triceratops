@@ -85,7 +85,7 @@ of the system being modeled. These building blocks can be combined in various wa
 capture the nuances of radio observations. Each major division of the building-block layer has its own landing page
 that provides an overview of the available modules and links to detailed user, theory, and developer documentation:
 
-.. grid:: 3
+.. grid:: 2 2 4 4
     :gutter: 2
 
     .. grid-item-card:: Shocks
@@ -108,6 +108,13 @@ that provides an overview of the available modules and links to detailed user, t
         Time-dependent one-zone disk models: thermodynamic closures, viscous spreading, fallback
         accretion, and the advective RIAF regime.
 
+    .. grid-item-card:: Dynamical Profiles
+        :link: profiles_user_guide
+        :link-type: ref
+
+        Parameterized analytic field classes for CSM densities, homologous ejecta, and upstream
+        velocity distributions. Used as source functions by shock engines and ODE integrators.
+
 .. toctree::
     :maxdepth: 1
     :hidden:
@@ -115,6 +122,7 @@ that provides an overview of the available modules and links to detailed user, t
     physics/shocks/overview
     physics/radiation/overview
     physics/disks/index
+    physics/profiles/profiles_user_guide
 
 
 Parallel Computing
