@@ -23,7 +23,7 @@ functions in :mod:`~trilobite.dynamics.shocks.utils`.
 Non-Relativistic Numerical Shock Engines
 -----------------------------------------
 
-Two fully implemented non-relativistic engines are available, covering the most common
+Three fully implemented non-relativistic engines are available, covering the most common
 levels of physical detail needed for radio-transient modeling.  The table below
 summarises their applicability and trade-offs.
 
@@ -33,9 +33,12 @@ summarises their applicability and trade-offs.
 
    * - Engine
      - Best For
+   * - :class:`~trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine`
+     - Late-time radiative snowplow phases where post-shock pressure is negligible and
+       total shell momentum is conserved.  Lightest computational cost.
    * - :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
      - Problems where only the **shell kinematics** matter and no separate energy budget
-       for each shocked layer is needed.  Fastest and simplest numerical engine.
+       for each shocked layer is needed.  Fastest adiabatic numerical engine.
    * - :class:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine`
      - Problems requiring **separate forward and reverse shock tracking**, independent
        internal energies, or optional radiative cooling in each layer.
@@ -689,13 +692,211 @@ returns ``None``.
 
 .. _momentum_conserving_shock_engine:
 
-Momentum-Conserving Shock Engine
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Momentum-Conserving (Snowplow) Shock Engine
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The :class:`~trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine` will
-implement a non-relativistic momentum-conserving thin-shell model.
+The :class:`~trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine`
+implements the non-relativistic momentum-conserving (snowplow) thin-shell closure.
+Post-shock pressure is neglected and shell acceleration is driven solely by the momentum
+flux deposited by swept-up material from both the ejecta side and the CSM side.  This is
+the appropriate limit once the shocked gas has radiated away most of its internal energy,
+so that the shell behaves as a cold, momentum-conserving snowplow.  For the theoretical
+derivation see :ref:`conservative_snowplow_model`.
 
-**Not yet implemented — planned for a future release.**
+The engine integrates the 3-component state vector
+
+.. math::
+
+    \mathbf{y} = (R_{\rm sh},\; M_{\rm sh},\; \Pi_{\rm sh})
+
+governed by
+
+.. math::
+
+    \begin{aligned}
+    \frac{dR_{\rm sh}}{dt}
+        &= v_{\rm sh} = \frac{\Pi_{\rm sh}}{M_{\rm sh}}, \\[4pt]
+    \frac{dM_{\rm sh}}{dt}
+        &= 4\pi R_{\rm sh}^2
+           \Bigl[
+               \rho_1(R_{\rm sh},t)\,\bigl(u_1(R_{\rm sh},t) - v_{\rm sh}\bigr)
+               +
+               \rho_4(R_{\rm sh},t)\,\bigl(v_{\rm sh} - u_4(R_{\rm sh},t)\bigr)
+           \Bigr], \\[4pt]
+    \frac{d\Pi_{\rm sh}}{dt}
+        &= u_1(R_{\rm sh},t)\,\dot{M}_2
+           + u_4(R_{\rm sh},t)\,\dot{M}_3,
+    \end{aligned}
+
+where
+
+.. math::
+
+    \dot{M}_2 = 4\pi R_{\rm sh}^2\,\rho_1\bigl(u_1 - v_{\rm sh}\bigr),
+    \qquad
+    \dot{M}_3 = 4\pi R_{\rm sh}^2\,\rho_4\bigl(v_{\rm sh} - u_4\bigr)
+
+are the ejecta and CSM mass-loading rates, clamped to be non-negative.  The initial
+momentum is set to :math:`\Pi_0 = M_0\,v_0`.
+
+Post-shock thermodynamics at the **forward shock** are derived as a diagnostic from the
+instantaneous strong cold-shock Rankine--Hugoniot conditions; they do not feed back into
+the ODE.
+
+.. hint::
+
+    Because pressure is neglected, the snowplow engine produces a different late-time
+    asymptote than the adiabatic engines.  For uniform CSM it converges to
+    :math:`R \propto t^{1/4}` (snowplow scaling), whereas the
+    :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
+    converges to :math:`R \propto t^{4/13}` and the full Sedov-Taylor solution gives
+    :math:`R \propto t^{2/5}`.  Use this engine when the shocked gas is strongly cooled
+    and pressure support is unimportant.
+
+Problem Setup
+~~~~~~~~~~~~~~
+
+The profile and source-function setup is identical to the pressure-driven thin-shell
+engine: build the ejecta and CSM density callables from the profile classes in
+:mod:`~trilobite.dynamics.profiles` and assemble the four two-argument source functions
+with :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`.
+
+.. dropdown:: Example — profile and engine setup
+
+    .. code-block:: python
+
+        from astropy import units as u
+        from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
+        from trilobite.dynamics.shocks import (
+            MomentumConservingShockEngine,
+            make_homologous_stationary_sources,
+        )
+
+        # Broken-power-law ejecta, normalized to E_ej and M_ej
+        K, v_t = BrokenPowerLawEjectaProfile.normalize(
+            E_ej=1e51 * u.erg,
+            M_ej=5.0  * u.Msun,
+            n=10.0,
+            delta=1.0,
+        )
+        rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10.0, delta=1.0)
+
+        # Steady wind CSM: rho(r) = A * r^-2
+        rho_csm = WindCSMProfile.as_optimized_callable(
+            mass_loss_rate=1e-5 * u.Msun / u.yr,
+            wind_velocity=100.0 * u.km / u.s,
+        )
+
+        # Assemble the four two-argument (r, t) source callables
+        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
+
+        # The engine is stateless — a single instance can be reused
+        engine = MomentumConservingShockEngine()
+
+
+Solving The Shock Properties
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Call
+:meth:`~trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.compute_shock_properties`
+with a time array, the four source callables, and initial conditions for the shell
+radius :math:`R_0`, velocity :math:`v_0`, mass :math:`M_0`, and start time :math:`t_0`.
+The method returns a
+:class:`~trilobite.dynamics.shocks.numerical.MomentumConservingShockState` named tuple
+with seven :class:`~astropy.units.Quantity` fields:
+
+.. dropdown:: Returned Shock Properties
+
+    .. list-table::
+        :header-rows: 1
+        :widths: 28 72
+
+        * - Key
+          - Description
+        * - ``radius``
+          - Shell radius :math:`R_{\rm sh}(t)`.
+        * - ``velocity``
+          - Shell velocity :math:`v_{\rm sh}(t) = \Pi_{\rm sh}/M_{\rm sh}`.
+        * - ``mass``
+          - Accumulated shell mass :math:`M_{\rm sh}(t)`.
+        * - ``post_shock_density``
+          - Immediate post-shock density :math:`\rho_s` at the forward shock, computed from the
+            strong cold-shock Rankine--Hugoniot relation applied to the upstream CSM density
+            :math:`\rho_4(R_{\rm sh}, t)`.
+        * - ``post_shock_pressure``
+          - Immediate post-shock pressure :math:`p_s` at the forward shock.
+        * - ``post_shock_temperature``
+          - Immediate post-shock temperature :math:`T_s` at the forward shock, computed using the
+            mean molecular weight ``mu`` set at engine instantiation.  The default is ``0.5``.
+        * - ``thermal_energy_density``
+          - Post-shock thermal energy density :math:`e_{\rm th} = p_s/(\gamma - 1)` at the
+            forward shock.
+
+The four post-shock thermodynamic fields are evaluated at every output time step using
+:class:`~trilobite.dynamics.shocks.core.rankine_hugoniot.StrongColdShockConditions`
+with :math:`v_{\rm sh}` as the shock velocity and
+:math:`\rho_4(R_{\rm sh},t)`, :math:`u_4(R_{\rm sh},t)` as the upstream CSM conditions.
+The mean molecular weight ``mu`` can be changed at instantiation, e.g.
+``MomentumConservingShockEngine(mu=0.62)`` for a solar-composition plasma.
+
+.. note::
+
+    The ODE integrator used internally is :func:`scipy.integrate.solve_ivp` with
+    ``method='Radau'`` and ``rtol=1e-10`` by default.  Any extra keyword arguments
+    passed to
+    :meth:`~trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.compute_shock_properties`
+    are forwarded directly to :func:`~scipy.integrate.solve_ivp`.
+
+.. dropdown:: Example — radius, velocity, and swept-up mass
+
+    .. plot::
+        :include-source:
+
+        import numpy as np
+        import matplotlib.pyplot as plt
+        from astropy import units as u
+
+        from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
+        from trilobite.dynamics.shocks import (
+            MomentumConservingShockEngine,
+            make_homologous_stationary_sources,
+        )
+        from trilobite.utils.plot_utils import set_plot_style
+
+        K, v_t  = BrokenPowerLawEjectaProfile.normalize(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
+        rho_ej  = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10.0, delta=1.0)
+        rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=1e-5 * u.Msun / u.yr, wind_velocity=100.0 * u.km / u.s)
+        rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
+
+        engine = MomentumConservingShockEngine()
+        time   = np.geomspace(1, 1000, 500) * u.day
+
+        state = engine.compute_shock_properties(
+            time=time,
+            rho_1=rho_1, rho_4=rho_4,
+            u_1=u_1,     u_4=u_4,
+            R_0=1e14 * u.cm,
+            v_0=1e9  * u.cm / u.s,
+            M_0=1e26 * u.g,
+            t_0=1.0  * u.day,
+        )
+
+        set_plot_style()
+        fig, axes = plt.subplots(3, 1, figsize=(6, 8), sharex=True)
+        t_days = time.to_value(u.day)
+
+        axes[0].loglog(t_days, state.radius.to_value(u.cm))
+        axes[0].set_ylabel("Radius (cm)")
+
+        axes[1].loglog(t_days, state.velocity.to_value(u.km / u.s))
+        axes[1].set_ylabel(r"Velocity (km s$^{-1}$)")
+
+        axes[2].loglog(t_days, state.mass.to_value(u.Msun))
+        axes[2].set_xlabel("Time (days)")
+        axes[2].set_ylabel(r"Shell mass ($M_\odot$)")
+
+        plt.tight_layout()
+        plt.show()
 
 ----
 

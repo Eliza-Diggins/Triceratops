@@ -29,6 +29,8 @@ __all__ = [
     "ThinShellShockState",
     "MechanicalShockState",
     "MechanicalShockEngine",
+    "MomentumConservingShockState",
+    "MomentumConservingShockEngine",
     "PressureDrivenThinShellShockEngine",
     "RelativisticJumpConditions",
     "RelativisticShockConditions",
@@ -66,6 +68,8 @@ from trilobite.dynamics.shocks.core.relativistic_jump_conditions import (
 from trilobite.dynamics.shocks.numerical import (
     MechanicalShockEngine,
     MechanicalShockState,
+    MomentumConservingShockEngine,
+    MomentumConservingShockState,
     PressureDrivenThinShellShockEngine,
     ThinShellShockState,
 )

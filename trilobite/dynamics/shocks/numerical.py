@@ -165,12 +165,18 @@ class MomentumConservingShockEngine(ShockEngine):
     the instantaneous strong cold-shock Rankine--Hugoniot conditions (they do not
     feed back into the ODE).
 
+    .. hint::
+
+        For a detailed derivation of the governing ODE system, see
+        :ref:`conservative_snowplow_model`.
+
     See Also
     --------
     :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine` :
         More accurate closure that includes post-shock pressure in the shell acceleration.
     :class:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine` :
         Most complete closure that evolves separate internal energies for each shocked layer.
+    :ref:`conservative_snowplow_model` : Theory derivation.
     """
 
     _STATE_CLASS = MomentumConservingShockState
