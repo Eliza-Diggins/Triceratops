@@ -17,7 +17,7 @@ See Also
     Analytic and numerical one-zone SED models.
 """
 
-from .aspherical import OnAxisAsymmetricSynchrotronEngine
+from .aspherical import OffAxisAsymmetricSynchrotronEngine, OnAxisAsymmetricSynchrotronEngine
 from .core import NumericalSynchrotronEngine
 from .inhomogeneous import InhomogeneousCylinderSynchrotronEngine
 from .one_zone import (
@@ -30,5 +30,6 @@ __all__ = [
     "NonRelativisticSphericalSynchrotronEngine",
     "UltraRelativisticSphericalSynchrotronEngine",
     "OnAxisAsymmetricSynchrotronEngine",
+    "OffAxisAsymmetricSynchrotronEngine",
     "InhomogeneousCylinderSynchrotronEngine",
 ]

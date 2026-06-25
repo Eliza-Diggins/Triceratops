@@ -1395,3 +1395,936 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
         )
         log_F = np.log(2.0 * np.pi) - 2.0 * log_D_A + logsumexp(log_integrand, axis=-1)
         return np.exp(np.log(4.0 * np.pi) + 2.0 * log_D_L + log_F) * (u.erg / (u.s * u.Hz))
+
+
+class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
+    r"""
+    Off-axis synchrotron SED engine for axisymmetric multi-zone outflows.
+
+    This class extends :class:`OnAxisAsymmetricSynchrotronEngine` to support
+    an arbitrary observer polar angle :math:`\theta_\mathrm{obs}` relative to the
+    outflow symmetry axis. Physical properties (magnetic field, electron distribution,
+    radius, shell thickness, filling factor, bulk velocity) vary only with the zone
+    polar angle :math:`\theta_\mathrm{jet}`, not with azimuth :math:`\phi`.
+
+    Notes
+    -----
+    **Flux formula.** The observed spectral flux density is
+
+    .. math::
+
+        F_\nu
+        =
+        \frac{2}{D_A^2}
+        \int_{-1}^{1}
+        \int_0^{\pi}
+        f_A(\mu)\,R(\mu)^2\,
+        \max\!\bigl(\mu_\mathrm{obs},\,0\bigr)
+        \left(\frac{\mathcal{D}(\mu,\phi)}{1+z}\right)^{\!3}
+        I'_{\nu'(\mu,\phi)}(\mu)\,
+        d\mu\,d\phi,
+
+    where :math:`\mu = \cos\theta_\mathrm{jet}` and the factor of 2 accounts for
+    integrating only :math:`\phi\in[0,\pi]` by exploiting the azimuthal symmetry
+    of the integrand. The line-of-sight cosine is
+
+    .. math::
+
+        \mu_\mathrm{obs}(\mu,\phi)
+        =
+        \cos\theta_\mathrm{obs}\,\mu
+        +
+        \sin\theta_\mathrm{obs}\sqrt{1-\mu^2}\cos\phi,
+
+    and the Doppler factor is
+    :math:`\mathcal{D} = \bigl[\Gamma\bigl(1-\beta\mu_\mathrm{obs}\bigr)\bigr]^{-1}`.
+
+    **Full-sphere convention.** The :math:`\mu` integral covers the full sphere
+    (:math:`\mu \in [-1,1]`). Back-facing zones (:math:`\mu_\mathrm{obs}\le 0`) are
+    zeroed by the :math:`\max(\mu_\mathrm{obs},0)` projected-area factor, equivalent
+    to a thin-shell approximation where back-facing material contributes no observed
+    flux.
+
+    **Shell thickness vs LOS path.** ``shell_thickness`` is the comoving-frame
+    perpendicular shell thickness :math:`\Delta r'(\theta_\mathrm{jet})`. The engine
+    converts it to the line-of-sight transfer depth as
+
+    .. math::
+
+        \ell'(\mu,\phi)
+        =
+        \frac{\Delta r'(\mu)}{\max(\mu_\mathrm{obs},\,\mu_\mathrm{min})},
+
+    with :math:`\mu_\mathrm{min} = 10^{-6}` preventing division by zero at grazing
+    incidence. The diverging path length is suppressed in the flux by the vanishing
+    projected-area factor, and the optical depth is clipped internally at
+    :math:`\tau \le 500`.
+
+    **Quadrature.** The :math:`\mu` integral uses :math:`n_\theta`-point
+    Gauss--Legendre quadrature on :math:`[-1,1]`. The :math:`\phi` integral uses
+    :math:`n_\phi`-point Gauss--Legendre quadrature on :math:`[0,\pi]`, executed as
+    a Python loop over :math:`\phi` nodes so that memory is bounded to the on-axis
+    footprint (no :math:`n_\phi` blowup).
+
+    **On-axis limit.** At :math:`\theta_\mathrm{obs}=0` the
+    :math:`\phi` integrand becomes constant and the inner integral evaluates to
+    :math:`\pi`, recovering the on-axis formula up to quadrature differences from
+    the different GL node placement on :math:`[-1,1]` vs :math:`[0,1]`.
+
+    See Also
+    --------
+    :class:`OnAxisAsymmetricSynchrotronEngine` :
+        On-axis engine; provides the multi-sightline inner radiative-transfer loop
+        reused here.
+    :class:`NumericalSynchrotronEngine` :
+        Base engine providing kernel tables and gamma-grid utilities.
+    """
+
+    _MU_MIN: float = 1e-6
+
+    # ------------------------------------------ #
+    # Initialization                             #
+    # ------------------------------------------ #
+
+    def __init__(self, n_theta: int = 20, n_phi: int = 20):
+        r"""
+        Initialize the off-axis axisymmetric synchrotron engine.
+
+        Parameters
+        ----------
+        n_theta : int, optional
+            Gauss--Legendre nodes for the polar integral over
+            :math:`\cos\theta_\mathrm{jet} \in [-1,1]`. Default is ``20``.
+        n_phi : int, optional
+            Gauss--Legendre nodes for the azimuthal integral over
+            :math:`\phi \in [0,\pi]`. Default is ``20``.
+
+        Notes
+        -----
+        :meth:`NumericalSynchrotronEngine.__init__` is called directly, bypassing the
+        on-axis quadrature setup in
+        :meth:`OnAxisAsymmetricSynchrotronEngine.__init__`. The attributes
+        ``gl_weights`` and ``quad_weights`` (which belong to the on-axis engine) are
+        therefore not set; use ``gl_weights_theta`` and ``gl_weights_phi`` instead.
+
+        Kernel tables are not loaded at construction. Call
+        :meth:`~NumericalSynchrotronEngine.load_avg_first_kernel` and/or
+        :meth:`~NumericalSynchrotronEngine.load_first_kernel` before evaluating SEDs.
+        """
+        NumericalSynchrotronEngine.__init__(self)
+
+        self._n_theta = n_theta
+        self._n_phi = n_phi
+
+        # θ quadrature: GL on [-1, 1]
+        xi, wi = np.polynomial.legendre.leggauss(n_theta)
+        self._cos_theta = xi  # (n_theta,) in [-1, 1]
+        self._gl_weights_theta = wi  # (n_theta,)
+        self._theta = np.arccos(xi)  # (n_theta,) in [0, π]
+        self._sin_theta = np.sqrt(1.0 - xi**2)  # (n_theta,); stable near ±1
+
+        # φ quadrature: GL on [0, π]; the factor-of-2 φ-symmetry prefactor is
+        # applied explicitly in the flux formulas, not absorbed into these weights.
+        xj, wj = np.polynomial.legendre.leggauss(n_phi)
+        self._phi = (xj + 1.0) / 2.0 * np.pi  # (n_phi,) in [0, π]
+        self._gl_weights_phi = wj * (np.pi / 2.0)  # (n_phi,) weights for [0, π]
+        self._cos_phi = np.cos(self._phi)  # (n_phi,)
+
+    # ------------------------------------------ #
+    # Dunder Methods                             #
+    # ------------------------------------------ #
+
+    def __repr__(self) -> str:
+        return (
+            f"{self.__class__.__name__}("
+            f"n_theta={self._n_theta}, "
+            f"n_phi={self._n_phi}, "
+            f"first_kernel_loaded={self.is_first_kernel_loaded}, "
+            f"avg_first_kernel_loaded={self.is_avg_first_kernel_loaded})"
+        )
+
+    def __str__(self) -> str:
+        kernels = []
+        if self.is_first_kernel_loaded:
+            kernels.append("first kernel")
+        if self.is_avg_first_kernel_loaded:
+            kernels.append("pitch-angle averaged kernel")
+        kernel_str = ", ".join(kernels) if kernels else "no kernels loaded"
+        return f"{self.__class__.__name__} | n_theta={self._n_theta}, n_phi={self._n_phi} | {kernel_str}"
+
+    # ------------------------------------------ #
+    # Properties                                 #
+    # ------------------------------------------ #
+
+    @property
+    def n_phi(self) -> int:
+        """Number of Gauss--Legendre azimuthal quadrature nodes."""
+        return self._n_phi
+
+    @property
+    def sin_theta(self) -> np.ndarray:
+        r"""Sine of the polar quadrature nodes, shape ``(n_theta,)``."""
+        return self._sin_theta.copy()
+
+    @property
+    def gl_weights_theta(self) -> np.ndarray:
+        r"""Gauss--Legendre weights for :math:`\int_{-1}^{1} f(\mu)\,d\mu`, shape ``(n_theta,)``."""
+        return self._gl_weights_theta.copy()
+
+    @property
+    def phi(self) -> np.ndarray:
+        r"""Azimuthal quadrature nodes :math:`\phi_j \in [0,\pi]` [rad], shape ``(n_phi,)``."""
+        return self._phi.copy()
+
+    @property
+    def gl_weights_phi(self) -> np.ndarray:
+        r"""Gauss--Legendre weights for :math:`\int_0^\pi f(\phi)\,d\phi`, shape ``(n_phi,)``."""
+        return self._gl_weights_phi.copy()
+
+    @property
+    def cos_phi(self) -> np.ndarray:
+        r"""Cosine of the azimuthal quadrature nodes, shape ``(n_phi,)``."""
+        return self._cos_phi.copy()
+
+    @property
+    def gl_weights(self):
+        raise AttributeError(
+            f"{self.__class__.__name__} does not expose 'gl_weights'. "
+            "Use 'gl_weights_theta' for the polar GL weights on [-1, 1]."
+        )
+
+    @property
+    def quad_weights(self):
+        raise AttributeError(
+            f"{self.__class__.__name__} does not expose 'quad_weights'. "
+            "Use 'gl_weights_theta' and 'gl_weights_phi' instead."
+        )
+
+    # ------------------------------------------ #
+    # Private Helpers                            #
+    # ------------------------------------------ #
+
+    def _compute_log_doppler_off_axis(self, beta: np.ndarray, mu_obs: np.ndarray) -> np.ndarray:
+        r"""
+        Log Doppler factor per theta node at one phi node.
+
+        Parameters
+        ----------
+        beta : ~numpy.ndarray, shape ``(n_theta,)``
+            Bulk velocity per theta node.
+        mu_obs : ~numpy.ndarray, shape ``(n_theta,)``
+            Line-of-sight cosine :math:`\mu_\mathrm{obs}` per theta node.
+
+        Returns
+        -------
+        log_D : ~numpy.ndarray, shape ``(n_theta,)``
+        """
+        log_gamma_bulk = -0.5 * np.log1p(-(beta**2))
+        return -(log_gamma_bulk + np.log1p(-beta * mu_obs))
+
+    def _coerce_off_axis_inputs(
+        self,
+        nu,
+        B,
+        N,
+        shell_thickness,
+        beta,
+        alpha,
+        gamma,
+        gamma_min: float,
+        gamma_max: float,
+        n_gamma: int,
+    ):
+        """Convert and broadcast all per-call inputs to internal log-CGS arrays."""
+        log_nu = np.atleast_1d(np.asarray(np.log(ensure_in_units(nu, u.Hz)), dtype="f8"))
+        log_B = np.log(np.broadcast_to(np.asarray(ensure_in_units(B, u.G), dtype="f8"), (self._n_theta,)))
+        log_shell = np.log(
+            np.broadcast_to(np.asarray(ensure_in_units(shell_thickness, u.cm), dtype="f8"), (self._n_theta,))
+        )
+        beta_arr = np.broadcast_to(np.asarray(beta, dtype="f8"), (self._n_theta,))
+        log_gamma, log_weights = self._build_gamma_grid(gamma, gamma_min, gamma_max, n_gamma)
+        log_N = self._resolve_log_N(N, log_gamma)
+        sin_alpha_arr = None
+        if alpha is not None:
+            sin_alpha_arr = np.sin(
+                np.broadcast_to(np.asarray(ensure_in_units(alpha, u.rad), dtype="f8"), (self._n_theta,))
+            )
+        return log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha_arr
+
+    def _compute_log_zone_intensities(
+        self,
+        log_nu: np.ndarray,
+        log_B: np.ndarray,
+        log_N: np.ndarray,
+        log_shell: np.ndarray,
+        beta_arr: np.ndarray,
+        log_gamma: np.ndarray,
+        log_weights: np.ndarray,
+        theta_obs: float,
+        z: float,
+        sin_alpha,
+    ):
+        r"""
+        Compute comoving-frame intensities over the full (phi, theta) grid.
+
+        Loops over :math:`n_\phi` azimuthal nodes, calling the on-axis inner
+        radiative-transfer kernel once per node. Memory is bounded to the on-axis
+        footprint regardless of :math:`n_\phi`.
+
+        Parameters
+        ----------
+        log_nu : ~numpy.ndarray, shape ``(n_nu,)``
+        log_B : ~numpy.ndarray, shape ``(n_theta,)``
+        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
+        log_shell : ~numpy.ndarray, shape ``(n_theta,)``
+        beta_arr : ~numpy.ndarray, shape ``(n_theta,)``
+        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        theta_obs : float
+            Observer polar angle [rad].
+        z : float
+        sin_alpha : ~numpy.ndarray or None, shape ``(n_theta,)``
+
+        Returns
+        -------
+        log_I_rf : ~numpy.ndarray, shape ``(n_nu, n_phi, n_theta)``
+            Natural log of comoving-frame specific intensity.
+        log_correction : ~numpy.ndarray, shape ``(n_phi, n_theta)``
+            :math:`\ln(\mathcal{D}/(1+z))` per zone.
+        mu_obs : ~numpy.ndarray, shape ``(n_phi, n_theta)``
+            Line-of-sight cosine per zone.
+        """
+        cos_obs = np.cos(theta_obs)
+        sin_obs = np.sin(theta_obs)
+        log_z1 = np.log1p(z)
+
+        log_I_rf_list = []
+        log_correction_list = []
+        mu_obs_list = []
+
+        for j in range(self._n_phi):
+            cos_phi_j = self._cos_phi[j]
+
+            # LOS cosine per theta at this phi: (n_theta,)
+            mu_obs_j = cos_obs * self._cos_theta + sin_obs * self._sin_theta * cos_phi_j
+
+            # LOS-corrected transfer depth: ell' = shell_thickness / max(mu_obs, mu_min)
+            log_slab_j = log_shell - np.log(np.maximum(mu_obs_j, self._MU_MIN))
+
+            # Doppler factor and frequency shift: (n_theta,)
+            log_D_j = self._compute_log_doppler_off_axis(beta_arr, mu_obs_j)
+            log_correction_j = log_D_j - log_z1
+
+            # Comoving-frame intensity via inherited inner kernel: (n_nu, n_theta)
+            log_I_rf_j = self._compute_log_on_axis_rf_intensity(
+                log_nu,
+                log_B,
+                log_N,
+                log_slab_j,
+                log_gamma,
+                log_weights,
+                log_correction_j,
+                sin_alpha=sin_alpha,
+            )
+
+            log_I_rf_list.append(log_I_rf_j)
+            log_correction_list.append(log_correction_j)
+            mu_obs_list.append(mu_obs_j)
+
+        # Stack results: (n_phi, n_nu, n_theta) -> (n_nu, n_phi, n_theta)
+        log_I_rf = np.stack(log_I_rf_list, axis=0).transpose(1, 0, 2)
+        log_correction = np.stack(log_correction_list, axis=0)  # (n_phi, n_theta)
+        mu_obs = np.stack(mu_obs_list, axis=0)  # (n_phi, n_theta)
+        return log_I_rf, log_correction, mu_obs
+
+    def _build_flux_log_integrand(
+        self,
+        log_nu: np.ndarray,
+        log_B: np.ndarray,
+        log_N: np.ndarray,
+        log_shell: np.ndarray,
+        beta_arr: np.ndarray,
+        log_gamma: np.ndarray,
+        log_weights: np.ndarray,
+        log_R: np.ndarray,
+        log_f_A: np.ndarray,
+        theta_obs: float,
+        z: float,
+        sin_alpha,
+    ) -> np.ndarray:
+        r"""
+        Build the ``(n_nu, n_phi * n_theta)`` log-integrand array for flux quadrature.
+
+        Each element contains
+        :math:`\ln(w_i\,v_j\,f_A\,R^2\,\max(\mu_\mathrm{obs},0)\,(\mathcal{D}/(1+z))^3\,I')`.
+        Back-facing zones (:math:`\mu_\mathrm{obs}\le 0`) contribute :math:`-\infty`.
+        The factor-of-2 φ-symmetry prefactor is **not** included here; callers apply it.
+
+        Returns
+        -------
+        log_flat : ~numpy.ndarray, shape ``(n_nu, n_phi * n_theta)``
+        """
+        log_I_rf, log_correction, mu_obs = self._compute_log_zone_intensities(
+            log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, theta_obs, z, sin_alpha
+        )
+        n_nu = log_nu.shape[0]
+
+        # Projected-area factor: max(mu_obs, 0); log = -inf for back-facing zones
+        with np.errstate(divide="ignore"):
+            log_mu_pos = np.log(np.maximum(mu_obs, 0.0))  # (n_phi, n_theta)
+
+        # Combined GL weights: v_j * w_i → (n_phi, n_theta)
+        log_quad = np.log(self._gl_weights_phi)[:, np.newaxis] + np.log(self._gl_weights_theta)[np.newaxis, :]
+
+        # Full log integrand: (n_nu, n_phi, n_theta)
+        log_integrand = (
+            log_quad[np.newaxis, :, :]
+            + log_mu_pos[np.newaxis, :, :]
+            + log_f_A[np.newaxis, np.newaxis, :]
+            + 2.0 * log_R[np.newaxis, np.newaxis, :]
+            + 3.0 * log_correction[np.newaxis, :, :]
+            + log_I_rf
+        )
+        return log_integrand.reshape(n_nu, -1)  # (n_nu, n_phi * n_theta)
+
+    # ------------------------------------------ #
+    # Public API — Per-zone quantities           #
+    # ------------------------------------------ #
+
+    def compute_rest_frame_specific_intensity(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        z: float = 0.0,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the comoving-frame specific intensity per (theta, phi) zone.
+
+        Frequencies are Doppler-shifted into the comoving frame of each zone before
+        evaluating the radiative transfer. The returned intensity is the comoving-frame
+        value before the final observer-frame boost.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node. Bare values are
+            interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
+        N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution :math:`dN/d\gamma` in
+            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``. If callable,
+            evaluated as ``N(gamma)`` and must return shape ``(n_theta, n_gamma)``.
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame shell thickness :math:`\Delta r'` per theta node. Bare
+            values are interpreted as cm. Must be scalar or broadcastable to
+            ``(n_theta,)``.
+        beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per theta node. Scalar or
+            broadcastable to ``(n_theta,)``.
+        theta_obs : float
+            Observer polar angle :math:`\theta_\mathrm{obs}` [rad].
+        gamma : array-like or None, optional
+            Explicit Lorentz-factor grid. Default is ``None`` (built internally).
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+            Comoving-frame pitch angle per theta node. ``None`` selects the
+            pitch-angle-averaged kernel.
+        z : float, optional
+            Cosmological redshift. Default is ``0.0``.
+        gamma_min : float, optional
+            Default is ``1.0``.
+        gamma_max : float, optional
+            Default is ``1e8``.
+        n_gamma : int, optional
+            Default is ``200``.
+
+        Returns
+        -------
+        I_rf : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+            Comoving-frame specific intensity in
+            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_I_rf, _, _ = self._compute_log_zone_intensities(
+            log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, theta_obs, z, sin_alpha
+        )
+        # (n_nu, n_phi, n_theta) -> (n_nu, n_theta, n_phi)
+        return np.exp(log_I_rf.transpose(0, 2, 1)) * (u.erg / (u.s * u.cm**2 * u.Hz * u.sr))
+
+    def compute_specific_intensity(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        z: float = 0.0,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the observer-frame specific intensity per (theta, phi) zone.
+
+        Applies the Doppler boost
+        :math:`I_\nu = \bigl(\mathcal{D}/(1+z)\bigr)^3 I'_{\nu'}` after solving the
+        comoving-frame radiative transfer.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node.
+        N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame shell thickness :math:`\Delta r'` per theta node.
+        beta : float or array-like
+            Bulk velocity per theta node.
+        theta_obs : float
+            Observer polar angle [rad].
+        gamma : array-like or None, optional
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+        z : float, optional
+        gamma_min : float, optional
+        gamma_max : float, optional
+        n_gamma : int, optional
+
+        Returns
+        -------
+        I_nu : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+            Observer-frame specific intensity in
+            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_I_rf, log_correction, _ = self._compute_log_zone_intensities(
+            log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, theta_obs, z, sin_alpha
+        )
+        log_I_obs = log_I_rf + 3.0 * log_correction[np.newaxis, :, :]  # (n_nu, n_phi, n_theta)
+        return np.exp(log_I_obs.transpose(0, 2, 1)) * (u.erg / (u.s * u.cm**2 * u.Hz * u.sr))
+
+    def compute_rest_frame_brightness_temperature(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        z: float = 0.0,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the comoving-frame brightness temperature per (theta, phi) zone.
+
+        Uses the Rayleigh--Jeans relation
+        :math:`T'_B = c^2 I'_{\nu'} / (2 k_B \nu'^2)` at the sightline-dependent
+        comoving frequency :math:`\nu' = \nu(1+z)/\mathcal{D}`.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node.
+        N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame shell thickness :math:`\Delta r'` per theta node.
+        beta : float or array-like
+        theta_obs : float
+        gamma : array-like or None, optional
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+        z : float, optional
+        gamma_min : float, optional
+        gamma_max : float, optional
+        n_gamma : int, optional
+
+        Returns
+        -------
+        T_B_rf : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+            Comoving-frame brightness temperature in Kelvin.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_I_rf, log_correction, _ = self._compute_log_zone_intensities(
+            log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, theta_obs, z, sin_alpha
+        )
+        # Comoving frequency per zone: log(nu') = log(nu) - log_correction
+        log_nu_rf = log_nu[:, np.newaxis, np.newaxis] - log_correction[np.newaxis, :, :]
+        _log_c = np.log(consts.c.cgs.value)
+        _log_kb = np.log(consts.k_B.cgs.value)
+        log_T = 2.0 * _log_c + log_I_rf - np.log(2.0) - _log_kb - 2.0 * log_nu_rf
+        return np.exp(log_T.transpose(0, 2, 1)) * u.K
+
+    def compute_brightness_temperature(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        z: float = 0.0,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the observer-frame brightness temperature per (theta, phi) zone.
+
+        Uses :math:`T_B = c^2 I_\nu / (2 k_B \nu^2)` at the observer-frame
+        frequency :math:`\nu`.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+        B : float, array-like, or ~astropy.units.Quantity
+        N : ~numpy.ndarray or callable
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+        beta : float or array-like
+        theta_obs : float
+        gamma : array-like or None, optional
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+        z : float, optional
+        gamma_min : float, optional
+        gamma_max : float, optional
+        n_gamma : int, optional
+
+        Returns
+        -------
+        T_B : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+            Observer-frame brightness temperature in Kelvin.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_I_rf, log_correction, _ = self._compute_log_zone_intensities(
+            log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, theta_obs, z, sin_alpha
+        )
+        log_I_obs = log_I_rf + 3.0 * log_correction[np.newaxis, :, :]
+        _log_c = np.log(consts.c.cgs.value)
+        _log_kb = np.log(consts.k_B.cgs.value)
+        log_T = 2.0 * _log_c + log_I_obs - np.log(2.0) - _log_kb - 2.0 * log_nu[:, np.newaxis, np.newaxis]
+        return np.exp(log_T.transpose(0, 2, 1)) * u.K
+
+    # ------------------------------------------ #
+    # Public API — Flux density                  #
+    # ------------------------------------------ #
+
+    def compute_sightline_flux_density(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        R: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        angular_diameter_distance: Union[u.Quantity, None] = None,
+        luminosity_distance: Union[u.Quantity, None] = None,
+        proper_distance: Union[u.Quantity, None] = None,
+        z: float = 0.0,
+        cosmology=None,
+        f_A: Union[float, np.ndarray] = 1.0,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the quadrature-weighted flux-density contribution per (theta, phi) zone.
+
+        Each element includes the Gauss--Legendre weights
+        ``gl_weights_theta[i] * gl_weights_phi[j]`` and the projected-area factor
+        :math:`\max(\mu_\mathrm{obs,ij},0)`. Summing over both sightline axes recovers
+        the angle-integrated flux density:
+
+        .. code-block:: python
+
+            F_ring.sum(
+                axis=(-2, -1)
+            )  # == compute_flux_density(...)
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node.
+        N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame shell thickness :math:`\Delta r'` per theta node.
+        R : float, array-like, or ~astropy.units.Quantity
+            Emission radius per theta node.
+        beta : float or array-like
+            Bulk velocity per theta node.
+        theta_obs : float
+            Observer polar angle [rad].
+        angular_diameter_distance : ~astropy.units.Quantity or None, optional
+        luminosity_distance : ~astropy.units.Quantity or None, optional
+        proper_distance : ~astropy.units.Quantity or None, optional
+        z : float, optional
+            Default is ``0.0``.
+        cosmology : ~astropy.cosmology.FLRW or None, optional
+        f_A : float or array-like, optional
+            Default is ``1.0``.
+        gamma : array-like or None, optional
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+        gamma_min : float, optional
+        gamma_max : float, optional
+        n_gamma : int, optional
+
+        Returns
+        -------
+        F_zone : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+            Quadrature-weighted flux-density contribution per zone in
+            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_D_A, _, log_R, log_f_A = self._resolve_flux_geometry(
+            R, f_A, angular_diameter_distance, luminosity_distance, proper_distance, z, cosmology
+        )
+        n_nu = log_nu.shape[0]
+        log_flat = self._build_flux_log_integrand(
+            log_nu,
+            log_B,
+            log_N,
+            log_shell,
+            beta_arr,
+            log_gamma,
+            log_weights,
+            log_R,
+            log_f_A,
+            theta_obs,
+            z,
+            sin_alpha,
+        )
+        # Reshape (n_nu, n_phi*n_theta) -> (n_nu, n_phi, n_theta), apply prefactors, transpose
+        log_grid = log_flat.reshape(n_nu, self._n_phi, self._n_theta)
+        log_sightline = np.log(2.0) - 2.0 * log_D_A + log_grid
+        return np.exp(log_sightline.transpose(0, 2, 1)) * (u.erg / (u.s * u.cm**2 * u.Hz))
+
+    def compute_flux_density(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        R: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        angular_diameter_distance: Union[u.Quantity, None] = None,
+        luminosity_distance: Union[u.Quantity, None] = None,
+        proper_distance: Union[u.Quantity, None] = None,
+        z: float = 0.0,
+        cosmology=None,
+        f_A: Union[float, np.ndarray] = 1.0,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the angle-integrated observer-frame spectral flux density.
+
+        Evaluates
+
+        .. math::
+
+            F_\nu
+            =
+            \frac{2}{D_A^2}
+            \int_{-1}^{1}
+            \int_0^{\pi}
+            f_A(\mu)\,R(\mu)^2\,
+            \max(\mu_\mathrm{obs},0)
+            \left(\frac{\mathcal{D}}{1+z}\right)^3
+            I'_{\nu'(\mu,\phi)}(\mu)\,
+            d\mu\,d\phi
+
+        by Gauss--Legendre quadrature in :math:`\mu` and :math:`\phi`.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node.
+        N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame shell thickness :math:`\Delta r'` per theta node. The engine
+            computes the LOS path internally as
+            :math:`\ell' = \Delta r' / \max(\mu_\mathrm{obs}, \mu_\mathrm{min})`.
+        R : float, array-like, or ~astropy.units.Quantity
+            Emission radius per theta node.
+        beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per theta node.
+        theta_obs : float
+            Observer polar angle :math:`\theta_\mathrm{obs}` [rad].
+        angular_diameter_distance : ~astropy.units.Quantity or None, optional
+        luminosity_distance : ~astropy.units.Quantity or None, optional
+        proper_distance : ~astropy.units.Quantity or None, optional
+        z : float, optional
+            Default is ``0.0``.
+        cosmology : ~astropy.cosmology.FLRW or None, optional
+        f_A : float or array-like, optional
+            Default is ``1.0``.
+        gamma : array-like or None, optional
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+        gamma_min : float, optional
+        gamma_max : float, optional
+        n_gamma : int, optional
+
+        Returns
+        -------
+        F_nu : ~astropy.units.Quantity, shape ``(n_nu,)``
+            Angle-integrated observer-frame spectral flux density in
+            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
+
+        See Also
+        --------
+        :meth:`compute_sightline_flux_density` :
+            Per-zone contributions before the angular summation.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_D_A, _, log_R, log_f_A = self._resolve_flux_geometry(
+            R, f_A, angular_diameter_distance, luminosity_distance, proper_distance, z, cosmology
+        )
+        log_flat = self._build_flux_log_integrand(
+            log_nu,
+            log_B,
+            log_N,
+            log_shell,
+            beta_arr,
+            log_gamma,
+            log_weights,
+            log_R,
+            log_f_A,
+            theta_obs,
+            z,
+            sin_alpha,
+        )
+        log_F = np.log(2.0) - 2.0 * log_D_A + logsumexp(log_flat, axis=-1)
+        return np.exp(log_F) * (u.erg / (u.s * u.cm**2 * u.Hz))
+
+    # ------------------------------------------ #
+    # Public API — Luminosity                    #
+    # ------------------------------------------ #
+
+    def compute_isotropic_luminosity(
+        self,
+        nu: Union[float, np.ndarray, u.Quantity],
+        B: Union[float, np.ndarray, u.Quantity],
+        N: Union[np.ndarray, Callable],
+        shell_thickness: Union[float, np.ndarray, u.Quantity],
+        R: Union[float, np.ndarray, u.Quantity],
+        beta: Union[float, np.ndarray],
+        theta_obs: float,
+        angular_diameter_distance: Union[u.Quantity, None] = None,
+        luminosity_distance: Union[u.Quantity, None] = None,
+        proper_distance: Union[u.Quantity, None] = None,
+        z: float = 0.0,
+        cosmology=None,
+        f_A: Union[float, np.ndarray] = 1.0,
+        gamma: Union[np.ndarray, None] = None,
+        alpha: Union[float, u.Quantity, None] = None,
+        *,
+        gamma_min: float = 1.0,
+        gamma_max: float = 1e8,
+        n_gamma: int = 200,
+    ) -> u.Quantity:
+        r"""
+        Compute the isotropic-equivalent spectral luminosity.
+
+        Converts the angle-integrated flux density to an isotropic-equivalent
+        luminosity via :math:`L_{\nu,\mathrm{iso}} = 4\pi D_L^2 F_\nu`.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+        B : float, array-like, or ~astropy.units.Quantity
+        N : ~numpy.ndarray or callable
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+        R : float, array-like, or ~astropy.units.Quantity
+        beta : float or array-like
+        theta_obs : float
+            Observer polar angle [rad].
+        angular_diameter_distance : ~astropy.units.Quantity or None, optional
+        luminosity_distance : ~astropy.units.Quantity or None, optional
+        proper_distance : ~astropy.units.Quantity or None, optional
+        z : float, optional
+        cosmology : ~astropy.cosmology.FLRW or None, optional
+        f_A : float or array-like, optional
+        gamma : array-like or None, optional
+        alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+        gamma_min : float, optional
+        gamma_max : float, optional
+        n_gamma : int, optional
+
+        Returns
+        -------
+        L_iso : ~astropy.units.Quantity, shape ``(n_nu,)``
+            Isotropic-equivalent spectral luminosity in
+            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.
+        """
+        log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
+            nu, B, N, shell_thickness, beta, alpha, gamma, gamma_min, gamma_max, n_gamma
+        )
+        log_D_A, log_D_L, log_R, log_f_A = self._resolve_flux_geometry(
+            R, f_A, angular_diameter_distance, luminosity_distance, proper_distance, z, cosmology
+        )
+        log_flat = self._build_flux_log_integrand(
+            log_nu,
+            log_B,
+            log_N,
+            log_shell,
+            beta_arr,
+            log_gamma,
+            log_weights,
+            log_R,
+            log_f_A,
+            theta_obs,
+            z,
+            sin_alpha,
+        )
+        log_F = np.log(2.0) - 2.0 * log_D_A + logsumexp(log_flat, axis=-1)
+        return np.exp(np.log(4.0 * np.pi) + 2.0 * log_D_L + log_F) * (u.erg / (u.s * u.Hz))

@@ -637,6 +637,111 @@ to unity. The distance can be supplied in any of the same forms accepted by the 
 combined with an optional ``cosmology`` argument. By default the projected source area is :math:`\pi
 R^2`; pass ``A_eff`` to override this for non-spherical geometries.
 
+.. _num_sed_aspherical:
+
+Multi-Zone Aspherical Engines
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For sources whose physical properties vary with polar angle — structured jets, asymmetric
+supernova ejecta, or any transient with genuine angular structure — Trilobite provides two
+aspherical multi-zone engines that extend the single-zone slab approach to full spherical
+geometry.
+
+**On-axis engine.**
+:class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine`
+handles an observer fixed on the outflow symmetry axis. Physical properties (:math:`B`, :math:`N`,
+radius, slab depth, filling factor, bulk speed) are supplied as :math:`(n_\theta,)` arrays, one value
+per Gauss--Legendre node in :math:`\cos\theta_\mathrm{jet} \in [0, 1]`. The engine computes the
+comoving-frame intensity at each node and integrates against the projected-area weight
+:math:`\cos\theta_\mathrm{jet}` to produce the angle-integrated flux:
+
+.. code-block:: python
+
+    import numpy as np
+    from astropy import units as u
+    from trilobite.radiation.synchrotron.SEDs.numerical import OnAxisAsymmetricSynchrotronEngine
+
+    engine = OnAxisAsymmetricSynchrotronEngine(n_theta=20)
+    engine.load_avg_first_kernel()
+
+    theta = engine.theta          # GL nodes in [0, pi/2]
+    B = 0.1 * (1 + np.cos(theta)) * u.G    # stronger near axis
+    R = 1e17 * np.ones(engine.n_theta) * u.cm
+    depth = 1e14 * np.ones(engine.n_theta) * u.cm
+
+    gamma = np.geomspace(1e2, 1e8, 300)
+    N0 = 1e4 * u.cm**-3
+    N_arr = N0.value * (gamma / 1e2) ** -2.5
+    N_2d = np.broadcast_to(N_arr, (engine.n_theta, len(gamma))).copy()
+
+    nu = np.geomspace(1e9, 1e15, 200) * u.Hz
+
+    F_nu = engine.compute_flux_density(
+        nu, B=B, N=N_2d, slab_depth=depth, R=R,
+        gamma=gamma, beta=0.3,
+        luminosity_distance=100 * u.Mpc,
+    )
+
+.. note::
+
+    The ``slab_depth`` parameter is the comoving line-of-sight transfer depth per zone — the caller is
+    responsible for any geometric correction (e.g. :math:`\Delta r / \cos\theta_\mathrm{jet}`).
+
+**Off-axis engine.**
+:class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine`
+generalizes the on-axis engine to an arbitrary observer polar angle
+:math:`\theta_\mathrm{obs}`. The :math:`\theta_\mathrm{jet}` nodes now span the full sphere
+(:math:`\cos\theta_\mathrm{jet} \in [-1, 1]`), and an additional azimuthal Gauss--Legendre
+quadrature over :math:`\phi \in [0, \pi]` is performed for each polar node. Back-facing zones
+(:math:`\mu_\mathrm{obs} \le 0`) are zeroed by the projected-area factor
+:math:`\max(\mu_\mathrm{obs}, 0)` automatically.
+
+The key API differences from the on-axis engine are:
+
+- ``shell_thickness`` (not ``slab_depth``): the perpendicular comoving shell thickness
+  :math:`\Delta r'(\theta_\mathrm{jet})`. The line-of-sight path
+  :math:`\ell' = \Delta r' / \max(\mu_\mathrm{obs}, 10^{-6})` is computed internally.
+- ``theta_obs``: the observer polar angle in radians, supplied at call time (not at construction).
+- Two independent quadrature grids: ``n_theta`` nodes for the polar integral and ``n_phi`` nodes for
+  the azimuthal integral (defaults: 20 each).
+
+.. code-block:: python
+
+    from trilobite.radiation.synchrotron.SEDs.numerical import OffAxisAsymmetricSynchrotronEngine
+
+    engine = OffAxisAsymmetricSynchrotronEngine(n_theta=20, n_phi=20)
+    engine.load_avg_first_kernel()
+
+    # Uniform outflow: same parameters at all polar angles
+    B = 0.1 * np.ones(engine.n_theta) * u.G
+    R = 1e17 * np.ones(engine.n_theta) * u.cm
+    shell = 1e14 * np.ones(engine.n_theta) * u.cm
+
+    gamma = np.geomspace(1e2, 1e8, 300)
+    N_1d = 1e4 * (gamma / 1e2) ** -2.5
+    N_2d = np.broadcast_to(N_1d, (engine.n_theta, len(gamma))).copy()
+
+    nu = np.geomspace(1e9, 1e15, 200) * u.Hz
+
+    # On-axis observer
+    F_on = engine.compute_flux_density(
+        nu, B=B, N=N_2d, shell_thickness=shell, R=R,
+        gamma=gamma, beta=0.3, theta_obs=0.0,
+        luminosity_distance=100 * u.Mpc,
+    )
+
+    # Off-axis observer at 45 degrees
+    F_off = engine.compute_flux_density(
+        nu, B=B, N=N_2d, shell_thickness=shell, R=R,
+        gamma=gamma, beta=0.3, theta_obs=np.pi / 4,
+        luminosity_distance=100 * u.Mpc,
+    )
+
+.. seealso::
+
+    :ref:`synch_off_axis_model` for the full derivation of the flux formula,
+    the LOS path length convention, and the on-axis limit.
+
 ----
 
 
@@ -678,6 +783,17 @@ API Reference
    NumericalSynchrotronEngine.compute_rest_frame_specific_intensity
    NumericalSynchrotronEngine.compute_specific_intensity
    NumericalSynchrotronEngine.compute_flux_density
+
+.. rubric:: Multi-Zone Aspherical Engines
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical
+
+.. autosummary::
+   :nosignatures:
+   :toctree: ../../../../_as_gen
+
+   OnAxisAsymmetricSynchrotronEngine
+   OffAxisAsymmetricSynchrotronEngine
 
 ----
 
