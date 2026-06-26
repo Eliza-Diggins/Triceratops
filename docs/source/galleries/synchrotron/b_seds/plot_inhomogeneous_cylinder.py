@@ -44,9 +44,7 @@ import numpy as np
 from astropy import units as u
 from matplotlib.colors import LogNorm
 
-from trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous import (
-    InhomogeneousCylinderSynchrotronEngine,
-)
+from trilobite.radiation.synchrotron import InhomogeneousCylinderSynchrotronEngine
 from trilobite.radiation.synchrotron.electron_distributions import PowerLaw
 from trilobite.utils.plot_utils import set_plot_style
 

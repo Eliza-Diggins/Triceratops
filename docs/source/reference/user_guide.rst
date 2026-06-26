@@ -19,6 +19,7 @@ a comprehensive overview of the relevant components and their usage.
 
     The core structure of TRILOBITE, from data and physics modules to a final inference product. The typical workflow
     in Trilobite will touch each of these 4 layers, but the user can also interact with each layer independently.
+
 ----
 
 Getting Started

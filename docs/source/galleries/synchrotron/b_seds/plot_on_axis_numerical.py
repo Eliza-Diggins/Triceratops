@@ -28,9 +28,7 @@ import numpy as np
 from astropy import units as u
 from matplotlib.colors import Normalize
 
-from trilobite.radiation.synchrotron.SEDs.numerical import (
-    OnAxisAsymmetricSynchrotronEngine,
-)
+from trilobite.radiation.synchrotron import OnAxisAsymmetricSynchrotronEngine
 from trilobite.radiation.synchrotron.electron_distributions import PowerLaw
 from trilobite.utils.plot_utils import set_plot_style
 

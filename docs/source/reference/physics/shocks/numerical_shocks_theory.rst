@@ -1818,7 +1818,7 @@ time :math:`t_0`. Assuming a cold shell,
    \qquad
    \Gamma_0 = \frac{1}{\sqrt{1-\beta_0^2}}.
 
-.. bigidea::
+.. note::
 
    The evolved variables are :math:`R_{\rm sh}`, :math:`M_{\rm sh}`,
    :math:`E_{\rm sh}`, and :math:`\Pi_{\rm sh}`. Rest mass :math:`M_{\rm sh}`

@@ -501,7 +501,7 @@ In the non-relativistic limit, we consider a spherical region which appears on t
 
     \Omega = \frac{\pi R^2 f_A}{D_A^2},
 
-where :math:`D_A` is the angular diameter distance to the source, and :f:`f_A` is a geometric factor which accounts for
+where :math:`D_A` is the angular diameter distance to the source, and :math:`f_A` is a geometric factor which accounts for
 the fact that the effective area of the source may be smaller than :math:`\pi R^2` (e.g. if the source is a
 thin shell rather than a filled sphere).
 
@@ -672,6 +672,111 @@ density is given by
     F_\nu = \int_0^\pi \frac{2\pi R^2 \sin\theta}{D_A^2}\,I_\nu(\theta)\,d\theta.
 
 This integral can again be evaluated using Gauss-Legendre quadrature in :math:`\mu = \cos\theta` as described above.
+
+.. _synch_off_axis_model:
+
+The Off-Axis Axisymmetric Shell Model
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The on-axis restriction :math:`\theta_\mathrm{obs} = 0` is lifted in the **off-axis axisymmetric shell model**,
+implemented by :class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine`.
+The outflow retains axial symmetry — physical properties depend only on the zone polar angle
+:math:`\theta_\mathrm{jet}` — but the observer may be located at an arbitrary polar angle
+:math:`\theta_\mathrm{obs}` relative to the symmetry axis.
+
+**Geometry.** For a zone at colatitude :math:`\theta_\mathrm{jet}` and azimuth :math:`\phi`, the cosine of the
+angle between the zone velocity and the observer line of sight is
+
+.. math::
+
+    \mu_\mathrm{obs}(\mu, \phi)
+    =
+    \cos\theta_\mathrm{obs}\,\mu
+    +
+    \sin\theta_\mathrm{obs}\,\sqrt{1-\mu^2}\,\cos\phi,
+
+where :math:`\mu = \cos\theta_\mathrm{jet}`. The relativistic Doppler factor for this zone is
+
+.. math::
+
+    \mathcal{D}(\mu, \phi)
+    =
+    \frac{1}{\Gamma\bigl(1 - \beta(\mu)\,\mu_\mathrm{obs}(\mu, \phi)\bigr)},
+
+where :math:`\Gamma = (1-\beta^2)^{-1/2}` and :math:`\beta(\mu)` is the bulk speed at zone :math:`\mu`.
+
+**Flux formula.** Each surface element contributes a projected area
+:math:`R^2 \max(\mu_\mathrm{obs}, 0)\,d\mu\,d\phi` toward the observer. Back-facing zones
+(:math:`\mu_\mathrm{obs} \le 0`) contribute no observed flux in the thin-shell approximation. The total
+observed spectral flux density is
+
+.. math::
+
+    F_\nu
+    =
+    \frac{2}{D_A^2}
+    \int_{-1}^{1}
+    \int_0^{\pi}
+    f_A(\mu)\,R(\mu)^2\,
+    \max\!\bigl(\mu_\mathrm{obs},\,0\bigr)
+    \left(\frac{\mathcal{D}(\mu,\phi)}{1+z}\right)^{\!3}
+    I'_{\nu'(\mu,\phi)}(\mu)\,
+    d\mu\,d\phi,
+
+where the factor of two exploits the azimuthal symmetry of an axisymmetric outflow
+(:math:`\phi \to 2\pi - \phi` leaves the integrand unchanged), reducing the azimuthal domain to
+:math:`[0, \pi]`.
+
+.. note::
+
+    The full-sphere integration convention (:math:`\mu \in [-1,1]`) is used here. Back-facing material
+    (:math:`\mu_\mathrm{obs} \le 0`) is suppressed by the :math:`\max(\mu_\mathrm{obs}, 0)` factor rather
+    than being excluded from the domain. This is equivalent to excluding it, but avoids any dependence of
+    the integration domain on :math:`\theta_\mathrm{obs}`.
+
+**LOS path length.** For a thin shell of perpendicular comoving thickness :math:`\Delta r'(\mu)`, the
+line-of-sight path length at zone :math:`(\mu, \phi)` is
+
+.. math::
+
+    \ell'(\mu, \phi)
+    =
+    \frac{\Delta r'(\mu)}{\max\!\bigl(\mu_\mathrm{obs}(\mu, \phi),\,\mu_\mathrm{min}\bigr)},
+
+where :math:`\mu_\mathrm{min} = 10^{-6}` prevents division by zero at grazing incidence. At forward
+angles the enhanced path length is exactly compensated by the vanishing projected-area factor, so
+grazing zones contribute negligible flux.
+
+.. admonition:: Convention: ``shell_thickness`` vs ``slab_depth``
+
+    The parameter name differs between the on-axis and off-axis engines to reflect this geometric
+    distinction. :class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine`
+    accepts ``slab_depth``, the direct LOS depth per zone (the caller is responsible for any angular
+    correction). :class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine`
+    accepts ``shell_thickness``, the perpendicular depth :math:`\Delta r'`, and applies the
+    :math:`1/\max(\mu_\mathrm{obs}, \mu_\mathrm{min})` correction internally.
+
+**On-axis limit.** Setting :math:`\theta_\mathrm{obs} = 0` gives :math:`\mu_\mathrm{obs} = \mu`, so
+back-facing zones (:math:`\mu < 0`) vanish and the :math:`\phi`-integral evaluates to :math:`\pi`,
+recovering
+
+.. math::
+
+    F_\nu\big|_{\theta_\mathrm{obs}=0}
+    =
+    \frac{2\pi}{D_A^2}
+    \int_0^1
+    f_A(\mu)\,R(\mu)^2\,\mu\,
+    \left(\frac{\mathcal{D}(\mu,0)}{1+z}\right)^3
+    I'_{\nu'}(\mu)\,d\mu,
+
+which matches the on-axis formula with the LOS-corrected slab depth :math:`\ell' = \Delta r' / \mu`.
+
+**Quadrature.** Both the :math:`\mu` and :math:`\phi` integrals are evaluated by
+Gauss--Legendre quadrature with :math:`n_\theta` and :math:`n_\phi` nodes respectively. The
+:math:`\phi` loop is executed in Python over :math:`n_\phi` nodes; at each node the inherited
+on-axis inner radiative-transfer kernel evaluates all :math:`n_\theta` zones simultaneously,
+so memory is bounded to the on-axis footprint regardless of :math:`n_\phi`.
 
 
 .. rubric:: References
