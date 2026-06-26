@@ -1,7 +1,8 @@
 """
 Non-relativistic and ultra-relativistic spherical synchrotron engines.
 
-Geometry-specializing wrappers around :class:`NumericalSynchrotronEngine`
+Geometry-specializing wrappers around
+:class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
 for one-zone spherical emission regions. Two approximations are provided:
 
 - :class:`NonRelativisticSphericalSynchrotronEngine`: isotropic expansion,
@@ -29,7 +30,8 @@ class NonRelativisticSphericalSynchrotronEngine(NumericalSynchrotronEngine):
     r"""
     Non-relativistic spherical synchrotron engine.
 
-    A thin geometry-specializing wrapper around :class:`NumericalSynchrotronEngine`
+    A thin geometry-specializing wrapper around
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
     for non-relativistic, spherically symmetric emission regions. Users supply a
     physical radius ``R`` and dimensionless volume and area filling factors ``f_V``
     and ``f_A`` in place of raw ``slab_depth`` and ``A_eff`` arguments. Bulk-motion
@@ -48,7 +50,7 @@ class NonRelativisticSphericalSynchrotronEngine(NumericalSynchrotronEngine):
 
     See Also
     --------
-    :class:`NumericalSynchrotronEngine`
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
         Base class providing all low-level numerical synchrotron machinery.
     """
 
@@ -89,7 +91,7 @@ class NonRelativisticSphericalSynchrotronEngine(NumericalSynchrotronEngine):
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values
+            Observer-frame frequency grid. Bare values
             are treated as Hz.
         R : float or ~astropy.units.Quantity
             Physical radius of the emission region. Bare values are treated as
@@ -165,7 +167,7 @@ class NonRelativisticSphericalSynchrotronEngine(NumericalSynchrotronEngine):
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values
+            Observer-frame frequency grid. Bare values
             are treated as Hz.
         R : float or ~astropy.units.Quantity
             Physical radius of the emission region. Bare values are treated as
@@ -536,7 +538,8 @@ class UltraRelativisticSphericalSynchrotronEngine(NumericalSynchrotronEngine):
     r"""
     Ultra-relativistic spherical synchrotron engine (beamed-cap approximation).
 
-    A thin geometry-specializing wrapper around :class:`NumericalSynchrotronEngine`
+    A thin geometry-specializing wrapper around
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
     for ultra-relativistic, spherically expanding outflows observed on-axis.
     Equal-arrival-time-surface (EATS) corrections are neglected; only the
     relativistically beamed cap contributes.
@@ -555,7 +558,7 @@ class UltraRelativisticSphericalSynchrotronEngine(NumericalSynchrotronEngine):
 
     See Also
     --------
-    :class:`NumericalSynchrotronEngine`
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
         Base class providing all low-level numerical synchrotron machinery.
     """
 

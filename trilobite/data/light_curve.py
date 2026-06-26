@@ -114,12 +114,12 @@ class RadioLightCurveContainer(XYDataContainer):
     # ========================= DETECTION LOGIC ========================= #
     @property
     def detection_mask(self) -> np.ndarray:
-        """Boolean mask selecting detections."""
+        """True where the row is a detection; False for upper limits."""
         return ~self.y_lim_mask
 
     @property
     def non_detection_mask(self) -> np.ndarray:
-        """Boolean mask selecting upper limits."""
+        """True where the row is an upper limit; False for detections."""
         return self.y_lim_mask
 
     @property
@@ -191,7 +191,7 @@ class RadioLightCurveContainer(XYDataContainer):
 
         Parameters
         ----------
-        model : Model
+        model : ~trilobite.models.core.base.Model
             The model instance. Its ``variable_names`` and ``output_names`` are
             used to determine default mappings.
         variables : dict, optional
@@ -358,7 +358,7 @@ class OpticalLightCurveContainer(XYDataContainer):
     --------
     RadioLightCurveContainer
         Equivalent container for single-frequency radio observations.
-    OpticalPhotometryContainer
+    ~trilobite.data.optical_photometry.OpticalPhotometryContainer
         Multi-band optical photometry container.
     """
 
@@ -495,12 +495,12 @@ class OpticalLightCurveContainer(XYDataContainer):
     # ========================= DETECTION LOGIC ========================= #
     @property
     def detection_mask(self) -> np.ndarray:
-        """Boolean mask: True for detections."""
+        """True where the row is a detection; False for upper limits."""
         return np.isnan(self.flux_upper_limit.value)
 
     @property
     def non_detection_mask(self) -> np.ndarray:
-        """Boolean mask: True for upper limits (non-detections)."""
+        """True where the row is an upper limit; False for detections."""
         return ~self.detection_mask
 
     @property
@@ -539,7 +539,7 @@ class OpticalLightCurveContainer(XYDataContainer):
 
         Parameters
         ----------
-        model : Model
+        model : ~trilobite.models.core.base.Model
             Optical model instance exposing a ``bundle`` attribute
             (:class:`~trilobite.utils.phot_utils.FilterBundle`).
         variables : dict, optional

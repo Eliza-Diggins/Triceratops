@@ -85,9 +85,6 @@ class HomologousVelocityProfile(VelocityProfile):
     r"""
     Homologous velocity field.
 
-    Returns
-    -------
-
     .. math::
 
         u(r, t) = \frac{r}{t},
@@ -117,9 +114,6 @@ class HomologousVelocityProfile(VelocityProfile):
 class ConstantVelocityProfile(VelocityProfile):
     r"""
     Spatially uniform constant velocity field.
-
-    Returns
-    -------
 
     .. math::
 

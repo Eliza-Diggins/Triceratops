@@ -111,7 +111,7 @@ class SSA_Cooling_SynchrotronSEDModel(Model):
     - Cosmological redshift corrections
 
     The model wraps
-    :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED`
+    :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED`
     and exposes it through the generic :class:`~trilobite.models.core.base.Model`
     interface for inference and forward modeling.
 
@@ -491,7 +491,7 @@ class SSA_Cooling_SynchrotronSEDModel(Model):
         Internally, this constructor instantiates the low-level
         synchrotron SED backend:
 
-        :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED`.
+        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED`.
         """
         super().__init__()
 
@@ -566,7 +566,7 @@ class SSA_SynchrotronSEDModel(Model):
     Radiative cooling is not included in this formulation.
 
     The model wraps
-    :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_SSA_SynchrotronSED`
+    :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED`
     and exposes it through the generic :class:`~trilobite.models.core.base.Model`
     interface.
 
@@ -905,7 +905,7 @@ class SSA_SynchrotronSEDModel(Model):
 
         Internally, this constructor instantiates:
 
-        :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_SSA_SynchrotronSED`
+        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED`
         """
         super().__init__()
 
@@ -977,7 +977,7 @@ class Cooling_SynchrotronSEDModel(Model):
     Synchrotron self-absorption is not included.
 
     The model wraps
-    :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_Cooling_SynchrotronSED`.
+    :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED`.
 
     All computations are performed in log-space.
 
@@ -1331,7 +1331,7 @@ class Cooling_SynchrotronSEDModel(Model):
 
         Internally, this constructor instantiates:
 
-        :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_Cooling_SynchrotronSED`
+        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED`
         """
         super().__init__()
 
@@ -1402,7 +1402,7 @@ class SynchrotronSEDModel(Model):
     No cooling or absorption breaks are included.
 
     The model wraps
-    :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_SynchrotronSED`.
+    :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED`.
 
     All computations are performed in log-space.
 
@@ -1749,7 +1749,7 @@ class SynchrotronSEDModel(Model):
 
         Internally, this constructor instantiates:
 
-        :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_SynchrotronSED`
+        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED`
         """
         self._sed = PowerLaw_SynchrotronSED()
         self._pitch_averaged = pitch_averaged

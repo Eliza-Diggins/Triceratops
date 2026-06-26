@@ -1,4 +1,5 @@
 .. _synch_numerical_sed_theory:
+
 ==============================================
 Methods: Quadrature Based SEDs
 ==============================================
@@ -388,7 +389,7 @@ In log-space the radiative transfer solution reads
     \ln I_\nu = \ln j_\nu - \ln|\alpha_\nu| + \ln\!\bigl(1 - e^{-\tau_\nu}\bigr),
 
 where :math:`\tau_\nu = \exp(\ln|\alpha_\nu| + \ln R)`. The term :math:`\ln(1 - e^{-\tau})` is evaluated using
-:func:`numpy.expm1` as :math:`\ln(-\mathrm{expm1}(-\tau))`, which avoids catastrophic cancellation for small
+``numpy.expm1`` as :math:`\ln(-\mathrm{expm1}(-\tau))`, which avoids catastrophic cancellation for small
 :math:`\tau` (where :math:`1 - e^{-\tau} \approx \tau` and a naive subtraction loses all significant digits). For
 very large optical depths, :math:`\tau` is clipped before exponentiation to prevent overflow. The result is a
 numerically stable expression for :math:`\ln I_\nu` that is accurate from the deeply optically thin to the deeply
@@ -457,7 +458,7 @@ where :math:`A_{\rm eff}` is the effective projected area of the source on the s
 for a sphere) and :math:`D_A` is the angular diameter distance to the source. This is the quantity returned by
 :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_flux_density`, which
 handles distance resolution (including conversion from luminosity distance, proper distance, or redshift) via
-:func:`~trilobite.physics_utils.resolve_cosmological_distances`.
+:func:`~trilobite.physics_utils.cosmology.resolve_cosmological_distances`.
 
 .. important::
 

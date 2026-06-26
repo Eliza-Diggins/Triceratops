@@ -366,7 +366,7 @@ class InferenceParameter:
         dict_rep : dict
             Dictionary produced by :meth:`to_dict`.
 
-        model : Model
+        model : ~trilobite.models.core.base.Model
             The model instance that owns the corresponding
             :class:`~trilobite.models.core.parameters.ModelParameter`. This is required in order
             to resolve the parameter definition (name, bounds,

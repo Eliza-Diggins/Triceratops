@@ -98,7 +98,7 @@ raises ``NotImplementedError``.
 
 Importantly, priors operate strictly in **physical parameter space**.
 Any transformations (e.g., log-sampling) are handled by
-:class:`InferenceParameter` inside the inference problem layer.
+:class:`~trilobite.inference.problem.InferenceParameter` inside the inference problem layer.
 
 Serialization
 -------------
@@ -113,7 +113,7 @@ Each prior implements:
 
 This mechanism works for all built-in priors.
 
-Custom callable priors (wrapped by :class:`CallablePrior`) are marked
+Custom callable priors (wrapped by :class:`~trilobite.inference.prior.CallablePrior`) are marked
 as non-reconstructible because arbitrary Python callables cannot be
 serialized safely.
 
@@ -124,7 +124,7 @@ continues to work automatically.
 Implementing a New Prior
 ------------------------
 
-To implement a new prior, subclass :class:`Prior` and define
+To implement a new prior, subclass :class:`~trilobite.inference.prior.Prior` and define
 ``_generate_log_prior``.
 
 For example, suppose we want a simple exponential prior:

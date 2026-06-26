@@ -96,8 +96,8 @@ print(f"Distance        : {D_L}")
 # (:math:`R \propto t^{2/5}`) once the swept-up mass equals the ejecta mass.
 # With these parameters the transition occurs at roughly 500 days.
 #
-# We use :class:`~trilobite.dynamics.profiles.UniformCSMProfile` and
-# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` to build
+# We use :class:`~trilobite.dynamics.profiles.csm.UniformCSMProfile` and
+# :class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile` to build
 # the upstream source callables, then combine them with
 # :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`.
 

@@ -89,13 +89,13 @@ v_ej = np.sqrt(2 * E_ej / M_ej)
 # Ejecta Profile
 # --------------
 #
-# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# :class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile` normalizes
 # the Chevalier broken-power-law kernel to the requested mass and energy via
-# :meth:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.normalize`, then
+# :meth:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize`, then
 # returns a fast unit-free :math:`\rho_{\rm ej}(r,t)` callable via
-# :meth:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.as_optimized_callable`.
+# :meth:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.as_optimized_callable`.
 # For an exponential ejecta profile, use
-# :class:`~trilobite.dynamics.profiles.ExponentialEjectaProfile` instead.
+# :class:`~trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile` instead.
 
 K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej, M_ej, n=10, delta=1)
 rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10, delta=1)
@@ -112,7 +112,7 @@ rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10, d
 #
 #     A = \frac{\dot{M}}{4\pi\,v_w}.
 #
-# :class:`~trilobite.dynamics.profiles.WindCSMProfile` handles the unit
+# :class:`~trilobite.dynamics.profiles.csm.WindCSMProfile` handles the unit
 # conversion and returns a fast unit-free two-argument callable.  Other common
 # profiles (uniform ISM, top-hat shell, smooth-truncated wind) are available
 # in :mod:`trilobite.dynamics.profiles`.

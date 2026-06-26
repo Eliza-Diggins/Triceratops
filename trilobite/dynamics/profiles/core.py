@@ -66,9 +66,9 @@ class _DynamicalProfile(ABC):
 
     See Also
     --------
-    CSMDensityProfile : ABC for circumstellar-medium density fields.
-    EjectaDensityProfile : ABC for homologous ejecta density fields.
-    VelocityProfile : ABC for upstream velocity fields.
+    ~trilobite.dynamics.profiles.csm.CSMDensityProfile : ABC for circumstellar-medium density fields.
+    ~trilobite.dynamics.profiles.ejecta.EjectaDensityProfile : ABC for homologous ejecta density fields.
+    ~trilobite.dynamics.profiles.velocity.VelocityProfile : ABC for upstream velocity fields.
     """
 
     OUTPUT_UNITS: ClassVar[Optional[u.Unit]] = None
@@ -159,7 +159,7 @@ class _DynamicalProfile(ABC):
 
         Returns
         -------
-        result
+        ~numpy.ndarray
             Unit-free profile value in the units represented by
             ``OUTPUT_UNITS``.
         """
@@ -187,7 +187,7 @@ class _DynamicalProfile(ABC):
 
         Returns
         -------
-        result
+        ~numpy.ndarray or ~astropy.units.Quantity
             Profile value. If ``OUTPUT_UNITS`` is not ``None``, the result is
             an :class:`~astropy.units.Quantity`; otherwise, a bare array or scalar.
         """
@@ -218,7 +218,7 @@ class _DynamicalProfile(ABC):
 
         Returns
         -------
-        result
+        ~numpy.ndarray
             Raw unit-free profile value.
         """
         return cls._opt_eval(*args, **parameters)

@@ -69,7 +69,7 @@ print(f"Wind termination radius: {R_wind.to(u.pc):.2f}")
 # The numerical thin-shell engine requires the CSM density profile to be provided
 # as a **callable function** returning the density in CGS units.
 #
-# Here we use :class:`~trilobite.dynamics.profiles.TruncatedWindCSMProfile`
+# Here we use :class:`~trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile`
 # to construct a broken profile:
 #
 # - For :math:`r \le R_{\rm wind}`: a steady wind with :math:`\rho \propto r^{-2}`
@@ -111,7 +111,7 @@ plt.show()
 #
 #     \rho_{\rm ej}(r, t) = t^{-3}\,G_{\rm ej}(r/t).
 #
-# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# :class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile` normalizes
 # the Chevalier broken-power-law kernel to the requested mass and energy and
 # returns a fast unit-free callable.
 

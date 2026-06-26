@@ -2,7 +2,8 @@
 Shock physics utilities for astrophysical transients.
 
 This subpackage provides the core shock abstractions and utilities used throughout
-the :mod:`trilobite.dynamics` module, including the abstract :class:`ShockEngine` base class,
+the :mod:`trilobite.dynamics` module, including the abstract
+:class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` base class,
 Rankine-Hugoniot jump condition utilities, and general-purpose numerical shock engines.
 """
 

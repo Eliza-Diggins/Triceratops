@@ -38,7 +38,8 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
         F_\nu \approx \sum_j \frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j).
 
     Each per-ring radiative transfer calculation is performed using the full
-    one-zone slab solution from the parent :class:`NumericalSynchrotronEngine`.
+    one-zone slab solution from the parent
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`.
     All rings are evaluated simultaneously in a single vectorized pass by
     treating the radial index as the zone batch axis, making the model efficient
     enough for MCMC hot-loop use.
@@ -46,7 +47,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
     The private API follows a three-level chain:
 
     1. ``_compute_log_[pa_]ring_specific_intensity`` — comoving-frame
-       :math:`\ln I_\nu(r_j)`, shape ``(*nu_shape, n_R)``.
+       :math:`\ln I_\nu(r_j)`.
     2. ``_compute_log_[pa_]ring_contributions`` — observer-frame log flux density
        per ring :math:`\ln[(2\pi r_j\,\Delta r_j / D_A^2)\,I_\nu(r_j)]`, shape
        ``(*nu_shape, n_R)``. Summing these in linear space gives :math:`F_\nu`.
@@ -71,7 +72,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
     See Also
     --------
-    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine`
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
         Base engine providing radiative transfer and kernel interpolation.
 
     References
@@ -115,9 +116,9 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        log_r : ~numpy.ndarray, shape ``(n_r,)``
+        log_r : ~numpy.ndarray
             Natural log of the radius grid in CGS (cm).
-        log_area_weights : ~numpy.ndarray, shape ``(n_r,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights
             :math:`2\pi r_j\,\Delta r_j` in CGS (:math:`\mathrm{cm^2}`),
             where :math:`\Delta r_j` is the central-difference spacing at
@@ -162,19 +163,19 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_slab_depth : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_slab_depth : ~numpy.ndarray or scalar
             Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).
-        log_B : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_B : ~numpy.ndarray or scalar
             Natural log of the comoving-frame magnetic field strength in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron number density distribution
             :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`. The last axis is
             the gamma integration axis; the leading axis indexes the rings.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid (shared across all rings).
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.
         z : float
             Cosmological redshift.
@@ -183,7 +184,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        log_I : ~numpy.ndarray, shape ``(*nu_shape, n_R)``
+        log_I : ~numpy.ndarray
             Natural log of the observer-frame specific intensity per ring, in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
@@ -222,31 +223,31 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_slab_depth : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_slab_depth : ~numpy.ndarray or scalar
             Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).
-        log_B : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_B : ~numpy.ndarray or scalar
             Natural log of the comoving-frame magnetic field strength in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron number density distribution
             :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`. The last axis is
             the gamma integration axis; the leading axis indexes the rings.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid (shared across all rings).
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.
         z : float
             Cosmological redshift.
         beta : float
             Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.
-        sin_alpha : float or ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        sin_alpha : float or ~numpy.ndarray or scalar
             Sine of the comoving-frame pitch angle :math:`\sin\alpha`. May be
             per-ring or a single value broadcast to all rings.
 
         Returns
         -------
-        log_I : ~numpy.ndarray, shape ``(*nu_shape, n_R)``
+        log_I : ~numpy.ndarray
             Natural log of the observer-frame specific intensity per ring, in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
@@ -294,20 +295,20 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_slab_depth : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_slab_depth : ~numpy.ndarray or scalar
             Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).
-        log_B : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_B : ~numpy.ndarray or scalar
             Natural log of the comoving-frame magnetic field strength in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron number density distribution
             :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid (shared across all rings).
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`
             in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.
         log_D_A : float
@@ -319,7 +320,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        log_dF : ~numpy.ndarray, shape ``(*nu_shape, n_R)``
+        log_dF : ~numpy.ndarray
             Log of the flux density contribution from each ring, in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing
             :math:`\exp(\mathrm{log\_dF})` over the last axis gives :math:`F_\nu`.
@@ -365,20 +366,20 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_slab_depth : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_slab_depth : ~numpy.ndarray or scalar
             Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).
-        log_B : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_B : ~numpy.ndarray or scalar
             Natural log of the comoving-frame magnetic field strength in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron number density distribution
             :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid (shared across all rings).
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`
             in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.
         log_D_A : float
@@ -387,12 +388,12 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
             Cosmological redshift.
         beta : float
             Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.
-        sin_alpha : float or ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        sin_alpha : float or ~numpy.ndarray or scalar
             Sine of the comoving-frame pitch angle :math:`\sin\alpha`.
 
         Returns
         -------
-        log_dF : ~numpy.ndarray, shape ``(*nu_shape, n_R)``
+        log_dF : ~numpy.ndarray
             Log of the flux density contribution from each ring, in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing
             :math:`\exp(\mathrm{log\_dF})` over the last axis gives :math:`F_\nu`.
@@ -437,20 +438,20 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_slab_depth : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_slab_depth : ~numpy.ndarray or scalar
             Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).
-        log_B : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_B : ~numpy.ndarray or scalar
             Natural log of the comoving-frame magnetic field strength in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron number density distribution
             :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid (shared across all rings).
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`
             in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.
         log_D_A : float
@@ -462,7 +463,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        log_F : ~numpy.ndarray, shape ``(*nu_shape,)``
+        log_F : ~numpy.ndarray
             Natural log of the observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
@@ -505,20 +506,20 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_slab_depth : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_slab_depth : ~numpy.ndarray or scalar
             Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).
-        log_B : ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        log_B : ~numpy.ndarray or scalar
             Natural log of the comoving-frame magnetic field strength in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron number density distribution
             :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid (shared across all rings).
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`
             in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.
         log_D_A : float
@@ -527,12 +528,12 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
             Cosmological redshift.
         beta : float
             Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.
-        sin_alpha : float or ~numpy.ndarray, shape ``(n_R,)`` or scalar
+        sin_alpha : float or ~numpy.ndarray or scalar
             Sine of the comoving-frame pitch angle :math:`\sin\alpha`.
 
         Returns
         -------
-        log_F : ~numpy.ndarray, shape ``(*nu_shape,)``
+        log_F : ~numpy.ndarray
             Natural log of the observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
@@ -667,10 +668,10 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values
+            Observer-frame frequency grid. Bare values
             are treated as Hz.
         r : ~numpy.ndarray, ~astropy.units.Quantity, or None
-            Radial grid of cylindrical annuli, shape ``(n_R,)``. Bare values
+            Radial grid of cylindrical annuli. Bare values
             are treated as cm. If ``None``, a grid is built from ``r_min``,
             ``r_max``, ``n_r``, and ``r_spacing``.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
@@ -682,7 +683,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
             ``(n_R,)`` or scalar. Bare values are treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`N(\gamma, r)` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_R, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(n_R, n_gamma)``
             or broadcastable to it. A callable returning ``(n_gamma,)`` is
             automatically broadcast to all rings.
@@ -704,7 +705,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
         beta : float, optional
             Bulk plasma velocity in units of :math:`c`. Default ``0``.
         alpha : float, ~numpy.ndarray, ~astropy.units.Quantity, or None, optional
-            Comoving-frame pitch angle, shape ``(n_R,)`` or scalar. Bare values
+            Comoving-frame pitch angle or scalar. Bare values
             are treated as radians. If ``None``, the pitch-angle-averaged kernel
             is used.
         r_min : float, optional
@@ -728,7 +729,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        dF_nu : ~astropy.units.Quantity, shape ``(*nu_shape, n_R)``
+        dF_nu : ~astropy.units.Quantity
             Per-ring flux density contributions in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing over the
             last axis gives the total :math:`F_\nu`.
@@ -835,10 +836,10 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values
+            Observer-frame frequency grid. Bare values
             are treated as Hz.
         r : ~numpy.ndarray, ~astropy.units.Quantity, or None
-            Radial grid of cylindrical annuli, shape ``(n_R,)``. Bare values
+            Radial grid of cylindrical annuli. Bare values
             are treated as cm. If ``None``, a grid is built from ``r_min``,
             ``r_max``, ``n_r``, and ``r_spacing``.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
@@ -850,7 +851,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
             ``(n_R,)`` or scalar. Bare values are treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`N(\gamma, r)` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_R, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(n_R, n_gamma)``
             or broadcastable to it. A callable returning ``(n_gamma,)`` is
             automatically broadcast to all rings.
@@ -872,7 +873,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
         beta : float, optional
             Bulk plasma velocity in units of :math:`c`. Default ``0``.
         alpha : float, ~numpy.ndarray, ~astropy.units.Quantity, or None, optional
-            Comoving-frame pitch angle, shape ``(n_R,)`` or scalar. Bare values
+            Comoving-frame pitch angle or scalar. Bare values
             are treated as radians. If ``None``, the pitch-angle-averaged kernel
             is used.
         r_min : float, optional
@@ -898,7 +899,7 @@ class InhomogeneousCylinderSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        F_nu : ~astropy.units.Quantity, shape ``(*nu_shape,)``
+        F_nu : ~astropy.units.Quantity
             Observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
@@ -1024,7 +1025,7 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
     The private API follows a three-level chain:
 
     1. ``_compute_log_pa_ray_specific_intensity`` — observer-frame
-       :math:`\ln I_\nu(b_j)`, shape ``(*nu_shape, n_R)``.
+       :math:`\ln I_\nu(b_j)`.
     2. ``_compute_log_pa_ray_contributions`` — observer-frame log flux density
        per ray :math:`\ln[(2\pi b_j\,\Delta b_j / D_A^2)\,I_\nu(b_j)]`, shape
        ``(*nu_shape, n_R)``. Summing these in linear space gives :math:`F_\nu`.
@@ -1052,7 +1053,7 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
     :class:`~trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine`
         Analogous engine for edge-on cylindrical annuli with full pitch-angle
         and relativistic-motion support.
-    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine`
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
         Base engine providing kernel tabulation and single-zone radiative transfer.
 
     References
@@ -1103,14 +1104,14 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        log_r : ~numpy.ndarray, shape ``(n_R,)``
+        log_r : ~numpy.ndarray
             Natural log of the radius grid in CGS (cm).
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights
             :math:`2\pi r_j\,\Delta r_j` in CGS (:math:`\mathrm{cm^2}`),
             where :math:`\Delta r_j` is the central-difference spacing at
             point :math:`j`.
-        half_path : ~numpy.ndarray, shape ``(n_R, n_R)``
+        half_path : ~numpy.ndarray
             Half-path lengths :math:`\ell_{j,i}` in CGS (cm). Entry
             ``[j, i]`` is the path of ray :math:`j` through shell :math:`i`
             on one side of the sphere midplane. The full path through shell
@@ -1181,28 +1182,28 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_B : ~numpy.ndarray, shape ``(n_R,)``
+        log_B : ~numpy.ndarray
             Natural log of the comoving-frame magnetic field per shell in
             CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron distribution per
             shell in :math:`\mathrm{cm^{-3}}`. Last axis is the gamma
             integration axis.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights
             :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i`.
         z : float
             Cosmological redshift.
-        half_path : ~numpy.ndarray, shape ``(n_R, n_R)``
+        half_path : ~numpy.ndarray
             Pre-computed half-path matrix from :meth:`_build_sphere_grid`.
 
         Returns
         -------
-        log_I : ~numpy.ndarray, shape ``(*nu_shape, n_R)``
+        log_I : ~numpy.ndarray
             Natural log of the observer-frame specific intensity per ray
             in :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
@@ -1266,29 +1267,29 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_B : ~numpy.ndarray, shape ``(n_R,)``
+        log_B : ~numpy.ndarray
             Natural log of the comoving-frame magnetic field in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron distribution.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights.
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights
             :math:`2\pi b_j\,\Delta b_j` in CGS (:math:`\mathrm{cm^2}`).
         log_D_A : float
             Natural log of the angular diameter distance in CGS (cm).
         z : float
             Cosmological redshift.
-        half_path : ~numpy.ndarray, shape ``(n_R, n_R)``
+        half_path : ~numpy.ndarray
             Pre-computed half-path matrix.
 
         Returns
         -------
-        log_dF : ~numpy.ndarray, shape ``(*nu_shape, n_R)``
+        log_dF : ~numpy.ndarray
             Log of the flux density contribution from each ray in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
@@ -1320,28 +1321,28 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_B : ~numpy.ndarray, shape ``(n_R,)``
+        log_B : ~numpy.ndarray
             Natural log of the comoving-frame magnetic field in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_R, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the comoving-frame electron distribution.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights.
-        log_area_weights : ~numpy.ndarray, shape ``(n_R,)``
+        log_area_weights : ~numpy.ndarray
             Log of the annular projected area weights.
         log_D_A : float
             Natural log of the angular diameter distance in CGS (cm).
         z : float
             Cosmological redshift.
-        half_path : ~numpy.ndarray, shape ``(n_R, n_R)``
+        half_path : ~numpy.ndarray
             Pre-computed half-path matrix.
 
         Returns
         -------
-        log_F : ~numpy.ndarray, shape ``(*nu_shape,)``
+        log_F : ~numpy.ndarray
             Natural log of the observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
@@ -1470,19 +1471,19 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values
+            Observer-frame frequency grid. Bare values
             are treated as Hz.
         r : ~numpy.ndarray, ~astropy.units.Quantity, or None
-            Radial grid, shape ``(n_R,)``. Bare values are treated as cm. If
+            Radial grid. Bare values are treated as cm. If
             ``None``, a grid is built from ``r_min``, ``r_max``, ``n_r``, and
             ``r_spacing``. The grid points serve as both shell centers and
             impact parameters.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field :math:`B(r)`, shape ``(n_R,)`` or
+            Comoving-frame magnetic field :math:`B(r)` or
             scalar. Bare values are treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`N(\gamma, r)` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_R, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and broadcast to all shells if it returns
             shape ``(n_gamma,)``.
         gamma : ~numpy.ndarray or None, optional
@@ -1523,7 +1524,7 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        dF_nu : ~astropy.units.Quantity, shape ``(*nu_shape, n_R)``
+        dF_nu : ~astropy.units.Quantity
             Per-ray flux density contributions in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing over
             the last axis gives the total :math:`F_\nu`.
@@ -1606,18 +1607,18 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values
+            Observer-frame frequency grid. Bare values
             are treated as Hz.
         r : ~numpy.ndarray, ~astropy.units.Quantity, or None
-            Radial grid, shape ``(n_R,)``. Bare values are treated as cm. If
+            Radial grid. Bare values are treated as cm. If
             ``None``, a grid is built from ``r_min``, ``r_max``, ``n_r``, and
             ``r_spacing``.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field :math:`B(r)`, shape ``(n_R,)`` or
+            Comoving-frame magnetic field :math:`B(r)` or
             scalar. Bare values are treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`N(\gamma, r)` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_R, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and broadcast to all shells.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from
@@ -1657,7 +1658,7 @@ class InhomogeneousSphereSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        F_nu : ~astropy.units.Quantity, shape ``(*nu_shape,)``
+        F_nu : ~astropy.units.Quantity
             Observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """

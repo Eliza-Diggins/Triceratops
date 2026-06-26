@@ -552,7 +552,7 @@ class RadioPhotometryContainer(DataContainer):
 
         Parameters
         ----------
-        model : Model
+        model : ~trilobite.models.core.base.Model
             The model instance for which inference will be performed.
             Its declared ``variable_names`` and ``observable_names`` are
             used to determine default mappings.
@@ -570,7 +570,7 @@ class RadioPhotometryContainer(DataContainer):
             Mapping from model observable names to photometry table columns.
 
             Each tuple should follow the convention expected by
-            :meth:`InferenceData.from_table`, typically:
+            :meth:`~trilobite.data.core.InferenceData.from_table`, typically:
 
             ``(value_column, error_column, upper_column, lower_column)``
 
@@ -642,7 +642,7 @@ class RadioPhotometryContainer(DataContainer):
 
         Advanced workflows may bypass this method and construct
         :class:`InferenceData` objects manually via
-        :meth:`InferenceData.from_table` for full control.
+        :meth:`~trilobite.data.core.InferenceData.from_table` for full control.
 
         See Also
         --------
@@ -1530,7 +1530,7 @@ class RadioPhotometryEpoch(XYDataContainer):
 
         Parameters
         ----------
-        model : Model
+        model : ~trilobite.models.core.base.Model
             The model instance. Its ``variable_names`` and ``output_names`` are
             used to determine default mappings.
         variables : dict, optional

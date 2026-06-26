@@ -48,7 +48,7 @@ class OpticalPhotometryContainer(DataContainer):
     Band identification uses human-readable **band names** (e.g. ``"g"``, ``"r"``)
     rather than integer indices.  Integer indices are resolved at
     :meth:`to_inference_data` time by looking up each name in the optical model's
-    :attr:`FilterBundle.filter_names` list.  This keeps the container independent
+    :attr:`~trilobite.utils.phot_utils.FilterBundle.filter_names` list.  This keeps the container independent
     of any particular model or filter ordering convention.
 
     Schema
@@ -240,12 +240,12 @@ class OpticalPhotometryContainer(DataContainer):
     # ========================= Detection Properties ========================= #
     @property
     def detection_mask(self) -> np.ndarray:
-        """Boolean mask selecting detections (rows where upper limit is NaN)."""
+        """True where the row is a detection (upper limit is NaN); False otherwise."""
         return self.__detection_mask__.copy()
 
     @property
     def non_detection_mask(self) -> np.ndarray:
-        """Boolean mask selecting non-detections / upper limits."""
+        """True where the row is a non-detection; False for detections."""
         return self.__non_detection_mask__.copy()
 
     @property
@@ -609,7 +609,7 @@ class OpticalPhotometryContainer(DataContainer):
 
         Parameters
         ----------
-        model : Model
+        model : ~trilobite.models.core.base.Model
             Optical model instance.  Must expose a ``bundle`` attribute
             (:class:`~trilobite.utils.phot_utils.FilterBundle`) whose
             ``filter_names`` list maps band names to integer indices.
@@ -770,9 +770,9 @@ class OpticalPhotometryEpoch(DataContainer):
 
     See Also
     --------
-    RadioPhotometryEpoch
+    ~trilobite.data.photometry.RadioPhotometryEpoch
         Equivalent container for single-epoch radio SED measurements.
-    OpticalPhotometryContainer
+    ~trilobite.data.optical_photometry.OpticalPhotometryContainer
         Multi-epoch optical photometry container.
     """
 
@@ -914,12 +914,12 @@ class OpticalPhotometryEpoch(DataContainer):
     # ========================= DETECTION LOGIC ========================= #
     @property
     def detection_mask(self) -> np.ndarray:
-        """Boolean mask: True for detections."""
+        """True where the row is a detection; False for upper limits."""
         return np.isnan(self.flux_upper_limit.value)
 
     @property
     def non_detection_mask(self) -> np.ndarray:
-        """Boolean mask: True for upper limits (non-detections)."""
+        """True where the row is an upper limit; False for detections."""
         return ~self.detection_mask
 
     @property
@@ -960,7 +960,7 @@ class OpticalPhotometryEpoch(DataContainer):
 
         Parameters
         ----------
-        model : Model
+        model : ~trilobite.models.core.base.Model
             Optical model instance exposing a ``bundle`` attribute
             (:class:`~trilobite.utils.phot_utils.FilterBundle`).
         variables : dict, optional

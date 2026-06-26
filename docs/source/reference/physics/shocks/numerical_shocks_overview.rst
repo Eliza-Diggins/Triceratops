@@ -360,8 +360,8 @@ Problem Setup
 
 The profile and source-function setup is identical to the pressure-driven thin-shell
 engine: build a ejecta density callable with
-:class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` (or
-:class:`~trilobite.dynamics.profiles.ExponentialEjectaProfile`), build a CSM
+:class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile` (or
+:class:`~trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile`), build a CSM
 density callable with one of the profile classes in :mod:`~trilobite.dynamics.profiles`,
 and assemble the four source callables with
 :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`.
@@ -382,30 +382,27 @@ transient at the first ODE step.
     .. code-block:: python
 
         from astropy import units as u
-        from trilobite.dynamics.shocks import (
-            MechanicalShockEngine,
-            get_bpl_ejecta_kernel,
-            get_wind_csm_density_func,
-            make_homologous_stationary_sources,
-        )
+        from trilobite.dynamics.shocks import MechanicalShockEngine, make_homologous_stationary_sources
+        from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
 
         # Ejecta kernel: Chevalier broken power law
-        G_ej = get_bpl_ejecta_kernel(
+        K, v_t = BrokenPowerLawEjectaProfile.normalize(
             E_ej=1e51 * u.erg,
             M_ej=5.0  * u.Msun,
             n=10.0,
             delta=1.0,
         )
+        G_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(n=10.0, delta=1.0, K=K, v_t=v_t)
 
         # CSM: steady red-supergiant wind
-        rho_csm = get_wind_csm_density_func(
+        rho_csm = WindCSMProfile.as_optimized_callable(
             mass_loss_rate=1e-5 * u.Msun / u.yr,
             wind_velocity=100.0 * u.km / u.s,
         )
 
         # Assemble the four two-argument source callables
         rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(
-            G_ej=G_ej,
+            rho_ej=G_ej,
             rho_csm=rho_csm,
         )
 
@@ -644,16 +641,13 @@ returns ``None``.
         import matplotlib.pyplot as plt
         from astropy import units as u
 
-        from trilobite.dynamics.shocks import (
-            MechanicalShockEngine,
-            get_bpl_ejecta_kernel,
-            get_wind_csm_density_func,
-            make_homologous_stationary_sources,
-        )
+        from trilobite.dynamics.shocks import MechanicalShockEngine, make_homologous_stationary_sources
+        from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
         from trilobite.utils.plot_utils import set_plot_style
 
-        G_ej    = get_bpl_ejecta_kernel(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
-        rho_csm = get_wind_csm_density_func(1e-5 * u.Msun / u.yr, 100.0 * u.km / u.s)
+        K, v_t  = BrokenPowerLawEjectaProfile.normalize(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
+        G_ej    = BrokenPowerLawEjectaProfile.as_optimized_callable(n=10.0, delta=1.0, K=K, v_t=v_t)
+        rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=1e-5 * u.Msun / u.yr, wind_velocity=100.0 * u.km / u.s)
         rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej, rho_csm)
 
         engine = MechanicalShockEngine()

@@ -409,7 +409,7 @@ Velocity Profiles
 ^^^^^^^^^^^^^^^^^
 
 Two-argument callables ``u(r, t)`` representing the bulk velocity field of the
-upstream gas.  Use :meth:`~trilobite.dynamics.profiles.VelocityProfile.as_optimized_callable`
+upstream gas.  Use :meth:`~trilobite.dynamics.profiles.velocity.VelocityProfile.as_optimized_callable`
 to build unit-free callables from the profile classes.
 
 .. list-table::
@@ -418,11 +418,11 @@ to build unit-free callables from the profile classes.
 
     * - Profile Class
       - Description
-    * - :class:`~trilobite.dynamics.profiles.StaticVelocityProfile`
+    * - :class:`~trilobite.dynamics.profiles.velocity.StaticVelocityProfile`
       - Returns zero velocity for all inputs.  Suitable for a stationary CSM.
-    * - :class:`~trilobite.dynamics.profiles.HomologousVelocityProfile`
+    * - :class:`~trilobite.dynamics.profiles.velocity.HomologousVelocityProfile`
       - Returns :math:`u(r,t) = r/t`.  Standard model for freely expanding ejecta.
-    * - :class:`~trilobite.dynamics.profiles.ConstantVelocityProfile`
+    * - :class:`~trilobite.dynamics.profiles.velocity.ConstantVelocityProfile`
       - Returns :math:`u(r,t) = u_0` for a fixed bulk-flow speed.
 
 Ejecta Profiles
@@ -438,9 +438,9 @@ where :math:`G(v)` is a time-independent velocity-space kernel.  Two profile fam
 supported: **broken power-law** (BPL, after
 :footcite:t:`chevalierSelfsimilarSolutionsInteraction1982`) and **exponential**, each
 available with or without an outer velocity truncation.  Use
-:meth:`~trilobite.dynamics.profiles.EjectaDensityProfile.normalize` to compute kernel
+:meth:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize` to compute kernel
 parameters from :math:`E_{\rm ej}` and :math:`M_{\rm ej}`, then
-:meth:`~trilobite.dynamics.profiles.EjectaDensityProfile.as_optimized_callable` to build a
+:meth:`~trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.as_optimized_callable` to build a
 unit-free :math:`\rho_{\rm ej}(r,t)` callable.
 
 .. list-table::
@@ -450,10 +450,10 @@ unit-free :math:`\rho_{\rm ej}(r,t)` callable.
     * - Profile Class
       - Family
       - Kernel parameters
-    * - :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile`
+    * - :class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile`
       - BPL
       - :math:`K`, :math:`v_t`
-    * - :class:`~trilobite.dynamics.profiles.ExponentialEjectaProfile`
+    * - :class:`~trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile`
       - Exponential
       - :math:`K`, :math:`v_e`
 
@@ -463,7 +463,7 @@ CSM Profiles
 Profile classes for the circumstellar medium geometries most commonly encountered in
 transient modeling.  Each class accepts physical parameters as
 :class:`~astropy.units.Quantity` objects via
-:meth:`~trilobite.dynamics.profiles.CSMDensityProfile.as_optimized_callable`, which
+:meth:`~trilobite.dynamics.profiles.csm.CSMDensityProfile.as_optimized_callable`, which
 converts units once and returns a unit-free CGS callable ``rho_csm(r, t)``.
 
 .. list-table::
@@ -472,26 +472,26 @@ converts units once and returns a unit-free CGS callable ``rho_csm(r, t)``.
 
     * - Profile Class
       - Profile
-    * - :class:`~trilobite.dynamics.profiles.UniformCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.UniformCSMProfile`
       - :math:`\rho(r) = \rho_0` — uniform medium.
-    * - :class:`~trilobite.dynamics.profiles.WindCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.WindCSMProfile`
       - :math:`\rho(r) = A r^{-2}` — steady spherical wind.
-    * - :class:`~trilobite.dynamics.profiles.TruncatedWindCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile`
       - Wind profile that transitions sharply to a constant density floor outside
         :math:`r_{\max}`.
-    * - :class:`~trilobite.dynamics.profiles.SmoothTruncatedWindCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.SmoothTruncatedWindCSMProfile`
       - Wind profile with a smooth :math:`\tanh` cutoff near :math:`r_{\max}`.
-    * - :class:`~trilobite.dynamics.profiles.WindWithFloorCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile`
       - :math:`\rho(r) = A r^{-2} + \rho_{\rm floor}` — wind plus a constant ambient
         density.
-    * - :class:`~trilobite.dynamics.profiles.PowerLawCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.PowerLawCSMProfile`
       - :math:`\rho(r) = \rho_{\rm ref}(r/r_{\rm ref})^{-s}` — general power law.
-    * - :class:`~trilobite.dynamics.profiles.BrokenPowerLawCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.BrokenPowerLawCSMProfile`
       - Continuous broken power law with independently specified inner and outer slopes.
-    * - :class:`~trilobite.dynamics.profiles.ShellCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.ShellCSMProfile`
       - Top-hat shell: constant density inside :math:`[r_{\rm in},r_{\rm out}]`, floor
         density outside.
-    * - :class:`~trilobite.dynamics.profiles.GaussianShellCSMProfile`
+    * - :class:`~trilobite.dynamics.profiles.csm.GaussianShellCSMProfile`
       - Gaussian-shell overdensity on a background:
         :math:`\rho(r) = \rho_{\rm bg} + \rho_{\rm shell}
         \exp\!\left[-\tfrac{1}{2}\left((r-R_s)/\sigma\right)^2\right]`.

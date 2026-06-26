@@ -88,24 +88,24 @@ Choose based on which physical processes are important for your source:
      - Cooling
      - SSA
      - Use when…
-   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_SynchrotronSED`
+   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED`
      - ✗
      - ✗
      - Simple power-law spectra; no breaks beyond :math:`\nu_m`
-   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_Cooling_SynchrotronSED`
+   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED`
      - ✓
      - ✗
      - Optically thin emission with a fast- or slow-cooling break
-   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_SSA_SynchrotronSED`
+   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED`
      - ✗
      - ✓
      - Compact or dense sources with an SSA turnover; electrons do not cool appreciably
-   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_Cooling_SSA_SynchrotronSED`
+   * - :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED`
      - ✓
      - ✓
      - Full broadband modeling (GRBs, SNe, TDEs); up to 8 spectral regimes
 
-:class:`~trilobite.radiation.synchrotron.SEDs.one_zone.SSA_SED_PowerLaw` is a phenomenological
+:class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw` is a phenomenological
 alternative where the break frequency is supplied directly by the user rather than derived from
 microphysics, following the closure of :footcite:t:`demarchiRadioAnalysisSN2004C2022`. Use it
 when you prefer to fit the SSA turnover without invoking any closure assumptions.
@@ -141,7 +141,7 @@ hidden state.
 Calling ``sed()``
 ^^^^^^^^^^^^^^^^^
 
-The primary interface for evaluating a synchrotron spectrum is :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.SynchrotronSED.sed`.
+The primary interface for evaluating a synchrotron spectrum is :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.sed`.
 Supply a frequency array and the phenomenological parameters:
 
 .. code-block:: python
@@ -204,9 +204,9 @@ The following example shows a slow-cooling spectrum with annotated break frequen
 
 .. note::
 
-   :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_Cooling_SynchrotronSED`,
-   :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_SSA_SynchrotronSED`, and
-   :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_Cooling_SSA_SynchrotronSED` use
+   :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED`,
+   :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED`, and
+   :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED` use
    keyword-only arguments after ``nu``; supplying parameters positionally will raise a
    ``TypeError``.
 
@@ -219,7 +219,7 @@ Normalizing from Physical Parameters
 
 If you have physical source parameters (magnetic field :math:`B`, radius :math:`R`,
 energy partition fractions :math:`\varepsilon_E`, :math:`\varepsilon_B`, …) rather than
-phenomenological ones, use :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.SynchrotronSED.from_physics_to_params`
+phenomenological ones, use :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_physics_to_params`
 to compute all required SED inputs in one step.
 
 .. code-block:: python
@@ -246,7 +246,7 @@ to compute all required SED inputs in one step.
    )
    # params contains: F_norm, nu_m, nu_c, nu_a, nu_max, nu_peak, F_peak, regime (all with units)
 
-Pass the result directly to :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.SynchrotronSED.sed`:
+Pass the result directly to :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.sed`:
 
 .. code-block:: python
 
@@ -294,7 +294,7 @@ Inverting the SED
 
 Given observed peak flux and peak frequency, you can recover physical source parameters
 (radius :math:`R`, magnetic field :math:`B`) using
-:meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.SynchrotronSED.from_params_to_physics`:
+:meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_params_to_physics`:
 
 .. code-block:: python
 
@@ -453,7 +453,7 @@ The entire computation is performed in log-space using :func:`~scipy.special.log
 numerically stable across the large dynamic range typical of synchrotron spectra and fast enough for use
 in inference hot loops.
 
-Unlike the stateless :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.SynchrotronSED` subclasses,
+Unlike the stateless :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED` subclasses,
 the engine is **stateful**: it pre-tabulates the synchrotron kernel on a grid and caches the resulting
 spline interpolator. This one-time setup cost is paid when the kernel is loaded; subsequent SED
 evaluations are fast lookups against that table.
@@ -752,7 +752,7 @@ API Reference
 
 .. rubric:: Analytical SED Classes
 
-.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone.seds
 
 .. autosummary::
    :nosignatures:
@@ -889,7 +889,7 @@ specific physical scenario. They operate entirely in logarithmic space.
 - :func:`log_exp_cutoff_sed` — smooth exponential truncation at high frequencies
   (the :math:`\nu_{\max}` cutoff).
 - :func:`smoothed_BPL` — un-logged smoothed broken power law, used by
-  :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.SSA_SED_PowerLaw`.
+  :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw`.
 
 .. rubric:: Log-Space SED Composition Example
 
@@ -1019,15 +1019,15 @@ convention. Each function should:
 
 **Step 2: Subclass the appropriate base class**
 
-For a **single-regime SED** (like :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_SynchrotronSED`),
-subclass :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.SynchrotronSED` and implement:
+For a **single-regime SED** (like :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED`),
+subclass :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED` and implement:
 
 - ``_log_opt_sed(self, log_nu, **params)`` — the log-space kernel,
 - ``sed(self, nu, **params)`` — the unit-aware public interface.
 
 For a **multi-regime SED** (like
-:class:`~trilobite.radiation.synchrotron.SEDs.one_zone.PowerLaw_Cooling_SSA_SynchrotronSED`), subclass
-:class:`~trilobite.radiation.synchrotron.SEDs.one_zone.MultiSpectrumSynchrotronSED` and implement:
+:class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED`), subclass
+:class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED` and implement:
 
 - ``_compute_sed_regime(self, **params) -> (regime, derived)`` — regime logic,
 - ``determine_sed_regime(self, **params) -> regime`` — unit-aware public wrapper,

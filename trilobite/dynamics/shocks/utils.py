@@ -73,13 +73,13 @@ def make_homologous_stationary_sources(
     rho_ej : callable or type
         Upstream ejecta density.  Either a two-argument unit-free callable
         ``rho_ej(r, t)`` returning density in :math:`\mathrm{g\,cm^{-3}}`, or
-        a :class:`~trilobite.dynamics.profiles.EjectaDensityProfile` subclass.
+        a :class:`~trilobite.dynamics.profiles.ejecta.EjectaDensityProfile` subclass.
         When a class is supplied ``ej_params`` must provide the profile
         parameters.
     rho_csm : callable or type
         Upstream CSM density.  Either a two-argument unit-free callable
         ``rho_csm(r, t)`` returning density in :math:`\mathrm{g\,cm^{-3}}`, or
-        a :class:`~trilobite.dynamics.profiles.CSMDensityProfile` subclass.
+        a :class:`~trilobite.dynamics.profiles.csm.CSMDensityProfile` subclass.
         When a class is supplied ``csm_params`` must provide the profile
         parameters.
     ej_params : dict, optional
@@ -104,9 +104,9 @@ def make_homologous_stationary_sources(
 
     See Also
     --------
-    trilobite.dynamics.profiles.EjectaDensityProfile :
+    trilobite.dynamics.profiles.ejecta.EjectaDensityProfile :
         Base class for ejecta density profiles.
-    trilobite.dynamics.profiles.CSMDensityProfile :
+    trilobite.dynamics.profiles.csm.CSMDensityProfile :
         Base class for CSM density profiles.
     """
     if inspect.isclass(rho_ej) and issubclass(rho_ej, _DynamicalProfile):

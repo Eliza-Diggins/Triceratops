@@ -146,7 +146,7 @@ Model and Data Binding
 
 The constructor requires:
 
-- a :class:`Model`,
+- a :class:`~trilobite.models.core.base.Model`,
 - an :class:`InferenceData`.
 
 Basic interface checks ensure that the objects conform to the expected

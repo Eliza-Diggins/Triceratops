@@ -887,25 +887,25 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the frequency grid in CGS (Hz). These are the
             rest frame frequencies for evaluation.
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the (rest frame) magnetic field strength in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the (rest frame) electron number density evaluated on the Lorentz factor
             grid. The last axis is the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the (rest frame) Lorentz factor grid.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i` in log-space,
             used to convert the sum over :math:`d\gamma` into a Riemann sum.
-        sin_alpha : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        sin_alpha : float or ~numpy.ndarray or broadcastable to it
             Sine of the (rest frame) pitch angle.
 
         Returns
         -------
-        log_emissivity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_emissivity : ~numpy.ndarray
             :math:`\log j_\nu` in CGS (:math:`\mathrm{erg\,s^{-1}\,cm^{-3}\,Hz^{-1}\,sr^{-1}}`).
             This is the **rest-frame** emissivity; transformation to the observer
             frame is the responsibility of the caller.
@@ -1003,23 +1003,23 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the frequency grid in CGS (Hz).
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the magnetic field strength in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the electron number density on the Lorentz factor grid.
             The last axis is the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the Lorentz factor grid.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i` in log-space.
-        sin_alpha : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        sin_alpha : float or ~numpy.ndarray or broadcastable to it
             Sine of the pitch angle.
 
         Returns
         -------
-        log_alpha : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_alpha : ~numpy.ndarray
             :math:`\log|\alpha_\nu|` in CGS (:math:`\mathrm{cm^{-1}}`).
 
         Notes
@@ -1099,9 +1099,9 @@ class NumericalSynchrotronEngine:
 
         Returns
         -------
-        log_emissivity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_emissivity : ~numpy.ndarray
             :math:`\log j_\nu` in CGS.
-        log_absorption : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_absorption : ~numpy.ndarray
             :math:`\log|\alpha_\nu|` in CGS.
         """
         log_nu = np.asarray(log_nu, dtype="f8")
@@ -1199,11 +1199,11 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **comoving-frame frequency**
             :math:`\nu'` in CGS (Hz).
 
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame line-of-sight path length**
             :math:`\ell'` through the emitting region in CGS (cm).
 
@@ -1211,37 +1211,37 @@ class NumericalSynchrotronEngine:
             rest frame. Lorentz contraction effects must therefore already be accounted
             for by the caller if the emitting geometry is defined in another frame.
 
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength**
             :math:`B'` in CGS (G).
 
             The synchrotron kernel and emissivity formalism assume that the magnetic
             field is evaluated in the plasma rest frame.
 
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid.
 
             The final axis corresponds to the electron Lorentz-factor integration axis;
             leading axes define independent emitting zones or batches.
 
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid.
 
             Electron Lorentz factors are always defined relative to the plasma
             rest frame.
 
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights used for numerical integration over the Lorentz-factor
             distribution.
 
-        sin_alpha : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        sin_alpha : float or ~numpy.ndarray or broadcastable to it
             Sine of the **comoving-frame pitch angle**
             :math:`\alpha'` between the electron velocity and magnetic field.
 
         Returns
         -------
-        log_intensity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_intensity : ~numpy.ndarray
             Natural log of the **comoving-frame specific intensity**
             :math:`I'_{\nu'}` in CGS units
 
@@ -1346,34 +1346,34 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **observer-frame frequency**
             :math:`\nu` in CGS (Hz).
 
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame transfer depth**
             :math:`\ell'` through the emitting region in CGS (cm).
 
             This quantity is assumed to already include any Lorentz contraction
             appropriate to the emitting geometry.
 
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength**
             :math:`B'` in CGS (G).
 
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid.
 
             The final axis corresponds to the Lorentz-factor integration axis;
             leading axes define independent emitting zones or batches.
 
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid.
 
             Electron Lorentz factors are defined in the plasma rest frame.
 
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights used for numerical integration over the
             electron distribution.
 
@@ -1387,13 +1387,13 @@ class NumericalSynchrotronEngine:
             Cosine of the angle between the bulk velocity vector and the
             observer line of sight.
 
-        sin_alpha : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        sin_alpha : float or ~numpy.ndarray or broadcastable to it
             Sine of the **comoving-frame pitch angle**
             :math:`\alpha'`.
 
         Returns
         -------
-        log_intensity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_intensity : ~numpy.ndarray
             Natural log of the observer-frame specific intensity
             :math:`I_\nu` in CGS units
 
@@ -1506,11 +1506,11 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **observer-frame frequency**
             :math:`\nu` in CGS (Hz).
 
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame transfer depth**
             :math:`\ell'` through the emitting region in CGS (cm).
 
@@ -1519,27 +1519,27 @@ class NumericalSynchrotronEngine:
             include any Lorentz-contraction corrections appropriate to the emitting
             geometry.
 
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength**
             :math:`B'` in CGS (G).
 
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid.
 
             The final axis corresponds to the Lorentz-factor integration axis while
             any leading axes define independent emitting zones or batches.
 
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid.
 
             Electron Lorentz factors are always defined in the plasma rest frame.
 
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights used for numerical integration over the electron
             distribution.
 
-        log_A : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_A : float or ~numpy.ndarray or broadcastable to it
             Natural log of the projected effective emitting area
             :math:`A_\mathrm{eff}` in CGS (:math:`\mathrm{cm^2}`).
 
@@ -1560,13 +1560,13 @@ class NumericalSynchrotronEngine:
             Cosine of the angle between the bulk velocity vector and the observer
             line of sight. Default is ``1``.
 
-        sin_alpha : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it, optional
+        sin_alpha : float or ~numpy.ndarray or broadcastable to it, optional
             Sine of the **comoving-frame pitch angle**
             :math:`\alpha'`. Default is ``1``.
 
         Returns
         -------
-        log_flux : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_flux : ~numpy.ndarray
             Natural log of the observer-frame spectral flux density
             :math:`F_\nu` in CGS units
 
@@ -1650,7 +1650,7 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the observer-frame frequency :math:`\nu`
             in CGS (Hz).
 
@@ -1733,35 +1733,35 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the comoving-frame frequency
             :math:`\nu'` in CGS (Hz).
 
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the comoving-frame transfer depth
             :math:`\ell'` through the emitting region in CGS (cm).
 
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the comoving-frame magnetic field strength
             :math:`B'` in CGS (G).
 
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the comoving-frame electron number density
             distribution :math:`N'(\gamma)`.
 
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid.
 
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights for gamma integration.
 
-        sin_alpha : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it, optional
+        sin_alpha : float or ~numpy.ndarray or broadcastable to it, optional
             Sine of the comoving-frame pitch angle
             :math:`\alpha'`. Default is ``1``.
 
         Returns
         -------
-        log_T_B : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_T_B : ~numpy.ndarray
             Natural log of the comoving-frame brightness temperature
             in Kelvin.
 
@@ -1826,24 +1826,24 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **comoving-frame frequency** :math:`\nu'` in CGS (Hz).
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength** :math:`B'`
             in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid. The last axis is
             the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i` in log-space,
             used to convert the sum over :math:`d\gamma` into a Riemann sum.
 
         Returns
         -------
-        log_emissivity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_emissivity : ~numpy.ndarray
             :math:`\log j_\nu` in CGS (:math:`\mathrm{erg\,s^{-1}\,cm^{-3}\,Hz^{-1}\,sr^{-1}}`).
             This is the **comoving-frame** emissivity; transformation to the observer
             frame is the responsibility of the caller.
@@ -1932,23 +1932,23 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **comoving-frame frequency** :math:`\nu'` in CGS (Hz).
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength** :math:`B'`
             in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid. The last axis is
             the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i` in log-space.
 
         Returns
         -------
-        log_alpha : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_alpha : ~numpy.ndarray
             :math:`\log|\alpha_\nu|` in CGS (:math:`\mathrm{cm^{-1}}`).
 
         Notes
@@ -2014,9 +2014,9 @@ class NumericalSynchrotronEngine:
 
         Returns
         -------
-        log_emissivity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_emissivity : ~numpy.ndarray
             :math:`\log j_\nu` in CGS.
-        log_absorption : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_absorption : ~numpy.ndarray
             :math:`\log|\alpha_\nu|` in CGS.
         """
         log_nu = np.asarray(log_nu, dtype="f8")
@@ -2104,28 +2104,28 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **comoving-frame frequency** :math:`\nu'` in CGS (Hz).
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame line-of-sight path length** :math:`\ell'`
             through the emitting region in CGS (cm). Lorentz contraction effects must be
             accounted for by the caller if the geometry is defined in another frame.
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength** :math:`B'`
             in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid. The last axis is
             the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid, defined in the plasma rest frame.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights used for numerical integration over the Lorentz-factor
             distribution.
 
         Returns
         -------
-        log_intensity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_intensity : ~numpy.ndarray
             Natural log of the **comoving-frame specific intensity** :math:`I'_{\nu'}`
             in CGS units
 
@@ -2201,22 +2201,22 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **observer-frame frequency** :math:`\nu` in CGS (Hz).
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame transfer depth** :math:`\ell'` through the
             emitting region in CGS (cm). Lorentz contraction effects must be accounted for
             by the caller if the emitting geometry is defined in another frame.
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength** :math:`B'`
             in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid. The last axis is
             the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid, defined in the plasma rest frame.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights used for numerical integration over the electron distribution.
         z : float
             Cosmological redshift of the source.
@@ -2227,7 +2227,7 @@ class NumericalSynchrotronEngine:
 
         Returns
         -------
-        log_intensity : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_intensity : ~numpy.ndarray
             Natural log of the observer-frame specific intensity :math:`I_\nu` in CGS units
 
             .. math::
@@ -2296,24 +2296,24 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the **observer-frame frequency** :math:`\nu` in CGS (Hz).
-        log_slab_depth : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_slab_depth : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame transfer depth** :math:`\ell'` through the
             emitting region in CGS (cm). Lorentz contraction effects must be accounted for
             by the caller if the emitting geometry is defined in another frame.
-        log_B : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_B : float or ~numpy.ndarray or broadcastable to it
             Natural log of the **comoving-frame magnetic field strength** :math:`B'`
             in CGS (G).
-        log_N : float or ~numpy.ndarray, shape ``(*zone_shape, n_gamma)``
+        log_N : float or ~numpy.ndarray
             Natural log of the **comoving-frame electron number density distribution**
             :math:`N'(\gamma)` evaluated on the Lorentz-factor grid. The last axis is
             the gamma integration axis; leading axes define the zone batch.
-        log_gamma : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : float or ~numpy.ndarray
             Natural log of the electron Lorentz-factor grid, defined in the plasma rest frame.
-        log_weights : float or ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : float or ~numpy.ndarray
             Quadrature weights used for numerical integration over the electron distribution.
-        log_A_eff : float or ~numpy.ndarray, shape ``(*zone_shape,)`` or broadcastable to it
+        log_A_eff : float or ~numpy.ndarray or broadcastable to it
             Natural log of the projected effective emitting area :math:`A_\mathrm{eff}`
             in CGS (:math:`\mathrm{cm^2}`). Interpreted as an observer-frame apparent area.
         log_D_A : float
@@ -2328,7 +2328,7 @@ class NumericalSynchrotronEngine:
 
         Returns
         -------
-        log_flux : ~numpy.ndarray, shape ``(*nu_shape, *zone_shape)``
+        log_flux : ~numpy.ndarray
             Natural log of the observer-frame spectral flux density :math:`F_\nu`
             in CGS units
 
@@ -2391,7 +2391,7 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the comoving-frame frequency :math:`\nu'` in CGS (Hz).
         log_slab_depth : float or ~numpy.ndarray
             Natural log of the comoving-frame transfer depth in CGS (cm).
@@ -2449,7 +2449,7 @@ class NumericalSynchrotronEngine:
 
         Parameters
         ----------
-        log_nu : float or ~numpy.ndarray, shape ``(*nu_shape)``
+        log_nu : float or ~numpy.ndarray
             Natural log of the observer-frame frequency :math:`\nu` in CGS (Hz).
         log_slab_depth : float or ~numpy.ndarray
             Natural log of the comoving-frame transfer depth in CGS (cm).
@@ -2521,9 +2521,9 @@ class NumericalSynchrotronEngine:
 
         Returns
         -------
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i`.
         """
         if gamma is not None:
@@ -2548,7 +2548,7 @@ class NumericalSynchrotronEngine:
             Electron number density :math:`dN/d\gamma` in :math:`\mathrm{cm^{-3}}`.
             If callable, called as ``N(gamma)`` where ``gamma = exp(log_gamma)``.
             If an array, used directly; its last axis must match ``log_gamma.size``.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz factor grid.
 
         Returns
@@ -2583,22 +2583,22 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Comoving-frame frequency grid. Bare values are
             treated as Hz.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, the
             pitch-angle-averaged kernel is used (requires
             :meth:`load_avg_first_kernel`).
@@ -2612,7 +2612,7 @@ class NumericalSynchrotronEngine:
         Returns
         -------
         j_nu : ~astropy.units.Quantity
-            Comoving-frame emissivity, shape ``(*nu_shape, *zone_shape)``, in
+            Comoving-frame emissivity, in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-3}\,Hz^{-1}\,sr^{-1}}`.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -2661,22 +2661,22 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Comoving-frame frequency grid. Bare values are
             treated as Hz.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, pitch-angle-averaged
             kernel is used.
         gamma_min : float, optional
@@ -2689,7 +2689,7 @@ class NumericalSynchrotronEngine:
         Returns
         -------
         alpha_nu : ~astropy.units.Quantity
-            Comoving-frame absorption coefficient, shape ``(*nu_shape, *zone_shape)``,
+            Comoving-frame absorption coefficient,
             in :math:`\mathrm{cm^{-1}}`.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -2738,22 +2738,22 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Comoving-frame frequency grid. Bare values are
             treated as Hz.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, pitch-angle-averaged
             kernel is used.
         gamma_min : float, optional
@@ -2766,7 +2766,7 @@ class NumericalSynchrotronEngine:
         Returns
         -------
         S_nu : ~astropy.units.Quantity
-            Comoving-frame source function, shape ``(*nu_shape, *zone_shape)``, in
+            Comoving-frame source function, in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -2816,7 +2816,7 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Comoving-frame frequency grid. Bare values are
             treated as Hz.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
             Comoving-frame line-of-sight transfer depth :math:`\ell'`, shape
@@ -2825,19 +2825,19 @@ class NumericalSynchrotronEngine:
             lab frame, divide by :math:`\Gamma` (for motion along the line of sight)
             before passing.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, pitch-angle-averaged
             kernel is used.
         gamma_min : float, optional
@@ -2850,7 +2850,7 @@ class NumericalSynchrotronEngine:
         Returns
         -------
         I_nu : ~astropy.units.Quantity
-            Comoving-frame specific intensity, shape ``(*nu_shape, *zone_shape)``,
+            Comoving-frame specific intensity,
             in :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -2906,7 +2906,7 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Observer-frame frequency grid. Bare values are
             treated as Hz.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
             Comoving-frame line-of-sight transfer depth :math:`\ell'`, shape
@@ -2915,12 +2915,12 @@ class NumericalSynchrotronEngine:
             lab frame, divide by :math:`\Gamma` (for motion along the line of sight)
             before passing.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
@@ -2934,7 +2934,7 @@ class NumericalSynchrotronEngine:
             Angle between the bulk velocity and the line of sight. Bare values are
             treated as radians. Default ``0``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, pitch-angle-averaged
             kernel is used.
         gamma_min : float, optional
@@ -2947,7 +2947,7 @@ class NumericalSynchrotronEngine:
         Returns
         -------
         I_nu : ~astropy.units.Quantity
-            Observer-frame specific intensity, shape ``(*nu_shape, *zone_shape)``,
+            Observer-frame specific intensity,
             in :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -3015,7 +3015,7 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Observer-frame frequency grid. Bare values are
             treated as Hz.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
             Comoving-frame line-of-sight transfer depth :math:`\ell'`, shape
@@ -3024,19 +3024,19 @@ class NumericalSynchrotronEngine:
             lab frame, divide by :math:`\Gamma` (for motion along the line of sight)
             before passing.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         A_eff : float, ~numpy.ndarray, or ~astropy.units.Quantity, optional
-            Observer-frame projected emitting area, shape ``(*zone_shape)`` or
+            Observer-frame projected emitting area or
             broadcastable to it. Bare values are treated as :math:`\mathrm{cm^2}`.
             Defaults to :math:`\pi \ell'^2` when ``None``.
         luminosity_distance : ~astropy.units.Quantity or None, optional
@@ -3060,7 +3060,7 @@ class NumericalSynchrotronEngine:
             Angle between the bulk velocity and the line of sight. Bare values are
             treated as radians. Default ``0``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, pitch-angle-averaged
             kernel is used.
         gamma_min : float, optional
@@ -3073,7 +3073,7 @@ class NumericalSynchrotronEngine:
         Returns
         -------
         F_nu : ~astropy.units.Quantity
-            Observer-frame spectral flux density, shape ``(*nu_shape, *zone_shape)``,
+            Observer-frame spectral flux density,
             in :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -3165,7 +3165,7 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Observer-frame frequency grid. Bare values are
             treated as Hz.
 
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
@@ -3174,13 +3174,13 @@ class NumericalSynchrotronEngine:
             Bare values are treated as cm.
 
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
 
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape
             ``(*zone_shape, n_gamma)`` or broadcastable to it.
 
@@ -3199,7 +3199,7 @@ class NumericalSynchrotronEngine:
             Bare values are treated as radians. Default ``0``.
 
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or
+            Comoving-frame pitch angle or
             broadcastable to it. Bare values are treated as radians.
             If ``None``, the pitch-angle-averaged kernel is used.
 
@@ -3300,19 +3300,19 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Comoving-frame frequency grid. Bare values are
             treated as Hz.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
             Comoving-frame line-of-sight transfer depth :math:`\ell'`, shape
             ``(*zone_shape)`` or broadcastable to the leading dimensions of ``N``.
             Bare values are treated as cm.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
@@ -3323,7 +3323,7 @@ class NumericalSynchrotronEngine:
             shape ``(*zone_shape)`` or broadcastable to it. Bare values are treated
             as :math:`\mathrm{cm^2}`. Defaults to :math:`\pi \ell'^2` when ``None``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, the
             pitch-angle-averaged kernel is used.
         gamma_min : float, optional
@@ -3419,26 +3419,26 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Observer-frame frequency grid. Bare values are
             treated as Hz.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
             Comoving-frame line-of-sight transfer depth :math:`\ell'`, shape
             ``(*zone_shape)`` or broadcastable to the leading dimensions of ``N``.
             Bare values are treated as cm.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         A_eff : float, ~numpy.ndarray, or ~astropy.units.Quantity, optional
-            Effective emitting area in the comoving frame, shape ``(*zone_shape)``
+            Effective emitting area in the comoving frame
             or broadcastable to it. Bare values are treated as
             :math:`\mathrm{cm^2}`. Defaults to :math:`\pi \ell'^2` when ``None``.
         z : float, optional
@@ -3449,7 +3449,7 @@ class NumericalSynchrotronEngine:
             Angle between the bulk velocity and the line of sight. Bare values are
             treated as radians. Default ``0``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, the
             pitch-angle-averaged kernel is used.
         gamma_min : float, optional
@@ -3550,26 +3550,26 @@ class NumericalSynchrotronEngine:
         Parameters
         ----------
         nu : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Observer-frame frequency grid, shape ``(*nu_shape)``. Bare values are
+            Observer-frame frequency grid. Bare values are
             treated as Hz.
         slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity
             Comoving-frame line-of-sight transfer depth :math:`\ell'`, shape
             ``(*zone_shape)`` or broadcastable to the leading dimensions of ``N``.
             Bare values are treated as cm.
         B : float, ~numpy.ndarray, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength, shape ``(*zone_shape)`` or
+            Comoving-frame magnetic field strength or
             broadcastable to the leading dimensions of ``N``. Bare values are
             treated as Gauss.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(*zone_shape, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             called as ``N(gamma)`` and must return shape ``(*zone_shape, n_gamma)``
             or broadcastable to it.
         gamma : ~numpy.ndarray or None, optional
             Explicit Lorentz factor grid. If ``None``, built from ``gamma_min``,
             ``gamma_max``, ``n_gamma``.
         A_eff : float, ~numpy.ndarray, or ~astropy.units.Quantity, optional
-            Observer-frame projected emitting area, shape ``(*zone_shape)`` or
+            Observer-frame projected emitting area or
             broadcastable to it. Bare values are treated as :math:`\mathrm{cm^2}`.
             Defaults to :math:`\pi \ell'^2` when ``None``.
         luminosity_distance : ~astropy.units.Quantity or None, optional
@@ -3593,7 +3593,7 @@ class NumericalSynchrotronEngine:
             Angle between the bulk velocity and the line of sight. Bare values are
             treated as radians. Default ``0``.
         alpha : float, ~astropy.units.Quantity, ~numpy.ndarray, or None, optional
-            Comoving-frame pitch angle, shape ``(*zone_shape)`` or broadcastable to
+            Comoving-frame pitch angle or broadcastable to
             it. Bare values are treated as radians. If ``None``, the
             pitch-angle-averaged kernel is used.
         gamma_min : float, optional

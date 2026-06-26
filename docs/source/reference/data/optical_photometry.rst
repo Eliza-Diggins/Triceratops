@@ -24,7 +24,7 @@ decoupled from any particular model or filter ordering convention.
 
 .. rubric:: In this section
 
-- `Schema`_
+- :ref:`optical_photometry_schema`
 - `Construction`_
 - `Dual-Representation Properties`_
 - `Detection / Non-Detection Logic`_
@@ -33,6 +33,8 @@ decoupled from any particular model or filter ordering convention.
 - `API Reference`_
 
 ----
+
+.. _optical_photometry_schema:
 
 Schema
 ------
@@ -247,7 +249,7 @@ bridges the container to the Trilobite inference pipeline.  It performs three ke
 
 The resulting :class:`~trilobite.data.core.InferenceData` has
 ``x = {"time": ..., "band_idx": ...}`` and ``y = {"flux_density": ...}``, which is exactly
-what :class:`~trilobite.inference.likelihood.GaussianLikelihood` expects.
+what :class:`~trilobite.inference.likelihood.base.GaussianLikelihood` expects.
 
 .. code-block:: python
 

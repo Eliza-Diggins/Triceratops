@@ -49,7 +49,9 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
     r"""
     On-axis synchrotron SED engine for axisymmetric multi-zone outflows.
 
-    This class extends the functionality of :class:`NumericalSynchrotronEngine` to handle axisymmetric outflows
+    This class extends the functionality of
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
+    to handle axisymmetric outflows
     with angular structure. This class allows users to model synchrotron emission detected by an on-axis observer
     from outflows where physical properties vary with polar angle, such as structured jets or spherical outflows
     with angular gradients.
@@ -81,14 +83,16 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
     the ``(n_\nu, n_\theta, n_\gamma)`` array without any Python loop over sightlines.
 
     Kernel tables are **not** pre-loaded at construction; call
-    :meth:`~NumericalSynchrotronEngine.load_avg_first_kernel` and/or
-    :meth:`~NumericalSynchrotronEngine.load_first_kernel` before evaluating SEDs.
+    :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_avg_first_kernel`
+    and/or
+    :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_first_kernel`
+    before evaluating SEDs.
     The Lorentz-factor grid is built per-call from the ``gamma`` / ``gamma_min`` /
     ``gamma_max`` / ``n_gamma`` arguments, exactly as in the parent class.
 
     The Doppler convention used here is :math:`\mathcal{D} = [\Gamma(1-\beta\cos\theta)]^{-1}`,
     where :math:`\beta > 0` and :math:`\cos\theta = 1` (on-axis) gives maximum
-    blueshift. This convention matches :class:`OnAxisMultizoneSynchrotronSED` and
+    blueshift. This convention matches ``OnAxisMultizoneSynchrotronSED`` and
     standard astrophysical usage for approaching ejecta.
 
     The electron distribution :math:`N(\gamma)` is passed as a call-time argument of
@@ -153,9 +157,11 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
         -----
         This constructor does not load synchrotron kernel interpolation tables.
         Before evaluating spectra, call
-        :meth:`~NumericalSynchrotronEngine.load_avg_first_kernel` for the
+        :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_avg_first_kernel`
+         for the
         pitch-angle-averaged formalism and/or
-        :meth:`~NumericalSynchrotronEngine.load_first_kernel` for fixed pitch-angle
+        :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_first_kernel`
+        for fixed pitch-angle
         calculations.
 
         The following read-only quadrature arrays are precomputed:
@@ -218,23 +224,23 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
     @property
     def theta(self) -> np.ndarray:
-        """Polar-angle quadrature nodes [rad], shape ``(n_theta,)``."""
+        """Polar-angle quadrature nodes [rad]."""
         return self._theta.copy()
 
     @property
     def cos_theta(self) -> np.ndarray:
-        r"""Cosine of the quadrature nodes :math:`\xi \in [0, 1]`, shape ``(n_theta,)``."""
+        r"""Cosine of the quadrature nodes :math:`\xi \in [0, 1]`."""
         return self._cos_theta.copy()
 
     @property
     def gl_weights(self) -> np.ndarray:
-        r"""Gauss-Legendre weights for :math:`\int_0^1 f(\xi)\,d\xi`, shape ``(n_theta,)``."""
+        r"""Gauss-Legendre weights for :math:`\int_0^1 f(\xi)\,d\xi`."""
         return self._gl_weights.copy()
 
     @property
     def quad_weights(self) -> np.ndarray:
         r"""
-        Composite weights for :math:`\int_0^1 f(\xi)\,\xi\,d\xi`, shape ``(n_theta,)``.
+        Composite weights for :math:`\int_0^1 f(\xi)\,\xi\,d\xi`.
 
         Equal to ``gl_weights * cos_theta``.
         """
@@ -254,12 +260,12 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        beta : ~numpy.ndarray, shape ``(n_theta,)``
+        beta : ~numpy.ndarray
             Bulk velocity per sightline.
 
         Returns
         -------
-        log_D : ~numpy.ndarray, shape ``(n_theta,)``
+        log_D : ~numpy.ndarray
         """
         beta = np.broadcast_to(np.asarray(beta, dtype="f8"), (self._n_theta,))
         log_gamma_bulk = -0.5 * np.log1p(-(beta**2))
@@ -317,21 +323,21 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        log_nu : ~numpy.ndarray, shape ``(n_nu,)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency grid in CGS (Hz).
-        log_B : ~numpy.ndarray, shape ``(n_theta,)``
+        log_B : ~numpy.ndarray
             Natural log of the magnetic field in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the electron distribution.
-        log_slab : ~numpy.ndarray, shape ``(n_theta,)``
+        log_slab : ~numpy.ndarray
             Natural log of the slab depth in CGS (cm).
-        beta_arr : ~numpy.ndarray, shape ``(n_theta,)``
+        beta_arr : ~numpy.ndarray
             Bulk velocity per zone.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz-factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`\gamma_i\,\Delta\ln\gamma_i`.
-        sin_alpha_arr : ~numpy.ndarray or None, shape ``(n_theta,)``
+        sin_alpha_arr : ~numpy.ndarray or None
             Sine of the pitch angle per zone, or ``None`` for PA-averaged kernel.
         """
         log_nu = np.atleast_1d(np.asarray(np.log(ensure_in_units(nu, u.Hz)), dtype="f8"))
@@ -389,9 +395,9 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
             Natural log of the angular-diameter distance in CGS (cm).
         log_D_L : float
             Natural log of the luminosity distance in CGS (cm).
-        log_R : ~numpy.ndarray, shape ``(n_theta,)``
+        log_R : ~numpy.ndarray
             Natural log of the emission radius per sightline in CGS (cm).
-        log_f_A : ~numpy.ndarray, shape ``(n_theta,)``
+        log_f_A : ~numpy.ndarray
             Natural log of the area filling factor per sightline.
         """
         dist = resolve_cosmological_distances(
@@ -430,27 +436,27 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu_obs : ~numpy.ndarray, shape ``(n_nu,)``
+        log_nu_obs : ~numpy.ndarray
             Natural log of observer-frame frequencies [Hz].
-        log_B : ~numpy.ndarray, shape ``(n_theta,)``
+        log_B : ~numpy.ndarray
             Natural log of comoving-frame magnetic field [G] per sightline.
-        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of comoving-frame electron distribution per sightline.
-        log_slab_depth : ~numpy.ndarray, shape ``(n_theta,)``
+        log_slab_depth : ~numpy.ndarray
             Natural log of comoving-frame LOS transfer depth [cm] per sightline.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz-factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of quadrature weights :math:`\gamma_i\,\Delta\!\log\gamma_i`.
-        log_correction : ~numpy.ndarray, shape ``(n_theta,)``
+        log_correction : ~numpy.ndarray
             :math:`\ln(\mathcal{D}/(1+z))` per sightline; used to shift observer
             frequencies to the comoving frame via :math:`\nu' = \nu / e^{\text{correction}}`.
-        sin_alpha : ~numpy.ndarray or None, shape ``(n_theta,)``
+        sin_alpha : ~numpy.ndarray or None
             Sine of pitch angle per sightline. ``None`` selects the PA-averaged kernel.
 
         Returns
         -------
-        log_I_rf : ~numpy.ndarray, shape ``(n_nu, n_theta)``
+        log_I_rf : ~numpy.ndarray
             Natural log of comoving-frame specific intensity
             [:math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`].
         """
@@ -576,16 +582,18 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        j_nu : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        j_nu : ~astropy.units.Quantity
             Comoving-frame synchrotron emissivity per sightline in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-3}\,Hz^{-1}\,sr^{-1}}`.
 
         Notes
         -----
         This method requires a loaded synchrotron kernel table. Call
-        :meth:`~NumericalSynchrotronEngine.load_avg_first_kernel` before using the
+        :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_avg_first_kernel`
+        before using the
         pitch-angle-averaged branch, or
-        :meth:`~NumericalSynchrotronEngine.load_first_kernel` before using the
+        :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_first_kernel`
+        before using the
         fixed-pitch-angle branch.
         """
         nu_cgs = ensure_in_units(nu, u.Hz)
@@ -661,7 +669,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        alpha_nu : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        alpha_nu : ~astropy.units.Quantity
             Comoving-frame synchrotron self-absorption coefficient per sightline in
             :math:`\mathrm{cm^{-1}}`.
 
@@ -764,7 +772,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        I_rf : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        I_rf : ~astropy.units.Quantity
             Comoving-frame specific intensity per sightline in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
 
@@ -864,7 +872,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        I_nu : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        I_nu : ~astropy.units.Quantity
             Observer-frame specific intensity per sightline in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
 
@@ -962,7 +970,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        T_B_rf : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        T_B_rf : ~astropy.units.Quantity
             Comoving-frame brightness temperature per sightline in Kelvin.
 
         Notes
@@ -1060,7 +1068,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        T_B : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        T_B : ~astropy.units.Quantity
             Observer-frame brightness temperature per sightline in Kelvin.
 
         Notes
@@ -1200,7 +1208,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        F_ring : ~astropy.units.Quantity, shape ``(n_nu, n_theta)``
+        F_ring : ~astropy.units.Quantity
             Quadrature-weighted flux-density contribution from each angular
             sightline in :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
 
@@ -1339,7 +1347,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        F_nu : ~astropy.units.Quantity, shape ``(n_nu,)``
+        F_nu : ~astropy.units.Quantity
             Angle-integrated observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
 
@@ -1482,7 +1490,7 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
         Returns
         -------
-        L_iso : ~astropy.units.Quantity, shape ``(n_nu,)``
+        L_iso : ~astropy.units.Quantity
             Angle-integrated isotropic-equivalent spectral luminosity in
             :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.
 
@@ -1634,8 +1642,10 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         therefore not set; use ``gl_weights_theta`` and ``gl_weights_phi`` instead.
 
         Kernel tables are not loaded at construction. Call
-        :meth:`~NumericalSynchrotronEngine.load_avg_first_kernel` and/or
-        :meth:`~NumericalSynchrotronEngine.load_first_kernel` before evaluating SEDs.
+        :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_avg_first_kernel`
+        and/or
+        :meth:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.load_first_kernel`
+        before evaluating SEDs.
         """
         NumericalSynchrotronEngine.__init__(self)
 
@@ -1689,27 +1699,27 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
     @property
     def sin_theta(self) -> np.ndarray:
-        r"""Sine of the polar quadrature nodes, shape ``(n_theta,)``."""
+        r"""Sine of the polar quadrature nodes."""
         return self._sin_theta.copy()
 
     @property
     def gl_weights_theta(self) -> np.ndarray:
-        r"""Gauss--Legendre weights for :math:`\int_{-1}^{1} f(\mu)\,d\mu`, shape ``(n_theta,)``."""
+        r"""Gauss--Legendre weights for :math:`\int_{-1}^{1} f(\mu)\,d\mu`."""
         return self._gl_weights_theta.copy()
 
     @property
     def phi(self) -> np.ndarray:
-        r"""Azimuthal quadrature nodes :math:`\phi_j \in [0,\pi]` [rad], shape ``(n_phi,)``."""
+        r"""Azimuthal quadrature nodes :math:`\phi_j \in [0,\pi]` [rad]."""
         return self._phi.copy()
 
     @property
     def gl_weights_phi(self) -> np.ndarray:
-        r"""Gauss--Legendre weights for :math:`\int_0^\pi f(\phi)\,d\phi`, shape ``(n_phi,)``."""
+        r"""Gauss--Legendre weights for :math:`\int_0^\pi f(\phi)\,d\phi`."""
         return self._gl_weights_phi.copy()
 
     @property
     def cos_phi(self) -> np.ndarray:
-        r"""Cosine of the azimuthal quadrature nodes, shape ``(n_phi,)``."""
+        r"""Cosine of the azimuthal quadrature nodes."""
         return self._cos_phi.copy()
 
     @property
@@ -1736,14 +1746,14 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Parameters
         ----------
-        beta : ~numpy.ndarray, shape ``(n_theta,)``
+        beta : ~numpy.ndarray
             Bulk velocity per theta node.
-        mu_obs : ~numpy.ndarray, shape ``(n_theta,)``
+        mu_obs : ~numpy.ndarray
             Line-of-sight cosine :math:`\mu_\mathrm{obs}` per theta node.
 
         Returns
         -------
-        log_D : ~numpy.ndarray, shape ``(n_theta,)``
+        log_D : ~numpy.ndarray
         """
         log_gamma_bulk = -0.5 * np.log1p(-(beta**2))
         return -(log_gamma_bulk + np.log1p(-beta * mu_obs))
@@ -1800,21 +1810,21 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        log_nu : ~numpy.ndarray, shape ``(n_nu,)``
+        log_nu : ~numpy.ndarray
             Natural log of the observer-frame frequency in CGS (Hz).
-        log_B : ~numpy.ndarray, shape ``(n_theta,)``
+        log_B : ~numpy.ndarray
             Natural log of the magnetic field in CGS (G).
-        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
+        log_N : ~numpy.ndarray
             Natural log of the electron distribution.
-        log_shell : ~numpy.ndarray, shape ``(n_theta,)``
+        log_shell : ~numpy.ndarray
             Natural log of the shell thickness in CGS (cm).
-        beta_arr : ~numpy.ndarray, shape ``(n_theta,)``
+        beta_arr : ~numpy.ndarray
             Bulk velocity per zone.
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_gamma : ~numpy.ndarray
             Natural log of the Lorentz-factor grid.
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_weights : ~numpy.ndarray
             Log of the quadrature weights :math:`\gamma_i\,\Delta\ln\gamma_i`.
-        sin_alpha_arr : ~numpy.ndarray or None, shape ``(n_theta,)``
+        sin_alpha_arr : ~numpy.ndarray or None
             Sine of the pitch angle per zone, or ``None`` for PA-averaged kernel.
         """
         log_nu = np.atleast_1d(np.asarray(np.log(ensure_in_units(nu, u.Hz)), dtype="f8"))
@@ -1854,25 +1864,25 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Parameters
         ----------
-        log_nu : ~numpy.ndarray, shape ``(n_nu,)``
-        log_B : ~numpy.ndarray, shape ``(n_theta,)``
-        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
-        log_shell : ~numpy.ndarray, shape ``(n_theta,)``
-        beta_arr : ~numpy.ndarray, shape ``(n_theta,)``
-        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
-        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+        log_nu : ~numpy.ndarray
+        log_B : ~numpy.ndarray
+        log_N : ~numpy.ndarray
+        log_shell : ~numpy.ndarray
+        beta_arr : ~numpy.ndarray
+        log_gamma : ~numpy.ndarray
+        log_weights : ~numpy.ndarray
         theta_obs : float
             Observer polar angle [rad].
         z : float
-        sin_alpha : ~numpy.ndarray or None, shape ``(n_theta,)``
+        sin_alpha : ~numpy.ndarray or None
 
         Returns
         -------
-        log_I_rf : ~numpy.ndarray, shape ``(n_nu, n_phi, n_theta)``
+        log_I_rf : ~numpy.ndarray
             Natural log of comoving-frame specific intensity.
-        log_correction : ~numpy.ndarray, shape ``(n_phi, n_theta)``
+        log_correction : ~numpy.ndarray
             :math:`\ln(\mathcal{D}/(1+z))` per zone.
-        mu_obs : ~numpy.ndarray, shape ``(n_phi, n_theta)``
+        mu_obs : ~numpy.ndarray
             Line-of-sight cosine per zone.
         """
         cos_obs = np.cos(theta_obs)
@@ -1943,7 +1953,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        log_flat : ~numpy.ndarray, shape ``(n_nu, n_phi * n_theta)``
+        log_flat : ~numpy.ndarray
         """
         log_I_rf, log_correction, mu_obs = self._compute_log_zone_intensities(
             log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, theta_obs, z, sin_alpha
@@ -2004,7 +2014,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
             interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             evaluated as ``N(gamma)`` and must return shape ``(n_theta, n_gamma)``.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame shell thickness :math:`\Delta r'` per theta node. Bare
@@ -2031,7 +2041,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        I_rf : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+        I_rf : ~astropy.units.Quantity
             Comoving-frame specific intensity in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
@@ -2076,7 +2086,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
             are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``. If callable,
+            :math:`\mathrm{cm^{-3}}`. If callable,
             evaluated as ``N(gamma)`` and must return shape ``(n_theta, n_gamma)``.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
@@ -2107,7 +2117,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        I_nu : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+        I_nu : ~astropy.units.Quantity
             Observer-frame specific intensity in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.
         """
@@ -2154,7 +2164,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
             are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``.
+            :math:`\mathrm{cm^{-3}}`.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
             theta node. Bare values are interpreted as cm.
@@ -2181,7 +2191,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        T_B_rf : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+        T_B_rf : ~astropy.units.Quantity
             Comoving-frame brightness temperature in Kelvin.
         """
         log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
@@ -2228,7 +2238,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
             are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``.
+            :math:`\mathrm{cm^{-3}}`.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
             theta node. Bare values are interpreted as cm.
@@ -2255,7 +2265,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        T_B : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+        T_B : ~astropy.units.Quantity
             Observer-frame brightness temperature in Kelvin.
         """
         log_nu, log_B, log_N, log_shell, beta_arr, log_gamma, log_weights, sin_alpha = self._coerce_off_axis_inputs(
@@ -2317,7 +2327,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         B : float, array-like, or ~astropy.units.Quantity
             Comoving-frame magnetic field strength per theta node.
         N : ~numpy.ndarray or callable
-            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+            Comoving-frame electron distribution.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame shell thickness :math:`\Delta r'` per theta node.
         R : float, array-like, or ~astropy.units.Quantity
@@ -2342,7 +2352,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        F_zone : ~astropy.units.Quantity, shape ``(n_nu, n_theta, n_phi)``
+        F_zone : ~astropy.units.Quantity
             Quadrature-weighted flux-density contribution per zone in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
         """
@@ -2421,7 +2431,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         B : float, array-like, or ~astropy.units.Quantity
             Comoving-frame magnetic field strength per theta node.
         N : ~numpy.ndarray or callable
-            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+            Comoving-frame electron distribution.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame shell thickness :math:`\Delta r'` per theta node. The engine
             computes the LOS path internally as
@@ -2448,7 +2458,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        F_nu : ~astropy.units.Quantity, shape ``(n_nu,)``
+        F_nu : ~astropy.units.Quantity
             Angle-integrated observer-frame spectral flux density in
             :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.
 
@@ -2521,7 +2531,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
             are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
             Comoving-frame electron distribution :math:`dN/d\gamma` in
-            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``.
+            :math:`\mathrm{cm^{-3}}`.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
             Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
             theta node. Bare values are interpreted as cm.
@@ -2564,7 +2574,7 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
         Returns
         -------
-        L_iso : ~astropy.units.Quantity, shape ``(n_nu,)``
+        L_iso : ~astropy.units.Quantity
             Isotropic-equivalent spectral luminosity in
             :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.
         """

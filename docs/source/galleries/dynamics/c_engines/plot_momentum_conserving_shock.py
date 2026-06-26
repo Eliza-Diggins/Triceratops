@@ -75,11 +75,11 @@ v_wind = 100.0 * u.km / u.s
 # Profile Construction
 # --------------------
 #
-# :class:`~trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile` normalizes
+# :class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile` normalizes
 # the Chevalier broken-power-law kernel to the requested mass and energy and
 # returns a fast unit-free callable.
 #
-# :class:`~trilobite.dynamics.profiles.WindCSMProfile` constructs the
+# :class:`~trilobite.dynamics.profiles.csm.WindCSMProfile` constructs the
 # :math:`\rho \propto r^{-2}` wind density callable.
 
 K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej=E_ej, M_ej=M_ej, n=10, delta=1)

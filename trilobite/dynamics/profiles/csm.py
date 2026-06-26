@@ -275,11 +275,11 @@ class WindCSMProfile(StationaryCSMDensityProfile):
 
     See Also
     --------
-    normalize :
+    normalize
         Compute :math:`A` from a mass-loss rate and wind velocity.
-    normalize_A_star :
+    normalize_A_star
         Compute :math:`A_*` from a mass-loss rate and wind velocity.
-    normalize_from_A_star :
+    normalize_from_A_star
         Compute :math:`A` from a supplied :math:`A_*`.
     """
 

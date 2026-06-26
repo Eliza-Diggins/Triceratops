@@ -46,6 +46,7 @@ the literature (see e.g. :footcite:t:`2025ApJ...992L..18S`).
 
 
 .. _single_zone_foundational_assumptions:
+
 Foundational Assumptions
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 

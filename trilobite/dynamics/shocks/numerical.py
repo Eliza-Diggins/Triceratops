@@ -600,7 +600,7 @@ class PressureDrivenThinShellShockEngine(ShockEngine):
     r"""
     Pressure-driven thin-shell shock engine for arbitrary ejecta and CSM profiles.
 
-    This :class:`~trilobite.dynamics.shocks.shock_engine.ShockEngine` subclass
+    This :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` subclass
     implements a general thin-shell shock model that collapses the shocked
     interaction region to a single shell of mass :math:`M_{\rm sh}`, radius
     :math:`R_{\rm sh}`, and velocity :math:`v_{\rm sh}`. The shell acceleration

@@ -104,7 +104,7 @@ From AB magnitudes:
 
     epoch = OpticalPhotometryEpoch(table)
 
-A :meth:`from_table` classmethod is also available:
+A ``from_table`` classmethod is also available:
 
 .. code-block:: python
 

@@ -38,7 +38,7 @@ The following assumptions are shared by all Chevalier self-similar shock models:
    where :math:`v_t` is the transition velocity, :math:`K_{\rm ej}` is the ejecta
    normalization, :math:`\delta` is the inner density index, and :math:`n` is the
    outer density index. The helper function
-   :meth:`trilobite.dynamics.profiles.BrokenPowerLawEjectaProfile.normalize`
+   :meth:`trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize`
    computes :math:`v_t` and :math:`K_{\rm ej}` from the total ejecta kinetic energy
    and mass.
 
@@ -839,7 +839,8 @@ class ChevalierSelfSimilarShockEngine(ShockEngine):
     r"""
     Implementation of the "classical" Chevalier 1982 self-similar supernova shock model.
 
-    This :class:`~trilobite.dynamics.shock_engine.ShockEngine` subclass implements the self-similar shock solutions
+    This :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` subclass implements the
+    self-similar shock solutions
     described in :footcite:t:`chevalierSelfsimilarSolutionsInteraction1982` for the interaction between
     supernova ejecta and a surrounding circumstellar medium (CSM). The model assumes power-law density profiles
     for both the ejecta and the CSM, leading to a self-similar evolution of the shock structure over time.
@@ -932,7 +933,7 @@ class ChevalierSelfSimilarShockEngine(ShockEngine):
     --------
     ChevalierSelfSimilarWindShockEngine
         Specialized version of :class:`ChevalierSelfSimilarShockEngine` for steady-wind CSM.
-    NumericalThinShellShockEngine
+    ~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine
         A numerical implementation of thin-shell shock dynamics for arbitrary ejecta and CSM profiles.
 
     References

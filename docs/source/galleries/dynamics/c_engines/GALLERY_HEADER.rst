@@ -22,4 +22,4 @@ Four engines are covered:
 Use these examples when you need to evolve a shock through a realistic,
 non-power-law density profile.
 
-**API:** :ref:`dynamics_numerical_engines`, :ref:`dynamics_csm_utils`
+**API:** :ref:`numerical_shocks_overview`, :ref:`profiles_user_guide`

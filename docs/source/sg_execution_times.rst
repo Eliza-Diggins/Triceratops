@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:01.299** total execution time for 61 files **from all galleries**:
+**00:00.003** total execution time for 67 files **from all galleries**:
 
 .. container::
 
@@ -32,17 +32,8 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_two_shock.py` (``galleries/dynamics/b_models/plot_chevalier_two_shock.py``)
-     - 00:01.025
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_wind_engine.py` (``galleries/dynamics/b_models/plot_chevalier_wind_engine.py``)
-     - 00:00.152
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_self_similar.py` (``galleries/dynamics/b_models/plot_chevalier_self_similar.py``)
-     - 00:00.119
-     - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``galleries/inference/plot_optical_lc_inference.py``)
-     - 00:00.002
+     - 00:00.003
      - 0.0
    * - :ref:`sphx_glr_auto_examples_modeling_plot_fred_blackbody_optical_lc.py` (``galleries/modeling/plot_fred_blackbody_optical_lc.py``)
      - 00:00.001
@@ -98,13 +89,34 @@ Computation times
    * - :ref:`sphx_glr_auto_examples_dynamics_a_fundamentals_plot_rh_jump_weak_conditions.py` (``galleries/dynamics/a_fundamentals/plot_rh_jump_weak_conditions.py``)
      - 00:00.000
      - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_blandford_mcKee.py` (``galleries/dynamics/b_models/plot_blandford_mcKee.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_self_similar.py` (``galleries/dynamics/b_models/plot_chevalier_self_similar.py``)
+     - 00:00.000
+     - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_shock_structure.py` (``galleries/dynamics/b_models/plot_chevalier_shock_structure.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_two_shock.py` (``galleries/dynamics/b_models/plot_chevalier_two_shock.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_chevalier_wind_engine.py` (``galleries/dynamics/b_models/plot_chevalier_wind_engine.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_b_models_plot_sedov_taylor_shock.py` (``galleries/dynamics/b_models/plot_sedov_taylor_shock.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shock_cooling.py` (``galleries/dynamics/c_engines/plot_mechanical_shock_cooling.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shock_model.py` (``galleries/dynamics/c_engines/plot_mechanical_shock_model.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shocks_csms.py` (``galleries/dynamics/c_engines/plot_mechanical_shocks_csms.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_momentum_conserving_shock.py` (``galleries/dynamics/c_engines/plot_momentum_conserving_shock.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_numerical_shock_engine.py` (``galleries/dynamics/c_engines/plot_numerical_shock_engine.py``)
@@ -185,7 +197,13 @@ Computation times
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_inhomogeneous_cylinder.py` (``galleries/synchrotron/b_seds/plot_inhomogeneous_cylinder.py``)
      - 00:00.000
      - 0.0
+   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_inhomogeneous_sphere.py` (``galleries/synchrotron/b_seds/plot_inhomogeneous_sphere.py``)
+     - 00:00.000
+     - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py` (``galleries/synchrotron/b_seds/plot_multi_component_numerical_SED.py``)
+     - 00:00.000
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_off_axis_numerical.py` (``galleries/synchrotron/b_seds/plot_off_axis_numerical.py``)
      - 00:00.000
      - 0.0
    * - :ref:`sphx_glr_auto_examples_synchrotron_b_seds_plot_on_axis_numerical.py` (``galleries/synchrotron/b_seds/plot_on_axis_numerical.py``)
