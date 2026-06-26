@@ -1,9 +1,34 @@
-"""
-Aspherical synchrotron radiation SEDs.
+r"""
+Aspherical and axisymmetric numerical synchrotron SED engines.
 
-This module contains functions for computing the spectral energy distribution (SED) of synchrotron radiation
-from aspherical sources. The SED is computed by integrating the synchrotron emission over the volume of the source,
-taking into account the geometry and orientation of the source.
+This module provides synchrotron SED engines for axisymmetric outflows with
+arbitrary angular structure, extending the one-zone slab machinery of
+:class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
+to multi-zone geometries resolved in polar angle.
+
+Two engines are provided:
+
+- :class:`OnAxisAsymmetricSynchrotronEngine` — for observers located on the
+  symmetry axis (:math:`\theta_\mathrm{obs} = 0`).  The flux integral reduces
+  to a single Gauss--Legendre quadrature over :math:`\mu = \cos\theta \in [0,1]`.
+- :class:`OffAxisAsymmetricSynchrotronEngine` — lifts the on-axis restriction to
+  an arbitrary observer angle :math:`\theta_\mathrm{obs}`.  Both :math:`\mu`
+  and :math:`\phi` integrals are evaluated by Gauss--Legendre quadrature; the
+  :math:`\phi` loop reuses the on-axis inner transfer kernel, so memory scales
+  with the on-axis footprint regardless of the number of :math:`\phi` nodes.
+
+Both engines inherit all kernel loading, emissivity, and radiative-transfer
+machinery from :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`.
+Kernel tables must be loaded explicitly before computing SEDs.
+
+See Also
+--------
+:mod:`trilobite.radiation.synchrotron.SEDs.numerical.core`
+    Base engine class and single-zone radiative-transfer machinery.
+:mod:`trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous`
+    Multi-zone engines resolved radially (cylinder and sphere geometries).
+:ref:`synch_numerical_sed_theory`
+    Detailed discussion of the aspherical shell and off-axis models.
 """
 
 from collections.abc import Callable
@@ -72,9 +97,15 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
 
     See Also
     --------
-    :class:`NumericalSynchrotronEngine` :
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
         Base engine providing kernel tables, gamma grids, and single-zone radiative
         transfer.
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine`
+        Extension to arbitrary observer viewing angles.
+
+    References
+    ----------
+    .. footbibliography::
     """
 
     # ------------------------------------------ #
@@ -247,7 +278,62 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
         gamma_max: float,
         n_gamma: int,
     ):
-        """Convert and broadcast all per-call inputs to internal log-CGS arrays."""
+        r"""
+        Convert and broadcast all per-call inputs to internal log-CGS arrays.
+
+        Validates units, converts to CGS, and broadcasts each scalar or
+        per-zone quantity to shape ``(n_theta,)`` so the inner vectorized
+        kernels receive consistently shaped arrays.  The Lorentz-factor grid
+        is built or validated via :meth:`_build_gamma_grid`, and the electron
+        distribution is resolved to ``log_N`` via :meth:`_resolve_log_N`.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency. Converted to Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field. Converted to Gauss. Broadcast to
+            ``(n_theta,)``.
+        N : array-like or callable
+            Comoving-frame electron distribution. See :meth:`_resolve_log_N`.
+        slab_depth : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame line-of-sight transfer depth per zone. Converted to
+            cm. Broadcast to ``(n_theta,)``.
+        beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per zone. Broadcast to
+            ``(n_theta,)``.
+        alpha : float, array-like, ~astropy.units.Quantity, or None
+            Comoving-frame pitch angle per zone. Converted to radians and
+            broadcast to ``(n_theta,)``. ``None`` selects the pitch-angle-averaged
+            kernel (``sin_alpha_arr`` returned as ``None``).
+        gamma : array-like or None
+            Explicit Lorentz-factor grid. ``None`` triggers internal construction.
+        gamma_min : float
+            Lower bound for the internally constructed Lorentz-factor grid.
+        gamma_max : float
+            Upper bound for the internally constructed Lorentz-factor grid.
+        n_gamma : int
+            Number of Lorentz-factor grid points.
+
+        Returns
+        -------
+        log_nu : ~numpy.ndarray, shape ``(n_nu,)``
+            Natural log of the observer-frame frequency grid in CGS (Hz).
+        log_B : ~numpy.ndarray, shape ``(n_theta,)``
+            Natural log of the magnetic field in CGS (G).
+        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
+            Natural log of the electron distribution.
+        log_slab : ~numpy.ndarray, shape ``(n_theta,)``
+            Natural log of the slab depth in CGS (cm).
+        beta_arr : ~numpy.ndarray, shape ``(n_theta,)``
+            Bulk velocity per zone.
+        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+            Natural log of the Lorentz-factor grid.
+        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+            Log of the quadrature weights :math:`\gamma_i\,\Delta\ln\gamma_i`.
+        sin_alpha_arr : ~numpy.ndarray or None, shape ``(n_theta,)``
+            Sine of the pitch angle per zone, or ``None`` for PA-averaged kernel.
+        """
         log_nu = np.atleast_1d(np.asarray(np.log(ensure_in_units(nu, u.Hz)), dtype="f8"))
         log_B = np.log(np.broadcast_to(np.asarray(ensure_in_units(B, u.G), dtype="f8"), (self._n_theta,)))
         log_slab = np.log(np.broadcast_to(np.asarray(ensure_in_units(slab_depth, u.cm), dtype="f8"), (self._n_theta,)))
@@ -271,7 +357,43 @@ class OnAxisAsymmetricSynchrotronEngine(NumericalSynchrotronEngine):
         z,
         cosmology,
     ):
-        """Resolve distance and per-sightline geometry to log-CGS arrays."""
+        r"""
+        Resolve distance and per-sightline geometry to log-CGS arrays.
+
+        Calls :func:`~trilobite.physics_utils.resolve_cosmological_distances`
+        to obtain angular-diameter and luminosity distances, then converts ``R``
+        and ``f_A`` to natural-log CGS form broadcast to ``(n_theta,)``.
+
+        Parameters
+        ----------
+        R : float, array-like, or ~astropy.units.Quantity
+            Emission radius per sightline. Converted to cm. Broadcast to
+            ``(n_theta,)``.
+        f_A : float or array-like
+            Projected-area filling factor per sightline. Broadcast to
+            ``(n_theta,)``.
+        angular_diameter_distance : ~astropy.units.Quantity or None
+            Angular-diameter distance to the source.
+        luminosity_distance : ~astropy.units.Quantity or None
+            Luminosity distance to the source.
+        proper_distance : ~astropy.units.Quantity or None
+            Proper (comoving) line-of-sight distance to the source.
+        z : float
+            Cosmological redshift.
+        cosmology : ~astropy.cosmology.FLRW or None
+            Cosmological model for distance conversion.
+
+        Returns
+        -------
+        log_D_A : float
+            Natural log of the angular-diameter distance in CGS (cm).
+        log_D_L : float
+            Natural log of the luminosity distance in CGS (cm).
+        log_R : ~numpy.ndarray, shape ``(n_theta,)``
+            Natural log of the emission radius per sightline in CGS (cm).
+        log_f_A : ~numpy.ndarray, shape ``(n_theta,)``
+            Natural log of the area filling factor per sightline.
+        """
         dist = resolve_cosmological_distances(
             redshift=z if z != 0 else None,
             luminosity_distance=luminosity_distance,
@@ -1473,11 +1595,15 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
 
     See Also
     --------
-    :class:`OnAxisAsymmetricSynchrotronEngine` :
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine`
         On-axis engine; provides the multi-sightline inner radiative-transfer loop
         reused here.
-    :class:`NumericalSynchrotronEngine` :
+    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`
         Base engine providing kernel tables and gamma-grid utilities.
+
+    References
+    ----------
+    .. footbibliography::
     """
 
     _MU_MIN: float = 1e-6
@@ -1635,7 +1761,62 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         gamma_max: float,
         n_gamma: int,
     ):
-        """Convert and broadcast all per-call inputs to internal log-CGS arrays."""
+        r"""
+        Convert and broadcast all per-call inputs to internal log-CGS arrays.
+
+        Identical in structure to :meth:`OnAxisAsymmetricSynchrotronEngine._coerce_on_axis_inputs`
+        except that the transfer-depth parameter is the perpendicular shell
+        thickness :math:`\Delta r'` (converted to cm) rather than the direct
+        line-of-sight depth.  The LOS correction
+        :math:`\ell' = \Delta r' / \max(\mu_\mathrm{obs}, \mu_\mathrm{min})`
+        is applied later inside :meth:`_compute_log_zone_intensities`.
+
+        Parameters
+        ----------
+        nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency. Converted to Hz.
+        B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field. Converted to Gauss. Broadcast to
+            ``(n_theta,)``.
+        N : array-like or callable
+            Comoving-frame electron distribution. See :meth:`_resolve_log_N`.
+        shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
+            zone. Converted to cm. Broadcast to ``(n_theta,)``.
+        beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per zone. Broadcast to
+            ``(n_theta,)``.
+        alpha : float, array-like, ~astropy.units.Quantity, or None
+            Comoving-frame pitch angle per zone. ``None`` selects the
+            pitch-angle-averaged kernel.
+        gamma : array-like or None
+            Explicit Lorentz-factor grid. ``None`` triggers internal construction.
+        gamma_min : float
+            Lower bound for the internally constructed Lorentz-factor grid.
+        gamma_max : float
+            Upper bound for the internally constructed Lorentz-factor grid.
+        n_gamma : int
+            Number of Lorentz-factor grid points.
+
+        Returns
+        -------
+        log_nu : ~numpy.ndarray, shape ``(n_nu,)``
+            Natural log of the observer-frame frequency in CGS (Hz).
+        log_B : ~numpy.ndarray, shape ``(n_theta,)``
+            Natural log of the magnetic field in CGS (G).
+        log_N : ~numpy.ndarray, shape ``(n_theta, n_gamma)``
+            Natural log of the electron distribution.
+        log_shell : ~numpy.ndarray, shape ``(n_theta,)``
+            Natural log of the shell thickness in CGS (cm).
+        beta_arr : ~numpy.ndarray, shape ``(n_theta,)``
+            Bulk velocity per zone.
+        log_gamma : ~numpy.ndarray, shape ``(n_gamma,)``
+            Natural log of the Lorentz-factor grid.
+        log_weights : ~numpy.ndarray, shape ``(n_gamma,)``
+            Log of the quadrature weights :math:`\gamma_i\,\Delta\ln\gamma_i`.
+        sin_alpha_arr : ~numpy.ndarray or None, shape ``(n_theta,)``
+            Sine of the pitch angle per zone, or ``None`` for PA-averaged kernel.
+        """
         log_nu = np.atleast_1d(np.asarray(np.log(ensure_in_units(nu, u.Hz)), dtype="f8"))
         log_B = np.log(np.broadcast_to(np.asarray(ensure_in_units(B, u.G), dtype="f8"), (self._n_theta,)))
         log_shell = np.log(
@@ -1891,21 +2072,38 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         nu : float, array-like, or ~astropy.units.Quantity
             Observer-frame frequency grid. Bare values are interpreted as Hz.
         B : float, array-like, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength per theta node.
+            Comoving-frame magnetic field strength per theta node. Bare values
+            are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
-            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+            Comoving-frame electron distribution :math:`dN/d\gamma` in
+            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``. If callable,
+            evaluated as ``N(gamma)`` and must return shape ``(n_theta, n_gamma)``.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
-            Comoving-frame shell thickness :math:`\Delta r'` per theta node.
+            Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
+            theta node. Bare values are interpreted as cm. Must be scalar or
+            broadcastable to ``(n_theta,)``.
         beta : float or array-like
-            Bulk velocity per theta node.
+            Bulk velocity :math:`\beta = v/c` per theta node. Must be scalar or
+            broadcastable to ``(n_theta,)``.
         theta_obs : float
-            Observer polar angle [rad].
+            Observer polar angle :math:`\theta_\mathrm{obs}` [rad].
         gamma : array-like or None, optional
+            Explicit Lorentz-factor grid. If ``None``, a logarithmic grid is built
+            from ``gamma_min``, ``gamma_max``, and ``n_gamma``.
         alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+            Comoving-frame pitch angle per theta node. Bare values are interpreted
+            as radians. ``None`` selects the pitch-angle-averaged kernel.
         z : float, optional
+            Cosmological redshift. Default is ``0.0``.
         gamma_min : float, optional
+            Lower bound of the internally generated Lorentz-factor grid. Ignored
+            when ``gamma`` is supplied. Default is ``1.0``.
         gamma_max : float, optional
+            Upper bound of the internally generated Lorentz-factor grid. Ignored
+            when ``gamma`` is supplied. Default is ``1e8``.
         n_gamma : int, optional
+            Number of Lorentz-factor grid points. Ignored when ``gamma`` is
+            supplied. Default is ``200``.
 
         Returns
         -------
@@ -1949,20 +2147,37 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         ----------
         nu : float, array-like, or ~astropy.units.Quantity
             Observer-frame frequency grid. Bare values are interpreted as Hz.
+            The comoving frequency :math:`\nu' = \nu(1+z)/\mathcal{D}` is
+            computed internally per zone.
         B : float, array-like, or ~astropy.units.Quantity
-            Comoving-frame magnetic field strength per theta node.
+            Comoving-frame magnetic field strength per theta node. Bare values
+            are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
-            Comoving-frame electron distribution, shape ``(n_theta, n_gamma)``.
+            Comoving-frame electron distribution :math:`dN/d\gamma` in
+            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
-            Comoving-frame shell thickness :math:`\Delta r'` per theta node.
+            Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
+            theta node. Bare values are interpreted as cm.
         beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per theta node. Scalar or
+            broadcastable to ``(n_theta,)``.
         theta_obs : float
+            Observer polar angle :math:`\theta_\mathrm{obs}` [rad].
         gamma : array-like or None, optional
+            Explicit Lorentz-factor grid. Default is ``None`` (built internally).
         alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+            Comoving-frame pitch angle per theta node. ``None`` selects the
+            pitch-angle-averaged kernel. Default is ``None``.
         z : float, optional
+            Cosmological redshift. Default is ``0.0``.
         gamma_min : float, optional
+            Lower bound of the internally generated Lorentz-factor grid. Default
+            is ``1.0``.
         gamma_max : float, optional
+            Upper bound of the internally generated Lorentz-factor grid. Default
+            is ``1e8``.
         n_gamma : int, optional
+            Number of Lorentz-factor grid points. Default is ``200``.
 
         Returns
         -------
@@ -2007,17 +2222,36 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         Parameters
         ----------
         nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
         B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node. Bare values
+            are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution :math:`dN/d\gamma` in
+            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
+            theta node. Bare values are interpreted as cm.
         beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per theta node. Scalar or
+            broadcastable to ``(n_theta,)``.
         theta_obs : float
+            Observer polar angle :math:`\theta_\mathrm{obs}` [rad].
         gamma : array-like or None, optional
+            Explicit Lorentz-factor grid. Default is ``None`` (built internally).
         alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+            Comoving-frame pitch angle per theta node. ``None`` selects the
+            pitch-angle-averaged kernel. Default is ``None``.
         z : float, optional
+            Cosmological redshift. Default is ``0.0``.
         gamma_min : float, optional
+            Lower bound of the internally generated Lorentz-factor grid. Default
+            is ``1.0``.
         gamma_max : float, optional
+            Upper bound of the internally generated Lorentz-factor grid. Default
+            is ``1e8``.
         n_gamma : int, optional
+            Number of Lorentz-factor grid points. Default is ``200``.
 
         Returns
         -------
@@ -2281,24 +2515,52 @@ class OffAxisAsymmetricSynchrotronEngine(OnAxisAsymmetricSynchrotronEngine):
         Parameters
         ----------
         nu : float, array-like, or ~astropy.units.Quantity
+            Observer-frame frequency grid. Bare values are interpreted as Hz.
         B : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame magnetic field strength per theta node. Bare values
+            are interpreted as Gauss. Scalar or broadcastable to ``(n_theta,)``.
         N : ~numpy.ndarray or callable
+            Comoving-frame electron distribution :math:`dN/d\gamma` in
+            :math:`\mathrm{cm^{-3}}`, shape ``(n_theta, n_gamma)``.
         shell_thickness : float, array-like, or ~astropy.units.Quantity
+            Comoving-frame perpendicular shell thickness :math:`\Delta r'` per
+            theta node. Bare values are interpreted as cm.
         R : float, array-like, or ~astropy.units.Quantity
+            Emission radius per theta node. Bare values are interpreted as cm.
+            Scalar or broadcastable to ``(n_theta,)``.
         beta : float or array-like
+            Bulk velocity :math:`\beta = v/c` per theta node. Scalar or
+            broadcastable to ``(n_theta,)``.
         theta_obs : float
-            Observer polar angle [rad].
+            Observer polar angle :math:`\theta_\mathrm{obs}` [rad].
         angular_diameter_distance : ~astropy.units.Quantity or None, optional
+            Angular-diameter distance to the source. One distance specification
+            or a non-zero ``z`` with a usable cosmology must be provided.
         luminosity_distance : ~astropy.units.Quantity or None, optional
+            Luminosity distance to the source. Used in
+            :math:`4\pi D_L^2 F_\nu`.
         proper_distance : ~astropy.units.Quantity or None, optional
+            Proper (comoving) line-of-sight distance to the source.
         z : float, optional
+            Cosmological redshift. Default is ``0.0``.
         cosmology : ~astropy.cosmology.FLRW or None, optional
+            Cosmology used to resolve distances.
         f_A : float or array-like, optional
+            Projected-area filling factor per theta node. Scalar or broadcastable
+            to ``(n_theta,)``. Default is ``1.0``.
         gamma : array-like or None, optional
+            Explicit Lorentz-factor grid. Default is ``None`` (built internally).
         alpha : float, array-like, ~astropy.units.Quantity, or None, optional
+            Comoving-frame pitch angle per theta node. ``None`` selects the
+            pitch-angle-averaged kernel. Default is ``None``.
         gamma_min : float, optional
+            Lower bound of the internally generated Lorentz-factor grid. Default
+            is ``1.0``.
         gamma_max : float, optional
+            Upper bound of the internally generated Lorentz-factor grid. Default
+            is ``1e8``.
         n_gamma : int, optional
+            Number of Lorentz-factor grid points. Default is ``200``.
 
         Returns
         -------

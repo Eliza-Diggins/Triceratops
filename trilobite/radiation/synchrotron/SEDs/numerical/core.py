@@ -496,7 +496,7 @@ class NumericalSynchrotronEngine:
         **kwargs,
     ) -> None:
         r"""
-        Build and cache the interpolator for the first synchrotron kernel :math:`F(x)`.
+        Build and cache the interpolator for the pitch-angle-averaged synchrotron kernel :math:`\bar{F}(x)`.
 
         Calling this method a second time overwrites the existing grid.
 
@@ -514,11 +514,11 @@ class NumericalSynchrotronEngine:
         spacing : {"log", "linear"}, optional
             Grid spacing when ``x`` is not provided. Default is ``"log"``.
         method : {"exact", "lu"}, optional
-            Kernel evaluation method passed to :func:`_log_first_synchrotron_kernel`.
-            Default is ``"exact"``.
+            Kernel evaluation method passed to
+            :func:`_log_averaged_first_synchrotron_kernel`. Default is ``"exact"``.
         derivative : bool, optional
-            Whether to compute and cache the derivative of the kernel with respect to log(x).
-            Passed to :func:`_log_first_synchrotron_kernel`. Default is True.
+            Whether to compute and cache the logarithmic derivative of the kernel.
+            Passed to :func:`_log_averaged_first_synchrotron_kernel`. Default is True.
         """
         if x is not None:
             x_grid = np.asarray(x, dtype=float)
@@ -556,12 +556,8 @@ class NumericalSynchrotronEngine:
         return self._interp_first_kernel(log_x, **kwargs)
 
     def _compute_first_kernel_derivative(self, log_x, **kwargs):
-        self.ensure_first_kernel_loaded()
-        return self._interp_dfirst_kernel_dlog_x(log_x, **kwargs)
-
-    def _compute_avg_first_kernel(self, log_x: Union[float, np.ndarray], **kwargs) -> Union[float, np.ndarray]:
         r"""
-        Evaluate :math:`\ln F(x)` by spline interpolation.
+        Evaluate :math:`d\ln F/d\ln x` by spline interpolation.
 
         Parameters
         ----------
@@ -570,13 +566,43 @@ class NumericalSynchrotronEngine:
 
         Returns
         -------
-        log_F : float or ~numpy.ndarray
-            :math:`\ln F(x)` at each input point.
+        dlogF_dlogx : float or ~numpy.ndarray
+            Logarithmic derivative :math:`d\ln F/d\ln x` at each input point.
+        """
+        self.ensure_first_kernel_loaded()
+        return self._interp_dfirst_kernel_dlog_x(log_x, **kwargs)
+
+    def _compute_avg_first_kernel(self, log_x: Union[float, np.ndarray], **kwargs) -> Union[float, np.ndarray]:
+        r"""
+        Evaluate :math:`\ln \bar{F}(x)` by spline interpolation.
+
+        Parameters
+        ----------
+        log_x : float or array-like
+            Natural log of the dimensionless frequency ratio :math:`x`.
+
+        Returns
+        -------
+        log_F_avg : float or ~numpy.ndarray
+            :math:`\ln \bar{F}(x)` at each input point.
         """
         self.ensure_avg_first_kernel_loaded()
         return self._interp_avg_first_kernel(log_x, **kwargs)
 
     def _compute_avg_first_kernel_derivative(self, log_x, **kwargs):
+        r"""
+        Evaluate :math:`d\ln \bar{F}/d\ln x` by spline interpolation.
+
+        Parameters
+        ----------
+        log_x : float or array-like
+            Natural log of the dimensionless frequency ratio :math:`x`.
+
+        Returns
+        -------
+        dlogFavg_dlogx : float or ~numpy.ndarray
+            Logarithmic derivative :math:`d\ln \bar{F}/d\ln x` at each input point.
+        """
         self.ensure_avg_first_kernel_loaded()
         return self._interp_davg_first_kernel_dlog_x(log_x, **kwargs)
 
