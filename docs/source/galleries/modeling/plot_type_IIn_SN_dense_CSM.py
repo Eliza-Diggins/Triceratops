@@ -134,7 +134,7 @@ B = np.sqrt(8 * np.pi * epsilon_B * _U) * u.G
 
 # Synchrotron cooling Lorentz factor
 cooling_engine = SynchrotronRadiativeCoolingEngine()
-gamma_c = cooling_engine.compute_cooling_gamma(B=B, t=times)
+gamma_c = np.maximum(cooling_engine.compute_cooling_gamma(B=B, t=times), 1.0)
 
 # %%
 # Free-Free Optical Depth from the Unshocked Wind
@@ -378,7 +378,7 @@ for Mdot, label, color in zip(Mdot_values, Mdot_labels, Mdot_colors):
     rho_i = (Mdot / (4 * np.pi * r_i**2 * v_wind)).to(u.g / u.cm**3)
     _U_i = 1.5 * (_R - 1) / _R**2 * rho_i.to_value(u.g / u.cm**3) * v_i.to_value(u.cm / u.s) ** 2
     B_i = np.sqrt(8 * np.pi * epsilon_B * _U_i) * u.G
-    gc_i = cooling_engine.compute_cooling_gamma(B=B_i, t=times)
+    gc_i = np.maximum(cooling_engine.compute_cooling_gamma(B=B_i, t=times), 1.0)
 
     M_dot_cgs_i = Mdot.to(u.g / u.s).value
 
