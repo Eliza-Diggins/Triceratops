@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/data/photometry';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -1020,7 +1020,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        model : Model</span>
+<span class="sd">        model : ~trilobite.models.core.base.Model</span>
 <span class="sd">            The model instance for which inference will be performed.</span>
 <span class="sd">            Its declared ``variable_names`` and ``observable_names`` are</span>
 <span class="sd">            used to determine default mappings.</span>
@@ -1038,7 +1038,7 @@
 <span class="sd">            Mapping from model observable names to photometry table columns.</span>
 
 <span class="sd">            Each tuple should follow the convention expected by</span>
-<span class="sd">            :meth:`InferenceData.from_table`, typically:</span>
+<span class="sd">            :meth:`~trilobite.data.core.InferenceData.from_table`, typically:</span>
 
 <span class="sd">            ``(value_column, error_column, upper_column, lower_column)``</span>
 
@@ -1110,7 +1110,7 @@
 
 <span class="sd">        Advanced workflows may bypass this method and construct</span>
 <span class="sd">        :class:`InferenceData` objects manually via</span>
-<span class="sd">        :meth:`InferenceData.from_table` for full control.</span>
+<span class="sd">        :meth:`~trilobite.data.core.InferenceData.from_table` for full control.</span>
 
 <span class="sd">        See Also</span>
 <span class="sd">        --------</span>
@@ -2010,7 +2010,7 @@
 
     <span class="c1"># ========================= Inference Data Conversion ========================= #</span>
 <div class="viewcode-block" id="RadioPhotometryEpoch.to_inference_data">
-<a class="viewcode-back" href="../../../reference/data/radio_photometry_epoch.html#trilobite.data.photometry.RadioPhotometryEpoch.to_inference_data">[docs]</a>
+<a class="viewcode-back" href="../../../_as_gen/trilobite.data.photometry.RadioPhotometryEpoch.to_inference_data.html#trilobite.data.photometry.RadioPhotometryEpoch.to_inference_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_inference_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">model</span><span class="p">:</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span>
@@ -2031,7 +2031,7 @@
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        model : Model</span>
+<span class="sd">        model : ~trilobite.models.core.base.Model</span>
 <span class="sd">            The model instance. Its ``variable_names`` and ``output_names`` are</span>
 <span class="sd">            used to determine default mappings.</span>
 <span class="sd">        variables : dict, optional</span>
@@ -2126,7 +2126,7 @@
 
     <span class="c1"># ======================== PLOTTING METHODS ======================== #</span>
 <div class="viewcode-block" id="RadioPhotometryEpoch.plot">
-<a class="viewcode-back" href="../../../reference/data/radio_photometry_epoch.html#trilobite.data.photometry.RadioPhotometryEpoch.plot">[docs]</a>
+<a class="viewcode-back" href="../../../_as_gen/trilobite.data.photometry.RadioPhotometryEpoch.plot.html#trilobite.data.photometry.RadioPhotometryEpoch.plot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
@@ -2255,8 +2255,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2290,7 +2290,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

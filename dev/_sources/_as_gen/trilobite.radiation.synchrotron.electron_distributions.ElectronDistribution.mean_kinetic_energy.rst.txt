@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.ElectronDistribution.mean\_kinetic\_energy
+==================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: ElectronDistribution.mean_kinetic_energy

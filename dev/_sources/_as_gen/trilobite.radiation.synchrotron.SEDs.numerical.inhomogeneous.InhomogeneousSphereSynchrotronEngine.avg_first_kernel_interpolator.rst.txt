@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.avg\_first\_kernel\_interpolator
+==================================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. autoproperty:: InhomogeneousSphereSynchrotronEngine.avg_first_kernel_interpolator

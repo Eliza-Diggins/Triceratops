@@ -1,0 +1,38 @@
+MomentumConservingShockState
+================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. autoclass:: trilobite.dynamics.shocks.numerical.MomentumConservingShockState
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MomentumConservingShockState.count
+      ~MomentumConservingShockState.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MomentumConservingShockState.mass
+      ~MomentumConservingShockState.post_shock_density
+      ~MomentumConservingShockState.post_shock_pressure
+      ~MomentumConservingShockState.post_shock_temperature
+      ~MomentumConservingShockState.radius
+      ~MomentumConservingShockState.thermal_energy_density
+      ~MomentumConservingShockState.velocity
+   
+   

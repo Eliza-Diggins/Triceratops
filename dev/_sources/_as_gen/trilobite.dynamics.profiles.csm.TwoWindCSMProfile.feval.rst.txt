@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.TwoWindCSMProfile.feval
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: TwoWindCSMProfile.feval

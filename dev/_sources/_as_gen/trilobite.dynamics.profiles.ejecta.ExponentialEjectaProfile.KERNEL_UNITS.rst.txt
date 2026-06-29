@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.KERNEL\_UNITS
+=========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoattribute:: ExponentialEjectaProfile.KERNEL_UNITS

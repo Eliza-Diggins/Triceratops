@@ -1,0 +1,27 @@
+LogTransform
+==========================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. autoclass:: trilobite.inference.transform.LogTransform
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~LogTransform.forward
+      ~LogTransform.from_dict
+      ~LogTransform.inverse
+      ~LogTransform.log_abs_det_jacobian
+      ~LogTransform.to_dict
+   
+   
+
+   
+   
+   

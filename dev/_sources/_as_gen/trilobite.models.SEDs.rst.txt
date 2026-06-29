@@ -1,4 +1,4 @@
-﻿trilobite.models.SEDs
+trilobite.models.SEDs
 =====================
 
 .. automodule:: trilobite.models.SEDs

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.StationaryCSMDensityProfile.eval
+================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: StationaryCSMDensityProfile.eval

@@ -1,0 +1,49 @@
+MaxwellJuettner
+======================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoclass:: trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MaxwellJuettner.approx_first_kinetic_moment
+      ~MaxwellJuettner.approx_first_moment
+      ~MaxwellJuettner.as_callable
+      ~MaxwellJuettner.bol_emiss_from_energy_density
+      ~MaxwellJuettner.bol_emiss_from_magnetic_field
+      ~MaxwellJuettner.cdf
+      ~MaxwellJuettner.logcdf
+      ~MaxwellJuettner.logpdf
+      ~MaxwellJuettner.logsf
+      ~MaxwellJuettner.mean
+      ~MaxwellJuettner.mean_energy
+      ~MaxwellJuettner.mean_kinetic_energy
+      ~MaxwellJuettner.moment
+      ~MaxwellJuettner.moment_between
+      ~MaxwellJuettner.n_between
+      ~MaxwellJuettner.n_eff
+      ~MaxwellJuettner.n_eff_between
+      ~MaxwellJuettner.n_total
+      ~MaxwellJuettner.normalize_from_energy_density
+      ~MaxwellJuettner.normalize_from_magnetic_field
+      ~MaxwellJuettner.normalize_from_n_eff
+      ~MaxwellJuettner.normalize_from_n_total
+      ~MaxwellJuettner.pdf
+      ~MaxwellJuettner.sf
+      ~MaxwellJuettner.std
+      ~MaxwellJuettner.support
+      ~MaxwellJuettner.var
+   
+   
+
+   
+   
+   

@@ -1,0 +1,47 @@
+BrokenPowerLaw
+=====================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoclass:: trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~BrokenPowerLaw.as_callable
+      ~BrokenPowerLaw.bol_emiss_from_energy_density
+      ~BrokenPowerLaw.bol_emiss_from_magnetic_field
+      ~BrokenPowerLaw.cdf
+      ~BrokenPowerLaw.logcdf
+      ~BrokenPowerLaw.logpdf
+      ~BrokenPowerLaw.logsf
+      ~BrokenPowerLaw.mean
+      ~BrokenPowerLaw.mean_energy
+      ~BrokenPowerLaw.mean_kinetic_energy
+      ~BrokenPowerLaw.moment
+      ~BrokenPowerLaw.moment_between
+      ~BrokenPowerLaw.n_between
+      ~BrokenPowerLaw.n_eff
+      ~BrokenPowerLaw.n_eff_between
+      ~BrokenPowerLaw.n_total
+      ~BrokenPowerLaw.normalize_from_energy_density
+      ~BrokenPowerLaw.normalize_from_magnetic_field
+      ~BrokenPowerLaw.normalize_from_n_eff
+      ~BrokenPowerLaw.normalize_from_n_total
+      ~BrokenPowerLaw.pdf
+      ~BrokenPowerLaw.sf
+      ~BrokenPowerLaw.std
+      ~BrokenPowerLaw.support
+      ~BrokenPowerLaw.var
+   
+   
+
+   
+   
+   

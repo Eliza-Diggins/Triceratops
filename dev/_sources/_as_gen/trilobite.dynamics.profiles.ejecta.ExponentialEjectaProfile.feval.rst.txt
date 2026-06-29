@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.feval
+=================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: ExponentialEjectaProfile.feval

@@ -1,0 +1,6 @@
+trilobite.inference.transform.IdentityTransform.forward
+=======================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: IdentityTransform.forward

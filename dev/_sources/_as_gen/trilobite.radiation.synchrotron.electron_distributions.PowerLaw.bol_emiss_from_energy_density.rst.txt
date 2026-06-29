@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.PowerLaw.bol\_emiss\_from\_energy\_density
+==================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: PowerLaw.bol_emiss_from_energy_density

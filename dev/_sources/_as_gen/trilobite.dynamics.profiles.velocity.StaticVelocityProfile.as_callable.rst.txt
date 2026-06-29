@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.StaticVelocityProfile.as\_callable
+=======================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. automethod:: StaticVelocityProfile.as_callable

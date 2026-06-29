@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MechanicalShockEngine.find\_ejecta\_crossing\_time
+======================================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. automethod:: MechanicalShockEngine.find_ejecta_crossing_time

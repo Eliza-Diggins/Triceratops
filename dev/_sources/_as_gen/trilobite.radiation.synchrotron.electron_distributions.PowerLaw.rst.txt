@@ -1,0 +1,47 @@
+PowerLaw
+===============================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoclass:: trilobite.radiation.synchrotron.electron_distributions.PowerLaw
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~PowerLaw.as_callable
+      ~PowerLaw.bol_emiss_from_energy_density
+      ~PowerLaw.bol_emiss_from_magnetic_field
+      ~PowerLaw.cdf
+      ~PowerLaw.logcdf
+      ~PowerLaw.logpdf
+      ~PowerLaw.logsf
+      ~PowerLaw.mean
+      ~PowerLaw.mean_energy
+      ~PowerLaw.mean_kinetic_energy
+      ~PowerLaw.moment
+      ~PowerLaw.moment_between
+      ~PowerLaw.n_between
+      ~PowerLaw.n_eff
+      ~PowerLaw.n_eff_between
+      ~PowerLaw.n_total
+      ~PowerLaw.normalize_from_energy_density
+      ~PowerLaw.normalize_from_magnetic_field
+      ~PowerLaw.normalize_from_n_eff
+      ~PowerLaw.normalize_from_n_total
+      ~PowerLaw.pdf
+      ~PowerLaw.sf
+      ~PowerLaw.std
+      ~PowerLaw.support
+      ~PowerLaw.var
+   
+   
+
+   
+   
+   

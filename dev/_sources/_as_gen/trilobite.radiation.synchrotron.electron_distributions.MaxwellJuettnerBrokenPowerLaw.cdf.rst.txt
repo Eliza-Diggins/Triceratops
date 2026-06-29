@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerBrokenPowerLaw.cdf
+=========================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerBrokenPowerLaw.cdf

@@ -18,9 +18,8 @@
 .. _sphx_glr_auto_examples_synchrotron_d_closures_plot_sed_to_source_size.py:
 
 
-=====================================================
 From SED to Source Size: The Inverse Closure Workflow
-=====================================================
+======================================================
 
 Radio astronomers often measure a synchrotron SED with uncertainties and want
 to estimate the **source radius**, **magnetic field**, and **minimum energy**
@@ -31,11 +30,13 @@ inverse closure — is the standard approach in the literature.
 This example demonstrates the complete pipeline:
 
 1. **Generate a realistic observed SED** with measurement uncertainties.
-2. **Fit the SED** using :class:`~models.SEDs.synchrotron.Synchrotron_SSA_SBPL_Model`
+2. **Fit the SED** using
+   :class:`~trilobite.models.SEDs.synchrotron.Synchrotron_SSA_SBPL_Model`
    and MCMC to extract posterior distributions of :math:`F_{\rm pk}`,
    :math:`\nu_{\rm pk}`.
-3. **Propagate the posteriors** through the inverse closure to obtain a
-   posterior distribution of source radius :math:`R`.
+3. **Propagate the posteriors** through the inverse closure via
+   :meth:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_params_to_physics`
+   to obtain posterior distributions of :math:`R` and :math:`B`.
 4. **Check the expansion velocity** :math:`v = R/t` as a fraction of the
    speed of light — a simple test for relativistic ejecta.
 
@@ -43,31 +44,25 @@ This example demonstrates the complete pipeline:
 
     This workflow is particularly powerful when applied to a time series of
     epochs: the evolution of :math:`R(t)` directly measures the shock
-    expansion velocity. For multi-epoch usage see the
-    :ref:`sphx_glr_auto_examples_inference_plot_multi_epoch_sed_evolution.py`
-    example.
+    expansion velocity.
 
-Relevant API
-------------
-- :class:`~models.SEDs.synchrotron.Synchrotron_SSA_SBPL_Model`
-- :meth:`~radiation.synchrotron.SEDs.PowerLaw_SSA_SynchrotronSED.from_params_to_physics`
-- :class:`~inference.problem.InferenceProblem`
-- :class:`~inference.sampling.mcmc.EmceeSampler`
-
-.. GENERATED FROM PYTHON SOURCE LINES 40-42
-
-Setup
------
-
-.. GENERATED FROM PYTHON SOURCE LINES 42-53
+.. GENERATED FROM PYTHON SOURCE LINES 30-49
 
 .. code-block:: Python
+
 
     import matplotlib.pyplot as plt
     import numpy as np
     from astropy import constants as const
     from astropy import units as u
+    from astropy.table import Table
+    from tqdm.auto import tqdm
 
+    from trilobite.data import InferenceData
+    from trilobite.data.photometry import RadioPhotometryEpochContainer
+    from trilobite.inference import GaussianCensoredLikelihood
+    from trilobite.inference.problem import InferenceProblem
+    from trilobite.inference.sampling.mcmc import EmceeSampler
     from trilobite.models.SEDs.synchrotron import Synchrotron_SSA_SBPL_Model
     from trilobite.radiation.synchrotron.SEDs import PowerLaw_SSA_SynchrotronSED
     from trilobite.utils.plot_utils import set_plot_style
@@ -81,7 +76,7 @@ Setup
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-67
+.. GENERATED FROM PYTHON SOURCE LINES 50-63
 
 Simulate a Realistic Observed SED
 ----------------------------------
@@ -97,14 +92,13 @@ physical parameters are:
 These correspond to an expansion velocity
 :math:`v = R/t \approx 0.04 c` — sub-relativistic.
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-93
+.. GENERATED FROM PYTHON SOURCE LINES 63-84
 
 .. code-block:: Python
 
 
     sed_model = Synchrotron_SSA_SBPL_Model()
 
-    # True SED parameters (from a forward closure calculation with B=0.5 G, R=3e16 cm)
     true_params = {
         "norm": 8.0 * u.mJy,
         "nu_break": 5.0 * u.GHz,
@@ -123,38 +117,19 @@ These correspond to an expansion velocity
     obs_flux = true_flux + noise
     obs_err = noise_frac * true_flux
 
-    print("=== Simulated observations ===")
-    for f, flux, err in zip(frequencies, obs_flux, obs_err):
-        print(f"  {f.to_value(u.GHz):5.1f} GHz:  {flux.to_value(u.mJy):.2f} ± {err.to_value(u.mJy):.2f} mJy")
 
 
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    === Simulated observations ===
-        0.5 GHz:  0.03 ± 0.00 mJy
-        1.4 GHz:  0.28 ± 0.05 mJy
-        3.0 GHz:  2.13 ± 0.29 mJy
-        5.0 GHz:  4.56 ± 0.60 mJy
-        7.0 GHz:  3.09 ± 0.66 mJy
-       10.0 GHz:  2.96 ± 0.55 mJy
-       15.0 GHz:  2.66 ± 0.39 mJy
-       22.0 GHz:  1.72 ± 0.27 mJy
-       43.0 GHz:  0.93 ± 0.14 mJy
 
 
-
-
-.. GENERATED FROM PYTHON SOURCE LINES 94-96
+.. GENERATED FROM PYTHON SOURCE LINES 85-87
 
 Visualize the Synthetic Data
 ----------------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 96-119
+.. GENERATED FROM PYTHON SOURCE LINES 87-110
 
 .. code-block:: Python
 
@@ -193,28 +168,20 @@ Visualize the Synthetic Data
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 120-125
+.. GENERATED FROM PYTHON SOURCE LINES 111-117
 
 Fit the SED with MCMC
 ---------------------
 
-We set up an :class:`~inference.problem.InferenceProblem` to fit the SED
-parameters and sample the posterior with :class:`~inference.sampling.mcmc.EmceeSampler`.
+We set up an :class:`~trilobite.inference.problem.InferenceProblem` to fit
+the SED parameters and sample the posterior with
+:class:`~trilobite.inference.sampling.mcmc.EmceeSampler`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 125-169
+.. GENERATED FROM PYTHON SOURCE LINES 117-150
 
 .. code-block:: Python
 
 
-    from astropy.table import Table
-
-    from trilobite.data import InferenceData
-    from trilobite.data.photometry import RadioPhotometryEpochContainer
-    from trilobite.inference import GaussianCensoredLikelihood
-    from trilobite.inference.problem import InferenceProblem
-    from trilobite.inference.sampling.mcmc import EmceeSampler
-
-    # Build a data table
     data_table = Table()
     data_table["freq"] = frequencies
     data_table["flux_density"] = obs_flux
@@ -247,8 +214,6 @@ parameters and sample the posterior with :class:`~inference.sampling.mcmc.EmceeS
     result = sampler.run(8_000, progress=True)
     samples = result.get_flat_samples(burn=2000, thin=5)
 
-    print(f"\nPosterior samples shape: {samples.shape}")
-
 
 
 
@@ -257,16 +222,14 @@ parameters and sample the posterior with :class:`~inference.sampling.mcmc.EmceeS
 
  .. code-block:: none
 
-    /home/runner/work/Trilobite/Trilobite/docs/source/galleries/synchrotron/d_closures/plot_sed_to_source_size.py:141: DeprecationWarning: RadioPhotometryEpochContainer is deprecated and will be removed in a future release. Use RadioPhotometryEpoch instead.
+    /home/runner/work/Trilobite/Trilobite/docs/source/galleries/synchrotron/d_closures/plot_sed_to_source_size.py:124: DeprecationWarning: RadioPhotometryEpochContainer is deprecated and will be removed in a future release. Use RadioPhotometryEpoch instead.
       photometry = RadioPhotometryEpochContainer(data_table)
-      0% |          | 🦖 0/8000 [00:00<?, ?it/s]      1% |          | 🦖 56/8000 [00:00<00:14, 556.34it/s]      1% |▏         | 🦖 114/8000 [00:00<00:13, 568.96it/s]      2% |▏         | 🦖 171/8000 [00:00<00:14, 550.73it/s]      3% |▎         | 🦖 227/8000 [00:00<00:14, 540.16it/s]      4% |▎         | 🦖 282/8000 [00:00<00:14, 534.48it/s]      4% |▍         | 🦖 336/8000 [00:00<00:14, 530.98it/s]      5% |▍         | 🦖 390/8000 [00:00<00:14, 528.62it/s]      6% |▌         | 🦖 443/8000 [00:00<00:14, 527.02it/s]      6% |▌         | 🦖 496/8000 [00:00<00:14, 518.54it/s]      7% |▋         | 🦖 549/8000 [00:01<00:14, 519.56it/s]      8% |▊         | 🦖 602/8000 [00:01<00:14, 520.76it/s]      8% |▊         | 🦖 655/8000 [00:01<00:14, 522.46it/s]      9% |▉         | 🦖 708/8000 [00:01<00:13, 522.47it/s]     10% |▉         | 🦖 761/8000 [00:01<00:13, 523.52it/s]     10% |█         | 🦖 814/8000 [00:01<00:13, 524.40it/s]     11% |█         | 🦖 867/8000 [00:01<00:13, 524.69it/s]     12% |█▏        | 🦖 920/8000 [00:01<00:13, 525.31it/s]     12% |█▏        | 🦖 973/8000 [00:01<00:13, 525.54it/s]     13% |█▎        | 🦖 1026/8000 [00:01<00:13, 525.80it/s]     13% |█▎        | 🦖 1079/8000 [00:02<00:13, 525.52it/s]     14% |█▍        | 🦖 1132/8000 [00:02<00:13, 525.16it/s]     15% |█▍        | 🦖 1185/8000 [00:02<00:12, 525.39it/s]     15% |█▌        | 🦖 1238/8000 [00:02<00:12, 523.28it/s]     16% |█▌        | 🦖 1292/8000 [00:02<00:12, 525.46it/s]     17% |█▋        | 🦖 1345/8000 [00:02<00:12, 524.75it/s]     17% |█▋        | 🦖 1398/8000 [00:02<00:12, 524.94it/s]     18% |█▊        | 🦖 1451/8000 [00:02<00:12, 523.32it/s]     19% |█▉        | 🦖 1504/8000 [00:02<00:12, 522.74it/s]     19% |█▉        | 🦖 1557/8000 [00:02<00:12, 523.72it/s]     20% |██        | 🦖 1610/8000 [00:03<00:12, 522.93it/s]     21% |██        | 🦖 1663/8000 [00:03<00:12, 522.87it/s]     21% |██▏       | 🦖 1716/8000 [00:03<00:12, 522.28it/s]     22% |██▏       | 🦖 1769/8000 [00:03<00:11, 523.28it/s]     23% |██▎       | 🦖 1822/8000 [00:03<00:11, 523.23it/s]     23% |██▎       | 🦖 1875/8000 [00:03<00:11, 523.10it/s]     24% |██▍       | 🦖 1928/8000 [00:03<00:11, 522.57it/s]     25% |██▍       | 🦖 1981/8000 [00:03<00:11, 522.50it/s]     25% |██▌       | 🦖 2034/8000 [00:03<00:11, 522.88it/s]     26% |██▌       | 🦖 2087/8000 [00:03<00:11, 519.75it/s]     27% |██▋       | 🦖 2140/8000 [00:04<00:11, 519.91it/s]     27% |██▋       | 🦖 2192/8000 [00:04<00:11, 519.55it/s]     28% |██▊       | 🦖 2245/8000 [00:04<00:11, 521.03it/s]     29% |██▊       | 🦖 2298/8000 [00:04<00:10, 521.41it/s]     29% |██▉       | 🦖 2351/8000 [00:04<00:10, 522.07it/s]     30% |███       | 🦖 2404/8000 [00:04<00:10, 522.70it/s]     31% |███       | 🦖 2457/8000 [00:04<00:10, 524.00it/s]     31% |███▏      | 🦖 2510/8000 [00:04<00:10, 524.18it/s]     32% |███▏      | 🦖 2563/8000 [00:04<00:10, 524.49it/s]     33% |███▎      | 🦖 2616/8000 [00:04<00:10, 523.37it/s]     33% |███▎      | 🦖 2669/8000 [00:05<00:10, 522.88it/s]     34% |███▍      | 🦖 2722/8000 [00:05<00:10, 522.11it/s]     35% |███▍      | 🦖 2775/8000 [00:05<00:10, 522.32it/s]     35% |███▌      | 🦖 2828/8000 [00:05<00:09, 522.11it/s]     36% |███▌      | 🦖 2881/8000 [00:05<00:09, 521.35it/s]     37% |███▋      | 🦖 2934/8000 [00:05<00:09, 522.06it/s]     37% |███▋      | 🦖 2987/8000 [00:05<00:09, 522.16it/s]     38% |███▊      | 🦖 3040/8000 [00:05<00:09, 522.55it/s]     39% |███▊      | 🦖 3093/8000 [00:05<00:09, 521.71it/s]     39% |███▉      | 🦖 3146/8000 [00:05<00:09, 521.32it/s]     40% |███▉      | 🦖 3199/8000 [00:06<00:09, 518.39it/s]     41% |████      | 🦖 3251/8000 [00:06<00:09, 516.77it/s]     41% |████▏     | 🦖 3304/8000 [00:06<00:09, 518.23it/s]     42% |████▏     | 🦖 3356/8000 [00:06<00:09, 515.93it/s]     43% |████▎     | 🦖 3409/8000 [00:06<00:08, 517.46it/s]     43% |████▎     | 🦖 3462/8000 [00:06<00:08, 519.41it/s]     44% |████▍     | 🦖 3514/8000 [00:06<00:08, 519.00it/s]     45% |████▍     | 🦖 3567/8000 [00:06<00:08, 519.94it/s]     45% |████▌     | 🦖 3619/8000 [00:06<00:08, 519.80it/s]     46% |████▌     | 🦖 3672/8000 [00:07<00:08, 520.74it/s]     47% |████▋     | 🦖 3725/8000 [00:07<00:08, 521.24it/s]     47% |████▋     | 🦖 3778/8000 [00:07<00:08, 522.03it/s]     48% |████▊     | 🦖 3831/8000 [00:07<00:07, 523.61it/s]     49% |████▊     | 🦖 3884/8000 [00:07<00:07, 523.59it/s]     49% |████▉     | 🦖 3937/8000 [00:07<00:07, 523.10it/s]     50% |████▉     | 🦖 3990/8000 [00:07<00:07, 523.00it/s]     51% |█████     | 🦖 4043/8000 [00:07<00:07, 523.46it/s]     51% |█████     | 🦖 4096/8000 [00:07<00:07, 523.77it/s]     52% |█████▏    | 🦖 4149/8000 [00:07<00:07, 523.43it/s]     53% |█████▎    | 🦖 4202/8000 [00:08<00:07, 522.04it/s]     53% |█████▎    | 🦖 4255/8000 [00:08<00:07, 522.23it/s]     54% |█████▍    | 🦖 4308/8000 [00:08<00:07, 522.34it/s]     55% |█████▍    | 🦖 4361/8000 [00:08<00:06, 523.71it/s]     55% |█████▌    | 🦖 4414/8000 [00:08<00:06, 523.99it/s]     56% |█████▌    | 🦖 4467/8000 [00:08<00:06, 523.98it/s]     56% |█████▋    | 🦖 4520/8000 [00:08<00:06, 524.43it/s]     57% |█████▋    | 🦖 4573/8000 [00:08<00:06, 524.78it/s]     58% |█████▊    | 🦖 4626/8000 [00:08<00:06, 524.90it/s]     58% |█████▊    | 🦖 4679/8000 [00:08<00:06, 524.73it/s]     59% |█████▉    | 🦖 4732/8000 [00:09<00:06, 523.77it/s]     60% |█████▉    | 🦖 4785/8000 [00:09<00:06, 523.59it/s]     60% |██████    | 🦖 4838/8000 [00:09<00:06, 522.44it/s]     61% |██████    | 🦖 4891/8000 [00:09<00:05, 522.07it/s]     62% |██████▏   | 🦖 4944/8000 [00:09<00:05, 522.76it/s]     62% |██████▏   | 🦖 4997/8000 [00:09<00:05, 522.21it/s]     63% |██████▎   | 🦖 5050/8000 [00:09<00:05, 521.61it/s]     64% |██████▍   | 🦖 5103/8000 [00:09<00:05, 522.42it/s]     64% |██████▍   | 🦖 5156/8000 [00:09<00:05, 522.54it/s]     65% |██████▌   | 🦖 5209/8000 [00:09<00:05, 522.65it/s]     66% |██████▌   | 🦖 5262/8000 [00:10<00:05, 521.12it/s]     66% |██████▋   | 🦖 5315/8000 [00:10<00:05, 522.48it/s]     67% |██████▋   | 🦖 5368/8000 [00:10<00:05, 523.23it/s]     68% |██████▊   | 🦖 5421/8000 [00:10<00:04, 522.97it/s]     68% |██████▊   | 🦖 5474/8000 [00:10<00:04, 524.53it/s]     69% |██████▉   | 🦖 5527/8000 [00:10<00:04, 525.02it/s]     70% |██████▉   | 🦖 5580/8000 [00:10<00:04, 524.50it/s]     70% |███████   | 🦖 5633/8000 [00:10<00:04, 523.48it/s]     71% |███████   | 🦖 5686/8000 [00:10<00:04, 523.64it/s]     72% |███████▏  | 🦖 5739/8000 [00:10<00:04, 522.56it/s]     72% |███████▏  | 🦖 5792/8000 [00:11<00:04, 521.66it/s]     73% |███████▎  | 🦖 5845/8000 [00:11<00:04, 521.47it/s]     74% |███████▎  | 🦖 5898/8000 [00:11<00:04, 521.91it/s]     74% |███████▍  | 🦖 5951/8000 [00:11<00:03, 521.85it/s]     75% |███████▌  | 🦖 6004/8000 [00:11<00:03, 522.61it/s]     76% |███████▌  | 🦖 6057/8000 [00:11<00:03, 522.33it/s]     76% |███████▋  | 🦖 6110/8000 [00:11<00:03, 522.76it/s]     77% |███████▋  | 🦖 6163/8000 [00:11<00:03, 522.74it/s]     78% |███████▊  | 🦖 6216/8000 [00:11<00:03, 522.45it/s]     78% |███████▊  | 🦖 6269/8000 [00:11<00:03, 521.04it/s]     79% |███████▉  | 🦖 6322/8000 [00:12<00:03, 521.57it/s]     80% |███████▉  | 🦖 6375/8000 [00:12<00:03, 520.14it/s]     80% |████████  | 🦖 6428/8000 [00:12<00:03, 519.80it/s]     81% |████████  | 🦖 6480/8000 [00:12<00:02, 517.93it/s]     82% |████████▏ | 🦖 6533/8000 [00:12<00:02, 520.37it/s]     82% |████████▏ | 🦖 6586/8000 [00:12<00:02, 520.97it/s]     83% |████████▎ | 🦖 6639/8000 [00:12<00:02, 521.21it/s]     84% |████████▎ | 🦖 6692/8000 [00:12<00:02, 521.47it/s]     84% |████████▍ | 🦖 6745/8000 [00:12<00:02, 518.27it/s]     85% |████████▍ | 🦖 6797/8000 [00:12<00:02, 517.69it/s]     86% |████████▌ | 🦖 6850/8000 [00:13<00:02, 518.66it/s]     86% |████████▋ | 🦖 6903/8000 [00:13<00:02, 520.35it/s]     87% |████████▋ | 🦖 6956/8000 [00:13<00:02, 521.01it/s]     88% |████████▊ | 🦖 7009/8000 [00:13<00:01, 521.61it/s]     88% |████████▊ | 🦖 7062/8000 [00:13<00:01, 521.61it/s]     89% |████████▉ | 🦖 7115/8000 [00:13<00:01, 522.20it/s]     90% |████████▉ | 🦖 7168/8000 [00:13<00:01, 522.68it/s]     90% |█████████ | 🦖 7221/8000 [00:13<00:01, 524.10it/s]     91% |█████████ | 🦖 7274/8000 [00:13<00:01, 524.04it/s]     92% |█████████▏| 🦖 7327/8000 [00:14<00:01, 517.34it/s]     92% |█████████▏| 🦖 7380/8000 [00:14<00:01, 518.72it/s]     93% |█████████▎| 🦖 7432/8000 [00:14<00:01, 519.05it/s]     94% |█████████▎| 🦖 7485/8000 [00:14<00:00, 519.96it/s]     94% |█████████▍| 🦖 7538/8000 [00:14<00:00, 522.08it/s]     95% |█████████▍| 🦖 7591/8000 [00:14<00:00, 522.26it/s]     96% |█████████▌| 🦖 7644/8000 [00:14<00:00, 522.39it/s]     96% |█████████▌| 🦖 7697/8000 [00:14<00:00, 521.05it/s]     97% |█████████▋| 🦖 7750/8000 [00:14<00:00, 522.07it/s]     98% |█████████▊| 🦖 7803/8000 [00:14<00:00, 522.53it/s]     98% |█████████▊| 🦖 7856/8000 [00:15<00:00, 522.37it/s]     99% |█████████▉| 🦖 7909/8000 [00:15<00:00, 521.69it/s]    100% |█████████▉| 🦖 7962/8000 [00:15<00:00, 520.70it/s]    100% |██████████| 🦖 8000/8000 [00:15<00:00, 522.75it/s]
-
-    Posterior samples shape: (19200, 3)
+      0% |          | 🦖 0/8000 [00:00<?, ?it/s]      1% |          | 🦖 82/8000 [00:00<00:09, 813.18it/s]      2% |▏         | 🦖 164/8000 [00:00<00:09, 788.29it/s]      3% |▎         | 🦖 243/8000 [00:00<00:10, 761.36it/s]      4% |▍         | 🦖 320/8000 [00:00<00:10, 750.30it/s]      5% |▍         | 🦖 396/8000 [00:00<00:10, 743.01it/s]      6% |▌         | 🦖 471/8000 [00:00<00:10, 739.00it/s]      7% |▋         | 🦖 545/8000 [00:00<00:10, 735.06it/s]      8% |▊         | 🦖 619/8000 [00:00<00:10, 732.35it/s]      9% |▊         | 🦖 693/8000 [00:00<00:10, 730.48it/s]     10% |▉         | 🦖 767/8000 [00:01<00:09, 729.38it/s]     10% |█         | 🦖 840/8000 [00:01<00:09, 727.26it/s]     11% |█▏        | 🦖 914/8000 [00:01<00:09, 728.72it/s]     12% |█▏        | 🦖 987/8000 [00:01<00:09, 728.27it/s]     13% |█▎        | 🦖 1061/8000 [00:01<00:09, 729.16it/s]     14% |█▍        | 🦖 1135/8000 [00:01<00:09, 730.69it/s]     15% |█▌        | 🦖 1209/8000 [00:01<00:09, 730.11it/s]     16% |█▌        | 🦖 1283/8000 [00:01<00:09, 729.89it/s]     17% |█▋        | 🦖 1356/8000 [00:01<00:09, 729.51it/s]     18% |█▊        | 🦖 1430/8000 [00:01<00:09, 729.80it/s]     19% |█▉        | 🦖 1504/8000 [00:02<00:08, 731.09it/s]     20% |█▉        | 🦖 1578/8000 [00:02<00:08, 717.30it/s]     21% |██        | 🦖 1650/8000 [00:02<00:08, 708.00it/s]     22% |██▏       | 🦖 1723/8000 [00:02<00:08, 714.02it/s]     22% |██▏       | 🦖 1797/8000 [00:02<00:08, 719.96it/s]     23% |██▎       | 🦖 1871/8000 [00:02<00:08, 724.33it/s]     24% |██▍       | 🦖 1945/8000 [00:02<00:08, 727.29it/s]     25% |██▌       | 🦖 2019/8000 [00:02<00:08, 729.46it/s]     26% |██▌       | 🦖 2093/8000 [00:02<00:08, 730.07it/s]     27% |██▋       | 🦖 2167/8000 [00:02<00:07, 730.69it/s]     28% |██▊       | 🦖 2241/8000 [00:03<00:07, 730.76it/s]     29% |██▉       | 🦖 2315/8000 [00:03<00:07, 731.35it/s]     30% |██▉       | 🦖 2389/8000 [00:03<00:07, 731.59it/s]     31% |███       | 🦖 2463/8000 [00:03<00:07, 731.15it/s]     32% |███▏      | 🦖 2537/8000 [00:03<00:07, 730.84it/s]     33% |███▎      | 🦖 2611/8000 [00:03<00:07, 730.50it/s]     34% |███▎      | 🦖 2685/8000 [00:03<00:07, 730.69it/s]     34% |███▍      | 🦖 2759/8000 [00:03<00:07, 729.78it/s]     35% |███▌      | 🦖 2832/8000 [00:03<00:07, 729.44it/s]     36% |███▋      | 🦖 2905/8000 [00:03<00:06, 728.57it/s]     37% |███▋      | 🦖 2978/8000 [00:04<00:06, 727.80it/s]     38% |███▊      | 🦖 3052/8000 [00:04<00:06, 728.57it/s]     39% |███▉      | 🦖 3125/8000 [00:04<00:06, 725.01it/s]     40% |███▉      | 🦖 3198/8000 [00:04<00:06, 725.54it/s]     41% |████      | 🦖 3272/8000 [00:04<00:06, 727.43it/s]     42% |████▏     | 🦖 3346/8000 [00:04<00:06, 728.72it/s]     43% |████▎     | 🦖 3420/8000 [00:04<00:06, 729.49it/s]     44% |████▎     | 🦖 3494/8000 [00:04<00:06, 731.04it/s]     45% |████▍     | 🦖 3568/8000 [00:04<00:06, 731.29it/s]     46% |████▌     | 🦖 3642/8000 [00:04<00:05, 730.55it/s]     46% |████▋     | 🦖 3716/8000 [00:05<00:05, 730.23it/s]     47% |████▋     | 🦖 3790/8000 [00:05<00:05, 730.63it/s]     48% |████▊     | 🦖 3864/8000 [00:05<00:05, 730.49it/s]     49% |████▉     | 🦖 3938/8000 [00:05<00:05, 730.72it/s]     50% |█████     | 🦖 4012/8000 [00:05<00:05, 730.65it/s]     51% |█████     | 🦖 4086/8000 [00:05<00:05, 724.50it/s]     52% |█████▏    | 🦖 4159/8000 [00:05<00:05, 725.06it/s]     53% |█████▎    | 🦖 4232/8000 [00:05<00:05, 725.29it/s]     54% |█████▍    | 🦖 4305/8000 [00:05<00:05, 725.82it/s]     55% |█████▍    | 🦖 4379/8000 [00:05<00:04, 727.39it/s]     56% |█████▌    | 🦖 4452/8000 [00:06<00:04, 727.86it/s]     57% |█████▋    | 🦖 4526/8000 [00:06<00:04, 729.04it/s]     57% |█████▋    | 🦖 4599/8000 [00:06<00:04, 729.23it/s]     58% |█████▊    | 🦖 4672/8000 [00:06<00:04, 728.75it/s]     59% |█████▉    | 🦖 4745/8000 [00:06<00:04, 728.59it/s]     60% |██████    | 🦖 4819/8000 [00:06<00:04, 729.26it/s]     61% |██████    | 🦖 4892/8000 [00:06<00:04, 729.22it/s]     62% |██████▏   | 🦖 4966/8000 [00:06<00:04, 729.60it/s]     63% |██████▎   | 🦖 5039/8000 [00:06<00:04, 728.56it/s]     64% |██████▍   | 🦖 5113/8000 [00:07<00:03, 730.53it/s]     65% |██████▍   | 🦖 5187/8000 [00:07<00:03, 727.94it/s]     66% |██████▌   | 🦖 5261/8000 [00:07<00:03, 729.35it/s]     67% |██████▋   | 🦖 5335/8000 [00:07<00:03, 729.88it/s]     68% |██████▊   | 🦖 5408/8000 [00:07<00:03, 728.97it/s]     69% |██████▊   | 🦖 5481/8000 [00:07<00:03, 729.26it/s]     69% |██████▉   | 🦖 5554/8000 [00:07<00:03, 729.02it/s]     70% |███████   | 🦖 5627/8000 [00:07<00:03, 728.21it/s]     71% |███████▏  | 🦖 5701/8000 [00:07<00:03, 729.85it/s]     72% |███████▏  | 🦖 5774/8000 [00:07<00:03, 729.44it/s]     73% |███████▎  | 🦖 5847/8000 [00:08<00:02, 729.41it/s]     74% |███████▍  | 🦖 5920/8000 [00:08<00:02, 729.49it/s]     75% |███████▍  | 🦖 5993/8000 [00:08<00:02, 729.14it/s]     76% |███████▌  | 🦖 6067/8000 [00:08<00:02, 730.13it/s]     77% |███████▋  | 🦖 6141/8000 [00:08<00:02, 731.02it/s]     78% |███████▊  | 🦖 6215/8000 [00:08<00:02, 731.55it/s]     79% |███████▊  | 🦖 6289/8000 [00:08<00:02, 730.45it/s]     80% |███████▉  | 🦖 6363/8000 [00:08<00:02, 730.31it/s]     80% |████████  | 🦖 6437/8000 [00:08<00:02, 731.07it/s]     81% |████████▏ | 🦖 6511/8000 [00:08<00:02, 730.52it/s]     82% |████████▏ | 🦖 6585/8000 [00:09<00:01, 730.97it/s]     83% |████████▎ | 🦖 6659/8000 [00:09<00:01, 730.34it/s]     84% |████████▍ | 🦖 6733/8000 [00:09<00:01, 730.89it/s]     85% |████████▌ | 🦖 6807/8000 [00:09<00:01, 729.65it/s]     86% |████████▌ | 🦖 6881/8000 [00:09<00:01, 730.37it/s]     87% |████████▋ | 🦖 6955/8000 [00:09<00:01, 730.02it/s]     88% |████████▊ | 🦖 7029/8000 [00:09<00:01, 730.88it/s]     89% |████████▉ | 🦖 7103/8000 [00:09<00:01, 730.43it/s]     90% |████████▉ | 🦖 7177/8000 [00:09<00:01, 731.13it/s]     91% |█████████ | 🦖 7251/8000 [00:09<00:01, 729.60it/s]     92% |█████████▏| 🦖 7324/8000 [00:10<00:00, 729.12it/s]     92% |█████████▏| 🦖 7397/8000 [00:10<00:00, 729.04it/s]     93% |█████████▎| 🦖 7470/8000 [00:10<00:00, 727.54it/s]     94% |█████████▍| 🦖 7543/8000 [00:10<00:00, 727.04it/s]     95% |█████████▌| 🦖 7617/8000 [00:10<00:00, 728.19it/s]     96% |█████████▌| 🦖 7690/8000 [00:10<00:00, 726.37it/s]     97% |█████████▋| 🦖 7764/8000 [00:10<00:00, 727.91it/s]     98% |█████████▊| 🦖 7837/8000 [00:10<00:00, 727.84it/s]     99% |█████████▉| 🦖 7910/8000 [00:10<00:00, 727.99it/s]    100% |█████████▉| 🦖 7983/8000 [00:10<00:00, 727.70it/s]    100% |██████████| 🦖 8000/8000 [00:10<00:00, 729.75it/s]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 170-175
+.. GENERATED FROM PYTHON SOURCE LINES 151-156
 
 Plot Posterior SED Envelope
 ---------------------------
@@ -274,7 +237,7 @@ Plot Posterior SED Envelope
 Draw 200 samples from the posterior and overlay them on the data to visualize
 the SED uncertainty.
 
-.. GENERATED FROM PYTHON SOURCE LINES 175-207
+.. GENERATED FROM PYTHON SOURCE LINES 156-187
 
 .. code-block:: Python
 
@@ -299,7 +262,6 @@ the SED uncertainty.
         ax.plot(freqs_plot.to_value(u.GHz), flux.to_value(u.mJy), color="C1", alpha=0.05)
 
     ax.plot(freqs_plot.to_value(u.GHz), true_curve.to_value(u.mJy), color="black", lw=2, label="True SED")
-
     ax.set_xlabel("Frequency [GHz]")
     ax.set_ylabel("Flux Density [mJy]")
     ax.set_xscale("log")
@@ -322,23 +284,19 @@ the SED uncertainty.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 208-217
+.. GENERATED FROM PYTHON SOURCE LINES 188-194
 
 Propagate Posteriors Through the Inverse Closure
 ------------------------------------------------
 
-Now comes the key step: for each posterior sample we apply the inverse
-closure to recover :math:`R` and :math:`B`. This propagates the SED
-measurement uncertainties into physical parameter uncertainties.
+For each posterior sample we apply the inverse closure to recover :math:`R`
+and :math:`B`, propagating SED measurement uncertainties into physical
+parameter uncertainties.  Microphysical parameters are held fixed.
 
-We assume fixed microphysical parameters:
-:math:`p=3`, :math:`\epsilon_e = \epsilon_B = 0.1`.
-
-.. GENERATED FROM PYTHON SOURCE LINES 217-271
+.. GENERATED FROM PYTHON SOURCE LINES 194-235
 
 .. code-block:: Python
 
-    from tqdm.auto import tqdm
 
     phys_sed = PowerLaw_SSA_SynchrotronSED()
 
@@ -377,20 +335,8 @@ We assume fixed microphysical parameters:
     R_post = u.Quantity(R_post).to_value("cm")
     B_post = u.Quantity(B_post).to_value("G")
 
-    # Expansion velocity posterior
     v_post = R_post / t_obs.to_value("s")
     v_over_c = v_post / const.c.cgs.value
-
-    print("\n=== Physical parameter posteriors ===")
-    print(
-        f"  R  :  {np.percentile(R_post, 16):.2e}  –  {np.percentile(R_post, 50):.2e}  –  {np.percentile(R_post, 84):.2e}  cm"
-    )
-    print(
-        f"  B  :  {np.percentile(B_post, 16):.3f}  –  {np.percentile(B_post, 50):.3f}  –  {np.percentile(B_post, 84):.3f}  G"
-    )
-    print(
-        f"  v/c:  {np.percentile(v_over_c, 16):.4f}  –  {np.percentile(v_over_c, 50):.4f}  –  {np.percentile(v_over_c, 84):.4f}"
-    )
 
 
 
@@ -400,17 +346,12 @@ We assume fixed microphysical parameters:
 
  .. code-block:: none
 
-      0%|          | 0/1000 [00:00<?, ?it/s]      2%|▏         | 23/1000 [00:00<00:04, 220.67it/s]      5%|▍         | 46/1000 [00:00<00:04, 221.45it/s]      7%|▋         | 69/1000 [00:00<00:04, 221.56it/s]      9%|▉         | 92/1000 [00:00<00:04, 222.10it/s]     12%|█▏        | 115/1000 [00:00<00:03, 222.44it/s]     14%|█▍        | 138/1000 [00:00<00:03, 222.38it/s]     16%|█▌        | 161/1000 [00:00<00:03, 222.53it/s]     18%|█▊        | 184/1000 [00:00<00:03, 222.64it/s]     21%|██        | 207/1000 [00:00<00:03, 220.90it/s]     23%|██▎       | 230/1000 [00:01<00:03, 221.11it/s]     25%|██▌       | 253/1000 [00:01<00:03, 221.31it/s]     28%|██▊       | 276/1000 [00:01<00:03, 221.03it/s]     30%|██▉       | 299/1000 [00:01<00:03, 221.23it/s]     32%|███▏      | 322/1000 [00:01<00:03, 221.63it/s]     34%|███▍      | 345/1000 [00:01<00:02, 221.73it/s]     37%|███▋      | 368/1000 [00:01<00:02, 221.96it/s]     39%|███▉      | 391/1000 [00:01<00:02, 221.61it/s]     41%|████▏     | 414/1000 [00:01<00:02, 221.97it/s]     44%|████▎     | 437/1000 [00:01<00:02, 222.18it/s]     46%|████▌     | 460/1000 [00:02<00:02, 222.14it/s]     48%|████▊     | 483/1000 [00:02<00:02, 222.61it/s]     51%|█████     | 506/1000 [00:02<00:02, 222.24it/s]     53%|█████▎    | 529/1000 [00:02<00:02, 221.91it/s]     55%|█████▌    | 552/1000 [00:02<00:02, 221.21it/s]     57%|█████▊    | 575/1000 [00:02<00:01, 221.59it/s]     60%|█████▉    | 598/1000 [00:02<00:01, 222.24it/s]     62%|██████▏   | 621/1000 [00:02<00:01, 222.44it/s]     64%|██████▍   | 644/1000 [00:02<00:01, 222.43it/s]     67%|██████▋   | 667/1000 [00:03<00:01, 222.49it/s]     69%|██████▉   | 690/1000 [00:03<00:01, 220.54it/s]     71%|███████▏  | 713/1000 [00:03<00:01, 220.57it/s]     74%|███████▎  | 736/1000 [00:03<00:01, 220.91it/s]     76%|███████▌  | 759/1000 [00:03<00:01, 221.30it/s]     78%|███████▊  | 782/1000 [00:03<00:00, 221.84it/s]     80%|████████  | 805/1000 [00:03<00:00, 221.82it/s]     83%|████████▎ | 828/1000 [00:03<00:00, 222.25it/s]     85%|████████▌ | 851/1000 [00:03<00:00, 222.46it/s]     87%|████████▋ | 874/1000 [00:03<00:00, 222.42it/s]     90%|████████▉ | 897/1000 [00:04<00:00, 222.35it/s]     92%|█████████▏| 920/1000 [00:04<00:00, 222.48it/s]     94%|█████████▍| 943/1000 [00:04<00:00, 222.20it/s]     97%|█████████▋| 966/1000 [00:04<00:00, 222.13it/s]     99%|█████████▉| 989/1000 [00:04<00:00, 222.13it/s]    100%|██████████| 1000/1000 [00:04<00:00, 221.89it/s]
-
-    === Physical parameter posteriors ===
-      R  :  8.75e+15  –  9.09e+15  –  9.41e+15  cm
-      B  :  0.690  –  0.724  –  0.760  G
-      v/c:  0.1126  –  0.1169  –  0.1211
+      0%|          | 0/1000 [00:00<?, ?it/s]      3%|▎         | 30/1000 [00:00<00:03, 297.99it/s]      6%|▌         | 61/1000 [00:00<00:03, 299.27it/s]      9%|▉         | 91/1000 [00:00<00:03, 299.20it/s]     12%|█▏        | 121/1000 [00:00<00:02, 299.05it/s]     15%|█▌        | 152/1000 [00:00<00:02, 299.47it/s]     18%|█▊        | 182/1000 [00:00<00:02, 297.19it/s]     21%|██        | 212/1000 [00:00<00:02, 297.82it/s]     24%|██▍       | 242/1000 [00:00<00:02, 297.91it/s]     27%|██▋       | 272/1000 [00:00<00:02, 297.98it/s]     30%|███       | 302/1000 [00:01<00:02, 298.53it/s]     33%|███▎      | 332/1000 [00:01<00:02, 298.34it/s]     36%|███▌      | 362/1000 [00:01<00:02, 298.71it/s]     39%|███▉      | 392/1000 [00:01<00:02, 298.56it/s]     42%|████▏     | 422/1000 [00:01<00:01, 298.39it/s]     45%|████▌     | 452/1000 [00:01<00:01, 298.41it/s]     48%|████▊     | 482/1000 [00:01<00:01, 298.60it/s]     51%|█████     | 512/1000 [00:01<00:01, 298.51it/s]     54%|█████▍    | 542/1000 [00:01<00:01, 297.71it/s]     57%|█████▋    | 572/1000 [00:01<00:01, 297.67it/s]     60%|██████    | 602/1000 [00:02<00:01, 297.75it/s]     63%|██████▎   | 632/1000 [00:02<00:01, 297.43it/s]     66%|██████▌   | 662/1000 [00:02<00:01, 298.04it/s]     69%|██████▉   | 692/1000 [00:02<00:01, 297.86it/s]     72%|███████▏  | 722/1000 [00:02<00:00, 297.45it/s]     75%|███████▌  | 752/1000 [00:02<00:00, 297.53it/s]     78%|███████▊  | 782/1000 [00:02<00:00, 297.19it/s]     81%|████████  | 812/1000 [00:02<00:00, 296.98it/s]     84%|████████▍ | 842/1000 [00:02<00:00, 297.34it/s]     87%|████████▋ | 872/1000 [00:02<00:00, 297.41it/s]     90%|█████████ | 902/1000 [00:03<00:00, 297.35it/s]     93%|█████████▎| 932/1000 [00:03<00:00, 297.50it/s]     96%|█████████▌| 962/1000 [00:03<00:00, 297.60it/s]     99%|█████████▉| 992/1000 [00:03<00:00, 297.31it/s]    100%|██████████| 1000/1000 [00:03<00:00, 297.86it/s]
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 272-277
+.. GENERATED FROM PYTHON SOURCE LINES 236-241
 
 Physical Parameter Posteriors
 -----------------------------
@@ -418,7 +359,7 @@ Physical Parameter Posteriors
 The posterior distributions on :math:`R`, :math:`B`, and :math:`v/c` quantify
 how measurement uncertainties in the SED propagate to physical uncertainties.
 
-.. GENERATED FROM PYTHON SOURCE LINES 277-305
+.. GENERATED FROM PYTHON SOURCE LINES 241-269
 
 .. code-block:: Python
 
@@ -462,45 +403,23 @@ how measurement uncertainties in the SED propagate to physical uncertainties.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 306-318
+.. GENERATED FROM PYTHON SOURCE LINES 270-280
 
 Relativistic Check
 ------------------
 
 A crucial sanity check: if the posterior on :math:`v/c = R/(ct)` extends
 above 1 the source is **superluminal** — which signals either (a) truly
-relativistic ejecta requiring a relativistic shock model, (b) an underestimated
-distance, or (c) a geometry effect (e.g. off-axis viewing).
+relativistic ejecta requiring a relativistic shock model, (b) an
+underestimated distance, or (c) a geometry effect (e.g. off-axis viewing).
 
 In this case the inferred :math:`v/c \sim 0.04` is comfortably sub-relativistic,
 consistent with the true input parameters.
 
-Median inferred velocity:
-
-.. GENERATED FROM PYTHON SOURCE LINES 318-320
-
-.. code-block:: Python
-
-    v_median = np.median(v_over_c)
-    print(f"\n  Median v/c = {v_median:.4f}  ({'sub-relativistic' if v_median < 0.1 else 'mildly relativistic'})")
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-      Median v/c = 0.1169  (mildly relativistic)
-
-
-
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 20.917 seconds)
+   **Total running time of the script:** (0 minutes 15.207 seconds)
 
 
 .. _sphx_glr_download_auto_examples_synchrotron_d_closures_plot_sed_to_source_size.py:

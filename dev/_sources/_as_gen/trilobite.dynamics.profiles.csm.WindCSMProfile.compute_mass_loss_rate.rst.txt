@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.compute\_mass\_loss\_rate
+========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.compute_mass_loss_rate

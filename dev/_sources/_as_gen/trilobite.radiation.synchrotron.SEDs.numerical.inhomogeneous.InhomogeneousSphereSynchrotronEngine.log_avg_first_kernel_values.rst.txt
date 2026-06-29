@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.log\_avg\_first\_kernel\_values
+=================================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. autoproperty:: InhomogeneousSphereSynchrotronEngine.log_avg_first_kernel_values

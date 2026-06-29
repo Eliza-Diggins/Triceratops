@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.UltraRelativisticSphericalSynchrotronEngine.first\_kernel\_grid
+========================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. autoproperty:: UltraRelativisticSphericalSynchrotronEngine.first_kernel_grid

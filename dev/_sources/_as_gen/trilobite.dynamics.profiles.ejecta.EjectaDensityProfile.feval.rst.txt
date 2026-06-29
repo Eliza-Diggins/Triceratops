@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.feval
+=============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: EjectaDensityProfile.feval

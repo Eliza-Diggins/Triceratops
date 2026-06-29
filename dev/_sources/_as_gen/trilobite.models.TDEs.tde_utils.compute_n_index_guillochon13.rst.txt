@@ -1,0 +1,6 @@
+trilobite.models.TDEs.tde\_utils.compute\_n\_index\_guillochon13
+================================================================
+
+.. currentmodule:: trilobite.models.TDEs.tde_utils
+
+.. autofunction:: compute_n_index_guillochon13

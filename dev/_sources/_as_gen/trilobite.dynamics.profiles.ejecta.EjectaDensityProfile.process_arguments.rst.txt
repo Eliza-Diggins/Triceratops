@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.process\_arguments
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: EjectaDensityProfile.process_arguments

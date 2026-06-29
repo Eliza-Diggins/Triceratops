@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.CSMDensityProfile.as\_optimized\_callable
+=========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: CSMDensityProfile.as_optimized_callable

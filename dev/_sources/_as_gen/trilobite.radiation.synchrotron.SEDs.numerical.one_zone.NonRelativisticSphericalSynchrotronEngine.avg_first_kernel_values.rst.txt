@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.NonRelativisticSphericalSynchrotronEngine.avg\_first\_kernel\_values
+=============================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. autoproperty:: NonRelativisticSphericalSynchrotronEngine.avg_first_kernel_values

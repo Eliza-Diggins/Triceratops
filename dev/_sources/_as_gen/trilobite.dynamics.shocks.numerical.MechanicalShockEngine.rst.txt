@@ -15,8 +15,9 @@ MechanicalShockEngine
       :recursive:
    
       ~MechanicalShockEngine.compute_shock_properties
+      ~MechanicalShockEngine.find_ejecta_crossing_time
       ~MechanicalShockEngine.generate_evaluation_kernel
-      ~MechanicalShockEngine.generate_initial_conditions
+      ~MechanicalShockEngine.infer_initial_conditions
    
    
 

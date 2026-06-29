@@ -1,0 +1,6 @@
+trilobite.data.utils.infer\_err\_from\_non\_detection
+=====================================================
+
+.. currentmodule:: trilobite.data.utils
+
+.. autofunction:: infer_err_from_non_detection

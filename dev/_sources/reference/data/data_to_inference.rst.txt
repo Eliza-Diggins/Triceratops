@@ -1,8 +1,8 @@
 .. _data_to_inference:
 
-=====================================
+==========================================
 From Data to Inference: A Complete Guide
-=====================================
+==========================================
 
 This guide walks through the full chain from raw observational data to a
 sampler-ready inference problem. It is the single document you need if you

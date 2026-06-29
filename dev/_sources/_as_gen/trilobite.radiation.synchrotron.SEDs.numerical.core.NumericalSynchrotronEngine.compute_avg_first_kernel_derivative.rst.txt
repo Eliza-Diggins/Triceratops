@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.compute\_avg\_first\_kernel\_derivative
+======================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
+.. automethod:: NumericalSynchrotronEngine.compute_avg_first_kernel_derivative

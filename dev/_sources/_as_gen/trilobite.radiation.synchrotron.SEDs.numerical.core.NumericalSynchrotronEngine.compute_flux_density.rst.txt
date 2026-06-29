@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.compute\_flux\_density
+=====================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
+.. automethod:: NumericalSynchrotronEngine.compute_flux_density

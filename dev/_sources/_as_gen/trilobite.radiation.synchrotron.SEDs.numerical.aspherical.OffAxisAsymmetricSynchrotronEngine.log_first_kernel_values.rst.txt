@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine.log\_first\_kernel\_values
+=======================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. autoproperty:: OffAxisAsymmetricSynchrotronEngine.log_first_kernel_values

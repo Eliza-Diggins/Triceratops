@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.normalize
+=====================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: ExponentialEjectaProfile.normalize

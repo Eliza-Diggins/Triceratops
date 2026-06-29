@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.StationaryCSMDensityProfile.process\_arguments
+==============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: StationaryCSMDensityProfile.process_arguments

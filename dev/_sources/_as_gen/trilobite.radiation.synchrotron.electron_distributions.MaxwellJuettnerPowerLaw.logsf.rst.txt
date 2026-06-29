@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerPowerLaw.logsf
+=====================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerPowerLaw.logsf

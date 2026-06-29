@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.shell\_mass
+==========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.shell_mass

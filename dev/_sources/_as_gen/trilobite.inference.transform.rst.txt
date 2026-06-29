@@ -1,0 +1,39 @@
+trilobite.inference.transform
+=============================
+
+.. automodule:: trilobite.inference.transform
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      IdentityTransform
+      Log10Transform
+      LogTransform
+      LogisticTransform
+      ParameterTransform
+      SoftplusTransform
+   
+   
+
+   
+   
+   

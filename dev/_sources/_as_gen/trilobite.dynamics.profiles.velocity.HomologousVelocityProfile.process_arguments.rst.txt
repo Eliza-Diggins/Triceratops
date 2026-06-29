@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.HomologousVelocityProfile.process\_arguments
+=================================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. automethod:: HomologousVelocityProfile.process_arguments

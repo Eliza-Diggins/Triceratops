@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.SmoothBPLCSMProfile.OUTPUT\_UNITS
+=================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: SmoothBPLCSMProfile.OUTPUT_UNITS

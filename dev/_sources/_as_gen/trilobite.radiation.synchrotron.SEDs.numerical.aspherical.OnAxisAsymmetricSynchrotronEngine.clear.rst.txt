@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine.clear
+=================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. automethod:: OnAxisAsymmetricSynchrotronEngine.clear

@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine.load\_first\_kernel
+================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. automethod:: OffAxisAsymmetricSynchrotronEngine.load_first_kernel

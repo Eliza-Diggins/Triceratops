@@ -1,0 +1,37 @@
+WindWithFloorCSMProfile
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~WindWithFloorCSMProfile.as_callable
+      ~WindWithFloorCSMProfile.as_optimized_callable
+      ~WindWithFloorCSMProfile.eval
+      ~WindWithFloorCSMProfile.feval
+      ~WindWithFloorCSMProfile.normalize
+      ~WindWithFloorCSMProfile.process_arguments
+      ~WindWithFloorCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~WindWithFloorCSMProfile.OUTPUT_UNITS
+   
+   

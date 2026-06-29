@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.KERNEL\_UNITS
+============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoattribute:: BrokenPowerLawEjectaProfile.KERNEL_UNITS

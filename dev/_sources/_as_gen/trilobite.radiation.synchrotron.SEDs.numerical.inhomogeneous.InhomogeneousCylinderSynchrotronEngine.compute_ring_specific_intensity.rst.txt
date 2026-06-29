@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.compute\_ring\_specific\_intensity
+======================================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. automethod:: InhomogeneousCylinderSynchrotronEngine.compute_ring_specific_intensity

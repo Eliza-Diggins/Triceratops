@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.log\_avg\_first\_kernel\_values
+==============================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
+.. autoproperty:: NumericalSynchrotronEngine.log_avg_first_kernel_values

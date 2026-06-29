@@ -1,0 +1,36 @@
+ShellCSMProfile
+===============================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.ShellCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ShellCSMProfile.as_callable
+      ~ShellCSMProfile.as_optimized_callable
+      ~ShellCSMProfile.eval
+      ~ShellCSMProfile.feval
+      ~ShellCSMProfile.process_arguments
+      ~ShellCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ShellCSMProfile.OUTPUT_UNITS
+   
+   

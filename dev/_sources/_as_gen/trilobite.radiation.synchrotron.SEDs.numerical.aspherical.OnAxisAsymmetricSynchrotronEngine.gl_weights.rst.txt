@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine.gl\_weights
+=======================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. autoproperty:: OnAxisAsymmetricSynchrotronEngine.gl_weights

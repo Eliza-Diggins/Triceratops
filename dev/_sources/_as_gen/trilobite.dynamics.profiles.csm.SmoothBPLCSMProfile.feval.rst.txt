@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.SmoothBPLCSMProfile.feval
+=========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: SmoothBPLCSMProfile.feval

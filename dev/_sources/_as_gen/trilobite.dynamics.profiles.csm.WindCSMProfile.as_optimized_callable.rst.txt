@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.as\_optimized\_callable
+======================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.as_optimized_callable

@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -57,7 +57,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'auto_examples/modeling/plot_tde_radio_afterglow';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -426,14 +426,17 @@
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../synchrotron/index.html">Synchrotron Emission Examples</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../synchrotron/a_fundamentals/index.html">Synchrotron Fundamentals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../synchrotron/a_fundamentals/plot_frequency_gamma_relation.html">The ν–γ–B Relation and Pitch-Angle Effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synchrotron/a_fundamentals/plot_electron_distributions.html">Electron Energy Distributions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../synchrotron/b_seds/index.html">Spectral Energy Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_inhomogeneous_cylinder.html">Synchrotron SEDs from an Inhomogeneous Cylinder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_multi_component_numerical_SED.html">Multi-Component Synchrotron SEDs with the Numerical Engine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_on_axis_numerical.html">On-Axis Asymmetric Synchrotron SEDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_sed_model_comparison.html">Comparing Synchrotron SED Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_inhomogeneous_sphere.html">Synchrotron SEDs from an Inhomogeneous Sphere</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_SSA_cooling_SED.html">Synchrotron Spectra With Cooling and SSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../synchrotron/b_seds/plot_off_axis_numerical.html">Off-Axis Synchrotron SEDs from Axisymmetric Outflows</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../synchrotron/c_cooling/index.html">Electron Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -472,14 +475,30 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../dynamics/index.html">Shock Dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_rh_jump_weak_conditions.html">Weak vs Strong Shock Jump Conditions (Cold Medium)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_numerical_shock_engine.html">Numerical Thin-Shell Shock Evolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_rh_jump_conditions.html">Rankine–Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_mechanical_shock_cooling.html">Radiative Cooling in the Mechanical Shock Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_mechanical_shock_model.html">Mechanical Shock Model: Forward and Reverse Shock Evolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_relativistic_thin_shell_convergence.html">Relativistic vs. Non-Relativistic Thin-Shell Convergence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_numerical_shocks_csms.html">SNe Shocks In Different CSM Environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../dynamics/plot_chevalier_shock_structure.html">Chevalier Self-Similar Shock Structure</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../dynamics/a_fundamentals/index.html">Shock Physics Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/a_fundamentals/plot_rh_jump_weak_conditions.html">Weak vs Strong Shock Jump Conditions (Cold Medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/a_fundamentals/plot_rh_jump_conditions.html">Rankine–Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../dynamics/b_models/index.html">Self-Similar Shock Models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/b_models/plot_chevalier_wind_engine.html">Chevalier Self-Similar Shock in a Steady Wind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/b_models/plot_chevalier_self_similar.html">Chevalier Self-Similar Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/b_models/plot_chevalier_two_shock.html">Two-Shock Chevalier Self-Similar Evolution in a Steady Wind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/b_models/plot_sedov_taylor_shock.html">Chevalier and Sedov-Taylor Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/b_models/plot_blandford_mcKee.html">Blandford-McKee Ultra-Relativistic Blast Wave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/b_models/plot_chevalier_shock_structure.html">Chevalier Self-Similar Shock Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../dynamics/c_engines/index.html">Numerical Shock Engines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_numerical_shock_engine.html">Numerical Thin-Shell Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_mechanical_shock_cooling.html">Radiative Cooling in the Mechanical Shock Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_mechanical_shock_model.html">Mechanical Shock Model: Forward and Reverse Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_momentum_conserving_shock.html">Momentum-Conserving Snowplow Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_relativistic_thin_shell_convergence.html">Relativistic vs. Non-Relativistic Thin-Shell Convergence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_mechanical_shocks_csms.html">MechanicalShockEngine: Forward and Reverse Shocks in Different CSM Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dynamics/c_engines/plot_numerical_shocks_csms.html">SNe Shocks In Different CSM Environments</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Forward Modeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -611,12 +630,9 @@ predict the radio light curves given these parameters.</p>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">const</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.profiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">BrokenPowerLawEjectaProfile</span><span class="p">,</span> <span class="n">UniformCSMProfile</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.shocks.numerical</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">PressureDrivenThinShellShockEngine</span></a>
-<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.shocks.utils</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_bpl_ejecta_kernel</span><span class="p">,</span>
-    <span class="n">get_uniform_csm_density_func</span><span class="p">,</span>
-    <span class="n">make_homologous_stationary_sources</span><span class="p">,</span>
-<span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.shocks.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_homologous_stationary_sources</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.synchrotron</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">PowerLaw_Cooling_SSA_SynchrotronSED</span></a>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.synchrotron.cooling</span><span class="w"> </span><span class="kn">import</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">SynchrotronRadiativeCoolingEngine</span></a>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.plot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_plot_style</span>
@@ -675,13 +691,14 @@ sweeps up mass. Initially the ejecta are in <strong>free expansion</strong>
 (<span class="math notranslate nohighlight">\(R \propto t\)</span>), then transition to the <strong>Sedov-Taylor</strong> phase
 (<span class="math notranslate nohighlight">\(R \propto t^{2/5}\)</span>) once the swept-up mass equals the ejecta mass.
 With these parameters the transition occurs at roughly 500 days.</p>
-<p>We use <a class="reference internal" href="../../_as_gen/trilobite.dynamics.shocks.utils.get_uniform_csm_density_func.html#trilobite.dynamics.shocks.utils.get_uniform_csm_density_func" title="trilobite.dynamics.shocks.utils.get_uniform_csm_density_func"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_uniform_csm_density_func()</span></code></a>
-and <a class="reference internal" href="../../_as_gen/trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel.html#trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel" title="trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_bpl_ejecta_kernel()</span></code></a> to build
+<p>We use <a class="reference internal" href="../../_as_gen/trilobite.dynamics.profiles.csm.UniformCSMProfile.html#trilobite.dynamics.profiles.csm.UniformCSMProfile" title="trilobite.dynamics.profiles.csm.UniformCSMProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">UniformCSMProfile</span></code></a> and
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.html#trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile" title="trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">BrokenPowerLawEjectaProfile</span></code></a> to build
 the upstream source callables, then combine them with
 <a class="reference internal" href="../../_as_gen/trilobite.dynamics.shocks.utils.make_homologous_stationary_sources.html#trilobite.dynamics.shocks.utils.make_homologous_stationary_sources" title="trilobite.dynamics.shocks.utils.make_homologous_stationary_sources"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_homologous_stationary_sources()</span></code></a>.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rho_csm</span> <span class="o">=</span> <span class="n">get_uniform_csm_density_func</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rho_ISM</span></a><span class="p">)</span>
-<span class="n">G_ej</span> <span class="o">=</span> <span class="n">get_bpl_ejecta_kernel</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_ej</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M_ej</span></a><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">rho_1</span><span class="p">,</span> <span class="n">u_1</span><span class="p">,</span> <span class="n">rho_4</span><span class="p">,</span> <span class="n">u_4</span> <span class="o">=</span> <span class="n">make_homologous_stationary_sources</span><span class="p">(</span><span class="n">G_ej</span><span class="o">=</span><span class="n">G_ej</span><span class="p">,</span> <span class="n">rho_csm</span><span class="o">=</span><span class="n">rho_csm</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">rho_csm</span> <span class="o">=</span> <span class="n">UniformCSMProfile</span><span class="o">.</span><span class="n">as_optimized_callable</span><span class="p">(</span><span class="n">rho_0</span><span class="o">=</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">rho_ISM</span></a><span class="p">)</span>
+<a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_t</span></a> <span class="o">=</span> <span class="n">BrokenPowerLawEjectaProfile</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_ej</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M_ej</span></a><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rho_ej</span> <span class="o">=</span> <span class="n">BrokenPowerLawEjectaProfile</span><span class="o">.</span><span class="n">as_optimized_callable</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="o">=</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_t</span></a><span class="o">=</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_t</span></a><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rho_1</span><span class="p">,</span> <span class="n">u_1</span><span class="p">,</span> <span class="n">rho_4</span><span class="p">,</span> <span class="n">u_4</span> <span class="o">=</span> <span class="n">make_homologous_stationary_sources</span><span class="p">(</span><span class="n">rho_ej</span><span class="p">,</span> <span class="n">rho_csm</span><span class="p">)</span>
 
 <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t_init</span></a> <span class="o">=</span> <span class="mf">10.0</span> <span class="o">*</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Unit.html#astropy.units.Unit" title="astropy.units.Unit" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">u</span><span class="o">.</span><span class="n">day</span></a>
 <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">R_init</span></a> <span class="o">=</span> <span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_init</span></a> <span class="o">*</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t_init</span></a><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Unit.html#astropy.units.Unit" title="astropy.units.Unit" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">u</span><span class="o">.</span><span class="n">cm</span></a><span class="p">)</span>
@@ -779,7 +796,7 @@ Rankine–Hugoniot jump conditions, so the thermal energy density is</p>
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>B-field range : 0.0055 G - 0.0478 G
-gamma_c range : 3.1e+04 - 2.0e+05
+gamma_c range : 4.6e+04 - 2.9e+05
 </pre></div>
 </div>
 </section>
@@ -863,8 +880,9 @@ for each case.</p>
 <span class="k">for</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">label</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">color</span></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_ej_values</span></a><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E_labels</span></a><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;C0&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">]):</span>
     <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M_ej_E</span></a> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E</span></a> <span class="o">/</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_init</span></a><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Unit.html#astropy.units.Unit" title="astropy.units.Unit" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">u</span><span class="o">.</span><span class="n">M_sun</span></a><span class="p">)</span>
 
-    <span class="n">G_ej_E</span> <span class="o">=</span> <span class="n">get_bpl_ejecta_kernel</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M_ej_E</span></a><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">rho_1_E</span><span class="p">,</span> <span class="n">u_1_E</span><span class="p">,</span> <span class="n">rho_4_E</span><span class="p">,</span> <span class="n">u_4_E</span> <span class="o">=</span> <span class="n">make_homologous_stationary_sources</span><span class="p">(</span><span class="n">G_ej</span><span class="o">=</span><span class="n">G_ej_E</span><span class="p">,</span> <span class="n">rho_csm</span><span class="o">=</span><span class="n">rho_csm</span><span class="p">)</span>
+    <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K_E</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_t_E</span></a> <span class="o">=</span> <span class="n">BrokenPowerLawEjectaProfile</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">E</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">M_ej_E</span></a><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">rho_ej_E</span> <span class="o">=</span> <span class="n">BrokenPowerLawEjectaProfile</span><span class="o">.</span><span class="n">as_optimized_callable</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K</span></a><span class="o">=</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">K_E</span></a><span class="p">,</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_t</span></a><span class="o">=</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">v_t_E</span></a><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">rho_1_E</span><span class="p">,</span> <span class="n">u_1_E</span><span class="p">,</span> <span class="n">rho_4_E</span><span class="p">,</span> <span class="n">u_4_E</span> <span class="o">=</span> <span class="n">make_homologous_stationary_sources</span><span class="p">(</span><span class="n">rho_ej_E</span><span class="p">,</span> <span class="n">rho_csm</span><span class="p">)</span>
 
     <span class="n">state_E</span> <span class="o">=</span> <span class="n">shock_engine</span><span class="o">.</span><span class="n">compute_shock_properties</span><span class="p">(</span>
         <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">times</span></a><span class="p">,</span>
@@ -947,7 +965,7 @@ ISM mass.</p></li>
 the total outflow kinetic energy, the ISM density at the black hole’s sphere
 of influence, and (via the microphysical parameters) the efficiency of
 particle acceleration at the shock.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.839 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 3.663 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-modeling-plot-tde-radio-afterglow-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/25d6785627ff42cf9a8a25e6be1bb037/plot_tde_radio_afterglow.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_tde_radio_afterglow.ipynb</span></code></a></p>
@@ -1044,8 +1062,8 @@ particle acceleration at the shock.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1079,7 +1097,7 @@ particle acceleration at the shock.</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

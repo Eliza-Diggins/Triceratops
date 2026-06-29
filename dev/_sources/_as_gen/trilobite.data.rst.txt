@@ -1,0 +1,38 @@
+﻿trilobite.data
+==============
+
+.. automodule:: trilobite.data
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      core
+      light_curve
+      optical_photometry
+      photometry
+      utils
+   
+   
+
+   
+   
+   
+
+   
+   
+   

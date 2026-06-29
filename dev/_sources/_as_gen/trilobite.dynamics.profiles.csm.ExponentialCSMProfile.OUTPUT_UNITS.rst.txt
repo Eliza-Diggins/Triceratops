@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ExponentialCSMProfile.OUTPUT\_UNITS
+===================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: ExponentialCSMProfile.OUTPUT_UNITS

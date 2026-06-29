@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.ElectronDistribution.sf
+===============================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: ElectronDistribution.sf

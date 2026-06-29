@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerPowerLaw.n\_eff\_between
+===============================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerPowerLaw.n_eff_between

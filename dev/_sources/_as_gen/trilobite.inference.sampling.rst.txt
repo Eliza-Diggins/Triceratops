@@ -1,4 +1,4 @@
-﻿trilobite.inference.sampling
+trilobite.inference.sampling
 ============================
 
 .. automodule:: trilobite.inference.sampling

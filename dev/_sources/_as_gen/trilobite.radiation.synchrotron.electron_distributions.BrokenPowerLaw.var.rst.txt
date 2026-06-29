@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.BrokenPowerLaw.var
+==========================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: BrokenPowerLaw.var

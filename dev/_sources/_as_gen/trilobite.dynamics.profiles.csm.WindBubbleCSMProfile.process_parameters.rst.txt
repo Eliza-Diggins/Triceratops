@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindBubbleCSMProfile.process\_parameters
+========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindBubbleCSMProfile.process_parameters

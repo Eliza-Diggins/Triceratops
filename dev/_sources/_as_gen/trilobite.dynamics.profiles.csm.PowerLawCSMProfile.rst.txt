@@ -1,0 +1,36 @@
+PowerLawCSMProfile
+==================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.PowerLawCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~PowerLawCSMProfile.as_callable
+      ~PowerLawCSMProfile.as_optimized_callable
+      ~PowerLawCSMProfile.eval
+      ~PowerLawCSMProfile.feval
+      ~PowerLawCSMProfile.process_arguments
+      ~PowerLawCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~PowerLawCSMProfile.OUTPUT_UNITS
+   
+   

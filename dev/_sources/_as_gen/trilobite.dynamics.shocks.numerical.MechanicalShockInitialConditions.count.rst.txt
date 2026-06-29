@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions.count
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. automethod:: MechanicalShockInitialConditions.count

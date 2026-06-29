@@ -1,4 +1,4 @@
-﻿trilobite.inference.likelihood
+trilobite.inference.likelihood
 ==============================
 
 .. automodule:: trilobite.inference.likelihood

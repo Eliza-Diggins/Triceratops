@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.NonRelativisticSphericalSynchrotronEngine.load\_first\_kernel
+======================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. automethod:: NonRelativisticSphericalSynchrotronEngine.load_first_kernel

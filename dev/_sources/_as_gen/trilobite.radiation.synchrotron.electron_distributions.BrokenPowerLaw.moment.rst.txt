@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.BrokenPowerLaw.moment
+=============================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: BrokenPowerLaw.moment

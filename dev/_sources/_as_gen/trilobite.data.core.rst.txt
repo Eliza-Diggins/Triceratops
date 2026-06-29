@@ -1,4 +1,4 @@
-﻿trilobite.data.core
+trilobite.data.core
 ===================
 
 .. automodule:: trilobite.data.core

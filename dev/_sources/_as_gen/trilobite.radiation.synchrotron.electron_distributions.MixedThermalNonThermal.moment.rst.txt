@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MixedThermalNonThermal.moment
+=====================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MixedThermalNonThermal.moment

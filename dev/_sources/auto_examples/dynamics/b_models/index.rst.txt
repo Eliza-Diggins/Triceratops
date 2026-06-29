@@ -1,0 +1,153 @@
+
+
+.. _sphx_glr_auto_examples_dynamics_b_models:
+
+Self-Similar Shock Models
+==========================
+
+These examples explore the analytic self-similar solutions for supernova
+shock interaction with a power-law circumstellar medium (CSM) — the
+Chevalier framework — in which the entire two-shock structure (forward shock,
+contact discontinuity, reverse shock) scales with a single power of time.
+
+They cover how to construct the self-similar solution, map it to physical
+coordinates at a series of snapshot times, and interpret the internal
+density and pressure profiles of the shocked layers.
+
+Use these examples when working with idealized power-law density profiles
+where a closed-form solution is available and computationally preferable
+to a full numerical integration.
+
+**API:**
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example computes the self-similar shock evolution for homologously expanding supernova ejecta interacting with a steady circumstellar wind.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/b_models/images/thumb/sphx_glr_plot_chevalier_wind_engine_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/b_models/plot_chevalier_wind_engine`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chevalier Self-Similar Shock in a Steady Wind</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example computes the self-similar shock evolution for homologously expanding supernova ejecta interacting with a power-law circumstellar medium (CSM). The calculation uses the Chevalier self-similar solution, which applies when the outer ejecta density and the CSM density are both described by power laws.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/b_models/images/thumb/sphx_glr_plot_chevalier_self_similar_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/b_models/plot_chevalier_self_similar`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chevalier Self-Similar Shock Evolution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example computes the self-similar interaction between homologously expanding supernova ejecta and a steady circumstellar wind.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/b_models/images/thumb/sphx_glr_plot_chevalier_two_shock_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/b_models/plot_chevalier_two_shock`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Two-Shock Chevalier Self-Similar Evolution in a Steady Wind</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example compares two classic self-similar shock solutions for supernova remnant evolution in a uniform circumstellar medium (CSM):">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/b_models/images/thumb/sphx_glr_plot_sedov_taylor_shock_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/b_models/plot_sedov_taylor_shock`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chevalier and Sedov-Taylor Shock Evolution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example computes the Blandford-McKee self-similar solution for an ultra-relativistic blast wave expanding into a uniform external medium.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/b_models/images/thumb/sphx_glr_plot_blandford_mcKee_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/b_models/plot_blandford_mcKee`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Blandford-McKee Ultra-Relativistic Blast Wave</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example walks through the internal structure of the Chevalier self-similar two-shock system and maps it back to physical space at a series of snapshot times.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/b_models/images/thumb/sphx_glr_plot_chevalier_shock_structure_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/b_models/plot_chevalier_shock_structure`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Chevalier Self-Similar Shock Structure</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/dynamics/b_models/plot_chevalier_wind_engine
+   /auto_examples/dynamics/b_models/plot_chevalier_self_similar
+   /auto_examples/dynamics/b_models/plot_chevalier_two_shock
+   /auto_examples/dynamics/b_models/plot_sedov_taylor_shock
+   /auto_examples/dynamics/b_models/plot_blandford_mcKee
+   /auto_examples/dynamics/b_models/plot_chevalier_shock_structure
+

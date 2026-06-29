@@ -1,19 +1,19 @@
-OnAxisAsymmetricSynchrotronEngine
+﻿trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine
 ================================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical
 
-.. autoclass:: trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine
+.. autoclass:: OnAxisAsymmetricSynchrotronEngine
 
    
+   .. automethod:: __init__
 
    
    .. rubric:: Methods
 
    .. autosummary::
-      :toctree:
-      :recursive:
    
+      ~OnAxisAsymmetricSynchrotronEngine.__init__
       ~OnAxisAsymmetricSynchrotronEngine.clear
       ~OnAxisAsymmetricSynchrotronEngine.compute_absorption
       ~OnAxisAsymmetricSynchrotronEngine.compute_avg_first_kernel
@@ -43,8 +43,6 @@ OnAxisAsymmetricSynchrotronEngine
    .. rubric:: Attributes
 
    .. autosummary::
-      :toctree:
-      :recursive:
    
       ~OnAxisAsymmetricSynchrotronEngine.avg_first_kernel_derivative_interpolator
       ~OnAxisAsymmetricSynchrotronEngine.avg_first_kernel_grid

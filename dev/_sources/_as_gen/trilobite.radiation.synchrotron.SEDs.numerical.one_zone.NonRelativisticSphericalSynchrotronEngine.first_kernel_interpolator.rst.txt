@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.NonRelativisticSphericalSynchrotronEngine.first\_kernel\_interpolator
+==============================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. autoproperty:: NonRelativisticSphericalSynchrotronEngine.first_kernel_interpolator

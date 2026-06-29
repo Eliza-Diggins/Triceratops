@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerPowerLaw.as\_callable
+============================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerPowerLaw.as_callable

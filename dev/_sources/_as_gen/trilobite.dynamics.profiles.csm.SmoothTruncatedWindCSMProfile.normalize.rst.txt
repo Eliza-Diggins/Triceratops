@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.SmoothTruncatedWindCSMProfile.normalize
+=======================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: SmoothTruncatedWindCSMProfile.normalize

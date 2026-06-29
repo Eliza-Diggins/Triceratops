@@ -2,17 +2,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from astropy import units as u
 
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
 from trilobite.dynamics.shocks import (
     PressureDrivenThinShellShockEngine,
-    get_bpl_ejecta_kernel,
-    get_wind_csm_density_func,
     make_homologous_stationary_sources,
 )
 from trilobite.utils.plot_utils import set_plot_style
 
-G_ej    = get_bpl_ejecta_kernel(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
-rho_csm = get_wind_csm_density_func(1e-5 * u.Msun / u.yr, 100.0 * u.km / u.s)
-rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej, rho_csm)
+K, v_t  = BrokenPowerLawEjectaProfile.normalize(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
+rho_ej  = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10.0, delta=1.0)
+rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=1e-5 * u.Msun / u.yr, wind_velocity=100.0 * u.km / u.s)
+rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
 engine = PressureDrivenThinShellShockEngine()
 time   = np.geomspace(1, 1000, 500) * u.day

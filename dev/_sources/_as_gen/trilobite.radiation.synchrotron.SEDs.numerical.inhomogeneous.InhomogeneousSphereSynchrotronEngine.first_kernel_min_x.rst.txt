@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.first\_kernel\_min\_x
+=======================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. autoproperty:: InhomogeneousSphereSynchrotronEngine.first_kernel_min_x

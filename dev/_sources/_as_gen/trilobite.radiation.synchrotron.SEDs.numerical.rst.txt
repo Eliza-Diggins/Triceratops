@@ -13,22 +13,22 @@ trilobite.radiation.synchrotron.SEDs.numerical
 
    
    
-   
-
-   
-   
-
-   .. rubric:: Classes
+   .. rubric:: Modules
 
    .. autosummary::
       :toctree:
-      :template: class.rst
+      :template: module.rst
       :recursive:
+
    
-      NonRelativisticSphericalSynchrotronEngine
-      NumericalSynchrotronEngine
-      OnAxisAsymmetricSynchrotronEngine
-      UltraRelativisticSphericalSynchrotronEngine
+      aspherical
+      core
+      inhomogeneous
+      one_zone
+   
+   
+
+   
    
    
 

@@ -1,0 +1,83 @@
+OffAxisAsymmetricSynchrotronEngine
+============================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. autoclass:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~OffAxisAsymmetricSynchrotronEngine.clear
+      ~OffAxisAsymmetricSynchrotronEngine.compute_absorption
+      ~OffAxisAsymmetricSynchrotronEngine.compute_avg_first_kernel
+      ~OffAxisAsymmetricSynchrotronEngine.compute_avg_first_kernel_derivative
+      ~OffAxisAsymmetricSynchrotronEngine.compute_brightness_temperature
+      ~OffAxisAsymmetricSynchrotronEngine.compute_emissivity
+      ~OffAxisAsymmetricSynchrotronEngine.compute_first_kernel
+      ~OffAxisAsymmetricSynchrotronEngine.compute_first_kernel_derivative
+      ~OffAxisAsymmetricSynchrotronEngine.compute_flux_density
+      ~OffAxisAsymmetricSynchrotronEngine.compute_isotropic_luminosity
+      ~OffAxisAsymmetricSynchrotronEngine.compute_luminosity_density
+      ~OffAxisAsymmetricSynchrotronEngine.compute_rest_frame_brightness_temperature
+      ~OffAxisAsymmetricSynchrotronEngine.compute_rest_frame_luminosity_density
+      ~OffAxisAsymmetricSynchrotronEngine.compute_rest_frame_specific_intensity
+      ~OffAxisAsymmetricSynchrotronEngine.compute_sightline_flux_density
+      ~OffAxisAsymmetricSynchrotronEngine.compute_source_function
+      ~OffAxisAsymmetricSynchrotronEngine.compute_specific_intensity
+      ~OffAxisAsymmetricSynchrotronEngine.ensure_avg_first_kernel_loaded
+      ~OffAxisAsymmetricSynchrotronEngine.ensure_first_kernel_loaded
+      ~OffAxisAsymmetricSynchrotronEngine.load_avg_first_kernel
+      ~OffAxisAsymmetricSynchrotronEngine.load_first_kernel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_derivative_interpolator
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_grid
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_interpolator
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_max_x
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_min_x
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_size
+      ~OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_values
+      ~OffAxisAsymmetricSynchrotronEngine.cos_phi
+      ~OffAxisAsymmetricSynchrotronEngine.cos_theta
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_derivative_interpolator
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_grid
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_interpolator
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_max_x
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_min_x
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_size
+      ~OffAxisAsymmetricSynchrotronEngine.first_kernel_values
+      ~OffAxisAsymmetricSynchrotronEngine.gl_weights
+      ~OffAxisAsymmetricSynchrotronEngine.gl_weights_phi
+      ~OffAxisAsymmetricSynchrotronEngine.gl_weights_theta
+      ~OffAxisAsymmetricSynchrotronEngine.is_avg_first_kernel_loaded
+      ~OffAxisAsymmetricSynchrotronEngine.is_first_kernel_loaded
+      ~OffAxisAsymmetricSynchrotronEngine.log_avg_first_kernel_derivative
+      ~OffAxisAsymmetricSynchrotronEngine.log_avg_first_kernel_grid
+      ~OffAxisAsymmetricSynchrotronEngine.log_avg_first_kernel_values
+      ~OffAxisAsymmetricSynchrotronEngine.log_first_kernel_derivative
+      ~OffAxisAsymmetricSynchrotronEngine.log_first_kernel_grid
+      ~OffAxisAsymmetricSynchrotronEngine.log_first_kernel_values
+      ~OffAxisAsymmetricSynchrotronEngine.n_phi
+      ~OffAxisAsymmetricSynchrotronEngine.n_theta
+      ~OffAxisAsymmetricSynchrotronEngine.phi
+      ~OffAxisAsymmetricSynchrotronEngine.quad_weights
+      ~OffAxisAsymmetricSynchrotronEngine.sin_theta
+      ~OffAxisAsymmetricSynchrotronEngine.theta
+   
+   

@@ -21,6 +21,8 @@
 Multi-Component Synchrotron SEDs with the Numerical Engine
 ===========================================================
 
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
 The synchrotron spectra of astrophysical transients are often modelled with a simple
 power-law electron distribution, but more complete shock-acceleration models
 (e.g. :footcite:t:`2011ApJ...741...40T`) predict a **two-component** population: a
@@ -30,7 +32,7 @@ accelerated to high Lorentz factors.
 Analytic broken power-law SED approximations are not adequate for this case, because the
 transition between the two components is smooth and does not map cleanly onto a single
 spectral break. The
-:class:`~trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine` provides a
+:class:`NumericalSynchrotronEngine` provides a
 fully numerical alternative: given any sampled electron distribution, it directly
 evaluates the synchrotron emissivity integral and solves the radiative transfer equation
 along a line-of-sight depth :math:`R`, without any piecewise approximation.
@@ -55,7 +57,7 @@ We import the engine and initialise it with the **pitch-angle-averaged** synchro
 kernel :math:`\langle F \rangle(x)`. This is the appropriate choice when the electron
 pitch-angle distribution is isotropic.
 
-.. GENERATED FROM PYTHON SOURCE LINES 39-50
+.. GENERATED FROM PYTHON SOURCE LINES 41-52
 
 .. code-block:: Python
 
@@ -77,7 +79,7 @@ pitch-angle distribution is isotropic.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 51-89
+.. GENERATED FROM PYTHON SOURCE LINES 53-91
 
 The Electron Distribution
 --------------------------
@@ -118,7 +120,7 @@ The prefactor is the reciprocal of
 :math:`\int_{\gamma_{\min}}^{\gamma_{\max}} \gamma^{-p}\,d\gamma`, ensuring that
 :math:`\int_{\gamma_{\min}}^{\gamma_{\max}} N_{\rm PL}(\gamma)\,d\gamma = n_{\rm PL}`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-114
+.. GENERATED FROM PYTHON SOURCE LINES 91-116
 
 .. code-block:: Python
 
@@ -154,7 +156,7 @@ The prefactor is the reciprocal of
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 115-120
+.. GENERATED FROM PYTHON SOURCE LINES 117-122
 
 Visualising the Distribution
 -----------------------------
@@ -162,7 +164,7 @@ Visualising the Distribution
 We evaluate both components on a logarithmically-spaced :math:`\gamma` grid that
 spans from non-relativistic through ultra-relativistic energies.
 
-.. GENERATED FROM PYTHON SOURCE LINES 120-154
+.. GENERATED FROM PYTHON SOURCE LINES 122-156
 
 .. code-block:: Python
 
@@ -212,7 +214,7 @@ spans from non-relativistic through ultra-relativistic energies.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 155-178
+.. GENERATED FROM PYTHON SOURCE LINES 157-180
 
 The thermal component peaks at :math:`\gamma \approx 2\theta = 20` and falls off
 exponentially above that, while the power-law component switches on at
@@ -224,7 +226,7 @@ Computing the SED
 ------------------
 
 We now pass the sampled distributions to
-:meth:`~trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity`.
+:meth:`NumericalSynchrotronEngine.compute_specific_intensity`.
 The engine numerically integrates the synchrotron emissivity
 
 .. math::
@@ -238,7 +240,7 @@ for a slab of line-of-sight depth :math:`R` to yield the specific intensity
 :math:`I_\nu`.  The ``z`` keyword applies a cosmological redshift to the frequency
 grid before evaluating the emissivity.
 
-.. GENERATED FROM PYTHON SOURCE LINES 178-192
+.. GENERATED FROM PYTHON SOURCE LINES 180-194
 
 .. code-block:: Python
 
@@ -264,18 +266,18 @@ grid before evaluating the emissivity.
 
  .. code-block:: none
 
-    /home/runner/work/Trilobite/Trilobite/trilobite/radiation/synchrotron/SEDs/numerical.py:2390: RuntimeWarning: divide by zero encountered in log
+    /home/runner/work/Trilobite/Trilobite/trilobite/radiation/synchrotron/SEDs/numerical/core.py:2563: RuntimeWarning: divide by zero encountered in log
       return np.log(np.asarray(N_values, dtype="f8"))
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 193-195
+.. GENERATED FROM PYTHON SOURCE LINES 195-197
 
 With the three intensity curves in hand, we overlay them to compare the spectral
 contributions from each component.
 
-.. GENERATED FROM PYTHON SOURCE LINES 195-234
+.. GENERATED FROM PYTHON SOURCE LINES 197-236
 
 .. code-block:: Python
 
@@ -330,7 +332,7 @@ contributions from each component.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 235-249
+.. GENERATED FROM PYTHON SOURCE LINES 237-251
 
 Several features are visible in the combined spectrum:
 
@@ -350,7 +352,7 @@ Several features are visible in the combined spectrum:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.517 seconds)
+   **Total running time of the script:** (0 minutes 0.337 seconds)
 
 
 .. _sphx_glr_download_auto_examples_synchrotron_b_seds_plot_multi_component_numerical_SED.py:

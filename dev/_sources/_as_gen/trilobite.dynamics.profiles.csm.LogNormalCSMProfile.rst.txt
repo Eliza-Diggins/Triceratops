@@ -1,0 +1,36 @@
+LogNormalCSMProfile
+===================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.LogNormalCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~LogNormalCSMProfile.as_callable
+      ~LogNormalCSMProfile.as_optimized_callable
+      ~LogNormalCSMProfile.eval
+      ~LogNormalCSMProfile.feval
+      ~LogNormalCSMProfile.process_arguments
+      ~LogNormalCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~LogNormalCSMProfile.OUTPUT_UNITS
+   
+   

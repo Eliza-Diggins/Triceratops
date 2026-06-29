@@ -1,0 +1,27 @@
+IdentityTransform
+===============================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. autoclass:: trilobite.inference.transform.IdentityTransform
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~IdentityTransform.forward
+      ~IdentityTransform.from_dict
+      ~IdentityTransform.inverse
+      ~IdentityTransform.log_abs_det_jacobian
+      ~IdentityTransform.to_dict
+   
+   
+
+   
+   
+   

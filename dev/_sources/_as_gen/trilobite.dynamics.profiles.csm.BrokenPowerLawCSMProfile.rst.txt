@@ -1,0 +1,36 @@
+BrokenPowerLawCSMProfile
+========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.BrokenPowerLawCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~BrokenPowerLawCSMProfile.as_callable
+      ~BrokenPowerLawCSMProfile.as_optimized_callable
+      ~BrokenPowerLawCSMProfile.eval
+      ~BrokenPowerLawCSMProfile.feval
+      ~BrokenPowerLawCSMProfile.process_arguments
+      ~BrokenPowerLawCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~BrokenPowerLawCSMProfile.OUTPUT_UNITS
+   
+   

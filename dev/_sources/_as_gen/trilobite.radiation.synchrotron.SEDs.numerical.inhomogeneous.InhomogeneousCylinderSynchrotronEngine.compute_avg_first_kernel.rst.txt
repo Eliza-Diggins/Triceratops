@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.compute\_avg\_first\_kernel
+===============================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. automethod:: InhomogeneousCylinderSynchrotronEngine.compute_avg_first_kernel

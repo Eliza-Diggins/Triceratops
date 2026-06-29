@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MixedThermalNonThermal.mean\_energy
+===========================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MixedThermalNonThermal.mean_energy

@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.BrokenPowerLaw.bol\_emiss\_from\_magnetic\_field
+========================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: BrokenPowerLaw.bol_emiss_from_magnetic_field

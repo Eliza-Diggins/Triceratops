@@ -1,0 +1,27 @@
+LogisticTransform
+===============================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. autoclass:: trilobite.inference.transform.LogisticTransform
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~LogisticTransform.forward
+      ~LogisticTransform.from_dict
+      ~LogisticTransform.inverse
+      ~LogisticTransform.log_abs_det_jacobian
+      ~LogisticTransform.to_dict
+   
+   
+
+   
+   
+   

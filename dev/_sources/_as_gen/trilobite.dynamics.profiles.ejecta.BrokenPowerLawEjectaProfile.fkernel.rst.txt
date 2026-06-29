@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.fkernel
+======================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: BrokenPowerLawEjectaProfile.fkernel

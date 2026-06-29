@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerBrokenPowerLaw.normalize\_from\_magnetic\_field
+======================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerBrokenPowerLaw.normalize_from_magnetic_field

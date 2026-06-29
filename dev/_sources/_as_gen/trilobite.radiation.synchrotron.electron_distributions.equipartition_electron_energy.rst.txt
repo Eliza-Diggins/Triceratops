@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.equipartition\_electron\_energy
+=======================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autofunction:: equipartition_electron_energy

@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerBrokenPowerLaw.normalize\_from\_n\_eff
+=============================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerBrokenPowerLaw.normalize_from_n_eff

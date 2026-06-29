@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.ensure\_first\_kernel\_loaded
+===============================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. automethod:: InhomogeneousSphereSynchrotronEngine.ensure_first_kernel_loaded

@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.PowerLaw.logcdf
+=======================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: PowerLaw.logcdf

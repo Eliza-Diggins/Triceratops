@@ -1,4 +1,4 @@
-﻿trilobite.data.light_curve
+trilobite.data.light_curve
 ==========================
 
 .. automodule:: trilobite.data.light_curve

@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions.Delta3\_0
+==============================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. autoattribute:: MechanicalShockInitialConditions.Delta3_0

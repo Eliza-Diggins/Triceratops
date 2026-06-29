@@ -1,4 +1,4 @@
-trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load\_first\_kernel
+﻿trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load\_first\_kernel
 =============================================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical

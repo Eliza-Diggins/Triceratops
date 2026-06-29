@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MixedThermalNonThermal.cdf
+==================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MixedThermalNonThermal.cdf

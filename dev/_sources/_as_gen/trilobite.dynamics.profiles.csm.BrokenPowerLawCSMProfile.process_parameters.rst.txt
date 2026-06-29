@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.BrokenPowerLawCSMProfile.process\_parameters
+============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: BrokenPowerLawCSMProfile.process_parameters

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.eval
+============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: EjectaDensityProfile.eval

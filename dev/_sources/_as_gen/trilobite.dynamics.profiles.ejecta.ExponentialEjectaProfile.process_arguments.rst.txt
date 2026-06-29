@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.process\_arguments
+==============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: ExponentialEjectaProfile.process_arguments

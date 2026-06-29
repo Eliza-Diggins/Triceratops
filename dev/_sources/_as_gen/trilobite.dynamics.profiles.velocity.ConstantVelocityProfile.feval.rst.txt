@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.ConstantVelocityProfile.feval
+==================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. automethod:: ConstantVelocityProfile.feval

@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MaxwellJuettnerBrokenPowerLaw.mean\_kinetic\_energy
+===========================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MaxwellJuettnerBrokenPowerLaw.mean_kinetic_energy

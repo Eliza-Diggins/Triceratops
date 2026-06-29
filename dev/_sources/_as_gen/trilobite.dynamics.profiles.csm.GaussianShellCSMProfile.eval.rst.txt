@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.GaussianShellCSMProfile.eval
+============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: GaussianShellCSMProfile.eval

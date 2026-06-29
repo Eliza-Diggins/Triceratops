@@ -1,0 +1,71 @@
+InhomogeneousSphereSynchrotronEngine
+=================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+.. autoclass:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~InhomogeneousSphereSynchrotronEngine.clear
+      ~InhomogeneousSphereSynchrotronEngine.compute_absorption
+      ~InhomogeneousSphereSynchrotronEngine.compute_avg_first_kernel
+      ~InhomogeneousSphereSynchrotronEngine.compute_avg_first_kernel_derivative
+      ~InhomogeneousSphereSynchrotronEngine.compute_brightness_temperature
+      ~InhomogeneousSphereSynchrotronEngine.compute_emissivity
+      ~InhomogeneousSphereSynchrotronEngine.compute_first_kernel
+      ~InhomogeneousSphereSynchrotronEngine.compute_first_kernel_derivative
+      ~InhomogeneousSphereSynchrotronEngine.compute_flux_density
+      ~InhomogeneousSphereSynchrotronEngine.compute_isotropic_luminosity
+      ~InhomogeneousSphereSynchrotronEngine.compute_luminosity_density
+      ~InhomogeneousSphereSynchrotronEngine.compute_ray_specific_intensity
+      ~InhomogeneousSphereSynchrotronEngine.compute_rest_frame_luminosity_density
+      ~InhomogeneousSphereSynchrotronEngine.compute_rest_frame_specific_intensity
+      ~InhomogeneousSphereSynchrotronEngine.compute_source_function
+      ~InhomogeneousSphereSynchrotronEngine.compute_specific_intensity
+      ~InhomogeneousSphereSynchrotronEngine.ensure_avg_first_kernel_loaded
+      ~InhomogeneousSphereSynchrotronEngine.ensure_first_kernel_loaded
+      ~InhomogeneousSphereSynchrotronEngine.load_avg_first_kernel
+      ~InhomogeneousSphereSynchrotronEngine.load_first_kernel
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_derivative_interpolator
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_grid
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_interpolator
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_max_x
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_min_x
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_size
+      ~InhomogeneousSphereSynchrotronEngine.avg_first_kernel_values
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_derivative_interpolator
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_grid
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_interpolator
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_max_x
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_min_x
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_size
+      ~InhomogeneousSphereSynchrotronEngine.first_kernel_values
+      ~InhomogeneousSphereSynchrotronEngine.is_avg_first_kernel_loaded
+      ~InhomogeneousSphereSynchrotronEngine.is_first_kernel_loaded
+      ~InhomogeneousSphereSynchrotronEngine.log_avg_first_kernel_derivative
+      ~InhomogeneousSphereSynchrotronEngine.log_avg_first_kernel_grid
+      ~InhomogeneousSphereSynchrotronEngine.log_avg_first_kernel_values
+      ~InhomogeneousSphereSynchrotronEngine.log_first_kernel_derivative
+      ~InhomogeneousSphereSynchrotronEngine.log_first_kernel_grid
+      ~InhomogeneousSphereSynchrotronEngine.log_first_kernel_values
+   
+   

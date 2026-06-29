@@ -1,0 +1,6 @@
+trilobite.inference.transform.ParameterTransform.from\_dict
+===========================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: ParameterTransform.from_dict

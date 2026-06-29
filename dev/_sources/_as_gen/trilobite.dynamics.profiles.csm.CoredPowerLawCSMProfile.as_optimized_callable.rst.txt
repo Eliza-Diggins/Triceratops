@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.CoredPowerLawCSMProfile.as\_optimized\_callable
+===============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: CoredPowerLawCSMProfile.as_optimized_callable

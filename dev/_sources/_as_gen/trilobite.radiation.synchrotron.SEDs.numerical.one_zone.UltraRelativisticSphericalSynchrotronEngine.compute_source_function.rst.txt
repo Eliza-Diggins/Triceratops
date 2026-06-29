@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.UltraRelativisticSphericalSynchrotronEngine.compute\_source\_function
+==============================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. automethod:: UltraRelativisticSphericalSynchrotronEngine.compute_source_function

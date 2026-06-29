@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.UltraRelativisticSphericalSynchrotronEngine.is\_avg\_first\_kernel\_loaded
+===================================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. autoproperty:: UltraRelativisticSphericalSynchrotronEngine.is_avg_first_kernel_loaded

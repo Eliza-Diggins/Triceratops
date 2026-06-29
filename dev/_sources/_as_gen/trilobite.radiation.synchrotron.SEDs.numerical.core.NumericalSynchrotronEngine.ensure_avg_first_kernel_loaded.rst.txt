@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.ensure\_avg\_first\_kernel\_loaded
+=================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
+.. automethod:: NumericalSynchrotronEngine.ensure_avg_first_kernel_loaded

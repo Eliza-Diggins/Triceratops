@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -57,7 +57,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/inference/priors_dev';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -519,7 +519,7 @@ generates callable evaluation functions:</p>
 raises <code class="docutils literal notranslate"><span class="pre">NotImplementedError</span></code>.</p>
 <p>Importantly, priors operate strictly in <strong>physical parameter space</strong>.
 Any transformations (e.g., log-sampling) are handled by
-<code class="xref py py-class docutils literal notranslate"><span class="pre">InferenceParameter</span></code> inside the inference problem layer.</p>
+<a class="reference internal" href="../../_as_gen/trilobite.inference.problem.InferenceParameter.html#trilobite.inference.problem.InferenceParameter" title="trilobite.inference.problem.InferenceParameter"><code class="xref py py-class docutils literal notranslate"><span class="pre">InferenceParameter</span></code></a> inside the inference problem layer.</p>
 </section>
 <section id="serialization">
 <h2>Serialization<a class="headerlink" href="#serialization" title="Link to this heading">#</a></h2>
@@ -530,7 +530,7 @@ Each prior implements:</p>
 </pre></div>
 </div>
 <p>This mechanism works for all built-in priors.</p>
-<p>Custom callable priors (wrapped by <code class="xref py py-class docutils literal notranslate"><span class="pre">CallablePrior</span></code>) are marked
+<p>Custom callable priors (wrapped by <a class="reference internal" href="../../_as_gen/trilobite.inference.prior.CallablePrior.html#trilobite.inference.prior.CallablePrior" title="trilobite.inference.prior.CallablePrior"><code class="xref py py-class docutils literal notranslate"><span class="pre">CallablePrior</span></code></a>) are marked
 as non-reconstructible because arbitrary Python callables cannot be
 serialized safely.</p>
 <p>If you introduce new prior subclasses, ensure they are discoverable
@@ -539,7 +539,7 @@ continues to work automatically.</p>
 </section>
 <section id="implementing-a-new-prior">
 <h2>Implementing a New Prior<a class="headerlink" href="#implementing-a-new-prior" title="Link to this heading">#</a></h2>
-<p>To implement a new prior, subclass <code class="xref py py-class docutils literal notranslate"><span class="pre">Prior</span></code> and define
+<p>To implement a new prior, subclass <a class="reference internal" href="../../_as_gen/trilobite.inference.prior.Prior.html#trilobite.inference.prior.Prior" title="trilobite.inference.prior.Prior"><code class="xref py py-class docutils literal notranslate"><span class="pre">Prior</span></code></a> and define
 <code class="docutils literal notranslate"><span class="pre">_generate_log_prior</span></code>.</p>
 <p>For example, suppose we want a simple exponential prior:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ExponentialPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
@@ -707,8 +707,8 @@ with the broader inference framework.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -742,7 +742,7 @@ with the broader inference framework.</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

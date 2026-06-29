@@ -1,0 +1,36 @@
+trilobite.models.TDEs.tde_utils
+===============================
+
+.. automodule:: trilobite.models.TDEs.tde_utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      compute_delta_M_guillochon13
+      compute_mdot_peak_guillochon13
+      compute_n_index_guillochon13
+      compute_t_peak_guillochon13
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.FiniteWindCSMProfile.normalize\_from\_timing
+============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: FiniteWindCSMProfile.normalize_from_timing

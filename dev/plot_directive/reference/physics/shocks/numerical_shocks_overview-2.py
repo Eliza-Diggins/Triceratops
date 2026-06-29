@@ -2,36 +2,27 @@ import numpy as np
 import matplotlib.pyplot as plt
 from astropy import units as u
 
-from trilobite.dynamics.shocks import (
-    MechanicalShockEngine,
-    get_bpl_ejecta_kernel,
-    get_wind_csm_density_func,
-    make_homologous_stationary_sources,
-)
+from trilobite.dynamics.shocks import MechanicalShockEngine, make_homologous_stationary_sources
+from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, WindCSMProfile
 from trilobite.utils.plot_utils import set_plot_style
 
-G_ej    = get_bpl_ejecta_kernel(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
-rho_csm = get_wind_csm_density_func(1e-5 * u.Msun / u.yr, 100.0 * u.km / u.s)
+K, v_t  = BrokenPowerLawEjectaProfile.normalize(1e51 * u.erg, 5.0 * u.Msun, n=10.0, delta=1.0)
+G_ej    = BrokenPowerLawEjectaProfile.as_optimized_callable(n=10.0, delta=1.0, K=K, v_t=v_t)
+rho_csm = WindCSMProfile.as_optimized_callable(mass_loss_rate=1e-5 * u.Msun / u.yr, wind_velocity=100.0 * u.km / u.s)
 rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej, rho_csm)
 
 engine = MechanicalShockEngine()
 t_0    = 1.0 * u.day
-R0, v0, M2_0, M3_0, U2_0, U3_0, Dlt2_0, Dlt3_0 = (
-    MechanicalShockEngine.generate_initial_conditions(
-        R_cd_0=1e14 * u.cm, v_cd_0=1e9 * u.cm / u.s,
-        t_0=t_0, rho_1=rho_1, rho_4=rho_4, u_1=u_1, u_4=u_4,
-    )
+ic = engine.infer_initial_conditions(
+    R_cd_0=1e14 * u.cm, v_cd_0=1e9 * u.cm / u.s,
+    t_0=t_0, rho_1=rho_1, rho_4=rho_4, u_1=u_1, u_4=u_4,
 )
 
 time  = np.geomspace(1, 1000, 300) * u.day
 state = engine.compute_shock_properties(
     time=time,
     rho_1=rho_1, rho_4=rho_4, u_1=u_1, u_4=u_4,
-    R_cd_0=R0 * u.cm, v_cd_0=v0 * u.cm / u.s,
-    M2_0=M2_0 * u.g, M3_0=M3_0 * u.g,
-    U2_0=U2_0 * u.erg, U3_0=U3_0 * u.erg,
-    Delta2_0=Dlt2_0 * u.cm, Delta3_0=Dlt3_0 * u.cm,
-    t_0=t_0,
+    initial_conditions=ic, t_0=t_0,
 )
 
 set_plot_style()

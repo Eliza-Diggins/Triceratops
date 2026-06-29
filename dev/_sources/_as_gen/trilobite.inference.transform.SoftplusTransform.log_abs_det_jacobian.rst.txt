@@ -1,0 +1,6 @@
+trilobite.inference.transform.SoftplusTransform.log\_abs\_det\_jacobian
+=======================================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: SoftplusTransform.log_abs_det_jacobian

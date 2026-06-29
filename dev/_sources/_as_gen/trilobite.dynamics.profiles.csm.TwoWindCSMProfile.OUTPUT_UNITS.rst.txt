@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.TwoWindCSMProfile.OUTPUT\_UNITS
+===============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: TwoWindCSMProfile.OUTPUT_UNITS

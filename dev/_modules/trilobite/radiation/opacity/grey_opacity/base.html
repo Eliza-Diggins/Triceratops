@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/opacity/grey_opacity/base';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -473,7 +473,7 @@
 
 
 <div class="viewcode-block" id="GreyOpacityLaw">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.html#trilobite.radiation.opacity.grey_opacity.tops.GreyOpacityLaw">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.GreyOpacityLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GreyOpacityLaw</span><span class="p">(</span><span class="n">OpacityLaw</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Abstract base class for grey (frequency-averaged) opacity laws.</span>
 
@@ -559,7 +559,7 @@
     <span class="c1"># ================================================================ #</span>
 
 <div class="viewcode-block" id="GreyOpacityLaw.opacity">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.opacity.html#trilobite.radiation.opacity.grey_opacity.tops.GreyOpacityLaw.opacity">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.opacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.GreyOpacityLaw.opacity">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return opacity :math:`\kappa(\rho, T)` (:math:`\mathrm{cm^2\,g^{-1}}`).</span>
 
@@ -569,7 +569,7 @@
 <span class="sd">            Mass density, convertible to :math:`\mathrm{g\,cm^{-3}}`.</span>
 <span class="sd">        T : `~astropy.units.Quantity`</span>
 <span class="sd">            Temperature, convertible to K.</span>
-<span class="sd">        nu : ignored</span>
+<span class="sd">        nu : any, optional</span>
 <span class="sd">            Accepted for interface compatibility; grey opacity has no frequency</span>
 <span class="sd">            dependence.</span>
 
@@ -584,7 +584,7 @@
 
 
 <div class="viewcode-block" id="GreyOpacityLaw.dlogkappa_dlogrho">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.dlogkappa_dlogrho.html#trilobite.radiation.opacity.grey_opacity.tops.GreyOpacityLaw.dlogkappa_dlogrho">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.dlogkappa_dlogrho.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.GreyOpacityLaw.dlogkappa_dlogrho">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dlogkappa_dlogrho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\rho` (dimensionless).</span>
 
@@ -594,7 +594,7 @@
 <span class="sd">            Mass density.</span>
 <span class="sd">        T : `~astropy.units.Quantity`</span>
 <span class="sd">            Temperature.</span>
-<span class="sd">        nu : ignored</span>
+<span class="sd">        nu : any, optional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
         <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
@@ -602,7 +602,7 @@
 
 
 <div class="viewcode-block" id="GreyOpacityLaw.dlogkappa_dlogT">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.dlogkappa_dlogT.html#trilobite.radiation.opacity.grey_opacity.tops.GreyOpacityLaw.dlogkappa_dlogT">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.dlogkappa_dlogT.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.GreyOpacityLaw.dlogkappa_dlogT">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dlogkappa_dlogT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln T` (dimensionless).</span>
 
@@ -612,7 +612,7 @@
 <span class="sd">            Mass density.</span>
 <span class="sd">        T : `~astropy.units.Quantity`</span>
 <span class="sd">            Temperature.</span>
-<span class="sd">        nu : ignored</span>
+<span class="sd">        nu : any, optional</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
         <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
@@ -620,7 +620,7 @@
 
 
 <div class="viewcode-block" id="GreyOpacityLaw.dlogkappa_dlognu">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.dlogkappa_dlognu.html#trilobite.radiation.opacity.grey_opacity.tops.GreyOpacityLaw.dlogkappa_dlognu">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw.dlogkappa_dlognu.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.GreyOpacityLaw.dlogkappa_dlognu">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dlogkappa_dlognu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rho</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">nu</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\nu` = 0 (grey law).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="mf">0.0</span></div>
@@ -629,7 +629,7 @@
 
 
 <div class="viewcode-block" id="ConstantGreyOpacity">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.ConstantGreyOpacity.html#trilobite.radiation.opacity.grey_opacity.tops.ConstantGreyOpacity">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.base.ConstantGreyOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.ConstantGreyOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConstantGreyOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Grey opacity law with a fixed, composition- and state-independent value.</span>
 
@@ -666,7 +666,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ConstantGreyOpacity.__init__">
-<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.ConstantGreyOpacity.html#trilobite.radiation.opacity.grey_opacity.tops.ConstantGreyOpacity.__init__">[docs]</a>
+<a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.ConstantGreyOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.ConstantGreyOpacity.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">kappa</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
@@ -727,8 +727,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -762,7 +762,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

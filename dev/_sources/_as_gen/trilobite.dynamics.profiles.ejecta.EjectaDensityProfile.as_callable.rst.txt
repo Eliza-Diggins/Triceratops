@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.as\_callable
+====================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: EjectaDensityProfile.as_callable

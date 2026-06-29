@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.GaussianShellCSMProfile.process\_arguments
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: GaussianShellCSMProfile.process_arguments

@@ -1,0 +1,36 @@
+UniformCSMProfile
+=================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.UniformCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~UniformCSMProfile.as_callable
+      ~UniformCSMProfile.as_optimized_callable
+      ~UniformCSMProfile.eval
+      ~UniformCSMProfile.feval
+      ~UniformCSMProfile.process_arguments
+      ~UniformCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~UniformCSMProfile.OUTPUT_UNITS
+   
+   

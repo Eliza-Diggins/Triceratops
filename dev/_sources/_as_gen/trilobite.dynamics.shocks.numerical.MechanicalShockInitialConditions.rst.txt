@@ -1,0 +1,39 @@
+MechanicalShockInitialConditions
+====================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. autoclass:: trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MechanicalShockInitialConditions.count
+      ~MechanicalShockInitialConditions.index
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MechanicalShockInitialConditions.Delta2_0
+      ~MechanicalShockInitialConditions.Delta3_0
+      ~MechanicalShockInitialConditions.M2_0
+      ~MechanicalShockInitialConditions.M3_0
+      ~MechanicalShockInitialConditions.R_cd_0
+      ~MechanicalShockInitialConditions.U2_0
+      ~MechanicalShockInitialConditions.U3_0
+      ~MechanicalShockInitialConditions.v_cd_0
+   
+   

@@ -1,0 +1,6 @@
+﻿trilobite.radiation.synchrotron.SEDs.one\_zone.\_functions.log\_smoothed\_SFBPL
+===============================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone._functions
+
+.. autofunction:: log_smoothed_SFBPL

@@ -19,11 +19,11 @@
 
 
 On-Axis Asymmetric Synchrotron SEDs
-==================================
+=====================================
 
 Most synchrotron models treat the emitting region as a single homogeneous
-zone. The
-:class:`~trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine`
+zone.
+:class:`~trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OnAxisAsymmetricSynchrotronEngine`
 generalizes this picture by assigning independent physical conditions to
 each polar-angle sightline :math:`\theta \in [0,\pi/2]`.
 
@@ -41,7 +41,7 @@ We then:
 - construct an equipartition electron distribution,
 - and decompose the resulting synchrotron SED into per-ring contributions.
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-40
+.. GENERATED FROM PYTHON SOURCE LINES 25-35
 
 .. code-block:: Python
 
@@ -51,13 +51,8 @@ We then:
     from astropy import units as u
     from matplotlib.colors import Normalize
 
-    from trilobite.radiation.synchrotron.SEDs.numerical import (
-        OnAxisAsymmetricSynchrotronEngine,
-    )
-    from trilobite.radiation.synchrotron.microphysics import (
-        compute_PL_norm_from_magnetic_field,
-        get_power_law_distribution,
-    )
+    from trilobite.radiation.synchrotron import OnAxisAsymmetricSynchrotronEngine
+    from trilobite.radiation.synchrotron.electron_distributions import PowerLaw
     from trilobite.utils.plot_utils import set_plot_style
 
 
@@ -67,14 +62,14 @@ We then:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 41-45
+.. GENERATED FROM PYTHON SOURCE LINES 36-40
 
 Engine Setup
 ------------
 The engine discretizes the projected emitting surface into
 :math:`n_\theta` polar-angle sightlines.
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-51
+.. GENERATED FROM PYTHON SOURCE LINES 40-46
 
 .. code-block:: Python
 
@@ -91,7 +86,7 @@ The engine discretizes the projected emitting surface into
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 52-58
+.. GENERATED FROM PYTHON SOURCE LINES 47-53
 
 Source Geometry
 ---------------
@@ -100,7 +95,7 @@ We define a simple two-zone structure:
 - Core (:math:`\theta < \pi/8`)
 - Wings (:math:`\theta \ge \pi/8`)
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-131
+.. GENERATED FROM PYTHON SOURCE LINES 53-126
 
 .. code-block:: Python
 
@@ -189,7 +184,7 @@ We define a simple two-zone structure:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-139
+.. GENERATED FROM PYTHON SOURCE LINES 127-134
 
 The compact core occupies the polar region near :math:`\theta = 0`,
 while the extended low-field wings dominate larger angles.
@@ -199,7 +194,7 @@ Electron Distribution
 We now construct an equipartition power-law electron distribution for
 each sightline.
 
-.. GENERATED FROM PYTHON SOURCE LINES 139-167
+.. GENERATED FROM PYTHON SOURCE LINES 134-155
 
 .. code-block:: Python
 
@@ -211,25 +206,18 @@ each sightline.
     epsilon_e = 0.1
     epsilon_B = 0.1
 
-    norm = compute_PL_norm_from_magnetic_field(
+    norm = PowerLaw.normalize_from_magnetic_field(
         B,
-        p,
-        epsilon_e,
         epsilon_B,
-        gamma_min=gamma_min,
-        gamma_max=gamma_max,
-    )
-
-    distribution = get_power_law_distribution(
-        gamma_min=gamma_min,
-        gamma_max=gamma_max,
+        epsilon_e,
         p=p,
-        norm=norm,
+        gamma_min=gamma_min,
+        gamma_max=gamma_max,
     )
 
     gamma = np.geomspace(gamma_min, gamma_max, 1000)
 
-    N_gamma = distribution(gamma[:, None]).T
+    N_gamma = norm.to_value(u.cm**-3)[:, None] * PowerLaw.pdf(gamma, p=p, gamma_min=gamma_min, gamma_max=gamma_max)
 
 
 
@@ -238,7 +226,7 @@ each sightline.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 168-175
+.. GENERATED FROM PYTHON SOURCE LINES 156-163
 
 Computing the SED
 -----------------
@@ -248,7 +236,7 @@ We compute:
 - the per-ring flux contributions,
 - and the fully integrated SED.
 
-.. GENERATED FROM PYTHON SOURCE LINES 175-201
+.. GENERATED FROM PYTHON SOURCE LINES 163-185
 
 .. code-block:: Python
 
@@ -270,13 +258,9 @@ We compute:
         **common_kwargs,
     )
 
-    ring_flux = sightline_flux
-
     total_sed = engine.compute_flux_density(nu, **common_kwargs)
 
-    # Verify: ring_flux sums to total_sed to floating-point precision.
-    # total = Σᵢ w_i ξ_i F_sightline_i  (Gauss-Legendre quadrature identity)
-    ring_sum = ring_flux.sum(axis=-1)
+    ring_sum = sightline_flux.sum(axis=-1)
 
 
 
@@ -285,7 +269,7 @@ We compute:
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 202-208
+.. GENERATED FROM PYTHON SOURCE LINES 186-192
 
 Spectral Decomposition
 ----------------------
@@ -294,7 +278,7 @@ Each coloured curve is the flux contribution from one annular ring; their sum
 any single ring because it is the sum of *all* :math:`n_\theta` rings — each
 ring carries only :math:`\sim 1/n_\theta` of the integrated flux on average.
 
-.. GENERATED FROM PYTHON SOURCE LINES 208-234
+.. GENERATED FROM PYTHON SOURCE LINES 192-218
 
 .. code-block:: Python
 
@@ -307,7 +291,7 @@ ring carries only :math:`\sim 1/n_\theta` of the integrated flux on average.
     cmap = plt.cm.viridis
     colors = cmap(np.linspace(0, 1, engine.n_theta))
     for i in range(engine.n_theta):
-        ax.loglog(nu_ghz, ring_flux[:, i].to_value(u.mJy), color=colors[::-1][i], lw=0.9, alpha=0.75)
+        ax.loglog(nu_ghz, sightline_flux[:, i].to_value(u.mJy), color=colors[::-1][i], lw=0.9, alpha=0.75)
 
     ax.loglog(nu_ghz, ring_sum.to_value(u.mJy), color="0.5", lw=2, ls="--", label=r"$\Sigma$ rings")
     ax.loglog(nu_ghz, total_sed.to_value(u.mJy), color="k", lw=2.5, label="Total")
@@ -336,7 +320,7 @@ ring carries only :math:`\sim 1/n_\theta` of the integrated flux on average.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 235-245
+.. GENERATED FROM PYTHON SOURCE LINES 219-229
 
 Several features are immediately visible:
 
@@ -352,7 +336,7 @@ Several features are immediately visible:
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.966 seconds)
+   **Total running time of the script:** (0 minutes 1.795 seconds)
 
 
 .. _sphx_glr_download_auto_examples_synchrotron_b_seds_plot_on_axis_numerical.py:

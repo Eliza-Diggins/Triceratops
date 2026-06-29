@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile.feval
+=============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: TruncatedWindCSMProfile.feval

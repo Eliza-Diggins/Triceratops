@@ -1,0 +1,40 @@
+BrokenPowerLawEjectaProfile
+==============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoclass:: trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~BrokenPowerLawEjectaProfile.as_callable
+      ~BrokenPowerLawEjectaProfile.as_optimized_callable
+      ~BrokenPowerLawEjectaProfile.eval
+      ~BrokenPowerLawEjectaProfile.feval
+      ~BrokenPowerLawEjectaProfile.fkernel
+      ~BrokenPowerLawEjectaProfile.kernel
+      ~BrokenPowerLawEjectaProfile.normalize
+      ~BrokenPowerLawEjectaProfile.process_arguments
+      ~BrokenPowerLawEjectaProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~BrokenPowerLawEjectaProfile.KERNEL_UNITS
+      ~BrokenPowerLawEjectaProfile.OUTPUT_UNITS
+   
+   

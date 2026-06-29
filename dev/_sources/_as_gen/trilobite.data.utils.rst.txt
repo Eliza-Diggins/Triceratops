@@ -1,0 +1,33 @@
+trilobite.data.utils
+====================
+
+.. automodule:: trilobite.data.utils
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      infer_err_from_non_detection
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   

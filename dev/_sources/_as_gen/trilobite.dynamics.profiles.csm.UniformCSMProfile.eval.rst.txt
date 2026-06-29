@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.UniformCSMProfile.eval
+======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: UniformCSMProfile.eval

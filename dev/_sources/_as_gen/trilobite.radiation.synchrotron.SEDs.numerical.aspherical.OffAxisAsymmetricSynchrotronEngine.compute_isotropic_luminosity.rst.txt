@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine.compute\_isotropic\_luminosity
+===========================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. automethod:: OffAxisAsymmetricSynchrotronEngine.compute_isotropic_luminosity

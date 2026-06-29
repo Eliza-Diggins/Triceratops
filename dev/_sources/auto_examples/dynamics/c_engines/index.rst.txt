@@ -1,0 +1,179 @@
+
+
+.. _sphx_glr_auto_examples_dynamics_c_engines:
+
+Numerical Shock Engines
+========================
+
+These examples demonstrate Trilobite's thin-shell shock engines — the
+numerical integrators that evolve blast-wave radius, velocity, and swept-up
+mass through an arbitrary circumstellar medium (CSM) density profile.
+
+Four engines are covered:
+
+- :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
+  — the standard non-relativistic pressure-driven thin shell
+- :class:`~trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine`
+  — the fully relativistic variant; shows where :math:`\Gamma\beta \gtrsim 1`
+  corrections become essential
+- CSM environment comparison (thin shell) — same ejecta launched into ISM,
+  wind, truncated wind, and shell density profiles using the
+  :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine`
+- CSM environment comparison (mechanical) — same comparison using the
+  :class:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine` to show
+  how CSM structure separately imprints on the forward and reverse shock
+
+Use these examples when you need to evolve a shock through a realistic,
+non-power-law density profile.
+
+**API:** :ref:`numerical_shocks_overview`, :ref:`profiles_user_guide`
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example demonstrates how to use the PressureDrivenThinShellShockEngine to model the evolution of a supernova shock expanding into a non-uniform circumstellar medium (CSM).">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_numerical_shock_engine_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_numerical_shock_engine`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Numerical Thin-Shell Shock Evolution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example adds a \rho^2-type radiative cooling term to Region 3    (the shocked CSM) of the    MechanicalShockEngine and    shows how varying the cooling coefficient from sub-dominant to strongly    radiative changes the thermal energy budget, forward-shock speed, and shell    width of the shocked CSM layer.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_mechanical_shock_cooling_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_mechanical_shock_cooling`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Radiative Cooling in the Mechanical Shock Engine</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example walks through the full setup of the    MechanicalShockEngine for a    canonical core-collapse supernova expanding into a red-supergiant wind.    It covers ejecta and CSM profile construction, source-function wrapping,    self-consistent initial conditions, and interpretation of the two-shock    structure in the outputs.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_mechanical_shock_model_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_mechanical_shock_model`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Mechanical Shock Model: Forward and Reverse Shock Evolution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example demonstrates the    MomentumConservingShockEngine for a    canonical core-collapse supernova expanding into a red-supergiant wind.  It covers    profile construction, source-function assembly, and visualization of the shell    kinematics — including a comparison with the pressure-driven thin-shell closure to    illustrate when the two models diverge.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_momentum_conserving_shock_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_momentum_conserving_shock`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Momentum-Conserving Snowplow Shock Evolution</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example compares the relativistic thin-shell engine    (~trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine)    against its non-relativistic counterpart    (~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine)    across four initial shell momenta spanning    \Gamma_0\beta_0 = 0.5 to \Gamma_0\beta_0 = 70.    The goal is to show where relativistic corrections become essential — all    four cases are genuinely relativistic, so the two engines disagree    throughout.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_relativistic_thin_shell_convergence_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_relativistic_thin_shell_convergence`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Relativistic vs. Non-Relativistic Thin-Shell Convergence</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example launches the same supernova ejecta into five representative    circumstellar medium (CSM) profiles using the    MechanicalShockEngine and    compares the resulting two-shock structure across environments.  Unlike a    thin-shell engine, the mechanical formulation tracks the forward shock,    contact discontinuity, and reverse shock separately, so we can see how CSM    density structure affects both shocks independently.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_mechanical_shocks_csms_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_mechanical_shocks_csms`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">MechanicalShockEngine: Forward and Reverse Shocks in Different CSM Environments</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This example explores how a pressure-driven supernova shock evolves when the same ejecta model is launched into several different circumstellar medium (CSM) density profiles.  It uses the PressureDrivenThinShellShockEngine together with the CSM profile classes in profiles.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/c_engines/images/thumb/sphx_glr_plot_numerical_shocks_csms_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/c_engines/plot_numerical_shocks_csms`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">SNe Shocks In Different CSM Environments</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/dynamics/c_engines/plot_numerical_shock_engine
+   /auto_examples/dynamics/c_engines/plot_mechanical_shock_cooling
+   /auto_examples/dynamics/c_engines/plot_mechanical_shock_model
+   /auto_examples/dynamics/c_engines/plot_momentum_conserving_shock
+   /auto_examples/dynamics/c_engines/plot_relativistic_thin_shell_convergence
+   /auto_examples/dynamics/c_engines/plot_mechanical_shocks_csms
+   /auto_examples/dynamics/c_engines/plot_numerical_shocks_csms
+

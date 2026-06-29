@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MixedThermalNonThermal.bol\_emiss\_from\_energy\_density
+================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: MixedThermalNonThermal.bol_emiss_from_energy_density

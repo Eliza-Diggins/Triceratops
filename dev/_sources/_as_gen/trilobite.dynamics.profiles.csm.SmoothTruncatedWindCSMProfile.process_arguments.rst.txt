@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.SmoothTruncatedWindCSMProfile.process\_arguments
+================================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: SmoothTruncatedWindCSMProfile.process_arguments

@@ -1,0 +1,6 @@
+trilobite.models.TDEs.tde\_utils.compute\_delta\_M\_guillochon13
+================================================================
+
+.. currentmodule:: trilobite.models.TDEs.tde_utils
+
+.. autofunction:: compute_delta_M_guillochon13

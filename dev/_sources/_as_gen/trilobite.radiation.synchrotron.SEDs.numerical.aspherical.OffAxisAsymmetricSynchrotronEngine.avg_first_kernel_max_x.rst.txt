@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine.avg\_first\_kernel\_max\_x
+=======================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. autoproperty:: OffAxisAsymmetricSynchrotronEngine.avg_first_kernel_max_x

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.SmoothBPLCSMProfile.eval
+========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: SmoothBPLCSMProfile.eval

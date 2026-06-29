@@ -49,17 +49,13 @@ cooling break frequency.
 
 .. note::
 
-    Both classes are imported from :mod:`radiation.synchrotron.cooling`.
+    Both classes are imported from
+    :mod:`trilobite.radiation.synchrotron.cooling`.
     The Thomson-regime approximation used here breaks down at
     :math:`4\gamma E_{\rm ph} / (m_e c^2) \gtrsim 1`; Klein–Nishina corrections
     are not included in the current implementation.
 
-Relevant API References
------------------------
-- :class:`~radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine`
-- :class:`~radiation.synchrotron.cooling.InverseComptonCoolingEngine`
-
-.. GENERATED FROM PYTHON SOURCE LINES 43-55
+.. GENERATED FROM PYTHON SOURCE LINES 39-51
 
 .. code-block:: Python
 
@@ -82,17 +78,17 @@ Relevant API References
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-58
+.. GENERATED FROM PYTHON SOURCE LINES 52-54
 
 Engine Instantiation
 --------------------
 
-.. GENERATED FROM PYTHON SOURCE LINES 58-69
+.. GENERATED FROM PYTHON SOURCE LINES 54-65
 
 .. code-block:: Python
 
 
-    synch_engine = SynchrotronRadiativeCoolingEngine(pitch_averaged=True)
+    synch_engine = SynchrotronRadiativeCoolingEngine()
     ic_engine = InverseComptonCoolingEngine(pitch_averaged=True)
 
     gamma_arr = np.geomspace(10, 1e7, 500)
@@ -109,7 +105,7 @@ Engine Instantiation
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 70-80
+.. GENERATED FROM PYTHON SOURCE LINES 66-76
 
 Section 1: Cooling Rates vs γ — Synchrotron and IC
 ----------------------------------------------------
@@ -122,7 +118,7 @@ The crossover Lorentz factor :math:`\gamma_\times` at which the two rates
 are equal does not depend on :math:`\gamma` (since both go as
 :math:`\gamma^2`); instead it depends on the ratio :math:`u_{\rm rad}/u_B = Y`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 80-112
+.. GENERATED FROM PYTHON SOURCE LINES 76-100
 
 .. code-block:: Python
 
@@ -150,14 +146,6 @@ are equal does not depend on :math:`\gamma` (since both go as
     plt.tight_layout()
     plt.show()
 
-    # Compute Compton Y for the reference parameters
-    u_rad = (L_bol_ref / (4 * np.pi * R_ref**2 * const.c)).to(u.erg / u.cm**3)
-    u_B = (B_ref.to_value("G") ** 2 / (8 * np.pi)) * (u.erg / u.cm**3)
-    Y_ref = (u_rad / u_B).decompose().value
-    print(f"Radiation energy density u_rad = {u_rad:.3e}")
-    print(f"Magnetic energy density  u_B   = {u_B:.3e}")
-    print(f"Compton Y = {Y_ref:.2f}  ({'IC-dominated' if Y_ref > 1 else 'synchrotron-dominated'})")
-
 
 
 
@@ -167,18 +155,10 @@ are equal does not depend on :math:`\gamma` (since both go as
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    Radiation energy density u_rad = 2.654e-01 erg / cm3
-    Magnetic energy density  u_B   = 3.979e-02 erg / cm3
-    Compton Y = 6.67  (IC-dominated)
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 113-127
+.. GENERATED FROM PYTHON SOURCE LINES 101-115
 
 Section 2: The Compton Y Parameter
 ------------------------------------
@@ -195,7 +175,7 @@ We plot :math:`Y` as a function of :math:`L_{\rm bol}/R^2` for three
 magnetic field strengths.  The :math:`Y = 1` line separates the IC-dominated
 and synchrotron-dominated regimes.
 
-.. GENERATED FROM PYTHON SOURCE LINES 127-156
+.. GENERATED FROM PYTHON SOURCE LINES 115-144
 
 .. code-block:: Python
 
@@ -240,7 +220,7 @@ and synchrotron-dominated regimes.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 157-171
+.. GENERATED FROM PYTHON SOURCE LINES 145-159
 
 Section 3: Effect of IC on the Cooling Break Frequency
 -------------------------------------------------------
@@ -257,7 +237,7 @@ and the cooling break frequency :math:`\nu_c^{\rm eff} \propto (\gamma_c^{\rm ef
 is suppressed by a factor :math:`(1 + Y)^{-2}` relative to the synchrotron-only
 prediction.
 
-.. GENERATED FROM PYTHON SOURCE LINES 171-222
+.. GENERATED FROM PYTHON SOURCE LINES 159-209
 
 .. code-block:: Python
 
@@ -282,7 +262,6 @@ prediction.
             u_B_val = B.to_value("G") ** 2 / (8 * np.pi)
             Y = u_rad_val / u_B_val
             Y_arr.append(Y)
-            # Combined cooling: IC + synch
             gamma_c_eff = gamma_c_synch / (1 + Y)
             nu_c_eff = synch_engine.compute_characteristic_frequency(B=B, gamma=gamma_c_eff).to_value(u.Hz)
             nu_c_eff_arr.append(nu_c_eff)
@@ -324,7 +303,7 @@ prediction.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 223-247
+.. GENERATED FROM PYTHON SOURCE LINES 210-234
 
 Discussion
 ----------
@@ -354,7 +333,7 @@ prediction for very high-:math:`\gamma` electrons.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 1.012 seconds)
+   **Total running time of the script:** (0 minutes 0.930 seconds)
 
 
 .. _sphx_glr_download_auto_examples_synchrotron_c_cooling_plot_ic_vs_synchrotron_cooling.py:

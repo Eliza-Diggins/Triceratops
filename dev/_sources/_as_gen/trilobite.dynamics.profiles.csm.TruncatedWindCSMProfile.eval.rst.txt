@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile.eval
+============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: TruncatedWindCSMProfile.eval

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ShellCSMProfile.process\_parameters
+===================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ShellCSMProfile.process_parameters

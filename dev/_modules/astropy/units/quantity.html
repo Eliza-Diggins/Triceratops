@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/astropy/units/quantity';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -458,12 +458,11 @@
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Collection</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Self</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Final</span><span class="p">,</span> <span class="n">Self</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">config</span> <span class="k">as</span> <span class="n">_config</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">astropy.utils.compat.numpycompat</span><span class="w"> </span><span class="kn">import</span> <span class="n">COPY_IF_NEEDED</span><span class="p">,</span> <span class="n">NUMPY_LT_2_0</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy.utils.data_info</span><span class="w"> </span><span class="kn">import</span> <span class="n">ParentDtypeInfo</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy.utils.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">AstropyWarning</span>
 
@@ -624,7 +623,7 @@
 <span class="sd">    be used as a general way to store meta information.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_represent_as_dict_attrs</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">)</span>
+    <span class="n">_represent_as_dict_attrs</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">)</span>
     <span class="n">_construct_from_dict_args</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
     <span class="n">_represent_as_dict_primary_data</span> <span class="o">=</span> <span class="s2">&quot;value&quot;</span>
 
@@ -669,7 +668,7 @@
             <span class="n">key</span><span class="p">:</span> <span class="p">(</span><span class="n">data</span> <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;value&quot;</span> <span class="k">else</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cols</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">key</span><span class="p">))</span>
             <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_represent_as_dict_attrs</span>
         <span class="p">}</span>
-        <span class="nb">map</span><span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">COPY_IF_NEEDED</span>
+        <span class="nb">map</span><span class="p">[</span><span class="s2">&quot;copy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_construct_from_dict</span><span class="p">(</span><span class="nb">map</span><span class="p">)</span>
 
         <span class="c1"># Set remaining info attributes</span>
@@ -691,6 +690,48 @@
 <span class="sd">        arrays : list of ndarray</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_parent</span><span class="p">]</span>
+
+
+<span class="c1"># For parsing a string with a number or list of numbers and a unit.  The first</span>
+<span class="c1"># part of the regex string matches any integer/float; the second parts adds</span>
+<span class="c1"># possible trailing .+-, which will break the float function in</span>
+<span class="c1"># _parse_quantity_string and ensure things like 1.2.3deg won&#39;t work.</span>
+<span class="n">NUM</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    [+-]?</span>
+<span class="s2">    ((\d+\.?\d*)|(\.\d+)|([nN][aA][nN])|</span>
+<span class="s2">    ([iI][nN][fF]([iI][nN][iI][tT][yY]){0,1}))</span>
+<span class="s2">    ([eE][+-]?\d+)?</span>
+<span class="s2">    [.+-]?</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="c1"># List of numbers separated by &quot;,&quot; or whitespace.</span>
+<span class="n">VECTOR_COMMA</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    \[\s*</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">NUM</span><span class="si">}</span>
+<span class="s2">    (?: (\s*,\s*)</span><span class="si">{</span><span class="n">NUM</span><span class="si">}</span><span class="s2">)*</span>
+<span class="s2">    (\s*,\s*)?</span>
+<span class="s2">    \s*\]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">VECTOR_WSPACE</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    \[\s*</span>
+<span class="s2">    </span><span class="si">{</span><span class="n">NUM</span><span class="si">}</span>
+<span class="s2">    (?: (\s+)</span><span class="si">{</span><span class="n">NUM</span><span class="si">}</span><span class="s2">)*</span>
+<span class="s2">    \s*\]</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">VECTOR_1D</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="sa">rf</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">VECTOR_COMMA</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="n">VECTOR_WSPACE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="n">NUMBER_PATTERN</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;\s*(?:</span><span class="si">{</span><span class="n">NUM</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="n">VECTOR_1D</span><span class="si">}</span><span class="s2">)\s*&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_parse_quantity_string</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">Unit</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a string as a number or list of numbers.</span>
+
+<span class="sd">    Returns a tuple of value (float or array) and unit.</span>
+<span class="sd">    Raises if not possible.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">NUMBER_PATTERN</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">group</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;[]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">items</span><span class="p">]</span> <span class="k">if</span> <span class="s2">&quot;[&quot;</span> <span class="ow">in</span> <span class="n">string</span> <span class="k">else</span> <span class="nb">float</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">unit</span> <span class="o">=</span> <span class="n">Unit</span><span class="p">(</span><span class="n">unit_str</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">unit_str</span> <span class="o">:=</span> <span class="n">v</span><span class="o">.</span><span class="n">string</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">value</span><span class="p">,</span> <span class="n">unit</span>
 
 
 <span class="k">class</span><span class="w"> </span><span class="nc">Quantity</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -874,12 +915,12 @@
         <span class="k">if</span> <span class="n">float_default</span><span class="p">:</span>
             <span class="n">dtype</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="c1"># optimize speed for Quantity with no dtype given, copy=COPY_IF_NEEDED</span>
+        <span class="c1"># optimize speed for Quantity with no dtype given, copy=None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">unit</span><span class="p">:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
                 <span class="c1"># the above already makes a copy (with float dtype)</span>
-                <span class="n">copy</span> <span class="o">=</span> <span class="n">COPY_IF_NEEDED</span>
+                <span class="n">copy</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">cls</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="n">subok</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)):</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
@@ -896,34 +937,21 @@
         <span class="n">value_unit</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                <span class="c1"># The first part of the regex string matches any integer/float;</span>
-                <span class="c1"># the second parts adds possible trailing .+-, which will break</span>
-                <span class="c1"># the float function below and ensure things like 1.2.3deg</span>
-                <span class="c1"># will not work.</span>
-                <span class="n">pattern</span> <span class="o">=</span> <span class="p">(</span>
-                    <span class="sa">r</span><span class="s2">&quot;\s*[+-]?&quot;</span>
-                    <span class="sa">r</span><span class="s2">&quot;((\d+\.?\d*)|(\.\d+)|([nN][aA][nN])|&quot;</span>
-                    <span class="sa">r</span><span class="s2">&quot;([iI][nN][fF]([iI][nN][iI][tT][yY]){0,1}))&quot;</span>
-                    <span class="sa">r</span><span class="s2">&quot;([eE][+-]?\d+)?&quot;</span>
-                    <span class="sa">r</span><span class="s2">&quot;[.+-]?&quot;</span>
-                <span class="p">)</span>
-
-                <span class="n">v</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-                <span class="n">unit_string</span> <span class="o">=</span> <span class="kc">None</span>
+                <span class="c1"># A string with a number or list of numbers and possible unit?</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+                    <span class="n">value</span><span class="p">,</span> <span class="n">value_unit</span> <span class="o">=</span> <span class="n">_parse_quantity_string</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+                    <span class="c1"># Parsing of values and units can lead to same class of</span>
+                    <span class="c1"># exception (e.g., ValueError). Pass on units related ones.</span>
+                    <span class="k">if</span> <span class="s2">&quot;unit&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+                        <span class="k">raise</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Cannot parse &quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot; as a </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">.&#39;</span>
+                    <span class="k">if</span> <span class="s2">&quot;[&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">value</span><span class="p">:</span>
+                        <span class="n">msg</span> <span class="o">+=</span> <span class="s2">&quot; It does not start with a number.&quot;</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 
-                <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                        <span class="sa">f</span><span class="s1">&#39;Cannot parse &quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot; as a </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s1">. It does not &#39;</span>
-                        <span class="s2">&quot;start with a number.&quot;</span>
-                    <span class="p">)</span>
-
-                <span class="n">unit_string</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">string</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">end</span><span class="p">()</span> <span class="p">:]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">unit_string</span><span class="p">:</span>
-                    <span class="n">value_unit</span> <span class="o">=</span> <span class="n">Unit</span><span class="p">(</span><span class="n">unit_string</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                        <span class="n">unit</span> <span class="o">=</span> <span class="n">value_unit</span>  <span class="c1"># signal no conversion needed below.</span>
+                <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">unit</span> <span class="o">=</span> <span class="n">value_unit</span>  <span class="c1"># signal no conversion needed below.</span>
 
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">value</span><span class="p">):</span>
@@ -967,7 +995,7 @@
                 <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">unit</span> <span class="o">=</span> <span class="n">value_unit</span>
                 <span class="k">elif</span> <span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">value_unit</span><span class="p">:</span>
-                    <span class="n">copy</span> <span class="o">=</span> <span class="n">COPY_IF_NEEDED</span>  <span class="c1"># copy will be made in conversion at end</span>
+                    <span class="n">copy</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># copy will be made in conversion at end</span>
 
         <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="n">value</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ndmin</span><span class="o">=</span><span class="n">ndmin</span>
@@ -1249,7 +1277,7 @@
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">COPY_IF_NEEDED</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asanyarray</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
 
         <span class="c1"># Take the view, set the unit, and update possible other properties</span>
         <span class="c1"># such as ``info``, ``wrap_angle`` in `Longitude`, etc.</span>
@@ -1308,7 +1336,7 @@
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__setstate__</span><span class="p">(</span><span class="n">nd_state</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">own_state</span><span class="p">)</span>
 
-    <span class="n">info</span> <span class="o">=</span> <span class="n">QuantityInfo</span><span class="p">()</span>
+    <span class="n">info</span><span class="p">:</span> <span class="n">QuantityInfoBase</span> <span class="o">=</span> <span class="n">QuantityInfo</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_to_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper method for to and to_value.&quot;&quot;&quot;</span>
@@ -2158,7 +2186,7 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">kind</span> <span class="o">==</span> <span class="s2">&quot;i&quot;</span> <span class="ow">and</span> <span class="n">check_precision</span><span class="p">:</span>
             <span class="c1"># If, e.g., we are casting float to int, we want to fail if</span>
             <span class="c1"># precision is lost, but let things pass if it works.</span>
-            <span class="n">_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_value</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">COPY_IF_NEEDED</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_value</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">can_cast</span><span class="p">(</span><span class="n">_value</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">):</span>
                 <span class="n">self_dtype_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">_value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">((</span><span class="n">self_dtype_array</span> <span class="o">==</span> <span class="n">_value</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">_value</span><span class="p">)):</span>
@@ -2172,14 +2200,6 @@
         <span class="k">if</span> <span class="n">_value</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_value</span> <span class="o">=</span> <span class="n">_value</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">_value</span>
-
-    <span class="k">if</span> <span class="n">NUMPY_LT_2_0</span><span class="p">:</span>
-
-        <span class="k">def</span><span class="w"> </span><span class="nf">itemset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;itemset must have at least one argument&quot;</span><span class="p">)</span>
-
-            <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">.</span><span class="n">itemset</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">args</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_to_own_unit</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),)))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">tostring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Not implemented, use ``.value.tostring()`` instead.&quot;&quot;&quot;</span>
@@ -2257,17 +2277,10 @@
         <span class="p">)</span>
 
     <span class="c1"># ensure we do not return indices as quantities</span>
-    <span class="k">if</span> <span class="n">NUMPY_LT_2_0</span><span class="p">:</span>
-
-        <span class="k">def</span><span class="w"> </span><span class="nf">argsort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-
-        <span class="k">def</span><span class="w"> </span><span class="nf">argsort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stable</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span>
-                <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">stable</span><span class="o">=</span><span class="n">stable</span>
-            <span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">argsort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">stable</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span>
+            <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span> <span class="n">stable</span><span class="o">=</span><span class="n">stable</span>
+        <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">searchsorted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">searchsorted</span><span class="p">(</span>
@@ -2568,7 +2581,7 @@
 
     <span class="c1"># The unit for the specific physical type.  Instances can only be created</span>
     <span class="c1"># with units that are equivalent to this.</span>
-    <span class="n">_equivalent_unit</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_equivalent_unit</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">UnitBase</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">UnitBase</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># The default unit used for views.  Even with `None`, views of arrays</span>
     <span class="c1"># without units are possible, but will have an uninitialized unit.</span>
@@ -2691,9 +2704,9 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_unquantify_allclose_arguments</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">desired</span><span class="p">,</span> <span class="n">rtol</span><span class="p">,</span> <span class="n">atol</span><span class="p">):</span>
-    <span class="n">actual</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">COPY_IF_NEEDED</span><span class="p">)</span>
+    <span class="n">actual</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
-    <span class="n">desired</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">desired</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">COPY_IF_NEEDED</span><span class="p">)</span>
+    <span class="n">desired</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">desired</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">desired</span> <span class="o">=</span> <span class="n">desired</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">actual</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">UnitsError</span><span class="p">:</span>
@@ -2709,7 +2722,7 @@
         <span class="c1"># units for a and b.</span>
         <span class="n">atol</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">atol</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">atol</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">COPY_IF_NEEDED</span><span class="p">)</span>
+        <span class="n">atol</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">atol</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">atol</span> <span class="o">=</span> <span class="n">atol</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">actual</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">UnitsError</span><span class="p">:</span>
@@ -2718,7 +2731,7 @@
                 <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">actual</span><span class="o">.</span><span class="n">unit</span><span class="si">}</span><span class="s2">) are not convertible&quot;</span>
             <span class="p">)</span>
 
-    <span class="n">rtol</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">rtol</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">COPY_IF_NEEDED</span><span class="p">)</span>
+    <span class="n">rtol</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="n">rtol</span><span class="p">,</span> <span class="n">subok</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">rtol</span> <span class="o">=</span> <span class="n">rtol</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
@@ -2754,8 +2767,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2789,7 +2802,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

@@ -1,4 +1,4 @@
-﻿trilobite.models.GRBs
+trilobite.models.GRBs
 =====================
 
 .. automodule:: trilobite.models.GRBs

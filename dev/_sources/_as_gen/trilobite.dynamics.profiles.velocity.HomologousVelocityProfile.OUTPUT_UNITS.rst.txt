@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.HomologousVelocityProfile.OUTPUT\_UNITS
+============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. autoattribute:: HomologousVelocityProfile.OUTPUT_UNITS

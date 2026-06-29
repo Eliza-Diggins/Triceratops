@@ -1,0 +1,6 @@
+﻿trilobite.radiation.synchrotron.SEDs.one\_zone.\_functions.smoothed\_BPL
+========================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone._functions
+
+.. autofunction:: smoothed_BPL

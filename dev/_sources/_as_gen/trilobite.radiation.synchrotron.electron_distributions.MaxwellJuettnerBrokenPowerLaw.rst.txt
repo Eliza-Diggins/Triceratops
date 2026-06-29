@@ -1,0 +1,47 @@
+MaxwellJuettnerBrokenPowerLaw
+====================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoclass:: trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MaxwellJuettnerBrokenPowerLaw.as_callable
+      ~MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_energy_density
+      ~MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_magnetic_field
+      ~MaxwellJuettnerBrokenPowerLaw.cdf
+      ~MaxwellJuettnerBrokenPowerLaw.logcdf
+      ~MaxwellJuettnerBrokenPowerLaw.logpdf
+      ~MaxwellJuettnerBrokenPowerLaw.logsf
+      ~MaxwellJuettnerBrokenPowerLaw.mean
+      ~MaxwellJuettnerBrokenPowerLaw.mean_energy
+      ~MaxwellJuettnerBrokenPowerLaw.mean_kinetic_energy
+      ~MaxwellJuettnerBrokenPowerLaw.moment
+      ~MaxwellJuettnerBrokenPowerLaw.moment_between
+      ~MaxwellJuettnerBrokenPowerLaw.n_between
+      ~MaxwellJuettnerBrokenPowerLaw.n_eff
+      ~MaxwellJuettnerBrokenPowerLaw.n_eff_between
+      ~MaxwellJuettnerBrokenPowerLaw.n_total
+      ~MaxwellJuettnerBrokenPowerLaw.normalize_from_energy_density
+      ~MaxwellJuettnerBrokenPowerLaw.normalize_from_magnetic_field
+      ~MaxwellJuettnerBrokenPowerLaw.normalize_from_n_eff
+      ~MaxwellJuettnerBrokenPowerLaw.normalize_from_n_total
+      ~MaxwellJuettnerBrokenPowerLaw.pdf
+      ~MaxwellJuettnerBrokenPowerLaw.sf
+      ~MaxwellJuettnerBrokenPowerLaw.std
+      ~MaxwellJuettnerBrokenPowerLaw.support
+      ~MaxwellJuettnerBrokenPowerLaw.var
+   
+   
+
+   
+   
+   

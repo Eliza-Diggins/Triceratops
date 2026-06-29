@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ExponentialCSMProfile.process\_arguments
+========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ExponentialCSMProfile.process_arguments

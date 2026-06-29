@@ -1,0 +1,2234 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous &#8212; Trilobite dev documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery.css?v=fd6457a4" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=391a8568" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+
+    <script src="../../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
+    <script src="../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../../../../../_static/sg-tags.js?v=d80f6fa4"></script>
+    <script src="../../../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/synchrotron/SEDs/numerical/inhomogeneous';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner =
+            false;
+        </script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="icon" href="../../../../../../_static/logo.svg"/>
+    <link rel="index" title="Index" href="../../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="dev" />
+  
+    
+    <script src="../../../../../../_static/searchtools.js"></script>
+    <script src="../../../../../../_static/language_data.js"></script>
+    <script src="../../../../../../searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../../../_static/logo.svg" class="logo__image only-light" alt="Trilobite logo"/>
+    <img src="../../../../../../_static/logo.svg" class="logo__image only-dark pst-js-only" alt="Trilobite logo"/>
+  
+  
+    <p class="title logo__title">Trilobite</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../reference/user_guide.html">
+    Trilobite User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples.html">
+    Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+      
+        <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-2"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-2"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-2"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-2">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/TransientsExtragalactic/Trilobite" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../api.html">
+    API
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../reference/user_guide.html">
+    Trilobite User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../examples.html">
+    Example Gallery
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../../../../../getting_started.html">
+    Quickstart Guide
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<div class="theme-switch-container dropdown pst-js-only" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Color mode">
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button dropdown-toggle" aria-label="Color mode" data-bs-toggle="dropdown">
+    <i class="theme-switch fa-solid fa-sun fa-lg fa-fw" data-mode="light" title="Light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg fa-fw" data-mode="dark" title="Dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg fa-fw" data-mode="auto" title="System Settings"></i>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg fa-fw me-1"></i>System Settings</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="light"><i class="fa-solid fa-sun fa-lg fa-fw me-1"></i>Light</button></li>
+    <li><button class="dropdown-item d-flex align-items-center theme-change-button" data-mode="dark"><i class="fa-solid fa-moon fa-lg fa-fw me-1"></i>Dark</button></li>
+  </ul>
+</div></div>
+        
+          <div class="navbar-item">
+<div class="version-switcher__container dropdown pst-js-only">
+  <button id="pst-version-switcher-button-3"
+    type="button"
+    class="version-switcher__button btn btn-sm dropdown-toggle"
+    data-bs-toggle="dropdown"
+    aria-haspopup="listbox"
+    aria-controls="pst-version-switcher-list-3"
+    aria-label="Version switcher list"
+  >
+    Choose version  <!-- this text may get changed later by javascript -->
+    <span class="caret"></span>
+  </button>
+  <div id="pst-version-switcher-list-3"
+    class="version-switcher__menu dropdown-menu list-group-flush py-0"
+    role="listbox" aria-labelledby="pst-version-switcher-button-3">
+    <!-- dropdown will be populated by javascript on page load -->
+  </div>
+</div></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/TransientsExtragalactic/Trilobite" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i><span class="visually-hidden">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../../../../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../../../../../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous</h1><div class="highlight"><pre>
+<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Inhomogeneous numerical synchrotron emission models.</span>
+
+<span class="sd">This module provides numerical synchrotron engines for spatially inhomogeneous</span>
+<span class="sd">emitting regions. These models extend the one-zone synchrotron slab machinery to</span>
+<span class="sd">multi-zone geometries by evaluating the local radiative-transfer solution across</span>
+<span class="sd">a collection of zones and summing their projected contributions to the observed</span>
+<span class="sd">flux density.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.physics_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_cosmological_distances</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.synchrotron.SEDs.numerical.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">NumericalSynchrotronEngine</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.misc_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_in_units</span>
+
+<span class="n">_LOG_2PI</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="InhomogeneousCylinderSynchrotronEngine">
+<a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.html#trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InhomogeneousCylinderSynchrotronEngine</span><span class="p">(</span><span class="n">NumericalSynchrotronEngine</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Numerical synchrotron engine for an inhomogeneous nested-cylinder geometry.</span>
+
+<span class="sd">    Models synchrotron emission from a set of concentric, edge-on cylindrical</span>
+<span class="sd">    annuli, each with its own magnetic field strength :math:`B(r)`, electron</span>
+<span class="sd">    distribution :math:`N(\gamma, r)`, and line-of-sight slab depth</span>
+<span class="sd">    :math:`\ell(r)`. The observed flux density is obtained by integrating the</span>
+<span class="sd">    specific intensity :math:`I_\nu(r)` weighted by the annular projected area</span>
+<span class="sd">    over the radial grid:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        F_\nu \approx \sum_j \frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j).</span>
+
+<span class="sd">    Each per-ring radiative transfer calculation is performed using the full</span>
+<span class="sd">    one-zone slab solution from the parent</span>
+<span class="sd">    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`.</span>
+<span class="sd">    All rings are evaluated simultaneously in a single vectorized pass by</span>
+<span class="sd">    treating the radial index as the zone batch axis, making the model efficient</span>
+<span class="sd">    enough for MCMC hot-loop use.</span>
+
+<span class="sd">    The private API follows a three-level chain:</span>
+
+<span class="sd">    1. ``_compute_log_[pa_]ring_specific_intensity`` — comoving-frame</span>
+<span class="sd">       :math:`\ln I_\nu(r_j)`.</span>
+<span class="sd">    2. ``_compute_log_[pa_]ring_contributions`` — observer-frame log flux density</span>
+<span class="sd">       per ring :math:`\ln[(2\pi r_j\,\Delta r_j / D_A^2)\,I_\nu(r_j)]`, shape</span>
+<span class="sd">       ``(*nu_shape, n_R)``. Summing these in linear space gives :math:`F_\nu`.</span>
+<span class="sd">    3. ``_compute_log_[pa_]cylinder_flux_density`` — total :math:`\ln F_\nu`,</span>
+<span class="sd">       shape ``(*nu_shape,)``.</span>
+
+<span class="sd">    The class follows the same two-level public/private API pattern as the parent</span>
+<span class="sd">    engine: private ``_compute_log_*`` methods accept pre-computed log-space CGS</span>
+<span class="sd">    arrays with no unit validation, while the public wrappers handle unit</span>
+<span class="sd">    conversion, grid construction, and distance resolution.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        **Velocity restriction.** This engine enforces :math:`\theta = \pi/2`</span>
+<span class="sd">        (bulk velocity **perpendicular** to the line of sight) for all rings.</span>
+<span class="sd">        This models radially expanding cylindrical shells observed edge-on, so</span>
+<span class="sd">        the Doppler factor reduces to :math:`\mathcal{D} = 1/\Gamma(\beta)`</span>
+<span class="sd">        independent of ring radius. A **single scalar** :math:`\beta` applies</span>
+<span class="sd">        uniformly to all rings. This is a deliberate simplification: the model</span>
+<span class="sd">        is not appropriate for jet-like geometries, oblique outflows, or</span>
+<span class="sd">        scenarios where the expansion velocity varies between shells.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`</span>
+<span class="sd">        Base engine providing radiative transfer and kernel interpolation.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Grid Helper                                #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_radius_grid</span><span class="p">(</span>
+        <span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e17</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build a radial quadrature grid for the cylinder model.</span>
+
+<span class="sd">        When ``r`` is ``None``, constructs a grid of ``n_r`` points spanning</span>
+<span class="sd">        ``[r_min, r_max]`` with the requested spacing. When ``r`` is provided,</span>
+<span class="sd">        uses it directly and computes per-point spacings via central differences.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        r : ~numpy.ndarray or None</span>
+<span class="sd">            Explicit radius grid in CGS (cm). If ``None``, built from ``r_min``,</span>
+<span class="sd">            ``r_max``, and ``n_r``.</span>
+<span class="sd">        r_min : float, optional</span>
+<span class="sd">            Lower bound of the grid in CGS (cm). Ignored when ``r`` is provided.</span>
+<span class="sd">            Default ``1e14``.</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Upper bound of the grid in CGS (cm). Ignored when ``r`` is provided.</span>
+<span class="sd">            Default ``1e17``.</span>
+<span class="sd">        n_r : int, optional</span>
+<span class="sd">            Number of grid points. Ignored when ``r`` is provided. Default ``50``.</span>
+<span class="sd">        spacing : {&quot;log&quot;, &quot;linear&quot;}, optional</span>
+<span class="sd">            Grid spacing when ``r`` is not provided. Default ``&quot;log&quot;``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_r : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the radius grid in CGS (cm).</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights</span>
+<span class="sd">            :math:`2\pi r_j\,\Delta r_j` in CGS (:math:`\mathrm{cm^2}`),</span>
+<span class="sd">            where :math:`\Delta r_j` is the central-difference spacing at</span>
+<span class="sd">            point :math:`j`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">spacing</span> <span class="o">==</span> <span class="s2">&quot;log&quot;</span><span class="p">:</span>
+            <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">spacing</span> <span class="o">==</span> <span class="s2">&quot;linear&quot;</span><span class="p">:</span>
+            <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid spacing &#39;</span><span class="si">{</span><span class="n">spacing</span><span class="si">}</span><span class="s2">&#39;. Must be &#39;log&#39; or &#39;linear&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r_grid</span><span class="p">)</span>
+        <span class="n">dr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">r_grid</span><span class="p">)</span>
+        <span class="n">log_area_weights</span> <span class="o">=</span> <span class="n">_LOG_2PI</span> <span class="o">+</span> <span class="n">log_r</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">log_r</span><span class="p">,</span> <span class="n">log_area_weights</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Private API — Level 1: per-ring I_nu       #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_pa_ring_specific_intensity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_slab_depth</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the pitch-angle-averaged log specific intensity :math:`\ln I_\nu(r_j)` per ring.</span>
+
+<span class="sd">        Thin wrapper around :meth:`_compute_log_pa_specific_intensity` that enforces</span>
+<span class="sd">        :math:`\cos\theta = 0` (bulk velocity perpendicular to the line of sight).</span>
+<span class="sd">        All inputs are pre-computed natural-log CGS quantities; no unit conversion or</span>
+<span class="sd">        grid construction is performed. This is the intended entry point for MCMC</span>
+<span class="sd">        hot-loop evaluations using the pitch-angle-averaged kernel.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_slab_depth : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).</span>
+<span class="sd">        log_B : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field strength in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron number density distribution</span>
+<span class="sd">            :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`. The last axis is</span>
+<span class="sd">            the gamma integration axis; the leading axis indexes the rings.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid (shared across all rings).</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        beta : float</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_I : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame specific intensity per ring, in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_specific_intensity</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_slab_depth</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+            <span class="n">cos_theta</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_ring_specific_intensity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_slab_depth</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">sin_alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the fixed-pitch-angle log specific intensity :math:`\ln I_\nu(r_j)` per ring.</span>
+
+<span class="sd">        Thin wrapper around :meth:`_compute_log_specific_intensity` that enforces</span>
+<span class="sd">        :math:`\cos\theta = 0` (bulk velocity perpendicular to the line of sight).</span>
+<span class="sd">        All inputs are pre-computed natural-log CGS quantities; no unit conversion or</span>
+<span class="sd">        grid construction is performed. This is the intended entry point for MCMC</span>
+<span class="sd">        hot-loop evaluations with a fixed (or per-ring) pitch angle.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_slab_depth : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).</span>
+<span class="sd">        log_B : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field strength in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron number density distribution</span>
+<span class="sd">            :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`. The last axis is</span>
+<span class="sd">            the gamma integration axis; the leading axis indexes the rings.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid (shared across all rings).</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        beta : float</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.</span>
+<span class="sd">        sin_alpha : float or ~numpy.ndarray or scalar</span>
+<span class="sd">            Sine of the comoving-frame pitch angle :math:`\sin\alpha`. May be</span>
+<span class="sd">            per-ring or a single value broadcast to all rings.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_I : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame specific intensity per ring, in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_specific_intensity</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_slab_depth</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+            <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+            <span class="n">cos_theta</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+            <span class="n">sin_alpha</span><span class="o">=</span><span class="n">sin_alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Private API — Level 2: per-ring dF_nu      #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_pa_ring_contributions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_slab_depth</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_area_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_D_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the pitch-angle-averaged log flux density contribution per ring.</span>
+
+<span class="sd">        Evaluates</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \ln\!\left[\frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j)\right]</span>
+
+<span class="sd">        for each ring :math:`j`. Summing these contributions in linear space</span>
+<span class="sd">        over the ring axis yields the total flux density :math:`F_\nu`. All</span>
+<span class="sd">        inputs are pre-computed natural-log CGS quantities.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_slab_depth : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).</span>
+<span class="sd">        log_B : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field strength in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron number density distribution</span>
+<span class="sd">            :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid (shared across all rings).</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`</span>
+<span class="sd">            in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.</span>
+<span class="sd">        log_D_A : float</span>
+<span class="sd">            Natural log of the angular diameter distance in CGS (cm).</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        beta : float</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_dF : ~numpy.ndarray</span>
+<span class="sd">            Log of the flux density contribution from each ring, in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing</span>
+<span class="sd">            :math:`\exp(\mathrm{log\_dF})` over the last axis gives :math:`F_\nu`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_ring_specific_intensity</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_slab_depth</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">beta</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">log_I</span> <span class="o">+</span> <span class="n">log_area_weights</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_D_A</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_ring_contributions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_slab_depth</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_area_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_D_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">sin_alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the fixed-pitch-angle log flux density contribution per ring.</span>
+
+<span class="sd">        Evaluates</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \ln\!\left[\frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j)\right]</span>
+
+<span class="sd">        for each ring :math:`j`. Summing these contributions in linear space</span>
+<span class="sd">        over the ring axis yields the total flux density :math:`F_\nu`. All</span>
+<span class="sd">        inputs are pre-computed natural-log CGS quantities.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_slab_depth : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).</span>
+<span class="sd">        log_B : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field strength in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron number density distribution</span>
+<span class="sd">            :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid (shared across all rings).</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`</span>
+<span class="sd">            in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.</span>
+<span class="sd">        log_D_A : float</span>
+<span class="sd">            Natural log of the angular diameter distance in CGS (cm).</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        beta : float</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.</span>
+<span class="sd">        sin_alpha : float or ~numpy.ndarray or scalar</span>
+<span class="sd">            Sine of the comoving-frame pitch angle :math:`\sin\alpha`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_dF : ~numpy.ndarray</span>
+<span class="sd">            Log of the flux density contribution from each ring, in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing</span>
+<span class="sd">            :math:`\exp(\mathrm{log\_dF})` over the last axis gives :math:`F_\nu`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_ring_specific_intensity</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_slab_depth</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">beta</span><span class="p">,</span>
+            <span class="n">sin_alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">log_I</span> <span class="o">+</span> <span class="n">log_area_weights</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_D_A</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Private API — Level 3: total F_nu          #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_pa_cylinder_flux_density</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_slab_depth</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_area_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_D_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the pitch-angle-averaged log spectral flux density :math:`\ln F_\nu`.</span>
+
+<span class="sd">        Sums the per-ring flux density contributions from</span>
+<span class="sd">        :meth:`_compute_log_pa_ring_contributions` via</span>
+<span class="sd">        :func:`~scipy.special.logsumexp`. All inputs are pre-computed</span>
+<span class="sd">        natural-log CGS quantities; this is the intended MCMC hot-loop entry</span>
+<span class="sd">        point for the pitch-angle-averaged kernel.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_slab_depth : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).</span>
+<span class="sd">        log_B : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field strength in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron number density distribution</span>
+<span class="sd">            :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid (shared across all rings).</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`</span>
+<span class="sd">            in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.</span>
+<span class="sd">        log_D_A : float</span>
+<span class="sd">            Natural log of the angular diameter distance in CGS (cm).</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        beta : float</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_F : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame spectral flux density in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_dF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_ring_contributions</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_slab_depth</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">beta</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">log_dF</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_cylinder_flux_density</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_slab_depth</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_area_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_D_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">sin_alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the fixed-pitch-angle log spectral flux density :math:`\ln F_\nu`.</span>
+
+<span class="sd">        Sums the per-ring flux density contributions from</span>
+<span class="sd">        :meth:`_compute_log_ring_contributions` via</span>
+<span class="sd">        :func:`~scipy.special.logsumexp`. All inputs are pre-computed</span>
+<span class="sd">        natural-log CGS quantities; this is the intended MCMC hot-loop entry</span>
+<span class="sd">        point for the fixed-pitch-angle kernel.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_slab_depth : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame slab depth :math:`\ell(r)` in CGS (cm).</span>
+<span class="sd">        log_B : ~numpy.ndarray or scalar</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field strength in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron number density distribution</span>
+<span class="sd">            :math:`N(\gamma, r)` in :math:`\mathrm{cm^{-3}}`.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid (shared across all rings).</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights :math:`w_i = \gamma_i\,\Delta\ln\gamma_i`.</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights :math:`2\pi r_j\,\Delta r_j`</span>
+<span class="sd">            in CGS (:math:`\mathrm{cm^2}`). Pre-computed by :meth:`_build_radius_grid`.</span>
+<span class="sd">        log_D_A : float</span>
+<span class="sd">            Natural log of the angular diameter distance in CGS (cm).</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        beta : float</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`, applied uniformly to all rings.</span>
+<span class="sd">        sin_alpha : float or ~numpy.ndarray or scalar</span>
+<span class="sd">            Sine of the comoving-frame pitch angle :math:`\sin\alpha`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_F : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame spectral flux density in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_dF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_ring_contributions</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_slab_depth</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">beta</span><span class="p">,</span>
+            <span class="n">sin_alpha</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">log_dF</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Public API (unit-bearing wrappers)         #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_inputs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">,</span>
+        <span class="n">r</span><span class="p">,</span>
+        <span class="n">slab_depth</span><span class="p">,</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">N</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">,</span>
+        <span class="n">n_gamma</span><span class="p">,</span>
+        <span class="n">r_min</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">,</span>
+        <span class="n">r_spacing</span><span class="p">,</span>
+        <span class="n">luminosity_distance</span><span class="p">,</span>
+        <span class="n">angular_diameter_distance</span><span class="p">,</span>
+        <span class="n">proper_distance</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">,</span>
+        <span class="n">cosmology</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shared unit-conversion and grid-building logic for both public methods.&quot;&quot;&quot;</span>
+        <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+        <span class="n">slab_depth_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">slab_depth</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+        <span class="n">B_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">G</span><span class="p">)</span>
+
+        <span class="n">r_cgs</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">log_area_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_radius_grid</span><span class="p">(</span><span class="n">r_cgs</span><span class="p">,</span> <span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">,</span> <span class="n">r_spacing</span><span class="p">)</span>
+        <span class="n">n_r_actual</span> <span class="o">=</span> <span class="n">log_area_weights</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_gamma_grid</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span><span class="p">,</span> <span class="n">n_gamma</span><span class="p">)</span>
+        <span class="n">log_N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_log_N</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">)</span>
+
+        <span class="c1"># Homogeneous callable (or 1-D array) → broadcast to (n_R, n_gamma) so that</span>
+        <span class="c1"># the base engine sees zone_shape = (n_r_actual,) for all rings.</span>
+        <span class="k">if</span> <span class="n">log_N</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">log_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">log_N</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="n">n_r_actual</span><span class="p">,</span> <span class="n">log_gamma</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">resolve_cosmological_distances</span><span class="p">(</span>
+            <span class="n">redshift</span><span class="o">=</span><span class="n">z</span> <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">luminosity_distance</span><span class="o">=</span><span class="n">luminosity_distance</span><span class="p">,</span>
+            <span class="n">angular_diameter_distance</span><span class="o">=</span><span class="n">angular_diameter_distance</span><span class="p">,</span>
+            <span class="n">proper_distance</span><span class="o">=</span><span class="n">proper_distance</span><span class="p">,</span>
+            <span class="n">cosmology</span><span class="o">=</span><span class="n">cosmology</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">log_D_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="s2">&quot;angular_diameter_distance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_cgs</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">slab_depth_cgs</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">B_cgs</span><span class="p">),</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="InhomogeneousCylinderSynchrotronEngine.compute_ring_specific_intensity">
+<a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.compute_ring_specific_intensity.html#trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.compute_ring_specific_intensity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_ring_specific_intensity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">slab_depth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">N</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Callable</span><span class="p">],</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">luminosity_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">angular_diameter_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proper_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e17</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">r_spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
+        <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the area-weighted flux density contribution :math:`dF_{\nu,j}` for each ring.</span>
+
+<span class="sd">        Returns the per-ring quantity</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            dF_{\nu,j} = \frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j),</span>
+
+<span class="sd">        in units of :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        Summing over the last (ring) axis recovers the total flux density:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            F_nu = engine.compute_ring_specific_intensity(</span>
+<span class="sd">                ...</span>
+<span class="sd">            ).sum(axis=-1)</span>
+
+<span class="sd">        This method is intended for exploration and debugging: inspecting the</span>
+<span class="sd">        per-ring contributions reveals which annuli dominate the emission and</span>
+<span class="sd">        how the radial profile shapes the SED.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This method enforces :math:`\theta = \pi/2` (bulk velocity</span>
+<span class="sd">            perpendicular to the line of sight). See the class-level warning for</span>
+<span class="sd">            the implications of this restriction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nu : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Observer-frame frequency grid. Bare values</span>
+<span class="sd">            are treated as Hz.</span>
+<span class="sd">        r : ~numpy.ndarray, ~astropy.units.Quantity, or None</span>
+<span class="sd">            Radial grid of cylindrical annuli. Bare values</span>
+<span class="sd">            are treated as cm. If ``None``, a grid is built from ``r_min``,</span>
+<span class="sd">            ``r_max``, ``n_r``, and ``r_spacing``.</span>
+<span class="sd">        slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Comoving-frame line-of-sight slab depth :math:`\ell(r)`, shape</span>
+<span class="sd">            ``(n_R,)`` or scalar (broadcast to all rings). Bare values are</span>
+<span class="sd">            treated as cm.</span>
+<span class="sd">        B : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Comoving-frame magnetic field strength :math:`B(r)`, shape</span>
+<span class="sd">            ``(n_R,)`` or scalar. Bare values are treated as Gauss.</span>
+<span class="sd">        N : ~numpy.ndarray or callable</span>
+<span class="sd">            Comoving-frame electron distribution :math:`N(\gamma, r)` in</span>
+<span class="sd">            :math:`\mathrm{cm^{-3}}`. If callable,</span>
+<span class="sd">            called as ``N(gamma)`` and must return shape ``(n_R, n_gamma)``</span>
+<span class="sd">            or broadcastable to it. A callable returning ``(n_gamma,)`` is</span>
+<span class="sd">            automatically broadcast to all rings.</span>
+<span class="sd">        gamma : ~numpy.ndarray or None, optional</span>
+<span class="sd">            Explicit Lorentz factor grid (shared across all rings). If ``None``,</span>
+<span class="sd">            built from ``gamma_min``, ``gamma_max``, ``n_gamma``.</span>
+<span class="sd">        luminosity_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source luminosity distance. Exactly one of ``luminosity_distance``,</span>
+<span class="sd">            ``angular_diameter_distance``, ``proper_distance``, or a non-zero</span>
+<span class="sd">            ``z`` must be provided.</span>
+<span class="sd">        angular_diameter_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source angular diameter distance.</span>
+<span class="sd">        proper_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source comoving line-of-sight distance.</span>
+<span class="sd">        z : float, optional</span>
+<span class="sd">            Cosmological redshift. Default ``0``.</span>
+<span class="sd">        cosmology : ~astropy.cosmology.FLRW or None, optional</span>
+<span class="sd">            Cosmological model for distance conversion.</span>
+<span class="sd">        beta : float, optional</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`. Default ``0``.</span>
+<span class="sd">        alpha : float, ~numpy.ndarray, ~astropy.units.Quantity, or None, optional</span>
+<span class="sd">            Comoving-frame pitch angle or scalar. Bare values</span>
+<span class="sd">            are treated as radians. If ``None``, the pitch-angle-averaged kernel</span>
+<span class="sd">            is used.</span>
+<span class="sd">        r_min : float, optional</span>
+<span class="sd">            Radius grid lower bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e14``.</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Radius grid upper bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e17``.</span>
+<span class="sd">        n_r : int, optional</span>
+<span class="sd">            Number of radius grid points. Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``50``.</span>
+<span class="sd">        r_spacing : {&quot;log&quot;, &quot;linear&quot;}, optional</span>
+<span class="sd">            Radius grid spacing. Ignored if ``r`` is provided. Default ``&quot;log&quot;``.</span>
+<span class="sd">        gamma_min : float, optional</span>
+<span class="sd">            Gamma grid lower bound. Ignored if ``gamma`` is provided. Default ``1.0``.</span>
+<span class="sd">        gamma_max : float, optional</span>
+<span class="sd">            Gamma grid upper bound. Ignored if ``gamma`` is provided. Default ``1e8``.</span>
+<span class="sd">        n_gamma : int, optional</span>
+<span class="sd">            Number of gamma grid points. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``200``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dF_nu : ~astropy.units.Quantity</span>
+<span class="sd">            Per-ring flux density contributions in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing over the</span>
+<span class="sd">            last axis gives the total :math:`F_\nu`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_slab_depth</span><span class="p">,</span> <span class="n">log_B</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">log_area_weights</span><span class="p">,</span> <span class="n">log_D_A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_inputs</span><span class="p">(</span>
+            <span class="n">nu</span><span class="p">,</span>
+            <span class="n">r</span><span class="p">,</span>
+            <span class="n">slab_depth</span><span class="p">,</span>
+            <span class="n">B</span><span class="p">,</span>
+            <span class="n">N</span><span class="p">,</span>
+            <span class="n">gamma</span><span class="p">,</span>
+            <span class="n">gamma_min</span><span class="p">,</span>
+            <span class="n">gamma_max</span><span class="p">,</span>
+            <span class="n">n_gamma</span><span class="p">,</span>
+            <span class="n">r_min</span><span class="p">,</span>
+            <span class="n">r_max</span><span class="p">,</span>
+            <span class="n">n_r</span><span class="p">,</span>
+            <span class="n">r_spacing</span><span class="p">,</span>
+            <span class="n">luminosity_distance</span><span class="p">,</span>
+            <span class="n">angular_diameter_distance</span><span class="p">,</span>
+            <span class="n">proper_distance</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">cosmology</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ensure_avg_first_kernel_loaded</span><span class="p">()</span>
+            <span class="n">log_dF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_ring_contributions</span><span class="p">(</span>
+                <span class="n">log_nu</span><span class="p">,</span>
+                <span class="n">log_slab_depth</span><span class="p">,</span>
+                <span class="n">log_B</span><span class="p">,</span>
+                <span class="n">log_N</span><span class="p">,</span>
+                <span class="n">log_gamma</span><span class="p">,</span>
+                <span class="n">log_weights</span><span class="p">,</span>
+                <span class="n">log_area_weights</span><span class="p">,</span>
+                <span class="n">log_D_A</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+                <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ensure_first_kernel_loaded</span><span class="p">()</span>
+            <span class="n">sin_alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">))</span>
+            <span class="n">log_dF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_ring_contributions</span><span class="p">(</span>
+                <span class="n">log_nu</span><span class="p">,</span>
+                <span class="n">log_slab_depth</span><span class="p">,</span>
+                <span class="n">log_B</span><span class="p">,</span>
+                <span class="n">log_N</span><span class="p">,</span>
+                <span class="n">log_gamma</span><span class="p">,</span>
+                <span class="n">log_weights</span><span class="p">,</span>
+                <span class="n">log_area_weights</span><span class="p">,</span>
+                <span class="n">log_D_A</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+                <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+                <span class="n">sin_alpha</span><span class="o">=</span><span class="n">sin_alpha</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dF</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="InhomogeneousCylinderSynchrotronEngine.compute_flux_density">
+<a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.compute_flux_density.html#trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine.compute_flux_density">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_flux_density</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">slab_depth</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">N</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Callable</span><span class="p">],</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">luminosity_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">angular_diameter_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proper_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e17</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">r_spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
+        <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the observer-frame spectral flux density :math:`F_\nu`.</span>
+
+<span class="sd">        Integrates the per-ring specific intensity over the cylinder&#39;s radial</span>
+<span class="sd">        profile:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            F_\nu \approx \sum_j \frac{2\pi r_j\,\Delta r_j}{D_A^2}\,I_\nu(r_j),</span>
+
+<span class="sd">        where :math:`\Delta r_j` is the central-difference spacing at ring</span>
+<span class="sd">        :math:`j` and :math:`D_A` is the angular diameter distance. The sum is</span>
+<span class="sd">        evaluated in log-space via :func:`~scipy.special.logsumexp` for</span>
+<span class="sd">        numerical stability.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This method enforces :math:`\theta = \pi/2` (bulk velocity</span>
+<span class="sd">            perpendicular to the line of sight). See the class-level warning for</span>
+<span class="sd">            the implications of this restriction.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nu : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Observer-frame frequency grid. Bare values</span>
+<span class="sd">            are treated as Hz.</span>
+<span class="sd">        r : ~numpy.ndarray, ~astropy.units.Quantity, or None</span>
+<span class="sd">            Radial grid of cylindrical annuli. Bare values</span>
+<span class="sd">            are treated as cm. If ``None``, a grid is built from ``r_min``,</span>
+<span class="sd">            ``r_max``, ``n_r``, and ``r_spacing``.</span>
+<span class="sd">        slab_depth : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Comoving-frame line-of-sight slab depth :math:`\ell(r)`, shape</span>
+<span class="sd">            ``(n_R,)`` or scalar (broadcast to all rings). Bare values are</span>
+<span class="sd">            treated as cm.</span>
+<span class="sd">        B : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Comoving-frame magnetic field strength :math:`B(r)`, shape</span>
+<span class="sd">            ``(n_R,)`` or scalar. Bare values are treated as Gauss.</span>
+<span class="sd">        N : ~numpy.ndarray or callable</span>
+<span class="sd">            Comoving-frame electron distribution :math:`N(\gamma, r)` in</span>
+<span class="sd">            :math:`\mathrm{cm^{-3}}`. If callable,</span>
+<span class="sd">            called as ``N(gamma)`` and must return shape ``(n_R, n_gamma)``</span>
+<span class="sd">            or broadcastable to it. A callable returning ``(n_gamma,)`` is</span>
+<span class="sd">            automatically broadcast to all rings.</span>
+<span class="sd">        gamma : ~numpy.ndarray or None, optional</span>
+<span class="sd">            Explicit Lorentz factor grid shared across all rings. If ``None``,</span>
+<span class="sd">            built from ``gamma_min``, ``gamma_max``, ``n_gamma``.</span>
+<span class="sd">        luminosity_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source luminosity distance. Exactly one of ``luminosity_distance``,</span>
+<span class="sd">            ``angular_diameter_distance``, ``proper_distance``, or a non-zero</span>
+<span class="sd">            ``z`` must be provided.</span>
+<span class="sd">        angular_diameter_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source angular diameter distance.</span>
+<span class="sd">        proper_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source comoving line-of-sight distance.</span>
+<span class="sd">        z : float, optional</span>
+<span class="sd">            Cosmological redshift. Default ``0``.</span>
+<span class="sd">        cosmology : ~astropy.cosmology.FLRW or None, optional</span>
+<span class="sd">            Cosmological model for distance conversion.</span>
+<span class="sd">        beta : float, optional</span>
+<span class="sd">            Bulk plasma velocity in units of :math:`c`. Default ``0``.</span>
+<span class="sd">        alpha : float, ~numpy.ndarray, ~astropy.units.Quantity, or None, optional</span>
+<span class="sd">            Comoving-frame pitch angle or scalar. Bare values</span>
+<span class="sd">            are treated as radians. If ``None``, the pitch-angle-averaged kernel</span>
+<span class="sd">            is used.</span>
+<span class="sd">        r_min : float, optional</span>
+<span class="sd">            Radius grid lower bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e14``.</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Radius grid upper bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e17``.</span>
+<span class="sd">        n_r : int, optional</span>
+<span class="sd">            Number of radius grid points. Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``50``.</span>
+<span class="sd">        r_spacing : {&quot;log&quot;, &quot;linear&quot;}, optional</span>
+<span class="sd">            Radius grid spacing. Ignored if ``r`` is provided. Default ``&quot;log&quot;``.</span>
+<span class="sd">        gamma_min : float, optional</span>
+<span class="sd">            Gamma grid lower bound. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``1.0``.</span>
+<span class="sd">        gamma_max : float, optional</span>
+<span class="sd">            Gamma grid upper bound. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``1e8``.</span>
+<span class="sd">        n_gamma : int, optional</span>
+<span class="sd">            Number of gamma grid points. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``200``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        F_nu : ~astropy.units.Quantity</span>
+<span class="sd">            Observer-frame spectral flux density in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_slab_depth</span><span class="p">,</span> <span class="n">log_B</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">log_area_weights</span><span class="p">,</span> <span class="n">log_D_A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_inputs</span><span class="p">(</span>
+            <span class="n">nu</span><span class="p">,</span>
+            <span class="n">r</span><span class="p">,</span>
+            <span class="n">slab_depth</span><span class="p">,</span>
+            <span class="n">B</span><span class="p">,</span>
+            <span class="n">N</span><span class="p">,</span>
+            <span class="n">gamma</span><span class="p">,</span>
+            <span class="n">gamma_min</span><span class="p">,</span>
+            <span class="n">gamma_max</span><span class="p">,</span>
+            <span class="n">n_gamma</span><span class="p">,</span>
+            <span class="n">r_min</span><span class="p">,</span>
+            <span class="n">r_max</span><span class="p">,</span>
+            <span class="n">n_r</span><span class="p">,</span>
+            <span class="n">r_spacing</span><span class="p">,</span>
+            <span class="n">luminosity_distance</span><span class="p">,</span>
+            <span class="n">angular_diameter_distance</span><span class="p">,</span>
+            <span class="n">proper_distance</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">cosmology</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">alpha</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ensure_avg_first_kernel_loaded</span><span class="p">()</span>
+            <span class="n">log_F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_cylinder_flux_density</span><span class="p">(</span>
+                <span class="n">log_nu</span><span class="p">,</span>
+                <span class="n">log_slab_depth</span><span class="p">,</span>
+                <span class="n">log_B</span><span class="p">,</span>
+                <span class="n">log_N</span><span class="p">,</span>
+                <span class="n">log_gamma</span><span class="p">,</span>
+                <span class="n">log_weights</span><span class="p">,</span>
+                <span class="n">log_area_weights</span><span class="p">,</span>
+                <span class="n">log_D_A</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+                <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ensure_first_kernel_loaded</span><span class="p">()</span>
+            <span class="n">sin_alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">))</span>
+            <span class="n">log_F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_cylinder_flux_density</span><span class="p">(</span>
+                <span class="n">log_nu</span><span class="p">,</span>
+                <span class="n">log_slab_depth</span><span class="p">,</span>
+                <span class="n">log_B</span><span class="p">,</span>
+                <span class="n">log_N</span><span class="p">,</span>
+                <span class="n">log_gamma</span><span class="p">,</span>
+                <span class="n">log_weights</span><span class="p">,</span>
+                <span class="n">log_area_weights</span><span class="p">,</span>
+                <span class="n">log_D_A</span><span class="p">,</span>
+                <span class="n">z</span><span class="o">=</span><span class="n">z</span><span class="p">,</span>
+                <span class="n">beta</span><span class="o">=</span><span class="n">beta</span><span class="p">,</span>
+                <span class="n">sin_alpha</span><span class="o">=</span><span class="n">sin_alpha</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_F</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="InhomogeneousSphereSynchrotronEngine">
+<a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.html#trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">InhomogeneousSphereSynchrotronEngine</span><span class="p">(</span><span class="n">NumericalSynchrotronEngine</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Numerical synchrotron engine for an inhomogeneous spherical geometry.</span>
+
+<span class="sd">    Models synchrotron emission from a set of concentric spherical shells,</span>
+<span class="sd">    each with its own magnetic field strength :math:`B(r)` and electron</span>
+<span class="sd">    distribution :math:`N(\gamma, r)`. The observed flux density is obtained</span>
+<span class="sd">    by integrating the specific intensity :math:`I_\nu(b)` weighted by the</span>
+<span class="sd">    annular projected area over impact parameters :math:`b_j = r_j` drawn from</span>
+<span class="sd">    the radial grid:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        F_\nu \approx \sum_j \frac{2\pi b_j\,\Delta b_j}{D_A^2}\,I_\nu(b_j).</span>
+
+<span class="sd">    For each ray at impact parameter :math:`b_j`, the specific intensity is</span>
+<span class="sd">    computed by a two-pass shell-by-shell radiative transfer procedure. The ray</span>
+<span class="sd">    traverses the sphere from the far edge inward (far pass) and then back</span>
+<span class="sd">    outward to the observer (near pass), with the standard slab update</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        I_{\nu,k+1} = I_{\nu,k}\,e^{-\tau_k}</span>
+<span class="sd">                      + S_{\nu,k}\!\left(1 - e^{-\tau_k}\right)</span>
+
+<span class="sd">    applied at each shell segment :math:`k`. Here</span>
+<span class="sd">    :math:`\tau_k = \alpha_{\nu,k}\,\ell_k` is the segment optical depth,</span>
+<span class="sd">    :math:`S_{\nu,k} = j_{\nu,k}/\alpha_{\nu,k}` is the source function, and</span>
+<span class="sd">    :math:`\ell_k` is the half-path of the ray through shell :math:`k` on the</span>
+<span class="sd">    relevant side of the sphere. Shell half-path lengths are pre-computed from the</span>
+<span class="sd">    grid geometry using geometric-mean boundaries.</span>
+
+<span class="sd">    Shell :math:`i` spans from its inner boundary</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r_{i,\mathrm{inner}} =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            0 &amp; i = 0 \\</span>
+<span class="sd">            \sqrt{r_{i-1}\,r_i} &amp; i &gt; 0</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    to its outer boundary</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        r_{i,\mathrm{outer}} =</span>
+<span class="sd">        \begin{cases}</span>
+<span class="sd">            \sqrt{r_i\,r_{i+1}} &amp; i &lt; n_R - 1 \\</span>
+<span class="sd">            r_{n_R-1}^2 / r_{n_R-2,\mathrm{outer}} &amp; i = n_R - 1.</span>
+<span class="sd">        \end{cases}</span>
+
+<span class="sd">    The half-path of ray :math:`j` through shell :math:`i` is then</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \ell_{j,i} =</span>
+<span class="sd">        \sqrt{\max(r_{i,\mathrm{outer}}^2 - b_j^2,\,0)}</span>
+<span class="sd">        - \sqrt{\max(r_{i,\mathrm{inner}}^2 - b_j^2,\,0)},</span>
+
+<span class="sd">    which is zero whenever shell :math:`i` lies entirely below the impact</span>
+<span class="sd">    parameter. Shells with zero half-path contribute nothing to the intensity</span>
+<span class="sd">    update and are handled automatically by the vectorised RT loop.</span>
+
+<span class="sd">    The private API follows a three-level chain:</span>
+
+<span class="sd">    1. ``_compute_log_pa_ray_specific_intensity`` — observer-frame</span>
+<span class="sd">       :math:`\ln I_\nu(b_j)`.</span>
+<span class="sd">    2. ``_compute_log_pa_ray_contributions`` — observer-frame log flux density</span>
+<span class="sd">       per ray :math:`\ln[(2\pi b_j\,\Delta b_j / D_A^2)\,I_\nu(b_j)]`, shape</span>
+<span class="sd">       ``(*nu_shape, n_R)``. Summing these in linear space gives :math:`F_\nu`.</span>
+<span class="sd">    3. ``_compute_log_pa_sphere_flux_density`` — total :math:`\ln F_\nu`,</span>
+<span class="sd">       shape ``(*nu_shape,)``.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        **Non-relativistic restriction.** This engine enforces</span>
+<span class="sd">        :math:`\beta = 0`; relativistic Doppler corrections are not applied.</span>
+<span class="sd">        Cosmological redshift :math:`z` is still handled correctly through the</span>
+<span class="sd">        standard :math:`(1 + z)^3` intensity scaling and frequency shift.</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        **Pitch-angle averaging.** This engine uses only the pitch-angle-averaged</span>
+<span class="sd">        synchrotron kernel :math:`\bar{F}(x)`, appropriate for an isotropically</span>
+<span class="sd">        expanding sphere with no preferred emission axis. Fixed pitch-angle</span>
+<span class="sd">        calculations are not supported. For fixed :math:`\sin\alpha`, use</span>
+<span class="sd">        :class:`~trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine`</span>
+<span class="sd">        which exposes both pitch-angle-averaged and fixed-pitch-angle paths.</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousCylinderSynchrotronEngine`</span>
+<span class="sd">        Analogous engine for edge-on cylindrical annuli with full pitch-angle</span>
+<span class="sd">        and relativistic-motion support.</span>
+<span class="sd">    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`</span>
+<span class="sd">        Base engine providing kernel tabulation and single-zone radiative transfer.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. footbibliography::</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Grid Helper                                #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_build_sphere_grid</span><span class="p">(</span>
+        <span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e17</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build the radial grid, area weights, and shell half-path matrix.</span>
+
+<span class="sd">        Constructs a radial grid of :math:`n_R` points, computes the annular</span>
+<span class="sd">        area weights :math:`2\pi r_j\,\Delta r_j` for flux integration, and</span>
+<span class="sd">        pre-computes the half-path length :math:`\ell_{j,i}` of each ray</span>
+<span class="sd">        (impact parameter :math:`b_j = r_j`) through each shell :math:`i`.</span>
+
+<span class="sd">        Shell boundaries are defined by geometric means of adjacent cell</span>
+<span class="sd">        centers. The innermost shell extends to :math:`r = 0`; the outermost</span>
+<span class="sd">        boundary is geometrically extrapolated beyond the last cell center,</span>
+<span class="sd">        ensuring the outermost ray has a non-zero path through its own shell.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        r : ~numpy.ndarray or None</span>
+<span class="sd">            Explicit radius grid in CGS (cm). If ``None``, built from</span>
+<span class="sd">            ``r_min``, ``r_max``, and ``n_r``.</span>
+<span class="sd">        r_min : float, optional</span>
+<span class="sd">            Lower bound of the grid in CGS (cm). Ignored when ``r`` is</span>
+<span class="sd">            provided. Default ``1e14``.</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Upper bound of the grid in CGS (cm). Ignored when ``r`` is</span>
+<span class="sd">            provided. Default ``1e17``.</span>
+<span class="sd">        n_r : int, optional</span>
+<span class="sd">            Number of grid points. Ignored when ``r`` is provided.</span>
+<span class="sd">            Default ``50``.</span>
+<span class="sd">        spacing : {&quot;log&quot;, &quot;linear&quot;}, optional</span>
+<span class="sd">            Grid spacing when ``r`` is not provided. Default ``&quot;log&quot;``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_r : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the radius grid in CGS (cm).</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights</span>
+<span class="sd">            :math:`2\pi r_j\,\Delta r_j` in CGS (:math:`\mathrm{cm^2}`),</span>
+<span class="sd">            where :math:`\Delta r_j` is the central-difference spacing at</span>
+<span class="sd">            point :math:`j`.</span>
+<span class="sd">        half_path : ~numpy.ndarray</span>
+<span class="sd">            Half-path lengths :math:`\ell_{j,i}` in CGS (cm). Entry</span>
+<span class="sd">            ``[j, i]`` is the path of ray :math:`j` through shell :math:`i`</span>
+<span class="sd">            on one side of the sphere midplane. The full path through shell</span>
+<span class="sd">            :math:`i` for ray :math:`j` is :math:`2\,\ell_{j,i}`.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the grid has fewer than 2 points or ``spacing`` is not</span>
+<span class="sd">            ``&quot;log&quot;`` or ``&quot;linear&quot;``.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">spacing</span> <span class="o">==</span> <span class="s2">&quot;log&quot;</span><span class="p">:</span>
+            <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">geomspace</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">spacing</span> <span class="o">==</span> <span class="s2">&quot;linear&quot;</span><span class="p">:</span>
+            <span class="n">r_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid spacing &#39;</span><span class="si">{</span><span class="n">spacing</span><span class="si">}</span><span class="s2">&#39;. Must be &#39;log&#39; or &#39;linear&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">r_grid</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Sphere grid requires at least 2 radial points.&quot;</span><span class="p">)</span>
+
+        <span class="n">n_r_actual</span> <span class="o">=</span> <span class="n">r_grid</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">r_grid</span><span class="p">)</span>
+        <span class="n">log_area_weights</span> <span class="o">=</span> <span class="n">_LOG_2PI</span> <span class="o">+</span> <span class="n">log_r</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">r_grid</span><span class="p">))</span>
+
+        <span class="c1"># Shell boundaries via geometric means.</span>
+        <span class="n">r_inner</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_r_actual</span><span class="p">)</span>
+        <span class="n">r_outer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_r_actual</span><span class="p">)</span>
+
+        <span class="n">r_inner</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">r_inner</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r_grid</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_grid</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">r_outer</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r_grid</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">r_grid</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+        <span class="n">r_outer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">r_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">r_outer</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># half_path[j, i]: half-path of ray j (b=r_grid[j]) through shell i.</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="n">r_grid</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># (n_R, 1)</span>
+        <span class="n">r_out2</span> <span class="o">=</span> <span class="n">r_outer</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># (1, n_R)</span>
+        <span class="n">r_in2</span> <span class="o">=</span> <span class="n">r_inner</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:]</span> <span class="o">**</span> <span class="mi">2</span>  <span class="c1"># (1, n_R)</span>
+
+        <span class="n">half_path</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">r_out2</span> <span class="o">-</span> <span class="n">b2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">r_in2</span> <span class="o">-</span> <span class="n">b2</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">log_r</span><span class="p">,</span> <span class="n">log_area_weights</span><span class="p">,</span> <span class="n">half_path</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Private API — Level 1: per-ray I_nu       #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_pa_ray_specific_intensity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">half_path</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the pitch-angle-averaged log specific intensity per ray.</span>
+
+<span class="sd">        Runs the two-pass shell-by-shell radiative transfer for all rays in</span>
+<span class="sd">        a single vectorised loop over shells. Shells with zero half-path for</span>
+<span class="sd">        a given impact parameter contribute nothing to the intensity update</span>
+<span class="sd">        (``exp(-0) = 1``, ``1 - exp(-0) = 0``). Cosmological redshift is</span>
+<span class="sd">        applied by shifting the frequency to the comoving frame before</span>
+<span class="sd">        evaluating emissivities, and scaling the resulting intensity by</span>
+<span class="sd">        :math:`(1 + z)^{-3}`.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_B : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field per shell in</span>
+<span class="sd">            CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron distribution per</span>
+<span class="sd">            shell in :math:`\mathrm{cm^{-3}}`. Last axis is the gamma</span>
+<span class="sd">            integration axis.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid.</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights</span>
+<span class="sd">            :math:`w_i = \gamma_i\,\Delta\!\log\gamma_i`.</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        half_path : ~numpy.ndarray</span>
+<span class="sd">            Pre-computed half-path matrix from :meth:`_build_sphere_grid`.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_I : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame specific intensity per ray</span>
+<span class="sd">            in :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">n_R</span> <span class="o">=</span> <span class="n">log_B</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="n">log_nu_rf</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+        <span class="c1"># zone_shape = (n_R,) → log_j, log_alpha have shape (*nu_shape, n_R).</span>
+        <span class="n">log_j</span><span class="p">,</span> <span class="n">log_alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_emissivity_and_absorption</span><span class="p">(</span>
+            <span class="n">log_nu_rf</span><span class="p">,</span> <span class="n">log_B</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span>
+        <span class="p">)</span>
+
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_alpha</span><span class="p">)</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_j</span> <span class="o">-</span> <span class="n">log_alpha</span><span class="p">)</span>
+
+        <span class="n">intensity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">log_nu</span><span class="o">.</span><span class="n">shape</span> <span class="o">+</span> <span class="p">(</span><span class="n">n_R</span><span class="p">,))</span>
+
+        <span class="c1"># Far-side pass: outermost shell to innermost.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_R</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">hp_i</span> <span class="o">=</span> <span class="n">half_path</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>  <span class="c1"># (n_R,)</span>
+            <span class="n">tau</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">hp_i</span>  <span class="c1"># (*nu_shape, n_R)</span>
+            <span class="n">intensity</span> <span class="o">=</span> <span class="n">intensity</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">tau</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="o">-</span><span class="n">tau</span><span class="p">)</span>
+
+        <span class="c1"># Near-side pass: innermost shell to outermost.</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_R</span><span class="p">):</span>
+            <span class="n">hp_i</span> <span class="o">=</span> <span class="n">half_path</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">tau</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">hp_i</span>
+            <span class="n">intensity</span> <span class="o">=</span> <span class="n">intensity</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">tau</span><span class="p">)</span> <span class="o">-</span> <span class="n">S</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">i</span><span class="p">][</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="o">-</span><span class="n">tau</span><span class="p">)</span>
+
+        <span class="n">log_I_rf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">intensity</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">tiny</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">log_I_rf</span> <span class="o">-</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Private API — Level 2: per-ray dF_nu      #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_pa_ray_contributions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_area_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_D_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">half_path</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the pitch-angle-averaged log flux density contribution per ray.</span>
+
+<span class="sd">        Evaluates</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            \ln\!\left[\frac{2\pi b_j\,\Delta b_j}{D_A^2}\,I_\nu(b_j)\right]</span>
+
+<span class="sd">        for each ray :math:`j`. Summing these contributions in linear space</span>
+<span class="sd">        over the ray axis yields the total flux density :math:`F_\nu`. All</span>
+<span class="sd">        inputs are pre-computed natural-log CGS quantities.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_B : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron distribution.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid.</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights.</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights</span>
+<span class="sd">            :math:`2\pi b_j\,\Delta b_j` in CGS (:math:`\mathrm{cm^2}`).</span>
+<span class="sd">        log_D_A : float</span>
+<span class="sd">            Natural log of the angular diameter distance in CGS (cm).</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        half_path : ~numpy.ndarray</span>
+<span class="sd">            Pre-computed half-path matrix.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_dF : ~numpy.ndarray</span>
+<span class="sd">            Log of the flux density contribution from each ray in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_I</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_ray_specific_intensity</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_B</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">z</span><span class="p">,</span> <span class="n">half_path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">log_I</span> <span class="o">+</span> <span class="n">log_area_weights</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_D_A</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Private API — Level 3: total F_nu         #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_pa_sphere_flux_density</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">log_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_B</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_N</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_gamma</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_area_weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">log_D_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">half_path</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the pitch-angle-averaged log spectral flux density :math:`\ln F_\nu`.</span>
+
+<span class="sd">        Sums the per-ray flux density contributions from</span>
+<span class="sd">        :meth:`_compute_log_pa_ray_contributions` via</span>
+<span class="sd">        :func:`~scipy.special.logsumexp`. This is the intended MCMC hot-loop</span>
+<span class="sd">        entry point.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        log_nu : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame frequency in CGS (Hz).</span>
+<span class="sd">        log_B : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame magnetic field in CGS (G).</span>
+<span class="sd">        log_N : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the comoving-frame electron distribution.</span>
+<span class="sd">        log_gamma : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the Lorentz factor grid.</span>
+<span class="sd">        log_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the quadrature weights.</span>
+<span class="sd">        log_area_weights : ~numpy.ndarray</span>
+<span class="sd">            Log of the annular projected area weights.</span>
+<span class="sd">        log_D_A : float</span>
+<span class="sd">            Natural log of the angular diameter distance in CGS (cm).</span>
+<span class="sd">        z : float</span>
+<span class="sd">            Cosmological redshift.</span>
+<span class="sd">        half_path : ~numpy.ndarray</span>
+<span class="sd">            Pre-computed half-path matrix.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        log_F : ~numpy.ndarray</span>
+<span class="sd">            Natural log of the observer-frame spectral flux density in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_dF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_ray_contributions</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">half_path</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">log_dF</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Shared input resolution                   #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_inputs</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">,</span>
+        <span class="n">r</span><span class="p">,</span>
+        <span class="n">B</span><span class="p">,</span>
+        <span class="n">N</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">,</span>
+        <span class="n">n_gamma</span><span class="p">,</span>
+        <span class="n">r_min</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">,</span>
+        <span class="n">r_spacing</span><span class="p">,</span>
+        <span class="n">luminosity_distance</span><span class="p">,</span>
+        <span class="n">angular_diameter_distance</span><span class="p">,</span>
+        <span class="n">proper_distance</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">,</span>
+        <span class="n">cosmology</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Shared unit-conversion and grid-building logic for both public methods.&quot;&quot;&quot;</span>
+        <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+        <span class="n">B_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">G</span><span class="p">)</span>
+        <span class="n">r_cgs</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
+
+        <span class="n">_</span><span class="p">,</span> <span class="n">log_area_weights</span><span class="p">,</span> <span class="n">half_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_sphere_grid</span><span class="p">(</span><span class="n">r_cgs</span><span class="p">,</span> <span class="n">r_min</span><span class="p">,</span> <span class="n">r_max</span><span class="p">,</span> <span class="n">n_r</span><span class="p">,</span> <span class="n">r_spacing</span><span class="p">)</span>
+        <span class="n">n_r_actual</span> <span class="o">=</span> <span class="n">log_area_weights</span><span class="o">.</span><span class="n">size</span>
+
+        <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_build_gamma_grid</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span><span class="p">,</span> <span class="n">n_gamma</span><span class="p">)</span>
+        <span class="n">log_N</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_log_N</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">log_N</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">log_N</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">broadcast_to</span><span class="p">(</span><span class="n">log_N</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="p">(</span><span class="n">n_r_actual</span><span class="p">,</span> <span class="n">log_gamma</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">resolve_cosmological_distances</span><span class="p">(</span>
+            <span class="n">redshift</span><span class="o">=</span><span class="n">z</span> <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">luminosity_distance</span><span class="o">=</span><span class="n">luminosity_distance</span><span class="p">,</span>
+            <span class="n">angular_diameter_distance</span><span class="o">=</span><span class="n">angular_diameter_distance</span><span class="p">,</span>
+            <span class="n">proper_distance</span><span class="o">=</span><span class="n">proper_distance</span><span class="p">,</span>
+            <span class="n">cosmology</span><span class="o">=</span><span class="n">cosmology</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">log_D_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">dist</span><span class="p">[</span><span class="s2">&quot;angular_diameter_distance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_cgs</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">B_cgs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)),</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+            <span class="n">half_path</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="c1"># ------------------------------------------ #</span>
+    <span class="c1"># Public API (unit-bearing wrappers)        #</span>
+    <span class="c1"># ------------------------------------------ #</span>
+<div class="viewcode-block" id="InhomogeneousSphereSynchrotronEngine.compute_ray_specific_intensity">
+<a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.compute_ray_specific_intensity.html#trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.compute_ray_specific_intensity">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_ray_specific_intensity</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">N</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Callable</span><span class="p">],</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">luminosity_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">angular_diameter_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proper_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e17</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">r_spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
+        <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the area-weighted flux density contribution :math:`dF_{\nu,j}` for each ray.</span>
+
+<span class="sd">        Returns the per-ray quantity</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            dF_{\nu,j} = \frac{2\pi b_j\,\Delta b_j}{D_A^2}\,I_\nu(b_j),</span>
+
+<span class="sd">        in units of :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        Summing over the last (ray) axis recovers the total flux density:</span>
+
+<span class="sd">        .. code-block:: python</span>
+
+<span class="sd">            F_nu = engine.compute_ray_specific_intensity(</span>
+<span class="sd">                ...</span>
+<span class="sd">            ).sum(axis=-1)</span>
+
+<span class="sd">        This method is intended for exploration and debugging: inspecting the</span>
+<span class="sd">        per-ray contributions reveals which lines of sight dominate the emission</span>
+<span class="sd">        and how the radial profile shapes the SED.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This method enforces :math:`\beta = 0` and uses the pitch-angle-averaged</span>
+<span class="sd">            kernel. See the class-level warnings for the implications of these</span>
+<span class="sd">            restrictions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nu : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Observer-frame frequency grid. Bare values</span>
+<span class="sd">            are treated as Hz.</span>
+<span class="sd">        r : ~numpy.ndarray, ~astropy.units.Quantity, or None</span>
+<span class="sd">            Radial grid. Bare values are treated as cm. If</span>
+<span class="sd">            ``None``, a grid is built from ``r_min``, ``r_max``, ``n_r``, and</span>
+<span class="sd">            ``r_spacing``. The grid points serve as both shell centers and</span>
+<span class="sd">            impact parameters.</span>
+<span class="sd">        B : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Comoving-frame magnetic field :math:`B(r)` or</span>
+<span class="sd">            scalar. Bare values are treated as Gauss.</span>
+<span class="sd">        N : ~numpy.ndarray or callable</span>
+<span class="sd">            Comoving-frame electron distribution :math:`N(\gamma, r)` in</span>
+<span class="sd">            :math:`\mathrm{cm^{-3}}`. If callable,</span>
+<span class="sd">            called as ``N(gamma)`` and broadcast to all shells if it returns</span>
+<span class="sd">            shape ``(n_gamma,)``.</span>
+<span class="sd">        gamma : ~numpy.ndarray or None, optional</span>
+<span class="sd">            Explicit Lorentz factor grid. If ``None``, built from</span>
+<span class="sd">            ``gamma_min``, ``gamma_max``, ``n_gamma``.</span>
+<span class="sd">        luminosity_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source luminosity distance. Exactly one of ``luminosity_distance``,</span>
+<span class="sd">            ``angular_diameter_distance``, ``proper_distance``, or a non-zero</span>
+<span class="sd">            ``z`` must be provided.</span>
+<span class="sd">        angular_diameter_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source angular diameter distance.</span>
+<span class="sd">        proper_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source comoving line-of-sight distance.</span>
+<span class="sd">        z : float, optional</span>
+<span class="sd">            Cosmological redshift. Default ``0``.</span>
+<span class="sd">        cosmology : ~astropy.cosmology.FLRW or None, optional</span>
+<span class="sd">            Cosmological model for distance conversion.</span>
+<span class="sd">        r_min : float, optional</span>
+<span class="sd">            Radius grid lower bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e14``.</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Radius grid upper bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e17``.</span>
+<span class="sd">        n_r : int, optional</span>
+<span class="sd">            Number of radius grid points. Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``50``.</span>
+<span class="sd">        r_spacing : {&quot;log&quot;, &quot;linear&quot;}, optional</span>
+<span class="sd">            Radius grid spacing. Ignored if ``r`` is provided. Default ``&quot;log&quot;``.</span>
+<span class="sd">        gamma_min : float, optional</span>
+<span class="sd">            Gamma grid lower bound. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``1.0``.</span>
+<span class="sd">        gamma_max : float, optional</span>
+<span class="sd">            Gamma grid upper bound. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``1e8``.</span>
+<span class="sd">        n_gamma : int, optional</span>
+<span class="sd">            Number of gamma grid points. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``200``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dF_nu : ~astropy.units.Quantity</span>
+<span class="sd">            Per-ray flux density contributions in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`. Summing over</span>
+<span class="sd">            the last axis gives the total :math:`F_\nu`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_B</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">log_area_weights</span><span class="p">,</span> <span class="n">log_D_A</span><span class="p">,</span> <span class="n">half_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_inputs</span><span class="p">(</span>
+            <span class="n">nu</span><span class="p">,</span>
+            <span class="n">r</span><span class="p">,</span>
+            <span class="n">B</span><span class="p">,</span>
+            <span class="n">N</span><span class="p">,</span>
+            <span class="n">gamma</span><span class="p">,</span>
+            <span class="n">gamma_min</span><span class="p">,</span>
+            <span class="n">gamma_max</span><span class="p">,</span>
+            <span class="n">n_gamma</span><span class="p">,</span>
+            <span class="n">r_min</span><span class="p">,</span>
+            <span class="n">r_max</span><span class="p">,</span>
+            <span class="n">n_r</span><span class="p">,</span>
+            <span class="n">r_spacing</span><span class="p">,</span>
+            <span class="n">luminosity_distance</span><span class="p">,</span>
+            <span class="n">angular_diameter_distance</span><span class="p">,</span>
+            <span class="n">proper_distance</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">cosmology</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensure_avg_first_kernel_loaded</span><span class="p">()</span>
+        <span class="n">log_dF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_ray_contributions</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">half_path</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_dF</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="InhomogeneousSphereSynchrotronEngine.compute_flux_density">
+<a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.compute_flux_density.html#trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous.InhomogeneousSphereSynchrotronEngine.compute_flux_density">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_flux_density</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">r</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span>
+        <span class="n">B</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">],</span>
+        <span class="n">N</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Callable</span><span class="p">],</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">luminosity_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">angular_diameter_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">proper_distance</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e14</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e17</span><span class="p">,</span>
+        <span class="n">n_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">r_spacing</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;log&quot;</span><span class="p">,</span>
+        <span class="n">gamma_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
+        <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute the observer-frame spectral flux density :math:`F_\nu`.</span>
+
+<span class="sd">        Integrates the per-ray specific intensity over the sphere&#39;s impact</span>
+<span class="sd">        parameter profile:</span>
+
+<span class="sd">        .. math::</span>
+
+<span class="sd">            F_\nu \approx \sum_j \frac{2\pi b_j\,\Delta b_j}{D_A^2}\,I_\nu(b_j),</span>
+
+<span class="sd">        where :math:`b_j = r_j` are the radial grid points, :math:`\Delta b_j`</span>
+<span class="sd">        is the central-difference spacing at point :math:`j`, and :math:`D_A`</span>
+<span class="sd">        is the angular diameter distance. The sum is evaluated in log-space via</span>
+<span class="sd">        :func:`~scipy.special.logsumexp` for numerical stability.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            This method enforces :math:`\beta = 0` and uses the pitch-angle-averaged</span>
+<span class="sd">            kernel. See the class-level warnings for the implications of these</span>
+<span class="sd">            restrictions.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        nu : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Observer-frame frequency grid. Bare values</span>
+<span class="sd">            are treated as Hz.</span>
+<span class="sd">        r : ~numpy.ndarray, ~astropy.units.Quantity, or None</span>
+<span class="sd">            Radial grid. Bare values are treated as cm. If</span>
+<span class="sd">            ``None``, a grid is built from ``r_min``, ``r_max``, ``n_r``, and</span>
+<span class="sd">            ``r_spacing``.</span>
+<span class="sd">        B : float, ~numpy.ndarray, or ~astropy.units.Quantity</span>
+<span class="sd">            Comoving-frame magnetic field :math:`B(r)` or</span>
+<span class="sd">            scalar. Bare values are treated as Gauss.</span>
+<span class="sd">        N : ~numpy.ndarray or callable</span>
+<span class="sd">            Comoving-frame electron distribution :math:`N(\gamma, r)` in</span>
+<span class="sd">            :math:`\mathrm{cm^{-3}}`. If callable,</span>
+<span class="sd">            called as ``N(gamma)`` and broadcast to all shells.</span>
+<span class="sd">        gamma : ~numpy.ndarray or None, optional</span>
+<span class="sd">            Explicit Lorentz factor grid. If ``None``, built from</span>
+<span class="sd">            ``gamma_min``, ``gamma_max``, ``n_gamma``.</span>
+<span class="sd">        luminosity_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source luminosity distance. Exactly one of ``luminosity_distance``,</span>
+<span class="sd">            ``angular_diameter_distance``, ``proper_distance``, or a non-zero</span>
+<span class="sd">            ``z`` must be provided.</span>
+<span class="sd">        angular_diameter_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source angular diameter distance.</span>
+<span class="sd">        proper_distance : ~astropy.units.Quantity or None, optional</span>
+<span class="sd">            Source comoving line-of-sight distance.</span>
+<span class="sd">        z : float, optional</span>
+<span class="sd">            Cosmological redshift. Default ``0``.</span>
+<span class="sd">        cosmology : ~astropy.cosmology.FLRW or None, optional</span>
+<span class="sd">            Cosmological model for distance conversion.</span>
+<span class="sd">        r_min : float, optional</span>
+<span class="sd">            Radius grid lower bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e14``.</span>
+<span class="sd">        r_max : float, optional</span>
+<span class="sd">            Radius grid upper bound in CGS (cm). Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``1e17``.</span>
+<span class="sd">        n_r : int, optional</span>
+<span class="sd">            Number of radius grid points. Ignored if ``r`` is provided.</span>
+<span class="sd">            Default ``50``.</span>
+<span class="sd">        r_spacing : {&quot;log&quot;, &quot;linear&quot;}, optional</span>
+<span class="sd">            Radius grid spacing. Ignored if ``r`` is provided. Default ``&quot;log&quot;``.</span>
+<span class="sd">        gamma_min : float, optional</span>
+<span class="sd">            Gamma grid lower bound. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``1.0``.</span>
+<span class="sd">        gamma_max : float, optional</span>
+<span class="sd">            Gamma grid upper bound. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``1e8``.</span>
+<span class="sd">        n_gamma : int, optional</span>
+<span class="sd">            Number of gamma grid points. Ignored if ``gamma`` is provided.</span>
+<span class="sd">            Default ``200``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        F_nu : ~astropy.units.Quantity</span>
+<span class="sd">            Observer-frame spectral flux density in</span>
+<span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_B</span><span class="p">,</span> <span class="n">log_N</span><span class="p">,</span> <span class="n">log_gamma</span><span class="p">,</span> <span class="n">log_weights</span><span class="p">,</span> <span class="n">log_area_weights</span><span class="p">,</span> <span class="n">log_D_A</span><span class="p">,</span> <span class="n">half_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_inputs</span><span class="p">(</span>
+            <span class="n">nu</span><span class="p">,</span>
+            <span class="n">r</span><span class="p">,</span>
+            <span class="n">B</span><span class="p">,</span>
+            <span class="n">N</span><span class="p">,</span>
+            <span class="n">gamma</span><span class="p">,</span>
+            <span class="n">gamma_min</span><span class="p">,</span>
+            <span class="n">gamma_max</span><span class="p">,</span>
+            <span class="n">n_gamma</span><span class="p">,</span>
+            <span class="n">r_min</span><span class="p">,</span>
+            <span class="n">r_max</span><span class="p">,</span>
+            <span class="n">n_r</span><span class="p">,</span>
+            <span class="n">r_spacing</span><span class="p">,</span>
+            <span class="n">luminosity_distance</span><span class="p">,</span>
+            <span class="n">angular_diameter_distance</span><span class="p">,</span>
+            <span class="n">proper_distance</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">cosmology</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensure_avg_first_kernel_loaded</span><span class="p">()</span>
+        <span class="n">log_F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_log_pa_sphere_flux_density</span><span class="p">(</span>
+            <span class="n">log_nu</span><span class="p">,</span>
+            <span class="n">log_B</span><span class="p">,</span>
+            <span class="n">log_N</span><span class="p">,</span>
+            <span class="n">log_gamma</span><span class="p">,</span>
+            <span class="n">log_weights</span><span class="p">,</span>
+            <span class="n">log_area_weights</span><span class="p">,</span>
+            <span class="n">log_D_A</span><span class="p">,</span>
+            <span class="n">z</span><span class="p">,</span>
+            <span class="n">half_path</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_F</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span></div>
+</div>
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025, Eliza Diggins.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 9.0.4.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

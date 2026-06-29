@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.OUTPUT\_UNITS
+=========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoattribute:: ExponentialEjectaProfile.OUTPUT_UNITS

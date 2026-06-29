@@ -1,4 +1,4 @@
-﻿trilobite.models.generic
+trilobite.models.generic
 ========================
 
 .. automodule:: trilobite.models.generic

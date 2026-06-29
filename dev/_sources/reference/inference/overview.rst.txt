@@ -16,7 +16,7 @@ you can take any compatible model and:
 The :mod:`trilobite.inference` subpackage provides a flexible and modular framework for
 constructing and running inference analyses. It supports:
 
-- integration with third-party samplers such as :mod:`emcee`,
+- integration with third-party samplers such as ``emcee``,
   ``dynesty``, and ``bilby``,
 - user-defined likelihood functions and prior distributions,
 - consistent parameter management and unit handling,
@@ -75,7 +75,7 @@ step by step:
 
 5. **Samplers**: With the inference problem defined, we can now use a sampling algorithm to explore the parameter
    space and estimate the posterior distribution of the model parameters. Trilobite integrates with several
-   third-party sampling libraries, including :mod:`emcee`, ``dynesty``, and ``bilby``. Each of these
+   third-party sampling libraries, including ``emcee``, ``dynesty``, and ``bilby``. Each of these
    samplers has its own strengths and weaknesses, and Trilobite provides a unified interface for using them through the
    :class:`~trilobite.inference.sampling.base.Sampler` class and its subclasses.
 
@@ -733,4 +733,4 @@ Samplers
     For more information about sampler development, implementation, and integration, see :ref:`samplers_dev`.
 
 What is a sampler: a way to explore the parameter space and find the minimum of the posterior distribution.
-Trilobite provides interfaces to several popular sampling libraries, including :mod:`emcee`, ``dynesty``, and ``bilby``.
+Trilobite provides interfaces to several popular sampling libraries, including ``emcee``, ``dynesty``, and ``bilby``.

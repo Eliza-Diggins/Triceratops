@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.equipartition\_magnetic\_field
+======================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autofunction:: equipartition_magnetic_field

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.BrokenPowerLawCSMProfile.as\_optimized\_callable
+================================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: BrokenPowerLawCSMProfile.as_optimized_callable

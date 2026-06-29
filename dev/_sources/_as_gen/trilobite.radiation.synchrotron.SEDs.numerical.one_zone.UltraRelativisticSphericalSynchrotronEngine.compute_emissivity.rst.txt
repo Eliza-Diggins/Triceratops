@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.UltraRelativisticSphericalSynchrotronEngine.compute\_emissivity
+========================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. automethod:: UltraRelativisticSphericalSynchrotronEngine.compute_emissivity

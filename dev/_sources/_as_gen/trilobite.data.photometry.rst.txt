@@ -1,4 +1,4 @@
-﻿trilobite.data.photometry
+trilobite.data.photometry
 =========================
 
 .. automodule:: trilobite.data.photometry

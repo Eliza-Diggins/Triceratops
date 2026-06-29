@@ -1,0 +1,36 @@
+GaussianShellCSMProfile
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.GaussianShellCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~GaussianShellCSMProfile.as_callable
+      ~GaussianShellCSMProfile.as_optimized_callable
+      ~GaussianShellCSMProfile.eval
+      ~GaussianShellCSMProfile.feval
+      ~GaussianShellCSMProfile.process_arguments
+      ~GaussianShellCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~GaussianShellCSMProfile.OUTPUT_UNITS
+   
+   

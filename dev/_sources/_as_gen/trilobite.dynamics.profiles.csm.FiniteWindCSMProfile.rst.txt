@@ -1,0 +1,38 @@
+FiniteWindCSMProfile
+====================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.FiniteWindCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~FiniteWindCSMProfile.as_callable
+      ~FiniteWindCSMProfile.as_optimized_callable
+      ~FiniteWindCSMProfile.eval
+      ~FiniteWindCSMProfile.feval
+      ~FiniteWindCSMProfile.normalize
+      ~FiniteWindCSMProfile.normalize_from_timing
+      ~FiniteWindCSMProfile.process_arguments
+      ~FiniteWindCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~FiniteWindCSMProfile.OUTPUT_UNITS
+   
+   

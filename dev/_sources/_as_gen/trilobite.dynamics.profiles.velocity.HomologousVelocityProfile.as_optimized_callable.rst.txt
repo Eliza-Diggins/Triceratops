@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.HomologousVelocityProfile.as\_optimized\_callable
+======================================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. automethod:: HomologousVelocityProfile.as_optimized_callable

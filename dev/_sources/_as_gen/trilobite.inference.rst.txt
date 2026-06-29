@@ -1,0 +1,38 @@
+﻿trilobite.inference
+===================
+
+.. automodule:: trilobite.inference
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      likelihood
+      prior
+      problem
+      sampling
+      transform
+   
+   
+
+   
+   
+   
+
+   
+   
+   

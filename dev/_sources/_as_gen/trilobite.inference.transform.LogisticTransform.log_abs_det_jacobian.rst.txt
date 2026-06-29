@@ -1,0 +1,6 @@
+trilobite.inference.transform.LogisticTransform.log\_abs\_det\_jacobian
+=======================================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: LogisticTransform.log_abs_det_jacobian

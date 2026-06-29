@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.column\_density
+==============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.column_density

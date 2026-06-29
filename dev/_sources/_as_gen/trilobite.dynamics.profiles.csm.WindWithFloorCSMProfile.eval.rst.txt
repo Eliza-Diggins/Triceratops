@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile.eval
+============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindWithFloorCSMProfile.eval

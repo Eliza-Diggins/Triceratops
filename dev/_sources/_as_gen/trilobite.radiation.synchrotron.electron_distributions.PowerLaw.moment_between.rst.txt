@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.PowerLaw.moment\_between
+================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: PowerLaw.moment_between

@@ -1,0 +1,6 @@
+trilobite.inference.transform.SoftplusTransform.forward
+=======================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: SoftplusTransform.forward

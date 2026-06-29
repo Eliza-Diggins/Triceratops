@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.ElectronDistribution.pdf
+================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: ElectronDistribution.pdf

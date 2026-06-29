@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -57,7 +57,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'auto_examples/synchrotron/b_seds/plot_multi_component_numerical_SED';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -68,7 +68,7 @@
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="On-Axis Asymmetric Synchrotron SEDs" href="plot_on_axis_numerical.html" />
-    <link rel="prev" title="Spectral Energy Distributions" href="index.html" />
+    <link rel="prev" title="Synchrotron SEDs from an Inhomogeneous Cylinder" href="plot_inhomogeneous_cylinder.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="dev" />
@@ -426,14 +426,17 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Synchrotron Emission Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../a_fundamentals/index.html">Synchrotron Fundamentals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../a_fundamentals/plot_frequency_gamma_relation.html">The ν–γ–B Relation and Pitch-Angle Effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../a_fundamentals/plot_electron_distributions.html">Electron Energy Distributions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Spectral Energy Distributions</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="plot_inhomogeneous_cylinder.html">Synchrotron SEDs from an Inhomogeneous Cylinder</a></li>
 <li class="toctree-l3 current active"><a class="current reference internal" href="#">Multi-Component Synchrotron SEDs with the Numerical Engine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_on_axis_numerical.html">On-Axis Asymmetric Synchrotron SEDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_sed_model_comparison.html">Comparing Synchrotron SED Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_inhomogeneous_sphere.html">Synchrotron SEDs from an Inhomogeneous Sphere</a></li>
 <li class="toctree-l3"><a class="reference internal" href="plot_SSA_cooling_SED.html">Synchrotron Spectra With Cooling and SSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_off_axis_numerical.html">Off-Axis Synchrotron SEDs from Axisymmetric Outflows</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../c_cooling/index.html">Electron Cooling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -472,14 +475,30 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../dynamics/index.html">Shock Dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_rh_jump_weak_conditions.html">Weak vs Strong Shock Jump Conditions (Cold Medium)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_numerical_shock_engine.html">Numerical Thin-Shell Shock Evolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_rh_jump_conditions.html">Rankine–Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_mechanical_shock_cooling.html">Radiative Cooling in the Mechanical Shock Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_mechanical_shock_model.html">Mechanical Shock Model: Forward and Reverse Shock Evolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_relativistic_thin_shell_convergence.html">Relativistic vs. Non-Relativistic Thin-Shell Convergence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_numerical_shocks_csms.html">SNe Shocks In Different CSM Environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_chevalier_shock_structure.html">Chevalier Self-Similar Shock Structure</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dynamics/a_fundamentals/index.html">Shock Physics Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/a_fundamentals/plot_rh_jump_weak_conditions.html">Weak vs Strong Shock Jump Conditions (Cold Medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/a_fundamentals/plot_rh_jump_conditions.html">Rankine–Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dynamics/b_models/index.html">Self-Similar Shock Models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_wind_engine.html">Chevalier Self-Similar Shock in a Steady Wind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_self_similar.html">Chevalier Self-Similar Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_two_shock.html">Two-Shock Chevalier Self-Similar Evolution in a Steady Wind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_sedov_taylor_shock.html">Chevalier and Sedov-Taylor Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_blandford_mcKee.html">Blandford-McKee Ultra-Relativistic Blast Wave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_shock_structure.html">Chevalier Self-Similar Shock Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dynamics/c_engines/index.html">Numerical Shock Engines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_numerical_shock_engine.html">Numerical Thin-Shell Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_mechanical_shock_cooling.html">Radiative Cooling in the Mechanical Shock Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_mechanical_shock_model.html">Mechanical Shock Model: Forward and Reverse Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_momentum_conserving_shock.html">Momentum-Conserving Snowplow Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_relativistic_thin_shell_convergence.html">Relativistic vs. Non-Relativistic Thin-Shell Convergence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_mechanical_shocks_csms.html">MechanicalShockEngine: Forward and Reverse Shocks in Different CSM Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_numerical_shocks_csms.html">SNe Shocks In Different CSM Environments</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../modeling/index.html">Forward Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -593,7 +612,7 @@ accelerated to high Lorentz factors.</p>
 <p>Analytic broken power-law SED approximations are not adequate for this case, because the
 transition between the two components is smooth and does not map cleanly onto a single
 spectral break. The
-<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.html#trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine" title="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">NumericalSynchrotronEngine</span></code></a> provides a
+<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.html#trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine" title="trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">NumericalSynchrotronEngine</span></code></a> provides a
 fully numerical alternative: given any sampled electron distribution, it directly
 evaluates the synchrotron emissivity integral and solves the radiative transfer equation
 along a line-of-sight depth <span class="math notranslate nohighlight">\(R\)</span>, without any piecewise approximation.</p>
@@ -726,7 +745,7 @@ contribute at a comparable level to the total distribution.</p>
 <section id="computing-the-sed">
 <h2>Computing the SED<a class="headerlink" href="#computing-the-sed" title="Link to this heading">#</a></h2>
 <p>We now pass the sampled distributions to
-<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity.html#trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity" title="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_specific_intensity()</span></code></a>.
+<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.compute_specific_intensity.html#trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.compute_specific_intensity" title="trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.compute_specific_intensity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">NumericalSynchrotronEngine.compute_specific_intensity()</span></code></a>.
 The engine numerically integrates the synchrotron emissivity</p>
 <div class="math notranslate nohighlight">
 \[j_\nu = \chi B \int_0^\infty
@@ -750,7 +769,7 @@ grid before evaluating the emissivity.</p>
 <a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">F_pl</span></a> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">compute_flux_density</span><span class="p">(</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nu</span></a><span class="p">,</span> <span class="n">N</span><span class="o">=</span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">N_pl_array</span></a><span class="p">,</span> <span class="o">**</span><a href="https://docs.python.org/3/library/stdtypes.html#dict" title="builtins.dict" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">source_kwargs</span></a><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/Trilobite/Trilobite/trilobite/radiation/synchrotron/SEDs/numerical.py:2390: RuntimeWarning: divide by zero encountered in log
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/Trilobite/Trilobite/trilobite/radiation/synchrotron/SEDs/numerical/core.py:2563: RuntimeWarning: divide by zero encountered in log
   return np.log(np.asarray(N_values, dtype=&quot;f8&quot;))
 </pre></div>
 </div>
@@ -807,7 +826,7 @@ without any artificial spectral breaks or patching — a direct consequence of
 numerically integrating the full <span class="math notranslate nohighlight">\(N(\gamma)\)</span>.</p></li>
 </ul>
 <p class="rubric">References</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.517 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.337 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-synchrotron-b-seds-plot-multi-component-numerical-sed-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../_downloads/7b83c025bc62391dcce11ec0631d22cf/plot_multi_component_numerical_SED.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_multi_component_numerical_SED.ipynb</span></code></a></p>
@@ -834,12 +853,12 @@ numerically integrating the full <span class="math notranslate nohighlight">\(N(
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="plot_inhomogeneous_cylinder.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Spectral Energy Distributions</p>
+        <p class="prev-next-title">Synchrotron SEDs from an Inhomogeneous Cylinder</p>
       </div>
     </a>
     <a class="right-next"
@@ -899,8 +918,8 @@ numerically integrating the full <span class="math notranslate nohighlight">\(N(
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -934,7 +953,7 @@ numerically integrating the full <span class="math notranslate nohighlight">\(N(
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

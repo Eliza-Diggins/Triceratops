@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -57,7 +57,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/physics/shocks/numerical_shocks_theory';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -67,7 +67,7 @@
     <link rel="icon" href="../../../_static/logo.svg"/>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="Self-Similar Shock Engines" href="self_similar_overview.html" />
+    <link rel="next" title="Numerical Shock Engines" href="numerical_shocks_overview.html" />
     <link rel="prev" title="Theory: Sedov-Taylor Self-Similar Solution" href="sedov_taylor_theory.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -454,14 +454,255 @@
 <li class="toctree-l2"><a class="reference internal" href="chevalier_theory.html">Theory: The Chevalier Self-Similar Solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="sedov_taylor_theory.html">Theory: Sedov-Taylor Self-Similar Solution</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Theory: Numerical Shock Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerical_shocks_overview.html">Numerical Shock Engines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="self_similar_overview.html">Self-Similar Shock Engines</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../radiation/overview.html">Radiation Processes in Trilobite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_overview.html">Synchrotron Emission Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_core.html">Core Synchrotron Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_microphysics.html">Synchrotron Microphysics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_seds.html">Synchrotron Spectral Energy Distributions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../radiation/synchrotron/synchrotron_electron_distributions.html">Synchrotron Electron Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.html">PowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.html">BrokenPowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.html">MaxwellJuettner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_kinetic_moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_kinetic_moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.sf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.std.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.support.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.var.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.html">MixedThermalNonThermal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.sf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.std.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.support.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.var.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.var</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.NON_THERMAL_DISTRIBUTION.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.NON_THERMAL_DISTRIBUTION</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.html">MaxwellJuettnerPowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.html">MaxwellJuettnerBrokenPowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.var</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../radiation/synchrotron/synchrotron_seds.html">Synchrotron Spectral Energy Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.html">SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.sed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.html">MultiSpectrumSynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.html">PowerLaw_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.sed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.html">PowerLaw_Cooling_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.html">PowerLaw_SSA_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_INVERSION_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_INVERSION_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.html">PowerLaw_Cooling_SSA_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.html">SSA_SED_PowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.sed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_first_kernel.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_first_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_avg_first_kernel.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_avg_first_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_emissivity.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_emissivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_absorption.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_absorption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_source_function.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_source_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_rest_frame_specific_intensity.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_rest_frame_specific_intensity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_flux_density.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_flux_density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine.html">trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.OffAxisAsymmetricSynchrotronEngine.html">trilobite.radiation.synchrotron.SEDs.numerical.OffAxisAsymmetricSynchrotronEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_smoothed_SFBPL.html">trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_smoothed_SFBPL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_exp_cutoff_sed.html">trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_exp_cutoff_sed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone._functions.smoothed_BPL.html">trilobite.radiation.synchrotron.SEDs.one_zone._functions.smoothed_BPL</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_cooling.html">Radiative Cooling Engines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_theory.html">Synchrotron Radiation Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../radiation/synchrotron/synchrotron_pl_sed_theory.html">Methods: Single-Zone Synchrotron SEDs</a></li>
@@ -651,60 +892,60 @@ and relativistic families.</p>
 applicable in different regimes.</p>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#overview" id="id9">Overview</a></p>
+<li><p><a class="reference internal" href="#overview" id="id11">Overview</a></p>
 <ul>
-<li><p><a class="reference internal" href="#geometry" id="id10">Geometry</a></p></li>
-<li><p><a class="reference internal" href="#equations-of-motion" id="id11">Equations of Motion</a></p>
+<li><p><a class="reference internal" href="#geometry" id="id12">Geometry</a></p></li>
+<li><p><a class="reference internal" href="#equations-of-motion" id="id13">Equations of Motion</a></p>
 <ul>
-<li><p><a class="reference internal" href="#the-conservation-equation" id="id12">The Conservation Equation</a></p></li>
-<li><p><a class="reference internal" href="#the-momentum-equation" id="id13">The Momentum Equation</a></p></li>
-<li><p><a class="reference internal" href="#the-energy-equation" id="id14">The Energy Equation</a></p></li>
+<li><p><a class="reference internal" href="#the-conservation-equation" id="id14">The Conservation Equation</a></p></li>
+<li><p><a class="reference internal" href="#the-momentum-equation" id="id15">The Momentum Equation</a></p></li>
+<li><p><a class="reference internal" href="#the-energy-equation" id="id16">The Energy Equation</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#closure-assumptions" id="id15">Closure Assumptions</a></p></li>
+<li><p><a class="reference internal" href="#closure-assumptions" id="id17">Closure Assumptions</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#momentum-conserving-snowplow" id="id16">Momentum-Conserving Snowplow</a></p>
+<li><p><a class="reference internal" href="#momentum-conserving-snowplow" id="id18">Momentum-Conserving Snowplow</a></p>
 <ul>
-<li><p><a class="reference internal" href="#assumptions" id="id17">Assumptions</a></p></li>
-<li><p><a class="reference internal" href="#model-equations" id="id18">Model Equations</a></p></li>
+<li><p><a class="reference internal" href="#assumptions" id="id19">Assumptions</a></p></li>
+<li><p><a class="reference internal" href="#model-equations" id="id20">Model Equations</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#pressure-driven-thin-shell-model" id="id19">Pressure-Driven Thin-Shell Model</a></p>
+<li><p><a class="reference internal" href="#pressure-driven-thin-shell-model" id="id21">Pressure-Driven Thin-Shell Model</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id2" id="id20">Assumptions</a></p></li>
-<li><p><a class="reference internal" href="#id3" id="id21">Model Equations</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id22">Assumptions</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id23">Model Equations</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#mechanical-internal-energy-model" id="id22">Mechanical Internal-Energy Model</a></p>
+<li><p><a class="reference internal" href="#mechanical-internal-energy-model" id="id24">Mechanical Internal-Energy Model</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id5" id="id23">Assumptions</a></p></li>
-<li><p><a class="reference internal" href="#id6" id="id24">Model Equations</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id25">Assumptions</a></p></li>
+<li><p><a class="reference internal" href="#id7" id="id26">Model Equations</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#relativistic-models" id="id25">Relativistic Models</a></p></li>
-<li><p><a class="reference internal" href="#relativistic-pressure-driven-thin-shell-model" id="id26">Relativistic Pressure-Driven Thin-Shell Model</a></p>
+<li><p><a class="reference internal" href="#relativistic-models" id="id27">Relativistic Models</a></p></li>
+<li><p><a class="reference internal" href="#relativistic-pressure-driven-thin-shell-model" id="id28">Relativistic Pressure-Driven Thin-Shell Model</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id7" id="id27">Assumptions</a></p></li>
-<li><p><a class="reference internal" href="#dynamical-state" id="id28">Dynamical State</a></p></li>
-<li><p><a class="reference internal" href="#shock-closure-and-jump-conditions" id="id29">Shock Closure and Jump Conditions</a></p></li>
-<li><p><a class="reference internal" href="#numerical-implementation-pre-tabulation-and-exact-pressure-closure" id="id30">Numerical Implementation: Pre-tabulation and Exact Pressure Closure</a></p></li>
-<li><p><a class="reference internal" href="#rest-mass-fluxes" id="id31">Rest-Mass Fluxes</a></p></li>
-<li><p><a class="reference internal" href="#id8" id="id32">Equations of Motion</a></p></li>
-<li><p><a class="reference internal" href="#initial-conditions" id="id33">Initial Conditions</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id29">Assumptions</a></p></li>
+<li><p><a class="reference internal" href="#dynamical-state" id="id30">Dynamical State</a></p></li>
+<li><p><a class="reference internal" href="#shock-closure-and-jump-conditions" id="id31">Shock Closure and Jump Conditions</a></p></li>
+<li><p><a class="reference internal" href="#numerical-implementation-pre-tabulation-and-exact-pressure-closure" id="id32">Numerical Implementation: Pre-tabulation and Exact Pressure Closure</a></p></li>
+<li><p><a class="reference internal" href="#rest-mass-fluxes" id="id33">Rest-Mass Fluxes</a></p></li>
+<li><p><a class="reference internal" href="#id10" id="id34">Equations of Motion</a></p></li>
+<li><p><a class="reference internal" href="#initial-conditions" id="id35">Initial Conditions</a></p></li>
 </ul>
 </li>
 </ul>
 </nav>
 <section id="overview">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>While each of the closures described in this document differ in their physics, assumptions,
 and implementations, they share a common derivation starting point: conservation
 laws integrated over a moving spherical control volume. Below we establish the
 geometry and derive the mass, momentum, and energy equations that serve as the
 common foundation for all three models.</p>
 <section id="geometry">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Geometry</a><a class="headerlink" href="#geometry" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Geometry</a><a class="headerlink" href="#geometry" title="Link to this heading">#</a></h3>
 <p>In establishing these models, we treat the typical geometry of a shock driven by
 an expanding spherical outflow into an ambient medium.
 We use the standard four-region notation for a supernova–CSM interaction:</p>
@@ -760,9 +1001,9 @@ t^{-3}G\!\left(\frac{r}{t}\right).\]</div>
 </div>
 </section>
 <section id="equations-of-motion">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Equations of Motion</a><a class="headerlink" href="#equations-of-motion" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Equations of Motion</a><a class="headerlink" href="#equations-of-motion" title="Link to this heading">#</a></h3>
 <section id="the-conservation-equation">
-<h4><a class="toc-backref" href="#id12" role="doc-backlink">The Conservation Equation</a><a class="headerlink" href="#the-conservation-equation" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id14" role="doc-backlink">The Conservation Equation</a><a class="headerlink" href="#the-conservation-equation" title="Link to this heading">#</a></h4>
 <p>The continuity equation in spherical symmetry is</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial\rho}{\partial t}
@@ -848,7 +1089,7 @@ velocity <span class="math notranslate nohighlight">\(u-\dot b\)</span>.</p>
 </div>
 </details></section>
 <section id="the-momentum-equation">
-<h4><a class="toc-backref" href="#id13" role="doc-backlink">The Momentum Equation</a><a class="headerlink" href="#the-momentum-equation" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id15" role="doc-backlink">The Momentum Equation</a><a class="headerlink" href="#the-momentum-equation" title="Link to this heading">#</a></h4>
 <p>The non-relativistic radial momentum equation in spherical symmetry is</p>
 <div class="math notranslate nohighlight">
 \[\frac{\partial(\rho u)}{\partial t}
@@ -949,7 +1190,7 @@ vanishes in the plane-parallel limit.</p>
 </div>
 </details></section>
 <section id="the-energy-equation">
-<h4><a class="toc-backref" href="#id14" role="doc-backlink">The Energy Equation</a><a class="headerlink" href="#the-energy-equation" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id16" role="doc-backlink">The Energy Equation</a><a class="headerlink" href="#the-energy-equation" title="Link to this heading">#</a></h4>
 <p>Define the total energy density as</p>
 <div class="math notranslate nohighlight">
 \[E = \frac{1}{2}\rho u^2 + \rho\epsilon,\]</div>
@@ -1053,7 +1294,7 @@ shocked CSM as independent ODEs.</p></li>
 </details></section>
 </section>
 <section id="closure-assumptions">
-<h3><a class="toc-backref" href="#id15" role="doc-backlink">Closure Assumptions</a><a class="headerlink" href="#closure-assumptions" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Closure Assumptions</a><a class="headerlink" href="#closure-assumptions" title="Link to this heading">#</a></h3>
 <p>All three models describe the same physical interaction: freely expanding ejecta
 collide with an external medium, generating a reverse shock, a contact
 discontinuity, and a forward shock. The distinction between the models lies not in
@@ -1116,7 +1357,7 @@ below summarizes the key properties of each closure.</p>
 </section>
 </section>
 <section id="momentum-conserving-snowplow">
-<span id="conservative-snowplow-model"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink">Momentum-Conserving Snowplow</a><a class="headerlink" href="#momentum-conserving-snowplow" title="Link to this heading">#</a></h2>
+<span id="conservative-snowplow-model"></span><h2><a class="toc-backref" href="#id18" role="doc-backlink">Momentum-Conserving Snowplow</a><a class="headerlink" href="#momentum-conserving-snowplow" title="Link to this heading">#</a></h2>
 <p>The momentum-conserving snowplow
 (<a class="reference internal" href="../../../_as_gen/trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.html#trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine" title="trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">MomentumConservingShockEngine</span></code></a>)
 is the simplest of the three numerical closures. It collapses the entire shocked
@@ -1129,7 +1370,7 @@ its bulk momentum.</p>
 shock evolution in which cooling is so efficient that the post-shock gas cannot
 remain hot and instead accumulates in a thin, dense, cold slab.</p>
 <section id="assumptions">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">Assumptions</a><a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Assumptions</a><a class="headerlink" href="#assumptions" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The shocked region (<span class="math notranslate nohighlight">\(R_{\rm rs} &lt; r &lt; R_{\rm fs}\)</span>) collapses to a
 razor-thin shell at a single radius <span class="math notranslate nohighlight">\(R_{\rm sh}\)</span>, so that
@@ -1143,7 +1384,7 @@ retained.</p></li>
 </ul>
 </section>
 <section id="model-equations">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">Model Equations</a><a class="headerlink" href="#model-equations" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Model Equations</a><a class="headerlink" href="#model-equations" title="Link to this heading">#</a></h3>
 <p>Taking <span class="math notranslate nohighlight">\(a=R_{\rm rs}\)</span> and <span class="math notranslate nohighlight">\(b=R_{\rm fs}\)</span> in the momentum equation
 and collapsing to the razor-thin limit, the geometric pressure integral is
 smaller than the boundary terms by a factor of order the fractional shell
@@ -1275,7 +1516,7 @@ behind accelerates it, while swept-up CSM ahead of the shell decelerates it.</p>
 </section>
 </section>
 <section id="pressure-driven-thin-shell-model">
-<span id="id1"></span><h2><a class="toc-backref" href="#id19" role="doc-backlink">Pressure-Driven Thin-Shell Model</a><a class="headerlink" href="#pressure-driven-thin-shell-model" title="Link to this heading">#</a></h2>
+<span id="id1"></span><h2><a class="toc-backref" href="#id21" role="doc-backlink">Pressure-Driven Thin-Shell Model</a><a class="headerlink" href="#pressure-driven-thin-shell-model" title="Link to this heading">#</a></h2>
 <p>The pressure-driven thin-shell model
 (<a class="reference internal" href="../../../_as_gen/trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine.html#trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine" title="trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">PressureDrivenThinShellShockEngine</span></code></a>)
 also collapses the shocked interaction region into a single thin shell of mass
@@ -1289,7 +1530,7 @@ shocked layer. It is particularly well suited to scenarios where one wants a
 pressure-balance approximation without the additional overhead of the full
 mechanical model.</p>
 <section id="id2">
-<h3><a class="toc-backref" href="#id20" role="doc-backlink">Assumptions</a><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">Assumptions</a><a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The shocked region collapses to a thin shell at <span class="math notranslate nohighlight">\(R_{\rm sh}\)</span>, so that
 <span class="math notranslate nohighlight">\(R_{\rm rs}\simeq R_{\rm cd}\simeq R_{\rm fs}\equiv R_{\rm sh}\)</span>.</p></li>
@@ -1307,7 +1548,7 @@ evolved as thermodynamic quantities.</p>
 </div>
 </section>
 <section id="id3">
-<h3><a class="toc-backref" href="#id21" role="doc-backlink">Model Equations</a><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Model Equations</a><a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p>The shell acceleration is closed by the net post-shock pressure force,</p>
 <div class="math notranslate nohighlight">
 \[\boxed{
@@ -1455,43 +1696,54 @@ for the forward shock, <span class="math notranslate nohighlight">\(v_u=v_{\rm s
 </section>
 </section>
 <section id="mechanical-internal-energy-model">
-<span id="id4"></span><h2><a class="toc-backref" href="#id22" role="doc-backlink">Mechanical Internal-Energy Model</a><a class="headerlink" href="#mechanical-internal-energy-model" title="Link to this heading">#</a></h2>
+<span id="id4"></span><h2><a class="toc-backref" href="#id24" role="doc-backlink">Mechanical Internal-Energy Model</a><a class="headerlink" href="#mechanical-internal-energy-model" title="Link to this heading">#</a></h2>
 <p>The mechanical model
 (<a class="reference internal" href="../../../_as_gen/trilobite.dynamics.shocks.numerical.MechanicalShockEngine.html#trilobite.dynamics.shocks.numerical.MechanicalShockEngine" title="trilobite.dynamics.shocks.numerical.MechanicalShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">MechanicalShockEngine</span></code></a>)
 is the most physically complete of the three numerical closures. Rather than
 collapsing the shocked region into a single shell, it assigns separate masses,
 internal energies, and effective volumes to the shocked ejecta (Region 2) and
-shocked CSM (Region 3), and evolves all of them as coupled ODEs.</p>
-<p>This closure is appropriate when the shocked gas stores thermal energy that
-continues to provide pressure support over dynamical timescales — the regime
-relevant to adiabatic or partially radiative shocks early in the evolution of a
-remnant.</p>
-<section id="id5">
-<h3><a class="toc-backref" href="#id23" role="doc-backlink">Assumptions</a><a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+shocked CSM (Region 3), and evolves all of them as coupled ODEs. In developing this model,
+we follow schematically the approach of Wang <em>et al.</em><a class="footnote-reference brackets" href="#footcite-wangvegasafterglowhighperformanceframework2026" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, but
+in the non-relativistic case.</p>
+<p>One significant advantage of this approach is that it allows for the inclusion of
+radiative losses in the shocked layers, which can be important in many late-time scenarios.</p>
+<section id="id6">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">Assumptions</a><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<p>Like our other models in this document, we assume that the shock separates the system into
+four regions: the unshocked ejecta (Region 1), the shocked ejecta (Region 2), the shocked CSM (Region 3),
+and the unshocked CSM (Region 4). The following are also assumed:</p>
 <ul>
 <li><p>The contact discontinuity at <span class="math notranslate nohighlight">\(R_{\rm cd}\)</span> separates two finite-width
 shocked layers:</p>
 <div class="math notranslate nohighlight">
-\[R_{\rm rs} = R_{\rm cd} - \Delta_2,
+\[R_{\rm rs} = R_{\rm cd} - \Delta_{\rm rs},
 \qquad
-R_{\rm fs} = R_{\rm cd} + \Delta_3.\]</div>
+R_{\rm fs} = R_{\rm cd} + \Delta_{\rm fs}.\]</div>
 </li>
-<li><p>The shock speeds are <span class="math notranslate nohighlight">\(D_{\rm rs} = v_{\rm cd} - \dot\Delta_2\)</span> and
-<span class="math notranslate nohighlight">\(D_{\rm fs} = v_{\rm cd} + \dot\Delta_3\)</span>.</p></li>
+<li><p>The shock speeds are (by definition)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{aligned}
+\frac{dR_{\rm rs}}{dt} &amp;= v_{\rm cd} - \dot{\Delta}_{\rm rs},
+\\
+\frac{dR_{\rm fs}}{dt} &amp;= v_{\rm cd} + \dot{\Delta}_{\rm fs},
+\end{aligned}\end{split}\]</div>
+</li>
 <li><p>The volumes of the shocked layers are approximated by thin-slab expressions,</p>
 <div class="math notranslate nohighlight">
 \[V_2 \simeq 4\pi R_{\rm cd}^2\Delta_2,
 \qquad
 V_3 \simeq 4\pi R_{\rm cd}^2\Delta_3.\]</div>
 </li>
-<li><p>The layer-averaged pressures are thermodynamic functions of the evolved internal
-energies:</p>
+</ul>
+<p>In order to <em>avoid</em> having to specify in full detail the fluid dynamic structure of the shocked layers, we invoke
+<em>approximate / heuristic</em> closure relations for the internal thermodynamics:</p>
+<ul>
+<li><p>Each shocked layer is treated as a single-zone, uniform-density, uniform-pressure slab. The internal energy
+is some <span class="math notranslate nohighlight">\(U_i\)</span>.</p></li>
+<li><p>The pressure is related to the internal energy and volume by an effective adiabatic index <span class="math notranslate nohighlight">\(\hat\gamma_i\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[P_i = (\hat\gamma_i-1)\frac{U_i}{V_i}.\]</div>
 </li>
-<li><p>The contact discontinuity is accelerated by the net pressure force with effective
-mass <span class="math notranslate nohighlight">\(M_{\rm eff}=M_2+M_3\)</span>.</p></li>
-<li><p>The upstream media are cold: <span class="math notranslate nohighlight">\(P_1\simeq P_4\simeq 0\)</span>.</p></li>
 </ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -1500,79 +1752,96 @@ Rankine–Hugoniot pressures. They are layer-averaged pressures obtained from
 the internal-energy budget of each shocked region, and they evolve continuously
 as mass is swept up and work is done by expansion.</p>
 </div>
+<p>For simplicity, we also assume that the upstream media are cold: <span class="math notranslate nohighlight">\(P_1\simeq P_4\simeq 0\)</span>.</p>
 </section>
-<section id="id6">
-<h3><a class="toc-backref" href="#id24" role="doc-backlink">Model Equations</a><a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
-<p>The full state vector is</p>
+<section id="id7">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">Model Equations</a><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>The first equation describing this model is the standard <strong>continuity equation</strong>, which provides two mass-loading
+equations:</p>
 <div class="math notranslate nohighlight">
-\[{\bf y}
-=
-\left(
-    R_{\rm cd},\;
-    v_{\rm cd},\;
-    M_2,\;
-    M_3,\;
-    U_2,\;
-    U_3,\;
-    \Delta_2,\;
-    \Delta_3
-\right).\]</div>
-<p>The mass-loading equations are</p>
-<div class="math notranslate nohighlight">
-\[\boxed{
+\[\begin{split}\boxed{
+\begin{aligned}
 \frac{dM_2}{dt}
-=
+&amp;=
 4\pi R_{\rm rs}^2
 \rho_1(R_{\rm rs},t)
 \left[
     u_1(R_{\rm rs},t)-D_{\rm rs}
 \right],
-\qquad
+\\
 \frac{dM_3}{dt}
-=
+&amp;=
 4\pi R_{\rm fs}^2
 \rho_4(R_{\rm fs},t)
 \left[
     D_{\rm fs}-u_4(R_{\rm fs},t)
 \right].
-}\]</div>
-<p>The contact-discontinuity equation of motion is</p>
+\end{aligned}
+}\end{split}\]</div>
+<p>To provide the additional constraint needed to close the dynamics, we impose
+global energy conservation for the shocked region. The total mechanical energy
+stored in the shocked layers is</p>
 <div class="math notranslate nohighlight">
-\[\boxed{
-(M_2+M_3)
-\frac{dv_{\rm cd}}{dt}
+\[E_{\rm sh}
 =
-4\pi R_{\rm cd}^2(P_2-P_3).
-}\]</div>
-<p>The internal energies evolve according to</p>
-<div class="math notranslate nohighlight">
-\[\boxed{
-\frac{dU_i}{dt}
-=
-\dot U_{{\rm sh},i}
+\frac{1}{2}M v_{\rm cd}^2
 +
-\dot U_{{\rm ad},i}
+U_2
 +
-\dot U_{{\rm rad},i},
+U_3,
 \qquad
-i\in\{2,3\},
-}\]</div>
-<p>with the shock-heating term</p>
+M = M_2 + M_3.\]</div>
+<p>Here <span class="math notranslate nohighlight">\(M_2\)</span> and <span class="math notranslate nohighlight">\(M_3\)</span> are the masses in the shocked ejecta and
+shocked CSM, respectively, while <span class="math notranslate nohighlight">\(U_2\)</span> and <span class="math notranslate nohighlight">\(U_3\)</span> are their
+corresponding internal energies.</p>
+<p>Differentiating gives</p>
 <div class="math notranslate nohighlight">
-\[\boxed{
-\dot U_{{\rm sh},i}
+\[\frac{dE_{\rm sh}}{dt}
 =
-\frac{1}{\hat\gamma_i-1}
-\left(
-    \frac{\chi_i-1}{\chi_i^2}
-\right)
-v_{{\rm rel},i}^2
-\frac{dM_i}{dt},
-}\]</div>
-<p>where
-<span class="math notranslate nohighlight">\(v_{{\rm rel},2}=u_1(R_{\rm rs},t)-D_{\rm rs}\)</span> and
-<span class="math notranslate nohighlight">\(v_{{\rm rel},3}=D_{\rm fs}-u_4(R_{\rm fs},t)\)</span>,
-the adiabatic expansion term</p>
+\frac{1}{2} M \frac{dv^2_{\rm cd}}{dt}
++
+\frac{1}{2}v_{\rm cd}^2\frac{dM}{dt}
++
+\frac{dU_2}{dt}
++
+\frac{dU_3}{dt}.\]</div>
+<p>The <strong>left-hand side</strong> of this equation can be made to represent the <em>advected</em> energy fluxes into the shocked layers
+along with any <em>ab initio</em> energy injection (e.g., from a central engine):</p>
+<div class="math notranslate nohighlight">
+\[\frac{dE_{\rm sh}}{dt} = \dot{E}_{\rm adv} + \dot{E}_{\rm inj} + \dot{E}_{\rm rad}.\]</div>
+<p>Here,</p>
+<div class="math notranslate nohighlight">
+\[\dot{E}_{\rm adv} = \frac{1}{2}\left[u_1(R_{\rm rs},t)^2 \frac{dM_2}{dt} + u_4(R_{\rm fs},t)^2 \frac{dM_3}{dt}\right],\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\dot{E}_{\rm rad} = \dot{U}_2{\rm rad} + \dot{U}_3{\rm rad}\]</div>
+<p>are the radiative losses from the shocked layers. These may be specified by the user to include radiative losses. Finally,
+<span class="math notranslate nohighlight">\(\dot{E}_{\rm inj}\)</span> is the energy injection rate from a central engine, which may also be specified by the user.</p>
+<p>On the <strong>right-hand side</strong>, we must account for all relevant dissipation mechanisms of the internal energy. In this
+model, <strong>we include 3 such mechanisms</strong>: adabatic expansion, radiative losses, and shock heating:</p>
+<div class="math notranslate nohighlight">
+\[\frac{dU_i}{dt} = \dot{U}_{\rm ad,i} + \dot{U}_{\rm rad,i} + \dot{U}_{\rm sh,i}.\]</div>
+<p>More details are provided below:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Adiabatic Expansion</label><div class="sd-tab-content docutils">
+<p>The adiabatic term follows from <span class="math notranslate nohighlight">\(P\,dV\)</span> work:</p>
+<div class="math notranslate nohighlight">
+\[\dot U_{{\rm ad},i}
+=
+-P_i\frac{dV_i}{dt}
+=
+-(\hat\gamma_i-1)U_i
+\frac{d\ln V_i}{dt}.\]</div>
+<p>With <span class="math notranslate nohighlight">\(V_i\simeq4\pi R_{\rm cd}^2\Delta_i\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\frac{d\ln V_i}{dt}
+=
+2\frac{v_{\rm cd}}{R_{\rm cd}}
++
+\frac{\dot\Delta_i}{\Delta_i},\]</div>
+<p>giving</p>
 <div class="math notranslate nohighlight">
 \[\boxed{
 \dot U_{{\rm ad},i}
@@ -1584,73 +1853,22 @@ the adiabatic expansion term</p>
     \frac{\dot\Delta_i}{\Delta_i}
 \right),
 }\]</div>
-<p>and <span class="math notranslate nohighlight">\(\dot U_{{\rm rad},i}\)</span> an external radiative loss to be specified by the
-user. The layer widths are closed by the layer sound speed,</p>
-<div class="math notranslate nohighlight">
-\[\boxed{
-\dot\Delta_i\simeq c_{s,i},
-\qquad
-c_{s,i}^2
-\simeq
-\hat\gamma_i\frac{P_i V_i}{M_i}.
-}\]</div>
-<p>Collecting all equations, the minimal mechanical model is</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}\boxed{
-\begin{aligned}
-    \frac{dR_{\rm cd}}{dt}
-    &amp;=
-    v_{\rm cd},
-    \\[6pt]
-    \frac{dM_2}{dt}
-    &amp;=
-    4\pi R_{\rm rs}^2
-    \rho_1(R_{\rm rs},t)
-    \left[
-        u_1(R_{\rm rs},t)-D_{\rm rs}
-    \right],
-    \\[6pt]
-    \frac{dM_3}{dt}
-    &amp;=
-    4\pi R_{\rm fs}^2
-    \rho_4(R_{\rm fs},t)
-    \left[
-        D_{\rm fs}-u_4(R_{\rm fs},t)
-    \right],
-    \\[6pt]
-    (M_2+M_3)
-    \frac{dv_{\rm cd}}{dt}
-    &amp;=
-    4\pi R_{\rm cd}^2(P_2-P_3),
-    \\[6pt]
-    \frac{dU_i}{dt}
-    &amp;=
-    \dot U_{{\rm sh},i}
-    +
-    \dot U_{{\rm ad},i}
-    +
-    \dot U_{{\rm rad},i},
-    \\[6pt]
-    \dot\Delta_i
-    &amp;\simeq
-    c_{s,i}.
-\end{aligned}
-}\end{split}\]</div>
-<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Derivation: shock-heating source term</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">For a cold, strong, non-relativistic shock, the compression ratio is</p>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Shock Heating</label><div class="sd-tab-content docutils">
+<p>For a cold, strong, non-relativistic shock, the compression ratio is</p>
 <div class="math notranslate nohighlight">
 \[\chi_i
 =
 \frac{\hat\gamma_i+1}{\hat\gamma_i-1}.\]</div>
-<p class="sd-card-text">The downstream pressure generated by upstream relative velocity <span class="math notranslate nohighlight">\(v_{\rm rel}\)</span> is</p>
+<p>The downstream pressure generated by upstream relative velocity <span class="math notranslate nohighlight">\(v_{\rm rel}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[P_d
 =
 \rho_u v_{\rm rel}^2
 \left(1-\frac{1}{\chi_i}\right).\]</div>
-<p class="sd-card-text">Since <span class="math notranslate nohighlight">\(\rho_d=\chi_i\rho_u\)</span>, the downstream specific internal energy is</p>
+<p>Since <span class="math notranslate nohighlight">\(\rho_d=\chi_i\rho_u\)</span>, the downstream specific internal energy is</p>
 <div class="math notranslate nohighlight">
 \[\varepsilon_{{\rm int},d}
 =
@@ -1662,33 +1880,131 @@ c_{s,i}^2
     \frac{\chi_i-1}{\chi_i^2}
 \right)
 v_{\rm rel}^2.\]</div>
-<p class="sd-card-text">Multiplying by the mass-loading rate gives the shock-heating source
-<span class="math notranslate nohighlight">\(\dot U_{{\rm sh},i} = \varepsilon_{{\rm int},i}\,dM_i/dt\)</span>.</p>
-</div>
-</details><details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
-<summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Derivation: adiabatic energy loss</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
-<p class="sd-card-text">The adiabatic term follows from <span class="math notranslate nohighlight">\(P\,dV\)</span> work:</p>
+<p>Multiplying by the mass-loading rate gives the shock-heating source
+<span class="math notranslate nohighlight">\(\dot U_{{\rm sh},i} = \varepsilon_{{\rm int},i}\,dM_i/dt\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\dot U_{{\rm ad},i}
+\[\boxed{
+\dot U_{{\rm sh},i}
 =
--P_i\frac{dV_i}{dt}
-=
--(\hat\gamma_i-1)U_i
-\frac{d\ln V_i}{dt}.\]</div>
-<p class="sd-card-text">With <span class="math notranslate nohighlight">\(V_i\simeq4\pi R_{\rm cd}^2\Delta_i\)</span>,</p>
-<div class="math notranslate nohighlight">
-\[\frac{d\ln V_i}{dt}
-=
-2\frac{v_{\rm cd}}{R_{\rm cd}}
-+
-\frac{\dot\Delta_i}{\Delta_i},\]</div>
-<p class="sd-card-text">giving the boxed expression for <span class="math notranslate nohighlight">\(\dot U_{{\rm ad},i}\)</span>.</p>
+\frac{1}{\hat\gamma_i-1}
+\left(
+    \frac{\chi_i-1}{\chi_i^2}
+\right)
+v_{{\rm rel},i}^2
+\frac{dM_i}{dt},
+}\]</div>
 </div>
-</details></section>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+Radiative Losses</label><div class="sd-tab-content docutils">
+<p><span class="math notranslate nohighlight">\(\dot U_{{\rm rad},i}\)</span> should be an external function of the state variables which may be
+specified by the user to provide radiative losses from free-free, line emission, synchrotron, etc.</p>
+</div>
+</div>
+<p>With all of the energy accounting in place, we introduce the parameter <span class="math notranslate nohighlight">\(\Phi = v_{\rm cd}^2\)</span> and may then
+write the differential equation in the form</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\frac{d\Phi}{dt} = \frac{2}{M}\left[\dot{E}_{\rm adv} +
+                                    \dot{E}_{\rm inj} +
+                                    \dot{E}_{\rm rad} -
+         \frac{1}{2} \dot{M} \Phi - \dot{U}_2 - \dot{U}_3\right]
+}\]</div>
+<p>Because the reverse shock propagates through a finite ejecta mass, we modify the behavior of the system
+once <span class="math notranslate nohighlight">\(M_2 \gtrsim M_{\rm ej}\)</span>. In this case, we set <span class="math notranslate nohighlight">\(M_2 = M_{\rm ej}\)</span> and <span class="math notranslate nohighlight">\(\dot{M}_2 = 0\)</span>, and we
+remove the advective and shock heating terms from the energy equation for the shocked ejecta layer.</p>
+<p>To close the model, we must specify the evolution of the shocked-layer
+widths. These widths should be interpreted as effective single-zone volumes
+rather than resolved hydrodynamic structures. Following the spirit of
+Wang <em>et al.</em><a class="footnote-reference brackets" href="#footcite-wangvegasafterglowhighperformanceframework2026" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, we use an
+asymmetric closure during reverse-shock crossing: the forward-shocked CSM
+layer expands at its internal sound speed, while the reverse-shocked ejecta
+layer grows according to the rate at which compressed ejecta is deposited
+behind the reverse shock.</p>
+<p>For the forward-shocked CSM layer, we take</p>
+<div class="math notranslate nohighlight">
+\[\dot{\Delta}_{\rm fs}
+=
+c_{s,3}
+=
+\sqrt{
+    \hat\gamma_3
+    \frac{P_3}{\rho_3}
+}.\]</div>
+<p>For the reverse-shocked ejecta layer, mass deposition implies</p>
+<div class="math notranslate nohighlight">
+\[\dot{\Delta}_{\rm rs}
+=
+\frac{1}{4\pi R_{\rm cd}^2\chi_2\rho_1(R_{\rm rs},t)}
+\frac{dM_2}{dt},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_2=(\hat\gamma_2+1)/(\hat\gamma_2-1)\)</span> is the strong-shock
+compression ratio. Since</p>
+<div class="math notranslate nohighlight">
+\[D_{\rm rs}
+=
+v_{\rm cd}
+-
+\dot{\Delta}_{\rm rs},\]</div>
+<p>the reverse-shock mass-loading rate is</p>
+<div class="math notranslate nohighlight">
+\[\frac{dM_2}{dt}
+=
+4\pi R_{\rm rs}^2\rho_1(R_{\rm rs},t)
+\left[
+    u_1(R_{\rm rs},t)
+    -
+    v_{\rm cd}
+    +
+    \dot{\Delta}_{\rm rs}
+\right].\]</div>
+<p>Combining the previous two equations gives an explicit algebraic closure,</p>
+<div class="math notranslate nohighlight">
+\[\dot{\Delta}_{\rm rs}
+=
+\frac{
+    \eta_{\rm rs}
+    \left[
+        u_1(R_{\rm rs},t)-v_{\rm cd}
+    \right]
+}{
+    1-\eta_{\rm rs}
+},
+\qquad
+\eta_{\rm rs}
+=
+\frac{R_{\rm rs}^2}{R_{\rm cd}^2\chi_2}.\]</div>
+<p>In the thin-shell limit, <span class="math notranslate nohighlight">\(R_{\rm rs}\simeq R_{\rm cd}\)</span>, this reduces to
+the form used in the numerical kernel,</p>
+<div class="math notranslate nohighlight">
+\[\boxed{
+\dot{\Delta}_{\rm rs}
+\simeq
+\frac{
+    u_1(R_{\rm rs},t)-v_{\rm cd}
+}{
+    \chi_2-1
+}.
+}\]</div>
+<p>Once the reverse shock has crossed the ejecta, Region 2 is no longer supplied
+by newly shocked ejecta. We therefore set <span class="math notranslate nohighlight">\(\dot M_2=0\)</span> and
+<span class="math notranslate nohighlight">\(\dot U_{{\rm sh},2}=0\)</span>, and switch the reverse-shocked layer to the same
+sound-speed expansion closure,</p>
+<div class="math notranslate nohighlight">
+\[\dot{\Delta}_{\rm rs}
+=
+c_{s,2}
+=
+\sqrt{
+    \hat\gamma_2
+    \frac{P_2}{\rho_2}
+}.\]</div>
+<p>If <span class="math notranslate nohighlight">\(u_1(R_{\rm rs},t)-v_{\rm cd}\le 0\)</span> during the crossing phase, the
+reverse shock is treated as inactive and the corresponding mass-loading and
+shock-heating terms are set to zero.</p>
+</section>
 </section>
 <section id="relativistic-models">
-<h2><a class="toc-backref" href="#id25" role="doc-backlink">Relativistic Models</a><a class="headerlink" href="#relativistic-models" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Relativistic Models</a><a class="headerlink" href="#relativistic-models" title="Link to this heading">#</a></h2>
 <p>We now generalize to the relativistic regime. The geometry remains the standard
 four-region structure, but the dynamics and shock jump conditions are governed by
 special relativity. The upstream media are specified by their <strong>comoving
@@ -1706,7 +2022,7 @@ At the shell radius we write <span class="math notranslate nohighlight">\(\rho_{
 <hr class="docutils" />
 </section>
 <section id="relativistic-pressure-driven-thin-shell-model">
-<span id="relativistic-pressure-driven-shells"></span><h2><a class="toc-backref" href="#id26" role="doc-backlink">Relativistic Pressure-Driven Thin-Shell Model</a><a class="headerlink" href="#relativistic-pressure-driven-thin-shell-model" title="Link to this heading">#</a></h2>
+<span id="relativistic-pressure-driven-shells"></span><h2><a class="toc-backref" href="#id28" role="doc-backlink">Relativistic Pressure-Driven Thin-Shell Model</a><a class="headerlink" href="#relativistic-pressure-driven-thin-shell-model" title="Link to this heading">#</a></h2>
 <p>The relativistic pressure-driven thin-shell model
 (<a class="reference internal" href="../../../_as_gen/trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine.html#trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine" title="trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">RelPressureDrivenThinShellShockEngine</span></code></a>)
 is the relativistic analogue of the
@@ -1715,8 +2031,8 @@ The shocked region is collapsed to a geometrically thin shell at a single radius
 <span class="math notranslate nohighlight">\(R_{\rm sh}\)</span>, and the shell dynamics are governed by the net post-shock
 pressure difference across the contact discontinuity, evaluated from the
 relativistic Rankine–Hugoniot jump conditions.</p>
-<section id="id7">
-<h3><a class="toc-backref" href="#id27" role="doc-backlink">Assumptions</a><a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<section id="id9">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">Assumptions</a><a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Thin-shell geometry:
 <span class="math notranslate nohighlight">\(R_{\rm rs}\simeq R_{\rm cd}\simeq R_{\rm fs}\equiv R_{\rm sh}\)</span>.</p></li>
@@ -1729,7 +2045,7 @@ relativistic Rankine–Hugoniot jump conditions.</p>
 </ul>
 </section>
 <section id="dynamical-state">
-<h3><a class="toc-backref" href="#id28" role="doc-backlink">Dynamical State</a><a class="headerlink" href="#dynamical-state" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">Dynamical State</a><a class="headerlink" href="#dynamical-state" title="Link to this heading">#</a></h3>
 <p>In the relativistic case, shocked internal energy contributes to the shell
 inertia alongside the baryonic rest mass, so the shell is described by its
 <strong>lab-frame four-momentum</strong>. The dynamical state vector is</p>
@@ -1774,7 +2090,7 @@ parametrization remains well behaved as <span class="math notranslate nohighligh
 needs no independent evolution.</p>
 </section>
 <section id="shock-closure-and-jump-conditions">
-<h3><a class="toc-backref" href="#id29" role="doc-backlink">Shock Closure and Jump Conditions</a><a class="headerlink" href="#shock-closure-and-jump-conditions" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">Shock Closure and Jump Conditions</a><a class="headerlink" href="#shock-closure-and-jump-conditions" title="Link to this heading">#</a></h3>
 <p>In the thin-shell approximation, both shocks travel at the shell speed
 <span class="math notranslate nohighlight">\(\beta_{\rm sh}\)</span>. The upstream speed in the shell (downstream) frame
 follows from relativistic velocity addition:</p>
@@ -1844,7 +2160,7 @@ using <span class="math notranslate nohighlight">\(e_d = \rho_d c^2 + P_d/(\hat\
 </div>
 </details></section>
 <section id="numerical-implementation-pre-tabulation-and-exact-pressure-closure">
-<h3><a class="toc-backref" href="#id30" role="doc-backlink">Numerical Implementation: Pre-tabulation and Exact Pressure Closure</a><a class="headerlink" href="#numerical-implementation-pre-tabulation-and-exact-pressure-closure" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">Numerical Implementation: Pre-tabulation and Exact Pressure Closure</a><a class="headerlink" href="#numerical-implementation-pre-tabulation-and-exact-pressure-closure" title="Link to this heading">#</a></h3>
 <p>The engine does not evaluate the ODE pressures directly from
 <span class="math notranslate nohighlight">\(\Gamma_{\rm rel,i}\)</span>.  Instead it uses the <em>exact</em> Rankine–Hugoniot
 result derived by combining baryon conservation, energy conservation, and
@@ -1953,7 +2269,7 @@ formula.  The ODE integration uses the exact momentum-flux pressures
 </div>
 </section>
 <section id="rest-mass-fluxes">
-<h3><a class="toc-backref" href="#id31" role="doc-backlink">Rest-Mass Fluxes</a><a class="headerlink" href="#rest-mass-fluxes" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id33" role="doc-backlink">Rest-Mass Fluxes</a><a class="headerlink" href="#rest-mass-fluxes" title="Link to this heading">#</a></h3>
 <p>The baryonic rest mass swept into the shell per unit time follows from the
 comoving-frame baryon-flux condition at each shock face:</p>
 <div class="math notranslate nohighlight" id="equation-rel-pd-mdot-reverse-shell-speed">
@@ -1972,8 +2288,8 @@ comoving-frame baryon-flux condition at each shock face:</p>
 }\]</div>
 <p>clamped to be non-negative.</p>
 </section>
-<section id="id8">
-<h3><a class="toc-backref" href="#id32" role="doc-backlink">Equations of Motion</a><a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<section id="id10">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink">Equations of Motion</a><a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>Combining baryon conservation, energy loading, and the pressure-driven momentum
 source gives the closed adiabatic system:</p>
 <div class="math notranslate nohighlight" id="equation-rel-pd-closed-energy-momentum-system">
@@ -2063,7 +2379,7 @@ beyond mass loading, defining the pressure-driven approximation.</p>
 </div>
 </details></section>
 <section id="initial-conditions">
-<h3><a class="toc-backref" href="#id33" role="doc-backlink">Initial Conditions</a><a class="headerlink" href="#initial-conditions" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id35" role="doc-backlink">Initial Conditions</a><a class="headerlink" href="#initial-conditions" title="Link to this heading">#</a></h3>
 <p>The initial state is specified by the triple <span class="math notranslate nohighlight">\((R_0,\,\beta_0,\,M_0)\)</span> at
 time <span class="math notranslate nohighlight">\(t_0\)</span>. Assuming a cold shell,</p>
 <div class="math notranslate nohighlight">
@@ -2072,6 +2388,21 @@ time <span class="math notranslate nohighlight">\(t_0\)</span>. Assuming a cold 
 \Pi_0 = M_0\,c\,\Gamma_0\,\beta_0,
 \qquad
 \Gamma_0 = \frac{1}{\sqrt{1-\beta_0^2}}.\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The evolved variables are <span class="math notranslate nohighlight">\(R_{\rm sh}\)</span>, <span class="math notranslate nohighlight">\(M_{\rm sh}\)</span>,
+<span class="math notranslate nohighlight">\(E_{\rm sh}\)</span>, and <span class="math notranslate nohighlight">\(\Pi_{\rm sh}\)</span>. Rest mass <span class="math notranslate nohighlight">\(M_{\rm sh}\)</span>
+is tracked by baryon conservation; <span class="math notranslate nohighlight">\(E_{\rm sh}\)</span> and <span class="math notranslate nohighlight">\(\Pi_{\rm sh}\)</span>
+jointly encode the relativistic inertia and speed of the shell. The
+pressure-driven nature of the model enters through the explicit force</p>
+<div class="math notranslate nohighlight">
+\[4\pi R_{\rm sh}^2(P_2-P_3),\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_i = \rho_{u,i}\,c^2\,\Gamma_{is}^2\,\beta_{is}^2(1-\beta_{ds}/\beta_{is})\)</span>
+is the exact post-shock pressure from the relativistic Rankine–Hugoniot conditions,
+with <span class="math notranslate nohighlight">\(\beta_{is}\)</span> and <span class="math notranslate nohighlight">\(\beta_{ds}\)</span> the upstream and downstream
+shock-frame speeds obtained by pre-tabulated interpolation of the full implicit
+cold-upstream equation.</p>
+</div>
 </section>
 </section>
 </section>
@@ -2096,11 +2427,11 @@ time <span class="math notranslate nohighlight">\(t_0\)</span>. Assuming a cold 
       </div>
     </a>
     <a class="right-next"
-       href="self_similar_overview.html"
+       href="numerical_shocks_overview.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Self-Similar Shock Engines</p>
+        <p class="prev-next-title">Numerical Shock Engines</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -2145,18 +2476,18 @@ time <span class="math notranslate nohighlight">\(t_0\)</span>. Assuming a cold 
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mechanical-internal-energy-model">Mechanical Internal-Energy Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Assumptions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Model Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Model Equations</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relativistic-models">Relativistic Models</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relativistic-pressure-driven-thin-shell-model">Relativistic Pressure-Driven Thin-Shell Model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Assumptions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">Assumptions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamical-state">Dynamical State</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shock-closure-and-jump-conditions">Shock Closure and Jump Conditions</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-implementation-pre-tabulation-and-exact-pressure-closure">Numerical Implementation: Pre-tabulation and Exact Pressure Closure</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rest-mass-fluxes">Rest-Mass Fluxes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">Equations of Motion</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Equations of Motion</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-conditions">Initial Conditions</a></li>
 </ul>
 </li>
@@ -2185,8 +2516,8 @@ time <span class="math notranslate nohighlight">\(t_0\)</span>. Assuming a cold 
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2220,7 +2551,7 @@ time <span class="math notranslate nohighlight">\(t_0\)</span>. Assuming a cold 
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

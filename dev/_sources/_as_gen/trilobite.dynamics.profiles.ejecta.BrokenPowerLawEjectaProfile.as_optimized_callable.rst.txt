@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.as\_optimized\_callable
+======================================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: BrokenPowerLawEjectaProfile.as_optimized_callable

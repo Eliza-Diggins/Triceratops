@@ -1,0 +1,80 @@
+
+
+.. _sphx_glr_auto_examples_dynamics_a_fundamentals:
+
+Shock Physics Basics
+=====================
+
+These examples cover the Rankine--Hugoniot relations that connect upstream
+(pre-shock) to downstream (post-shock) states via conservation of mass,
+momentum, and energy. They sweep from the subsonic limit through the
+Newtonian strong-shock approximation to the fully relativistic regime,
+showing where each approximation is valid.
+
+These are the right starting point if you want to understand *why* shocks
+produce the compression ratios and temperature jumps that drive synchrotron
+and thermal emission before working with the higher-level shock engines.
+
+**Theory:** :ref:`rankine_hugoniot_theory`, :ref:`relativistic_jump_conditions_theory`
+
+**API:** :ref:`rankine_hugoniot_overview`
+
+
+.. raw:: html
+
+  <div id='sg-tag-list' class='sphx-glr-tag-list'></div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example compares weak-shock and strong-shock Rankine–Hugoniot    solvers in a cold upstream medium. By sweeping the shock velocity    from subsonic to highly supersonic values, it shows how the weak-shock    solution smoothly transitions into the strong-shock limit.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/a_fundamentals/images/thumb/sphx_glr_plot_rh_jump_weak_conditions_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/a_fundamentals/plot_rh_jump_weak_conditions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Weak vs Strong Shock Jump Conditions (Cold Medium)</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="   This example compares Newtonian, relativistic, and ultra-relativistic    shock jump-condition solvers across a wide range of shock velocities.    By sweeping from \beta \sim 10^{-3} to relativistic speeds,    it shows where classical approximations break down and how the full    relativistic solution transitions between regimes.">
+
+.. only:: html
+
+  .. image:: /auto_examples/dynamics/a_fundamentals/images/thumb/sphx_glr_plot_rh_jump_conditions_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/dynamics/a_fundamentals/plot_rh_jump_conditions`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Rankine--Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /auto_examples/dynamics/a_fundamentals/plot_rh_jump_weak_conditions
+   /auto_examples/dynamics/a_fundamentals/plot_rh_jump_conditions
+

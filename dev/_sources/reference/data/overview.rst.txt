@@ -4,7 +4,7 @@
 Data Loading, Handling, and Visualization
 =========================================
 
-The :mod:`trilobite.data` module is the boundary between raw observational
+The ``trilobite.data`` module is the boundary between raw observational
 data and the Trilobite modeling and inference systems. It provides
 schema-validated, unit-aware containers for every major data type encountered
 in time-domain radio and optical astronomy, and a clean translation layer

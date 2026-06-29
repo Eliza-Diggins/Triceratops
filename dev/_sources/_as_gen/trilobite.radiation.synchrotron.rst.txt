@@ -24,7 +24,7 @@ trilobite.radiation.synchrotron
       SEDs
       cooling
       core
-      microphysics
+      electron_distributions
       utils
    
    

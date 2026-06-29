@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.VelocityProfile.eval
+=========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. automethod:: VelocityProfile.eval

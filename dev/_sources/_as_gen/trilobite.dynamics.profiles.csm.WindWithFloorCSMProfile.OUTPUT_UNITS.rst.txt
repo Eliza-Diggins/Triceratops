@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile.OUTPUT\_UNITS
+=====================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: WindWithFloorCSMProfile.OUTPUT_UNITS

@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions.R\_cd\_0
+=============================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. autoattribute:: MechanicalShockInitialConditions.R_cd_0

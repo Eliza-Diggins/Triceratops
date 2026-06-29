@@ -1,0 +1,36 @@
+CSMDensityProfile
+=================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.CSMDensityProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~CSMDensityProfile.as_callable
+      ~CSMDensityProfile.as_optimized_callable
+      ~CSMDensityProfile.eval
+      ~CSMDensityProfile.feval
+      ~CSMDensityProfile.process_arguments
+      ~CSMDensityProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~CSMDensityProfile.OUTPUT_UNITS
+   
+   

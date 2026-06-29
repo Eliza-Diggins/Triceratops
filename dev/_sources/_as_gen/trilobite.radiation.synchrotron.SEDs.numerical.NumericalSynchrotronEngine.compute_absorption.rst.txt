@@ -1,4 +1,4 @@
-trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_absorption
+﻿trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_absorption
 =============================================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical

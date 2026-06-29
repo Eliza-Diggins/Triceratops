@@ -1,0 +1,6 @@
+trilobite.inference.transform.Log10Transform.inverse
+====================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: Log10Transform.inverse

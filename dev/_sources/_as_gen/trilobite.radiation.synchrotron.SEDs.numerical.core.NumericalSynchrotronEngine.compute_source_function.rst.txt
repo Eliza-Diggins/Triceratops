@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.compute\_source\_function
+========================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
+.. automethod:: NumericalSynchrotronEngine.compute_source_function

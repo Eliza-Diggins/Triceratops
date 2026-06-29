@@ -1,0 +1,35 @@
+trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+============================================================
+
+.. automodule:: trilobite.radiation.synchrotron.SEDs.numerical.inhomogeneous
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      InhomogeneousCylinderSynchrotronEngine
+      InhomogeneousSphereSynchrotronEngine
+   
+   
+
+   
+   
+   

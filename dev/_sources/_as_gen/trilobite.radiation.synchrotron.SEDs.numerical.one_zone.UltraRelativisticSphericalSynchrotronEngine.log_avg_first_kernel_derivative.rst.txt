@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.one\_zone.UltraRelativisticSphericalSynchrotronEngine.log\_avg\_first\_kernel\_derivative
+========================================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.one_zone
+
+.. autoproperty:: UltraRelativisticSphericalSynchrotronEngine.log_avg_first_kernel_derivative

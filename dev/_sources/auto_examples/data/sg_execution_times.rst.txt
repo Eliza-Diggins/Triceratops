@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:01.855** total execution time for 7 files **from auto_examples/data**:
+**00:01.618** total execution time for 7 files **from auto_examples/data**:
 
 .. container::
 
@@ -33,23 +33,23 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_data_plot_radio_photometry.py` (``plot_radio_photometry.py``)
-     - 00:00.637
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_optical_light_curve.py` (``plot_optical_light_curve.py``)
-     - 00:00.249
+     - 00:00.533
      - 0.0
    * - :ref:`sphx_glr_auto_examples_data_plot_radio_light_curve.py` (``plot_radio_light_curve.py``)
-     - 00:00.237
+     - 00:00.230
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_data_plot_multiband_radio.py` (``plot_multiband_radio.py``)
-     - 00:00.236
+   * - :ref:`sphx_glr_auto_examples_data_plot_optical_light_curve.py` (``plot_optical_light_curve.py``)
+     - 00:00.216
      - 0.0
    * - :ref:`sphx_glr_auto_examples_data_plot_inference_data.py` (``plot_inference_data.py``)
      - 00:00.190
      - 0.0
+   * - :ref:`sphx_glr_auto_examples_data_plot_multiband_radio.py` (``plot_multiband_radio.py``)
+     - 00:00.181
+     - 0.0
    * - :ref:`sphx_glr_auto_examples_data_plot_optical_photometry.py` (``plot_optical_photometry.py``)
-     - 00:00.177
+     - 00:00.143
      - 0.0
    * - :ref:`sphx_glr_auto_examples_data_plot_multiband_optical.py` (``plot_multiband_optical.py``)
-     - 00:00.128
+     - 00:00.125
      - 0.0

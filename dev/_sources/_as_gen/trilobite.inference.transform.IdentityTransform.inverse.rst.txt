@@ -1,0 +1,6 @@
+trilobite.inference.transform.IdentityTransform.inverse
+=======================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: IdentityTransform.inverse

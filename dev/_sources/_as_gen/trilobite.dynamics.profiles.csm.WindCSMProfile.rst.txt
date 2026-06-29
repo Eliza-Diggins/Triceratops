@@ -1,0 +1,44 @@
+WindCSMProfile
+==============================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.WindCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~WindCSMProfile.as_callable
+      ~WindCSMProfile.as_optimized_callable
+      ~WindCSMProfile.column_density
+      ~WindCSMProfile.compute_mass_loss_rate
+      ~WindCSMProfile.enclosed_mass
+      ~WindCSMProfile.eval
+      ~WindCSMProfile.feval
+      ~WindCSMProfile.normalize
+      ~WindCSMProfile.normalize_A_star
+      ~WindCSMProfile.normalize_from_A_star
+      ~WindCSMProfile.process_arguments
+      ~WindCSMProfile.process_parameters
+      ~WindCSMProfile.shell_mass
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~WindCSMProfile.A_STAR_NORMALIZATION
+      ~WindCSMProfile.OUTPUT_UNITS
+   
+   

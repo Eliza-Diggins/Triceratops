@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ExponentialCSMProfile.eval
+==========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ExponentialCSMProfile.eval

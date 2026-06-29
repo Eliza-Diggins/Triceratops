@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.VelocityProfile.process\_parameters
+========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. automethod:: VelocityProfile.process_parameters

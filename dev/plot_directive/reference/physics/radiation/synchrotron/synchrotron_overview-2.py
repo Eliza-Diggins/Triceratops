@@ -4,10 +4,9 @@ from astropy import units as u
 from astropy import constants as const
 
 from trilobite.radiation.synchrotron.SEDs.numerical import NumericalSynchrotronEngine
-from trilobite.radiation.synchrotron.microphysics import (
-    compute_MJD_and_PL_norm_from_magnetic_field,
-    get_maxwell_juttner_distribution,
-    get_power_law_distribution,
+from trilobite.radiation.synchrotron.electron_distributions import (
+    MaxwellJuettner,
+    PowerLaw,
 )
 
 # ---------------------------------------------------------------------
@@ -38,20 +37,17 @@ gamma_max = 1e10
 # ---------------------------------------------------------------------
 # Normalize electron distributions (equipartition closure)
 # ---------------------------------------------------------------------
-N_therm, N_pl = compute_MJD_and_PL_norm_from_magnetic_field(
-    B=B,
-    Theta=Theta,
-    p=p,
-    delta=delta,
-    epsilon_E=epsilon_e,
-    epsilon_B=epsilon_B,
-    gamma_min=gamma_min,
-    gamma_max=gamma_max,
+N_therm = MaxwellJuettner.normalize_from_magnetic_field(
+    B=B, epsilon_B=epsilon_B, epsilon_E=epsilon_e * delta, Theta=Theta
+)
+N_pl = PowerLaw.normalize_from_magnetic_field(
+    B=B, epsilon_B=epsilon_B, epsilon_E=epsilon_e * (1 - delta),
+    p=p, gamma_min=gamma_min, gamma_max=gamma_max,
 )
 
-mjd = get_maxwell_juttner_distribution(Theta, norm=N_therm)
-pl  = get_power_law_distribution(p=p, norm=N_pl,
-                                 gamma_min=gamma_min, gamma_max=gamma_max)
+mjd = MaxwellJuettner.as_callable(norm=N_therm.value, Theta=Theta)
+pl  = PowerLaw.as_callable(norm=N_pl.value, p=p,
+                           gamma_min=gamma_min, gamma_max=gamma_max)
 
 # ---------------------------------------------------------------------
 # Grids

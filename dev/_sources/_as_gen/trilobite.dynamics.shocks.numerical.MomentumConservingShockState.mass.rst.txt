@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MomentumConservingShockState.mass
+=====================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. autoattribute:: MomentumConservingShockState.mass

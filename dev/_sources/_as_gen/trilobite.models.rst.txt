@@ -1,0 +1,39 @@
+﻿trilobite.models
+================
+
+.. automodule:: trilobite.models
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      GRBs
+      SEDs
+      TDEs
+      core
+      generic
+      supernovae
+   
+   
+
+   
+   
+   
+
+   
+   
+   

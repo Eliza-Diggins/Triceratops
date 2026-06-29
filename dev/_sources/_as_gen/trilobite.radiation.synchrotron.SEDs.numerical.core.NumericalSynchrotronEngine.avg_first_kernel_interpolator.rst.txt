@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine.avg\_first\_kernel\_interpolator
+===============================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.core
+
+.. autoproperty:: NumericalSynchrotronEngine.avg_first_kernel_interpolator

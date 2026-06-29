@@ -31,18 +31,18 @@ look the way they do before working with the higher-level SED classes.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Every synchrotron emitting electron radiates near its characteristic synchrotron frequency \nu_m, which depends on the electron Lorentz factor \gamma and the local magnetic field B:">
+    <div class="sphx-glr-thumbcontainer" tooltip="Trilobite&#x27;s synchrotron framework is built on encapsulated electron distribution classes that package the PDF, moments, normalization, and bolometric emissivity for a given population model.  This example walks through the most common workflows:">
 
 .. only:: html
 
-  .. image:: /auto_examples/synchrotron/a_fundamentals/images/thumb/sphx_glr_plot_frequency_gamma_relation_thumb.png
+  .. image:: /auto_examples/synchrotron/a_fundamentals/images/thumb/sphx_glr_plot_electron_distributions_thumb.png
     :alt:
 
-  :doc:`/auto_examples/synchrotron/a_fundamentals/plot_frequency_gamma_relation`
+  :doc:`/auto_examples/synchrotron/a_fundamentals/plot_electron_distributions`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The ν–γ–B Relation and Pitch-Angle Effects</div>
+      <div class="sphx-glr-thumbnail-title">Electron Energy Distributions</div>
     </div>
 
 
@@ -56,5 +56,5 @@ look the way they do before working with the higher-level SED classes.
 .. toctree::
    :hidden:
 
-   /auto_examples/synchrotron/a_fundamentals/plot_frequency_gamma_relation
+   /auto_examples/synchrotron/a_fundamentals/plot_electron_distributions
 

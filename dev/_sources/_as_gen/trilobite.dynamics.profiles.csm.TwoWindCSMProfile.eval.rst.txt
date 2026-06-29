@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.TwoWindCSMProfile.eval
+======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: TwoWindCSMProfile.eval

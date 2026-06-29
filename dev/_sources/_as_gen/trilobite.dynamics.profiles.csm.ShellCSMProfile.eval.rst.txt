@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ShellCSMProfile.eval
+====================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ShellCSMProfile.eval

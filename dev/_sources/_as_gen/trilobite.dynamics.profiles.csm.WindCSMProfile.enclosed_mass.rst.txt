@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.enclosed\_mass
+=============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.enclosed_mass

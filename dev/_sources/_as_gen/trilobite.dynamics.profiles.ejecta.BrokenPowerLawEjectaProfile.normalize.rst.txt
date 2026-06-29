@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize
+========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: BrokenPowerLawEjectaProfile.normalize

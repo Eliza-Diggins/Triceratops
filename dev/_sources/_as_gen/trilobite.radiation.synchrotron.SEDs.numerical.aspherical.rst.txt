@@ -1,0 +1,35 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+=========================================================
+
+.. automodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      OffAxisAsymmetricSynchrotronEngine
+      OnAxisAsymmetricSynchrotronEngine
+   
+   
+
+   
+   
+   

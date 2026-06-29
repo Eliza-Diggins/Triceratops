@@ -1,0 +1,44 @@
+trilobite.radiation.synchrotron.SEDs.one_zone.seds
+==================================================
+
+.. automodule:: trilobite.radiation.synchrotron.SEDs.one_zone.seds
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      MultiSpectrumSynchrotronSED
+      Numerical_PowerLaw_Cooling_SSA_SynchrotronSED
+      Numerical_PowerLaw_SSA_SynchrotronSED
+      Numerical_Thermal_PowerLaw_SSA_SynchrotronSED
+      Numerical_Thermal_SSA_SynchrotronSED
+      PowerLaw_Cooling_SSA_SynchrotronSED
+      PowerLaw_Cooling_SynchrotronSED
+      PowerLaw_SSA_SynchrotronSED
+      PowerLaw_SynchrotronSED
+      SSA_SED_PowerLaw
+      SynchrotronSED
+   
+   
+
+   
+   
+   

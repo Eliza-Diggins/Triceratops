@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.PowerLawCSMProfile.OUTPUT\_UNITS
+================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: PowerLawCSMProfile.OUTPUT_UNITS

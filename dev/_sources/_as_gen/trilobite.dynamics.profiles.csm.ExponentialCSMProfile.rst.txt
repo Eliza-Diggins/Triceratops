@@ -1,0 +1,36 @@
+ExponentialCSMProfile
+=====================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.ExponentialCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ExponentialCSMProfile.as_callable
+      ~ExponentialCSMProfile.as_optimized_callable
+      ~ExponentialCSMProfile.eval
+      ~ExponentialCSMProfile.feval
+      ~ExponentialCSMProfile.process_arguments
+      ~ExponentialCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ExponentialCSMProfile.OUTPUT_UNITS
+   
+   

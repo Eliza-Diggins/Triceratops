@@ -1,0 +1,36 @@
+CoredPowerLawCSMProfile
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.CoredPowerLawCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~CoredPowerLawCSMProfile.as_callable
+      ~CoredPowerLawCSMProfile.as_optimized_callable
+      ~CoredPowerLawCSMProfile.eval
+      ~CoredPowerLawCSMProfile.feval
+      ~CoredPowerLawCSMProfile.process_arguments
+      ~CoredPowerLawCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~CoredPowerLawCSMProfile.OUTPUT_UNITS
+   
+   

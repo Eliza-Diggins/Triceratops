@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.ElectronDistribution.moment\_between
+============================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. automethod:: ElectronDistribution.moment_between

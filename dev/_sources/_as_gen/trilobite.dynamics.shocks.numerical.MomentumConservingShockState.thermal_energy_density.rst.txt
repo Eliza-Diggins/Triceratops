@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MomentumConservingShockState.thermal\_energy\_density
+=========================================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. autoattribute:: MomentumConservingShockState.thermal_energy_density

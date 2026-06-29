@@ -1,7 +1,5 @@
 :orphan:
 
-.. _synchrotron_gallery:
-
 *****************************
 Synchrotron Emission Examples
 *****************************
@@ -22,7 +20,7 @@ Examples are grouped into four progressive sections:
 
 For the underlying physics, see :ref:`synchrotron_theory` and :ref:`synch_sed_theory`.
 For cooling theory, see :ref:`synchrotron_cooling_theory` and :ref:`electron_cooling`.
-For the API, see :ref:`synchrotron_core`, :ref:`synchrotron_microphysics`, :ref:`synchrotron_seds`,
+For the API, see :ref:`synchrotron_core`, :ref:`synchrotron_seds`,
 and :ref:`synchrotron_cooling`.
 
 
@@ -72,18 +70,18 @@ look the way they do before working with the higher-level SED classes.
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Every synchrotron emitting electron radiates near its characteristic synchrotron frequency \nu_m, which depends on the electron Lorentz factor \gamma and the local magnetic field B:">
+    <div class="sphx-glr-thumbcontainer" tooltip="Trilobite&#x27;s synchrotron framework is built on encapsulated electron distribution classes that package the PDF, moments, normalization, and bolometric emissivity for a given population model.  This example walks through the most common workflows:">
 
 .. only:: html
 
-  .. image:: /auto_examples/synchrotron/a_fundamentals/images/thumb/sphx_glr_plot_frequency_gamma_relation_thumb.png
+  .. image:: /auto_examples/synchrotron/a_fundamentals/images/thumb/sphx_glr_plot_electron_distributions_thumb.png
     :alt:
 
-  :doc:`/auto_examples/synchrotron/a_fundamentals/plot_frequency_gamma_relation`
+  :doc:`/auto_examples/synchrotron/a_fundamentals/plot_electron_distributions`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">The ν–γ–B Relation and Pitch-Angle Effects</div>
+      <div class="sphx-glr-thumbnail-title">Electron Energy Distributions</div>
     </div>
 
 
@@ -106,7 +104,7 @@ configuration, and to understand how spectral slopes change across different reg
 
 **Theory:** :ref:`synch_sed_theory`, :ref:`ssa`
 
-**API:** :ref:`synchrotron_seds`, :ref:`synchrotron_microphysics`
+**API:** :ref:`synchrotron_seds`, :ref:`synchrotron_core`
 
 
 .. raw:: html
@@ -119,6 +117,23 @@ configuration, and to understand how spectral slopes change across different reg
     <div class="sphx-glr-thumbnails">
 
 .. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="Most synchrotron models (including most Trilobite models) treat the emitting region as a single homogeneous zone.  Real astrophysical sources — expanding blast waves in supernovae and GRBs, structured jets, and tidally-disrupted stellar debris — have genuine radial structure: the magnetic field strength, electron density, and SSA opacity all vary with distance from the center.  These inhomogeneities can significantly shape the observed SED.">
+
+.. only:: html
+
+  .. image:: /auto_examples/synchrotron/b_seds/images/thumb/sphx_glr_plot_inhomogeneous_cylinder_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/synchrotron/b_seds/plot_inhomogeneous_cylinder`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Synchrotron SEDs from an Inhomogeneous Cylinder</div>
+    </div>
+
 
 .. raw:: html
 
@@ -139,7 +154,7 @@ configuration, and to understand how spectral slopes change across different reg
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Most synchrotron models treat the emitting region as a single homogeneous zone. The OnAxisAsymmetricSynchrotronEngine generalizes this picture by assigning independent physical conditions to each polar-angle sightline \theta \in [0,\pi/2].">
+    <div class="sphx-glr-thumbcontainer" tooltip="Most synchrotron models treat the emitting region as a single homogeneous zone. OnAxisAsymmetricSynchrotronEngine generalizes this picture by assigning independent physical conditions to each polar-angle sightline \theta \in [0,\pi/2].">
 
 .. only:: html
 
@@ -173,7 +188,24 @@ configuration, and to understand how spectral slopes change across different reg
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="In practice, synchrotron spectra are made much more complex than the idealized scenarios often presented in textbooks (e.g. :footciteRybickiLightman or :footcite1970ranp.book.....P). In the modern literature of supernova and GRB synchrotron modeling, the effect of synchrotron self absorption (SSA) and radiative cooling of the electron population are often included to better match observed spectra (e.g. :footciteGranotSari2002SpectralBreaks).">
+    <div class="sphx-glr-thumbcontainer" tooltip="Radio-bright transients — supernovae interacting with a dense circumstellar medium, GRB afterglows, and tidal disruption event outflows — are often modelled as expanding spherical blast waves.  In the simplest picture the entire emitting volume is assigned a single uniform magnetic field and a single electron density; in reality both decline outward as the shocked shell expands.">
+
+.. only:: html
+
+  .. image:: /auto_examples/synchrotron/b_seds/images/thumb/sphx_glr_plot_inhomogeneous_sphere_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/synchrotron/b_seds/plot_inhomogeneous_sphere`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Synchrotron SEDs from an Inhomogeneous Sphere</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="In practice, synchrotron spectra are considerably more complex than the idealized scenarios discussed in textbooks such as :footciteRybickiLightman or :footcite1970ranp.book.....P. In the modern synchrotron modeling literature for supernovae and GRBs, both synchrotron self-absorption (SSA) and radiative cooling are routinely included to reproduce observed spectra (:footciteGranotSari2002SpectralBreaks).">
 
 .. only:: html
 
@@ -185,6 +217,23 @@ configuration, and to understand how spectral slopes change across different reg
 .. raw:: html
 
       <div class="sphx-glr-thumbnail-title">Synchrotron Spectra With Cooling and SSA</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="For an axisymmetric outflow, the observer need not lie on the symmetry axis. OffAxisAsymmetricSynchrotronEngine extends the on-axis formalism to an arbitrary polar viewing angle \theta_\mathrm{obs} by evaluating the double integral">
+
+.. only:: html
+
+  .. image:: /auto_examples/synchrotron/b_seds/images/thumb/sphx_glr_plot_off_axis_numerical_thumb.png
+    :alt:
+
+  :doc:`/auto_examples/synchrotron/b_seds/plot_off_axis_numerical`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Off-Axis Synchrotron SEDs from Axisymmetric Outflows</div>
     </div>
 
 
@@ -275,7 +324,7 @@ uncertainties through to physical posteriors via MCMC.
 
 **Theory:** :ref:`sed_forward_closure`, :ref:`sed_inverse_closure`, :ref:`synch_equipartition_theory`
 
-**API:** :ref:`synchrotron_microphysics`, :ref:`synchrotron_seds`
+**API:** :ref:`synchrotron_core`, :ref:`synchrotron_seds`
 
 
 .. raw:: html

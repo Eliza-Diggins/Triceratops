@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.process\_arguments
+=================================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. automethod:: BrokenPowerLawEjectaProfile.process_arguments

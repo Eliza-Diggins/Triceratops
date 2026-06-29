@@ -1,0 +1,55 @@
+MixedThermalNonThermal
+=============================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoclass:: trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MixedThermalNonThermal.as_callable
+      ~MixedThermalNonThermal.bol_emiss_from_energy_density
+      ~MixedThermalNonThermal.bol_emiss_from_magnetic_field
+      ~MixedThermalNonThermal.cdf
+      ~MixedThermalNonThermal.logcdf
+      ~MixedThermalNonThermal.logpdf
+      ~MixedThermalNonThermal.logsf
+      ~MixedThermalNonThermal.mean
+      ~MixedThermalNonThermal.mean_energy
+      ~MixedThermalNonThermal.mean_kinetic_energy
+      ~MixedThermalNonThermal.moment
+      ~MixedThermalNonThermal.moment_between
+      ~MixedThermalNonThermal.n_between
+      ~MixedThermalNonThermal.n_eff
+      ~MixedThermalNonThermal.n_eff_between
+      ~MixedThermalNonThermal.n_total
+      ~MixedThermalNonThermal.normalize_from_energy_density
+      ~MixedThermalNonThermal.normalize_from_magnetic_field
+      ~MixedThermalNonThermal.normalize_from_n_eff
+      ~MixedThermalNonThermal.normalize_from_n_total
+      ~MixedThermalNonThermal.pdf
+      ~MixedThermalNonThermal.sf
+      ~MixedThermalNonThermal.std
+      ~MixedThermalNonThermal.support
+      ~MixedThermalNonThermal.var
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~MixedThermalNonThermal.NON_THERMAL_DISTRIBUTION
+   
+   

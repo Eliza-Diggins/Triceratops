@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.LogNormalCSMProfile.OUTPUT\_UNITS
+=================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: LogNormalCSMProfile.OUTPUT_UNITS

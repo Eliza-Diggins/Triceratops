@@ -31,16 +31,16 @@ MechanicalShockState
       ~MechanicalShockState.density_3
       ~MechanicalShockState.energy_2
       ~MechanicalShockState.energy_3
-      ~MechanicalShockState.jump_density_fs
-      ~MechanicalShockState.jump_density_rs
-      ~MechanicalShockState.jump_pressure_fs
-      ~MechanicalShockState.jump_pressure_rs
-      ~MechanicalShockState.jump_temperature_fs
-      ~MechanicalShockState.jump_temperature_rs
-      ~MechanicalShockState.jump_thermal_energy_density_fs
-      ~MechanicalShockState.jump_thermal_energy_density_rs
       ~MechanicalShockState.mass_2
       ~MechanicalShockState.mass_3
+      ~MechanicalShockState.post_shock_density_fs
+      ~MechanicalShockState.post_shock_density_rs
+      ~MechanicalShockState.post_shock_pressure_fs
+      ~MechanicalShockState.post_shock_pressure_rs
+      ~MechanicalShockState.post_shock_temperature_fs
+      ~MechanicalShockState.post_shock_temperature_rs
+      ~MechanicalShockState.post_shock_thermal_energy_density_fs
+      ~MechanicalShockState.post_shock_thermal_energy_density_rs
       ~MechanicalShockState.pressure_2
       ~MechanicalShockState.pressure_3
       ~MechanicalShockState.radius

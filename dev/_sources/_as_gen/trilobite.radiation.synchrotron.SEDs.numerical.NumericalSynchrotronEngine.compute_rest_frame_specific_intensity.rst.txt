@@ -1,4 +1,4 @@
-trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_rest\_frame\_specific\_intensity
+﻿trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_rest\_frame\_specific\_intensity
 ===================================================================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical

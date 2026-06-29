@@ -1,0 +1,36 @@
+SmoothBPLCSMProfile
+===================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.SmoothBPLCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~SmoothBPLCSMProfile.as_callable
+      ~SmoothBPLCSMProfile.as_optimized_callable
+      ~SmoothBPLCSMProfile.eval
+      ~SmoothBPLCSMProfile.feval
+      ~SmoothBPLCSMProfile.process_arguments
+      ~SmoothBPLCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~SmoothBPLCSMProfile.OUTPUT_UNITS
+   
+   

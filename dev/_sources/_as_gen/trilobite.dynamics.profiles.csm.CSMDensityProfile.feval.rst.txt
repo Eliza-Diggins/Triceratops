@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.CSMDensityProfile.feval
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: CSMDensityProfile.feval

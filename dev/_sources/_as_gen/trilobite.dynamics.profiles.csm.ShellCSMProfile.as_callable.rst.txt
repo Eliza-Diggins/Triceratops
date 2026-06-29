@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ShellCSMProfile.as\_callable
+============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ShellCSMProfile.as_callable

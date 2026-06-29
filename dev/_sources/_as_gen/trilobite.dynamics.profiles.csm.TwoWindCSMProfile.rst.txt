@@ -1,0 +1,39 @@
+TwoWindCSMProfile
+=================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.TwoWindCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~TwoWindCSMProfile.as_callable
+      ~TwoWindCSMProfile.as_optimized_callable
+      ~TwoWindCSMProfile.eval
+      ~TwoWindCSMProfile.feval
+      ~TwoWindCSMProfile.normalize
+      ~TwoWindCSMProfile.normalize_A_star
+      ~TwoWindCSMProfile.normalize_from_A_star
+      ~TwoWindCSMProfile.process_arguments
+      ~TwoWindCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~TwoWindCSMProfile.OUTPUT_UNITS
+   
+   

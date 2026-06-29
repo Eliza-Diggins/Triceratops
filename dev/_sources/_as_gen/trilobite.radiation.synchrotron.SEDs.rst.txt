@@ -23,7 +23,6 @@ trilobite.radiation.synchrotron.SEDs
    
       numerical
       one_zone
-      one_zone_closure
    
    
 

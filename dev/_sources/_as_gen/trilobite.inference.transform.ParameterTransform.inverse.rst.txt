@@ -1,0 +1,6 @@
+trilobite.inference.transform.ParameterTransform.inverse
+========================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: ParameterTransform.inverse

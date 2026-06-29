@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ShellCSMProfile.feval
+=====================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ShellCSMProfile.feval

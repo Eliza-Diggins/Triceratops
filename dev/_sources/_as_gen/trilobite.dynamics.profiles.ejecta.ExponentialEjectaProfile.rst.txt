@@ -1,0 +1,40 @@
+ExponentialEjectaProfile
+===========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoclass:: trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ExponentialEjectaProfile.as_callable
+      ~ExponentialEjectaProfile.as_optimized_callable
+      ~ExponentialEjectaProfile.eval
+      ~ExponentialEjectaProfile.feval
+      ~ExponentialEjectaProfile.fkernel
+      ~ExponentialEjectaProfile.kernel
+      ~ExponentialEjectaProfile.normalize
+      ~ExponentialEjectaProfile.process_arguments
+      ~ExponentialEjectaProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ExponentialEjectaProfile.KERNEL_UNITS
+      ~ExponentialEjectaProfile.OUTPUT_UNITS
+   
+   

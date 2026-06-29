@@ -1,0 +1,6 @@
+trilobite.models.TDEs.tde\_utils.compute\_mdot\_peak\_guillochon13
+==================================================================
+
+.. currentmodule:: trilobite.models.TDEs.tde_utils
+
+.. autofunction:: compute_mdot_peak_guillochon13

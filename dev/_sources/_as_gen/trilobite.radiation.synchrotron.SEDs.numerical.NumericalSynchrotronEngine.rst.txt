@@ -1,19 +1,19 @@
-NumericalSynchrotronEngine
+﻿trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine
 =========================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical
 
-.. autoclass:: trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine
+.. autoclass:: NumericalSynchrotronEngine
 
    
+   .. automethod:: __init__
 
    
    .. rubric:: Methods
 
    .. autosummary::
-      :toctree:
-      :recursive:
    
+      ~NumericalSynchrotronEngine.__init__
       ~NumericalSynchrotronEngine.clear
       ~NumericalSynchrotronEngine.compute_absorption
       ~NumericalSynchrotronEngine.compute_avg_first_kernel
@@ -41,8 +41,6 @@ NumericalSynchrotronEngine
    .. rubric:: Attributes
 
    .. autosummary::
-      :toctree:
-      :recursive:
    
       ~NumericalSynchrotronEngine.avg_first_kernel_derivative_interpolator
       ~NumericalSynchrotronEngine.avg_first_kernel_grid

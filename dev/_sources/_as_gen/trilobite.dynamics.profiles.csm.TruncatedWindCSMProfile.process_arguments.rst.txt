@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile.process\_arguments
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: TruncatedWindCSMProfile.process_arguments

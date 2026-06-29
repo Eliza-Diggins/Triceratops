@@ -54,7 +54,7 @@ computed using the standard forward-closure machinery.
 Setup
 -----
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-55
+.. GENERATED FROM PYTHON SOURCE LINES 37-52
 
 .. code-block:: Python
 
@@ -64,12 +64,9 @@ Setup
     from astropy import constants as const
     from astropy import units as u
 
+    from trilobite.dynamics.profiles import BrokenPowerLawEjectaProfile, UniformCSMProfile
     from trilobite.dynamics.shocks.numerical import PressureDrivenThinShellShockEngine
-    from trilobite.dynamics.shocks.utils import (
-        get_bpl_ejecta_kernel,
-        get_uniform_csm_density_func,
-        make_homologous_stationary_sources,
-    )
+    from trilobite.dynamics.shocks.utils import make_homologous_stationary_sources
     from trilobite.radiation.synchrotron import PowerLaw_Cooling_SSA_SynchrotronSED
     from trilobite.radiation.synchrotron.cooling import SynchrotronRadiativeCoolingEngine
     from trilobite.utils.plot_utils import set_plot_style
@@ -83,7 +80,7 @@ Setup
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-62
+.. GENERATED FROM PYTHON SOURCE LINES 53-59
 
 Physical Parameters
 -------------------
@@ -92,7 +89,7 @@ We set the launch velocity to :math:`0.3\,c` and kinetic energy to
 :math:`10^{50}` erg, then derive the ejecta mass from the kinetic energy
 relation :math:`E_{\rm ej} = \tfrac{1}{2} M_{\rm ej} v^2`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-92
+.. GENERATED FROM PYTHON SOURCE LINES 59-89
 
 .. code-block:: Python
 
@@ -143,7 +140,7 @@ relation :math:`E_{\rm ej} = \tfrac{1}{2} M_{\rm ej} v^2`.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 93-106
+.. GENERATED FROM PYTHON SOURCE LINES 90-103
 
 Shock Dynamics in Uniform ISM
 ------------------------------
@@ -154,19 +151,20 @@ sweeps up mass. Initially the ejecta are in **free expansion**
 (:math:`R \propto t^{2/5}`) once the swept-up mass equals the ejecta mass.
 With these parameters the transition occurs at roughly 500 days.
 
-We use :func:`~trilobite.dynamics.shocks.utils.get_uniform_csm_density_func`
-and :func:`~trilobite.dynamics.shocks.utils.get_bpl_ejecta_kernel` to build
+We use :class:`~trilobite.dynamics.profiles.csm.UniformCSMProfile` and
+:class:`~trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile` to build
 the upstream source callables, then combine them with
 :func:`~trilobite.dynamics.shocks.utils.make_homologous_stationary_sources`.
 
-.. GENERATED FROM PYTHON SOURCE LINES 106-131
+.. GENERATED FROM PYTHON SOURCE LINES 103-129
 
 .. code-block:: Python
 
 
-    rho_csm = get_uniform_csm_density_func(rho_ISM)
-    G_ej = get_bpl_ejecta_kernel(E_ej, M_ej, n=10, delta=0)
-    rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(G_ej=G_ej, rho_csm=rho_csm)
+    rho_csm = UniformCSMProfile.as_optimized_callable(rho_0=rho_ISM)
+    K, v_t = BrokenPowerLawEjectaProfile.normalize(E_ej, M_ej, n=10, delta=0)
+    rho_ej = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K, v_t=v_t, n=10, delta=0)
+    rho_1, u_1, rho_4, u_4 = make_homologous_stationary_sources(rho_ej, rho_csm)
 
     t_init = 10.0 * u.day
     R_init = (v_init * t_init).to(u.cm)
@@ -195,7 +193,7 @@ the upstream source callables, then combine them with
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 132-137
+.. GENERATED FROM PYTHON SOURCE LINES 130-135
 
 Sedov-Taylor Transition
 -----------------------
@@ -203,7 +201,7 @@ Sedov-Taylor Transition
 We estimate the Sedov-Taylor transition time as the moment when the
 swept-up ISM mass equals the ejecta mass.
 
-.. GENERATED FROM PYTHON SOURCE LINES 137-176
+.. GENERATED FROM PYTHON SOURCE LINES 135-174
 
 .. code-block:: Python
 
@@ -268,7 +266,7 @@ swept-up ISM mass equals the ejecta mass.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 177-195
+.. GENERATED FROM PYTHON SOURCE LINES 175-193
 
 Post-Shock Magnetic Field
 --------------------------
@@ -289,7 +287,7 @@ and the equipartition magnetic field is
 
     B = \sqrt{8\pi\,\epsilon_B\,e_{\rm th}}.
 
-.. GENERATED FROM PYTHON SOURCE LINES 195-206
+.. GENERATED FROM PYTHON SOURCE LINES 193-204
 
 .. code-block:: Python
 
@@ -314,12 +312,12 @@ and the equipartition magnetic field is
 
 
     B-field range : 0.0055 G - 0.0478 G
-    gamma_c range : 3.1e+04 - 2.0e+05
+    gamma_c range : 4.6e+04 - 2.9e+05
 
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 207-213
+.. GENERATED FROM PYTHON SOURCE LINES 205-211
 
 Synchrotron Radio Light Curves
 --------------------------------
@@ -328,7 +326,7 @@ We compute the synchrotron SED at each epoch using the
 :class:`~trilobite.radiation.synchrotron.SEDs.PowerLaw_Cooling_SSA_SynchrotronSED`
 forward closure and evaluate the predicted flux at 1.4, 5, and 15 GHz.
 
-.. GENERATED FROM PYTHON SOURCE LINES 213-246
+.. GENERATED FROM PYTHON SOURCE LINES 211-244
 
 .. code-block:: Python
 
@@ -372,7 +370,7 @@ forward closure and evaluate the predicted flux at 1.4, 5, and 15 GHz.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 247-255
+.. GENERATED FROM PYTHON SOURCE LINES 245-253
 
 Plot Radio Light Curves
 -----------------------
@@ -383,7 +381,7 @@ peaks near the Sedov-Taylor transition, then declines as the shock
 decelerates. Lower frequencies peak later because the SSA absorption
 frequency :math:`\nu_a` falls with time.
 
-.. GENERATED FROM PYTHON SOURCE LINES 255-274
+.. GENERATED FROM PYTHON SOURCE LINES 253-272
 
 .. code-block:: Python
 
@@ -418,7 +416,7 @@ frequency :math:`\nu_a` falls with time.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 275-282
+.. GENERATED FROM PYTHON SOURCE LINES 273-280
 
 Energy Scaling: Effect of Outflow Energy
 -----------------------------------------
@@ -428,7 +426,7 @@ values of :math:`E_{\rm ej}` while keeping the launch velocity fixed at
 :math:`0.3\,c`, so the ejecta mass scales as :math:`M_{\rm ej} = 2 E_{\rm ej} / v^2`
 for each case.
 
-.. GENERATED FROM PYTHON SOURCE LINES 282-353
+.. GENERATED FROM PYTHON SOURCE LINES 280-352
 
 .. code-block:: Python
 
@@ -441,8 +439,9 @@ for each case.
     for E, label, color in zip(E_ej_values, E_labels, ["C0", "C1", "C2"]):
         M_ej_E = (2.0 * E / v_init**2).to(u.M_sun)
 
-        G_ej_E = get_bpl_ejecta_kernel(E, M_ej_E, n=10, delta=0)
-        rho_1_E, u_1_E, rho_4_E, u_4_E = make_homologous_stationary_sources(G_ej=G_ej_E, rho_csm=rho_csm)
+        K_E, v_t_E = BrokenPowerLawEjectaProfile.normalize(E, M_ej_E, n=10, delta=0)
+        rho_ej_E = BrokenPowerLawEjectaProfile.as_optimized_callable(K=K_E, v_t=v_t_E, n=10, delta=0)
+        rho_1_E, u_1_E, rho_4_E, u_4_E = make_homologous_stationary_sources(rho_ej_E, rho_csm)
 
         state_E = shock_engine.compute_shock_properties(
             times,
@@ -515,7 +514,7 @@ for each case.
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 354-375
+.. GENERATED FROM PYTHON SOURCE LINES 353-374
 
 Interpretation
 ---------------
@@ -542,7 +541,7 @@ particle acceleration at the shock.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 4.839 seconds)
+   **Total running time of the script:** (0 minutes 3.663 seconds)
 
 
 .. _sphx_glr_download_auto_examples_modeling_plot_tde_radio_afterglow.py:

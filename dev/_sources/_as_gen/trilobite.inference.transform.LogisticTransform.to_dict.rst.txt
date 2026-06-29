@@ -1,0 +1,6 @@
+trilobite.inference.transform.LogisticTransform.to\_dict
+========================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: LogisticTransform.to_dict

@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/accretion/one_zone/core';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -544,6 +544,7 @@
     <span class="p">}</span>
     <span class="n">RUNTIME_PARAMETERS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_RUNTIME_PARAMETERS</span>
     <span class="n">INITIAL_CONDITIONS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">BASE_INITIAL_CONDITIONS</span>
+    <span class="c1">#: Ordered mapping of output field names to their column indices in the result array.</span>
     <span class="n">RESULT_FIELDS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_RESULT_FIELDS</span>
     <span class="n">CYTHON_FIELD_MAP</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_CYTHON_FIELD_MAP</span>
 
@@ -561,11 +562,11 @@
 <span class="sd">        mu : float, optional</span>
 <span class="sd">            Mean molecular weight of the disk gas (dimensionless).</span>
 <span class="sd">            Default ``0.6``.</span>
-<span class="sd">        opacity : str or ~trilobite.radiation.opacity.base.GreyOpacityLaw, optional</span>
+<span class="sd">        opacity : str or ~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw, optional</span>
 <span class="sd">            Opacity model.  Accepted strings: ``&quot;electron_scattering&quot;`` (default),</span>
 <span class="sd">            ``&quot;kramers_ff&quot;``, ``&quot;kramers_bf&quot;``, ``&quot;kramers&quot;``,</span>
 <span class="sd">            ``&quot;kramers_ff_es&quot;``, ``&quot;kramers_bf_es&quot;``, ``&quot;kramers_es&quot;``.</span>
-<span class="sd">            A :class:`~trilobite.radiation.opacity.base.GreyOpacityLaw` instance</span>
+<span class="sd">            A :class:`~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw` instance</span>
 <span class="sd">            may also be passed directly.</span>
 <span class="sd">        fallback : bool, optional</span>
 <span class="sd">            If ``True``, enable a power-law debris-stream mass supply.  The</span>
@@ -673,6 +674,7 @@
     <span class="p">}</span>
     <span class="n">RUNTIME_PARAMETERS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_RUNTIME_PARAMETERS</span>
     <span class="n">INITIAL_CONDITIONS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">BASE_INITIAL_CONDITIONS</span>
+    <span class="c1">#: Ordered mapping of output field names to their column indices in the result array.</span>
     <span class="n">RESULT_FIELDS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_RESULT_FIELDS</span>
     <span class="n">CYTHON_FIELD_MAP</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_CYTHON_FIELD_MAP</span>
 
@@ -690,11 +692,11 @@
 <span class="sd">        mu : float, optional</span>
 <span class="sd">            Mean molecular weight of the disk gas (dimensionless).</span>
 <span class="sd">            Default ``0.6``.</span>
-<span class="sd">        opacity : str or ~trilobite.radiation.opacity.base.GreyOpacityLaw, optional</span>
+<span class="sd">        opacity : str or ~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw, optional</span>
 <span class="sd">            Opacity model.  Accepted strings: ``&quot;electron_scattering&quot;`` (default),</span>
 <span class="sd">            ``&quot;kramers_ff&quot;``, ``&quot;kramers_bf&quot;``, ``&quot;kramers&quot;``,</span>
 <span class="sd">            ``&quot;kramers_ff_es&quot;``, ``&quot;kramers_bf_es&quot;``, ``&quot;kramers_es&quot;``.</span>
-<span class="sd">            A :class:`~trilobite.radiation.opacity.base.GreyOpacityLaw` instance</span>
+<span class="sd">            A :class:`~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw` instance</span>
 <span class="sd">            may also be passed directly.</span>
 <span class="sd">        fallback : bool, optional</span>
 <span class="sd">            If ``True``, enable a power-law debris-stream mass supply.  The</span>
@@ -776,11 +778,11 @@
 <span class="sd">        Default ``0.6``.</span>
 <span class="sd">    xi : float, optional</span>
 <span class="sd">        Entropy gradient parameter (dimensionless, &gt; 0).  Default ``0.5``.</span>
-<span class="sd">    opacity : str or ~trilobite.radiation.opacity.base.GreyOpacityLaw, optional</span>
+<span class="sd">    opacity : str or ~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw, optional</span>
 <span class="sd">        Opacity model.  Accepted strings: ``&quot;electron_scattering&quot;`` (default),</span>
 <span class="sd">        ``&quot;kramers_ff&quot;``, ``&quot;kramers_bf&quot;``, ``&quot;kramers&quot;``,</span>
 <span class="sd">        ``&quot;kramers_ff_es&quot;``, ``&quot;kramers_bf_es&quot;``, ``&quot;kramers_es&quot;``.</span>
-<span class="sd">        A :class:`~trilobite.radiation.opacity.base.GreyOpacityLaw` instance</span>
+<span class="sd">        A :class:`~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw` instance</span>
 <span class="sd">        may also be passed directly.</span>
 <span class="sd">    fallback : bool, optional</span>
 <span class="sd">        If ``True``, enable a power-law debris-stream mass supply.</span>
@@ -837,6 +839,7 @@
     <span class="p">}</span>
     <span class="n">RUNTIME_PARAMETERS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">FALLBACK_RUNTIME_PARAMETERS</span>
     <span class="n">INITIAL_CONDITIONS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">BASE_INITIAL_CONDITIONS</span>
+    <span class="c1">#: Ordered mapping of output field names to their column indices in the result array.</span>
     <span class="n">RESULT_FIELDS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">ADV_FB_RESULT_FIELDS</span>
     <span class="n">CYTHON_FIELD_MAP</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="n">ADV_FB_CYTHON_FIELD_MAP</span>
 
@@ -936,8 +939,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -971,7 +974,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

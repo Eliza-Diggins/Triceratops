@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.LogNormalCSMProfile.process\_arguments
+======================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: LogNormalCSMProfile.process_arguments

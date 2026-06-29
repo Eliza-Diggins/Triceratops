@@ -1,0 +1,36 @@
+ConstantVelocityProfile
+============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. autoclass:: trilobite.dynamics.profiles.velocity.ConstantVelocityProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ConstantVelocityProfile.as_callable
+      ~ConstantVelocityProfile.as_optimized_callable
+      ~ConstantVelocityProfile.eval
+      ~ConstantVelocityProfile.feval
+      ~ConstantVelocityProfile.process_arguments
+      ~ConstantVelocityProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ConstantVelocityProfile.OUTPUT_UNITS
+   
+   

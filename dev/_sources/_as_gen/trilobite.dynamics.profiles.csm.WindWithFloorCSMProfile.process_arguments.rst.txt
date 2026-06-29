@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile.process\_arguments
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindWithFloorCSMProfile.process_arguments

@@ -47,7 +47,7 @@ the various algorithms.
     .. grid-item-card:: Usage Reference
 
         - :ref:`synchrotron_core` -- kernel functions, single-electron spectra
-        - :ref:`synchrotron_microphysics` -- distributions, equipartition closure
+        - :ref:`synchrotron_electron_distributions` -- distributions, equipartition closure
         - :ref:`synchrotron_seds` -- one-zone SED models and spectrum inversion
         - :ref:`synchrotron_cooling` -- radiative cooling engines
 
@@ -68,7 +68,7 @@ the various algorithms.
 
     synchrotron/synchrotron_overview
     synchrotron/synchrotron_core
-    synchrotron/synchrotron_microphysics
+    synchrotron/synchrotron_electron_distributions
     synchrotron/synchrotron_seds
     synchrotron/synchrotron_cooling
     synchrotron/synchrotron_theory

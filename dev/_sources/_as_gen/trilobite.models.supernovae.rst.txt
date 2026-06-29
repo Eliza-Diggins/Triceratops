@@ -1,4 +1,4 @@
-﻿trilobite.models.supernovae
+trilobite.models.supernovae
 ===========================
 
 .. automodule:: trilobite.models.supernovae

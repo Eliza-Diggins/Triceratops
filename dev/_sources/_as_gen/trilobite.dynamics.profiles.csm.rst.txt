@@ -1,0 +1,51 @@
+trilobite.dynamics.profiles.csm
+===============================
+
+.. automodule:: trilobite.dynamics.profiles.csm
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      BrokenPowerLawCSMProfile
+      CSMDensityProfile
+      CoredPowerLawCSMProfile
+      ExponentialCSMProfile
+      FiniteWindCSMProfile
+      GaussianShellCSMProfile
+      LogNormalCSMProfile
+      PowerLawCSMProfile
+      ShellCSMProfile
+      SmoothBPLCSMProfile
+      SmoothTruncatedWindCSMProfile
+      StationaryCSMDensityProfile
+      TruncatedWindCSMProfile
+      TwoWindCSMProfile
+      UniformCSMProfile
+      WindBubbleCSMProfile
+      WindCSMProfile
+      WindWithFloorCSMProfile
+   
+   
+
+   
+   
+   

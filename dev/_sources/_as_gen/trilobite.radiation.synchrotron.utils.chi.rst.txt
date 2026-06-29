@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.utils.chi
+=========================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.utils
+
+.. autodata:: chi

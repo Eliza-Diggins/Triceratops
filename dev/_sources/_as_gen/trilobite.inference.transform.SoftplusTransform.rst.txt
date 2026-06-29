@@ -1,0 +1,27 @@
+SoftplusTransform
+===============================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. autoclass:: trilobite.inference.transform.SoftplusTransform
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~SoftplusTransform.forward
+      ~SoftplusTransform.from_dict
+      ~SoftplusTransform.inverse
+      ~SoftplusTransform.log_abs_det_jacobian
+      ~SoftplusTransform.to_dict
+   
+   
+
+   
+   
+   

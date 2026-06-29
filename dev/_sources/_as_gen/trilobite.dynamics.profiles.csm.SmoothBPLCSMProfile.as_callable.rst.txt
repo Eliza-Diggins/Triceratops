@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.SmoothBPLCSMProfile.as\_callable
+================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: SmoothBPLCSMProfile.as_callable

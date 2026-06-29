@@ -1,4 +1,4 @@
-trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_source\_function
+﻿trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_source\_function
 ===================================================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical

@@ -15,6 +15,7 @@ MomentumConservingShockEngine
       :recursive:
    
       ~MomentumConservingShockEngine.compute_shock_properties
+      ~MomentumConservingShockEngine.generate_evaluation_kernel
    
    
 

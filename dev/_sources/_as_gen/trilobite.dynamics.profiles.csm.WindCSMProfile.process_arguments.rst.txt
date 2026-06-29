@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.process\_arguments
+=================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.process_arguments

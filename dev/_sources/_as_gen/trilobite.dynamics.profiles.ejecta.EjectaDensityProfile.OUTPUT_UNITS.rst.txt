@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.OUTPUT\_UNITS
+=====================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoattribute:: EjectaDensityProfile.OUTPUT_UNITS

@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -57,7 +57,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'auto_examples/synchrotron/c_cooling/plot_synchrotron_cooling_engine';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -426,14 +426,17 @@
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../index.html">Synchrotron Emission Examples</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../a_fundamentals/index.html">Synchrotron Fundamentals</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../a_fundamentals/plot_frequency_gamma_relation.html">The ν–γ–B Relation and Pitch-Angle Effects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../a_fundamentals/plot_electron_distributions.html">Electron Energy Distributions</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../b_seds/index.html">Spectral Energy Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_inhomogeneous_cylinder.html">Synchrotron SEDs from an Inhomogeneous Cylinder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_multi_component_numerical_SED.html">Multi-Component Synchrotron SEDs with the Numerical Engine</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_on_axis_numerical.html">On-Axis Asymmetric Synchrotron SEDs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_sed_model_comparison.html">Comparing Synchrotron SED Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_inhomogeneous_sphere.html">Synchrotron SEDs from an Inhomogeneous Sphere</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_SSA_cooling_SED.html">Synchrotron Spectra With Cooling and SSA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../b_seds/plot_off_axis_numerical.html">Off-Axis Synchrotron SEDs from Axisymmetric Outflows</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="index.html">Electron Cooling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
@@ -472,14 +475,30 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../dynamics/index.html">Shock Dynamics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_rh_jump_weak_conditions.html">Weak vs Strong Shock Jump Conditions (Cold Medium)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_numerical_shock_engine.html">Numerical Thin-Shell Shock Evolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_rh_jump_conditions.html">Rankine–Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_mechanical_shock_cooling.html">Radiative Cooling in the Mechanical Shock Engine</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_mechanical_shock_model.html">Mechanical Shock Model: Forward and Reverse Shock Evolution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_relativistic_thin_shell_convergence.html">Relativistic vs. Non-Relativistic Thin-Shell Convergence</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_numerical_shocks_csms.html">SNe Shocks In Different CSM Environments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../dynamics/plot_chevalier_shock_structure.html">Chevalier Self-Similar Shock Structure</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dynamics/a_fundamentals/index.html">Shock Physics Basics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/a_fundamentals/plot_rh_jump_weak_conditions.html">Weak vs Strong Shock Jump Conditions (Cold Medium)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/a_fundamentals/plot_rh_jump_conditions.html">Rankine–Hugoniot Jump Conditions: Newtonian to Ultra-Relativistic</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dynamics/b_models/index.html">Self-Similar Shock Models</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_wind_engine.html">Chevalier Self-Similar Shock in a Steady Wind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_self_similar.html">Chevalier Self-Similar Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_two_shock.html">Two-Shock Chevalier Self-Similar Evolution in a Steady Wind</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_sedov_taylor_shock.html">Chevalier and Sedov-Taylor Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_blandford_mcKee.html">Blandford-McKee Ultra-Relativistic Blast Wave</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/b_models/plot_chevalier_shock_structure.html">Chevalier Self-Similar Shock Structure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../dynamics/c_engines/index.html">Numerical Shock Engines</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_numerical_shock_engine.html">Numerical Thin-Shell Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_mechanical_shock_cooling.html">Radiative Cooling in the Mechanical Shock Engine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_mechanical_shock_model.html">Mechanical Shock Model: Forward and Reverse Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_momentum_conserving_shock.html">Momentum-Conserving Snowplow Shock Evolution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_relativistic_thin_shell_convergence.html">Relativistic vs. Non-Relativistic Thin-Shell Convergence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_mechanical_shocks_csms.html">MechanicalShockEngine: Forward and Reverse Shocks in Different CSM Environments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../dynamics/c_engines/plot_numerical_shocks_csms.html">SNe Shocks In Different CSM Environments</a></li>
+</ul>
+</details></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../modeling/index.html">Forward Modeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -603,22 +622,18 @@ at which electrons cool significantly within the dynamical time:</p>
 \[\gamma_c = \frac{6\pi m_e c}{\sigma_T B^2 t_{\rm dyn}}\]</div>
 <p>Electrons with <span class="math notranslate nohighlight">\(\gamma &gt; \gamma_c\)</span> are in the fast-cooling regime;
 those with <span class="math notranslate nohighlight">\(\gamma &lt; \gamma_c\)</span> are in the slow-cooling regime.</p>
-<p>This example demonstrates the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code>
-class which encapsulates all of these calculations.</p>
+<p>This example demonstrates
+<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.html#trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine" title="trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code></a>,
+which encapsulates all of these calculations.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code>
+<p><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.html#trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine" title="trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code></a>
 must be imported directly from
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron.cooling</span></code>.  The top-level
-<code class="xref py py-mod docutils literal notranslate"><span class="pre">radiation.synchrotron</span></code> namespace only exports the abstract
-base class <code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronCoolingEngine</span></code>.</p>
+<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.html#module-trilobite.radiation.synchrotron.cooling" title="trilobite.radiation.synchrotron.cooling"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trilobite.radiation.synchrotron.cooling</span></code></a>.  The top-level
+<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.html#module-trilobite.radiation.synchrotron" title="trilobite.radiation.synchrotron"><code class="xref py py-mod docutils literal notranslate"><span class="pre">trilobite.radiation.synchrotron</span></code></a> namespace only exports the abstract
+base class
+<a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.SynchrotronCoolingEngine.html#trilobite.radiation.synchrotron.cooling.SynchrotronCoolingEngine" title="trilobite.radiation.synchrotron.cooling.SynchrotronCoolingEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronCoolingEngine</span></code></a>.</p>
 </div>
-<section id="relevant-api-references">
-<h2>Relevant API References<a class="headerlink" href="#relevant-api-references" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code></p></li>
-</ul>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
@@ -627,14 +642,14 @@ base class <code class="xref py py-class docutils literal notranslate"><span cla
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.plot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">set_plot_style</span>
 </pre></div>
 </div>
-</section>
 <section id="engine-instantiation">
 <h2>Engine Instantiation<a class="headerlink" href="#engine-instantiation" title="Link to this heading">#</a></h2>
-<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code>
+<p><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.html#trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine" title="trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">SynchrotronRadiativeCoolingEngine</span></code></a>
 is a stateless engine: physical parameters are passed at call time, not stored
-at construction.  The only configuration choice at instantiation is whether to
-use the pitch-angle averaged loss rate (default, <code class="docutils literal notranslate"><span class="pre">pitch_averaged=True</span></code>).</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">SynchrotronRadiativeCoolingEngine</span></a><span class="p">(</span><span class="n">pitch_averaged</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+at construction.  All cooling rates are ensemble-averaged over an isotropic
+pitch-angle distribution by default; a specific pitch angle may be supplied
+via <code class="docutils literal notranslate"><span class="pre">sin_alpha</span></code> to any <code class="docutils literal notranslate"><span class="pre">compute_*</span></code> method.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <a href="https://docs.python.org/3/library/abc.html#abc.ABC" title="abc.ABC" class="sphx-glr-backref-module-abc sphx-glr-backref-type-py-class"><span class="n">SynchrotronRadiativeCoolingEngine</span></a><span class="p">()</span>
 
 <span class="c1"># Lorentz factor grid</span>
 <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">gamma_arr</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.geomspace.html#numpy.geomspace" title="numpy.geomspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">geomspace</span></a><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">1e8</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
@@ -676,7 +691,7 @@ In log–log space this is a slope-2 line whose intercept increases by
 <img src="../../../_images/sphx_glr_plot_synchrotron_cooling_engine_001.png" srcset="../../../_images/sphx_glr_plot_synchrotron_cooling_engine_001.png" alt="Synchrotron Cooling Rate vs Lorentz Factor" class = "sphx-glr-single-img"/></section>
 <section id="section-2-cooling-time-vs-and-the-cooling-lorentz-factor">
 <h2>Section 2: Cooling Time vs γ and the Cooling Lorentz Factor<a class="headerlink" href="#section-2-cooling-time-vs-and-the-cooling-lorentz-factor" title="Link to this heading">#</a></h2>
-<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_cooling_time()</span></code>
+<p><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.compute_cooling_time.html#trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.compute_cooling_time" title="trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.compute_cooling_time"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_cooling_time()</span></code></a>
 returns <span class="math notranslate nohighlight">\(t_{\rm cool}(\gamma, B)\)</span>.  We overlay a representative
 dynamical time <span class="math notranslate nohighlight">\(t_{\rm dyn}\)</span> and identify the crossing point
 <span class="math notranslate nohighlight">\(\gamma_c\)</span> where <span class="math notranslate nohighlight">\(t_{\rm cool} = t_{\rm dyn}\)</span>.</p>
@@ -751,7 +766,7 @@ slow-cooling.</p>
 <p>The synchrotron frequency of the cooling electron,
 <span class="math notranslate nohighlight">\(\nu_c = \nu_{\rm synch}(\gamma_c, B)\)</span>, traces a
 characteristic <strong>cooling track</strong> as a function of <span class="math notranslate nohighlight">\(t_{\rm dyn}\)</span>.</p>
-<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_characteristic_frequency()</span></code>
+<p><a class="reference internal" href="../../../_as_gen/trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.compute_characteristic_frequency.html#trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.compute_characteristic_frequency" title="trilobite.radiation.synchrotron.cooling.SynchrotronRadiativeCoolingEngine.compute_characteristic_frequency"><code class="xref py py-meth docutils literal notranslate"><span class="pre">compute_characteristic_frequency()</span></code></a>
 combines <span class="math notranslate nohighlight">\(\gamma_c(B, t)\)</span> and <span class="math notranslate nohighlight">\(\nu(\gamma, B)\)</span> into a
 single convenience method.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.astropy.org/en/stable/api/astropy.units.Quantity.html#astropy.units.Quantity" title="astropy.units.Quantity" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">t_dyn_arr</span></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.geomspace.html#numpy.geomspace" title="numpy.geomspace" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-function"><span class="n">np</span><span class="o">.</span><span class="n">geomspace</span></a><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span> <span class="o">*</span> <a href="https://docs.astropy.org/en/stable/api/astropy.units.Unit.html#astropy.units.Unit" title="astropy.units.Unit" class="sphx-glr-backref-module-astropy-units sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">u</span><span class="o">.</span><span class="n">day</span></a>
@@ -782,7 +797,11 @@ single convenience method.</p>
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../../_images/sphx_glr_plot_synchrotron_cooling_engine_004.png" srcset="../../../_images/sphx_glr_plot_synchrotron_cooling_engine_004.png" alt="The Synchrotron Cooling Frequency Track" class = "sphx-glr-single-img"/></section>
+<img src="../../../_images/sphx_glr_plot_synchrotron_cooling_engine_004.png" srcset="../../../_images/sphx_glr_plot_synchrotron_cooling_engine_004.png" alt="The Synchrotron Cooling Frequency Track" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/home/runner/work/Trilobite/Trilobite/docs/source/galleries/synchrotron/c_cooling/plot_synchrotron_cooling_engine.py:196: RuntimeWarning: Synchrotron cooling Lorentz factor gamma_c &lt; 1 (unphysical). Check that B and t are physical.
+  engine.compute_characteristic_frequency(B=B, gamma=engine.compute_cooling_gamma(B=B, t=t)).to_value(u.Hz)
+</pre></div>
+</div>
+</section>
 <section id="discussion">
 <h2>Discussion<a class="headerlink" href="#discussion" title="Link to this heading">#</a></h2>
 <p>The synchrotron cooling engine provides a self-consistent calculation of all
@@ -802,7 +821,7 @@ rapidly with time, eventually leaving the observing band.</p></li>
 <p>For the role of inverse Compton cooling (which modifies <span class="math notranslate nohighlight">\(\gamma_c\)</span>
 when an external radiation field is present) see the companion example on
 synchrotron vs IC cooling.</p>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.444 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 1.227 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-synchrotron-c-cooling-plot-synchrotron-cooling-engine-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../../_downloads/051f0819d14b62549d8190f0c4ce518c/plot_synchrotron_cooling_engine.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_synchrotron_cooling_engine.ipynb</span></code></a></p>
@@ -865,7 +884,6 @@ synchrotron vs IC cooling.</p>
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relevant-api-references">Relevant API References</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#engine-instantiation">Engine Instantiation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#section-1-cooling-rate-de-dt-vs">Section 1: Cooling Rate dE/dt vs γ</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#section-2-cooling-time-vs-and-the-cooling-lorentz-factor">Section 2: Cooling Time vs γ and the Cooling Lorentz Factor</a></li>
@@ -897,8 +915,8 @@ synchrotron vs IC cooling.</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -932,7 +950,7 @@ synchrotron vs IC cooling.</p>
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

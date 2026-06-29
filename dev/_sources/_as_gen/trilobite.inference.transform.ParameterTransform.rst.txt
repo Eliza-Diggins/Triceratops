@@ -1,0 +1,27 @@
+ParameterTransform
+================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. autoclass:: trilobite.inference.transform.ParameterTransform
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ParameterTransform.forward
+      ~ParameterTransform.from_dict
+      ~ParameterTransform.inverse
+      ~ParameterTransform.log_abs_det_jacobian
+      ~ParameterTransform.to_dict
+   
+   
+
+   
+   
+   

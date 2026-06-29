@@ -1,0 +1,37 @@
+WindBubbleCSMProfile
+====================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.WindBubbleCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~WindBubbleCSMProfile.as_callable
+      ~WindBubbleCSMProfile.as_optimized_callable
+      ~WindBubbleCSMProfile.eval
+      ~WindBubbleCSMProfile.feval
+      ~WindBubbleCSMProfile.normalize
+      ~WindBubbleCSMProfile.process_arguments
+      ~WindBubbleCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~WindBubbleCSMProfile.OUTPUT_UNITS
+   
+   

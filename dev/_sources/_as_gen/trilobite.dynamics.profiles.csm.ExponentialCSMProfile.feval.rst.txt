@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.ExponentialCSMProfile.feval
+===========================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: ExponentialCSMProfile.feval

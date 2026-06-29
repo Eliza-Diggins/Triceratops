@@ -1,4 +1,4 @@
-trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_emissivity
+﻿trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute\_emissivity
 =============================================================================================
 
 .. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical

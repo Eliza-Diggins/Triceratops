@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.velocity.ConstantVelocityProfile.OUTPUT\_UNITS
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. autoattribute:: ConstantVelocityProfile.OUTPUT_UNITS

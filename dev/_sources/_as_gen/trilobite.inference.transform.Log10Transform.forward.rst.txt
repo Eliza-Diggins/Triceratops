@@ -1,0 +1,6 @@
+trilobite.inference.transform.Log10Transform.forward
+====================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: Log10Transform.forward

@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindWithFloorCSMProfile.as\_optimized\_callable
+===============================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindWithFloorCSMProfile.as_optimized_callable

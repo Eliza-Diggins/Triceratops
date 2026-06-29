@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.electron\_distributions.MixedThermalNonThermal.NON\_THERMAL\_DISTRIBUTION
+=========================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoattribute:: MixedThermalNonThermal.NON_THERMAL_DISTRIBUTION

@@ -1,0 +1,36 @@
+HomologousVelocityProfile
+==============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. autoclass:: trilobite.dynamics.profiles.velocity.HomologousVelocityProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~HomologousVelocityProfile.as_callable
+      ~HomologousVelocityProfile.as_optimized_callable
+      ~HomologousVelocityProfile.eval
+      ~HomologousVelocityProfile.feval
+      ~HomologousVelocityProfile.process_arguments
+      ~HomologousVelocityProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~HomologousVelocityProfile.OUTPUT_UNITS
+   
+   

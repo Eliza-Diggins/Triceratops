@@ -1,0 +1,37 @@
+trilobite.dynamics.profiles
+===========================
+
+.. automodule:: trilobite.dynamics.profiles
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Modules
+
+   .. autosummary::
+      :toctree:
+      :template: module.rst
+      :recursive:
+
+   
+      core
+      csm
+      ejecta
+      velocity
+   
+   
+
+   
+   
+   
+
+   
+   
+   

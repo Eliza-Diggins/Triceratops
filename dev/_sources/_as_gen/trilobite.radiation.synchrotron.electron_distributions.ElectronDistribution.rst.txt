@@ -1,0 +1,47 @@
+ElectronDistribution
+===========================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.electron_distributions
+
+.. autoclass:: trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~ElectronDistribution.as_callable
+      ~ElectronDistribution.bol_emiss_from_energy_density
+      ~ElectronDistribution.bol_emiss_from_magnetic_field
+      ~ElectronDistribution.cdf
+      ~ElectronDistribution.logcdf
+      ~ElectronDistribution.logpdf
+      ~ElectronDistribution.logsf
+      ~ElectronDistribution.mean
+      ~ElectronDistribution.mean_energy
+      ~ElectronDistribution.mean_kinetic_energy
+      ~ElectronDistribution.moment
+      ~ElectronDistribution.moment_between
+      ~ElectronDistribution.n_between
+      ~ElectronDistribution.n_eff
+      ~ElectronDistribution.n_eff_between
+      ~ElectronDistribution.n_total
+      ~ElectronDistribution.normalize_from_energy_density
+      ~ElectronDistribution.normalize_from_magnetic_field
+      ~ElectronDistribution.normalize_from_n_eff
+      ~ElectronDistribution.normalize_from_n_total
+      ~ElectronDistribution.pdf
+      ~ElectronDistribution.sf
+      ~ElectronDistribution.std
+      ~ElectronDistribution.support
+      ~ElectronDistribution.var
+   
+   
+
+   
+   
+   

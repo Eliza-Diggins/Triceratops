@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.utils.compute\_c5c6\_ratio
+==========================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.utils
+
+.. autofunction:: compute_c5c6_ratio

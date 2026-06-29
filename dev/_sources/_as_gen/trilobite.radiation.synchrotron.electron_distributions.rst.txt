@@ -1,0 +1,50 @@
+trilobite.radiation.synchrotron.electron_distributions
+======================================================
+
+.. automodule:: trilobite.radiation.synchrotron.electron_distributions
+
+   
+   
+   
+
+   
+   
+   .. rubric:: Functions
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+
+   
+      equipartition_electron_energy
+      equipartition_magnetic_field
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      BrokenPowerLaw
+      ElectronDistribution
+      MaxwellJuettner
+      MaxwellJuettnerBrokenPowerLaw
+      MaxwellJuettnerPowerLaw
+      MixedThermalNonThermal
+      PowerLaw
+   
+   
+
+   
+   
+   

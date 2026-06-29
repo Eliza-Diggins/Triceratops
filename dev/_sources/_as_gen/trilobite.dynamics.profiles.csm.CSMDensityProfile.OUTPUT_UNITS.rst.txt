@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.CSMDensityProfile.OUTPUT\_UNITS
+===============================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoattribute:: CSMDensityProfile.OUTPUT_UNITS

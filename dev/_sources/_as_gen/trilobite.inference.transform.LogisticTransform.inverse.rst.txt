@@ -1,0 +1,6 @@
+trilobite.inference.transform.LogisticTransform.inverse
+=======================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: LogisticTransform.inverse

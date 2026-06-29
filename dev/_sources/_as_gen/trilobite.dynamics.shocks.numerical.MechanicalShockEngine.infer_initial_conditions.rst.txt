@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MechanicalShockEngine.infer\_initial\_conditions
+====================================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. automethod:: MechanicalShockEngine.infer_initial_conditions

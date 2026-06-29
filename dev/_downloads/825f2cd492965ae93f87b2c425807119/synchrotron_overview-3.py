@@ -3,11 +3,9 @@ import matplotlib.pyplot as plt
 from astropy import units as u
 
 from trilobite.radiation.synchrotron.SEDs.numerical import NumericalSynchrotronEngine
-from trilobite.radiation.synchrotron.microphysics import (
-    compute_PL_norm_from_magnetic_field,
-    compute_BPL_norm_from_magnetic_field,
-    get_power_law_distribution,
-    get_broken_power_law_distribution,
+from trilobite.radiation.synchrotron.electron_distributions import (
+    PowerLaw,
+    BrokenPowerLaw,
 )
 
 # ---------------------------------------------------------------------
@@ -27,34 +25,35 @@ epsilon_B = 0.01
 
 # Electron distribution parameters
 p = 2.5
-gamma_c = 1e2
+gamma_c = 1e3    # cooling break Lorentz factor
 gamma_min = 1.0
 gamma_max = 1e10
 
 # ---------------------------------------------------------------------
 # Normalize electron distributions (equipartition closure)
+# Component 1: uncooled power law; Component 2: cooling-break BPL
+# (p1=injection slope, p2=cooled slope = p1+1)
 # ---------------------------------------------------------------------
-N0_pl = compute_PL_norm_from_magnetic_field(
-    B1, p, epsilon_B, epsilon_e,
-    gamma_min=gamma_min, gamma_max=gamma_max
+N0_pl = PowerLaw.normalize_from_magnetic_field(
+    B1, epsilon_B, epsilon_e,
+    p=p, gamma_min=gamma_min, gamma_max=gamma_max,
 )
 
-N0_bpl = compute_BPL_norm_from_magnetic_field(
-    B2, -p, -(p + 1), gamma_c,
-    epsilon_B, epsilon_e,
-    gamma_min=gamma_min, gamma_max=gamma_max
+N0_bpl = BrokenPowerLaw.normalize_from_magnetic_field(
+    B2, epsilon_B, epsilon_e,
+    p1=p, p2=p + 1, gamma_c=gamma_c,
+    gamma_min=gamma_min, gamma_max=gamma_max,
 )
 
 # Distribution functions
-pl  = get_power_law_distribution(
-    p, norm=N0_pl,
-    gamma_min=gamma_min, gamma_max=gamma_max
+pl  = PowerLaw.as_callable(
+    norm=N0_pl.value, p=p,
+    gamma_min=gamma_min, gamma_max=gamma_max,
 )
 
-bpl = get_broken_power_law_distribution(
-    -p, -(p + 1), gamma_c,
-    norm=N0_bpl,
-    gamma_min=gamma_min, gamma_max=gamma_max
+bpl = BrokenPowerLaw.as_callable(
+    norm=N0_bpl.value, p1=p, p2=p + 1, gamma_c=gamma_c,
+    gamma_min=gamma_min, gamma_max=gamma_max,
 )
 
 # ---------------------------------------------------------------------

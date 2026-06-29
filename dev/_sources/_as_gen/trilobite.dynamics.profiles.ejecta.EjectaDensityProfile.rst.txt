@@ -1,0 +1,39 @@
+EjectaDensityProfile
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.ejecta
+
+.. autoclass:: trilobite.dynamics.profiles.ejecta.EjectaDensityProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~EjectaDensityProfile.as_callable
+      ~EjectaDensityProfile.as_optimized_callable
+      ~EjectaDensityProfile.eval
+      ~EjectaDensityProfile.feval
+      ~EjectaDensityProfile.fkernel
+      ~EjectaDensityProfile.kernel
+      ~EjectaDensityProfile.process_arguments
+      ~EjectaDensityProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~EjectaDensityProfile.KERNEL_UNITS
+      ~EjectaDensityProfile.OUTPUT_UNITS
+   
+   

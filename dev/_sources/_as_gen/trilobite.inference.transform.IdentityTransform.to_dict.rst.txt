@@ -1,0 +1,6 @@
+trilobite.inference.transform.IdentityTransform.to\_dict
+========================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: IdentityTransform.to_dict

@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.generate\_evaluation\_kernel
+==============================================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. automethod:: MomentumConservingShockEngine.generate_evaluation_kernel

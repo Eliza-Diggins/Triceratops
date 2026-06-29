@@ -1,0 +1,37 @@
+TruncatedWindCSMProfile
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. autoclass:: trilobite.dynamics.profiles.csm.TruncatedWindCSMProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~TruncatedWindCSMProfile.as_callable
+      ~TruncatedWindCSMProfile.as_optimized_callable
+      ~TruncatedWindCSMProfile.eval
+      ~TruncatedWindCSMProfile.feval
+      ~TruncatedWindCSMProfile.normalize
+      ~TruncatedWindCSMProfile.process_arguments
+      ~TruncatedWindCSMProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~TruncatedWindCSMProfile.OUTPUT_UNITS
+   
+   

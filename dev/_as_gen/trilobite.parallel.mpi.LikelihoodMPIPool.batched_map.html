@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../_static/doctools.js?v=fd6eb6e6"></script>
@@ -56,7 +56,7 @@
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_as_gen/trilobite.parallel.mpi.LikelihoodMPIPool.batched_map';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -453,14 +453,255 @@
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/shocks/chevalier_theory.html">Theory: The Chevalier Self-Similar Solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/shocks/sedov_taylor_theory.html">Theory: Sedov-Taylor Self-Similar Solution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/shocks/numerical_shocks_theory.html">Theory: Numerical Shock Engines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/physics/shocks/numerical_shocks_overview.html">Numerical Shock Engines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/shocks/self_similar_overview.html">Self-Similar Shock Engines</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../reference/physics/radiation/overview.html">Radiation Processes in Trilobite</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_overview.html">Synchrotron Emission Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_core.html">Core Synchrotron Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_microphysics.html">Synchrotron Microphysics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_seds.html">Synchrotron Spectral Energy Distributions</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_electron_distributions.html">Synchrotron Electron Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.html">PowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.PowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.PowerLaw.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.html">BrokenPowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.html">MaxwellJuettner</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_kinetic_moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_kinetic_moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.sf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.std.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.support.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.var.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.html">MixedThermalNonThermal</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.sf.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.std.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.support.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.var.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.var</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.NON_THERMAL_DISTRIBUTION.html">trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.NON_THERMAL_DISTRIBUTION</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.html">MaxwellJuettnerPowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.var</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.html">MaxwellJuettnerBrokenPowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.as_callable.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.as_callable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.bol_emiss_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.cdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.cdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logcdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logcdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logpdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logpdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logsf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.logsf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_kinetic_energy.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.mean_kinetic_energy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.moment_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff_between.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_eff_between</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_energy_density.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_energy_density</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_magnetic_field.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_magnetic_field</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_eff.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_eff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_total.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.normalize_from_n_total</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.pdf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.pdf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.sf.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.sf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.std.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.std</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.support.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.var.html">trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.var</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_seds.html">Synchrotron Spectral Energy Distributions</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.html">SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SynchrotronSED.sed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.html">MultiSpectrumSynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.MultiSpectrumSynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.html">PowerLaw_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED.sed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.html">PowerLaw_Cooling_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.html">PowerLaw_SSA_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_INVERSION_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED.SPECTRUM_INVERSION_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.html">PowerLaw_Cooling_SSA_SynchrotronSED</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.determine_sed_regime.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.determine_sed_regime</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.sed</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED.SPECTRUM_FUNCTIONS</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.html">SSA_SED_PowerLaw</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_params_to_physics.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_params_to_physics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_physics_to_params.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.from_physics_to_params</a></li>
+<li class="toctree-l4"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.sed.html">trilobite.radiation.synchrotron.SEDs.one_zone.seds.SSA_SED_PowerLaw.sed</a></li>
+</ul>
+</details></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_first_kernel.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_first_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_avg_first_kernel.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.load_avg_first_kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_emissivity.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_emissivity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_absorption.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_absorption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_source_function.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_source_function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_rest_frame_specific_intensity.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_rest_frame_specific_intensity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_specific_intensity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_flux_density.html">trilobite.radiation.synchrotron.SEDs.numerical.NumericalSynchrotronEngine.compute_flux_density</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine.html">trilobite.radiation.synchrotron.SEDs.numerical.OnAxisAsymmetricSynchrotronEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.numerical.OffAxisAsymmetricSynchrotronEngine.html">trilobite.radiation.synchrotron.SEDs.numerical.OffAxisAsymmetricSynchrotronEngine</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_smoothed_SFBPL.html">trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_smoothed_SFBPL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_exp_cutoff_sed.html">trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_exp_cutoff_sed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trilobite.radiation.synchrotron.SEDs.one_zone._functions.smoothed_BPL.html">trilobite.radiation.synchrotron.SEDs.one_zone._functions.smoothed_BPL</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_cooling.html">Radiative Cooling Engines</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_theory.html">Synchrotron Radiation Theory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../reference/physics/radiation/synchrotron/synchrotron_pl_sed_theory.html">Methods: Single-Zone Synchrotron SEDs</a></li>
@@ -706,8 +947,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -741,7 +982,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

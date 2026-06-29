@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.WindCSMProfile.normalize\_A\_star
+=================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: WindCSMProfile.normalize_A_star

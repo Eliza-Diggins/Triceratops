@@ -1,0 +1,6 @@
+trilobite.inference.transform.SoftplusTransform.to\_dict
+========================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: SoftplusTransform.to_dict

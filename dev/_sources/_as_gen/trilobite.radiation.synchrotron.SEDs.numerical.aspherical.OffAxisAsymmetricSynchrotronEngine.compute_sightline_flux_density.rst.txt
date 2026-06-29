@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine.compute\_sightline\_flux\_density
+==============================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. automethod:: OffAxisAsymmetricSynchrotronEngine.compute_sightline_flux_density

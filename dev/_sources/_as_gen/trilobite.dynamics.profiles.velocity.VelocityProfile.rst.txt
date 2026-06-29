@@ -1,0 +1,36 @@
+VelocityProfile
+====================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.velocity
+
+.. autoclass:: trilobite.dynamics.profiles.velocity.VelocityProfile
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~VelocityProfile.as_callable
+      ~VelocityProfile.as_optimized_callable
+      ~VelocityProfile.eval
+      ~VelocityProfile.feval
+      ~VelocityProfile.process_arguments
+      ~VelocityProfile.process_parameters
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~VelocityProfile.OUTPUT_UNITS
+   
+   

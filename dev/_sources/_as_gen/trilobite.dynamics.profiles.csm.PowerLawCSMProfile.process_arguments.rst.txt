@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.PowerLawCSMProfile.process\_arguments
+=====================================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: PowerLawCSMProfile.process_arguments

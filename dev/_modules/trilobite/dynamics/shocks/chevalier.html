@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=0790524f97105ba85085" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/shocks/chevalier';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.18.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -454,38 +454,6 @@
 <span class="sd">radius and velocity evolution of the shocked interface in regimes where the</span>
 <span class="sd">ejecta and external medium can be approximated by scale-free density profiles.</span>
 
-<span class="sd">The ejecta are modeled as a broken power law in homologous velocity</span>
-<span class="sd">:math:`v = r/t`,</span>
-
-<span class="sd">.. math::</span>
-
-<span class="sd">    \rho_{\rm ej}(r,t)</span>
-<span class="sd">    =</span>
-<span class="sd">    K_{\rm ej} t^{-3}</span>
-<span class="sd">    \begin{cases}</span>
-<span class="sd">        v^{-\delta}, &amp; v &lt; v_t, \\</span>
-<span class="sd">        v_t^{n-\delta} v^{-n}, &amp; v \ge v_t,</span>
-<span class="sd">    \end{cases}</span>
-
-<span class="sd">where :math:`v_t` is the transition velocity, :math:`K_{\rm ej}` is the ejecta</span>
-<span class="sd">normalization, :math:`\delta` is the inner density index, and :math:`n` is the</span>
-<span class="sd">outer density index. The helper function :func:`normalize_bpl_ejecta`</span>
-<span class="sd">computes :math:`v_t` and :math:`K_{\rm ej}` from the total ejecta kinetic energy</span>
-<span class="sd">and mass.</span>
-
-<span class="sd">The CSM is modeled as a power-law density profile,</span>
-
-<span class="sd">.. math::</span>
-
-<span class="sd">    \rho_{\rm CSM}(r) = K_{\rm CSM} r^{-s},</span>
-
-<span class="sd">with utilities for constructing both general power-law normalizations and the</span>
-<span class="sd">special steady-wind case,</span>
-
-<span class="sd">.. math::</span>
-
-<span class="sd">    K_{\rm CSM} = \frac{\dot{M}}{4\pi v_w}.</span>
-
 <span class="sd">The primary classes are:</span>
 
 <span class="sd">- :class:`ChevalierSelfSimilarShockEngine`, which computes self-similar shock</span>
@@ -493,8 +461,38 @@
 <span class="sd">- :class:`ChevalierSelfSimilarWindShockEngine`, a convenience specialization for</span>
 <span class="sd">  wind-like media with :math:`s = 2`.</span>
 
-<span class="sd">The module also provides helper functions for constructing callable ejecta and</span>
-<span class="sd">CSM density profiles suitable for use by other shock engines.</span>
+<span class="sd">.. rubric:: Model Assumptions</span>
+
+<span class="sd">The following assumptions are shared by all Chevalier self-similar shock models:</span>
+
+<span class="sd">1. The supernova ejecta are **homologously expanding**, meaning that the velocity field of</span>
+<span class="sd">   the fluid is :math:`u_{\rm ejecta}(r,t) = r/t`. This is a good approximation during the early</span>
+<span class="sd">   phases of supernova expansion after the initial explosion, before significant deceleration occurs.</span>
+
+<span class="sd">2. The ejecta density profile is a **broken power law** with an inner flat core and an outer steep envelope:</span>
+
+<span class="sd">   .. math::</span>
+
+<span class="sd">       \rho_{\rm ej}(r,t)</span>
+<span class="sd">       =</span>
+<span class="sd">       K_{\rm ej} t^{-3}</span>
+<span class="sd">       \begin{cases}</span>
+<span class="sd">           v^{-\delta}, &amp; v &lt; v_t, \\</span>
+<span class="sd">           v_t^{n-\delta} v^{-n}, &amp; v \ge v_t,</span>
+<span class="sd">       \end{cases}</span>
+
+<span class="sd">   where :math:`v_t` is the transition velocity, :math:`K_{\rm ej}` is the ejecta</span>
+<span class="sd">   normalization, :math:`\delta` is the inner density index, and :math:`n` is the</span>
+<span class="sd">   outer density index. The helper function</span>
+<span class="sd">   :meth:`trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize`</span>
+<span class="sd">   computes :math:`v_t` and :math:`K_{\rm ej}` from the total ejecta kinetic energy</span>
+<span class="sd">   and mass.</span>
+
+<span class="sd">3. The circumstellar medium (CSM) is a **power-law density profile**:</span>
+
+<span class="sd">   .. math::</span>
+
+<span class="sd">       \rho_{\rm CSM}(r) = K_{\rm CSM} r^{-s}.</span>
 
 <span class="sd">Notes</span>
 <span class="sd">-----</span>
@@ -513,104 +511,227 @@
 <span class="sd">.. footbibliography::</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Union</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ArrayLike</span><span class="p">,</span> <span class="n">_UnitBearingArrayLike</span><span class="p">,</span> <span class="n">_UnitBearingScalarLike</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.profiles.ejecta</span><span class="w"> </span><span class="kn">import</span> <span class="n">_normalize_bpl_cgs</span> <span class="k">as</span> <span class="n">_normalize_BPL_ejecta_cgs</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.shocks.core.rankine_hugoniot</span><span class="w"> </span><span class="kn">import</span> <span class="n">StrongColdShockConditions</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.shocks.core.shock_engine</span><span class="w"> </span><span class="kn">import</span> <span class="n">ShockEngine</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.dynamics.shocks.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">_normalize_BPL_ejecta</span>
-
-<span class="c1"># ===================================================== #</span>
-<span class="c1"># Utility Functions                                     #</span>
-<span class="c1"># ===================================================== #</span>
-<span class="c1"># These are functions made available here because they are directly associated</span>
-<span class="c1"># with the Chevalier model, but they are not necessarily specific to the Chevalier model. They are</span>
-<span class="c1"># intended to be accessible to other shock engines as well, but they are not necessarily general enough to be moved</span>
-<span class="c1"># to a more general utilities module.</span>
-
 
 <span class="c1"># ==================================================== #</span>
-<span class="c1"># State Classes                                        #</span>
+<span class="c1"># Chevalier Solution Classes                           #</span>
 <span class="c1"># ==================================================== #</span>
-<span class="c1"># ==================================================== #</span>
-<span class="c1"># Utility Methods                                      #</span>
-<span class="c1"># ==================================================== #</span>
+<span class="c1"># These classes and functions are used to actually solve the Chevalier self-similar ODEs to</span>
+<span class="c1"># determine the fluid-dynamic structure of the shocked regions. These are then used to</span>
+<span class="c1"># provide necessary information for the shock engine classes below.</span>
+
+
 <div class="viewcode-block" id="ChevalierSelfSimilarFunctions">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.chevalier.ChevalierSelfSimilarFunctions.html#trilobite.dynamics.shocks.chevalier.ChevalierSelfSimilarFunctions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ChevalierSelfSimilarFunctions</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Dimensionless Chevalier self-similar two-shock structure.</span>
+<span class="sd">    Dimensionless Chevalier self-similar two-shock ODE solution.</span>
 
-<span class="sd">    The global similarity coordinate is</span>
+<span class="sd">    Returned by :func:`compute_self_similar_functions`. Stores the complete</span>
+<span class="sd">    dimensionless fluid-dynamic structure of the two shocked regions produced by</span>
+<span class="sd">    supernova ejecta interacting with a power-law CSM: the shocked CSM (outer region,</span>
+<span class="sd">    between the forward shock and the contact discontinuity) and the shocked ejecta</span>
+<span class="sd">    (inner region, between the contact discontinuity and the reverse shock).</span>
+
+<span class="sd">    All quantities are expressed in the global similarity coordinate</span>
 
 <span class="sd">    .. math::</span>
 
-<span class="sd">        \xi = r / R_c,</span>
+<span class="sd">        \xi \equiv r / R_{\rm cd},</span>
 
-<span class="sd">    where :math:`R_c` is the contact-discontinuity radius. The returned grid</span>
-<span class="sd">    spans</span>
+<span class="sd">    where :math:`R_{\rm cd}` is the contact-discontinuity radius. The solution</span>
+<span class="sd">    spans :math:`\xi_{\rm rs} \le \xi \le \xi_{\rm fs}`, with the contact</span>
+<span class="sd">    discontinuity at :math:`\xi = 1`.</span>
 
-<span class="sd">    .. math::</span>
+<span class="sd">    The self-similar functions :math:`U`, :math:`\Omega`, and :math:`P` are</span>
+<span class="sd">    the dimensionless velocity, density, and pressure respectively. Their</span>
+<span class="sd">    connection to physical (CGS) quantities depends on which region is being</span>
+<span class="sd">    evaluated:</span>
 
-<span class="sd">        R_{\rm rs}/R_c \le \xi \le R_{\rm fs}/R_c.</span>
+<span class="sd">    - **Outer shocked CSM** (:math:`1 \le \xi \le \xi_{\rm fs}`):</span>
 
-<span class="sd">    The contact discontinuity is located at ``xi = 1``.</span>
+<span class="sd">      .. math::</span>
+
+<span class="sd">          u = \frac{r}{t}\,U, \quad</span>
+<span class="sd">          \rho = K_{\rm CSM}\,r^{-s}\,\Omega, \quad</span>
+<span class="sd">          p = K_{\rm CSM}\,t^{-2}\,r^{2-s}\,P.</span>
+
+<span class="sd">    - **Inner shocked ejecta** (:math:`\xi_{\rm rs} \le \xi \le 1`):</span>
+
+<span class="sd">      .. math::</span>
+
+<span class="sd">          u = \frac{r}{t}\,U, \quad</span>
+<span class="sd">          \rho = K_{\rm ej}\,t^{n-3}\,r^{-n}\,\Omega, \quad</span>
+<span class="sd">          p = K_{\rm ej}\,t^{n-5}\,r^{2-n}\,P.</span>
+
+<span class="sd">    The ``_inner`` and ``_outer`` array pairs hold the ODE solution on</span>
+<span class="sd">    uniformly-spaced :math:`\xi` grids for each region separately.  The</span>
+<span class="sd">    unprefixed ``xi``, ``U``, ``Omega``, ``P`` arrays are the two grids</span>
+<span class="sd">    concatenated (inner first, then outer) for convenience when plotting or</span>
+<span class="sd">    integrating across the full shock structure.  The ``density_hat``,</span>
+<span class="sd">    ``pressure_hat``, and ``velocity_hat`` arrays are contact-radius-scaled</span>
+<span class="sd">    profiles (normalized to the CSM convention) that can be plotted without</span>
+<span class="sd">    choosing physical normalization constants.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Input parameters</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
     <span class="n">n</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Outer ejecta density power-law index (``n &gt; 5`` required).&quot;&quot;&quot;</span>
+
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;CSM density power-law index (``s &lt; 3`` required).&quot;&quot;&quot;</span>
+
     <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Adiabatic index of the shocked gas.&quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Derived kinematic exponents</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
     <span class="n">expansion_index</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">similarity_exponent</span><span class="p">:</span> <span class="nb">float</span>
-
-    <span class="n">A</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">radius_fs_over_radius_cd</span><span class="p">:</span> <span class="nb">float</span>
-    <span class="n">radius_rs_over_radius_cd</span><span class="p">:</span> <span class="nb">float</span>
-
-    <span class="n">xi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">U</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">Omega</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">P</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-
-    <span class="n">density_hat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">pressure_hat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">velocity_hat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-
-    <span class="n">xi_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">U_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">Omega_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">P_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-
-    <span class="n">xi_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">U_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">Omega_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">P_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span></div>
-
-
-
-<div class="viewcode-block" id="ChevalierSelfSimilarCriticalGrid">
-<a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.chevalier.ChevalierSelfSimilarCriticalGrid.html#trilobite.dynamics.shocks.chevalier.ChevalierSelfSimilarCriticalGrid">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ChevalierSelfSimilarCriticalGrid</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Critical Chevalier self-similar constants on an ``(n, s)`` grid.</span>
+<span class="sd">    Contact-discontinuity expansion exponent :math:`\lambda = (n-3)/(n-s)`.</span>
 
-<span class="sd">    Arrays are indexed as ``[i, j]``, where ``i`` indexes ``n_values`` and</span>
-<span class="sd">    ``j`` indexes ``s_values``.</span>
+<span class="sd">    The contact radius grows as :math:`R_{\rm cd} \propto t^\lambda`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">n_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">s_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">similarity_exponent</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reciprocal of the expansion exponent, :math:`1/\lambda`.</span>
 
-    <span class="n">expansion_index</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">similarity_exponent</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="sd">    Gives the time at which a given radius was first crossed:</span>
+<span class="sd">    :math:`t \propto r^{1/\lambda}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">radius_fs_over_radius_cd</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-    <span class="n">radius_rs_over_radius_cd</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span></div>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Dimensionless constants</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">A</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dimensionless normalization constant :math:`A`.</span>
+
+<span class="sd">    Determined by matching the pressure across the contact discontinuity.</span>
+<span class="sd">    It enters the contact-discontinuity radius as</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        R_{\rm cd}(t) = \left(\frac{A\,K_{\rm ej}}{K_{\rm CSM}}\right)^{1/(n-s)} t^\lambda.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">radius_fs_over_radius_cd</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Forward-shock to contact-discontinuity radius ratio,</span>
+<span class="sd">    :math:`\xi_{\rm fs} = R_{\rm fs} / R_{\rm cd} &gt; 1`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">radius_rs_over_radius_cd</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reverse-shock to contact-discontinuity radius ratio,</span>
+<span class="sd">    :math:`\xi_{\rm rs} = R_{\rm rs} / R_{\rm cd} &lt; 1`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Global combined grids (inner + outer concatenated)</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">xi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Global similarity coordinate :math:`\xi = r / R_{\rm cd}`, spanning</span>
+<span class="sd">    :math:`[\xi_{\rm rs},\, \xi_{\rm fs}]`. Concatenation of ``xi_inner``</span>
+<span class="sd">    followed by ``xi_outer``. Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">U</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dimensionless velocity :math:`U(\xi)` on the global grid.</span>
+<span class="sd">    Physical velocity: :math:`u = (r/t)\,U`. Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Omega</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dimensionless density :math:`\Omega(\xi)` on the global grid.</span>
+<span class="sd">    See class docstring for the physical scaling on each side. Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">P</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dimensionless pressure :math:`P(\xi)` on the global grid.</span>
+<span class="sd">    See class docstring for the physical scaling on each side. Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Contact-radius-scaled profiles (normalization-free, for plotting)</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">density_hat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contact-radius-scaled density profile on the global grid.</span>
+
+<span class="sd">    In the outer region this equals :math:`\xi^{-s}\,\Omega`; in the inner</span>
+<span class="sd">    region :math:`A^{-1}\,\xi^{-n}\,\Omega`. Both sides are normalized to</span>
+<span class="sd">    the outer (CSM) convention so the profile is continuous at :math:`\xi = 1`.</span>
+<span class="sd">    Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">pressure_hat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contact-radius-scaled pressure profile on the global grid.</span>
+
+<span class="sd">    Outer: :math:`\xi^{2-s}\,P`; inner: :math:`A^{-1}\,\xi^{2-n}\,P`.</span>
+<span class="sd">    Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">velocity_hat</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dimensionless physical velocity :math:`\xi\,U` on the global grid,</span>
+<span class="sd">    equal to :math:`u\,t/R_{\rm cd}`. Shape ``(n_points,)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Inner region: shocked ejecta (xi_rs &lt;= xi &lt;= 1)</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">xi_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Similarity coordinate on the inner (shocked ejecta) grid,</span>
+<span class="sd">    uniformly spaced from :math:`\xi_{\rm rs}` to just below 1.</span>
+<span class="sd">    Shape ``(n_inner,)`` where ``n_inner = max(2, n_points // 2)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">U_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dimensionless velocity :math:`U` on the inner grid. Shape ``(n_points // 2,)``.&quot;&quot;&quot;</span>
+
+    <span class="n">Omega_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dimensionless density :math:`\Omega` on the inner grid. Shape ``(n_points // 2,)``.&quot;&quot;&quot;</span>
+
+    <span class="n">P_inner</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dimensionless pressure :math:`P` on the inner grid. Shape ``(n_points // 2,)``.&quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Outer region: shocked CSM (1 &lt;= xi &lt;= xi_fs)</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">xi_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Similarity coordinate on the outer (shocked CSM) grid,</span>
+<span class="sd">    uniformly spaced from just above 1 to :math:`\xi_{\rm fs}`.</span>
+<span class="sd">    Shape ``(n_outer,)`` where ``n_outer = max(2, n_points - max(2, n_points // 2))``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">U_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dimensionless velocity :math:`U` on the outer grid. Shape ``(n_points // 2,)``.&quot;&quot;&quot;</span>
+
+    <span class="n">Omega_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dimensionless density :math:`\Omega` on the outer grid. Shape ``(n_points // 2,)``.&quot;&quot;&quot;</span>
+
+    <span class="n">P_outer</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Dimensionless pressure :math:`P` on the outer grid. Shape ``(n_points // 2,)``.&quot;&quot;&quot;</span></div>
 
 
 
@@ -766,14 +887,12 @@
             <span class="n">x_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0e-8</span><span class="p">)</span>
             <span class="n">target_U</span> <span class="o">=</span> <span class="n">expansion_index</span> <span class="o">-</span> <span class="n">contact_epsilon</span>
             <span class="n">direction</span> <span class="o">=</span> <span class="mf">1.0</span>
-            <span class="n">max_step</span> <span class="o">=</span> <span class="mf">1.0e-3</span>
 
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># Start at R_rs and integrate outward to R_c.</span>
             <span class="n">x_span</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)</span>
             <span class="n">target_U</span> <span class="o">=</span> <span class="n">expansion_index</span> <span class="o">+</span> <span class="n">contact_epsilon</span>
             <span class="n">direction</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
-            <span class="n">max_step</span> <span class="o">=</span> <span class="mf">1.0e-3</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">event_contact</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">target_U</span>
@@ -789,7 +908,6 @@
             <span class="n">events</span><span class="o">=</span><span class="n">event_contact</span><span class="p">,</span>
             <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span>
             <span class="n">atol</span><span class="o">=</span><span class="n">atol</span><span class="p">,</span>
-            <span class="n">max_step</span><span class="o">=</span><span class="n">max_step</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">solution</span><span class="o">.</span><span class="n">status</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
@@ -918,6 +1036,98 @@
         <span class="n">Omega_outer</span><span class="o">=</span><span class="n">Omega_outer</span><span class="p">,</span>
         <span class="n">P_outer</span><span class="o">=</span><span class="n">P_outer</span><span class="p">,</span>
     <span class="p">)</span></div>
+
+
+
+<span class="c1"># ===================================================== #</span>
+<span class="c1"># Chevalier Solution Tables and Interpolation           #</span>
+<span class="c1"># ===================================================== #</span>
+<span class="c1"># For most uses, the entire fluid dynamic solution is not useful; we instead care about</span>
+<span class="c1"># the boundaries of the shocked region (R_rs and R_fs) and the conditions at the contact discontinuity</span>
+<span class="c1"># (R_c). The following functions compute tables of these values for a grid of n,</span>
+<span class="c1"># s, and gamma, and then provide interpolation functions to get these values for arbitrary n, s, and gamma.</span>
+<div class="viewcode-block" id="ChevalierSelfSimilarCriticalGrid">
+<a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.chevalier.ChevalierSelfSimilarCriticalGrid.html#trilobite.dynamics.shocks.chevalier.ChevalierSelfSimilarCriticalGrid">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ChevalierSelfSimilarCriticalGrid</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Chevalier self-similar constants tabulated on an ``(n, s)`` grid.</span>
+
+<span class="sd">    Returned by :func:`compute_self_similar_critical_grid`. Stores only the</span>
+<span class="sd">    dimensionless scalar constants extracted from the full ODE solution — the</span>
+<span class="sd">    expansion exponent, normalization constant :math:`A`, and the two shock-to-contact</span>
+<span class="sd">    radius ratios — for every combination of outer ejecta index ``n`` and CSM index</span>
+<span class="sd">    ``s`` on the input grids. The full fluid-dynamic profiles are discarded; use</span>
+<span class="sd">    :class:`ChevalierSelfSimilarFunctions` (via :func:`compute_self_similar_functions`)</span>
+<span class="sd">    if you need those.</span>
+
+<span class="sd">    All 2-D array fields are indexed as ``arr[i, j]``, where ``i`` runs over</span>
+<span class="sd">    ``n_values`` and ``j`` runs over ``s_values``.</span>
+
+<span class="sd">    The primary use-case is pre-tabulation for :class:`ChevalierTwoShockSelfSimilarEngine`,</span>
+<span class="sd">    which bilinearly interpolates :math:`A`, :math:`\xi_{\rm fs}`, and</span>
+<span class="sd">    :math:`\xi_{\rm rs}` at runtime to avoid re-solving the ODEs for every</span>
+<span class="sd">    ``(n, s)`` evaluation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Grid axes</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">n_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;1-D array of outer ejecta density indices (all must satisfy ``n &gt; 5``). Shape ``(N_n,)``.&quot;&quot;&quot;</span>
+
+    <span class="n">s_values</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;1-D array of CSM density indices (all must satisfy ``s &lt; 3``). Shape ``(N_s,)``.&quot;&quot;&quot;</span>
+
+    <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Adiabatic index used when solving the self-similar ODEs at each grid point.&quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Kinematic exponents</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">expansion_index</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Contact-discontinuity expansion exponent :math:`\lambda_{ij} = (n_i - 3)/(n_i - s_j)`.</span>
+
+<span class="sd">    The contact radius grows as :math:`R_{\rm cd} \propto t^{\lambda}`.</span>
+<span class="sd">    Shape ``(N_n, N_s)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">similarity_exponent</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reciprocal of the expansion exponent, :math:`1/\lambda_{ij}`.</span>
+<span class="sd">    Shape ``(N_n, N_s)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="c1"># Dimensionless shock constants</span>
+    <span class="c1"># ------------------------------------------------------------------</span>
+    <span class="n">A</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dimensionless normalization constant :math:`A_{ij}`.</span>
+
+<span class="sd">    Determined by matching pressure across the contact discontinuity for each</span>
+<span class="sd">    ``(n, s)`` pair. Used to set the absolute contact-radius scale via</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        R_{\rm cd}(t) = \left(\frac{A\,K_{\rm ej}}{K_{\rm CSM}}\right)^{1/(n-s)} t^\lambda.</span>
+
+<span class="sd">    Shape ``(N_n, N_s)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">radius_fs_over_radius_cd</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Forward-shock to contact-discontinuity radius ratio,</span>
+<span class="sd">    :math:`\xi_{{\rm fs},ij} = R_{\rm fs} / R_{\rm cd} &gt; 1`.</span>
+<span class="sd">    Shape ``(N_n, N_s)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">radius_rs_over_radius_cd</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reverse-shock to contact-discontinuity radius ratio,</span>
+<span class="sd">    :math:`\xi_{{\rm rs},ij} = R_{\rm rs} / R_{\rm cd} &lt; 1`.</span>
+<span class="sd">    Shape ``(N_n, N_s)``.</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 
 
@@ -1092,7 +1302,8 @@
 <span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementation of the &quot;classical&quot; Chevalier 1982 self-similar supernova shock model.</span>
 
-<span class="sd">    This :class:`~trilobite.dynamics.shock_engine.ShockEngine` subclass implements the self-similar shock solutions</span>
+<span class="sd">    This :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` subclass implements the</span>
+<span class="sd">    self-similar shock solutions</span>
 <span class="sd">    described in :footcite:t:`chevalierSelfsimilarSolutionsInteraction1982` for the interaction between</span>
 <span class="sd">    supernova ejecta and a surrounding circumstellar medium (CSM). The model assumes power-law density profiles</span>
 <span class="sd">    for both the ejecta and the CSM, leading to a self-similar evolution of the shock structure over time.</span>
@@ -1185,7 +1396,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    ChevalierSelfSimilarWindShockEngine</span>
 <span class="sd">        Specialized version of :class:`ChevalierSelfSimilarShockEngine` for steady-wind CSM.</span>
-<span class="sd">    NumericalThinShellShockEngine</span>
+<span class="sd">    ~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine</span>
 <span class="sd">        A numerical implementation of thin-shell shock dynamics for arbitrary ejecta and CSM profiles.</span>
 
 <span class="sd">    References</span>
@@ -1256,6 +1467,16 @@
 
 <span class="sd">        where :math:`\lambda = \frac{3-n}{s-n}`. A derivation of this parameter can be found in</span>
 <span class="sd">        :ref:`chevalier_theory`.</span>
+
+<span class="sd">        .. note::</span>
+
+<span class="sd">            :math:`\zeta` is derived from momentum conservation and is **distinct** from the</span>
+<span class="sd">            pressure-matched normalization constant :math:`A` returned by</span>
+<span class="sd">            :func:`compute_self_similar_functions`. Both constants set the absolute</span>
+<span class="sd">            contact-radius scale, but :math:`A` is more accurate because it is obtained from the</span>
+<span class="sd">            full two-sided ODE solution. For highest fidelity, use</span>
+<span class="sd">            :class:`ChevalierTwoShockSelfSimilarEngine`, which tabulates :math:`A` at</span>
+<span class="sd">            construction time.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1"># Construct lambda from n and s.</span>
         <span class="n">_lambda</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">n</span><span class="p">)</span>
@@ -1304,17 +1525,13 @@
 <span class="sd">        M_ej: ~astropy.units.Quantity or float</span>
 <span class="sd">            The total mass in the ejecta from the explosion. If units are provided,</span>
 <span class="sd">            they will be taken into account. Otherwise, CGS units (grams) are assumed.</span>
-<span class="sd">        K_csm: ~astropy.units.Quantity or float, optional</span>
+<span class="sd">        K_csm: ~astropy.units.Quantity or float</span>
 <span class="sd">            The scaling (:math:`K_{\rm CSM}`) for the CSM density profile of the form</span>
 <span class="sd">            :math:`\rho_{\rm CSM}(r) = K_{\rm CSM} r^{-s}`. If units are provided, they will be</span>
-<span class="sd">            taken into account. Otherwise, CGS units (``g * cm^{(s-3)}``) are assumed. If not provided,</span>
-<span class="sd">            a default scaling based on a wind-like CSM with :math:`\dot{M} \sim 10^{-5} M_{\odot}/yr`</span>
-<span class="sd">            and :math:`v_w \sim 1000 km/s` is used at a radius of :math:`r = 10^{16} cm`.</span>
-
-<span class="sd">            .. note::</span>
-
-<span class="sd">                For science scenarios, ``K_csm`` should always be provided explicitly to ensure</span>
-<span class="sd">                physical accuracy. The default is only a placeholder.</span>
+<span class="sd">            taken into account. Otherwise, CGS units (``g * cm^{(s-3)}``) are assumed. Must be</span>
+<span class="sd">            strictly positive. For a wind-like CSM (:math:`s = 2`), use</span>
+<span class="sd">            :class:`ChevalierSelfSimilarWindShockEngine`, which accepts :math:`\dot{M}` and</span>
+<span class="sd">            :math:`v_w` directly.</span>
 <span class="sd">        n: float, optional</span>
 <span class="sd">            The outer ejecta density profile power-law index. Default is ``10.0``. Must be steeper than</span>
 <span class="sd">            5 for convergence.</span>
@@ -1331,14 +1548,23 @@
 <span class="sd">            with :class:`~astropy.units.Quantity` units attached to every field.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Validate inputs and determine a scaling for K_csm if one</span>
-        <span class="c1"># is not provided. To do this, we set a standard density based on a wind-like</span>
-        <span class="c1"># density profile. THIS IS PURELY A MEANS FOR PICKING A DEFAULT, IT SHOULD</span>
-        <span class="c1"># NOT BE USED IN SCIENCE RUNS.</span>
+        <span class="c1"># Require K_csm to be explicitly provided.</span>
         <span class="k">if</span> <span class="n">K_csm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="c1"># Assume a generic wind-like CSM with M_dot ~ 1e-5 Msun/yr and v_w ~ 1000 km/s scaled</span>
-            <span class="c1"># at r = 1e16 cm.</span>
-            <span class="n">K_csm</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1e16</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-5</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Msun</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;K_csm must be provided. For a wind-like CSM (s=2), use &quot;</span>
+                <span class="s2">&quot;ChevalierSelfSimilarWindShockEngine, which accepts M_dot and v_wind directly.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Validate n and s before converting K_csm (whose unit depends on s).</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The outer ejecta density profile index `n` must be greater than 5 for convergence.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The CSM density index `s` must be less than 3 for a convergent self-similar solution.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The CSM index s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> must be strictly less than the ejecta index n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="s2">&quot;for a physically valid (decelerating) forward shock.&quot;</span>
+            <span class="p">)</span>
 
         <span class="c1"># Scale everything down to CGS for internal computation.</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
@@ -1347,14 +1573,24 @@
             <span class="n">M_ej</span> <span class="o">=</span> <span class="n">M_ej</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">K_csm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">K_csm</span> <span class="o">=</span> <span class="n">K_csm</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">**</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
 
-        <span class="c1"># Perform checks on ``n``, ``s``, and ``delta`` to ensure convergence.</span>
+        <span class="c1"># Validate remaining inputs.</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;time must be strictly positive; the self-similar solution is undefined at t &lt;= 0.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Inner ejecta index delta=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> is negative, implying density increases &quot;</span>
+                <span class="s2">&quot;with velocity in the ejecta core. This is unphysical for standard SN profiles.&quot;</span><span class="p">,</span>
+                <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The inner ejecta density profile index `delta` must be less than 3 for convergence.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The outer ejecta density profile index `n` must be greater than 5 for convergence.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">K_csm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;K_csm must be strictly positive.&quot;</span><span class="p">)</span>
 
         <span class="c1"># Call the internal CGS computation method.</span>
         <span class="n">shock_properties_cgs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_shock_properties_cgs</span><span class="p">(</span>
@@ -1412,14 +1648,11 @@
 <span class="sd">            All fields are plain :class:`numpy.ndarray` values in CGS units.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
         <span class="c1"># Using the ``_compute_v_t_and_K_from_energetics_cgs`` static method to get v_t and K. We can</span>
         <span class="c1"># discard v_t, but K is necessary.</span>
-        <span class="n">v_t</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">_normalize_BPL_ejecta</span><span class="p">(</span>
-            <span class="n">E_ej</span><span class="o">=</span><span class="n">E_ej</span><span class="p">,</span>
-            <span class="n">M_ej</span><span class="o">=</span><span class="n">M_ej</span><span class="p">,</span>
-            <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
-            <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span>
-        <span class="p">)</span>
+        <span class="n">K</span><span class="p">,</span> <span class="n">v_t</span> <span class="o">=</span> <span class="n">_normalize_BPL_ejecta_cgs</span><span class="p">(</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">M_ej</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
 
         <span class="c1"># Correct K since it needs to be multiplied by v_t^(n - delta) for the outer ejecta profile.</span>
         <span class="n">K_EJ</span> <span class="o">=</span> <span class="n">K</span> <span class="o">*</span> <span class="n">v_t</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span>
@@ -1525,7 +1758,7 @@
 <span class="sd">        .. math::</span>
 
 <span class="sd">            \rho_{\rm ej}(r,t) = K_{\rm ej} t^{-3} \left(\frac{r}{t}\right)^{-n} =</span>
-<span class="sd">            \rho_0 \left(\frac{r/t}{v_0}\right)^{-n} left(\frac{t}{t_0}\right)^{-3},</span>
+<span class="sd">            \rho_0 \left(\frac{r/t}{v_0}\right)^{-n} \left(\frac{t}{t_0}\right)^{-3},</span>
 
 <span class="sd">        given a reference density :math:`\rho_0` at a reference velocity :math:`v_0` and time :math:`t_0`.</span>
 
@@ -1682,8 +1915,22 @@
             <span class="n">M_dot</span> <span class="o">=</span> <span class="n">M_dot</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v_wind</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">v_wind</span> <span class="o">=</span> <span class="n">v_wind</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-        <span class="c1"># Perform checks on ``n``, ``s``, and ``delta`` to ensure convergence.</span>
+        <span class="c1"># Validate inputs.</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;time must be strictly positive; the self-similar solution is undefined at t &lt;= 0.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">M_dot</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;M_dot must be strictly positive.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v_wind</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v_wind must be strictly positive.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Inner ejecta index delta=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> is negative, implying density increases &quot;</span>
+                <span class="s2">&quot;with velocity in the ejecta core. This is unphysical for standard SN profiles.&quot;</span><span class="p">,</span>
+                <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The inner ejecta density profile index `delta` must be less than 3 for convergence.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
@@ -1888,7 +2135,7 @@
 <span class="sd">    rtol, atol : float, optional</span>
 <span class="sd">        ODE solver tolerances forwarded to :func:`compute_self_similar_functions`.</span>
 <span class="sd">    show_progress : bool, optional</span>
-<span class="sd">        Show a ``tqdm`` progress bar while building the table. Default ``False``.</span>
+<span class="sd">        Show a ``tqdm`` progress bar while building the table. Default ``True``.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -1918,7 +2165,7 @@
         <span class="n">contact_epsilon</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-6</span><span class="p">,</span>
         <span class="n">rtol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-9</span><span class="p">,</span>
         <span class="n">atol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0e-11</span><span class="p">,</span>
-        <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">show_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2047,9 +2294,11 @@
 <span class="sd">            Ejecta kinetic energy. Bare float assumed to be in erg.</span>
 <span class="sd">        M_ej : ~astropy.units.Quantity or float</span>
 <span class="sd">            Ejecta mass. Bare float assumed to be in grams.</span>
-<span class="sd">        K_csm : ~astropy.units.Quantity or float, optional</span>
-<span class="sd">            CSM normalization :math:`K_{\rm CSM}` in :math:`\mathrm{g\,cm^{s-3}}`.</span>
-<span class="sd">            A wind-like default is used if omitted.</span>
+<span class="sd">        K_csm : ~astropy.units.Quantity or float</span>
+<span class="sd">            CSM normalization :math:`K_{\rm CSM}` in :math:`\mathrm{g\,cm^{s-3}}`. Must be</span>
+<span class="sd">            strictly positive. For a wind-like CSM (:math:`s = 2`) use</span>
+<span class="sd">            :class:`ChevalierTwoShockSelfSimilarWindEngine`, which accepts :math:`\dot{M}` and</span>
+<span class="sd">            :math:`v_w` directly.</span>
 <span class="sd">        n : float, optional</span>
 <span class="sd">            Outer ejecta power-law index. Must lie within the tabulated ``n_grid``.</span>
 <span class="sd">        s : float, optional</span>
@@ -2063,8 +2312,23 @@
 <span class="sd">            Shock positions, velocities, and post-shock thermodynamics at all</span>
 <span class="sd">            requested times, with astropy units attached to every field.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Require K_csm to be explicitly provided.</span>
         <span class="k">if</span> <span class="n">K_csm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">K_csm</span> <span class="o">=</span> <span class="p">((</span><span class="mf">1e16</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e-5</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Msun</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;K_csm must be provided. For a wind-like CSM (s=2), use &quot;</span>
+                <span class="s2">&quot;ChevalierTwoShockSelfSimilarWindEngine, which accepts M_dot and v_wind directly.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Validate n and s before converting K_csm (whose unit depends on s).</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The outer ejecta density profile index `n` must be greater than 5 for convergence.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The CSM density index `s` must be less than 3 for a convergent self-similar solution.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The CSM index s=</span><span class="si">{</span><span class="n">s</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> must be strictly less than the ejecta index n=</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="s2">&quot;for a physically valid (decelerating) forward shock.&quot;</span>
+            <span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">E_ej</span> <span class="o">=</span> <span class="n">E_ej</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
@@ -2072,13 +2336,24 @@
             <span class="n">M_ej</span> <span class="o">=</span> <span class="n">M_ej</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">K_csm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">K_csm</span> <span class="o">=</span> <span class="n">K_csm</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">**</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mi">3</span><span class="p">))</span><span class="o">.</span><span class="n">value</span>
 
+        <span class="c1"># Validate remaining inputs.</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;time must be strictly positive; the self-similar solution is undefined at t &lt;= 0.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Inner ejecta index delta=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> is negative, implying density increases &quot;</span>
+                <span class="s2">&quot;with velocity in the ejecta core. This is unphysical for standard SN profiles.&quot;</span><span class="p">,</span>
+                <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The inner ejecta density profile index `delta` must be less than 3 for convergence.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The outer ejecta density profile index `n` must be greater than 5 for convergence.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">K_csm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;K_csm must be strictly positive.&quot;</span><span class="p">)</span>
 
         <span class="n">cgs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_shock_properties_cgs</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">E_ej</span><span class="o">=</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">M_ej</span><span class="o">=</span><span class="n">M_ej</span><span class="p">,</span> <span class="n">K_csm</span><span class="o">=</span><span class="n">K_csm</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attach_units</span><span class="p">(</span><span class="n">cgs</span><span class="p">)</span></div>
@@ -2118,8 +2393,10 @@
 <span class="sd">        ChevalierTwoShockState</span>
 <span class="sd">            All fields are plain :class:`numpy.ndarray` values in CGS units.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
         <span class="c1"># Ejecta normalization: K_ej in g * cm^{n-3} * s^{3-n}</span>
-        <span class="n">v_t</span><span class="p">,</span> <span class="n">K_inner</span> <span class="o">=</span> <span class="n">_normalize_BPL_ejecta</span><span class="p">(</span><span class="n">E_ej</span><span class="o">=</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">M_ej</span><span class="o">=</span><span class="n">M_ej</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">)</span>
+        <span class="n">K_inner</span><span class="p">,</span> <span class="n">v_t</span> <span class="o">=</span> <span class="n">_normalize_BPL_ejecta_cgs</span><span class="p">(</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">M_ej</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span> <span class="n">delta</span><span class="o">=</span><span class="n">delta</span><span class="p">,</span> <span class="n">v_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
         <span class="n">K_ej</span> <span class="o">=</span> <span class="n">K_inner</span> <span class="o">*</span> <span class="n">v_t</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">delta</span><span class="p">)</span>
 
         <span class="n">_lambda</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span>
@@ -2240,7 +2517,22 @@
             <span class="n">M_dot</span> <span class="o">=</span> <span class="n">M_dot</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v_wind</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">v_wind</span> <span class="o">=</span> <span class="n">v_wind</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
+        <span class="c1"># Validate inputs.</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">time</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;time must be strictly positive; the self-similar solution is undefined at t &lt;= 0.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">M_dot</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;M_dot must be strictly positive.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">v_wind</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;v_wind must be strictly positive.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Inner ejecta index delta=</span><span class="si">{</span><span class="n">delta</span><span class="si">:</span><span class="s2">.4g</span><span class="si">}</span><span class="s2"> is negative, implying density increases &quot;</span>
+                <span class="s2">&quot;with velocity in the ejecta core. This is unphysical for standard SN profiles.&quot;</span><span class="p">,</span>
+                <span class="ne">UserWarning</span><span class="p">,</span>
+                <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="p">)</span>
         <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The inner ejecta density profile index `delta` must be less than 3 for convergence.&quot;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
@@ -2297,8 +2589,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=0790524f97105ba85085"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=0790524f97105ba85085"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2332,7 +2624,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.18.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
 </p></div>
       
     </div>

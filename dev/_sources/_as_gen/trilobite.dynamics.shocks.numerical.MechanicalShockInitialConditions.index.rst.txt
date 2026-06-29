@@ -1,0 +1,6 @@
+trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions.index
+==========================================================================
+
+.. currentmodule:: trilobite.dynamics.shocks.numerical
+
+.. automethod:: MechanicalShockInitialConditions.index

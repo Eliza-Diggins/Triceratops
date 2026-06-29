@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.numerical.aspherical.OffAxisAsymmetricSynchrotronEngine.compute\_avg\_first\_kernel\_derivative
+====================================================================================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.numerical.aspherical
+
+.. automethod:: OffAxisAsymmetricSynchrotronEngine.compute_avg_first_kernel_derivative

@@ -1,0 +1,6 @@
+trilobite.inference.transform.LogTransform.from\_dict
+=====================================================
+
+.. currentmodule:: trilobite.inference.transform
+
+.. automethod:: LogTransform.from_dict

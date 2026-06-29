@@ -1,0 +1,36 @@
+trilobite.dynamics.profiles.ejecta
+==================================
+
+.. automodule:: trilobite.dynamics.profiles.ejecta
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+   
+
+   
+   
+
+   .. rubric:: Classes
+
+   .. autosummary::
+      :toctree:
+      :template: class.rst
+      :recursive:
+   
+      BrokenPowerLawEjectaProfile
+      EjectaDensityProfile
+      ExponentialEjectaProfile
+   
+   
+
+   
+   
+   

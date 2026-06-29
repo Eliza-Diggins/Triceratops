@@ -1,0 +1,6 @@
+trilobite.dynamics.profiles.csm.PowerLawCSMProfile.eval
+=======================================================
+
+.. currentmodule:: trilobite.dynamics.profiles.csm
+
+.. automethod:: PowerLawCSMProfile.eval

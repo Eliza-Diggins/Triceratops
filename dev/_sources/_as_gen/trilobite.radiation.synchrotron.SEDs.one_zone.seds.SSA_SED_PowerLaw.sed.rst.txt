@@ -1,0 +1,6 @@
+trilobite.radiation.synchrotron.SEDs.one\_zone.seds.SSA\_SED\_PowerLaw.sed
+==========================================================================
+
+.. currentmodule:: trilobite.radiation.synchrotron.SEDs.one_zone.seds
+
+.. automethod:: SSA_SED_PowerLaw.sed
