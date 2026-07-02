@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**05:43.504** total execution time for 7 files **from auto_examples/inference**:
+**07:18.089** total execution time for 7 files **from auto_examples/inference**:
 
 .. container::
 
@@ -33,22 +33,22 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_inference_plot_shock_parameter_inference.py` (``plot_shock_parameter_inference.py``)
-     - 01:36.153
+     - 01:57.061
      - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_multi_epoch_sed_evolution.py` (``plot_multi_epoch_sed_evolution.py``)
-     - 01:13.704
+     - 01:40.825
      - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_evolving_sed.py` (``plot_evolving_sed.py``)
-     - 00:59.371
+     - 01:06.022
      - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_upper_limit_inference.py` (``plot_upper_limit_inference.py``)
-     - 00:48.179
+     - 01:05.016
      - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_censored_SED_fit.py` (``plot_censored_SED_fit.py``)
-     - 00:40.073
+     - 00:53.836
      - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_SED_fit.py` (``plot_SED_fit.py``)
-     - 00:26.023
+     - 00:35.327
      - 0.0
    * - :ref:`sphx_glr_auto_examples_inference_plot_optical_lc_inference.py` (``plot_optical_lc_inference.py``)
      - 00:00.002

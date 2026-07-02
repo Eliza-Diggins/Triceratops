@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:21.810** total execution time for 7 files **from auto_examples/dynamics/c_engines**:
+**00:29.223** total execution time for 7 files **from auto_examples/dynamics/c_engines**:
 
 .. container::
 
@@ -33,23 +33,23 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_relativistic_thin_shell_convergence.py` (``plot_relativistic_thin_shell_convergence.py``)
-     - 00:08.729
+     - 00:11.544
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_numerical_shocks_csms.py` (``plot_numerical_shocks_csms.py``)
-     - 00:07.600
+     - 00:10.893
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shocks_csms.py` (``plot_mechanical_shocks_csms.py``)
-     - 00:01.857
+     - 00:02.213
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_momentum_conserving_shock.py` (``plot_momentum_conserving_shock.py``)
-     - 00:01.512
+     - 00:02.030
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shock_model.py` (``plot_mechanical_shock_model.py``)
-     - 00:00.864
+     - 00:01.020
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_numerical_shock_engine.py` (``plot_numerical_shock_engine.py``)
-     - 00:00.721
+     - 00:00.913
      - 0.0
    * - :ref:`sphx_glr_auto_examples_dynamics_c_engines_plot_mechanical_shock_cooling.py` (``plot_mechanical_shock_cooling.py``)
-     - 00:00.527
+     - 00:00.609
      - 0.0

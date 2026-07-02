@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:30.981** total execution time for 8 files **from auto_examples/accretion**:
+**00:30.561** total execution time for 8 files **from auto_examples/accretion**:
 
 .. container::
 
@@ -33,26 +33,26 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_accretion_plot_adv_disk.py` (``plot_adv_disk.py``)
-     - 00:10.811
+     - 00:10.099
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_fallback_disk.py` (``plot_fallback_disk.py``)
-     - 00:06.532
+     - 00:06.291
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_disk_broadband_sed.py` (``plot_disk_broadband_sed.py``)
-     - 00:04.200
+     - 00:04.139
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_one_zone_disk_quickstart.py` (``plot_one_zone_disk_quickstart.py``)
-     - 00:03.164
-     - 0.0
-   * - :ref:`sphx_glr_auto_examples_accretion_plot_disk_eos_comparison.py` (``plot_disk_eos_comparison.py``)
-     - 00:01.974
+     - 00:03.203
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_ss_disk.py` (``plot_ss_disk.py``)
-     - 00:01.890
+     - 00:02.143
+     - 0.0
+   * - :ref:`sphx_glr_auto_examples_accretion_plot_disk_eos_comparison.py` (``plot_disk_eos_comparison.py``)
+     - 00:02.123
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_tde_disk_observables.py` (``plot_tde_disk_observables.py``)
-     - 00:01.458
+     - 00:01.543
      - 0.0
    * - :ref:`sphx_glr_auto_examples_accretion_plot_disk_scurve.py` (``plot_disk_scurve.py``)
-     - 00:00.952
+     - 00:01.020
      - 0.0

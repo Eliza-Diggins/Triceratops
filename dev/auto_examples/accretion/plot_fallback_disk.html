@@ -616,9 +616,9 @@ orbital period of the most bound debris).</p>
 <p>Trilobite implements this fallback channel through a pluggable <strong>source term</strong>
 architecture: a C-level function applied after the base viscous derivative at
 every integration step.  The
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a> (with <code class="docutils literal notranslate"><span class="pre">fallback=True</span></code>)
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a> (with <code class="docutils literal notranslate"><span class="pre">fallback=True</span></code>)
 and
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.FullPressureDisk.html#trilobite.dynamics.accretion.one_zone.FullPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.FullPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullPressureDisk</span></code></a> (with <code class="docutils literal notranslate"><span class="pre">fallback=True</span></code>)
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.FullPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.FullPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.FullPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullPressureDisk</span></code></a> (with <code class="docutils literal notranslate"><span class="pre">fallback=True</span></code>)
 wire this source term onto the gas-pressure and full-pressure EOS
 closures respectively, without any modifications to the integrator.</p>
 <section id="physical-picture">
@@ -641,7 +641,7 @@ injection from the fallback stream.</p>
 <p>In this example we compare three scenarios:</p>
 <ol class="arabic simple">
 <li><p><strong>No fallback</strong> — a bare viscously draining disk
-(<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>).</p></li>
+(<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>).</p></li>
 <li><p><strong>Moderate fallback</strong> — <span class="math notranslate nohighlight">\(\dot{M}_{\rm fb,0} = 10^{28}\;\text{g\,s}^{-1}\)</span>
 (comparable to the initial viscous drain rate).</p></li>
 <li><p><strong>Strong fallback</strong> — <span class="math notranslate nohighlight">\(\dot{M}_{\rm fb,0} = 10^{29}\;\text{g\,s}^{-1}\)</span>
@@ -651,8 +651,8 @@ injection from the fallback stream.</p>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a></p></li>
-<li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.FullPressureDisk.html#trilobite.dynamics.accretion.one_zone.FullPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.FullPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullPressureDisk</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.FullPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.FullPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.FullPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">FullPressureDisk</span></code></a></p></li>
 <li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.base.OneZoneAccretionDiskBase.solve.html#trilobite.dynamics.accretion.one_zone.base.OneZoneAccretionDiskBase.solve" title="trilobite.dynamics.accretion.one_zone.base.OneZoneAccretionDiskBase.solve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">solve()</span></code></a></p></li>
 </ul>
 <div class="admonition hint">
@@ -727,9 +727,9 @@ Initial J_D:         2.820912484255768e+50 cm2 g / s
 <section id="running-the-integrations">
 <h2>Running the Integrations<a class="headerlink" href="#running-the-integrations" title="Link to this heading">#</a></h2>
 <p>We instantiate one
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>
 (no fallback) and one
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a> (with <code class="docutils literal notranslate"><span class="pre">fallback=True</span></code>)
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a> (with <code class="docutils literal notranslate"><span class="pre">fallback=True</span></code>)
 run at two different <span class="math notranslate nohighlight">\(\dot{M}_{\rm fb,0}\)</span> values.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1009,19 +1009,19 @@ in a single call.  Here we use it to map how the disk mass at
 </pre></div>
 </div>
 <div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>  0% |          | 🦖 0/12 [00:00&lt;?, ?it/s]
-  8% |▊         | 🦖 1/12 [00:00&lt;00:02,  3.79it/s]
- 17% |█▋        | 🦖 2/12 [00:00&lt;00:02,  3.81it/s]
- 25% |██▌       | 🦖 3/12 [00:00&lt;00:02,  3.80it/s]
- 33% |███▎      | 🦖 4/12 [00:01&lt;00:02,  3.80it/s]
- 42% |████▏     | 🦖 5/12 [00:01&lt;00:01,  3.79it/s]
- 50% |█████     | 🦖 6/12 [00:01&lt;00:01,  3.80it/s]
- 58% |█████▊    | 🦖 7/12 [00:01&lt;00:01,  3.80it/s]
- 67% |██████▋   | 🦖 8/12 [00:02&lt;00:01,  3.80it/s]
- 75% |███████▌  | 🦖 9/12 [00:02&lt;00:00,  3.80it/s]
- 83% |████████▎ | 🦖 10/12 [00:02&lt;00:00,  3.80it/s]
- 92% |█████████▏| 🦖 11/12 [00:02&lt;00:00,  3.80it/s]
-100% |██████████| 🦖 12/12 [00:03&lt;00:00,  3.79it/s]
-100% |██████████| 🦖 12/12 [00:03&lt;00:00,  3.80it/s]
+  8% |▊         | 🦖 1/12 [00:00&lt;00:02,  4.02it/s]
+ 17% |█▋        | 🦖 2/12 [00:00&lt;00:02,  4.02it/s]
+ 25% |██▌       | 🦖 3/12 [00:00&lt;00:02,  4.01it/s]
+ 33% |███▎      | 🦖 4/12 [00:00&lt;00:01,  4.01it/s]
+ 42% |████▏     | 🦖 5/12 [00:01&lt;00:01,  4.01it/s]
+ 50% |█████     | 🦖 6/12 [00:01&lt;00:01,  4.02it/s]
+ 58% |█████▊    | 🦖 7/12 [00:01&lt;00:01,  4.02it/s]
+ 67% |██████▋   | 🦖 8/12 [00:01&lt;00:00,  4.02it/s]
+ 75% |███████▌  | 🦖 9/12 [00:02&lt;00:00,  4.02it/s]
+ 83% |████████▎ | 🦖 10/12 [00:02&lt;00:00,  4.02it/s]
+ 92% |█████████▏| 🦖 11/12 [00:02&lt;00:00,  4.02it/s]
+100% |██████████| 🦖 12/12 [00:02&lt;00:00,  4.02it/s]
+100% |██████████| 🦖 12/12 [00:02&lt;00:00,  4.02it/s]
 </pre></div>
 </div>
 </section>
@@ -1051,7 +1051,7 @@ regardless of fallback strength.</p>
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_fallback_disk_004.png" srcset="../../_images/sphx_glr_plot_fallback_disk_004.png" alt="Disk Mass at $t = 10^7\,\mathrm{s}$ vs. Fallback Rate and $\alpha$" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 6.532 seconds)</p>
+<img src="../../_images/sphx_glr_plot_fallback_disk_004.png" srcset="../../_images/sphx_glr_plot_fallback_disk_004.png" alt="Disk Mass at $t = 10^7\,\mathrm{s}$ vs. Fallback Rate and $\alpha$" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 6.291 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-accretion-plot-fallback-disk-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/8612ce49b1feec3401bdbb1b98207e84/plot_fallback_disk.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_fallback_disk.ipynb</span></code></a></p>

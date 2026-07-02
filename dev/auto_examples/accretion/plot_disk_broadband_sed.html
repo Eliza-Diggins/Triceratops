@@ -636,14 +636,14 @@ a <span class="math notranslate nohighlight">\(10^6\,M_\odot\)</span> black hole
 a typical configuration for UV/optical TDE surveys.  The disk begins at the
 circularization radius with a total mass of <span class="math notranslate nohighlight">\(M_{D,0} = 1\,M_\odot\)</span>.
 We use
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>
 throughout, which is appropriate once the system has settled into the
 sub-Eddington thin-disk regime.</p>
 </section>
 <section id="see-also">
 <h2>See Also<a class="headerlink" href="#see-also" title="Link to this heading">#</a></h2>
 <ul class="simple">
-<li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a></p></li>
+<li><p><a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a></p></li>
 <li><p><a class="reference internal" href="../../_as_gen/trilobite.physics_utils.gravity.compute_tidal_radius.html#trilobite.physics_utils.gravity.compute_tidal_radius" title="trilobite.physics_utils.gravity.compute_tidal_radius"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_tidal_radius()</span></code></a></p></li>
 <li><p><a class="reference internal" href="../../_as_gen/trilobite.physics_utils.general_relativity.compute_ISCO.html#trilobite.physics_utils.general_relativity.compute_ISCO" title="trilobite.physics_utils.general_relativity.compute_ISCO"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_ISCO()</span></code></a></p></li>
 <li><p><span class="xref std std-ref">tde_disk_observables</span> — TDE disk luminosity and Eddington ratio</p></li>
@@ -651,7 +651,7 @@ sub-Eddington thin-disk regime.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>For the super-Eddington early phase of TDE disk evolution, see the
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.AdvectiveDisk.html#trilobite.dynamics.accretion.one_zone.AdvectiveDisk" title="trilobite.dynamics.accretion.one_zone.core.AdvectiveDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvectiveDisk</span></code></a>
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.AdvectiveDisk.html#trilobite.dynamics.accretion.one_zone.core.AdvectiveDisk" title="trilobite.dynamics.accretion.one_zone.core.AdvectiveDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdvectiveDisk</span></code></a>
 gallery (<span class="xref std std-ref">tde_disk_observables</span>).</p>
 </div>
 </section>
@@ -720,7 +720,7 @@ D      = 60.0 Mpc
 <section id="model-instantiation-and-initial-conditions">
 <h2>Model Instantiation and Initial Conditions<a class="headerlink" href="#model-instantiation-and-initial-conditions" title="Link to this heading">#</a></h2>
 <p>We instantiate a
-<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>
+<a class="reference internal" href="../../_as_gen/trilobite.dynamics.accretion.one_zone.core.GasPressureDisk.html#trilobite.dynamics.accretion.one_zone.core.GasPressureDisk" title="trilobite.dynamics.accretion.one_zone.core.GasPressureDisk"><code class="xref py py-class docutils literal notranslate"><span class="pre">GasPressureDisk</span></code></a>
 and generate self-consistent initial conditions from
 <span class="math notranslate nohighlight">\((M_{D,0},\,R_{D,0})\)</span>.  The initial disk mass is taken as the full
 stellar mass <span class="math notranslate nohighlight">\(M_\star\)</span> — appropriate for the late-time phase where the
@@ -944,7 +944,7 @@ The epoch markers (vertical dashed lines) correspond to the six SEDs above.</p>
 <a href="https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.show.html#matplotlib.pyplot.show" title="matplotlib.pyplot.show" class="sphx-glr-backref-module-matplotlib-pyplot sphx-glr-backref-type-py-function"><span class="n">plt</span><span class="o">.</span><span class="n">show</span></a><span class="p">()</span>
 </pre></div>
 </div>
-<img src="../../_images/sphx_glr_plot_disk_broadband_sed_002.png" srcset="../../_images/sphx_glr_plot_disk_broadband_sed_002.png" alt="Late-Time Disk Cooling  ($\alpha = 0.1$,  $\mu = 0.6$), Wien Peak Frequency, Bolometric Luminosity" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.200 seconds)</p>
+<img src="../../_images/sphx_glr_plot_disk_broadband_sed_002.png" srcset="../../_images/sphx_glr_plot_disk_broadband_sed_002.png" alt="Late-Time Disk Cooling  ($\alpha = 0.1$,  $\mu = 0.6$), Wien Peak Frequency, Bolometric Luminosity" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 4.139 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-accretion-plot-disk-broadband-sed-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/1eb2899ff2bba8f6b43f065aa601d21f/plot_disk_broadband_sed.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_disk_broadband_sed.ipynb</span></code></a></p>
