@@ -714,8 +714,8 @@ class PressureDrivenThinShellShockEngine(ShockEngine):
             u1 = u_1(R_sh, t)
             u4 = u_4(R_sh, t)
 
-            Delta = u1 - v_sh
-            v_fwd = v_sh - u4
+            Delta = np.maximum(u1 - v_sh, 0)
+            v_fwd = np.maximum(v_sh - u4, 0)
 
             coeff = 4.0 * np.pi * R_sh**2 / m * (1.0 - 1.0 / chi)
 
