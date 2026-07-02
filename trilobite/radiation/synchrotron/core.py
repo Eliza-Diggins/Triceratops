@@ -860,7 +860,7 @@ def _log_averaged_first_synchrotron_kernel(
             log_F[rmsk] = (np.log(np.pi) - np.log(2.0)) + np.log1p(-eps) - x_r
 
             if derivative:
-                dlog_F_dlog_x[rmsk] = 0.5 - x_r
+                dlog_F_dlog_x[rmsk] = eps / (1.0 - eps) - x_r
 
         # Now we perform the exact computation using the Bessel functions. This is taken from
         # Wenbin Lu's book equation 8.79.
