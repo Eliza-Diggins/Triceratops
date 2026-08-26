@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/core/base';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.core.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Abstract base classes for Trilobite models.</span>
 
 <span class="sd">This module defines the abstract base class structure for all Trilobite models. It is the</span>
@@ -453,9 +453,9 @@
 
 <span class="sd">At their core, all of the models in Trilobite inherit from the</span>
 <span class="sd">:class:`~trilobite.models.core.base.Model` abstract base class, which</span>
-<span class="sd">effectively declares a set of ``parameters``, a set of ``variables``, and a method to compute the model&#39;s outputs</span>
+<span class="sd">effectively declares a set of ``parameters``, a set of ``variables``, and a method to compute the model's outputs</span>
 <span class="sd">based on those parameters and variables.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">inspect</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
@@ -482,11 +482,11 @@
 <div class="viewcode-block" id="Model">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.core.base.Model.html#trilobite.models.generic.light_curve.Model">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for all Trilobite models.</span>
 
 <span class="sd">    At their core, all models in Trilobite are wrappers around a set of physical</span>
-<span class="sd">    parameters and variables, along with a method to compute the model&#39;s outputs based on</span>
+<span class="sd">    parameters and variables, along with a method to compute the model's outputs based on</span>
 <span class="sd">    those parameters and variables. Formally, a model maps as set of input variables :math:`{\bf x}` and</span>
 <span class="sd">    a set of model parameters :math:`\boldsymbol{\Theta}` to a set of outputs :math:`{\bf y}` via a function :math:`f`</span>
 
@@ -496,8 +496,8 @@
 
 <span class="sd">    This abstract base class defines the structure that all Trilobite models must adhere to. Specifically, each</span>
 <span class="sd">    model must declare its parameters and variables as class-level attributes, and implement the</span>
-<span class="sd">    :meth:`~trilobite.models.core.base.Model._forward_model` method to compute the model&#39;s outputs.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    :meth:`~trilobite.models.core.base.Model._forward_model` method to compute the model's outputs.</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Parameter and Variable Declarations             #</span>
@@ -505,33 +505,33 @@
     <span class="c1"># Each model must declare its parameters and variables as class-level attributes. These</span>
     <span class="c1"># must each be instances of `ModelParameter` and `ModelVariable`, respectively.</span>
     <span class="n">PARAMETERS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">ModelParameter</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`ModelParameter`: The model&#39;s parameters.</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`ModelParameter`: The model's parameters.</span>
 
 <span class="sd">    Each element of :attr:`PARAMETERS` is a :class:`ModelParameter` instance that defines a single</span>
 <span class="sd">    parameter of the model. These parameters are used to configure the model and control its behavior. Each</span>
 <span class="sd">    parameter contains information about the base units, default value, and valid range for that parameter.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">VARIABLES</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">ModelVariable</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">()</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`ModelVariable`: The model&#39;s variables.</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`ModelVariable`: The model's variables.</span>
 
 <span class="sd">    Each element of :attr:`VARIABLES` is a :class:`ModelVariable` instance that defines a single</span>
 <span class="sd">    variable of the model. These variables represent the inputs to the model that can vary during</span>
 <span class="sd">    evaluation. Each variable contains information about the base units, name, etc. of the variable. Notably,</span>
 <span class="sd">    variables differ from the parameters (:attr:`PARAMETERS`) in that variables are do **NOT** have default</span>
 <span class="sd">    values, do **NOT** have validity ranges, and are expected to be provided at model evaluation time.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Model Metadata Declarations                     #</span>
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Each model must declare its parameters and variables as class-level attributes.</span>
     <span class="n">OUTPUTS</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    NamedTuple: Structured declaration of the model outputs.</span>
 
 <span class="sd">    ``OUTPUTS`` must be a NamedTuple instance whose field names define the</span>
 <span class="sd">    names of the model outputs. These names must match the keys returned by</span>
-<span class="sd">    the model&#39;s :meth:`~trilobite.models.core.base.Model._forward_model` evaluation method.</span>
+<span class="sd">    the model's :meth:`~trilobite.models.core.base.Model._forward_model` evaluation method.</span>
 
 <span class="sd">    Each field value should be a string representing the output name. The</span>
 <span class="sd">    field ordering defines the canonical ordering of outputs throughout the</span>
@@ -542,15 +542,15 @@
 <span class="sd">    &gt;&gt;&gt; class Outputs(NamedTuple):</span>
 <span class="sd">    ...     y: str</span>
 <span class="sd">    ...</span>
-<span class="sd">    &gt;&gt;&gt; OUTPUTS = Outputs(y=&quot;y&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; OUTPUTS = Outputs(y="y")</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    The field names of :attr:`OUTPUTS` must exactly match those of</span>
 <span class="sd">    :attr:`UNITS`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">UNITS</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">tuple</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    NamedTuple: Structured declaration of output units.</span>
 
 <span class="sd">    ``UNITS`` must be a NamedTuple instance with the same field names and</span>
@@ -574,55 +574,55 @@
 <span class="sd">    -----</span>
 <span class="sd">    Units are validated and coerced to proper Astropy units at class</span>
 <span class="sd">    definition time via :meth:`__init_subclass__`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    str: Short human-readable summary of the model.</span>
 
 <span class="sd">    This should briefly describe the physical or phenomenological</span>
 <span class="sd">    behavior of the model. It is intended for documentation generation,</span>
 <span class="sd">    model inspection, and reproducibility metadata.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    str: Citation or bibliographic reference for the model.</span>
 
 <span class="sd">    This may include a journal reference, DOI, arXiv identifier,</span>
 <span class="sd">    textbook citation, or other authoritative source describing</span>
-<span class="sd">    the model&#39;s origin or usage.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    the model's origin or usage.</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Initialization and Instantiation                #</span>
     <span class="c1"># =============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate that the subclass has properly defined its parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Validate that the subclass has properly defined its parameters and variables."""</span>
         <span class="c1"># Hand off to the super-class initializer to ensure that any work</span>
         <span class="c1"># done there is not skipped.</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">VARIABLES</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;At least one VARIABLE must be defined.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"At least one VARIABLE must be defined."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">ModelParameter</span><span class="p">)</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">PARAMETERS</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;All PARAMETERS must be instances of ModelParameter.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"All PARAMETERS must be instances of ModelParameter."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">var</span><span class="p">,</span> <span class="n">ModelVariable</span><span class="p">)</span> <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">VARIABLES</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;All VARIABLES must be instances of ModelVariable.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"All VARIABLES must be instances of ModelVariable."</span><span class="p">)</span>
 
         <span class="c1"># -------------------------------------------------- #</span>
         <span class="c1"># Validate OUTPUTS and UNITS (namedtuple-based)      #</span>
         <span class="c1"># -------------------------------------------------- #</span>
         <span class="c1"># Ensure OUTPUTS is a NamedTuple class</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isclass</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;OUTPUTS must be a NamedTuple class.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"OUTPUTS must be a NamedTuple class."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;OUTPUTS must inherit from NamedTuple.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"OUTPUTS must inherit from NamedTuple."</span><span class="p">)</span>
 
         <span class="c1"># Ensure UNITS is instance of OUTPUTS</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">UNITS</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;UNITS must be an instance of OUTPUTS.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"UNITS must be an instance of OUTPUTS."</span><span class="p">)</span>
 
         <span class="c1"># Convert unit specifications safely while preserving namedtuple structure</span>
         <span class="n">unit_values</span> <span class="o">=</span> <span class="p">[]</span>
@@ -631,34 +631,34 @@
             <span class="n">unit</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">UNITS</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">unit</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">unit_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">))</span>
+                <span class="n">unit_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">""</span><span class="p">))</span>
 
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                 <span class="k">try</span><span class="p">:</span>
                     <span class="n">unit_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">unit</span><span class="p">))</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid unit string &#39;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&#39; for output &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid unit string '</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">' for output '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">UnitBase</span><span class="p">):</span>
                 <span class="n">unit_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span>
 
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unit for output &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; must be str or astropy Unit, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unit for output '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' must be str or astropy Unit, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">unit</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
         <span class="c1"># Rebuild namedtuple with validated units</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">UNITS</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">UNITS</span><span class="p">)(</span><span class="o">*</span><span class="n">unit_values</span><span class="p">)</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
 
     <span class="k">pass</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_register_init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Register the kwargs for serialization.</span>
+<span class="w">        </span><span class="sd">"""Register the kwargs for serialization.</span>
 
 <span class="sd">        This must be done in all models that have external kwargs.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_model_init_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="c1"># =============================================== #</span>
@@ -676,37 +676,37 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the model&#39;s outputs based on the provided variables and parameters.</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the model's outputs based on the provided variables and parameters.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        variables: dict of str, array-like</span>
-<span class="sd">            The model&#39;s input variables. Each variable must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the variable name and the value is the variable&#39;s value. Each element</span>
+<span class="sd">            The model's input variables. Each variable must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the variable name and the value is the variable's value. Each element</span>
 <span class="sd">            must either be a float or an array-like object. Standard numpy broadcasting rules are applied</span>
 <span class="sd">            throughout.</span>
 <span class="sd">        parameters: dict of str, array-like</span>
-<span class="sd">            The model&#39;s parameters. Each parameter must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter&#39;s value. Each element</span>
+<span class="sd">            The model's parameters. Each parameter must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter's value. Each element</span>
 <span class="sd">            must either be a float or an array-like object. Standard numpy broadcasting rules are applied</span>
 <span class="sd">            throughout. All parameters must be provided; there are no default values at this level.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        outputs : namedtuple</span>
-<span class="sd">            Instance of the model&#39;s ``OUTPUTS`` NamedTuple. Each field contains</span>
+<span class="sd">            Instance of the model's ``OUTPUTS`` NamedTuple. Each field contains</span>
 <span class="sd">            the computed output value, returned as either a NumPy scalar/ndarray</span>
 <span class="sd">            or an :class:`~astropy.units.Quantity` depending on whether units are defined.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">pass</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model_tupled</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the model&#39;s outputs as a tuple based on the provided variables and parameters.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the model's outputs as a tuple based on the provided variables and parameters.</span>
 
 <span class="sd">        This is a convenience method that wraps around</span>
 <span class="sd">        :meth:`~trilobite.models.core.base.Model._forward_model` to return</span>
@@ -715,21 +715,21 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        variables: dict of str, array-like</span>
-<span class="sd">            The model&#39;s input variables. Each variable must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the variable name and the value is the variable&#39;s value. Each element</span>
+<span class="sd">            The model's input variables. Each variable must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the variable name and the value is the variable's value. Each element</span>
 <span class="sd">            must either be a float or an array-like object. Standard numpy broadcasting rules are applied</span>
 <span class="sd">            throughout.</span>
 <span class="sd">        parameters: dict of str, array-like</span>
-<span class="sd">            The model&#39;s parameters. Each parameter must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter&#39;s value. Each element</span>
+<span class="sd">            The model's parameters. Each parameter must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter's value. Each element</span>
 <span class="sd">            must either be a float or an array-like object. Standard numpy broadcasting rules are applied</span>
 <span class="sd">            throughout. All parameters must be provided; there are no default values at this level.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        outputs: tuple of array-like</span>
-<span class="sd">            The model&#39;s outputs as a tuple, ordered according to :attr:`OUTPUTS`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            The model's outputs as a tuple, ordered according to :attr:`OUTPUTS`.</span>
+<span class="sd">        """</span>
         <span class="n">raw_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_model</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">raw_outputs</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span> <span class="k">for</span> <span class="n">output_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span>
 
@@ -739,20 +739,20 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInput</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInput</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the model&#39;s outputs based on the provided variables and parameters.</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Compute the model's outputs based on the provided variables and parameters.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        variables: dict of str, array-like or ~astropy.units.Quantity</span>
-<span class="sd">            The model&#39;s input variables. Each variable must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the variable name and the value is the variable&#39;s value. Each element</span>
+<span class="sd">            The model's input variables. Each variable must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the variable name and the value is the variable's value. Each element</span>
 <span class="sd">            must either be a float, an array-like object, or an :class:`astropy.units.Quantity`. Standard numpy</span>
 <span class="sd">            broadcasting rules are applied throughout.</span>
 <span class="sd">        parameters: dict of str, array-like or ~astropy.units.Quantity</span>
-<span class="sd">            The model&#39;s parameters. Each parameter must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter&#39;s value. Each element</span>
+<span class="sd">            The model's parameters. Each parameter must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter's value. Each element</span>
 <span class="sd">            must either be a float, an array-like object, or an :class:`astropy.units.Quantity`. Standard numpy</span>
 <span class="sd">            broadcasting rules are applied throughout. If a parameter is missing, it will be filled by the</span>
 <span class="sd">            default value defined in the :attr:`PARAMETERS` class attribute.</span>
@@ -764,7 +764,7 @@
 <span class="sd">            order defined by :attr:`OUTPUTS`. Fields with defined units</span>
 <span class="sd">            are returned as :class:`~astropy.units.Quantity` objects; fields</span>
 <span class="sd">            without units are returned as floats or ``ndarray`` objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># --- Coerce the variables and parameters --- #</span>
         <span class="c1"># The first task in the forward model is to coerce the input variables and parameters</span>
         <span class="c1"># into raw numerical values (i.e., strip off any units) and ensure that all of the</span>
@@ -785,7 +785,7 @@
 
         <span class="c1"># --- Compute the raw outputs --- #</span>
         <span class="c1"># With the inputs coerced and validated, we can now compute the raw outputs by passing</span>
-        <span class="c1"># the inputs to the model&#39;s core physics routine, ``_forward_model``.</span>
+        <span class="c1"># the inputs to the model's core physics routine, ``_forward_model``.</span>
         <span class="n">_raw_outputs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_forward_model</span><span class="p">(</span><span class="n">_input_variables</span><span class="p">,</span> <span class="n">_input_parameters</span><span class="p">)</span>
 
         <span class="c1"># --- Attach units to outputs --- #</span>
@@ -798,7 +798,7 @@
             <span class="n">raw_value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">_raw_outputs</span><span class="p">,</span> <span class="n">output_name</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">output_unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">raw_value</span><span class="p">,</span> <span class="s2">&quot;unit&quot;</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">raw_value</span><span class="p">,</span> <span class="s2">"unit"</span><span class="p">):</span>
                     <span class="n">_final_outputs</span><span class="p">[</span><span class="n">output_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_value</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">output_unit</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">_final_outputs</span><span class="p">[</span><span class="n">output_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">raw_value</span> <span class="o">*</span> <span class="n">output_unit</span>
@@ -809,19 +809,19 @@
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the model with the given variables and parameters.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        variables: dict of str, array-like or ~astropy.units.Quantity</span>
-<span class="sd">            The model&#39;s input variables. Each variable must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the variable name and the value is the variable&#39;s value. Each element</span>
+<span class="sd">            The model's input variables. Each variable must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the variable name and the value is the variable's value. Each element</span>
 <span class="sd">            must either be a float, an array-like object, or an :class:`astropy.units.Quantity`. Standard numpy</span>
 <span class="sd">            broadcasting rules are applied throughout.</span>
 <span class="sd">        parameters: dict of str, array-like or ~astropy.units.Quantity</span>
-<span class="sd">            The model&#39;s parameters. Each parameter must be provided as a key-value pair in the</span>
-<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter&#39;s value. Each element</span>
+<span class="sd">            The model's parameters. Each parameter must be provided as a key-value pair in the</span>
+<span class="sd">            dictionary, where the key is the parameter name and the value is the parameter's value. Each element</span>
 <span class="sd">            must either be a float, an array-like object, or an :class:`astropy.units.Quantity`. Standard numpy</span>
 <span class="sd">            broadcasting rules are applied throughout. If a parameter is missing, it will be filled by the</span>
 <span class="sd">            default value defined in the :attr:`PARAMETERS` class attribute.</span>
@@ -833,7 +833,7 @@
 <span class="sd">            order defined by :attr:`OUTPUTS`. Fields with defined units</span>
 <span class="sd">            are returned as :class:`~astropy.units.Quantity` objects; fields</span>
 <span class="sd">            without units are returned as floats or ``ndarray`` objects.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward_model</span><span class="p">(</span><span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
 
     <span class="c1"># =============================================== #</span>
@@ -842,7 +842,7 @@
 <div class="viewcode-block" id="Model.coerce_model_variables">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.core.base.Model.coerce_model_variables.html#trilobite.models.generic.light_curve.Model.coerce_model_variables">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">coerce_model_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Coerce model variables into raw numerical values in base units.</span>
 
 <span class="sd">        This method validates that all required model variables are provided and</span>
@@ -864,7 +864,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If a required variable is missing or cannot be coerced into base units.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Declare the coerced variables dictionary to ensure that</span>
         <span class="c1"># there are no mutability issues.</span>
         <span class="n">coerced_variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span> <span class="o">=</span> <span class="p">{}</span>
@@ -874,13 +874,13 @@
         <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIABLES</span><span class="p">:</span>
             <span class="c1"># Check for the variable in the input variables dictionary.</span>
             <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">variables</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Missing required model variable &#39;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Missing required model variable '</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
 
             <span class="c1"># Attempt to coerce the variable to its base value.</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">coerced_variables</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">to_base_value</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error coercing model variable &#39;</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error coercing model variable '</span><span class="si">{</span><span class="n">var</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="k">return</span> <span class="n">coerced_variables</span></div>
 
@@ -888,7 +888,7 @@
 <div class="viewcode-block" id="Model.coerce_model_parameters">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.core.base.Model.coerce_model_parameters.html#trilobite.models.generic.light_curve.Model.coerce_model_parameters">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">coerce_model_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ModelParametersInputRaw</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Coerce model parameters into raw numerical values in base units.</span>
 
 <span class="sd">        This method fills in missing parameters using their default values,</span>
@@ -910,7 +910,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If a parameter value cannot be coerced or violates its bounds.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Declare the coerced variables dictionary to ensure that</span>
         <span class="c1"># there are no mutability issues.</span>
         <span class="n">coerced_parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span> <span class="o">=</span> <span class="p">{}</span>
@@ -925,7 +925,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">coerced_parameters</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">to_base_value</span><span class="p">(</span><span class="n">coerced_parameters</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error coercing model parameter &#39;</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error coercing model parameter '</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="k">return</span> <span class="n">coerced_parameters</span></div>
 
@@ -938,7 +938,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check parameter-level bounds in base units.</span>
 
 <span class="sd">        This method enforces all parameter bounds defined by each</span>
@@ -954,7 +954,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If any parameter value violates its bounds.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">PARAMETERS</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="p">]</span>
 
@@ -968,7 +968,7 @@
 
             <span class="k">if</span> <span class="ow">not</span> <span class="n">valid</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;Model parameter &#39;</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; with value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> violates its bounds </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">bounds</span><span class="si">}</span><span class="s2">.&quot;</span>
+                    <span class="sa">f</span><span class="s2">"Model parameter '</span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">' with value </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2"> violates its bounds </span><span class="si">{</span><span class="n">param</span><span class="o">.</span><span class="n">bounds</span><span class="si">}</span><span class="s2">."</span>
                 <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_check_model_bounds_base</span><span class="p">(</span>
@@ -976,7 +976,7 @@
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check model-level bounds in base units.</span>
 
 <span class="sd">        This method is intended to be optionally overridden by subclasses</span>
@@ -997,7 +997,7 @@
 <span class="sd">        - This method should raise ``ValueError`` for *hard* violations.</span>
 <span class="sd">        - For physics-driven invalid regions, it is generally preferable</span>
 <span class="sd">          to allow ``_forward_model`` to return NaNs or infinities instead.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="Model.check_parameter_bounds">
@@ -1006,7 +1006,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInput</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check parameter-level bounds with unit handling.</span>
 
 <span class="sd">        This is a user-facing wrapper around</span>
@@ -1022,7 +1022,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If any parameter violates its bounds.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">coerced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coerce_model_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_parameter_bounds_base</span><span class="p">(</span><span class="n">coerced</span><span class="p">)</span></div>
 
@@ -1034,7 +1034,7 @@
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInput</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInput</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Check model-level bounds with unit handling.</span>
 
 <span class="sd">        This method coerces both variables and parameters into base units</span>
@@ -1055,7 +1055,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If a model-level constraint is violated.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">coerced_vars</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coerce_model_variables</span><span class="p">(</span><span class="n">variables</span><span class="p">)</span>
         <span class="n">coerced_params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coerce_model_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_model_bounds_base</span><span class="p">(</span><span class="n">coerced_vars</span><span class="p">,</span> <span class="n">coerced_params</span><span class="p">)</span></div>
@@ -1065,27 +1065,27 @@
     <span class="c1"># Dunder Methods                                  #</span>
     <span class="c1"># =============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> Model: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">DESCRIPTION</span><span class="si">}</span><span class="s2">&gt;&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> Model: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">DESCRIPTION</span><span class="si">}</span><span class="s2">&gt;"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute the total number of parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Compute the total number of parameters and variables."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">PARAMETERS</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">VARIABLES</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">ModelParameter</span><span class="p">,</span> <span class="n">ModelVariable</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a parameter or variable by name.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Get a parameter or variable by name."""</span>
         <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">PARAMETERS</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">param</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">param</span>
         <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIABLES</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">var</span>
-        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&#39; is not a valid parameter or variable name.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">' is not a valid parameter or variable name."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Iterate over the model&#39;s parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Iterate over the model's parameters and variables."""</span>
         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">PARAMETERS</span>
         <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIABLES</span>
 
@@ -1102,7 +1102,7 @@
 <div class="viewcode-block" id="Model.to_model_spec">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.core.base.Model.to_model_spec.html#trilobite.models.generic.light_curve.Model.to_model_spec">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_model_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModelSpec</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Serialize this model to a ModelSpec.</span>
 
 <span class="sd">        Requirements</span>
@@ -1119,25 +1119,25 @@
 <span class="sd">            If constructor arguments are not JSON-serializable.</span>
 <span class="sd">        ImportError</span>
 <span class="sd">            If the model class is not importable.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
         <span class="c1"># --------------------------------------------------</span>
         <span class="c1"># 1. Ensure constructor registration exists</span>
         <span class="c1"># --------------------------------------------------</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_init_kwargs&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_model_init_kwargs"</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> did not register constructor &quot;</span>
-                <span class="s2">&quot;arguments. Models must call `_register_init(...)` &quot;</span>
-                <span class="s2">&quot;inside __init__.&quot;</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> did not register constructor "</span>
+                <span class="s2">"arguments. Models must call `_register_init(...)` "</span>
+                <span class="s2">"inside __init__."</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;_model_init_kwargs&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">"_model_init_kwargs"</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">SyntaxError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> did not register constructor &quot;</span>
-                <span class="s2">&quot;arguments. Models must call `_register_init(...)` &quot;</span>
-                <span class="s2">&quot;inside __init__.&quot;</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> did not register constructor "</span>
+                <span class="s2">"arguments. Models must call `_register_init(...)` "</span>
+                <span class="s2">"inside __init__."</span>
             <span class="p">)</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model_init_kwargs</span>
 
@@ -1148,9 +1148,9 @@
             <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Model &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; contains &quot;</span>
-                <span class="s2">&quot;non-serializable constructor arguments. &quot;</span>
-                <span class="s2">&quot;Override to_model_spec() to handle custom objects.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Model '</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">' contains "</span>
+                <span class="s2">"non-serializable constructor arguments. "</span>
+                <span class="s2">"Override to_model_spec() to handle custom objects."</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># --------------------------------------------------</span>
@@ -1163,12 +1163,12 @@
             <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
             <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model class &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; is not importable from module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Model class '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' is not importable from module '</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># --------------------------------------------------</span>
         <span class="c1"># 4. Construct spec</span>
         <span class="c1"># --------------------------------------------------</span>
-        <span class="n">target</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">"</span>
 
         <span class="k">return</span> <span class="n">ModelSpec</span><span class="p">(</span>
             <span class="n">target</span><span class="o">=</span><span class="n">target</span><span class="p">,</span>
@@ -1180,21 +1180,21 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.core.base.Model.from_model_spec.html#trilobite.models.generic.light_curve.Model.from_model_spec">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_model_spec</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">ModelSpec</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Construct a model from a ModelSpec.</span>
 
 <span class="sd">        Ensures:</span>
 <span class="sd">        - Spec is valid</span>
 <span class="sd">        - Target is importable</span>
 <span class="sd">        - Returned object is instance of Model</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">ModelSpec</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Expected ModelSpec.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Expected ModelSpec."</span><span class="p">)</span>
 
         <span class="n">model</span> <span class="o">=</span> <span class="n">spec</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Constructed object is not a Model instance.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Constructed object is not a Model instance."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">model</span></div>
 
@@ -1204,22 +1204,22 @@
     <span class="c1"># =============================================== #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">parameter_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The names of the model&#39;s parameters.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: The names of the model's parameters."""</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">PARAMETERS</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">variable_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The names of the model&#39;s variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: The names of the model's variables."""</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIABLES</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">output_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: The names of the model&#39;s outputs.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: The names of the model's outputs."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="o">.</span><span class="n">_fields</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">output_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">],</span> <span class="o">...</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;astropy.units.Unit or None: The units of the model&#39;s outputs.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""astropy.units.Unit or None: The units of the model's outputs."""</span>
         <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">UNITS</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="o">.</span><span class="n">_fields</span><span class="p">)</span></div>
 
 </pre></div>
@@ -1251,8 +1251,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1286,7 +1286,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

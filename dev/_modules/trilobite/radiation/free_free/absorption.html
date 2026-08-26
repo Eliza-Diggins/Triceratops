@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/free_free/absorption';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.free_free.absorption</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Free-free optical depth calculations for structured plasma environments.</span>
 
 <span class="sd">This module provides routines for computing the **free-free (bremsstrahlung)</span>
@@ -453,7 +453,7 @@
 
 <span class="sd">.. math::</span>
 
-<span class="sd">    \tau_{\rm ff}(\nu) = \int_{r_{\rm min}}^{r_{\rm max}} \alpha_\nu^{\rm RJ}(r&#39;)\, dr&#39;,</span>
+<span class="sd">    \tau_{\rm ff}(\nu) = \int_{r_{\rm min}}^{r_{\rm max}} \alpha_\nu^{\rm RJ}(r')\, dr',</span>
 <span class="sd">    \qquad</span>
 <span class="sd">    \alpha_\nu^{\rm RJ} \propto Z^2\, n_e\, n_i\, T^{-3/2}\, \nu^{-2}\, g_{\rm ff}</span>
 
@@ -494,7 +494,7 @@
 
 <span class="sd">    \tau_{\rm eff} = \sqrt{\tau_{\rm ff}\,(\tau_{\rm ff} + \tau_T)},</span>
 <span class="sd">    \qquad</span>
-<span class="sd">    \tau_T = \sigma_T \int_{r_{\rm min}}^{r_{\rm max}} n_e(r&#39;)\, dr&#39;</span>
+<span class="sd">    \tau_T = \sigma_T \int_{r_{\rm min}}^{r_{\rm max}} n_e(r')\, dr'</span>
 
 <span class="sd">Module structure</span>
 <span class="sd">----------------</span>
@@ -506,7 +506,7 @@
 
 <span class="sd">    Quadrature-based functions accept density and temperature profiles as</span>
 <span class="sd">    **pure-CGS Python callables** (``n_e(r_cgs) -&gt; float`` etc.).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
@@ -524,24 +524,24 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ArrayLike</span><span class="p">,</span> <span class="n">_UnitBearingArrayLike</span>
 
 <span class="c1"># NumPy compatibility: np.trapezoid added in 2.0, np.trapz removed in 2.0.</span>
-<span class="n">_trapz</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;trapezoid&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;trapz&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">_trapz</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">"trapezoid"</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">"trapz"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
 <span class="n">_sigma_T_cgs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">6.6524e-25</span>
-<span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: Thomson cross-section :math:`\sigma_T` [cm\ :sup:`2`].&quot;&quot;&quot;</span>
+<span class="sa">r</span><span class="sd">"""float: Thomson cross-section :math:`\sigma_T` [cm\ :sup:`2`]."""</span>
 
 <span class="n">_m_p_cgs</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.67262192e-24</span>
-<span class="sa">r</span><span class="sd">&quot;&quot;&quot;float: Proton mass :math:`m_p` [g].&quot;&quot;&quot;</span>
+<span class="sa">r</span><span class="sd">"""float: Proton mass :math:`m_p` [g]."""</span>
 
 
 <span class="c1"># ============================================== #</span>
 <span class="c1"># Private helpers                                #</span>
 <span class="c1"># ============================================== #</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_powerlaw_integral</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_r_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_r_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\ln\!\int_{r_{\rm min}}^{r_{\rm max}} r^{k-1}\,dr` in log-space.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return :math:`\ln\!\int_{r_{\rm min}}^{r_{\rm max}} r^{k-1}\,dr` in log-space.</span>
 
 <span class="sd">    * :math:`k \neq 0`: :math:`(r_{\rm max}^k - r_{\rm min}^k)/k`.</span>
 <span class="sd">    * :math:`k = 0`: :math:`\ln(r_{\rm max}/r_{\rm min})`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">log_r_max</span> <span class="o">-</span> <span class="n">log_r_min</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -556,19 +556,19 @@
 <span class="c1"># Private API — log-space CGS backends           #</span>
 <span class="c1"># ============================================== #</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_RJ_ff_optical_depth_from_quadrature</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">r</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">n_e</span><span class="p">:</span> <span class="s2">&quot;Callable[[float], float]&quot;</span><span class="p">,</span>
-    <span class="n">n_i</span><span class="p">:</span> <span class="s2">&quot;Callable[[float], float]&quot;</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Callable[[float], float]&quot;</span><span class="p">,</span>
+    <span class="n">n_e</span><span class="p">:</span> <span class="s2">"Callable[[float], float]"</span><span class="p">,</span>
+    <span class="n">n_i</span><span class="p">:</span> <span class="s2">"Callable[[float], float]"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Callable[[float], float]"</span><span class="p">,</span>
     <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth via adaptive quadrature in the RJ limit (CGS log-space).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth via adaptive quadrature in the RJ limit (CGS log-space).</span>
 
 <span class="sd">    Gaunt factor is resolved from ``temperature(r)`` when ``g_ff`` is ``None``.</span>
 
@@ -600,7 +600,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    tau : ~numpy.ndarray</span>
 <span class="sd">        Optical depths, shape ``(len(log_nu),)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_T_ref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">temperature</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
     <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">tau_ff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span>
@@ -629,18 +629,18 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_RJ_ff_optical_depth_from_arrays</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">log_n_e</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">log_n_i</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">r</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">log_n_e</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">log_n_i</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth via trapezoidal integration in the RJ limit (CGS log-space).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth via trapezoidal integration in the RJ limit (CGS log-space).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -667,7 +667,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    tau : ~numpy.ndarray</span>
 <span class="sd">        Optical depths, shape ``(n_nu,)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu_ref</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">Z_eff</span><span class="p">,</span> <span class="n">g_ff_eff</span> <span class="o">=</span> <span class="n">_resolve_gff</span><span class="p">(</span><span class="n">log_nu_ref</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g_ff</span><span class="p">)</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -691,7 +691,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_RJ_ff_optical_depth_wind</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_r_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_r_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_n_e_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -699,12 +699,12 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="n">log_T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0e4</span><span class="p">),</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth through a steady wind in the RJ limit (CGS log-space).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth through a steady wind in the RJ limit (CGS log-space).</span>
 
 <span class="sd">    Profile: :math:`n_e(r) = n_{e,0}\,(r_0/r)^2`.</span>
 
@@ -731,7 +731,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    tau : ~numpy.ndarray</span>
 <span class="sd">        Optical depths, shape ``(len(log_nu),)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu_ref</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">Z_eff</span><span class="p">,</span> <span class="n">g_ff_eff</span> <span class="o">=</span> <span class="n">_resolve_gff</span><span class="p">(</span><span class="n">log_nu_ref</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g_ff</span><span class="p">)</span>
 
@@ -755,19 +755,19 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_RJ_ff_optical_depth_shell</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_r_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_n_e_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_n_i_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="n">log_T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0e4</span><span class="p">),</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth through a uniform shell in the RJ limit (CGS log-space).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth through a uniform shell in the RJ limit (CGS log-space).</span>
 
 <span class="sd">    Profile: :math:`n_e(r) = n_{e,0}` (constant).</span>
 
@@ -793,7 +793,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    tau : ~numpy.ndarray</span>
 <span class="sd">        Optical depths, shape ``(len(log_nu),)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu_ref</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">Z_eff</span><span class="p">,</span> <span class="n">g_ff_eff</span> <span class="o">=</span> <span class="n">_resolve_gff</span><span class="p">(</span><span class="n">log_nu_ref</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g_ff</span><span class="p">)</span>
 
@@ -815,7 +815,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_RJ_ff_optical_depth_powerlaw</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_r_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_r_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_n_e_0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -824,12 +824,12 @@
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_r_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="n">log_T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0e4</span><span class="p">),</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth for a power-law density profile in the RJ limit (CGS log-space).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth for a power-law density profile in the RJ limit (CGS log-space).</span>
 
 <span class="sd">    Profile: :math:`n_e(r) = n_{e,0}\,(r_0/r)^p`.  Setting :math:`k = 1 - 2p`:</span>
 
@@ -863,7 +863,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    tau : ~numpy.ndarray</span>
 <span class="sd">        Optical depths, shape ``(len(log_nu),)``.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu_ref</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">Z_eff</span><span class="p">,</span> <span class="n">g_ff_eff</span> <span class="o">=</span> <span class="n">_resolve_gff</span><span class="p">(</span><span class="n">log_nu_ref</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g_ff</span><span class="p">)</span>
 
@@ -887,15 +887,15 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_RJ_ff_optical_depth_EM</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_EM</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">log_T</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0e4</span><span class="p">),</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth from emission measure in the RJ limit (CGS log-space).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth from emission measure in the RJ limit (CGS log-space).</span>
 
 <span class="sd">    Evaluates</span>
 
@@ -932,7 +932,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    _compute_RJ_ff_optical_depth_from_arrays : Integrates over a discrete profile.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_nu_ref</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">log_nu_arr</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
     <span class="n">Z_eff</span><span class="p">,</span> <span class="n">g_ff_eff</span> <span class="o">=</span> <span class="n">_resolve_gff</span><span class="p">(</span><span class="n">log_nu_ref</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">g_ff</span><span class="p">)</span>
@@ -948,21 +948,21 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_from_quadrature">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_from_quadrature.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_from_quadrature">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_from_quadrature</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">r</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">n_e</span><span class="p">:</span> <span class="s2">&quot;Callable[[float], float]&quot;</span><span class="p">,</span>
-    <span class="n">n_i</span><span class="p">:</span> <span class="s2">&quot;Callable[[float], float]&quot;</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Callable[[float], float]&quot;</span><span class="p">,</span>
-    <span class="n">r_max</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_e</span><span class="p">:</span> <span class="s2">"Callable[[float], float]"</span><span class="p">,</span>
+    <span class="n">n_i</span><span class="p">:</span> <span class="s2">"Callable[[float], float]"</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Callable[[float], float]"</span><span class="p">,</span>
+    <span class="n">r_max</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth for an arbitrary density profile via quadrature (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth for an arbitrary density profile via quadrature (RJ limit).</span>
 
-<span class="sd">    Evaluates :math:`\tau_{\rm ff}^{\rm RJ}(\nu) = \int_r^{r_{\rm max}} \alpha_\nu^{\rm RJ}(r&#39;)\, dr&#39;`</span>
+<span class="sd">    Evaluates :math:`\tau_{\rm ff}^{\rm RJ}(\nu) = \int_r^{r_{\rm max}} \alpha_\nu^{\rm RJ}(r')\, dr'`</span>
 <span class="sd">    by numerical quadrature at each frequency.  Valid when :math:`h\nu \ll k_B T`.</span>
 
 <span class="sd">    Parameters</span>
@@ -1026,7 +1026,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_from_arrays : Trapezoidal variant.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_wind : Analytic wind-profile variant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">r_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">r_max_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r_max</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
@@ -1049,18 +1049,18 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_from_arrays">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_from_arrays.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_from_arrays">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_from_arrays</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">n_e</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">n_i</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">r</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">n_e</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">n_i</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth for discrete density arrays via trapezoidal integration (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth for discrete density arrays via trapezoidal integration (RJ limit).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1122,7 +1122,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_from_quadrature : Quadrature variant.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_wind : Analytic alternative.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">r_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">n_e_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">n_e</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1146,20 +1146,20 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_wind">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_wind.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_wind">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_wind</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r_min</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">r_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">n_e_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">n_i_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">r_min</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">r_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">n_e_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">n_i_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">r_max</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">r_max</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth through a steady spherically-symmetric wind (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth through a steady spherically-symmetric wind (RJ limit).</span>
 
 <span class="sd">    Assumes :math:`n_e(r) = n_{e,0}\,(r_0/r)^2`, giving</span>
 <span class="sd">    :math:`\tau_{\rm ff}^{\rm RJ} \propto \nu^{-2} T^{-3/2}`.</span>
@@ -1222,7 +1222,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_powerlaw : General power-law density profile.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_from_quadrature : Arbitrary-profile variant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">r_min_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">r_0_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
@@ -1250,21 +1250,21 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_wind_Mdot">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_wind_Mdot.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_wind_Mdot">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_wind_Mdot</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Mdot</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">v_w</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">r_min</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">Mdot</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">v_w</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">r_min</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">mu_e</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="n">mu_i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">r_max</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">r_max</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth through a steady wind, parameterised by mass-loss rate (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth through a steady wind, parameterised by mass-loss rate (RJ limit).</span>
 
 <span class="sd">    Converts the mass-loss rate :math:`\dot{M}` and wind velocity :math:`v_w` into</span>
 <span class="sd">    electron and ion number densities at the reference radius :math:`r_0` via</span>
@@ -1339,7 +1339,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_wind : Same geometry parameterised by :math:`n_{e,0}`, :math:`n_{i,0}`.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_powerlaw : General power-law density profile.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">Mdot_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Mdot</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
     <span class="n">v_w_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v_w</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
@@ -1372,19 +1372,19 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_shell">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_shell.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_shell">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_shell</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r_min</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">n_e_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">n_i_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">r_min</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">n_e_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">n_i_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">r_max</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">r_max</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth through a uniform-density spherical shell (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth through a uniform-density spherical shell (RJ limit).</span>
 
 <span class="sd">    :math:`\tau_{\rm ff}^{\rm RJ}(\nu) = \alpha_\nu^{\rm RJ}\,(r_{\rm max} - r_{\rm min})`,</span>
 <span class="sd">    scaling as :math:`\nu^{-2} T^{-3/2}`.</span>
@@ -1444,7 +1444,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_wind : Wind (r\ :sup:`-2`) variant.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_powerlaw : General power-law variant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">r_min_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">n_e_0_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">n_e_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">))</span>
@@ -1470,21 +1470,21 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_powerlaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_powerlaw.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_powerlaw">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_powerlaw</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r_min</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">r_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">n_e_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
-    <span class="n">n_i_0</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">r_min</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">r_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">n_e_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
+    <span class="n">n_i_0</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">r_max</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">r_max</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">thomson</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth for a power-law density profile (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth for a power-law density profile (RJ limit).</span>
 
 <span class="sd">    Assumes :math:`n_e(r) = n_{e,0}\,(r_0/r)^p`.  Setting :math:`k = 1 - 2p`:</span>
 
@@ -1555,7 +1555,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_wind : Optimised :math:`p = 2` variant.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_shell : Uniform-density (:math:`p = 0`) variant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">r_min_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">r_0_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
@@ -1584,15 +1584,15 @@
 <div class="viewcode-block" id="compute_ff_RJ_optical_depth_EM">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_EM.html#trilobite.radiation.free_free.absorption.compute_ff_RJ_optical_depth_EM">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_RJ_optical_depth_EM</span><span class="p">(</span>
-    <span class="n">frequency</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">EM</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span><span class="p">,</span>
+    <span class="n">frequency</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">EM</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">temperature</span><span class="p">:</span> <span class="s2">&quot;Union[float, u.Quantity]&quot;</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">temperature</span><span class="p">:</span> <span class="s2">"Union[float, u.Quantity]"</span> <span class="o">=</span> <span class="mf">1.0e4</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free optical depth from emission measure (RJ limit).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free optical depth from emission measure (RJ limit).</span>
 
 <span class="sd">    Evaluates</span>
 
@@ -1650,7 +1650,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_RJ_optical_depth_wind : Analytic wind profile.</span>
 <span class="sd">    compute_ff_RJ_optical_depth_from_arrays : Integrates over a discrete profile.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">frequency</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">EM_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">EM</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">5</span><span class="p">))</span>
     <span class="n">T_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
@@ -1693,8 +1693,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1728,7 +1728,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

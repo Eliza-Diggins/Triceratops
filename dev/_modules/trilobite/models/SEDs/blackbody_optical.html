@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/SEDs/blackbody_optical';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.SEDs.blackbody_optical</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Blackbody optical photometry models.</span>
 
 <span class="sd">Provides the simplest possible concrete implementations of</span>
@@ -457,7 +457,7 @@
 <span class="sd">end-to-end (model → ``to_inference_data`` → ``GaussianLikelihood`` →</span>
 <span class="sd">``InferenceProblem``) and to serve as a reference implementation for more</span>
 <span class="sd">complex SED models.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
 
@@ -472,31 +472,31 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ModelParametersInputRaw</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.phot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterBundle</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BlackbodyOpticalModel&quot;</span><span class="p">,</span> <span class="s2">&quot;BlackbodyOpticalEpochModel&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"BlackbodyOpticalModel"</span><span class="p">,</span> <span class="s2">"BlackbodyOpticalEpochModel"</span><span class="p">]</span>
 
 <span class="n">_BB_PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
     <span class="n">ModelParameter</span><span class="p">(</span>
-        <span class="s2">&quot;T&quot;</span><span class="p">,</span>
+        <span class="s2">"T"</span><span class="p">,</span>
         <span class="mf">1.0e4</span><span class="p">,</span>
         <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Blackbody temperature.&quot;</span><span class="p">,</span>
-        <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$T$&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Blackbody temperature."</span><span class="p">,</span>
+        <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$T$"</span><span class="p">,</span>
         <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
     <span class="p">),</span>
     <span class="n">ModelParameter</span><span class="p">(</span>
-        <span class="s2">&quot;R&quot;</span><span class="p">,</span>
+        <span class="s2">"R"</span><span class="p">,</span>
         <span class="mf">1.0e14</span><span class="p">,</span>
         <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Photospheric radius.&quot;</span><span class="p">,</span>
-        <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$R$&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Photospheric radius."</span><span class="p">,</span>
+        <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$R$"</span><span class="p">,</span>
         <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
     <span class="p">),</span>
     <span class="n">ModelParameter</span><span class="p">(</span>
-        <span class="s2">&quot;D&quot;</span><span class="p">,</span>
+        <span class="s2">"D"</span><span class="p">,</span>
         <span class="mf">3.086e26</span><span class="p">,</span>
         <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Luminosity distance.&quot;</span><span class="p">,</span>
-        <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$D$&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s2">"Luminosity distance."</span><span class="p">,</span>
+        <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$D$"</span><span class="p">,</span>
         <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
     <span class="p">),</span>
 <span class="p">)</span>
@@ -505,7 +505,7 @@
 <div class="viewcode-block" id="BlackbodyOpticalModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.blackbody_optical.BlackbodyOpticalModel.html#trilobite.models.SEDs.blackbody_optical.BlackbodyOpticalModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BlackbodyOpticalModel</span><span class="p">(</span><span class="n">OpticalModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Static spherical blackbody: time-evolving multi-band optical photometry.</span>
 
 <span class="sd">    Temperature, radius, and distance are time-independent; the SED shape is</span>
@@ -517,25 +517,25 @@
 <span class="sd">    ----------</span>
 <span class="sd">    bundle : FilterBundle</span>
 <span class="sd">        Filter set defining the observable bands.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="n">_BB_PARAMETERS</span>
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Static spherical blackbody observed through an optical filter set.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Planck 1901.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Static spherical blackbody observed through an optical filter set."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Planck 1901."</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="s2">&quot;FilterBundle&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="s2">"FilterBundle"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_sed</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">nu_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">t_unique</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="p">:</span> <span class="s2">&quot;_ModelParametersInputRaw&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="s2">"_ModelParametersInputRaw"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_grid</span><span class="p">)</span>  <span class="c1"># (N_nu,)</span>
-        <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">])</span>
-        <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">])</span>
-        <span class="n">log_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">])</span>
+        <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"T"</span><span class="p">])</span>
+        <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"R"</span><span class="p">])</span>
+        <span class="n">log_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">])</span>
 
         <span class="n">log_fnu</span> <span class="o">=</span> <span class="n">_log_specific_flux_fnu_cgs</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_R</span><span class="p">,</span> <span class="n">log_D</span><span class="p">)</span>  <span class="c1"># (N_nu,)</span>
 
@@ -547,31 +547,31 @@
 <div class="viewcode-block" id="BlackbodyOpticalEpochModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.blackbody_optical.BlackbodyOpticalEpochModel.html#trilobite.models.SEDs.blackbody_optical.BlackbodyOpticalEpochModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BlackbodyOpticalEpochModel</span><span class="p">(</span><span class="n">OpticalEpochModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Static spherical blackbody: single-epoch multi-band optical photometry.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    bundle : FilterBundle</span>
 <span class="sd">        Filter set defining the observable bands.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="n">_BB_PARAMETERS</span>
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Static spherical blackbody SED observed through an optical filter set.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Planck 1901.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Static spherical blackbody SED observed through an optical filter set."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Planck 1901."</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="s2">&quot;FilterBundle&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bundle</span><span class="p">:</span> <span class="s2">"FilterBundle"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_sed</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">nu_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="p">:</span> <span class="s2">&quot;_ModelParametersInputRaw&quot;</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="s2">"_ModelParametersInputRaw"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">nu_grid</span><span class="p">)</span>  <span class="c1"># (N_nu,)</span>
-        <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;T&quot;</span><span class="p">])</span>
-        <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;R&quot;</span><span class="p">])</span>
-        <span class="n">log_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">])</span>
+        <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"T"</span><span class="p">])</span>
+        <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"R"</span><span class="p">])</span>
+        <span class="n">log_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_specific_flux_fnu_cgs</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_R</span><span class="p">,</span> <span class="n">log_D</span><span class="p">))</span>  <span class="c1"># (N_nu,)</span></div>
 
@@ -604,8 +604,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -639,7 +639,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

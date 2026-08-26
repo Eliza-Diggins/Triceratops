@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/SEDs/synchrotron';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.SEDs.synchrotron</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Physical synchrotron spectral energy distribution (SED) models.</span>
 
 <span class="sd">This module provides physically motivated single-zone synchrotron</span>
@@ -511,7 +511,7 @@
 
 <span class="sd">- :ref:`synchrotron_theory`</span>
 <span class="sd">- :ref:`synch_sed_theory`</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
@@ -529,23 +529,23 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.synchrotron.SEDs.one_zone._functions</span><span class="w"> </span><span class="kn">import</span> <span class="n">smoothed_BPL</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;SSA_Cooling_SynchrotronSEDModel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;SSA_SynchrotronSEDModel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Cooling_SynchrotronSEDModel&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;SynchrotronSEDModel&quot;</span><span class="p">,</span>
+    <span class="s2">"SSA_Cooling_SynchrotronSEDModel"</span><span class="p">,</span>
+    <span class="s2">"SSA_SynchrotronSEDModel"</span><span class="p">,</span>
+    <span class="s2">"Cooling_SynchrotronSEDModel"</span><span class="p">,</span>
+    <span class="s2">"SynchrotronSEDModel"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># ------------------------------------------------- #</span>
 <span class="c1"># Define the Output object                          #</span>
 <span class="c1"># ------------------------------------------------- #</span>
-<span class="n">_SynchrotronSEDOutput</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;SynchrotronSEDOutput&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux&quot;</span><span class="p">])</span>
+<span class="n">_SynchrotronSEDOutput</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"SynchrotronSEDOutput"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux"</span><span class="p">])</span>
 <span class="n">_SynchrotronSEDOutputUnits</span> <span class="o">=</span> <span class="n">_SynchrotronSEDOutput</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="SSA_Cooling_SynchrotronSEDModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.synchrotron.SSA_Cooling_SynchrotronSEDModel.html#trilobite.models.SEDs.synchrotron.SSA_Cooling_SynchrotronSEDModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SSA_Cooling_SynchrotronSEDModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Physical synchrotron spectral energy distribution including radiative cooling and synchrotron self-absorption (SSA).</span>
 
 <span class="sd">    This model provides a physically motivated single-zone synchrotron</span>
@@ -568,7 +568,7 @@
 
 <span class="sd">    .. important::</span>
 
-<span class="sd">        A detailed description of this model&#39;s assumptions, parameters, and implementation methodology</span>
+<span class="sd">        A detailed description of this model's assumptions, parameters, and implementation methodology</span>
 <span class="sd">        may be found in :ref:`synchrotron_theory` and :ref:`synch_sed_theory`.</span>
 
 <span class="sd">    .. dropdown:: Parameters</span>
@@ -659,9 +659,9 @@
 
 <span class="sd">      .. math::</span>
 
-<span class="sd">          \nu_{\rm obs} = \frac{\delta}{1+z} \nu&#39;</span>
+<span class="sd">          \nu_{\rm obs} = \frac{\delta}{1+z} \nu'</span>
 
-<span class="sd">          F_{\nu,\rm obs} = \delta^3 F&#39;_{\nu&#39;}</span>
+<span class="sd">          F_{\nu,\rm obs} = \delta^3 F'_{\nu'}</span>
 
 <span class="sd">    - Assumes a homogeneous single-zone emission region.</span>
 <span class="sd">    - Equipartition closure is used for normalization.</span>
@@ -690,44 +690,44 @@
 <span class="sd">        nu = np.logspace(8, 16, 400)</span>
 
 <span class="sd">        parameters = {</span>
-<span class="sd">            &quot;p&quot;: 2.5,</span>
-<span class="sd">            &quot;epsilon_E&quot;: 0.1,</span>
-<span class="sd">            &quot;epsilon_B&quot;: 0.01,</span>
-<span class="sd">            &quot;log_gamma_min&quot;: np.log(10.0),</span>
-<span class="sd">            &quot;log_gamma_c&quot;: np.log(1e3),</span>
-<span class="sd">            &quot;log_gamma_max&quot;: np.log(1e4),</span>
-<span class="sd">            &quot;gamma_bulk&quot;: 2.0,</span>
-<span class="sd">            &quot;alpha&quot;: np.pi / 2,</span>
-<span class="sd">            &quot;log_B&quot;: np.log(1.0),</span>
-<span class="sd">            &quot;log_R&quot;: np.log(1e16),</span>
-<span class="sd">            &quot;f_V&quot;: 1.0,</span>
-<span class="sd">            &quot;f_A&quot;: 1.0,</span>
-<span class="sd">            &quot;log_D_L&quot;: np.log(1e27),</span>
-<span class="sd">            &quot;log_D_A&quot;: np.log(1e27),</span>
-<span class="sd">            &quot;redshift&quot;: 0.01,</span>
+<span class="sd">            "p": 2.5,</span>
+<span class="sd">            "epsilon_E": 0.1,</span>
+<span class="sd">            "epsilon_B": 0.01,</span>
+<span class="sd">            "log_gamma_min": np.log(10.0),</span>
+<span class="sd">            "log_gamma_c": np.log(1e3),</span>
+<span class="sd">            "log_gamma_max": np.log(1e4),</span>
+<span class="sd">            "gamma_bulk": 2.0,</span>
+<span class="sd">            "alpha": np.pi / 2,</span>
+<span class="sd">            "log_B": np.log(1.0),</span>
+<span class="sd">            "log_R": np.log(1e16),</span>
+<span class="sd">            "f_V": 1.0,</span>
+<span class="sd">            "f_A": 1.0,</span>
+<span class="sd">            "log_D_L": np.log(1e27),</span>
+<span class="sd">            "log_D_A": np.log(1e27),</span>
+<span class="sd">            "redshift": 0.01,</span>
 <span class="sd">        }</span>
 
 <span class="sd">        # Evaluate model</span>
-<span class="sd">        output = model({&quot;log_nu&quot;: np.log(nu)}, parameters)</span>
+<span class="sd">        output = model({"log_nu": np.log(nu)}, parameters)</span>
 <span class="sd">        flux = np.exp(output.flux)</span>
 
 <span class="sd">        # Compute break frequencies</span>
 <span class="sd">        norm = model._sed._opt_from_physics_to_params(</span>
-<span class="sd">            log_B=parameters[&quot;log_B&quot;],</span>
-<span class="sd">            log_R=parameters[&quot;log_R&quot;],</span>
-<span class="sd">            log_D_L=parameters[&quot;log_D_L&quot;],</span>
-<span class="sd">            log_D_A=parameters[&quot;log_D_A&quot;],</span>
-<span class="sd">            log_gamma_min=parameters[&quot;log_gamma_min&quot;],</span>
-<span class="sd">            log_gamma_c=parameters[&quot;log_gamma_c&quot;],</span>
-<span class="sd">            log_gamma_max=parameters[&quot;log_gamma_max&quot;],</span>
-<span class="sd">            p=parameters[&quot;p&quot;],</span>
-<span class="sd">            epsilon_E=parameters[&quot;epsilon_E&quot;],</span>
-<span class="sd">            epsilon_B=parameters[&quot;epsilon_B&quot;],</span>
-<span class="sd">            alpha=parameters[&quot;alpha&quot;],</span>
-<span class="sd">            gamma_bulk=parameters[&quot;gamma_bulk&quot;],</span>
-<span class="sd">            redshift=parameters[&quot;redshift&quot;],</span>
-<span class="sd">            f_V=parameters[&quot;f_V&quot;],</span>
-<span class="sd">            f_A=parameters[&quot;f_A&quot;],</span>
+<span class="sd">            log_B=parameters["log_B"],</span>
+<span class="sd">            log_R=parameters["log_R"],</span>
+<span class="sd">            log_D_L=parameters["log_D_L"],</span>
+<span class="sd">            log_D_A=parameters["log_D_A"],</span>
+<span class="sd">            log_gamma_min=parameters["log_gamma_min"],</span>
+<span class="sd">            log_gamma_c=parameters["log_gamma_c"],</span>
+<span class="sd">            log_gamma_max=parameters["log_gamma_max"],</span>
+<span class="sd">            p=parameters["p"],</span>
+<span class="sd">            epsilon_E=parameters["epsilon_E"],</span>
+<span class="sd">            epsilon_B=parameters["epsilon_B"],</span>
+<span class="sd">            alpha=parameters["alpha"],</span>
+<span class="sd">            gamma_bulk=parameters["gamma_bulk"],</span>
+<span class="sd">            redshift=parameters["redshift"],</span>
+<span class="sd">            f_V=parameters["f_V"],</span>
+<span class="sd">            f_A=parameters["f_A"],</span>
 <span class="sd">            pitch_average=True,</span>
 <span class="sd">        )</span>
 
@@ -735,22 +735,22 @@
 <span class="sd">        synthetic = flux + 0.1 * flux * rng.normal(size=flux.size)</span>
 
 <span class="sd">        plt.figure(figsize=(8,6))</span>
-<span class="sd">        plt.loglog(nu, flux, lw=2, label=&quot;Model&quot;)</span>
+<span class="sd">        plt.loglog(nu, flux, lw=2, label="Model")</span>
 <span class="sd">        plt.scatter(nu, synthetic, s=10, alpha=0.4)</span>
 
 <span class="sd">        # Mark breaks</span>
 <span class="sd">        for key, label in [</span>
-<span class="sd">            (&quot;nu_a&quot;, r&quot;$\nu_a$&quot;),</span>
-<span class="sd">            (&quot;nu_m&quot;, r&quot;$\nu_m$&quot;),</span>
-<span class="sd">            (&quot;nu_c&quot;, r&quot;$\nu_c$&quot;),</span>
-<span class="sd">            (&quot;nu_max&quot;, r&quot;$\nu_{\max}$&quot;),</span>
+<span class="sd">            ("nu_a", r"$\nu_a$"),</span>
+<span class="sd">            ("nu_m", r"$\nu_m$"),</span>
+<span class="sd">            ("nu_c", r"$\nu_c$"),</span>
+<span class="sd">            ("nu_max", r"$\nu_{\max}$"),</span>
 <span class="sd">        ]:</span>
-<span class="sd">            plt.axvline(np.exp(norm[key]), ls=&quot;--&quot;, alpha=0.6)</span>
+<span class="sd">            plt.axvline(np.exp(norm[key]), ls="--", alpha=0.6)</span>
 <span class="sd">            plt.text(np.exp(norm[key]), np.amax(flux)*0.3, label, rotation=90)</span>
 
-<span class="sd">        plt.xlabel(&quot;Frequency [Hz]&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux Density [cgs]&quot;)</span>
-<span class="sd">        plt.title(&quot;Synchrotron SED (Cooling + SSA)&quot;)</span>
+<span class="sd">        plt.xlabel("Frequency [Hz]")</span>
+<span class="sd">        plt.ylabel("Flux Density [cgs]")</span>
+<span class="sd">        plt.title("Synchrotron SED (Cooling + SSA)")</span>
 <span class="sd">        plt.grid(alpha=0.3)</span>
 <span class="sd">        plt.tight_layout()</span>
 <span class="sd">        plt.show()</span>
@@ -775,7 +775,7 @@
 <span class="sd">    :ref:`synch_sed_theory`</span>
 <span class="sd">        Detailed documentation of SED construction and normalization.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="c1"># Output Definition                                  #</span>
@@ -788,120 +788,120 @@
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
         <span class="c1"># Microphysical Parameters.</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron power law index&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"p"</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Electron power law index"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"p"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_E&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_E"</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Electron energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_e&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_e"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_B&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_B"</span><span class="p">,</span>
             <span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Magnetic energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Magnetic energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_min&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_min"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the minimum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the minimum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm min}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm min}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_max&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_max"</span><span class="p">,</span>
             <span class="mf">8.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the maximum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the maximum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm max}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm max}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;gamma_bulk&quot;</span><span class="p">,</span>
+            <span class="s2">"gamma_bulk"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bulk Lorentz factor of the emitting region&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Bulk Lorentz factor of the emitting region"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\gamma_{\rm bulk}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\gamma_{\rm bulk}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;alpha&quot;</span><span class="p">,</span>
+            <span class="s2">"alpha"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pitch angle of the electrons (if not pitch-averaged)&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Pitch angle of the electrons (if not pitch-averaged)"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\alpha"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_c&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_c"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the cooling Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the cooling Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_c&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_c"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_D_L&quot;</span><span class="p">,</span>
+            <span class="s2">"log_D_L"</span><span class="p">,</span>
             <span class="mf">27.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the luminosity distance to the source (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the luminosity distance to the source (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log_D_L&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log_D_L"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_D_A&quot;</span><span class="p">,</span>
+            <span class="s2">"log_D_A"</span><span class="p">,</span>
             <span class="mf">27.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the angular diameter distance to the source (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the angular diameter distance to the source (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log_D_A&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log_D_A"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Core Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_B&quot;</span><span class="p">,</span>
+            <span class="s2">"log_B"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the magnetic field strength (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the magnetic field strength (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_R&quot;</span><span class="p">,</span>
+            <span class="s2">"log_R"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e16</span><span class="p">),</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the effective radius (cm).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the effective radius (cm)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log R_{\rm eff}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log R_{\rm eff}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="s2">"f_V"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Volume filling factor of the emitting region (dimensionless).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Volume filling factor of the emitting region (dimensionless)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"f_V"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f_A&quot;</span><span class="p">,</span>
+            <span class="s2">"f_A"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Area filling factor of the emitting region (dimensionless).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Area filling factor of the emitting region (dimensionless)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;F_A&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"F_A"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;redshift&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Redshift of the source&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="s2">"redshift"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Redshift of the source"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;log_nu&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the observing frequency (Hz).&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \nu&quot;</span>
+            <span class="s2">"log_nu"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the observing frequency (Hz)."</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \nu"</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
@@ -912,7 +912,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pitch_averaged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Initialize the SSA + Cooling synchrotron SED model.</span>
 
 <span class="sd">        Parameters</span>
@@ -940,7 +940,7 @@
 <span class="sd">        synchrotron SED backend:</span>
 
 <span class="sd">        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SSA_SynchrotronSED`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span> <span class="o">=</span> <span class="n">PowerLaw_Cooling_SSA_SynchrotronSED</span><span class="p">()</span>
@@ -955,45 +955,45 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
         <span class="c1"># Use the SED object created at initialization to construct the</span>
         <span class="c1"># correct normalization data. The resulting norm dictionary provides</span>
         <span class="c1"># - F_peak, the log of the peak flux density (in cgs units)</span>
         <span class="c1"># - nu_m, the log of the characteristic synchrotron frequency (in Hz)</span>
         <span class="c1"># - nu_c, the log of the cooling frequency (in Hz)</span>
         <span class="c1"># - nu_max, the log of the maximum synchrotron frequency (in Hz)</span>
-        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., &quot;fast_cooling&quot;</span>
-        <span class="c1">#           or &quot;slow_cooling&quot;)</span>
+        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., "fast_cooling"</span>
+        <span class="c1">#           or "slow_cooling")</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_opt_from_physics_to_params</span><span class="p">(</span>
-            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_B&quot;</span><span class="p">],</span>
-            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_R&quot;</span><span class="p">],</span>
-            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_D_L&quot;</span><span class="p">],</span>
-            <span class="n">log_D_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_D_A&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_min&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_c</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_c&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_max&quot;</span><span class="p">],</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_E&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_B&quot;</span><span class="p">],</span>
-            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
-            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma_bulk&quot;</span><span class="p">],</span>
-            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;redshift&quot;</span><span class="p">],</span>
-            <span class="n">f_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f_A&quot;</span><span class="p">],</span>
-            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f_V&quot;</span><span class="p">],</span>
+            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_B"</span><span class="p">],</span>
+            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_R"</span><span class="p">],</span>
+            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_D_L"</span><span class="p">],</span>
+            <span class="n">log_D_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_D_A"</span><span class="p">],</span>
+            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_min"</span><span class="p">],</span>
+            <span class="n">log_gamma_c</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_c"</span><span class="p">],</span>
+            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_max"</span><span class="p">],</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_E"</span><span class="p">],</span>
+            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_B"</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">],</span>
+            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma_bulk"</span><span class="p">],</span>
+            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"redshift"</span><span class="p">],</span>
+            <span class="n">f_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f_A"</span><span class="p">],</span>
+            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f_V"</span><span class="p">],</span>
             <span class="n">pitch_average</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitch_averaged</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Now we can use the SED to compute the correct flux density at the given frequencies.</span>
         <span class="n">log_F_nu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_log_opt_sed_from_regime</span><span class="p">(</span>
-            <span class="n">regime</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;regime&quot;</span><span class="p">],</span>
-            <span class="n">log_nu</span><span class="o">=</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;log_nu&quot;</span><span class="p">],</span>
-            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_m&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_a&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_c&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_max&quot;</span><span class="p">]),</span>
-            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;F_norm&quot;</span><span class="p">]),</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we&#39;re not modeling a smoothed SED here.</span>
+            <span class="n">regime</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"regime"</span><span class="p">],</span>
+            <span class="n">log_nu</span><span class="o">=</span><span class="n">variables</span><span class="p">[</span><span class="s2">"log_nu"</span><span class="p">],</span>
+            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_m"</span><span class="p">]),</span>
+            <span class="n">log_nu_a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_a"</span><span class="p">]),</span>
+            <span class="n">log_nu_c</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_c"</span><span class="p">]),</span>
+            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_max"</span><span class="p">]),</span>
+            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"F_norm"</span><span class="p">]),</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we're not modeling a smoothed SED here.</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">log_F_nu</span><span class="p">)</span></div>
@@ -1003,7 +1003,7 @@
 <div class="viewcode-block" id="SSA_SynchrotronSEDModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.synchrotron.SSA_SynchrotronSEDModel.html#trilobite.models.SEDs.synchrotron.SSA_SynchrotronSEDModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SSA_SynchrotronSEDModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Physical synchrotron spectral energy distribution including SSA but without radiative cooling.</span>
 
 <span class="sd">    This model provides a single-zone synchrotron emission model with:</span>
@@ -1115,9 +1115,9 @@
 
 <span class="sd">      .. math::</span>
 
-<span class="sd">          \nu_{\rm obs} = \frac{\delta}{1+z} \nu&#39; ,</span>
+<span class="sd">          \nu_{\rm obs} = \frac{\delta}{1+z} \nu' ,</span>
 <span class="sd">          \quad</span>
-<span class="sd">          F_{\nu,\rm obs} = \delta^3 F&#39;_{\nu&#39;}.</span>
+<span class="sd">          F_{\nu,\rm obs} = \delta^3 F'_{\nu'}.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -1144,42 +1144,42 @@
 <span class="sd">        nu = np.logspace(8, 16, 400)</span>
 
 <span class="sd">        parameters = {</span>
-<span class="sd">            &quot;p&quot;: 2.5,</span>
-<span class="sd">            &quot;epsilon_E&quot;: 0.1,</span>
-<span class="sd">            &quot;epsilon_B&quot;: 0.1,</span>
-<span class="sd">            &quot;log_gamma_min&quot;: np.log(10.0),</span>
-<span class="sd">            &quot;log_gamma_max&quot;: np.log(1e4),</span>
-<span class="sd">            &quot;gamma_bulk&quot;: 2.0,</span>
-<span class="sd">            &quot;alpha&quot;: np.pi / 2,</span>
-<span class="sd">            &quot;log_B&quot;: np.log(1.0),</span>
-<span class="sd">            &quot;log_R&quot;: np.log(1e16),</span>
-<span class="sd">            &quot;f_V&quot;: 1.0,</span>
-<span class="sd">            &quot;f_A&quot;: 1.0,</span>
-<span class="sd">            &quot;log_D_L&quot;: np.log(1e27),</span>
-<span class="sd">            &quot;log_D_A&quot;: np.log(1e27),</span>
-<span class="sd">            &quot;redshift&quot;: 0.01,</span>
+<span class="sd">            "p": 2.5,</span>
+<span class="sd">            "epsilon_E": 0.1,</span>
+<span class="sd">            "epsilon_B": 0.1,</span>
+<span class="sd">            "log_gamma_min": np.log(10.0),</span>
+<span class="sd">            "log_gamma_max": np.log(1e4),</span>
+<span class="sd">            "gamma_bulk": 2.0,</span>
+<span class="sd">            "alpha": np.pi / 2,</span>
+<span class="sd">            "log_B": np.log(1.0),</span>
+<span class="sd">            "log_R": np.log(1e16),</span>
+<span class="sd">            "f_V": 1.0,</span>
+<span class="sd">            "f_A": 1.0,</span>
+<span class="sd">            "log_D_L": np.log(1e27),</span>
+<span class="sd">            "log_D_A": np.log(1e27),</span>
+<span class="sd">            "redshift": 0.01,</span>
 <span class="sd">        }</span>
 
 <span class="sd">        # Evaluate model</span>
-<span class="sd">        output = model({&quot;log_nu&quot;: np.log(nu)}, parameters)</span>
+<span class="sd">        output = model({"log_nu": np.log(nu)}, parameters)</span>
 <span class="sd">        flux = np.exp(output.flux)</span>
 
 <span class="sd">        # Compute break frequencies</span>
 <span class="sd">        norm = model._sed._opt_from_physics_to_params(</span>
-<span class="sd">            log_B=parameters[&quot;log_B&quot;],</span>
-<span class="sd">            log_R=parameters[&quot;log_R&quot;],</span>
-<span class="sd">            log_D_L=parameters[&quot;log_D_L&quot;],</span>
-<span class="sd">            log_D_A=parameters[&quot;log_D_A&quot;],</span>
-<span class="sd">            log_gamma_min=parameters[&quot;log_gamma_min&quot;],</span>
-<span class="sd">            log_gamma_max=parameters[&quot;log_gamma_max&quot;],</span>
-<span class="sd">            p=parameters[&quot;p&quot;],</span>
-<span class="sd">            epsilon_E=parameters[&quot;epsilon_E&quot;],</span>
-<span class="sd">            epsilon_B=parameters[&quot;epsilon_B&quot;],</span>
-<span class="sd">            alpha=parameters[&quot;alpha&quot;],</span>
-<span class="sd">            gamma_bulk=parameters[&quot;gamma_bulk&quot;],</span>
-<span class="sd">            redshift=parameters[&quot;redshift&quot;],</span>
-<span class="sd">            f_V=parameters[&quot;f_V&quot;],</span>
-<span class="sd">            f_A=parameters[&quot;f_A&quot;],</span>
+<span class="sd">            log_B=parameters["log_B"],</span>
+<span class="sd">            log_R=parameters["log_R"],</span>
+<span class="sd">            log_D_L=parameters["log_D_L"],</span>
+<span class="sd">            log_D_A=parameters["log_D_A"],</span>
+<span class="sd">            log_gamma_min=parameters["log_gamma_min"],</span>
+<span class="sd">            log_gamma_max=parameters["log_gamma_max"],</span>
+<span class="sd">            p=parameters["p"],</span>
+<span class="sd">            epsilon_E=parameters["epsilon_E"],</span>
+<span class="sd">            epsilon_B=parameters["epsilon_B"],</span>
+<span class="sd">            alpha=parameters["alpha"],</span>
+<span class="sd">            gamma_bulk=parameters["gamma_bulk"],</span>
+<span class="sd">            redshift=parameters["redshift"],</span>
+<span class="sd">            f_V=parameters["f_V"],</span>
+<span class="sd">            f_A=parameters["f_A"],</span>
 <span class="sd">            pitch_average=True,</span>
 <span class="sd">        )</span>
 
@@ -1187,25 +1187,25 @@
 <span class="sd">        synthetic = flux + 0.1 * flux * rng.normal(size=flux.size)</span>
 
 <span class="sd">        plt.figure(figsize=(8,6))</span>
-<span class="sd">        plt.loglog(nu, flux, lw=2, label=&quot;Model&quot;)</span>
+<span class="sd">        plt.loglog(nu, flux, lw=2, label="Model")</span>
 <span class="sd">        plt.scatter(nu, synthetic, s=10, alpha=0.4)</span>
 
 <span class="sd">        # Mark breaks</span>
 <span class="sd">        for key, label in [</span>
-<span class="sd">            (&quot;nu_a&quot;, r&quot;$\nu_a$&quot;),</span>
-<span class="sd">            (&quot;nu_m&quot;, r&quot;$\nu_m$&quot;),</span>
-<span class="sd">            (&quot;nu_max&quot;, r&quot;$\nu_{\max}$&quot;),</span>
+<span class="sd">            ("nu_a", r"$\nu_a$"),</span>
+<span class="sd">            ("nu_m", r"$\nu_m$"),</span>
+<span class="sd">            ("nu_max", r"$\nu_{\max}$"),</span>
 <span class="sd">        ]:</span>
-<span class="sd">            plt.axvline(np.exp(norm[key]), ls=&quot;--&quot;, alpha=0.6)</span>
+<span class="sd">            plt.axvline(np.exp(norm[key]), ls="--", alpha=0.6)</span>
 <span class="sd">            plt.text(np.exp(norm[key]), np.amax(flux)*0.3, label, rotation=90)</span>
 
-<span class="sd">        plt.xlabel(&quot;Frequency [Hz]&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux Density [cgs]&quot;)</span>
-<span class="sd">        plt.title(&quot;Synchrotron SED (SSA Only)&quot;)</span>
+<span class="sd">        plt.xlabel("Frequency [Hz]")</span>
+<span class="sd">        plt.ylabel("Flux Density [cgs]")</span>
+<span class="sd">        plt.title("Synchrotron SED (SSA Only)")</span>
 <span class="sd">        plt.grid(alpha=0.3)</span>
 <span class="sd">        plt.tight_layout()</span>
 <span class="sd">        plt.show()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="c1"># Output Definition                                  #</span>
@@ -1218,113 +1218,113 @@
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
         <span class="c1"># Microphysical Parameters.</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron power law index&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"p"</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Electron power law index"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"p"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_E&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_E"</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Electron energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_e&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_e"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_B&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_B"</span><span class="p">,</span>
             <span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Magnetic energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Magnetic energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_min&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_min"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the minimum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the minimum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm min}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm min}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_max&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_max"</span><span class="p">,</span>
             <span class="mf">8.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the maximum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the maximum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm max}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm max}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;gamma_bulk&quot;</span><span class="p">,</span>
+            <span class="s2">"gamma_bulk"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bulk Lorentz factor of the emitting region&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Bulk Lorentz factor of the emitting region"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\gamma_{\rm bulk}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\gamma_{\rm bulk}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;alpha&quot;</span><span class="p">,</span>
+            <span class="s2">"alpha"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pitch angle of the electrons (if not pitch-averaged)&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Pitch angle of the electrons (if not pitch-averaged)"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\alpha"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_D_L&quot;</span><span class="p">,</span>
+            <span class="s2">"log_D_L"</span><span class="p">,</span>
             <span class="mf">27.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the luminosity distance to the source (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the luminosity distance to the source (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log_D_L&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log_D_L"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_D_A&quot;</span><span class="p">,</span>
+            <span class="s2">"log_D_A"</span><span class="p">,</span>
             <span class="mf">27.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the angular diameter distance to the source (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the angular diameter distance to the source (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log_D_A&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log_D_A"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Core Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_B&quot;</span><span class="p">,</span>
+            <span class="s2">"log_B"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the magnetic field strength (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the magnetic field strength (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_R&quot;</span><span class="p">,</span>
+            <span class="s2">"log_R"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e16</span><span class="p">),</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the effective radius (cm).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the effective radius (cm)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log R_{\rm eff}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log R_{\rm eff}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="s2">"f_V"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Volume filling factor of the emitting region (dimensionless).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Volume filling factor of the emitting region (dimensionless)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"f_V"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f_A&quot;</span><span class="p">,</span>
+            <span class="s2">"f_A"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Area filling factor of the emitting region (dimensionless).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Area filling factor of the emitting region (dimensionless)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;F_A&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"F_A"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;redshift&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Redshift of the source&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="s2">"redshift"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Redshift of the source"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;log_nu&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the observing frequency (Hz).&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \nu&quot;</span>
+            <span class="s2">"log_nu"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the observing frequency (Hz)."</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \nu"</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
@@ -1332,7 +1332,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pitch_averaged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Initialize the synchrotron SED model including synchrotron self-absorption (SSA), without cooling.</span>
 
 <span class="sd">        Parameters</span>
@@ -1357,7 +1357,7 @@
 <span class="sd">        Internally, this constructor instantiates:</span>
 
 <span class="sd">        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SSA_SynchrotronSED`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span> <span class="o">=</span> <span class="n">PowerLaw_SSA_SynchrotronSED</span><span class="p">()</span>
@@ -1372,42 +1372,42 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
         <span class="c1"># Use the SED object created at initialization to construct the</span>
         <span class="c1"># correct normalization data. The resulting norm dictionary provides</span>
         <span class="c1"># - F_peak, the log of the peak flux density (in cgs units)</span>
         <span class="c1"># - nu_m, the log of the characteristic synchrotron frequency (in Hz)</span>
         <span class="c1"># - nu_c, the log of the cooling frequency (in Hz)</span>
         <span class="c1"># - nu_max, the log of the maximum synchrotron frequency (in Hz)</span>
-        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., &quot;fast_cooling&quot; or &quot;slow_cooling&quot;)</span>
+        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., "fast_cooling" or "slow_cooling")</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_opt_from_physics_to_params</span><span class="p">(</span>
-            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_B&quot;</span><span class="p">],</span>
-            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_R&quot;</span><span class="p">],</span>
-            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_D_L&quot;</span><span class="p">],</span>
-            <span class="n">log_D_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_D_A&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_min&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_max&quot;</span><span class="p">],</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_E&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_B&quot;</span><span class="p">],</span>
-            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
-            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma_bulk&quot;</span><span class="p">],</span>
-            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;redshift&quot;</span><span class="p">],</span>
-            <span class="n">f_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f_A&quot;</span><span class="p">],</span>
-            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f_V&quot;</span><span class="p">],</span>
+            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_B"</span><span class="p">],</span>
+            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_R"</span><span class="p">],</span>
+            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_D_L"</span><span class="p">],</span>
+            <span class="n">log_D_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_D_A"</span><span class="p">],</span>
+            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_min"</span><span class="p">],</span>
+            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_max"</span><span class="p">],</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_E"</span><span class="p">],</span>
+            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_B"</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">],</span>
+            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma_bulk"</span><span class="p">],</span>
+            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"redshift"</span><span class="p">],</span>
+            <span class="n">f_A</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f_A"</span><span class="p">],</span>
+            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f_V"</span><span class="p">],</span>
             <span class="n">pitch_average</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitch_averaged</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Now we can use the SED to compute the correct flux density at the given frequencies.</span>
         <span class="n">log_F_nu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_log_opt_sed_from_regime</span><span class="p">(</span>
-            <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;log_nu&quot;</span><span class="p">],</span>
-            <span class="n">regime</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;regime&quot;</span><span class="p">],</span>
-            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_m&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_a&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_max&quot;</span><span class="p">]),</span>
-            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;F_norm&quot;</span><span class="p">]),</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we&#39;re not modeling a smoothed SED here.</span>
+            <span class="n">variables</span><span class="p">[</span><span class="s2">"log_nu"</span><span class="p">],</span>
+            <span class="n">regime</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"regime"</span><span class="p">],</span>
+            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_m"</span><span class="p">]),</span>
+            <span class="n">log_nu_a</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_a"</span><span class="p">]),</span>
+            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_max"</span><span class="p">]),</span>
+            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"F_norm"</span><span class="p">]),</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we're not modeling a smoothed SED here.</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">log_F_nu</span><span class="p">)</span></div>
@@ -1417,7 +1417,7 @@
 <div class="viewcode-block" id="Cooling_SynchrotronSEDModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.synchrotron.Cooling_SynchrotronSEDModel.html#trilobite.models.SEDs.synchrotron.Cooling_SynchrotronSEDModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Cooling_SynchrotronSEDModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Physical synchrotron spectral energy distribution including cooling but without synchrotron self-absorption.</span>
 
 <span class="sd">    This model includes:</span>
@@ -1560,26 +1560,26 @@
 <span class="sd">        # --------------------------------------------------</span>
 
 <span class="sd">        parameters = {</span>
-<span class="sd">            &quot;p&quot;: 2.5,</span>
-<span class="sd">            &quot;epsilon_E&quot;: 0.1,</span>
-<span class="sd">            &quot;epsilon_B&quot;: 0.1,</span>
-<span class="sd">            &quot;log_gamma_min&quot;: np.log(10.0),</span>
-<span class="sd">            &quot;log_gamma_c&quot;: np.log(1e3),</span>
-<span class="sd">            &quot;log_gamma_max&quot;: np.log(1e6),</span>
-<span class="sd">            &quot;gamma_bulk&quot;: 2.0,</span>
-<span class="sd">            &quot;alpha&quot;: np.pi / 2,</span>
-<span class="sd">            &quot;log_B&quot;: np.log(1.0),</span>
-<span class="sd">            &quot;log_R&quot;: np.log(1e16),</span>
-<span class="sd">            &quot;f_V&quot;: 1.0,</span>
-<span class="sd">            &quot;log_D_L&quot;: np.log(1e27),</span>
-<span class="sd">            &quot;redshift&quot;: 0.01,</span>
+<span class="sd">            "p": 2.5,</span>
+<span class="sd">            "epsilon_E": 0.1,</span>
+<span class="sd">            "epsilon_B": 0.1,</span>
+<span class="sd">            "log_gamma_min": np.log(10.0),</span>
+<span class="sd">            "log_gamma_c": np.log(1e3),</span>
+<span class="sd">            "log_gamma_max": np.log(1e6),</span>
+<span class="sd">            "gamma_bulk": 2.0,</span>
+<span class="sd">            "alpha": np.pi / 2,</span>
+<span class="sd">            "log_B": np.log(1.0),</span>
+<span class="sd">            "log_R": np.log(1e16),</span>
+<span class="sd">            "f_V": 1.0,</span>
+<span class="sd">            "log_D_L": np.log(1e27),</span>
+<span class="sd">            "redshift": 0.01,</span>
 <span class="sd">        }</span>
 
 <span class="sd">        # --------------------------------------------------</span>
 <span class="sd">        # Evaluate model</span>
 <span class="sd">        # --------------------------------------------------</span>
 
-<span class="sd">        output = model({&quot;log_nu&quot;: np.log(nu)}, parameters)</span>
+<span class="sd">        output = model({"log_nu": np.log(nu)}, parameters)</span>
 <span class="sd">        flux = np.exp(output.flux)</span>
 
 <span class="sd">        # --------------------------------------------------</span>
@@ -1587,19 +1587,19 @@
 <span class="sd">        # --------------------------------------------------</span>
 
 <span class="sd">        norm = model._sed._opt_from_physics_to_params(</span>
-<span class="sd">            log_B=parameters[&quot;log_B&quot;],</span>
-<span class="sd">            log_R=parameters[&quot;log_R&quot;],</span>
-<span class="sd">            log_D_L=parameters[&quot;log_D_L&quot;],</span>
-<span class="sd">            log_gamma_min=parameters[&quot;log_gamma_min&quot;],</span>
-<span class="sd">            log_gamma_c=parameters[&quot;log_gamma_c&quot;],</span>
-<span class="sd">            log_gamma_max=parameters[&quot;log_gamma_max&quot;],</span>
-<span class="sd">            p=parameters[&quot;p&quot;],</span>
-<span class="sd">            epsilon_E=parameters[&quot;epsilon_E&quot;],</span>
-<span class="sd">            epsilon_B=parameters[&quot;epsilon_B&quot;],</span>
-<span class="sd">            alpha=parameters[&quot;alpha&quot;],</span>
-<span class="sd">            gamma_bulk=parameters[&quot;gamma_bulk&quot;],</span>
-<span class="sd">            redshift=parameters[&quot;redshift&quot;],</span>
-<span class="sd">            f_V=parameters[&quot;f_V&quot;],</span>
+<span class="sd">            log_B=parameters["log_B"],</span>
+<span class="sd">            log_R=parameters["log_R"],</span>
+<span class="sd">            log_D_L=parameters["log_D_L"],</span>
+<span class="sd">            log_gamma_min=parameters["log_gamma_min"],</span>
+<span class="sd">            log_gamma_c=parameters["log_gamma_c"],</span>
+<span class="sd">            log_gamma_max=parameters["log_gamma_max"],</span>
+<span class="sd">            p=parameters["p"],</span>
+<span class="sd">            epsilon_E=parameters["epsilon_E"],</span>
+<span class="sd">            epsilon_B=parameters["epsilon_B"],</span>
+<span class="sd">            alpha=parameters["alpha"],</span>
+<span class="sd">            gamma_bulk=parameters["gamma_bulk"],</span>
+<span class="sd">            redshift=parameters["redshift"],</span>
+<span class="sd">            f_V=parameters["f_V"],</span>
 <span class="sd">            pitch_average=True,</span>
 <span class="sd">        )</span>
 
@@ -1615,33 +1615,33 @@
 
 <span class="sd">        plt.figure(figsize=(8,6))</span>
 
-<span class="sd">        plt.loglog(nu, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(nu, synthetic, s=10, alpha=0.4, label=&quot;Synthetic data&quot;)</span>
+<span class="sd">        plt.loglog(nu, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(nu, synthetic, s=10, alpha=0.4, label="Synthetic data")</span>
 
 <span class="sd">        # Mark breaks</span>
 <span class="sd">        for key, label in [</span>
-<span class="sd">            (&quot;nu_m&quot;, r&quot;$\nu_m$&quot;),</span>
-<span class="sd">            (&quot;nu_c&quot;, r&quot;$\nu_c$&quot;),</span>
-<span class="sd">            (&quot;nu_max&quot;, r&quot;$\nu_{\max}$&quot;),</span>
+<span class="sd">            ("nu_m", r"$\nu_m$"),</span>
+<span class="sd">            ("nu_c", r"$\nu_c$"),</span>
+<span class="sd">            ("nu_max", r"$\nu_{\max}$"),</span>
 <span class="sd">        ]:</span>
-<span class="sd">            plt.axvline(np.exp(norm[key]), ls=&quot;--&quot;, alpha=0.6)</span>
+<span class="sd">            plt.axvline(np.exp(norm[key]), ls="--", alpha=0.6)</span>
 <span class="sd">            plt.text(</span>
 <span class="sd">                np.exp(norm[key]),</span>
 <span class="sd">                np.amax(flux) * 0.3,</span>
 <span class="sd">                label,</span>
 <span class="sd">                rotation=90,</span>
-<span class="sd">                verticalalignment=&quot;center&quot;</span>
+<span class="sd">                verticalalignment="center"</span>
 <span class="sd">            )</span>
 
-<span class="sd">        plt.xlabel(&quot;Frequency [Hz]&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux Density [cgs]&quot;)</span>
-<span class="sd">        plt.title(&quot;Synchrotron SED (Cooling Only)&quot;)</span>
+<span class="sd">        plt.xlabel("Frequency [Hz]")</span>
+<span class="sd">        plt.ylabel("Flux Density [cgs]")</span>
+<span class="sd">        plt.title("Synchrotron SED (Cooling Only)")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.grid(alpha=0.3)</span>
 <span class="sd">        plt.tight_layout()</span>
 <span class="sd">        plt.show()</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="c1"># Output Definition                                  #</span>
@@ -1654,105 +1654,105 @@
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
         <span class="c1"># Microphysical Parameters.</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron power law index&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"p"</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Electron power law index"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"p"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_E&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_E"</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Electron energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_e&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_e"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_B&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_B"</span><span class="p">,</span>
             <span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Magnetic energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Magnetic energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_min&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_min"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the minimum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the minimum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm min}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm min}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_max&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_max"</span><span class="p">,</span>
             <span class="mf">8.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the maximum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the maximum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm max}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm max}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;gamma_bulk&quot;</span><span class="p">,</span>
+            <span class="s2">"gamma_bulk"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bulk Lorentz factor of the emitting region&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Bulk Lorentz factor of the emitting region"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\gamma_{\rm bulk}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\gamma_{\rm bulk}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;alpha&quot;</span><span class="p">,</span>
+            <span class="s2">"alpha"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pitch angle of the electrons (if not pitch-averaged)&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Pitch angle of the electrons (if not pitch-averaged)"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\alpha"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_c&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_c"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the cooling Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the cooling Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_c&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_c"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_D_L&quot;</span><span class="p">,</span>
+            <span class="s2">"log_D_L"</span><span class="p">,</span>
             <span class="mf">27.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the luminosity distance to the source (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the luminosity distance to the source (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log_D_L&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log_D_L"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Core Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_B&quot;</span><span class="p">,</span>
+            <span class="s2">"log_B"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the magnetic field strength (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the magnetic field strength (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_R&quot;</span><span class="p">,</span>
+            <span class="s2">"log_R"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e16</span><span class="p">),</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the effective radius (cm).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the effective radius (cm)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log R_{\rm eff}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log R_{\rm eff}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="s2">"f_V"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Volume filling factor of the emitting region (dimensionless).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Volume filling factor of the emitting region (dimensionless)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"f_V"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;redshift&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Redshift of the source&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="s2">"redshift"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Redshift of the source"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;log_nu&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the observing frequency (Hz).&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \nu&quot;</span>
+            <span class="s2">"log_nu"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the observing frequency (Hz)."</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \nu"</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
@@ -1760,7 +1760,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pitch_averaged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Initialize the synchrotron SED model including radiative cooling but without synchrotron self-absorption.</span>
 
 <span class="sd">        Parameters</span>
@@ -1786,7 +1786,7 @@
 <span class="sd">        Internally, this constructor instantiates:</span>
 
 <span class="sd">        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_Cooling_SynchrotronSED`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span> <span class="o">=</span> <span class="n">PowerLaw_Cooling_SynchrotronSED</span><span class="p">()</span>
@@ -1801,41 +1801,41 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
         <span class="c1"># Use the SED object created at initialization to construct the</span>
         <span class="c1"># correct normalization data. The resulting norm dictionary provides</span>
         <span class="c1"># - F_peak, the log of the peak flux density (in cgs units)</span>
         <span class="c1"># - nu_m, the log of the characteristic synchrotron frequency (in Hz)</span>
         <span class="c1"># - nu_c, the log of the cooling frequency (in Hz)</span>
         <span class="c1"># - nu_max, the log of the maximum synchrotron frequency (in Hz)</span>
-        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., &quot;fast_cooling&quot; or &quot;slow_cooling&quot;)</span>
+        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., "fast_cooling" or "slow_cooling")</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_opt_from_physics_to_params</span><span class="p">(</span>
-            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_B&quot;</span><span class="p">],</span>
-            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_R&quot;</span><span class="p">],</span>
-            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_D_L&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_min&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_c</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_c&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_max&quot;</span><span class="p">],</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_E&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_B&quot;</span><span class="p">],</span>
-            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
-            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma_bulk&quot;</span><span class="p">],</span>
-            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;redshift&quot;</span><span class="p">],</span>
-            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f_V&quot;</span><span class="p">],</span>
+            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_B"</span><span class="p">],</span>
+            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_R"</span><span class="p">],</span>
+            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_D_L"</span><span class="p">],</span>
+            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_min"</span><span class="p">],</span>
+            <span class="n">log_gamma_c</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_c"</span><span class="p">],</span>
+            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_max"</span><span class="p">],</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_E"</span><span class="p">],</span>
+            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_B"</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">],</span>
+            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma_bulk"</span><span class="p">],</span>
+            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"redshift"</span><span class="p">],</span>
+            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f_V"</span><span class="p">],</span>
             <span class="n">pitch_average</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitch_averaged</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Now we can use the SED to compute the correct flux density at the given frequencies.</span>
         <span class="n">log_F_nu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_log_opt_sed_from_regime</span><span class="p">(</span>
-            <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;log_nu&quot;</span><span class="p">],</span>
-            <span class="n">regime</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;regime&quot;</span><span class="p">],</span>
-            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_m&quot;</span><span class="p">],</span>
-            <span class="n">log_nu_c</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_c&quot;</span><span class="p">],</span>
-            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_max&quot;</span><span class="p">],</span>
-            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;F_norm&quot;</span><span class="p">],</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we&#39;re not modeling a smoothed SED here.</span>
+            <span class="n">variables</span><span class="p">[</span><span class="s2">"log_nu"</span><span class="p">],</span>
+            <span class="n">regime</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"regime"</span><span class="p">],</span>
+            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_m"</span><span class="p">],</span>
+            <span class="n">log_nu_c</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_c"</span><span class="p">],</span>
+            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_max"</span><span class="p">],</span>
+            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">norm</span><span class="p">[</span><span class="s2">"F_norm"</span><span class="p">],</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we're not modeling a smoothed SED here.</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">log_F_nu</span><span class="p">)</span></div>
@@ -1845,7 +1845,7 @@
 <div class="viewcode-block" id="SynchrotronSEDModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.synchrotron.SynchrotronSEDModel.html#trilobite.models.SEDs.synchrotron.SynchrotronSEDModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SynchrotronSEDModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Optically thin synchrotron spectral energy distribution without radiative cooling or self-absorption.</span>
 
 <span class="sd">    This is the simplest physically motivated synchrotron model,</span>
@@ -1988,25 +1988,25 @@
 <span class="sd">        # --------------------------------------------------</span>
 
 <span class="sd">        parameters = {</span>
-<span class="sd">            &quot;p&quot;: 2.5,</span>
-<span class="sd">            &quot;epsilon_E&quot;: 0.1,</span>
-<span class="sd">            &quot;epsilon_B&quot;: 0.1,</span>
-<span class="sd">            &quot;log_gamma_min&quot;: np.log(10.0),</span>
-<span class="sd">            &quot;log_gamma_max&quot;: np.log(1e6),</span>
-<span class="sd">            &quot;gamma_bulk&quot;: 2.0,</span>
-<span class="sd">            &quot;alpha&quot;: np.pi / 2,</span>
-<span class="sd">            &quot;log_B&quot;: np.log(1.0),</span>
-<span class="sd">            &quot;log_R&quot;: np.log(1e16),</span>
-<span class="sd">            &quot;f_V&quot;: 1.0,</span>
-<span class="sd">            &quot;log_D_L&quot;: np.log(1e27),</span>
-<span class="sd">            &quot;redshift&quot;: 0.01,</span>
+<span class="sd">            "p": 2.5,</span>
+<span class="sd">            "epsilon_E": 0.1,</span>
+<span class="sd">            "epsilon_B": 0.1,</span>
+<span class="sd">            "log_gamma_min": np.log(10.0),</span>
+<span class="sd">            "log_gamma_max": np.log(1e6),</span>
+<span class="sd">            "gamma_bulk": 2.0,</span>
+<span class="sd">            "alpha": np.pi / 2,</span>
+<span class="sd">            "log_B": np.log(1.0),</span>
+<span class="sd">            "log_R": np.log(1e16),</span>
+<span class="sd">            "f_V": 1.0,</span>
+<span class="sd">            "log_D_L": np.log(1e27),</span>
+<span class="sd">            "redshift": 0.01,</span>
 <span class="sd">        }</span>
 
 <span class="sd">        # --------------------------------------------------</span>
 <span class="sd">        # Evaluate model</span>
 <span class="sd">        # --------------------------------------------------</span>
 
-<span class="sd">        output = model({&quot;log_nu&quot;: np.log(nu)}, parameters)</span>
+<span class="sd">        output = model({"log_nu": np.log(nu)}, parameters)</span>
 <span class="sd">        flux = np.exp(output.flux)</span>
 
 <span class="sd">        # --------------------------------------------------</span>
@@ -2014,18 +2014,18 @@
 <span class="sd">        # --------------------------------------------------</span>
 
 <span class="sd">        norm = model._sed._opt_from_physics_to_params(</span>
-<span class="sd">            log_B=parameters[&quot;log_B&quot;],</span>
-<span class="sd">            log_R=parameters[&quot;log_R&quot;],</span>
-<span class="sd">            log_D_L=parameters[&quot;log_D_L&quot;],</span>
-<span class="sd">            log_gamma_min=parameters[&quot;log_gamma_min&quot;],</span>
-<span class="sd">            log_gamma_max=parameters[&quot;log_gamma_max&quot;],</span>
-<span class="sd">            p=parameters[&quot;p&quot;],</span>
-<span class="sd">            epsilon_E=parameters[&quot;epsilon_E&quot;],</span>
-<span class="sd">            epsilon_B=parameters[&quot;epsilon_B&quot;],</span>
-<span class="sd">            alpha=parameters[&quot;alpha&quot;],</span>
-<span class="sd">            gamma_bulk=parameters[&quot;gamma_bulk&quot;],</span>
-<span class="sd">            redshift=parameters[&quot;redshift&quot;],</span>
-<span class="sd">            f_V=parameters[&quot;f_V&quot;],</span>
+<span class="sd">            log_B=parameters["log_B"],</span>
+<span class="sd">            log_R=parameters["log_R"],</span>
+<span class="sd">            log_D_L=parameters["log_D_L"],</span>
+<span class="sd">            log_gamma_min=parameters["log_gamma_min"],</span>
+<span class="sd">            log_gamma_max=parameters["log_gamma_max"],</span>
+<span class="sd">            p=parameters["p"],</span>
+<span class="sd">            epsilon_E=parameters["epsilon_E"],</span>
+<span class="sd">            epsilon_B=parameters["epsilon_B"],</span>
+<span class="sd">            alpha=parameters["alpha"],</span>
+<span class="sd">            gamma_bulk=parameters["gamma_bulk"],</span>
+<span class="sd">            redshift=parameters["redshift"],</span>
+<span class="sd">            f_V=parameters["f_V"],</span>
 <span class="sd">            pitch_average=True,</span>
 <span class="sd">        )</span>
 
@@ -2041,31 +2041,31 @@
 
 <span class="sd">        plt.figure(figsize=(8,6))</span>
 
-<span class="sd">        plt.loglog(nu, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(nu, synthetic, s=10, alpha=0.4, label=&quot;Synthetic data&quot;)</span>
+<span class="sd">        plt.loglog(nu, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(nu, synthetic, s=10, alpha=0.4, label="Synthetic data")</span>
 
 <span class="sd">        # Mark breaks</span>
 <span class="sd">        for key, label in [</span>
-<span class="sd">            (&quot;nu_m&quot;, r&quot;$\nu_m$&quot;),</span>
-<span class="sd">            (&quot;nu_max&quot;, r&quot;$\nu_{\max}$&quot;),</span>
+<span class="sd">            ("nu_m", r"$\nu_m$"),</span>
+<span class="sd">            ("nu_max", r"$\nu_{\max}$"),</span>
 <span class="sd">        ]:</span>
-<span class="sd">            plt.axvline(np.exp(norm[key]), ls=&quot;--&quot;, alpha=0.6)</span>
+<span class="sd">            plt.axvline(np.exp(norm[key]), ls="--", alpha=0.6)</span>
 <span class="sd">            plt.text(</span>
 <span class="sd">                np.exp(norm[key]),</span>
 <span class="sd">                np.amax(flux) * 0.3,</span>
 <span class="sd">                label,</span>
 <span class="sd">                rotation=90,</span>
-<span class="sd">                verticalalignment=&quot;center&quot;</span>
+<span class="sd">                verticalalignment="center"</span>
 <span class="sd">            )</span>
 
-<span class="sd">        plt.xlabel(&quot;Frequency [Hz]&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux Density [cgs]&quot;)</span>
-<span class="sd">        plt.title(&quot;Synchrotron SED (Optically Thin Only)&quot;)</span>
+<span class="sd">        plt.xlabel("Frequency [Hz]")</span>
+<span class="sd">        plt.ylabel("Flux Density [cgs]")</span>
+<span class="sd">        plt.title("Synchrotron SED (Optically Thin Only)")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.grid(alpha=0.3)</span>
 <span class="sd">        plt.tight_layout()</span>
 <span class="sd">        plt.show()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="c1"># Output Definition                                  #</span>
@@ -2078,105 +2078,105 @@
     <span class="c1"># -------------------------------------------------- #</span>
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
         <span class="c1"># Microphysical Parameters.</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron power law index&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"p"</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Electron power law index"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"p"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_E&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_E"</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Electron energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Electron energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_e&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_e"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_B&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_B"</span><span class="p">,</span>
             <span class="mf">0.01</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Magnetic energy fraction&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Magnetic energy fraction"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_min&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_min"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the minimum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the minimum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm min}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm min}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_max&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_max"</span><span class="p">,</span>
             <span class="mf">8.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the maximum electron Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the maximum electron Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_{\rm max}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_{\rm max}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;gamma_bulk&quot;</span><span class="p">,</span>
+            <span class="s2">"gamma_bulk"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Bulk Lorentz factor of the emitting region&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Bulk Lorentz factor of the emitting region"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\gamma_{\rm bulk}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\gamma_{\rm bulk}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;alpha&quot;</span><span class="p">,</span>
+            <span class="s2">"alpha"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pitch angle of the electrons (if not pitch-averaged)&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Pitch angle of the electrons (if not pitch-averaged)"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\alpha"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_gamma_c&quot;</span><span class="p">,</span>
+            <span class="s2">"log_gamma_c"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the cooling Lorentz factor&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the cooling Lorentz factor"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \gamma_c&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \gamma_c"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="c1"># Geometric Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_D_L&quot;</span><span class="p">,</span>
+            <span class="s2">"log_D_L"</span><span class="p">,</span>
             <span class="mf">27.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the luminosity distance to the source (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the luminosity distance to the source (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log_D_L&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log_D_L"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="c1"># Core Parameters.</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_B&quot;</span><span class="p">,</span>
+            <span class="s2">"log_B"</span><span class="p">,</span>
             <span class="mf">0.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the magnetic field strength (cgs).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the magnetic field strength (cgs)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log B&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log B"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;log_R&quot;</span><span class="p">,</span>
+            <span class="s2">"log_R"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1e16</span><span class="p">),</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the effective radius (cm).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the effective radius (cm)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log R_{\rm eff}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log R_{\rm eff}"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="s2">"f_V"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Volume filling factor of the emitting region (dimensionless).&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Volume filling factor of the emitting region (dimensionless)."</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;f_V&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"f_V"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;redshift&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Redshift of the source&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+            <span class="s2">"redshift"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Redshift of the source"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;log_nu&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Logarithm of the observing frequency (Hz).&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\log \nu&quot;</span>
+            <span class="s2">"log_nu"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Logarithm of the observing frequency (Hz)."</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\log \nu"</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
@@ -2184,7 +2184,7 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pitch_averaged</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Initialize the optically thin synchrotron SED model without radiative cooling or self-absorption.</span>
 
 <span class="sd">        Parameters</span>
@@ -2207,7 +2207,7 @@
 <span class="sd">        Internally, this constructor instantiates:</span>
 
 <span class="sd">        :class:`~trilobite.radiation.synchrotron.SEDs.one_zone.seds.PowerLaw_SynchrotronSED`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span> <span class="o">=</span> <span class="n">PowerLaw_SynchrotronSED</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pitch_averaged</span> <span class="o">=</span> <span class="n">pitch_averaged</span>
 
@@ -2220,38 +2220,38 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
         <span class="c1"># Use the SED object created at initialization to construct the</span>
         <span class="c1"># correct normalization data. The resulting norm dictionary provides</span>
         <span class="c1"># - F_peak, the log of the peak flux density (in cgs units)</span>
         <span class="c1"># - nu_m, the log of the characteristic synchrotron frequency (in Hz)</span>
         <span class="c1"># - nu_c, the log of the cooling frequency (in Hz)</span>
         <span class="c1"># - nu_max, the log of the maximum synchrotron frequency (in Hz)</span>
-        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., &quot;fast_cooling&quot; or &quot;slow_cooling&quot;)</span>
+        <span class="c1"># - regime: an Enum indicating the spectral regime (e.g., "fast_cooling" or "slow_cooling")</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_opt_from_physics_to_params</span><span class="p">(</span>
-            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_B&quot;</span><span class="p">],</span>
-            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_R&quot;</span><span class="p">],</span>
-            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_D_L&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_min&quot;</span><span class="p">],</span>
-            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;log_gamma_max&quot;</span><span class="p">],</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_E&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_B&quot;</span><span class="p">],</span>
-            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
-            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma_bulk&quot;</span><span class="p">],</span>
-            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;redshift&quot;</span><span class="p">],</span>
-            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f_V&quot;</span><span class="p">],</span>
+            <span class="n">log_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_B"</span><span class="p">],</span>
+            <span class="n">log_R</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_R"</span><span class="p">],</span>
+            <span class="n">log_D_L</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_D_L"</span><span class="p">],</span>
+            <span class="n">log_gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_min"</span><span class="p">],</span>
+            <span class="n">log_gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"log_gamma_max"</span><span class="p">],</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_E"</span><span class="p">],</span>
+            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_B"</span><span class="p">],</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">],</span>
+            <span class="n">gamma_bulk</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma_bulk"</span><span class="p">],</span>
+            <span class="n">redshift</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"redshift"</span><span class="p">],</span>
+            <span class="n">f_V</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f_V"</span><span class="p">],</span>
             <span class="n">pitch_average</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_pitch_averaged</span><span class="p">,</span>
         <span class="p">)</span>
 
         <span class="c1"># Now we can use the SED to compute the correct flux density at the given frequencies.</span>
         <span class="n">log_F_nu</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sed</span><span class="o">.</span><span class="n">_log_opt_sed</span><span class="p">(</span>
-            <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;log_nu&quot;</span><span class="p">],</span>
-            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;F_norm&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_m&quot;</span><span class="p">]),</span>
-            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">&quot;nu_max&quot;</span><span class="p">]),</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we&#39;re not modeling a smoothed SED here.</span>
+            <span class="n">variables</span><span class="p">[</span><span class="s2">"log_nu"</span><span class="p">],</span>
+            <span class="n">log_F_norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"F_norm"</span><span class="p">]),</span>
+            <span class="n">log_nu_m</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_m"</span><span class="p">]),</span>
+            <span class="n">log_nu_max</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">[</span><span class="s2">"nu_max"</span><span class="p">]),</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">s</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>  <span class="c1"># We can set s=1 for the smoothing parameter since we're not modeling a smoothed SED here.</span>
         <span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">log_F_nu</span><span class="p">)</span></div>
@@ -2261,7 +2261,7 @@
 <div class="viewcode-block" id="Synchrotron_SSA_SBPL_Model">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.SEDs.synchrotron.Synchrotron_SSA_SBPL_Model.html#trilobite.models.SEDs.synchrotron.Synchrotron_SSA_SBPL_Model">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Synchrotron_SSA_SBPL_Model</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Phenomenological synchrotron self-absorbed broken power-law spectral energy distribution (SED).</span>
 
 <span class="sd">    This model provides a **time-independent**, smoothly broken power-law approximation to a</span>
@@ -2360,13 +2360,13 @@
 <span class="sd">    In most scenarios, the break frequency will be ill-constrained without broadband sampling of</span>
 <span class="sd">    the radio SED. Care should be taken when interpreting fit results, especially when using</span>
 <span class="sd">    sparse data.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ============================================== #</span>
     <span class="c1"># Model Initialization                           #</span>
     <span class="c1"># ============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="c1"># =============================================== #</span>
@@ -2374,81 +2374,81 @@
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Each model must declare its parameters and variables as class-level attributes. These</span>
     <span class="c1"># must each be instances of `ModelParameter` and `ModelVariable`, respectively.</span>
-    <span class="n">PARAMETERS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="s2">&quot;ModelParameter&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">PARAMETERS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="s2">"ModelParameter"</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;norm&quot;</span><span class="p">,</span>
+            <span class="s2">"norm"</span><span class="p">,</span>
             <span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Normalization constant of the SED.&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;Jy&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Normalization constant of the SED."</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"Jy"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;F_{\rm nu,0}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"F_{\rm nu,0}"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;nu_break&quot;</span><span class="p">,</span>
+            <span class="s2">"nu_break"</span><span class="p">,</span>
             <span class="mf">5.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Break frequency of the SED.&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;GHz&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Break frequency of the SED."</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"GHz"</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\nu_{\rm break}&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\nu_{\rm break}"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;p&quot;</span><span class="p">,</span>
+            <span class="s2">"p"</span><span class="p">,</span>
             <span class="mf">3.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Power-law index for the electron energy distribution.&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Power-law index for the electron energy distribution."</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;p&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"p"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+            <span class="s2">"s"</span><span class="p">,</span>
             <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The smoothing parameter of the broken power-law.&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The smoothing parameter of the broken power-law."</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"s"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`ModelParameter`: The model&#39;s parameters.</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`ModelParameter`: The model's parameters.</span>
 
 <span class="sd">    Each element of :attr:`PARAMETERS` is a :class:`ModelParameter` instance that defines a single</span>
 <span class="sd">    parameter of the model. These parameters are used to configure the model and control its behavior. Each</span>
 <span class="sd">    parameter contains information about the base units, default value, and valid range for that parameter.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">VARIABLES</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="s2">&quot;ModelVariable&quot;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+<span class="sd">    """</span>
+    <span class="n">VARIABLES</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="s2">"ModelVariable"</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Observing frequency at which to evaluate the SED.&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;GHz&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\nu&quot;</span>
+            <span class="s2">"frequency"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Observing frequency at which to evaluate the SED."</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">"GHz"</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\nu"</span>
         <span class="p">),</span>
     <span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`ModelVariable`: The model&#39;s variables.</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`ModelVariable`: The model's variables.</span>
 
 <span class="sd">    Each element of :attr:`VARIABLES` is a :class:`ModelVariable` instance that defines a single</span>
 <span class="sd">    variable of the model. These variables represent the inputs to the model that can vary during</span>
 <span class="sd">    evaluation. Each variable contains information about the base units, name, etc. of the variable. Notably,</span>
 <span class="sd">    variables differ from the parameters (:attr:`PARAMETERS`) in that variables are do **NOT** have default</span>
 <span class="sd">    values, do **NOT** have validity ranges, and are expected to be provided at model evaluation time.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Model Metadata Declarations                     #</span>
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Each model must declare its parameters and variables as class-level attributes.</span>
-    <span class="n">OUTPUTS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;Synchrotron_SSA_SBPL_SEDOutput&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux_density&quot;</span><span class="p">])</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of str: The names of the model&#39;s outputs.</span>
+    <span class="n">OUTPUTS</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"Synchrotron_SSA_SBPL_SEDOutput"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux_density"</span><span class="p">])</span>
+<span class="w">    </span><span class="sd">"""tuple of str: The names of the model's outputs.</span>
 
 <span class="sd">    Each element of :attr:`OUTPUTS` is a string that defines the name of a single output of the model.</span>
-<span class="sd">    These names correspond to the keys in the dictionary returned by the model&#39;s evaluation method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    These names correspond to the keys in the dictionary returned by the model's evaluation method.</span>
+<span class="sd">    """</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux_density</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`astropy.units.Unit`: The units of the model&#39;s outputs.</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`astropy.units.Unit`: The units of the model's outputs.</span>
 
 <span class="sd">    Each element of :attr:`UNITS` is an :class:`astropy.units.Unit` instance that defines the units of a single</span>
 <span class="sd">    output of the model. The order of the units in :attr:`UNITS` corresponds to the order of the output names</span>
 <span class="sd">    in :attr:`OUTPUTS`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: A brief description of the model.&quot;&quot;&quot;</span>
-    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: A reference for the model, e.g., a journal article or textbook.&quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: A brief description of the model."""</span>
+    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: A reference for the model, e.g., a journal article or textbook."""</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Model Evaluation Method                         #</span>
@@ -2457,14 +2457,14 @@
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">_ModelVariablesInputRaw</span><span class="p">,</span>
         <span class="n">parameters</span><span class="p">:</span> <span class="n">_ModelParametersInputRaw</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OUTPUTS&quot;</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OUTPUTS"</span><span class="p">:</span>
         <span class="c1"># Construct the indices from the value of p.</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">]</span>
         <span class="n">alpha_2</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">alpha_1</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 
         <span class="n">result</span> <span class="o">=</span> <span class="n">smoothed_BPL</span><span class="p">(</span>
-            <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;norm&quot;</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;nu_break&quot;</span><span class="p">],</span> <span class="n">alpha_1</span><span class="p">,</span> <span class="n">alpha_2</span><span class="p">,</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span>
+            <span class="n">variables</span><span class="p">[</span><span class="s2">"frequency"</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"norm"</span><span class="p">],</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"nu_break"</span><span class="p">],</span> <span class="n">alpha_1</span><span class="p">,</span> <span class="n">alpha_2</span><span class="p">,</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux_density</span><span class="o">=</span><span class="n">result</span><span class="p">)</span></div>
 
@@ -2497,8 +2497,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2532,7 +2532,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

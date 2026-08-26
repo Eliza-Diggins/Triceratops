@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/opacity/grey_opacity/rosseland/models';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.opacity.grey_opacity.rosseland.models</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Grey (frequency-averaged) opacity laws for use in radiative diffusion problems.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Grey (frequency-averaged) opacity laws for use in radiative diffusion problems.</span>
 
 <span class="sd">The Rosseland mean opacity is defined as</span>
 
@@ -509,7 +509,7 @@
 <span class="sd">|                          | to construct instances from the bundled tables.                 |</span>
 <span class="sd">+--------------------------+-----------------------------------------------------------------+</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">ClassVar</span>
@@ -545,7 +545,7 @@
 <div class="viewcode-block" id="ElectronScatteringOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.ElectronScatteringOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.ElectronScatteringOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ElectronScatteringOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Thomson electron-scattering opacity.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Thomson electron-scattering opacity.</span>
 
 <span class="sd">    Electron scattering is *grey* (frequency-independent) and provides a</span>
 <span class="sd">    constant opacity floor throughout a fully ionised plasma.  The value</span>
@@ -600,10 +600,10 @@
 <span class="sd">            1e-5 * u.g / u.cm**3, 1e7 * u.K</span>
 <span class="sd">        )</span>
 <span class="sd">        # → 0.34 cm² g⁻¹ (independent of ρ and T)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
     <span class="c1">#: Exposed so callers can read back the value without accessing the C companion.</span>
     <span class="n">kappa_es</span><span class="p">:</span> <span class="nb">float</span>
@@ -628,7 +628,7 @@
 <div class="viewcode-block" id="KramersFFOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersFFOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersFFOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KramersFFOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free (bremsstrahlung) Kramers opacity.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free (bremsstrahlung) Kramers opacity.</span>
 
 <span class="sd">    The free-free Rosseland mean opacity follows the classical Kramers scaling</span>
 
@@ -678,10 +678,10 @@
 <span class="sd">            kappa0=1.0e22</span>
 <span class="sd">        )  # non-solar composition</span>
 <span class="sd">        kap = op.opacity(1e-5 * u.g / u.cm**3, 1e6 * u.K)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
 <div class="viewcode-block" id="KramersFFOpacity.__init__">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.KramersFFOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersFFOpacity.__init__">[docs]</a>
@@ -701,7 +701,7 @@
 <div class="viewcode-block" id="KramersBFOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersBFOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersBFOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KramersBFOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bound-free (photoionisation) Kramers opacity.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Bound-free (photoionisation) Kramers opacity.</span>
 
 <span class="sd">    The bound-free Rosseland mean follows the same :math:`\rho\,T^{-3.5}`</span>
 <span class="sd">    power law as the free-free term but with a significantly larger coefficient:</span>
@@ -749,10 +749,10 @@
 <span class="sd">            kappa0=1.0e24</span>
 <span class="sd">        )  # metal-poor composition</span>
 <span class="sd">        kap = op.opacity(1e-5 * u.g / u.cm**3, 1e6 * u.K)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
 <div class="viewcode-block" id="KramersBFOpacity.__init__">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.KramersBFOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersBFOpacity.__init__">[docs]</a>
@@ -772,7 +772,7 @@
 <div class="viewcode-block" id="KramersOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KramersOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Combined free-free and bound-free Kramers opacity.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Combined free-free and bound-free Kramers opacity.</span>
 
 <span class="sd">    Both the free-free and bound-free Rosseland terms share the same</span>
 <span class="sd">    :math:`\rho\,T^{-3.5}` scaling, so they add to a single effective</span>
@@ -822,10 +822,10 @@
 <span class="sd">            kappa0=2.0e25</span>
 <span class="sd">        )  # non-solar composition</span>
 <span class="sd">        kap = op.opacity(1e-5 * u.g / u.cm**3, 1e6 * u.K)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
 <div class="viewcode-block" id="KramersOpacity.__init__">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.KramersOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersOpacity.__init__">[docs]</a>
@@ -845,7 +845,7 @@
 <div class="viewcode-block" id="KramersFFESOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersFFESOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersFFESOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KramersFFESOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Free-free Kramers opacity with an electron-scattering floor.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Free-free Kramers opacity with an electron-scattering floor.</span>
 
 <span class="sd">    Combines a frequency-independent Thomson floor with the free-free Kramers</span>
 <span class="sd">    term:</span>
@@ -897,10 +897,10 @@
 <span class="sd">            kappa_es=0.20</span>
 <span class="sd">        )  # helium-dominated composition</span>
 <span class="sd">        kap = op.opacity(1e-5 * u.g / u.cm**3, 1e7 * u.K)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
 <div class="viewcode-block" id="KramersFFESOpacity.__init__">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.KramersFFESOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersFFESOpacity.__init__">[docs]</a>
@@ -920,7 +920,7 @@
 <div class="viewcode-block" id="KramersBFESOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersBFESOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersBFESOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KramersBFESOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bound-free Kramers opacity with an electron-scattering floor.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Bound-free Kramers opacity with an electron-scattering floor.</span>
 
 <span class="sd">    Combines a Thomson scattering floor with the bound-free Kramers term:</span>
 
@@ -973,10 +973,10 @@
 <span class="sd">            kappa0=1.0e24, kappa_es=0.20</span>
 <span class="sd">        )  # metal-poor, helium-rich</span>
 <span class="sd">        kap = op.opacity(1e-5 * u.g / u.cm**3, 1e6 * u.K)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
 <div class="viewcode-block" id="KramersBFESOpacity.__init__">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.KramersBFESOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersBFESOpacity.__init__">[docs]</a>
@@ -996,7 +996,7 @@
 <div class="viewcode-block" id="KramersESOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersESOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersESOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">KramersESOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Combined Kramers opacity with an electron-scattering floor.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Combined Kramers opacity with an electron-scattering floor.</span>
 
 <span class="sd">    The most complete grey analytic opacity for a hot, fully ionised plasma.</span>
 <span class="sd">    It sums a Thomson scattering floor with both free-free and bound-free</span>
@@ -1051,10 +1051,10 @@
 <span class="sd">            kappa_es=0.20, kappa0=2.0e25</span>
 <span class="sd">        )  # helium-rich ejecta</span>
 <span class="sd">        kap = op.opacity(1e-5 * u.g / u.cm**3, 1e7 * u.K)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
 <div class="viewcode-block" id="KramersESOpacity.__init__">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.KramersESOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.KramersESOpacity.__init__">[docs]</a>
@@ -1076,13 +1076,13 @@
 <span class="c1"># ================================================================ #</span>
 
 <span class="c1">#: Out-of-bounds mode codes passed to C_OPALTableOpacity.</span>
-<span class="n">_OOB_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;raise&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;clamp&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">_OOB_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"raise"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"clamp"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
 
 
 <div class="viewcode-block" id="OPALOpacity">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OPALOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Rosseland mean opacity from bilinear interpolation on a 2-D OPAL table.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Rosseland mean opacity from bilinear interpolation on a 2-D OPAL table.</span>
 
 <span class="sd">    The OPAL tables (:footcite:t:`Iglesias1996`) provide numerically computed</span>
 <span class="sd">    Rosseland mean opacities on a grid of :math:`\log_{10}T` and</span>
@@ -1116,9 +1116,9 @@
 <span class="sd">    kappa : ~numpy.ndarray</span>
 <span class="sd">        :math:`\log_{10}(\kappa\,[\mathrm{cm^2\,g^{-1}}])`.</span>
 <span class="sd">        ``NaN`` marks out-of-range cells.</span>
-<span class="sd">    out_of_bounds : {&#39;raise&#39;, &#39;clamp&#39;, &#39;nan&#39;}, optional</span>
+<span class="sd">    out_of_bounds : {'raise', 'clamp', 'nan'}, optional</span>
 <span class="sd">        Behaviour when a query :math:`(T, \rho)` falls outside the table</span>
-<span class="sd">        grid or lands on a NaN-flagged cell.  Default ``&#39;raise&#39;``.</span>
+<span class="sd">        grid or lands on a NaN-flagged cell.  Default ``'raise'``.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -1139,7 +1139,7 @@
 <span class="sd">        import astropy.units as u</span>
 
 <span class="sd">        # Via the registry (solar default)</span>
-<span class="sd">        op = get_opacity(&quot;opal&quot;)</span>
+<span class="sd">        op = get_opacity("opal")</span>
 
 <span class="sd">        # By composition</span>
 <span class="sd">        op = load_opal_opacity(X=0.70, Z=0.02)</span>
@@ -1152,13 +1152,13 @@
 <span class="sd">        dkdT = op.dlogkappa_dlogT(</span>
 <span class="sd">            1e-5 * u.g / u.cm**3, 1e7 * u.K</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
+    <span class="n">mean_type</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
 
     <span class="c1">#: Path to the bundled OPAL table HDF5 file.</span>
-    <span class="n">_PATH</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tables&quot;</span> <span class="o">/</span> <span class="s2">&quot;asplund_grevesse_05.h5&quot;</span>
+    <span class="n">_PATH</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"tables"</span> <span class="o">/</span> <span class="s2">"asplund_grevesse_05.h5"</span>
     <span class="c1">#: Lazily populated namespace; ``None`` until first :meth:`get_tables` call.</span>
     <span class="n">_TABLES</span><span class="p">:</span> <span class="n">ClassVar</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -1167,20 +1167,20 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_read_h5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SimpleNamespace&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the OPAL HDF5 file at *path* into a SimpleNamespace of arrays.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_h5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"SimpleNamespace"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Read the OPAL HDF5 file at *path* into a SimpleNamespace of arrays."""</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleNamespace</span>
 
         <span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
 
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">ns</span> <span class="o">=</span> <span class="n">SimpleNamespace</span><span class="p">(</span>
-                <span class="n">grid_T</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;grid/grid_1&quot;</span><span class="p">][:],</span>
-                <span class="n">grid_R</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;grid/grid_2&quot;</span><span class="p">][:],</span>
-                <span class="n">opacity</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;opacity&quot;</span><span class="p">][:],</span>
-                <span class="n">X</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;metadata/X&quot;</span><span class="p">][:],</span>
-                <span class="n">Y</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;metadata/Y&quot;</span><span class="p">][:],</span>
-                <span class="n">Z</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;metadata/Z&quot;</span><span class="p">][:],</span>
+                <span class="n">grid_T</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">"grid/grid_1"</span><span class="p">][:],</span>
+                <span class="n">grid_R</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">"grid/grid_2"</span><span class="p">][:],</span>
+                <span class="n">opacity</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">"opacity"</span><span class="p">][:],</span>
+                <span class="n">X</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">"metadata/X"</span><span class="p">][:],</span>
+                <span class="n">Y</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">"metadata/Y"</span><span class="p">][:],</span>
+                <span class="n">Z</span><span class="o">=</span><span class="n">f</span><span class="p">[</span><span class="s2">"metadata/Z"</span><span class="p">][:],</span>
             <span class="p">)</span>
         <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">arr</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1189,8 +1189,8 @@
 <div class="viewcode-block" id="OPALOpacity.get_tables">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.get_tables.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.get_tables">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_tables</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SimpleNamespace&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the full OPAL table set, loading from disk on first call.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_tables</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"SimpleNamespace"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the full OPAL table set, loading from disk on first call.</span>
 
 <span class="sd">        The result is cached on the class after the first load (for the</span>
 <span class="sd">        bundled file).  Passing a custom *path* bypasses the cache and reads</span>
@@ -1211,7 +1211,7 @@
 <span class="sd">            * ``grid_R``  — :math:`\log_{10}(R)`, shape ``(19,)``</span>
 <span class="sd">            * ``opacity`` — :math:`\log_{10}(\kappa)`, shape ``(126, 70, 19)``; ``NaN`` = invalid</span>
 <span class="sd">            * ``X``, ``Y``, ``Z`` — composition fractions, shape ``(126,)``</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_read_h5</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_TABLES</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1223,7 +1223,7 @@
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.find.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.find">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">X</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Z</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e-6</span><span class="p">,</span> <span class="n">table_path</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the unique composition index matching *(X, Z)*.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return the unique composition index matching *(X, Z)*.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1255,13 +1255,13 @@
 <span class="sd">            )</span>
 
 <span class="sd">            idx = OPALOpacity.find(X=0.70, Z=0.02)  # → 72</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_tables</span><span class="p">(</span><span class="n">table_path</span><span class="p">)</span>
         <span class="n">hits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">Z</span> <span class="o">-</span> <span class="n">Z</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No OPAL table found for X=</span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">, Z=</span><span class="si">{</span><span class="n">Z</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No OPAL table found for X=</span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">, Z=</span><span class="si">{</span><span class="n">Z</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">hits</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Multiple OPAL tables match X=</span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">, Z=</span><span class="si">{</span><span class="n">Z</span><span class="si">}</span><span class="s2">: indices </span><span class="si">{</span><span class="n">hits</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Multiple OPAL tables match X=</span><span class="si">{</span><span class="n">X</span><span class="si">}</span><span class="s2">, Z=</span><span class="si">{</span><span class="n">Z</span><span class="si">}</span><span class="s2">: indices </span><span class="si">{</span><span class="n">hits</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">hits</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
 
 
@@ -1269,14 +1269,14 @@
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.where.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.where">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">where</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">table_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">conditions</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return indices of tables satisfying all composition conditions.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return indices of tables satisfying all composition conditions.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        table_path : str or Path, optional</span>
 <span class="sd">            Custom table file; defaults to the bundled table.</span>
 <span class="sd">        **conditions</span>
-<span class="sd">            Each key must be one of ``&quot;X&quot;``, ``&quot;Y&quot;``, ``&quot;Z&quot;``.  The value</span>
+<span class="sd">            Each key must be one of ``"X"``, ``"Y"``, ``"Z"``.  The value</span>
 <span class="sd">            may be:</span>
 
 <span class="sd">            * a **scalar float** — matched within absolute tolerance ``1e-6``;</span>
@@ -1303,13 +1303,13 @@
 
 <span class="sd">            # Intersection of two conditions</span>
 <span class="sd">            OPALOpacity.where(X=0.70, Z=0.02)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_tables</span><span class="p">(</span><span class="n">table_path</span><span class="p">)</span>
-        <span class="n">arrays</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;X&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Z</span><span class="p">}</span>
+        <span class="n">arrays</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"X"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="s2">"Y"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Y</span><span class="p">,</span> <span class="s2">"Z"</span><span class="p">:</span> <span class="n">t</span><span class="o">.</span><span class="n">Z</span><span class="p">}</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">X</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">conditions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">arrays</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown composition key </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2">. Valid keys: X, Y, Z.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown composition key </span><span class="si">{</span><span class="n">key</span><span class="si">!r}</span><span class="s2">. Valid keys: X, Y, Z."</span><span class="p">)</span>
             <span class="n">arr</span> <span class="o">=</span> <span class="n">arrays</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
                 <span class="n">mask</span> <span class="o">&amp;=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">val</span><span class="p">(</span><span class="n">arr</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
@@ -1330,10 +1330,10 @@
         <span class="n">grid_R</span><span class="p">,</span>
         <span class="n">kappa</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">out_of_bounds</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_OOB_MODES</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out_of_bounds must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_OOB_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">out_of_bounds</span><span class="si">!r}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"out_of_bounds must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_OOB_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">out_of_bounds</span><span class="si">!r}</span><span class="s2">."</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out_of_bounds</span> <span class="o">=</span> <span class="n">out_of_bounds</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">grid_T</span><span class="o">=</span><span class="n">grid_T</span><span class="p">,</span> <span class="n">grid_R</span><span class="o">=</span><span class="n">grid_R</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="n">kappa</span><span class="p">,</span> <span class="n">out_of_bounds</span><span class="o">=</span><span class="n">out_of_bounds</span><span class="p">)</span></div>
 
@@ -1344,7 +1344,7 @@
         <span class="k">return</span> <span class="n">C_OPALTableOpacity</span><span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grid_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grid_R</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">"C"</span><span class="p">),</span>
             <span class="n">_OOB_MODES</span><span class="p">[</span><span class="n">out_of_bounds</span><span class="p">],</span>
         <span class="p">)</span>
 
@@ -1358,9 +1358,9 @@
         <span class="n">X</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">Z</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">table_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OPALOpacity&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load an :class:`OPALOpacity` from the bundled OPAL table.</span>
+        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OPALOpacity"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Load an :class:`OPALOpacity` from the bundled OPAL table.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1373,8 +1373,8 @@
 <span class="sd">            Metal mass fraction.  Must be paired with *X*.</span>
 <span class="sd">        table_path : str or Path, optional</span>
 <span class="sd">            Override the default bundled table path.</span>
-<span class="sd">        out_of_bounds : {&#39;raise&#39;, &#39;clamp&#39;, &#39;nan&#39;}, optional</span>
-<span class="sd">            Out-of-bounds behaviour.  Default ``&#39;raise&#39;``.</span>
+<span class="sd">        out_of_bounds : {'raise', 'clamp', 'nan'}, optional</span>
+<span class="sd">            Out-of-bounds behaviour.  Default ``'raise'``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1383,11 +1383,11 @@
 <span class="sd">        Notes</span>
 <span class="sd">        -----</span>
 <span class="sd">        With no arguments, solar composition (X = 0.70, Z = 0.02) is used.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="p">(</span><span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">Z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Supply either &#39;index&#39; or (&#39;X&#39;, &#39;Z&#39;), not both.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Supply either 'index' or ('X', 'Z'), not both."</span><span class="p">)</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">X</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="o">!=</span> <span class="p">(</span><span class="n">Z</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Supply both &#39;X&#39; and &#39;Z&#39; together, or neither.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Supply both 'X' and 'Z' together, or neither."</span><span class="p">)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_tables</span><span class="p">(</span><span class="n">table_path</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">index</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Z</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1402,7 +1402,7 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_log_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\ln\kappa` via bilinear interpolation in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\ln\kappa` via bilinear interpolation in the table."""</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">log_opacity_array</span><span class="p">(</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
@@ -1411,7 +1411,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">log_opacity</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlogrho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\rho` from the table gradient.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln\rho` from the table gradient."""</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogrho_array</span><span class="p">(</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
@@ -1420,7 +1420,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogrho</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlogT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln T` from the table gradient.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln T` from the table gradient."""</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogT_array</span><span class="p">(</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
@@ -1436,7 +1436,7 @@
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.read_from_opal_txt.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OPALOpacity.read_from_opal_txt">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">read_from_opal_txt</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">txt_path</span><span class="p">,</span> <span class="n">h5_path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Parse an OPAL fixed-width text file and write it to HDF5.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Parse an OPAL fixed-width text file and write it to HDF5.</span>
 
 <span class="sd">        This classmethod is a provenance utility for (re-)generating the</span>
 <span class="sd">        bundled ``asplund_grevesse_05.h5`` from the original source text.</span>
@@ -1448,7 +1448,7 @@
 <span class="sd">            Path to the OPAL-format fixed-width text file.</span>
 <span class="sd">        h5_path : str or Path</span>
 <span class="sd">            Output HDF5 path (overwritten if it exists).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">re</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_re</span>
 
         <span class="kn">import</span><span class="w"> </span><span class="nn">h5py</span>
@@ -1461,17 +1461,17 @@
 
         <span class="n">data_start</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">lines</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\*+\s+Tables\s+\*+&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="n">_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\*+\s+Tables\s+\*+"</span><span class="p">,</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()):</span>
                 <span class="n">data_start</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="k">break</span>
         <span class="k">if</span> <span class="n">data_start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find &#39;*** Tables ***&#39; separator in </span><span class="si">{</span><span class="n">txt_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Could not find '*** Tables ***' separator in </span><span class="si">{</span><span class="n">txt_path</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
         <span class="n">table_hdr</span> <span class="o">=</span> <span class="n">_re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
-            <span class="sa">r</span><span class="s2">&quot;TABLE\s*#\s*\d+\s+(\S+)\s+X=([0-9.]+)\s+Y=([0-9.]+)\s+&quot;</span>
-            <span class="sa">r</span><span class="s2">&quot;Z=([0-9.]+)\s+dX1=([0-9.]+)\s+dX2=([0-9.]+)&quot;</span>
+            <span class="sa">r</span><span class="s2">"TABLE\s*#\s*\d+\s+(\S+)\s+X=([0-9.]+)\s+Y=([0-9.]+)\s+"</span>
+            <span class="sa">r</span><span class="s2">"Z=([0-9.]+)\s+dX1=([0-9.]+)\s+dX2=([0-9.]+)"</span>
         <span class="p">)</span>
-        <span class="n">col_hdr</span> <span class="o">=</span> <span class="n">_re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;logT\s+(.*)&quot;</span><span class="p">)</span>
+        <span class="n">col_hdr</span> <span class="o">=</span> <span class="n">_re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"logT\s+(.*)"</span><span class="p">)</span>
 
         <span class="n">blocks</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">log_r_values</span> <span class="o">=</span> <span class="n">log_t_values</span> <span class="o">=</span> <span class="kc">None</span>
@@ -1497,7 +1497,7 @@
                         <span class="k">break</span>
                     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="k">if</span> <span class="n">col_m</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing &#39;logT ...&#39; column header after TABLE block.&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Missing 'logT ...' column header after TABLE block."</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">log_r_values</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">log_r_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">col_m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1507,7 +1507,7 @@
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">dl</span><span class="p">:</span>
                         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="k">continue</span>
-                    <span class="k">if</span> <span class="n">table_hdr</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">dl</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;^\*+&quot;</span><span class="p">,</span> <span class="n">dl</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">table_hdr</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">dl</span><span class="p">)</span> <span class="ow">or</span> <span class="n">_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">"^\*+"</span><span class="p">,</span> <span class="n">dl</span><span class="p">):</span>
                         <span class="k">break</span>
                     <span class="n">parts</span> <span class="o">=</span> <span class="n">dl</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
                     <span class="k">try</span><span class="p">:</span>
@@ -1532,7 +1532,7 @@
                 <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">blocks</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No TABLE blocks found in </span><span class="si">{</span><span class="n">txt_path</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No TABLE blocks found in </span><span class="si">{</span><span class="n">txt_path</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
         <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n_tbl</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">log_t_values</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">log_r_values</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
         <span class="n">opacity</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">n_tbl</span><span class="p">,</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
@@ -1548,25 +1548,25 @@
             <span class="n">dX2s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dX2</span><span class="p">)</span>
 
         <span class="n">h5_path</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;source&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;OPAL&quot;</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;reference&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Iglesias &amp; Rogers 1996&quot;</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;mean_type&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span>
-            <span class="n">grp</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s2">&quot;grid&quot;</span><span class="p">)</span>
-            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;grid_1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">log_t_values</span><span class="p">)</span>
-            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;grid_2&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">log_r_values</span><span class="p">)</span>
-            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;opacity&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">opacity</span><span class="p">)</span>
-            <span class="n">mgrp</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">)</span>
-            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Xs</span><span class="p">))</span>
-            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ys</span><span class="p">))</span>
-            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Zs</span><span class="p">))</span>
-            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;dX1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dX1s</span><span class="p">))</span>
-            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;dX2&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dX2s</span><span class="p">))</span>
-            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;table_id&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tids</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">h5py</span><span class="o">.</span><span class="n">string_dtype</span><span class="p">())</span></div>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"source"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"OPAL"</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"reference"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"Iglesias &amp; Rogers 1996"</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"mean_type"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"rosseland"</span>
+            <span class="n">grp</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s2">"grid"</span><span class="p">)</span>
+            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"grid_1"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">log_t_values</span><span class="p">)</span>
+            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"grid_2"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">log_r_values</span><span class="p">)</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"opacity"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">opacity</span><span class="p">)</span>
+            <span class="n">mgrp</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="s2">"metadata"</span><span class="p">)</span>
+            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"X"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Xs</span><span class="p">))</span>
+            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"Y"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Ys</span><span class="p">))</span>
+            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"Z"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Zs</span><span class="p">))</span>
+            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"dX1"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dX1s</span><span class="p">))</span>
+            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"dX2"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dX2s</span><span class="p">))</span>
+            <span class="n">mgrp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"table_id"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">tids</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">object</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">h5py</span><span class="o">.</span><span class="n">string_dtype</span><span class="p">())</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;OPALOpacity(out_of_bounds=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">out_of_bounds</span><span class="si">!r}</span><span class="s2">)&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"OPALOpacity(out_of_bounds=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">out_of_bounds</span><span class="si">!r}</span><span class="s2">)"</span></div>
 
 </pre></div>
 
@@ -1597,8 +1597,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1632,7 +1632,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

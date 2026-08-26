@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/inference/likelihood/base';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.inference.likelihood.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Abstract base class for likelihood models.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""Abstract base class for likelihood models."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span>
@@ -463,7 +463,7 @@
     <span class="p">)</span>
 
 <span class="c1"># Defining the __all__ variable.</span>
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Likelihood&quot;</span><span class="p">,</span> <span class="s2">&quot;GaussianLikelihood&quot;</span><span class="p">,</span> <span class="s2">&quot;GaussianCensoredLikelihood&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Likelihood"</span><span class="p">,</span> <span class="s2">"GaussianLikelihood"</span><span class="p">,</span> <span class="s2">"GaussianCensoredLikelihood"</span><span class="p">]</span>
 
 
 <span class="c1"># ============================================================ #</span>
@@ -472,7 +472,7 @@
 <div class="viewcode-block" id="Likelihood">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.inference.likelihood.base.Likelihood.html#trilobite.inference.likelihood.base.Likelihood">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Likelihood</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for statistical likelihood functions.</span>
 
 <span class="sd">    The :class:`~trilobite.inference.likelihood.base.Likelihood` class defines the interface and execution</span>
@@ -536,13 +536,13 @@
 <span class="sd">    - This class makes no assumptions about priors or sampling strategies.</span>
 <span class="sd">    - Parameter coercion is delegated to the model.</span>
 <span class="sd">    - Data validation is delegated to :class:`InferenceData`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ============================================================ #</span>
     <span class="c1"># Initialization                                               #</span>
     <span class="c1"># ============================================================ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">Model</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">InferenceData</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the likelihood object.</span>
 
 <span class="sd">        Parameters</span>
@@ -566,12 +566,12 @@
 <span class="sd">            If `model` is not a :class:`~trilobite.models.core.base.Model` instance.</span>
 <span class="sd">        TypeError</span>
 <span class="sd">            If `data` is not an :class:`InferenceData` instance.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Model</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`model` must be an instance of Model.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"`model` must be an instance of Model."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">InferenceData</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;`data` must be an instance of InferenceData.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"`data` must be an instance of InferenceData."</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="p">:</span> <span class="n">Model</span> <span class="o">=</span> <span class="n">model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="p">:</span> <span class="n">InferenceData</span> <span class="o">=</span> <span class="n">data</span>
@@ -587,7 +587,7 @@
     <span class="c1"># ============================================================ #</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Configure subclass-specific behavior.</span>
 
 <span class="sd">        Called immediately after model and data assignment.</span>
@@ -598,12 +598,12 @@
 <span class="sd">        ----------</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Arbitrary configuration options provided at initialization.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_model_and_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Validate compatibility between the model and data.</span>
 
 <span class="sd">        This method must verify that:</span>
@@ -612,7 +612,7 @@
 <span class="sd">        - The data structure satisfies required statistical constraints</span>
 
 <span class="sd">        It must raise an exception if incompatibility is detected.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="c1"># ============================================================ #</span>
@@ -621,31 +621,31 @@
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_log_likelihood</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;_ModelParametersInputRaw&quot;</span><span class="p">],</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"_ModelParametersInputRaw"</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Compute the log-likelihood for raw model parameters.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        parameters : dict</span>
 <span class="sd">            Mapping of model parameter names to values in the</span>
-<span class="sd">            model&#39;s raw, unit-consistent internal format.</span>
+<span class="sd">            model's raw, unit-consistent internal format.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Log-likelihood value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 <div class="viewcode-block" id="Likelihood.log_likelihood">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.inference.likelihood.base.Likelihood.log_likelihood.html#trilobite.inference.likelihood.base.Likelihood.log_likelihood">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_likelihood</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;_ModelParametersInput&quot;</span><span class="p">],</span>
+        <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">"_ModelParametersInput"</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the log-likelihood for model parameters.</span>
 
 <span class="sd">        This is the public entry point for likelihood evaluation.</span>
@@ -670,7 +670,7 @@
 <span class="sd">        For performance-critical inference backends, prefer calling</span>
 <span class="sd">        :meth:`_log_likelihood` directly with parameters already</span>
 <span class="sd">        in raw format to avoid repeated coercion overhead.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_model</span><span class="o">.</span><span class="n">coerce_model_parameters</span><span class="p">(</span><span class="n">parameters</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_likelihood</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span></div>
 </div>
@@ -680,7 +680,7 @@
 <div class="viewcode-block" id="GaussianLikelihood">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.inference.likelihood.base.GaussianLikelihood.html#trilobite.inference.likelihood.base.GaussianLikelihood">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GaussianLikelihood</span><span class="p">(</span><span class="n">Likelihood</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Multivariate Gaussian log-likelihood for uncensored observations.</span>
 
 <span class="sd">    This likelihood assumes that all observed data points are detections</span>
@@ -753,13 +753,13 @@
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    ~trilobite.inference.likelihood.gaussian.gaussian_loglikelihood : Low-level numerical backend.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ============================================================</span>
     <span class="c1"># Configuration</span>
     <span class="c1"># ============================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Extract and cache numerical arrays from :class:`InferenceData`.</span>
 
 <span class="sd">        This method is called exactly once during initialization.</span>
@@ -774,7 +774,7 @@
 
 <span class="sd">        _x : dict[str, ndarray]</span>
 <span class="sd">            Independent variable arrays used by the forward model.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Cache independent variables for faster access</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">x</span>
 
@@ -788,36 +788,36 @@
     <span class="c1"># Validation</span>
     <span class="c1"># ============================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_model_and_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Validate structural compatibility between model and data.</span>
 
 <span class="sd">        Ensures:</span>
 <span class="sd">        - Uncertainties are present</span>
 <span class="sd">        - Shapes are consistent</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Ensure that shapes are consistent.</span>
         <span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_y</span><span class="o">.</span><span class="n">shape</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Provided data container must have equal shapes for observed values and&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot; uncertainties. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_err: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="s2">"Provided data container must have equal shapes for observed values and"</span>
+                <span class="sa">f</span><span class="s2">" uncertainties. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_err: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
         <span class="c1"># Ensure that we have EITHER a detection, an upper limit, or a lower limit</span>
         <span class="c1"># for EVERY entry.</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_y</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;GaussianCensoredLikelihood requires that every entry has a detection.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"GaussianCensoredLikelihood requires that every entry has a detection."</span><span class="p">)</span>
 
         <span class="c1"># Ensure that an error is provided for EVERY entry.</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;GaussianCensoredLikelihood requires defined uncertainties for all entries.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"GaussianCensoredLikelihood requires defined uncertainties for all entries."</span><span class="p">)</span>
 
     <span class="c1"># ============================================================</span>
     <span class="c1"># Likelihood evaluation</span>
     <span class="c1"># ============================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_log_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the Gaussian log-likelihood.</span>
 
 <span class="sd">        Parameters</span>
@@ -829,7 +829,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Log-likelihood value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># --------------------------------------------------------</span>
         <span class="c1"># Forward model evaluation</span>
         <span class="c1"># --------------------------------------------------------</span>
@@ -856,7 +856,7 @@
 <div class="viewcode-block" id="GaussianCensoredLikelihood">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.inference.likelihood.base.GaussianCensoredLikelihood.html#trilobite.inference.likelihood.base.GaussianCensoredLikelihood">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GaussianCensoredLikelihood</span><span class="p">(</span><span class="n">Likelihood</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Multivariate Gaussian log-likelihood with support for censored data.</span>
 
 <span class="sd">    This likelihood extends the standard Gaussian likelihood to support:</span>
@@ -939,17 +939,17 @@
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    ~trilobite.inference.likelihood.gaussian.censored_gaussian_loglikelihood : Low-level numerical backend.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ============================================================</span>
     <span class="c1"># Configuration</span>
     <span class="c1"># ============================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Extract and cache numerical arrays and censoring masks.</span>
 
 <span class="sd">        Executed once during initialization.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Cache independent variables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_container</span><span class="o">.</span><span class="n">x</span>
 
@@ -980,43 +980,43 @@
     <span class="c1"># Validation</span>
     <span class="c1"># ============================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_model_and_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate structural compatibility and required fields.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Validate structural compatibility and required fields."""</span>
         <span class="c1"># Ensure that shapes are consistent.</span>
         <span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_data_y</span><span class="o">.</span><span class="n">shape</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Provided data container must have equal shapes for observed values and&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot; uncertainties. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_err: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="s2">"Provided data container must have equal shapes for observed values and"</span>
+                <span class="sa">f</span><span class="s2">" uncertainties. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_err: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_upper</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Provided data container must have equal shapes for observed values and&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot; upper limits. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_upper: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_upper</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="s2">"Provided data container must have equal shapes for observed values and"</span>
+                <span class="sa">f</span><span class="s2">" upper limits. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_upper: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_upper</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y_lower</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Provided data container must have equal shapes for observed values and&quot;</span>
-                <span class="sa">f</span><span class="s2">&quot; lower limits. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_lower: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_lower</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="s2">"Provided data container must have equal shapes for observed values and"</span>
+                <span class="sa">f</span><span class="s2">" lower limits. Found shapes: y: </span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">, y_lower: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_lower</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
         <span class="c1"># Ensure that we have EITHER a detection, an upper limit, or a lower limit</span>
         <span class="c1"># for EVERY entry.</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_upper</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_lower</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_data_y</span><span class="p">)):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;GaussianCensoredLikelihood requires that every entry has either a detection&quot;</span>
-                <span class="s2">&quot;, an upper limit, or a lower limit.&quot;</span>
+                <span class="s2">"GaussianCensoredLikelihood requires that every entry has either a detection"</span>
+                <span class="s2">", an upper limit, or a lower limit."</span>
             <span class="p">)</span>
 
         <span class="c1"># Ensure that an error is provided for EVERY entry.</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y_err</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;GaussianCensoredLikelihood requires defined uncertainties for all entries.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"GaussianCensoredLikelihood requires defined uncertainties for all entries."</span><span class="p">)</span>
 
     <span class="c1"># ============================================================</span>
     <span class="c1"># Likelihood evaluation</span>
     <span class="c1"># ============================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_log_likelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate censored Gaussian log-likelihood.</span>
 
 <span class="sd">        Parameters</span>
@@ -1028,7 +1028,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Log-likelihood value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># --------------------------------------------------------</span>
         <span class="c1"># Forward model evaluation</span>
         <span class="c1"># --------------------------------------------------------</span>
@@ -1080,8 +1080,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1115,7 +1115,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

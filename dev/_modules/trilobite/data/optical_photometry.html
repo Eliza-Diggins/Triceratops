@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/data/optical_photometry';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.data.optical_photometry</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Data container for optical photometric observations.</span>
 
 <span class="sd">This module provides :class:`OpticalPhotometryContainer`, a schema-validated,</span>
@@ -454,7 +454,7 @@
 <span class="sd">representation on-the-fly via properties and always converts to physical flux units</span>
 <span class="sd">when building an :class:`~trilobite.data.core.InferenceData` object for likelihood</span>
 <span class="sd">evaluation.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
@@ -475,13 +475,13 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">.light_curve</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpticalLightCurveContainer</span>
 
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;OpticalPhotometryContainer&quot;</span><span class="p">,</span> <span class="s2">&quot;OpticalPhotometryEpoch&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"OpticalPhotometryContainer"</span><span class="p">,</span> <span class="s2">"OpticalPhotometryEpoch"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="OpticalPhotometryContainer">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.html#trilobite.data.optical_photometry.OpticalPhotometryContainer">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OpticalPhotometryContainer</span><span class="p">(</span><span class="n">DataContainer</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immutable container for optical photometric observations.</span>
 
 <span class="sd">    Observations may be expressed as **AB magnitudes**, **flux densities**</span>
@@ -493,9 +493,9 @@
 <span class="sd">    Detections are identified by a ``NaN`` value in whichever upper-limit column</span>
 <span class="sd">    is present (``flux_upper_limit`` takes priority over ``mag_ab_upper_limit``).</span>
 
-<span class="sd">    Band identification uses human-readable **band names** (e.g. ``&quot;g&quot;``, ``&quot;r&quot;``)</span>
+<span class="sd">    Band identification uses human-readable **band names** (e.g. ``"g"``, ``"r"``)</span>
 <span class="sd">    rather than integer indices.  Integer indices are resolved at</span>
-<span class="sd">    :meth:`to_inference_data` time by looking up each name in the optical model&#39;s</span>
+<span class="sd">    :meth:`to_inference_data` time by looking up each name in the optical model's</span>
 <span class="sd">    :attr:`~trilobite.utils.phot_utils.FilterBundle.filter_names` list.  This keeps the container independent</span>
 <span class="sd">    of any particular model or filter ordering convention.</span>
 
@@ -534,100 +534,100 @@
 <span class="sd">        The filter bundle whose ``filter_names`` list defines the band→index mapping.</span>
 <span class="sd">    trilobite.data.photometry.RadioPhotometryContainer</span>
 <span class="sd">        Equivalent container for radio photometry.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ========================= SCHEMA DEFINITION ========================= #</span>
     <span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span>
         <span class="c1"># Time axis — always required</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Relative time of each observation.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"time"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"day"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Relative time of each observation."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="c1"># Band identification — band_name is the canonical identifier;</span>
         <span class="c1"># band_idx is intentionally absent and only appears in InferenceData.x</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;band_name&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Survey band identifier (e.g. &#39;g&#39;, &#39;r&#39;, &#39;i&#39;).&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"band_name"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Survey band identifier (e.g. 'g', 'r', 'i')."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="c1"># Flux representation (F_nu in erg/s/cm²/Hz)</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flux_density&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Measured flux density F_nu for detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"flux_density"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"erg/(s cm2 Hz)"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Measured flux density F_nu for detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flux_density_error&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;1-sigma uncertainty on flux_density.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"flux_density_error"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"erg/(s cm2 Hz)"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"1-sigma uncertainty on flux_density."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flux_upper_limit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Upper limit on flux density for non-detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"flux_upper_limit"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"erg/(s cm2 Hz)"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Upper limit on flux density for non-detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="c1"># Magnitude representation (dimensionless AB)</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mag_ab&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;AB magnitude for detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mag_ab"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"AB magnitude for detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mag_ab_error&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;1-sigma uncertainty on mag_ab.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mag_ab_error"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"1-sigma uncertainty on mag_ab."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;AB magnitude upper limit for non-detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mag_ab_upper_limit"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"AB magnitude upper limit for non-detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="c1"># Optional metadata</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;obs_name&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Observation identifier.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"obs_name"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Observation identifier."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;epoch_id&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Integer epoch identifier for grouping observations.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"epoch_id"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Integer epoch identifier for grouping observations."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">]</span>
 
     <span class="c1"># ========================= Initialization ========================= #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Table</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Instantiate the container, validate the schema, and build detection masks.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        table : astropy.table.Table</span>
 <span class="sd">            Input table conforming to the :attr:`COLUMNS` schema.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
         <span class="c1"># Determine the upper-limit column to use for detection logic.</span>
         <span class="c1"># flux_upper_limit takes priority; fall back to mag_ab_upper_limit.</span>
-        <span class="k">if</span> <span class="s2">&quot;flux_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">upper_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">upper_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"flux_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">upper_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s2">"mag_ab_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">upper_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="c1"># No upper-limit column: treat all rows as detections</span>
             <span class="n">upper_col</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
@@ -637,200 +637,200 @@
 
         <span class="c1"># Epoch support (same pattern as RadioPhotometryContainer)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">if</span> <span class="s2">&quot;epoch_id&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;epoch_id&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"epoch_id"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"epoch_id"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="c1"># ========================= Schema Validation ========================= #</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Table</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Validate schema and enforce optical-specific invariants.</span>
 
 <span class="sd">        Extends the base :meth:`DataContainer._validate_table` with checks that</span>
 <span class="sd">        ensure at least one y-column group (flux or magnitude) is present.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Run base schema validation (dtype coercion + unit checking)</span>
         <span class="n">table</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_validate_table</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
 
         <span class="c1"># At least one y-column group must be present</span>
-        <span class="n">has_flux</span> <span class="o">=</span> <span class="s2">&quot;flux_density&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
-        <span class="n">has_mag</span> <span class="o">=</span> <span class="s2">&quot;mag_ab&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="n">has_flux</span> <span class="o">=</span> <span class="s2">"flux_density"</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="n">has_mag</span> <span class="o">=</span> <span class="s2">"mag_ab"</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">has_flux</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_mag</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;OpticalPhotometryContainer requires at least one of &#39;flux_density&#39; &quot;</span>
-                <span class="s2">&quot;or &#39;mag_ab&#39; to be present in the input table.&quot;</span>
+                <span class="s2">"OpticalPhotometryContainer requires at least one of 'flux_density' "</span>
+                <span class="s2">"or 'mag_ab' to be present in the input table."</span>
             <span class="p">)</span>
 
         <span class="c1"># Warn about incomplete pairs</span>
-        <span class="k">if</span> <span class="n">has_flux</span> <span class="ow">and</span> <span class="s2">&quot;flux_density_error&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Column &#39;flux_density&#39; present but &#39;flux_density_error&#39; is missing.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">has_mag</span> <span class="ow">and</span> <span class="s2">&quot;mag_ab_error&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Column &#39;mag_ab&#39; present but &#39;mag_ab_error&#39; is missing.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_flux</span> <span class="ow">and</span> <span class="s2">"flux_density_error"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Column 'flux_density' present but 'flux_density_error' is missing."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">has_mag</span> <span class="ow">and</span> <span class="s2">"mag_ab_error"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Column 'mag_ab' present but 'mag_ab_error' is missing."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">table</span>
 
     <span class="c1"># ========================= Core Properties ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the total number of observations.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the total number of observations."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Observation times as an Astropy Quantity (days).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+<span class="w">        </span><span class="sd">"""Observation times as an Astropy Quantity (days)."""</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">band_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Survey band names (string array).&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;band_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Survey band names (string array)."""</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"band_name"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
     <span class="c1"># ========================= Detection Properties ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">detection_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;True where the row is a detection (upper limit is NaN); False otherwise.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""True where the row is a detection (upper limit is NaN); False otherwise."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__detection_mask__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">non_detection_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;True where the row is a non-detection; False for detections.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""True where the row is a non-detection; False for detections."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__non_detection_mask__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_detections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of detections.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of detections."""</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__detection_mask__</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_non_detections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of non-detections (upper limits).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of non-detections (upper limits)."""</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__non_detection_mask__</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">detections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryContainer&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new container containing only detections.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">detections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryContainer"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return a new container containing only detections."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__detection_mask__</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">upper_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryContainer&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new container containing only non-detections (upper limits).&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">upper_limits</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryContainer"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return a new container containing only non-detections (upper limits)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__non_detection_mask__</span><span class="p">)</span>
 
     <span class="c1"># ========================= Flux Properties ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_has_flux_column</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;flux_density&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="k">return</span> <span class="s2">"flux_density"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_has_mag_column</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;mag_ab&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="k">return</span> <span class="s2">"mag_ab"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flux</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Flux density F_ν in erg/s/cm²/Hz.</span>
 
 <span class="sd">        Returns the ``flux_density`` column if present.  Otherwise converts</span>
 <span class="sd">        ``mag_ab`` to flux using the AB zero-point.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_flux_column</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_density&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
-        <span class="n">mag_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_vals</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_density"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="n">mag_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_vals</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flux_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        1-sigma uncertainty on F_ν in erg/s/cm²/Hz.</span>
 
 <span class="sd">        Returns ``flux_density_error`` if present.  Otherwise propagates from</span>
 <span class="sd">        ``mag_ab_error`` using :math:`\sigma_F = F \cdot \sigma_m / 1.0857`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_flux_column</span> <span class="ow">and</span> <span class="s2">&quot;flux_density_error&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_density_error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
-        <span class="n">mag_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_flux_column</span> <span class="ow">and</span> <span class="s2">"flux_density_error"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_density_error"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="n">mag_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_error"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span> <span class="o">*</span> <span class="p">(</span><span class="n">mag_err</span> <span class="o">/</span> <span class="mf">1.0857</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flux_upper_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Upper limit on F_ν in erg/s/cm²/Hz (NaN for detections).</span>
 
 <span class="sd">        Returns ``flux_upper_limit`` if present.  Otherwise converts</span>
 <span class="sd">        ``mag_ab_upper_limit`` to flux.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;flux_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
-        <span class="k">if</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">mag_ul</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_ul</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="s2">"flux_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="k">if</span> <span class="s2">"mag_ab_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">mag_ul</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_ul</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)</span>
         <span class="c1"># No upper-limit column present — return NaN array</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)</span>
 
     <span class="c1"># ========================= Magnitude Properties ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        AB magnitude (dimensionless array).</span>
 
 <span class="sd">        Returns ``mag_ab`` if present.  Otherwise converts ``flux_density``</span>
 <span class="sd">        using the AB zero-point.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_mag_column</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">flux_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="n">flux_to_ab_mag</span><span class="p">(</span><span class="n">flux_vals</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mag_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        1-sigma uncertainty on AB magnitude.</span>
 
 <span class="sd">        Returns ``mag_ab_error`` if present.  Otherwise propagates from</span>
 <span class="sd">        ``flux_density_error`` using :math:`\sigma_m = 1.0857 \cdot \sigma_F / F`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_mag_column</span> <span class="ow">and</span> <span class="s2">&quot;mag_ab_error&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_mag_column</span> <span class="ow">and</span> <span class="s2">"mag_ab_error"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_error"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">flux_err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_error</span><span class="o">.</span><span class="n">value</span>
         <span class="n">flux_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">value</span>
         <span class="k">return</span> <span class="mf">1.0857</span> <span class="o">*</span> <span class="n">flux_err</span> <span class="o">/</span> <span class="n">flux_vals</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mag_upper_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        AB magnitude upper limit (NaN for detections).</span>
 
 <span class="sd">        Returns ``mag_ab_upper_limit`` if present.  Otherwise converts</span>
 <span class="sd">        ``flux_upper_limit`` to magnitudes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="s2">"mag_ab_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">flux_to_ab_mag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="c1"># ========================= Optional Metadata Properties ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">obs_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Observation names (raises if column absent).&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;obs_name&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Column &#39;obs_name&#39; not found in the table.&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;obs_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Observation names (raises if column absent)."""</span>
+        <span class="k">if</span> <span class="s2">"obs_name"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"Column 'obs_name' not found in the table."</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"obs_name"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
     <span class="c1"># ========================= Epoch Support ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">has_epochs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if epoch IDs have been assigned.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return True if epoch IDs have been assigned."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">epoch_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a copy of the epoch ID array (raises if epochs not set).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return a copy of the epoch ID array (raises if epochs not set)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;No epochs defined.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"No epochs defined."</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_epochs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of unique epochs, or None if epochs are not defined.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of unique epochs, or None if epochs are not defined."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span><span class="p">)))</span>
@@ -838,16 +838,16 @@
 <div class="viewcode-block" id="OpticalPhotometryContainer.get_epoch_mask">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.get_epoch_mask.html#trilobite.data.optical_photometry.OpticalPhotometryContainer.get_epoch_mask">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_epoch_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">epoch</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a boolean mask for observations in *epoch*.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return a boolean mask for observations in *epoch*."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;No epochs defined.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"No epochs defined."</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="o">==</span> <span class="n">epoch</span></div>
 
 
 <div class="viewcode-block" id="OpticalPhotometryContainer.set_epochs_from_indices">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.set_epochs_from_indices.html#trilobite.data.optical_photometry.OpticalPhotometryContainer.set_epochs_from_indices">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_epochs_from_indices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Assign epoch IDs explicitly, one integer per observation.</span>
 
 <span class="sd">        Parameters</span>
@@ -855,12 +855,12 @@
 <span class="sd">        indices : array-like of int</span>
 <span class="sd">            Epoch identifier for each observation.  Need not start at zero or</span>
 <span class="sd">            be contiguous; they are remapped to ``[0, n_epochs-1]`` internally.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">indices</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Epoch indices must have shape (n_obs,).&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Epoch indices must have shape (n_obs,)."</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">indices</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">integer</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Epoch indices must be integers.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Epoch indices must be integers."</span><span class="p">)</span>
         <span class="n">unique</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
         <span class="n">remap</span> <span class="o">=</span> <span class="p">{</span><span class="n">old</span><span class="p">:</span> <span class="n">new</span> <span class="k">for</span> <span class="n">new</span><span class="p">,</span> <span class="n">old</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique</span><span class="p">)}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">remap</span><span class="o">.</span><span class="n">get</span><span class="p">)(</span><span class="n">indices</span><span class="p">)</span></div>
@@ -869,14 +869,14 @@
 <div class="viewcode-block" id="OpticalPhotometryContainer.set_epochs_from_time_gaps">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.set_epochs_from_time_gaps.html#trilobite.data.optical_photometry.OpticalPhotometryContainer.set_epochs_from_time_gaps">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">set_epochs_from_time_gaps</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_gap</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Group observations into epochs separated by time gaps larger than *max_gap*.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        max_gap : astropy.units.Quantity</span>
 <span class="sd">            Maximum time gap (must be convertible to days) within an epoch.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">times</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">max_gap</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">times</span><span class="p">)</span>
         <span class="n">epoch_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
@@ -891,8 +891,8 @@
     <span class="c1"># ========================= Masking ========================= #</span>
 <div class="viewcode-block" id="OpticalPhotometryContainer.apply_mask">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.apply_mask.html#trilobite.data.optical_photometry.OpticalPhotometryContainer.apply_mask">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryContainer&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryContainer"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Return a new container containing only the rows selected by *mask*.</span>
 
 <span class="sd">        Parameters</span>
@@ -903,17 +903,17 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        OpticalPhotometryContainer</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">sliced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_epochs</span> <span class="ow">and</span> <span class="s2">&quot;epoch_id&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sliced</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">sliced</span><span class="p">[</span><span class="s2">&quot;epoch_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_epochs</span> <span class="ow">and</span> <span class="s2">"epoch_id"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sliced</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">sliced</span><span class="p">[</span><span class="s2">"epoch_id"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epoch_ids__</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="n">from_table</span><span class="p">(</span><span class="n">sliced</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="OpticalPhotometryContainer.extract_lightcurve">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.extract_lightcurve.html#trilobite.data.optical_photometry.OpticalPhotometryContainer.extract_lightcurve">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">extract_lightcurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">band</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalLightCurveContainer&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a single-band light curve from this container.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">extract_lightcurve</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">band</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalLightCurveContainer"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Extract a single-band light curve from this container.</span>
 
 <span class="sd">        Selects all observations whose ``band_name`` matches *band* and returns</span>
 <span class="sd">        them as an :class:`~trilobite.data.light_curve.OpticalLightCurveContainer`.</span>
@@ -921,7 +921,7 @@
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        band : str</span>
-<span class="sd">            Band name to extract (e.g. ``&quot;g&quot;``, ``&quot;r&quot;``). Must match a value</span>
+<span class="sd">            Band name to extract (e.g. ``"g"``, ``"r"``). Must match a value</span>
 <span class="sd">            present in the ``band_name`` column.</span>
 
 <span class="sd">        Returns</span>
@@ -933,23 +933,23 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If *band* is not found in this container.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.light_curve</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpticalLightCurveContainer</span>
 
         <span class="n">available</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">band_name</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">band</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Band &#39;</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">&#39; not found. Available bands: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">available</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Band '</span><span class="si">{</span><span class="n">band</span><span class="si">}</span><span class="s2">' not found. Available bands: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">available</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
         <span class="n">mask</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">band_name</span> <span class="o">==</span> <span class="n">band</span>
         <span class="n">sliced</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">table</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
         <span class="c1"># band_name is now metadata on the container; drop it from the table.</span>
-        <span class="n">drop</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;band_name&quot;</span><span class="p">,</span> <span class="s2">&quot;epoch_id&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sliced</span><span class="o">.</span><span class="n">colnames</span><span class="p">]</span>
+        <span class="n">drop</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"band_name"</span><span class="p">,</span> <span class="s2">"epoch_id"</span><span class="p">]</span> <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">sliced</span><span class="o">.</span><span class="n">colnames</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">drop</span><span class="p">:</span>
             <span class="n">sliced</span> <span class="o">=</span> <span class="n">sliced</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">sliced</span><span class="o">.</span><span class="n">remove_columns</span><span class="p">(</span><span class="n">drop</span><span class="p">)</span>
 
-        <span class="n">sort_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">sliced</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">])</span>
+        <span class="n">sort_order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">sliced</span><span class="p">[</span><span class="s2">"time"</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">OpticalLightCurveContainer</span><span class="p">(</span><span class="n">sliced</span><span class="p">[</span><span class="n">sort_order</span><span class="p">],</span> <span class="n">band</span><span class="o">=</span><span class="n">band</span><span class="p">)</span></div>
 
 
@@ -962,10 +962,10 @@
         <span class="n">table</span><span class="p">:</span> <span class="n">Table</span><span class="p">,</span>
         <span class="n">column_map</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">time_start</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">internal_time_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;relative&quot;</span><span class="p">,</span>
-        <span class="n">internal_time_scale</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;utc&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryContainer&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="n">internal_time_format</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"relative"</span><span class="p">,</span>
+        <span class="n">internal_time_scale</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"utc"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryContainer"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Construct an :class:`OpticalPhotometryContainer` from an Astropy Table.</span>
 
 <span class="sd">        Parameters</span>
@@ -979,19 +979,19 @@
 
 <span class="sd">        time_start : float or astropy.units.Quantity, optional</span>
 <span class="sd">            Reference time subtracted from the ``time`` column to convert absolute</span>
-<span class="sd">            times to relative times.  When ``internal_time_format=&quot;relative&quot;``</span>
+<span class="sd">            times to relative times.  When ``internal_time_format="relative"``</span>
 <span class="sd">            this is interpreted as days (float) or an Astropy Quantity.</span>
 
-<span class="sd">        internal_time_format : str, default ``&quot;relative&quot;``</span>
+<span class="sd">        internal_time_format : str, default ``"relative"``</span>
 <span class="sd">            Format of the ``time`` column in the input table.</span>
 
-<span class="sd">            - ``&quot;relative&quot;`` — time is already elapsed days since some reference.</span>
-<span class="sd">            - Any valid Astropy time format (e.g. ``&quot;mjd&quot;``, ``&quot;jd&quot;``,</span>
-<span class="sd">              ``&quot;iso&quot;``, ``&quot;unix&quot;``).</span>
+<span class="sd">            - ``"relative"`` — time is already elapsed days since some reference.</span>
+<span class="sd">            - Any valid Astropy time format (e.g. ``"mjd"``, ``"jd"``,</span>
+<span class="sd">              ``"iso"``, ``"unix"``).</span>
 
-<span class="sd">        internal_time_scale : str, default ``&quot;utc&quot;``</span>
+<span class="sd">        internal_time_scale : str, default ``"utc"``</span>
 <span class="sd">            Astropy time scale used when interpreting absolute time formats.</span>
-<span class="sd">            Ignored when ``internal_time_format=&quot;relative&quot;``.</span>
+<span class="sd">            Ignored when ``internal_time_format="relative"``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1013,10 +1013,10 @@
 
 <span class="sd">            c = OpticalPhotometryContainer.from_table(</span>
 <span class="sd">                table,</span>
-<span class="sd">                internal_time_format=&quot;mjd&quot;,</span>
-<span class="sd">                time_start=Time(59000.0, format=&quot;mjd&quot;),</span>
+<span class="sd">                internal_time_format="mjd",</span>
+<span class="sd">                time_start=Time(59000.0, format="mjd"),</span>
 <span class="sd">            )</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
         <span class="c1"># Optional column renaming</span>
@@ -1024,27 +1024,27 @@
             <span class="n">table</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">column_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">column_map</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
 
         <span class="c1"># Time handling</span>
-        <span class="k">if</span> <span class="n">internal_time_format</span> <span class="o">!=</span> <span class="s2">&quot;relative&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">internal_time_format</span> <span class="o">!=</span> <span class="s2">"relative"</span><span class="p">:</span>
             <span class="c1"># Parse as absolute time and convert to relative days</span>
-            <span class="n">t_abs</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">internal_time_format</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">internal_time_scale</span><span class="p">)</span>
+            <span class="n">t_abs</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="n">internal_time_format</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">internal_time_scale</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">time_start</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;time_start must be supplied when internal_time_format != &#39;relative&#39;.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"time_start must be supplied when internal_time_format != 'relative'."</span><span class="p">)</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_start</span><span class="p">,</span> <span class="n">Time</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                    <span class="s2">&quot;time_start must be an astropy.time.Time object when &quot;</span>
-                    <span class="s2">&quot;internal_time_format is an absolute time format.&quot;</span>
+                    <span class="s2">"time_start must be an astropy.time.Time object when "</span>
+                    <span class="s2">"internal_time_format is an absolute time format."</span>
                 <span class="p">)</span>
             <span class="n">t_rel</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_abs</span> <span class="o">-</span> <span class="n">time_start</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
-            <span class="n">table</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t_rel</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span>
+            <span class="n">table</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">=</span> <span class="n">t_rel</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span>
         <span class="k">elif</span> <span class="n">time_start</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># Relative times with an optional offset subtracted</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time_start</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
                 <span class="n">offset</span> <span class="o">=</span> <span class="n">time_start</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">offset</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">time_start</span><span class="p">)</span>
-            <span class="n">col</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span>
             <span class="n">vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">-</span> <span class="n">offset</span>
-            <span class="n">table</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vals</span> <span class="o">*</span> <span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">unit</span> <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
+            <span class="n">table</span><span class="p">[</span><span class="s2">"time"</span><span class="p">]</span> <span class="o">=</span> <span class="n">vals</span> <span class="o">*</span> <span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">unit</span> <span class="k">if</span> <span class="n">col</span><span class="o">.</span><span class="n">unit</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">table</span><span class="p">)</span></div>
 
@@ -1054,18 +1054,18 @@
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryContainer.to_inference_data.html#trilobite.data.optical_photometry.OpticalPhotometryContainer.to_inference_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_inference_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">model</span><span class="p">:</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="s2">"Model"</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">observables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">infer_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">detection_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
         <span class="n">mask</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InferenceData&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"InferenceData"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Convert this container to :class:`~trilobite.data.core.InferenceData`.</span>
 
 <span class="sd">        The independent variable ``band_idx`` is resolved at call time by</span>
-<span class="sd">        looking up each observation&#39;s ``band_name`` in</span>
+<span class="sd">        looking up each observation's ``band_name`` in</span>
 <span class="sd">        ``model.bundle.filter_names``.  The model is therefore the single</span>
 <span class="sd">        source of truth for the band → index mapping, and the container remains</span>
 <span class="sd">        independent of any particular filter ordering convention.</span>
@@ -1085,14 +1085,14 @@
 <span class="sd">        variables : dict, optional</span>
 <span class="sd">            Override the default variable mapping.  By default:</span>
 
-<span class="sd">            - ``&quot;time&quot;`` → ``time`` column (converted to model units)</span>
-<span class="sd">            - ``&quot;band_idx&quot;`` → resolved from ``band_name`` via</span>
+<span class="sd">            - ``"time"`` → ``time`` column (converted to model units)</span>
+<span class="sd">            - ``"band_idx"`` → resolved from ``band_name`` via</span>
 <span class="sd">              ``model.bundle.filter_names``</span>
 
 <span class="sd">        observables : dict, optional</span>
 <span class="sd">            Override the default observable mapping.  By default, the single</span>
 <span class="sd">            model observable is mapped to</span>
-<span class="sd">            ``(&quot;flux_density&quot;, &quot;flux_density_error&quot;, &quot;flux_upper_limit&quot;, None)``.</span>
+<span class="sd">            ``("flux_density", "flux_density_error", "flux_upper_limit", None)``.</span>
 
 <span class="sd">        infer_errors : bool, default True</span>
 <span class="sd">            If True, infer 1-sigma uncertainties for non-detections from their</span>
@@ -1115,15 +1115,15 @@
 <span class="sd">        KeyError</span>
 <span class="sd">            If a ``band_name`` present in the data is not found in</span>
 <span class="sd">            ``model.bundle.filter_names``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># ------------------------------------------------------------------</span>
         <span class="c1"># Resolve band_name → band_idx via model.bundle</span>
         <span class="c1"># ------------------------------------------------------------------</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;bundle&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">"bundle"</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Model &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; does not have a &#39;bundle&#39; attribute. &quot;</span>
-                <span class="s2">&quot;Optical photometry requires the model to expose a FilterBundle &quot;</span>
-                <span class="s2">&quot;via &#39;model.bundle&#39;.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Model '</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">' does not have a 'bundle' attribute. "</span>
+                <span class="s2">"Optical photometry requires the model to expose a FilterBundle "</span>
+                <span class="s2">"via 'model.bundle'."</span>
             <span class="p">)</span>
 
         <span class="n">filter_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">bundle</span><span class="o">.</span><span class="n">filter_names</span><span class="p">)</span>
@@ -1133,9 +1133,9 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">band_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">name_to_idx</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">band_names</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">bad</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="n">bad</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"'"</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Band name &#39;</span><span class="si">{</span><span class="n">bad</span><span class="si">}</span><span class="s2">&#39; is not in the model&#39;s FilterBundle. Available bands: </span><span class="si">{</span><span class="n">filter_names</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"Band name '</span><span class="si">{</span><span class="n">bad</span><span class="si">}</span><span class="s2">' is not in the model's FilterBundle. Available bands: </span><span class="si">{</span><span class="n">filter_names</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># ------------------------------------------------------------------</span>
@@ -1143,7 +1143,7 @@
         <span class="c1"># ------------------------------------------------------------------</span>
         <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mask must have the same length as the number of observations.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Mask must have the same length as the number of observations."</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
 
@@ -1153,9 +1153,9 @@
         <span class="c1"># ------------------------------------------------------------------</span>
         <span class="c1"># Resolve flux values — convert from mag if needed</span>
         <span class="c1"># ------------------------------------------------------------------</span>
-        <span class="n">flux_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-        <span class="n">flux_err_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_error</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
-        <span class="n">flux_ul_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">flux_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">flux_err_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_error</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">flux_ul_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
         <span class="c1"># ------------------------------------------------------------------</span>
         <span class="c1"># Infer errors for non-detections where they are missing</span>
@@ -1169,9 +1169,9 @@
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">flux_err_vals</span><span class="p">)):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s2">&quot;flux_density_error contains NaN values after error inference. &quot;</span>
-                <span class="s2">&quot;This may cause errors during likelihood evaluation. &quot;</span>
-                <span class="s2">&quot;Use infer_errors=True to fill missing errors from upper limits.&quot;</span><span class="p">,</span>
+                <span class="s2">"flux_density_error contains NaN values after error inference. "</span>
+                <span class="s2">"This may cause errors during likelihood evaluation. "</span>
+                <span class="s2">"Use infer_errors=True to fill missing errors from upper limits."</span><span class="p">,</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="p">)</span>
 
@@ -1180,12 +1180,12 @@
         <span class="c1"># coerce to model-declared units</span>
         <span class="c1"># ------------------------------------------------------------------</span>
         <span class="n">x</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;time&quot;</span><span class="p">:</span> <span class="n">t_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
-            <span class="s2">&quot;band_idx&quot;</span><span class="p">:</span> <span class="n">idx_vals</span><span class="p">,</span>
+            <span class="s2">"time"</span><span class="p">:</span> <span class="n">t_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+            <span class="s2">"band_idx"</span><span class="p">:</span> <span class="n">idx_vals</span><span class="p">,</span>
         <span class="p">}</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">flux_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)}</span>
-        <span class="n">y_err</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">flux_err_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)}</span>
-        <span class="n">y_upper</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">flux_ul_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)}</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">flux_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)}</span>
+        <span class="n">y_err</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">flux_err_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)}</span>
+        <span class="n">y_upper</span> <span class="o">=</span> <span class="p">{</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="n">flux_ul_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)}</span>
 
         <span class="k">return</span> <span class="n">InferenceData</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span>
             <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
@@ -1201,7 +1201,7 @@
 <div class="viewcode-block" id="OpticalPhotometryEpoch">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryEpoch.html#trilobite.data.optical_photometry.OpticalPhotometryEpoch">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OpticalPhotometryEpoch</span><span class="p">(</span><span class="n">DataContainer</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immutable container for single-epoch, multi-band optical photometry.</span>
 
 <span class="sd">    Represents broadband flux density or AB magnitude measurements taken at a</span>
@@ -1222,7 +1222,7 @@
 <span class="sd">    ------</span>
 <span class="sd">    Required:</span>
 
-<span class="sd">    - ``band_name`` [str] — survey band identifier (e.g. ``&quot;g&quot;``, ``&quot;r&quot;``).</span>
+<span class="sd">    - ``band_name`` [str] — survey band identifier (e.g. ``"g"``, ``"r"``).</span>
 
 <span class="sd">    At least one y-column group must be present:</span>
 
@@ -1246,152 +1246,152 @@
 <span class="sd">        Equivalent container for single-epoch radio SED measurements.</span>
 <span class="sd">    ~trilobite.data.optical_photometry.OpticalPhotometryContainer</span>
 <span class="sd">        Multi-epoch optical photometry container.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ========================= SCHEMA ========================= #</span>
     <span class="n">COLUMNS</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;band_name&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Survey band identifier.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"band_name"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Survey band identifier."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flux_density&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Flux density F_ν for detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"flux_density"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"erg/(s cm2 Hz)"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Flux density F_ν for detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flux_density_error&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;1-sigma uncertainty on flux_density.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"flux_density_error"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"erg/(s cm2 Hz)"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"1-sigma uncertainty on flux_density."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;flux_upper_limit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Upper limit on F_ν for non-detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"flux_upper_limit"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"unit"</span><span class="p">:</span> <span class="s2">"erg/(s cm2 Hz)"</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Upper limit on F_ν for non-detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mag_ab&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;AB magnitude for detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mag_ab"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"AB magnitude for detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mag_ab_error&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;1-sigma uncertainty on mag_ab.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mag_ab_error"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"1-sigma uncertainty on mag_ab."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;AB magnitude upper limit for non-detections.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"mag_ab_upper_limit"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"AB magnitude upper limit for non-detections."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
         <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;obs_name&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-            <span class="s2">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Observation identifier.&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;required&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"obs_name"</span><span class="p">,</span>
+            <span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">"description"</span><span class="p">:</span> <span class="s2">"Observation identifier."</span><span class="p">,</span>
+            <span class="s2">"required"</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
         <span class="p">},</span>
     <span class="p">]</span>
 
     <span class="c1"># ========================= VALIDATION ========================= #</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_table</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table</span><span class="p">:</span> <span class="n">Table</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Table</span><span class="p">:</span>
         <span class="n">table</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_validate_table</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
-        <span class="n">has_flux</span> <span class="o">=</span> <span class="s2">&quot;flux_density&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
-        <span class="n">has_mag</span> <span class="o">=</span> <span class="s2">&quot;mag_ab&quot;</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="n">has_flux</span> <span class="o">=</span> <span class="s2">"flux_density"</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="n">has_mag</span> <span class="o">=</span> <span class="s2">"mag_ab"</span> <span class="ow">in</span> <span class="n">table</span><span class="o">.</span><span class="n">colnames</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">has_flux</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">has_mag</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;OpticalPhotometryEpoch requires at least one y-column group: &quot;</span>
-                <span class="s2">&quot;either &#39;flux_density&#39; (+ &#39;flux_density_error&#39; + &#39;flux_upper_limit&#39;) &quot;</span>
-                <span class="s2">&quot;or &#39;mag_ab&#39; (+ &#39;mag_ab_error&#39; + &#39;mag_ab_upper_limit&#39;).&quot;</span>
+                <span class="s2">"OpticalPhotometryEpoch requires at least one y-column group: "</span>
+                <span class="s2">"either 'flux_density' (+ 'flux_density_error' + 'flux_upper_limit') "</span>
+                <span class="s2">"or 'mag_ab' (+ 'mag_ab_error' + 'mag_ab_upper_limit')."</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">table</span>
 
     <span class="c1"># ========================= HELPERS ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_has_flux_column</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;flux_density&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="k">return</span> <span class="s2">"flux_density"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_has_mag_column</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;mag_ab&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
+        <span class="k">return</span> <span class="s2">"mag_ab"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span>
 
     <span class="c1"># ========================= DATA ACCESS ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">band_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Band names as a string array.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;band_name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Band names as a string array."""</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"band_name"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_obs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of bands / observations.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of bands / observations."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flux</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Flux density F_ν in erg/s/cm²/Hz (converted from mag if needed).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Flux density F_ν in erg/s/cm²/Hz (converted from mag if needed)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_flux_column</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_density&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
-        <span class="n">mag_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_vals</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_density"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="n">mag_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_vals</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flux_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;1-sigma uncertainty on F_ν (propagated from mag error if needed).&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_flux_column</span> <span class="ow">and</span> <span class="s2">&quot;flux_density_error&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_density_error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
-        <span class="n">mag_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""1-sigma uncertainty on F_ν (propagated from mag error if needed)."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_flux_column</span> <span class="ow">and</span> <span class="s2">"flux_density_error"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_density_error"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="n">mag_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_error"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span> <span class="o">*</span> <span class="p">(</span><span class="n">mag_err</span> <span class="o">/</span> <span class="mf">1.0857</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flux_upper_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Upper limit on F_ν in erg/s/cm²/Hz (NaN for detections).&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;flux_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;flux_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
-        <span class="k">if</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="n">mag_ul</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_ul</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""Upper limit on F_ν in erg/s/cm²/Hz (NaN for detections)."""</span>
+        <span class="k">if</span> <span class="s2">"flux_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"flux_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">quantity</span>
+        <span class="k">if</span> <span class="s2">"mag_ab_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="n">mag_ul</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag_ul</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mag</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;AB magnitudes (converted from flux if needed).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""AB magnitudes (converted from flux if needed)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_mag_column</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">flux_to_ab_mag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mag_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;1-sigma uncertainty on AB magnitude (propagated from flux if needed).&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_mag_column</span> <span class="ow">and</span> <span class="s2">&quot;mag_ab_error&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_error&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""1-sigma uncertainty on AB magnitude (propagated from flux if needed)."""</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_has_mag_column</span> <span class="ow">and</span> <span class="s2">"mag_ab_error"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_error"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="mf">1.0857</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_error</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mag_upper_limit</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;AB magnitude upper limit (NaN for detections; converted from flux if needed).&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="s2">&quot;mag_ab_upper_limit&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">&quot;mag_ab_upper_limit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="w">        </span><span class="sd">"""AB magnitude upper limit (NaN for detections; converted from flux if needed)."""</span>
+        <span class="k">if</span> <span class="s2">"mag_ab_upper_limit"</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="s2">"mag_ab_upper_limit"</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">flux_to_ab_mag</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="c1"># ========================= DETECTION LOGIC ========================= #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">detection_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;True where the row is a detection; False for upper limits.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""True where the row is a detection; False for upper limits."""</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">non_detection_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;True where the row is an upper limit; False for detections.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""True where the row is an upper limit; False for detections."""</span>
         <span class="k">return</span> <span class="o">~</span><span class="bp">self</span><span class="o">.</span><span class="n">detection_mask</span>
 
     <span class="nd">@property</span>
@@ -1405,8 +1405,8 @@
     <span class="c1"># ========================= MASKING ========================= #</span>
 <div class="viewcode-block" id="OpticalPhotometryEpoch.apply_mask">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryEpoch.apply_mask.html#trilobite.data.optical_photometry.OpticalPhotometryEpoch.apply_mask">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryEpoch&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a new container with only the rows selected by *mask*.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryEpoch"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return a new container with only the rows selected by *mask*."""</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)(</span><span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span></div>
 
@@ -1416,14 +1416,14 @@
 <a class="viewcode-back" href="../../../_as_gen/trilobite.data.optical_photometry.OpticalPhotometryEpoch.to_inference_data.html#trilobite.data.optical_photometry.OpticalPhotometryEpoch.to_inference_data">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_inference_data</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">model</span><span class="p">:</span> <span class="s2">&quot;Model&quot;</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="s2">"Model"</span><span class="p">,</span>
         <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">observables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">infer_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">detection_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.0</span><span class="p">,</span>
         <span class="n">mask</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;InferenceData&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"InferenceData"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Convert this :class:`OpticalPhotometryEpoch` to an :class:`~trilobite.data.core.InferenceData` object.</span>
 
 <span class="sd">        Band names are resolved to integer indices via ``model.bundle.filter_names``.</span>
@@ -1432,7 +1432,7 @@
 
 <span class="sd">        Default mapping:</span>
 
-<span class="sd">        - ``variables``: ``{&quot;band_idx&quot;: &lt;resolved integer indices&gt;}``</span>
+<span class="sd">        - ``variables``: ``{"band_idx": &lt;resolved integer indices&gt;}``</span>
 <span class="sd">        - ``observables``: the single model output mapped to flux columns</span>
 
 <span class="sd">        Parameters</span>
@@ -1461,12 +1461,12 @@
 <span class="sd">            If ``model`` does not expose a ``bundle`` attribute.</span>
 <span class="sd">        KeyError</span>
 <span class="sd">            If a band name in the data is not found in ``model.bundle.filter_names``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">&quot;bundle&quot;</span><span class="p">):</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s2">"bundle"</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Model &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39; does not have a &#39;bundle&#39; attribute. &quot;</span>
-                <span class="s2">&quot;Optical photometry epoch containers require the model to expose a &quot;</span>
-                <span class="s2">&quot;FilterBundle via &#39;model.bundle&#39;.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Model '</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">' does not have a 'bundle' attribute. "</span>
+                <span class="s2">"Optical photometry epoch containers require the model to expose a "</span>
+                <span class="s2">"FilterBundle via 'model.bundle'."</span>
             <span class="p">)</span>
 
         <span class="n">filter_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">bundle</span><span class="o">.</span><span class="n">filter_names</span><span class="p">)</span>
@@ -1475,23 +1475,23 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">band_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">name_to_idx</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">band_name</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="n">bad</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">&quot;&#39;&quot;</span><span class="p">)</span>
+            <span class="n">bad</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s2">"'"</span><span class="p">)</span>
             <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Band name &#39;</span><span class="si">{</span><span class="n">bad</span><span class="si">}</span><span class="s2">&#39; is not in the model&#39;s FilterBundle. Available bands: </span><span class="si">{</span><span class="n">filter_names</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"Band name '</span><span class="si">{</span><span class="n">bad</span><span class="si">}</span><span class="s2">' is not in the model's FilterBundle. Available bands: </span><span class="si">{</span><span class="n">filter_names</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># Apply optional row mask</span>
         <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">mask</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,):</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mask must have the same length as the number of observations.&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Mask must have the same length as the number of observations."</span><span class="p">)</span>
             <span class="n">mask_arr</span> <span class="o">=</span> <span class="n">mask</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mask_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_obs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
 
         <span class="n">idx_vals</span> <span class="o">=</span> <span class="n">band_idx</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
-        <span class="n">flux_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
-        <span class="n">flux_err_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_error</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
-        <span class="n">flux_ul_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
+        <span class="n">flux_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
+        <span class="n">flux_err_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_error</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
+        <span class="n">flux_ul_vals</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flux_upper_limit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">))</span><span class="o">.</span><span class="n">value</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">infer_errors</span><span class="p">:</span>
             <span class="n">nan_err_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">flux_err_vals</span><span class="p">)</span>
@@ -1502,25 +1502,25 @@
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">flux_err_vals</span><span class="p">)):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="s2">&quot;flux_density_error contains NaN values after error inference. &quot;</span>
-                <span class="s2">&quot;This may cause errors during likelihood evaluation. &quot;</span>
-                <span class="s2">&quot;Use infer_errors=True to fill missing errors from upper limits.&quot;</span><span class="p">,</span>
+                <span class="s2">"flux_density_error contains NaN values after error inference. "</span>
+                <span class="s2">"This may cause errors during likelihood evaluation. "</span>
+                <span class="s2">"Use infer_errors=True to fill missing errors from upper limits."</span><span class="p">,</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">variables</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">variables</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;band_idx&quot;</span><span class="p">:</span> <span class="n">idx_vals</span><span class="p">}</span>
+            <span class="n">variables</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"band_idx"</span><span class="p">:</span> <span class="n">idx_vals</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="n">observables</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                    <span class="s2">&quot;OpticalPhotometryEpoch can only infer defaults for &quot;</span>
-                    <span class="s2">&quot;single-observable models. Please specify `observables=`.&quot;</span>
+                    <span class="s2">"OpticalPhotometryEpoch can only infer defaults for "</span>
+                    <span class="s2">"single-observable models. Please specify `observables=`."</span>
                 <span class="p">)</span>
             <span class="n">obs_name</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">output_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="n">obs_name</span><span class="p">:</span> <span class="n">flux_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)}</span>
-            <span class="n">y_err</span> <span class="o">=</span> <span class="p">{</span><span class="n">obs_name</span><span class="p">:</span> <span class="n">flux_err_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)}</span>
-            <span class="n">y_upper</span> <span class="o">=</span> <span class="p">{</span><span class="n">obs_name</span><span class="p">:</span> <span class="n">flux_ul_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;erg/(s cm2 Hz)&quot;</span><span class="p">)}</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="p">{</span><span class="n">obs_name</span><span class="p">:</span> <span class="n">flux_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)}</span>
+            <span class="n">y_err</span> <span class="o">=</span> <span class="p">{</span><span class="n">obs_name</span><span class="p">:</span> <span class="n">flux_err_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)}</span>
+            <span class="n">y_upper</span> <span class="o">=</span> <span class="p">{</span><span class="n">obs_name</span><span class="p">:</span> <span class="n">flux_ul_vals</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"erg/(s cm2 Hz)"</span><span class="p">)}</span>
 
             <span class="k">return</span> <span class="n">InferenceData</span><span class="o">.</span><span class="n">from_arrays</span><span class="p">(</span>
                 <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
@@ -1534,7 +1534,7 @@
         <span class="n">scratch</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__table__</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">scratch</span> <span class="o">=</span> <span class="n">scratch</span><span class="p">[</span><span class="n">mask_arr</span><span class="p">]</span>
-        <span class="n">scratch</span><span class="p">[</span><span class="s2">&quot;band_idx&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx_vals</span>
+        <span class="n">scratch</span><span class="p">[</span><span class="s2">"band_idx"</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx_vals</span>
         <span class="k">return</span> <span class="n">InferenceData</span><span class="o">.</span><span class="n">from_table</span><span class="p">(</span>
             <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
             <span class="n">table</span><span class="o">=</span><span class="n">scratch</span><span class="p">,</span>
@@ -1551,8 +1551,8 @@
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">table</span><span class="p">:</span> <span class="n">Table</span><span class="p">,</span>
         <span class="n">column_map</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryEpoch&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct an :class:`OpticalPhotometryEpoch` from an Astropy table.&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryEpoch"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Construct an :class:`OpticalPhotometryEpoch` from an Astropy table."""</span>
         <span class="k">if</span> <span class="n">column_map</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
             <span class="n">table</span><span class="o">.</span><span class="n">rename_columns</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">column_map</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">column_map</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
@@ -1566,8 +1566,8 @@
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">path</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpticalPhotometryEpoch&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct an :class:`OpticalPhotometryEpoch` from a file on disk.&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpticalPhotometryEpoch"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Construct an :class:`OpticalPhotometryEpoch` from a file on disk."""</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">table</span><span class="p">)</span></div>
 </div>
@@ -1601,8 +1601,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1636,7 +1636,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

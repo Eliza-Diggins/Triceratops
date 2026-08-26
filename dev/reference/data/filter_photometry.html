@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -57,7 +57,7 @@
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/data/filter_photometry';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -395,7 +395,8 @@
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar"><svg class="pst-icon svg-inline--fa" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+        <div class="sidebar-primary-item pst-sidebar-collapse"><button id="pst-collapse-sidebar-button" aria-expanded="true" aria-controls="pst-primary-sidebar">
+  <svg class="pst-icon" role="img" aria-hidden="true" focusable="false" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
     <path fill="currentColor" d="M3 15.5C2.36232 15.5 1.74874 15.2564 1.28478 14.8189C0.820828 14.3815 0.541576 13.7832 0.504167 13.1467L0.5 13L0.5 3C0.499965 2.36232 0.743605 1.74874 1.18107 1.28478C1.61854 0.820828 2.21676 0.541576 2.85333 0.504167L3 0.5L13 0.5C13.6377 0.499965 14.2513 0.743605 14.7152 1.18107C15.1792 1.61854 15.4584 2.21676 15.4958 2.85333L15.5 3L15.5 13C15.5 13.6377 15.2564 14.2513 14.8189 14.7152C14.3815 15.1792 13.7832 15.4584 13.1467 15.4958L13 15.5L3 15.5ZM3 13.8333L10.5 13.8333L10.5 2.16667L3 2.16667C2.79589 2.16669 2.59889 2.24163 2.44636 2.37726C2.29383 2.5129 2.19638 2.69979 2.1725 2.9025L2.16667 3L2.16667 13C2.16669 13.2041 2.24163 13.4011 2.37726 13.5536C2.5129 13.7062 2.69979 13.8036 2.9025 13.8275L3 13.8333ZM6.65583 10.325L6.5775 10.2558L4.91083 8.58917C4.76735 8.44567 4.68116 8.25476 4.66843 8.05223C4.65569 7.84971 4.71729 7.6495 4.84167 7.48917L4.91083 7.41083L6.5775 5.74417C6.72747 5.59471 6.9287 5.50794 7.14032 5.50148C7.35194 5.49502 7.55809 5.56935 7.7169 5.70937C7.8757 5.8494 7.97525 6.04463 7.99533 6.25539C8.01541 6.46616 7.95451 6.67667 7.825 6.84417L7.75583 6.9225L6.67917 8L7.75583 9.0775C7.89931 9.22099 7.98551 9.41191 7.99824 9.61443C8.01097 9.81695 7.94938 10.0172 7.825 10.1775L7.75583 10.2558C7.61234 10.3993 7.42142 10.4855 7.2189 10.4982C7.01638 10.511 6.81617 10.4494 6.65583 10.325Z"/>
   </svg>
   <span class="pst-collapse-sidebar-label">Collapse Sidebar</span>
@@ -884,11 +885,11 @@ dimensionless.</p>
 <span class="c1"># From an Astropy Quantity (recommended)</span>
 <span class="n">lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">5500</span><span class="p">,</span> <span class="mi">7500</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
 <span class="n">T</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">lam</span><span class="o">.</span><span class="n">value</span> <span class="o">-</span> <span class="mi">6500</span><span class="p">)</span> <span class="o">/</span> <span class="mi">500</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">r_filt</span> <span class="o">=</span> <span class="n">PhotometryFilter</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;r-band&quot;</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="s2">&quot;photon&quot;</span><span class="p">)</span>
+<span class="n">r_filt</span> <span class="o">=</span> <span class="n">PhotometryFilter</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"r-band"</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="s2">"photon"</span><span class="p">)</span>
 
 <span class="c1"># From a bare array already in cm</span>
 <span class="n">lam_cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">5.5e-5</span><span class="p">,</span> <span class="mf">7.5e-5</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>   <span class="c1"># cm</span>
-<span class="n">r_filt</span> <span class="o">=</span> <span class="n">PhotometryFilter</span><span class="p">(</span><span class="n">lam_cm</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;r-band&quot;</span><span class="p">)</span>
+<span class="n">r_filt</span> <span class="o">=</span> <span class="n">PhotometryFilter</span><span class="p">(</span><span class="n">lam_cm</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"r-band"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">weighting</span></code> keyword controls how the detector samples incoming photons:</p>
@@ -900,7 +901,7 @@ dimensionless.</p>
 <section id="useful-properties">
 <h3>Useful Properties<a class="headerlink" href="#useful-properties" title="Link to this heading">#</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">r_filt</span><span class="p">)</span>
-<span class="c1"># PhotometryFilter(&#39;r-band&#39;, lam_eff=6408.5 AA, weighting=&#39;photon&#39;, N=300)</span>
+<span class="c1"># PhotometryFilter('r-band', lam_eff=6408.5 AA, weighting='photon', N=300)</span>
 
 <span class="n">r_filt</span><span class="o">.</span><span class="n">effective_wavelength</span>   <span class="c1"># pivot wavelength in cm</span>
 <span class="n">r_filt</span><span class="o">.</span><span class="n">effective_frequency</span>    <span class="c1"># pivot frequency in Hz</span>
@@ -914,7 +915,7 @@ dimensionless.</p>
 <section id="convolution">
 <h3>Convolution<a class="headerlink" href="#convolution" title="Link to this heading">#</a></h3>
 <p>There are three convolution entry points, trading off convenience against speed:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Case 1: F_nu already on the filter&#39;s own grid (fastest — no interpolation)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Case 1: F_nu already on the filter's own grid (fastest — no interpolation)</span>
 <span class="n">F_nu_on_grid</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">r_filt</span><span class="o">.</span><span class="n">frequency</span><span class="p">)</span>
 <span class="n">F_band</span> <span class="o">=</span> <span class="n">r_filt</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">F_nu_on_grid</span><span class="p">)</span>
 
@@ -938,8 +939,8 @@ returns a result of shape <code class="docutils literal notranslate"><span class
 </section>
 <section id="visualisation">
 <h3>Visualisation<a class="headerlink" href="#visualisation" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">r_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength_unit</span><span class="o">=</span><span class="s2">&quot;AA&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;r-band&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;firebrick&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;SDSS r-band transmission&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">r_filt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength_unit</span><span class="o">=</span><span class="s2">"AA"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"r-band"</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"firebrick"</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"SDSS r-band transmission"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -956,13 +957,13 @@ convolution to a single matrix multiply at inference time.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.phot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">FilterBundle</span>
 
 <span class="n">bundle</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="p">({</span>
-    <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">g_filt</span><span class="p">,</span>
-    <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="n">r_filt</span><span class="p">,</span>
-    <span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="n">i_filt</span><span class="p">,</span>
+    <span class="s2">"g"</span><span class="p">:</span> <span class="n">g_filt</span><span class="p">,</span>
+    <span class="s2">"r"</span><span class="p">:</span> <span class="n">r_filt</span><span class="p">,</span>
+    <span class="s2">"i"</span><span class="p">:</span> <span class="n">i_filt</span><span class="p">,</span>
 <span class="p">})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>
-<span class="c1"># FilterBundle([&#39;g&#39;, &#39;r&#39;, &#39;i&#39;], N_common=600)</span>
+<span class="c1"># FilterBundle(['g', 'r', 'i'], N_common=600)</span>
 </pre></div>
 </div>
 <p>The <strong>common frequency grid</strong> is the sorted union of all individual filter grids. The
@@ -979,7 +980,7 @@ your model on that grid.</p></li>
 no interpolation overhead.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Setup (once, before MCMC)</span>
-<span class="n">bundle</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="p">({</span><span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">g_filt</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">:</span> <span class="n">r_filt</span><span class="p">,</span> <span class="s2">&quot;i&quot;</span><span class="p">:</span> <span class="n">i_filt</span><span class="p">})</span>
+<span class="n">bundle</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="p">({</span><span class="s2">"g"</span><span class="p">:</span> <span class="n">g_filt</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">:</span> <span class="n">r_filt</span><span class="p">,</span> <span class="s2">"i"</span><span class="p">:</span> <span class="n">i_filt</span><span class="p">})</span>
 <span class="n">nu_eval</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">frequency_grid</span>   <span class="c1"># shape (N_common,)</span>
 
 <span class="c1"># Inside the likelihood (called millions of times)</span>
@@ -1004,8 +1005,8 @@ no interpolation overhead.</p></li>
 <section id="dict-like-interface">
 <h3>Dict-like Interface<a class="headerlink" href="#dict-like-interface" title="Link to this heading">#</a></h3>
 <p><a class="reference internal" href="../../_as_gen/trilobite.utils.phot_utils.FilterBundle.html#trilobite.utils.phot_utils.FilterBundle" title="trilobite.utils.phot_utils.FilterBundle"><code class="xref py py-class docutils literal notranslate"><span class="pre">FilterBundle</span></code></a> supports a dictionary-like interface:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bundle</span><span class="p">[</span><span class="s2">&quot;r&quot;</span><span class="p">]</span>                          <span class="c1"># retrieve a filter by name</span>
-<span class="s2">&quot;g&quot;</span> <span class="ow">in</span> <span class="n">bundle</span>                        <span class="c1"># membership test</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bundle</span><span class="p">[</span><span class="s2">"r"</span><span class="p">]</span>                          <span class="c1"># retrieve a filter by name</span>
+<span class="s2">"g"</span> <span class="ow">in</span> <span class="n">bundle</span>                        <span class="c1"># membership test</span>
 <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">bundle</span><span class="p">:</span> <span class="o">...</span>              <span class="c1"># iteration over filter names</span>
 <span class="nb">len</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>                          <span class="c1"># number of filters</span>
 </pre></div>
@@ -1016,15 +1017,15 @@ no interpolation overhead.</p></li>
 <p>Filters can be added or removed at any time; the common grid and weight matrix are automatically
 rebuilt:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">z_filt</span> <span class="o">=</span> <span class="n">PhotometryFilter</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="n">bundle</span><span class="o">.</span><span class="n">add_filter</span><span class="p">(</span><span class="s2">&quot;z&quot;</span><span class="p">,</span> <span class="n">z_filt</span><span class="p">)</span>
+<span class="n">bundle</span><span class="o">.</span><span class="n">add_filter</span><span class="p">(</span><span class="s2">"z"</span><span class="p">,</span> <span class="n">z_filt</span><span class="p">)</span>
 
-<span class="n">old_filt</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">remove_filter</span><span class="p">(</span><span class="s2">&quot;i&quot;</span><span class="p">)</span>   <span class="c1"># returns the removed filter</span>
+<span class="n">old_filt</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">remove_filter</span><span class="p">(</span><span class="s2">"i"</span><span class="p">)</span>   <span class="c1"># returns the removed filter</span>
 </pre></div>
 </div>
 </section>
 <section id="id2">
 <h3>Visualisation<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength_unit</span><span class="o">=</span><span class="s2">&quot;AA&quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">bundle</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength_unit</span><span class="o">=</span><span class="s2">"AA"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Each filter is drawn in a distinct colour sampled from the default colourmap and a legend is
@@ -1040,8 +1041,8 @@ added automatically (pass <code class="docutils literal notranslate"><span class
 By default the wavelength column is assumed to be in Ångström:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.phot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_filter_from_file</span>
 
-<span class="n">filt</span> <span class="o">=</span> <span class="n">load_filter_from_file</span><span class="p">(</span><span class="s2">&quot;sdss_r.dat&quot;</span><span class="p">)</span>                       <span class="c1"># Å default</span>
-<span class="n">filt</span> <span class="o">=</span> <span class="n">load_filter_from_file</span><span class="p">(</span><span class="s2">&quot;sdss_r.dat&quot;</span><span class="p">,</span> <span class="n">wavelength_unit</span><span class="o">=</span><span class="s2">&quot;nm&quot;</span><span class="p">)</span> <span class="c1"># nm</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">load_filter_from_file</span><span class="p">(</span><span class="s2">"sdss_r.dat"</span><span class="p">)</span>                       <span class="c1"># Å default</span>
+<span class="n">filt</span> <span class="o">=</span> <span class="n">load_filter_from_file</span><span class="p">(</span><span class="s2">"sdss_r.dat"</span><span class="p">,</span> <span class="n">wavelength_unit</span><span class="o">=</span><span class="s2">"nm"</span><span class="p">)</span> <span class="c1"># nm</span>
 </pre></div>
 </div>
 <p>The filter name defaults to the file stem.</p>
@@ -1059,12 +1060,12 @@ dependency with:</p>
 
 <span class="c1"># List all available filters (or a subset by prefix)</span>
 <span class="n">all_filters</span>  <span class="o">=</span> <span class="n">list_speclite_filters</span><span class="p">()</span>
-<span class="n">sdss_filters</span> <span class="o">=</span> <span class="n">list_speclite_filters</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s2">&quot;sdss&quot;</span><span class="p">)</span>
+<span class="n">sdss_filters</span> <span class="o">=</span> <span class="n">list_speclite_filters</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s2">"sdss"</span><span class="p">)</span>
 
 <span class="c1"># Load by name</span>
-<span class="n">r_sdss</span> <span class="o">=</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="s2">&quot;sdss-r&quot;</span><span class="p">)</span>
-<span class="n">r_ztf</span>  <span class="o">=</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="s2">&quot;ztf-r&quot;</span><span class="p">)</span>
-<span class="n">r_lsst</span> <span class="o">=</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="s2">&quot;lsst2016-r&quot;</span><span class="p">)</span>
+<span class="n">r_sdss</span> <span class="o">=</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="s2">"sdss-r"</span><span class="p">)</span>
+<span class="n">r_ztf</span>  <span class="o">=</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="s2">"ztf-r"</span><span class="p">)</span>
+<span class="n">r_lsst</span> <span class="o">=</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="s2">"lsst2016-r"</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Common filter name prefixes include: <code class="docutils literal notranslate"><span class="pre">sdss-</span></code>, <code class="docutils literal notranslate"><span class="pre">ztf-</span></code>, <code class="docutils literal notranslate"><span class="pre">lsst2016-</span></code>, <code class="docutils literal notranslate"><span class="pre">decam-</span></code>,
@@ -1172,12 +1173,12 @@ conversion into a single call:</p>
 <code class="docutils literal notranslate"><span class="pre">to_dict</span></code> / <code class="docutils literal notranslate"><span class="pre">from_dict</span></code>, <code class="docutils literal notranslate"><span class="pre">to_json</span></code> / <code class="docutils literal notranslate"><span class="pre">from_json</span></code>, and <code class="docutils literal notranslate"><span class="pre">to_hdf5</span></code> / <code class="docutils literal notranslate"><span class="pre">from_hdf5</span></code>. In the
 HDF5 file each filter occupies a separate group and the original filter order is preserved.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save and reload a bundle</span>
-<span class="n">bundle</span><span class="o">.</span><span class="n">to_hdf5</span><span class="p">(</span><span class="s2">&quot;my_filters.h5&quot;</span><span class="p">)</span>
-<span class="n">bundle2</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="o">.</span><span class="n">from_hdf5</span><span class="p">(</span><span class="s2">&quot;my_filters.h5&quot;</span><span class="p">)</span>
+<span class="n">bundle</span><span class="o">.</span><span class="n">to_hdf5</span><span class="p">(</span><span class="s2">"my_filters.h5"</span><span class="p">)</span>
+<span class="n">bundle2</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="o">.</span><span class="n">from_hdf5</span><span class="p">(</span><span class="s2">"my_filters.h5"</span><span class="p">)</span>
 
 <span class="c1"># Or via JSON (useful for version control)</span>
-<span class="n">bundle</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">&quot;my_filters.json&quot;</span><span class="p">)</span>
-<span class="n">bundle2</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s2">&quot;my_filters.json&quot;</span><span class="p">)</span>
+<span class="n">bundle</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="s2">"my_filters.json"</span><span class="p">)</span>
+<span class="n">bundle2</span> <span class="o">=</span> <span class="n">FilterBundle</span><span class="o">.</span><span class="n">from_json</span><span class="p">(</span><span class="s2">"my_filters.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -1282,8 +1283,8 @@ HDF5 file each filter occupies a separate group and the original filter order is
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1317,7 +1318,7 @@ HDF5 file each filter occupies a separate group and the original filter order is
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

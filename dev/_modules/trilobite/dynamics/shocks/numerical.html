@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/shocks/numerical';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.shocks.numerical</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Numerical shock-evolution engines for transient dynamics.</span>
 
 <span class="sd">This module provides ODE-based shock engines for modelling the interaction</span>
@@ -483,7 +483,7 @@
 <span class="sd">    and mechanical closures.</span>
 
 <span class="sd">:ref:`shock_engines`: overview of the shock engine interface shared by all engines.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
@@ -500,7 +500,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.misc_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">ensure_in_units</span>
 
 <span class="c1"># NumPy compatibility: np.trapezoid added in 2.0, np.trapz removed in 2.0.</span>
-<span class="n">_trapz</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;trapezoid&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;trapz&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">_trapz</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">"trapezoid"</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">"trapz"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
 
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
@@ -518,56 +518,56 @@
 <div class="viewcode-block" id="MomentumConservingShockState">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MomentumConservingShockState.html#trilobite.dynamics.shocks.numerical.MomentumConservingShockState">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MomentumConservingShockState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Time-dependent state returned by :class:`MomentumConservingShockEngine`.</span>
 
 <span class="sd">    The low-level CGS interface returns plain :class:`numpy.ndarray` fields in</span>
 <span class="sd">    CGS units. The public unit-aware interface returns the same structure with</span>
 <span class="sd">    fields converted to :class:`astropy.units.Quantity`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">radius</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shell radius :math:`R_{\rm sh}` in cm.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shell radius :math:`R_{\rm sh}` in cm."""</span>
 
     <span class="n">velocity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shell velocity :math:`v_{\rm sh}` in cm/s.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shell velocity :math:`v_{\rm sh}` in cm/s."""</span>
 
     <span class="n">mass</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Accumulated shell mass :math:`M_{\rm sh}` in g.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Accumulated shell mass :math:`M_{\rm sh}` in g."""</span>
 
     <span class="n">post_shock_density</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock density :math:`\rho_s` in :math:`\mathrm{g\,cm^{-3}}`,</span>
 <span class="sd">    derived from the strong cold-shock Rankine--Hugoniot relation applied at the</span>
 <span class="sd">    forward shock using the upstream CSM density :math:`\rho_4(R_{\rm sh},\,t)`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_pressure</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock pressure :math:`p_s` in :math:`\mathrm{dyn\,cm^{-2}}`,</span>
 <span class="sd">    derived from the strong cold-shock Rankine--Hugoniot relation applied at the</span>
 <span class="sd">    forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock temperature :math:`T_s` in K, derived from the ideal-gas</span>
 <span class="sd">    relation applied at the forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">thermal_energy_density</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Post-shock thermal energy density</span>
 <span class="sd">    :math:`e_{\rm th} = p_s / (\gamma - 1)` in :math:`\mathrm{erg\,cm^{-3}}`,</span>
 <span class="sd">    evaluated at the forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="MomentumConservingShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.html#trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MomentumConservingShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Momentum-conserving snowplow shock engine for arbitrary ejecta and CSM profiles.</span>
 
 <span class="sd">    This :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` subclass</span>
@@ -628,7 +628,7 @@
 <span class="sd">    :class:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine` :</span>
 <span class="sd">        Most complete closure that evolves separate internal energies for each shocked layer.</span>
 <span class="sd">    :ref:`conservative_snowplow_model` : Theory derivation.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">_STATE_CLASS</span> <span class="o">=</span> <span class="n">MomentumConservingShockState</span>
 
@@ -645,7 +645,7 @@
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">u_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Build the ODE right-hand side for the momentum-conserving snowplow model.</span>
 
 <span class="sd">        Returns a function ``kernel(t, y)`` suitable for</span>
@@ -669,7 +669,7 @@
 <span class="sd">        callable</span>
 <span class="sd">            ``kernel(t, y) -&gt; dy/dt`` where</span>
 <span class="sd">            ``y = [R_sh, M_sh, Pi_sh]``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">_kernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
             <span class="c1"># Extract the current state variables.</span>
@@ -703,19 +703,19 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.numerical.MomentumConservingShockEngine.compute_shock_properties">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">u_4</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">R_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">v_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e7</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
-        <span class="n">M_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e28</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
-        <span class="n">t_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">R_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="n">v_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e7</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">M_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e28</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">t_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MomentumConservingShockState&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"MomentumConservingShockState"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the shock properties at the given times.</span>
 
 <span class="sd">        Parameters</span>
@@ -745,7 +745,7 @@
 <span class="sd">            Default ``5/3``.</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :func:`scipy.integrate.solve_ivp`.</span>
-<span class="sd">            ``method`` defaults to ``&#39;Radau&#39;``; ``rtol`` defaults to ``1e-10``.</span>
+<span class="sd">            ``method`` defaults to ``'Radau'``; ``rtol`` defaults to ``1e-10``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -753,7 +753,7 @@
 <span class="sd">            Unit-bearing named tuple with fields ``radius``, ``velocity``,</span>
 <span class="sd">            ``mass``, ``post_shock_density``, ``post_shock_pressure``,</span>
 <span class="sd">            ``post_shock_temperature``, and ``thermal_energy_density``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">R_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
@@ -792,7 +792,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_shock_properties_cgs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -803,8 +803,8 @@
         <span class="n">t_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MomentumConservingShockState&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"MomentumConservingShockState"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Integrate the momentum-conserving snowplow ODEs in CGS units.</span>
 
 <span class="sd">        Parameters</span>
@@ -827,15 +827,15 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~trilobite.dynamics.shocks.numerical.MomentumConservingShockState</span>
 <span class="sd">            CGS-valued named tuple.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">rho_1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream ejecta density function `rho_1` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream ejecta density function `rho_1` must be provided."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">rho_4</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream CSM density function `rho_4` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream CSM density function `rho_4` must be provided."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">u_1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream ejecta velocity function `u_1` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream ejecta velocity function `u_1` must be provided."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">u_4</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream CSM velocity function `u_4` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream CSM velocity function `u_4` must be provided."</span><span class="p">)</span>
 
         <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
@@ -850,8 +850,8 @@
         <span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span>
 
         <span class="n">solver_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;rtol&quot;</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;Radau&quot;</span><span class="p">)</span>
+        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"rtol"</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"method"</span><span class="p">,</span> <span class="s2">"Radau"</span><span class="p">)</span>
 
         <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
             <span class="n">fun</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
@@ -865,7 +865,7 @@
 
         <span class="k">if</span> <span class="n">sol</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;ODE solver failed to integrate the momentum-conserving snowplow equations:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"ODE solver failed to integrate the momentum-conserving snowplow equations:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
         <span class="n">R_sh</span><span class="p">,</span> <span class="n">M_sh</span><span class="p">,</span> <span class="n">Pi_sh</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span>
@@ -882,10 +882,10 @@
             <span class="n">radius</span><span class="o">=</span><span class="n">R_sh</span><span class="p">,</span>
             <span class="n">velocity</span><span class="o">=</span><span class="n">v_sh</span><span class="p">,</span>
             <span class="n">mass</span><span class="o">=</span><span class="n">M_sh</span><span class="p">,</span>
-            <span class="n">post_shock_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_density&quot;</span><span class="p">],</span>
-            <span class="n">post_shock_pressure</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_pressure&quot;</span><span class="p">],</span>
-            <span class="n">post_shock_temperature</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_temperature&quot;</span><span class="p">],</span>
-            <span class="n">thermal_energy_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_thermal_energy_density&quot;</span><span class="p">],</span>
+            <span class="n">post_shock_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_density"</span><span class="p">],</span>
+            <span class="n">post_shock_pressure</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_pressure"</span><span class="p">],</span>
+            <span class="n">post_shock_temperature</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_temperature"</span><span class="p">],</span>
+            <span class="n">thermal_energy_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_thermal_energy_density"</span><span class="p">],</span>
         <span class="p">)</span></div>
 
 
@@ -893,13 +893,13 @@
 <div class="viewcode-block" id="RelMomentumConservingShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.RelMomentumConservingShockEngine.html#trilobite.dynamics.shocks.numerical.RelMomentumConservingShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelMomentumConservingShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Relativistic momentum conserving shock engine.</span>
 
 <span class="sd">    .. note::</span>
 
 <span class="sd">        This engine is not yet implemented. It will be added in a future release.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">pass</span></div>
 
@@ -911,162 +911,162 @@
 <div class="viewcode-block" id="ThinShellShockState">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.ThinShellShockState.html#trilobite.dynamics.shocks.numerical.ThinShellShockState">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ThinShellShockState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Time-dependent state returned by :class:`PressureDrivenThinShellShockEngine`.</span>
 
 <span class="sd">    The low-level CGS interface returns plain :class:`numpy.ndarray` fields in</span>
 <span class="sd">    CGS units. The public unit-aware interface returns the same structure with</span>
 <span class="sd">    fields converted to :class:`astropy.units.Quantity`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">radius</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shell radius :math:`R_{\rm sh}` in cm.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">velocity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shell velocity :math:`v_{\rm sh}` in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">mass</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Accumulated shell mass :math:`M_{\rm sh}` in g.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_density</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock density :math:`\rho_s` in :math:`\mathrm{g\,cm^{-3}}`,</span>
 <span class="sd">    derived from the strong cold-shock Rankine--Hugoniot relation applied at the</span>
 <span class="sd">    forward shock using the upstream CSM density :math:`\rho_4(R_{\rm sh},\,t)`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_pressure</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock pressure :math:`p_s` in :math:`\mathrm{dyn\,cm^{-2}}`,</span>
 <span class="sd">    derived from the strong cold-shock Rankine--Hugoniot relation applied at the</span>
 <span class="sd">    forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock temperature :math:`T_s` in K, derived from the ideal-gas</span>
 <span class="sd">    relation applied at the forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">thermal_energy_density</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Post-shock thermal energy density</span>
 <span class="sd">    :math:`e_{\rm th} = p_s / (\gamma - 1)` in :math:`\mathrm{erg\,cm^{-3}}`,</span>
 <span class="sd">    evaluated at the forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="RelThinShellShockState">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.RelThinShellShockState.html#trilobite.dynamics.shocks.numerical.RelThinShellShockState">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelThinShellShockState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Time-dependent state returned by :class:`RelPressureDrivenThinShellShockEngine`.</span>
 
 <span class="sd">    The low-level CGS interface returns plain :class:`numpy.ndarray` fields.</span>
 <span class="sd">    The public unit-aware interface attaches :class:`astropy.units.Quantity`</span>
 <span class="sd">    units to the dimensional fields; dimensionless fields (:math:`\beta`, :math:`\Gamma`, :math:`\eta`) are always</span>
 <span class="sd">    plain arrays.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Evolved four-momentum state                                         #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">radius</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shell radius :math:`R_{\rm sh}` in cm.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shell radius :math:`R_{\rm sh}` in cm."""</span>
 
     <span class="n">mass</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Swept baryonic rest mass :math:`M_{\rm sh}` in g.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Swept baryonic rest mass :math:`M_{\rm sh}` in g."""</span>
 
     <span class="n">energy</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lab-frame total energy :math:`E_{\rm sh}` in erg.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lab-frame total energy :math:`E_{\rm sh}` in erg."""</span>
 
     <span class="n">momentum</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Lab-frame radial momentum :math:`\Pi_{\rm sh}` in :math:`\mathrm{g\,cm\,s^{-1}}`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Lab-frame radial momentum :math:`\Pi_{\rm sh}` in :math:`\mathrm{g\,cm\,s^{-1}}`."""</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Derived shell kinematics                                            #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">beta_sh</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shell velocity :math:`\beta_{\rm sh} = v_{\rm sh}/c` (dimensionless).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shell velocity :math:`\beta_{\rm sh} = v_{\rm sh}/c` (dimensionless)."""</span>
 
     <span class="n">Gamma_sh</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shell Lorentz factor :math:`\Gamma_{\rm sh}` (dimensionless).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shell Lorentz factor :math:`\Gamma_{\rm sh}` (dimensionless)."""</span>
 
     <span class="n">w_sh</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shell proper velocity :math:`w_{\rm sh} = \Gamma_{\rm sh}\beta_{\rm sh}` (dimensionless).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shell proper velocity :math:`w_{\rm sh} = \Gamma_{\rm sh}\beta_{\rm sh}` (dimensionless)."""</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Shell-frame relative velocities and Lorentz factors                 #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">beta_rel_rs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Upstream ejecta speed in the shell (downstream) frame,</span>
 <span class="sd">    :math:`\beta_{\rm rel,2}` (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">Gamma_rel_rs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Lorentz factor of the upstream ejecta in the shell frame,</span>
 <span class="sd">    :math:`\Gamma_{\rm rel,2} = \Gamma_{u|d}` at the reverse shock (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">beta_rel_fs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Upstream CSM speed in the shell (downstream) frame,</span>
 <span class="sd">    :math:`\beta_{\rm rel,3}` (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">Gamma_rel_fs</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Lorentz factor of the upstream CSM in the shell frame,</span>
 <span class="sd">    :math:`\Gamma_{\rm rel,3} = \Gamma_{u|d}` at the forward shock (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Post-shock pressures                                                #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">pressure_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Reverse-shock post-shock pressure</span>
 <span class="sd">    :math:`P_2 = \rho_{1,\rm sh}c^2(\Gamma_{\rm rel,2}-1)(\hat\gamma\Gamma_{\rm rel,2}+1)`</span>
 <span class="sd">    in :math:`\mathrm{dyn\,cm^{-2}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">pressure_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Forward-shock post-shock pressure</span>
 <span class="sd">    :math:`P_3 = \rho_{4,\rm sh}c^2(\Gamma_{\rm rel,3}-1)(\hat\gamma\Gamma_{\rm rel,3}+1)`</span>
 <span class="sd">    in :math:`\mathrm{dyn\,cm^{-2}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Energy-loading factors                                              #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">eta_2</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shell-frame energy per downstream rest-mass at the reverse shock,</span>
 <span class="sd">    :math:`\eta_2 = e_2/(\rho_2 c^2) = \Gamma_{\rm rel,2}` (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">eta_3</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shell-frame energy per downstream rest-mass at the forward shock,</span>
 <span class="sd">    :math:`\eta_3 = e_3/(\rho_3 c^2) = \Gamma_{\rm rel,3}` (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="PressureDrivenThinShellShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine.html#trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PressureDrivenThinShellShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Pressure-driven thin-shell shock engine for arbitrary ejecta and CSM profiles.</span>
 
 <span class="sd">    This :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine` subclass</span>
@@ -1118,12 +1118,12 @@
 <span class="sd">        More complete closure that evolves separate internal energies for each</span>
 <span class="sd">        shocked layer.</span>
 <span class="sd">    :ref:`pressure_driven_thin_shell_model` : Theory derivation.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">_STATE_CLASS</span> <span class="o">=</span> <span class="n">ThinShellShockState</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the :class:`PressureDrivenThinShellShockEngine`.</span>
 
 <span class="sd">        Parameters</span>
@@ -1134,7 +1134,7 @@
 <span class="sd">            ionized hydrogen).</span>
 <span class="sd">        kwargs</span>
 <span class="sd">            Passed to :class:`~trilobite.dynamics.shocks.shock_engine.ShockEngine`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
 
@@ -1148,7 +1148,7 @@
         <span class="n">u_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Build the ODE right-hand side for the pressure-driven thin-shell model.</span>
 
 <span class="sd">        Returns a function ``kernel(t, y)`` suitable for</span>
@@ -1174,7 +1174,7 @@
 <span class="sd">        callable</span>
 <span class="sd">            ``kernel(t, y) -&gt; dy/dt`` where</span>
 <span class="sd">            ``y = [R_sh, v_sh, M_sh]``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">chi</span> <span class="o">=</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">_kernel</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
@@ -1203,19 +1203,19 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine.compute_shock_properties">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">u_4</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">R_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">v_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e7</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
-        <span class="n">M_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e28</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
-        <span class="n">t_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">R_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="n">v_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e7</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">M_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e28</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">t_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the shock properties at the given times.</span>
 
 <span class="sd">        Parameters</span>
@@ -1244,15 +1244,15 @@
 <span class="sd">            Adiabatic index of the shocked gas. Default ``5/3``.</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :func:`scipy.integrate.solve_ivp`.</span>
-<span class="sd">            ``method`` defaults to ``&#39;Radau&#39;``; ``rtol`` defaults to ``1e-10``.</span>
+<span class="sd">            ``method`` defaults to ``'Radau'``; ``rtol`` defaults to ``1e-10``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict of str, ~astropy.units.Quantity</span>
-<span class="sd">            - ``&#39;radius&#39;``: shell radius in cm.</span>
-<span class="sd">            - ``&#39;velocity&#39;``: shell velocity in cm/s.</span>
-<span class="sd">            - ``&#39;mass&#39;``: shell mass in g.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            - ``'radius'``: shell radius in cm.</span>
+<span class="sd">            - ``'velocity'``: shell velocity in cm/s.</span>
+<span class="sd">            - ``'mass'``: shell mass in g.</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">R_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
@@ -1291,7 +1291,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_shock_properties_cgs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1303,7 +1303,7 @@
         <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Integrate the pressure-driven thin-shell ODEs in CGS units.</span>
 
 <span class="sd">        Parameters</span>
@@ -1325,18 +1325,18 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict of str, numpy.ndarray</span>
-<span class="sd">            - ``&#39;radius&#39;``: shell radius in cm.</span>
-<span class="sd">            - ``&#39;velocity&#39;``: shell velocity in cm/s.</span>
-<span class="sd">            - ``&#39;mass&#39;``: shell mass in g.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            - ``'radius'``: shell radius in cm.</span>
+<span class="sd">            - ``'velocity'``: shell velocity in cm/s.</span>
+<span class="sd">            - ``'mass'``: shell mass in g.</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">rho_1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream ejecta density function `rho_1` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream ejecta density function `rho_1` must be provided."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">rho_4</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream CSM density function `rho_4` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream CSM density function `rho_4` must be provided."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">u_1</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream ejecta velocity function `u_1` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream ejecta velocity function `u_1` must be provided."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">u_4</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;An upstream CSM velocity function `u_4` must be provided.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"An upstream CSM velocity function `u_4` must be provided."</span><span class="p">)</span>
 
         <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
@@ -1352,8 +1352,8 @@
         <span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span>
 
         <span class="n">solver_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;rtol&quot;</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;Radau&quot;</span><span class="p">)</span>
+        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"rtol"</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"method"</span><span class="p">,</span> <span class="s2">"Radau"</span><span class="p">)</span>
 
         <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
             <span class="n">fun</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
@@ -1367,7 +1367,7 @@
 
         <span class="k">if</span> <span class="n">sol</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;ODE solver failed to integrate the pressure-driven thin-shell equations:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"ODE solver failed to integrate the pressure-driven thin-shell equations:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
         <span class="n">R_sh</span><span class="p">,</span> <span class="n">v_sh</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span>
@@ -1383,10 +1383,10 @@
             <span class="n">radius</span><span class="o">=</span><span class="n">R_sh</span><span class="p">,</span>
             <span class="n">velocity</span><span class="o">=</span><span class="n">v_sh</span><span class="p">,</span>
             <span class="n">mass</span><span class="o">=</span><span class="n">m</span><span class="p">,</span>
-            <span class="n">post_shock_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_density&quot;</span><span class="p">],</span>
-            <span class="n">post_shock_pressure</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_pressure&quot;</span><span class="p">],</span>
-            <span class="n">post_shock_temperature</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_temperature&quot;</span><span class="p">],</span>
-            <span class="n">thermal_energy_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_thermal_energy_density&quot;</span><span class="p">],</span>
+            <span class="n">post_shock_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_density"</span><span class="p">],</span>
+            <span class="n">post_shock_pressure</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_pressure"</span><span class="p">],</span>
+            <span class="n">post_shock_temperature</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_temperature"</span><span class="p">],</span>
+            <span class="n">thermal_energy_density</span><span class="o">=</span><span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_thermal_energy_density"</span><span class="p">],</span>
         <span class="p">)</span></div>
 
 
@@ -1394,7 +1394,7 @@
 <div class="viewcode-block" id="RelPressureDrivenThinShellShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine.html#trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelPressureDrivenThinShellShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Relativistic pressure-driven thin-shell shock engine for arbitrary ejecta and CSM profiles.</span>
 
 <span class="sd">    This engine evolves the four-component lab-frame state</span>
@@ -1481,7 +1481,7 @@
 <span class="sd">    :class:`~trilobite.dynamics.shocks.numerical.PressureDrivenThinShellShockEngine` :</span>
 <span class="sd">        Non-relativistic analogue.</span>
 <span class="sd">    :ref:`relativistic_pressure_driven_shells` : Theory derivation.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">_STATE_CLASS</span> <span class="o">=</span> <span class="n">RelThinShellShockState</span>
 
@@ -1495,14 +1495,14 @@
         <span class="n">beta_grid_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the :class:`RelPressureDrivenThinShellShockEngine`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        kwargs</span>
 <span class="sd">            Passed to :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Pass off the kwargs and the adiabatic indices to the parent class. The gammas are stored as</span>
         <span class="c1"># attributes on the parent class since they are needed for the kernel generation.</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">gamma_1</span><span class="o">=</span><span class="n">gamma_1</span><span class="p">,</span> <span class="n">gamma_4</span><span class="o">=</span><span class="n">gamma_4</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -1520,11 +1520,11 @@
         <span class="c1"># Do some checks on the beta grid to ensure that it is valid for use generating the</span>
         <span class="c1"># shock properties. The grid must be strictly between -1 and 1, and it must be sorted.</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_beta_grid</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_beta_grid</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The beta grid must be strictly between 0 and 1.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The beta grid must be strictly between 0 and 1."</span><span class="p">)</span>
 
         <span class="c1"># Check that the beta grid is sorted in ascending order.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_beta_grid</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The beta grid must be sorted in ascending order.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The beta grid must be sorted in ascending order."</span><span class="p">)</span>
 
         <span class="c1"># Pre-compute the grids.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_beta_2_grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">_solve_strong_cold_shock_beta</span><span class="p">(</span><span class="n">_beta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gamma_ad_1</span><span class="p">)</span> <span class="k">for</span> <span class="n">_beta</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta_grid</span><span class="p">]</span>
@@ -1539,7 +1539,7 @@
         <span class="n">beta_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">beta_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Build the ODE right-hand side for the relativistic pressure-driven thin-shell model.</span>
 
 <span class="sd">        Returns a function ``kernel(t, y)`` suitable for</span>
@@ -1562,7 +1562,7 @@
 <span class="sd">        callable</span>
 <span class="sd">            ``kernel(t, y) -&gt; dy/dt`` where</span>
 <span class="sd">            ``y = [R_sh, M_sh, E_sh, Pi_sh]`` in CGS.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Load important state variables into the local scope so that</span>
         <span class="c1"># the kernel has access to them.</span>
         <span class="n">_beta_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_beta_grid</span>
@@ -1742,19 +1742,19 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.numerical.RelPressureDrivenThinShellShockEngine.compute_shock_properties">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">beta_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">beta_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">R_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="n">R_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e11</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
         <span class="n">beta_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
-        <span class="n">M_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e28</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
-        <span class="n">t_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">M_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e28</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">t_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RelThinShellShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the relativistic shock properties at the given times.</span>
 
 <span class="sd">        Parameters</span>
@@ -1783,13 +1783,13 @@
 <span class="sd">            Adiabatic index :math:`\hat\gamma`. Default ``4/3``.</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :func:`scipy.integrate.solve_ivp`.</span>
-<span class="sd">            ``method`` defaults to ``&#39;Radau&#39;``; ``rtol`` defaults to ``1e-10``.</span>
+<span class="sd">            ``method`` defaults to ``'Radau'``; ``rtol`` defaults to ``1e-10``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ~trilobite.dynamics.shocks.numerical.RelThinShellShockState</span>
 <span class="sd">            Named tuple with unit-bearing fields.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">R_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
@@ -1833,7 +1833,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_shock_properties_cgs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">beta_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
@@ -1844,7 +1844,7 @@
         <span class="n">t_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RelThinShellShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Integrate the relativistic pressure-driven thin-shell ODEs in CGS units.</span>
 
 <span class="sd">        Parameters</span>
@@ -1872,7 +1872,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~trilobite.dynamics.shocks.numerical.RelThinShellShockState</span>
 <span class="sd">            CGS-valued named tuple.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
         <span class="c1"># Cold-shell initial four-momentum: E = M c^2 Gamma_0, Pi = M c w_0.</span>
@@ -1886,8 +1886,8 @@
         <span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">amax</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span>
 
         <span class="n">solver_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;rtol&quot;</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;Radau&quot;</span><span class="p">)</span>
+        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"rtol"</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"method"</span><span class="p">,</span> <span class="s2">"Radau"</span><span class="p">)</span>
 
         <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span>
             <span class="n">fun</span><span class="o">=</span><span class="n">kernel</span><span class="p">,</span>
@@ -1900,7 +1900,7 @@
         <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">sol</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ODE solver failed to integrate the relativistic thin-shell equations:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ODE solver failed to integrate the relativistic thin-shell equations:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="n">R_sh</span><span class="p">,</span> <span class="n">M_sh</span><span class="p">,</span> <span class="n">E_sh</span><span class="p">,</span> <span class="n">Pi_sh</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span>
 
@@ -1958,7 +1958,7 @@
 <div class="viewcode-block" id="MechanicalShockInitialConditions">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions.html#trilobite.dynamics.shocks.numerical.MechanicalShockInitialConditions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MechanicalShockInitialConditions</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Self-consistent 8-component initial-condition vector for :class:`MechanicalShockEngine`.</span>
 
 <span class="sd">    All values are plain CGS floats (no unit objects).  Construct this with</span>
@@ -1968,38 +1968,38 @@
 <span class="sd">    Passing an instance directly to</span>
 <span class="sd">    :meth:`~trilobite.dynamics.shocks.numerical.MechanicalShockEngine.compute_shock_properties`</span>
 <span class="sd">    via the ``initial_conditions`` keyword is the recommended workflow.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">R_cd_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Contact-discontinuity radius at :math:`t_0` in cm.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Contact-discontinuity radius at :math:`t_0` in cm."""</span>
 
     <span class="n">v_cd_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Contact-discontinuity velocity at :math:`t_0` in cm/s.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Contact-discontinuity velocity at :math:`t_0` in cm/s."""</span>
 
     <span class="n">M2_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shocked ejecta mass at :math:`t_0` in g.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shocked ejecta mass at :math:`t_0` in g."""</span>
 
     <span class="n">M3_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shocked CSM mass at :math:`t_0` in g.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shocked CSM mass at :math:`t_0` in g."""</span>
 
     <span class="n">U2_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shocked ejecta internal energy at :math:`t_0` in erg.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shocked ejecta internal energy at :math:`t_0` in erg."""</span>
 
     <span class="n">U3_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shocked CSM internal energy at :math:`t_0` in erg.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shocked CSM internal energy at :math:`t_0` in erg."""</span>
 
     <span class="n">Delta2_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Effective shocked ejecta layer width at :math:`t_0` in cm.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Effective shocked ejecta layer width at :math:`t_0` in cm."""</span>
 
     <span class="n">Delta3_0</span><span class="p">:</span> <span class="nb">float</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Effective shocked CSM layer width at :math:`t_0` in cm.&quot;&quot;&quot;</span></div>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Effective shocked CSM layer width at :math:`t_0` in cm."""</span></div>
 
 
 
 <div class="viewcode-block" id="MechanicalShockState">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MechanicalShockState.html#trilobite.dynamics.shocks.numerical.MechanicalShockState">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MechanicalShockState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Time-dependent state returned by :class:`MechanicalShockEngine`.</span>
 
 <span class="sd">    The state separates three conceptually distinct groups of quantities:</span>
@@ -2014,115 +2014,115 @@
 <span class="sd">    discontinuity and internally by the reverse shock. Region 3 denotes shocked</span>
 <span class="sd">    CSM, bounded internally by the contact discontinuity and externally by the</span>
 <span class="sd">    forward shock.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Evolved dynamical state                                             #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">radius</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Contact-discontinuity radius :math:`R_{\rm cd}` in cm.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">velocity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Contact-discontinuity velocity :math:`v_{\rm cd}` in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">mass_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shocked ejecta mass :math:`M_2` in g.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">mass_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shocked CSM mass :math:`M_3` in g.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">energy_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Internal energy of the shocked ejecta, :math:`U_2`, in erg.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">energy_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Internal energy of the shocked CSM, :math:`U_3`, in erg.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">width_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Effective shocked-ejecta width :math:`\Delta_2 = R_{\rm cd}-R_{\rm rs}` in cm.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">width_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Effective shocked-CSM width :math:`\Delta_3 = R_{\rm fs}-R_{\rm cd}` in cm.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Shock geometry and kinematics                                       #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">radius_rs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Reverse-shock radius :math:`R_{\rm rs} = R_{\rm cd}-\Delta_2` in cm.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">radius_fs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Forward-shock radius :math:`R_{\rm fs} = R_{\rm cd}+\Delta_3` in cm.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">velocity_rs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Reverse-shock speed :math:`D_{\rm rs}` in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">velocity_fs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Forward-shock speed :math:`D_{\rm fs}` in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Region-averaged thermodynamics                                     #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">volume_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Effective shocked-ejecta volume :math:`V_2 \simeq 4\pi R_{\rm cd}^2\Delta_2`</span>
 <span class="sd">    in :math:`\mathrm{cm^{3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">volume_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Effective shocked-CSM volume :math:`V_3 \simeq 4\pi R_{\rm cd}^2\Delta_3`</span>
 <span class="sd">    in :math:`\mathrm{cm^{3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">density_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-ejecta density :math:`\bar{\rho}_2 = M_2/V_2`</span>
 <span class="sd">    in :math:`\mathrm{g\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">density_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-CSM density :math:`\bar{\rho}_3 = M_3/V_3`</span>
 <span class="sd">    in :math:`\mathrm{g\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">pressure_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-ejecta pressure</span>
 <span class="sd">    :math:`P_2 = (\gamma_2-1)U_2/V_2` in :math:`\mathrm{dyn\,cm^{-2}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">pressure_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-CSM pressure</span>
 <span class="sd">    :math:`P_3 = (\gamma_3-1)U_3/V_3` in :math:`\mathrm{dyn\,cm^{-2}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">temperature_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-ejecta temperature</span>
 
 <span class="sd">    .. math::</span>
@@ -2135,10 +2135,10 @@
 <span class="sd">        (\gamma_2-1)\frac{U_2}{M_2}.</span>
 
 <span class="sd">    Returned in K.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">temperature_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-CSM temperature</span>
 
 <span class="sd">    .. math::</span>
@@ -2151,22 +2151,22 @@
 <span class="sd">        (\gamma_3-1)\frac{U_3}{M_3}.</span>
 
 <span class="sd">    Returned in K.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">thermal_energy_density_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-ejecta thermal energy density</span>
 <span class="sd">    :math:`e_2 = U_2/V_2` in :math:`\mathrm{erg\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">thermal_energy_density_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-CSM thermal energy density</span>
 <span class="sd">    :math:`e_3 = U_3/V_3` in :math:`\mathrm{erg\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">sound_speed_2</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-ejecta sound speed</span>
 
 <span class="sd">    .. math::</span>
@@ -2177,10 +2177,10 @@
 <span class="sd">        \sqrt{\gamma_2(\gamma_2-1)U_2/M_2}.</span>
 
 <span class="sd">    Returned in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">sound_speed_3</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Volume-averaged shocked-CSM sound speed</span>
 
 <span class="sd">    .. math::</span>
@@ -2191,80 +2191,80 @@
 <span class="sd">        \sqrt{\gamma_3(\gamma_3-1)U_3/M_3}.</span>
 
 <span class="sd">    Returned in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Instantaneous reverse-shock jump diagnostics                        #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">post_shock_density_rs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock density at the reverse shock in :math:`\mathrm{g\,cm^{-3}}`.</span>
 
 <span class="sd">    This is an instantaneous Rankine--Hugoniot jump diagnostic, not the</span>
 <span class="sd">    volume-averaged density of Region 2.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_pressure_rs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock pressure at the reverse shock in :math:`\mathrm{dyn\,cm^{-2}}`.</span>
 
 <span class="sd">    This is an instantaneous Rankine--Hugoniot jump diagnostic, not the</span>
 <span class="sd">    volume-averaged pressure of Region 2.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_temperature_rs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock temperature at the reverse shock in K.</span>
 
 <span class="sd">    This is an instantaneous shock-front diagnostic. It should be interpreted as</span>
 <span class="sd">    the injection temperature of newly shocked ejecta, not the evolved Region-2</span>
 <span class="sd">    temperature.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_thermal_energy_density_rs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock thermal energy density at the reverse shock in :math:`\mathrm{erg\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Instantaneous forward-shock jump diagnostics                        #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="n">post_shock_density_fs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock density at the forward shock in :math:`\mathrm{g\,cm^{-3}}`.</span>
 
 <span class="sd">    This is an instantaneous Rankine--Hugoniot jump diagnostic, not the</span>
 <span class="sd">    volume-averaged density of Region 3.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_pressure_fs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock pressure at the forward shock in :math:`\mathrm{dyn\,cm^{-2}}`.</span>
 
 <span class="sd">    This is an instantaneous Rankine--Hugoniot jump diagnostic, not the</span>
 <span class="sd">    volume-averaged pressure of Region 3.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_temperature_fs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock temperature at the forward shock in K.</span>
 
 <span class="sd">    This is an instantaneous shock-front diagnostic. It should be interpreted as</span>
 <span class="sd">    the injection temperature of newly shocked CSM, not the evolved Region-3</span>
 <span class="sd">    temperature.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_thermal_energy_density_fs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Immediate post-shock thermal energy density at the forward shock in :math:`\mathrm{erg\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
 <div class="viewcode-block" id="MechanicalShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MechanicalShockEngine.html#trilobite.dynamics.shocks.numerical.MechanicalShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MechanicalShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Non-relativistic mechanical shock engine tracking forward and reverse shock evolution.</span>
 
 <span class="sd">    This class implements a **non-relativistic mechanical shock model** for ejecta--CSM</span>
@@ -2584,7 +2584,7 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">_STATE_CLASS</span> <span class="o">=</span> <span class="n">MechanicalShockState</span>
 
@@ -2609,7 +2609,7 @@
         <span class="n">gamma_3</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">3</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Instantiate the :class:`MechanicalShockEngine`.</span>
 
 <span class="sd">        Parameters</span>
@@ -2629,7 +2629,7 @@
 <span class="sd">            Adiabatic index of the shocked CSM (Region 3).  Default ``5/3``.</span>
 <span class="sd">        kwargs</span>
 <span class="sd">            Passed to the base :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mu_2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu_2</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mu_3</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu_3</span><span class="p">)</span>
@@ -2652,15 +2652,15 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MechanicalShockEngine.infer_initial_conditions.html#trilobite.dynamics.shocks.numerical.MechanicalShockEngine.infer_initial_conditions">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">infer_initial_conditions</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">R_cd_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">v_cd_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">t_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">rho_1</span><span class="p">:</span> <span class="s2">&quot;Callable&quot;</span><span class="p">,</span>
-        <span class="n">rho_4</span><span class="p">:</span> <span class="s2">&quot;Callable&quot;</span><span class="p">,</span>
-        <span class="n">u_1</span><span class="p">:</span> <span class="s2">&quot;Callable&quot;</span><span class="p">,</span>
-        <span class="n">u_4</span><span class="p">:</span> <span class="s2">&quot;Callable&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MechanicalShockInitialConditions&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="n">R_cd_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">v_cd_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">t_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">rho_1</span><span class="p">:</span> <span class="s2">"Callable"</span><span class="p">,</span>
+        <span class="n">rho_4</span><span class="p">:</span> <span class="s2">"Callable"</span><span class="p">,</span>
+        <span class="n">u_1</span><span class="p">:</span> <span class="s2">"Callable"</span><span class="p">,</span>
+        <span class="n">u_4</span><span class="p">:</span> <span class="s2">"Callable"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"MechanicalShockInitialConditions"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Derive a self-consistent 8-component initial-condition vector.</span>
 
 <span class="sd">        Given the contact-discontinuity position and velocity at time :math:`t_0`,</span>
@@ -2764,7 +2764,7 @@
 <span class="sd">        the integrand at scalar values, each density callable is invoked with a</span>
 <span class="sd">        1-element NumPy array and the result extracted with ``.flat[0]``, keeping</span>
 <span class="sd">        callables that use boolean array masking internally compatible.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># --- strip units ---</span>
         <span class="n">R_cd_0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_cd_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
         <span class="n">v_cd_0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v_cd_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
@@ -2813,9 +2813,9 @@
             <span class="n">Delta2_0</span> <span class="o">*=</span> <span class="mf">0.5</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;Cannot place the reverse-shock face in the supersonic ejecta region &quot;</span>
-                <span class="s2">&quot;after 30 bisection steps. Verify that u_1(r, t_0) &gt; v_cd_0 for some &quot;</span>
-                <span class="s2">&quot;r &lt; R_cd_0 (i.e. that a reverse shock physically exists at t_0).&quot;</span>
+                <span class="s2">"Cannot place the reverse-shock face in the supersonic ejecta region "</span>
+                <span class="s2">"after 30 bisection steps. Verify that u_1(r, t_0) &gt; v_cd_0 for some "</span>
+                <span class="s2">"r &lt; R_cd_0 (i.e. that a reverse shock physically exists at t_0)."</span>
             <span class="p">)</span>
 
         <span class="n">R_rs_0</span> <span class="o">=</span> <span class="n">R_cd_0</span> <span class="o">-</span> <span class="n">Delta2_0</span>
@@ -2844,14 +2844,14 @@
 
         <span class="k">if</span> <span class="n">v_rel_2_0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Reverse shock has non-positive upstream relative velocity &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">v_rel_2_0</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> cm/s) even after bisection. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Ensure u_1(r, t_0) &gt; v_cd_0 for some r &lt; R_cd_0.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Reverse shock has non-positive upstream relative velocity "</span>
+                <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">v_rel_2_0</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> cm/s) even after bisection. "</span>
+                <span class="sa">f</span><span class="s2">"Ensure u_1(r, t_0) &gt; v_cd_0 for some r &lt; R_cd_0."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">v_rel_3_0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Forward shock has non-positive upstream relative velocity &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">v_rel_3_0</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> cm/s). Ensure v_cd_0 &gt; u_4(R_fs_0, t_0).&quot;</span>
+                <span class="sa">f</span><span class="s2">"Forward shock has non-positive upstream relative velocity "</span>
+                <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="n">v_rel_3_0</span><span class="si">:</span><span class="s2">.3e</span><span class="si">}</span><span class="s2"> cm/s). Ensure v_cd_0 &gt; u_4(R_fs_0, t_0)."</span>
             <span class="p">)</span>
 
         <span class="c1"># --- Rankine-Hugoniot specific internal energies ---</span>
@@ -2878,11 +2878,11 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">find_ejecta_crossing_time</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">state</span><span class="p">:</span> <span class="s2">&quot;MechanicalShockState&quot;</span><span class="p">,</span>
-        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Union[u.Quantity, None]&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">state</span><span class="p">:</span> <span class="s2">"MechanicalShockState"</span><span class="p">,</span>
+        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Union[u.Quantity, None]"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the first time at which the reverse shock has crossed all ejecta.</span>
 
 <span class="sd">        The crossing is defined as the first output step where</span>
@@ -2909,7 +2909,7 @@
 <span class="sd">        ~astropy.units.Quantity or None</span>
 <span class="sd">            Time of ejecta crossing in seconds, or ``None`` if the condition</span>
 <span class="sd">            is never satisfied within the supplied time grid.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">time_arr</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">M1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M1_total</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
         <span class="n">mass_2</span> <span class="o">=</span> <span class="p">(</span>
@@ -2932,11 +2932,11 @@
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">u_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">cooling_2</span><span class="p">:</span> <span class="s2">&quot;Union[Callable, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">cooling_3</span><span class="p">:</span> <span class="s2">&quot;Union[Callable, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">&quot;Union[float, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cooling_2</span><span class="p">:</span> <span class="s2">"Union[Callable, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cooling_3</span><span class="p">:</span> <span class="s2">"Union[Callable, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">"Union[float, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Build the ODE right-hand side for the mechanical shock model.</span>
 
 <span class="sd">        Returns a function ``kernel(t, y)`` suitable for</span>
@@ -2985,7 +2985,7 @@
 <span class="sd">            ``kernel(t, y) -&gt; dy/dt`` where</span>
 <span class="sd">            ``y = [R_cd, Phi, M2, M3, U2, U3, Delta2, Delta3]``</span>
 <span class="sd">            and ``Phi = v_cd^2``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Pull instance constants into the local scope -- avoids repeated</span>
         <span class="c1"># attribute lookups inside the hot kernel path.</span>
         <span class="n">gamma_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gamma_2</span>
@@ -3107,27 +3107,27 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.MechanicalShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.numerical.MechanicalShockEngine.compute_shock_properties">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">u_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">initial_conditions</span><span class="p">:</span> <span class="s2">&quot;Union[MechanicalShockInitialConditions, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">R_cd_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e14</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">v_cd_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
-        <span class="n">M2_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e26</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
-        <span class="n">M3_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e26</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
-        <span class="n">U2_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e45</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
-        <span class="n">U3_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e45</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
-        <span class="n">Delta2_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e12</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">Delta3_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e12</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="n">t_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
-        <span class="n">cooling_2</span><span class="p">:</span> <span class="s2">&quot;Union[Callable, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">cooling_3</span><span class="p">:</span> <span class="s2">&quot;Union[Callable, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">&quot;Union[float, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">initial_conditions</span><span class="p">:</span> <span class="s2">"Union[MechanicalShockInitialConditions, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">R_cd_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e14</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="n">v_cd_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">M2_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e26</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">M3_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e26</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="n">U2_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e45</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
+        <span class="n">U3_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e45</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
+        <span class="n">Delta2_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e12</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="n">Delta3_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e12</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="n">t_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">cooling_2</span><span class="p">:</span> <span class="s2">"Union[Callable, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cooling_3</span><span class="p">:</span> <span class="s2">"Union[Callable, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">"Union[float, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MechanicalShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the mechanical shock evolution and return a unit-bearing state.</span>
 
 <span class="sd">        Adiabatic indices are taken from the engine instance (``self._gamma_2``,</span>
@@ -3188,7 +3188,7 @@
 <span class="sd">            Default ``None`` (no limit).</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :func:`scipy.integrate.solve_ivp`.</span>
-<span class="sd">            ``method`` defaults to ``&#39;Radau&#39;``; ``rtol`` defaults to</span>
+<span class="sd">            ``method`` defaults to ``'Radau'``; ``rtol`` defaults to</span>
 <span class="sd">            ``1e-6`` (suitable for parameter studies; tighten to ``1e-10`` for</span>
 <span class="sd">            publication accuracy).</span>
 
@@ -3196,7 +3196,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~trilobite.dynamics.shocks.numerical.MechanicalShockState</span>
 <span class="sd">            Named tuple of :class:`~astropy.units.Quantity` arrays.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">time_s</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">initial_conditions</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -3295,7 +3295,7 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_shock_properties_cgs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">rho_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">rho_4</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
         <span class="n">u_1</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
@@ -3309,18 +3309,18 @@
         <span class="n">Delta2_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e12</span><span class="p">,</span>
         <span class="n">Delta3_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e12</span><span class="p">,</span>
         <span class="n">t_0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">cooling_2</span><span class="p">:</span> <span class="s2">&quot;Union[Callable, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">cooling_3</span><span class="p">:</span> <span class="s2">&quot;Union[Callable, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">&quot;Union[float, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cooling_2</span><span class="p">:</span> <span class="s2">"Union[Callable, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cooling_3</span><span class="p">:</span> <span class="s2">"Union[Callable, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">M1_total</span><span class="p">:</span> <span class="s2">"Union[float, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MechanicalShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Integrate the mechanical shock ODEs in CGS units and return all diagnostics.</span>
 
 <span class="sd">        When ``M1_total`` is finite the integration is split at the ejecta-crossing</span>
 <span class="sd">        event to restart Radau cleanly at the RHS discontinuity, avoiding unnecessary</span>
 <span class="sd">        step-size reduction near the switch.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
         <span class="n">gamma_2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_gamma_2</span>
@@ -3345,8 +3345,8 @@
         <span class="n">t_span</span> <span class="o">=</span> <span class="p">(</span><span class="n">t_0</span><span class="p">,</span> <span class="n">t_max</span><span class="p">)</span>
 
         <span class="n">solver_kwargs</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;rtol&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_RTOL</span><span class="p">)</span>
-        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;method&quot;</span><span class="p">,</span> <span class="s2">&quot;Radau&quot;</span><span class="p">)</span>
+        <span class="n">rtol</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"rtol"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_RTOL</span><span class="p">)</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="n">solver_kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">"method"</span><span class="p">,</span> <span class="s2">"Radau"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">_M1_total</span><span class="p">):</span>
             <span class="c1"># Two-phase integration: detect the ejecta-crossing event precisely so</span>
@@ -3362,7 +3362,7 @@
                 <span class="n">kernel</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">events</span><span class="o">=</span><span class="p">[</span><span class="n">_crossing</span><span class="p">],</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">solver_kwargs</span>
             <span class="p">)</span>
             <span class="k">if</span> <span class="n">sol1</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ODE solver failed (phase 1):</span><span class="se">\n</span><span class="si">{</span><span class="n">sol1</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ODE solver failed (phase 1):</span><span class="se">\n</span><span class="si">{</span><span class="n">sol1</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
             <span class="k">if</span> <span class="n">sol1</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">t_cross</span> <span class="o">=</span> <span class="n">sol1</span><span class="o">.</span><span class="n">t_events</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -3379,7 +3379,7 @@
                         <span class="n">kernel</span><span class="p">,</span> <span class="p">(</span><span class="n">t_cross</span><span class="p">,</span> <span class="n">t_max</span><span class="p">),</span> <span class="n">y_cross</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">time</span><span class="p">[</span><span class="n">after</span><span class="p">],</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">solver_kwargs</span>
                     <span class="p">)</span>
                     <span class="k">if</span> <span class="n">sol2</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ODE solver failed (phase 2):</span><span class="se">\n</span><span class="si">{</span><span class="n">sol2</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ODE solver failed (phase 2):</span><span class="se">\n</span><span class="si">{</span><span class="n">sol2</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
                     <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">8</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span>
                     <span class="n">Y</span><span class="p">[:,</span> <span class="o">~</span><span class="n">after</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol1</span><span class="o">.</span><span class="n">y</span>
                     <span class="n">Y</span><span class="p">[:,</span> <span class="n">after</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol2</span><span class="o">.</span><span class="n">y</span>
@@ -3390,7 +3390,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sol</span> <span class="o">=</span> <span class="n">solve_ivp</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">t_span</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">t_eval</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">rtol</span><span class="o">=</span><span class="n">rtol</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="o">**</span><span class="n">solver_kwargs</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">sol</span><span class="o">.</span><span class="n">status</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ODE solver failed:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"ODE solver failed:</span><span class="se">\n</span><span class="si">{</span><span class="n">sol</span><span class="o">.</span><span class="n">message</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
             <span class="n">Y</span> <span class="o">=</span> <span class="n">sol</span><span class="o">.</span><span class="n">y</span>
 
         <span class="n">R_cd</span><span class="p">,</span> <span class="n">Phi</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">M3</span><span class="p">,</span> <span class="n">U2</span><span class="p">,</span> <span class="n">U3</span><span class="p">,</span> <span class="n">Delta2</span><span class="p">,</span> <span class="n">Delta3</span> <span class="o">=</span> <span class="n">Y</span>
@@ -3460,10 +3460,10 @@
                 <span class="n">gamma</span><span class="o">=</span><span class="n">gamma_3</span><span class="p">,</span>
                 <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_mu_3</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">psd_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_density&quot;</span><span class="p">]</span>
-            <span class="n">psp_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_pressure&quot;</span><span class="p">]</span>
-            <span class="n">pst_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_temperature&quot;</span><span class="p">]</span>
-            <span class="n">pste_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_thermal_energy_density&quot;</span><span class="p">]</span>
+            <span class="n">psd_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_density"</span><span class="p">]</span>
+            <span class="n">psp_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_pressure"</span><span class="p">]</span>
+            <span class="n">pst_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_temperature"</span><span class="p">]</span>
+            <span class="n">pste_fs</span><span class="p">[</span><span class="n">active_fs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_thermal_energy_density"</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">active_rs</span><span class="p">):</span>
             <span class="n">rh</span> <span class="o">=</span> <span class="n">StrongColdShockConditions</span><span class="o">.</span><span class="n">_solve</span><span class="p">(</span>
@@ -3473,10 +3473,10 @@
                 <span class="n">gamma</span><span class="o">=</span><span class="n">gamma_2</span><span class="p">,</span>
                 <span class="n">mu</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_mu_2</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">psd_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_density&quot;</span><span class="p">]</span>
-            <span class="n">psp_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_pressure&quot;</span><span class="p">]</span>
-            <span class="n">pst_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_temperature&quot;</span><span class="p">]</span>
-            <span class="n">pste_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">&quot;post_shock_thermal_energy_density&quot;</span><span class="p">]</span>
+            <span class="n">psd_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_density"</span><span class="p">]</span>
+            <span class="n">psp_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_pressure"</span><span class="p">]</span>
+            <span class="n">pst_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_temperature"</span><span class="p">]</span>
+            <span class="n">pste_rs</span><span class="p">[</span><span class="n">active_rs</span><span class="p">]</span> <span class="o">=</span> <span class="n">rh</span><span class="p">[</span><span class="s2">"post_shock_thermal_energy_density"</span><span class="p">]</span>
 
         <span class="c1"># Mask RS position and velocity to 0/NaN once the RS no longer exists.</span>
         <span class="c1"># The ODE state (Delta2, U2) continues to evolve but R_rs and D_rs</span>
@@ -3524,13 +3524,13 @@
 <div class="viewcode-block" id="RelMechanicalShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.numerical.RelMechanicalShockEngine.html#trilobite.dynamics.shocks.numerical.RelMechanicalShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelMechanicalShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">,</span> <span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Relativistic mechanical shock engine.</span>
 
 <span class="sd">    .. note::</span>
 
 <span class="sd">        This engine is not yet implemented. It will be added in a future release.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">pass</span></div>
 
@@ -3563,8 +3563,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -3598,7 +3598,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

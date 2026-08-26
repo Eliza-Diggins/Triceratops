@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/inference/prior';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.inference.prior</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Inference priors for use in Bayesian inference.</span>
 
 <span class="sd">This module provides a collection of commonly used prior probability</span>
@@ -491,7 +491,7 @@
 
 <span class="sd">Improper priors are discouraged and should only be introduced deliberately</span>
 <span class="sd">and explicitly by the user.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
@@ -505,23 +505,23 @@
 <span class="c1"># Package versioning and Type checking</span>
 <span class="c1"># ============================================================= #=</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="n">__pkg_version__</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">&quot;trilobite&quot;</span><span class="p">)</span>
+    <span class="n">__pkg_version__</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="s2">"trilobite"</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">PackageNotFoundError</span><span class="p">:</span>
-    <span class="n">__pkg_version__</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+    <span class="n">__pkg_version__</span> <span class="o">=</span> <span class="s2">"unknown"</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Prior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;UniformPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;LogUniformPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;NormalPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TruncatedNormalPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;HalfNormalPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;LogNormalPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GammaPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;BetaPrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;CallablePrior&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;PRIOR_REGISTRY&quot;</span><span class="p">,</span>
+    <span class="s2">"Prior"</span><span class="p">,</span>
+    <span class="s2">"UniformPrior"</span><span class="p">,</span>
+    <span class="s2">"LogUniformPrior"</span><span class="p">,</span>
+    <span class="s2">"NormalPrior"</span><span class="p">,</span>
+    <span class="s2">"TruncatedNormalPrior"</span><span class="p">,</span>
+    <span class="s2">"HalfNormalPrior"</span><span class="p">,</span>
+    <span class="s2">"LogNormalPrior"</span><span class="p">,</span>
+    <span class="s2">"GammaPrior"</span><span class="p">,</span>
+    <span class="s2">"BetaPrior"</span><span class="p">,</span>
+    <span class="s2">"CallablePrior"</span><span class="p">,</span>
+    <span class="s2">"PRIOR_REGISTRY"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -531,7 +531,7 @@
 <div class="viewcode-block" id="Prior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.Prior.html#trilobite.inference.prior.Prior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Prior</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for prior probability distributions.</span>
 
 <span class="sd">    This class defines the minimal interface required for Bayesian inference</span>
@@ -557,13 +557,13 @@
 <span class="sd">    -----</span>
 <span class="sd">    This class is sampler-agnostic and can be used with MCMC, nested sampling,</span>
 <span class="sd">    variational inference, or grid-based approaches.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------ #</span>
     <span class="c1"># Initialization                                               #</span>
     <span class="c1"># ------------------------------------------------------------ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Initialize the prior distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -572,7 +572,7 @@
 <span class="sd">            Keyword arguments defining the parameters of the prior distribution.</span>
 <span class="sd">            These are stored and passed to the generator methods so that subclasses</span>
 <span class="sd">            may flexibly define their behavior.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Store the defining parameters for introspection and debugging.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span> <span class="o">=</span> <span class="n">parameters</span>
 
@@ -586,7 +586,7 @@
     <span class="c1"># ------------------------------------------------------------ #</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate the log-prior callable.</span>
 
 <span class="sd">        This method *must* be implemented by all subclasses.</span>
@@ -596,11 +596,11 @@
 <span class="sd">        callable</span>
 <span class="sd">            A function ``logp(x)`` that evaluates ``log p(x)`` and returns</span>
 <span class="sd">            ``-np.inf`` outside the support.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate the probability density function (PDF) callable.</span>
 
 <span class="sd">        This method is optional. If not implemented, calling ``pdf`` will</span>
@@ -610,11 +610,11 @@
 <span class="sd">        -------</span>
 <span class="sd">        callable or None</span>
 <span class="sd">            A function ``p(x)`` evaluating the PDF, or ``None`` if unavailable.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_cum_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Generate the cumulative distribution function (CDF) callable.</span>
 
 <span class="sd">        This method is optional. If not implemented, calling ``cdf`` will</span>
@@ -624,7 +624,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        callable or None</span>
 <span class="sd">            A function ``P(X ≤ x)``, or ``None`` if unavailable.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="c1"># ------------------------------------------------------------ #</span>
@@ -633,7 +633,7 @@
 <div class="viewcode-block" id="Prior.logp">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.Prior.logp.html#trilobite.inference.prior.Prior.logp">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">logp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the log-prior at a given value.</span>
 
 <span class="sd">        Parameters</span>
@@ -645,39 +645,39 @@
 <span class="sd">        -------</span>
 <span class="sd">        float</span>
 <span class="sd">            Log-prior value.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_prior</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Prior.pdf">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.Prior.pdf.html#trilobite.inference.prior.Prior.pdf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the probability density function at a given value.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        NotImplementedError</span>
 <span class="sd">            If the PDF is not defined for this prior.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> does not define a PDF.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> does not define a PDF."</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prior</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Prior.cdf">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.Prior.cdf.html#trilobite.inference.prior.Prior.cdf">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the cumulative distribution function at a given value.</span>
 
 <span class="sd">        Raises</span>
 <span class="sd">        ------</span>
 <span class="sd">        NotImplementedError</span>
 <span class="sd">            If the CDF is not defined for this prior.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cum_prior</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> does not define a CDF.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> does not define a CDF."</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cum_prior</span><span class="p">(</span><span class="n">x</span><span class="p">)</span></div>
 
 
@@ -685,22 +685,22 @@
     <span class="c1"># Dunder methods                                               #</span>
     <span class="c1"># ------------------------------------------------------------ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Alias for :meth:`logp`.</span>
 
 <span class="sd">        This allows prior instances to be used as callable log-priors.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">logp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">)"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">:</span>
-            <span class="n">params</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with parameters (</span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">)&quot;</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">"</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with parameters (</span><span class="si">{</span><span class="n">params</span><span class="si">}</span><span class="s2">)"</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span>
 
     <span class="c1"># ------------------------------------------------------------ #</span>
     <span class="c1"># Serialization support                                        #</span>
@@ -708,7 +708,7 @@
 <div class="viewcode-block" id="Prior.to_dict">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.Prior.to_dict.html#trilobite.inference.prior.Prior.to_dict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Serialize the prior to a JSON-safe dictionary.</span>
 
 <span class="sd">        .. important::</span>
@@ -728,7 +728,7 @@
 <span class="sd">            If the prior class is not importable.</span>
 <span class="sd">        TypeError</span>
 <span class="sd">            If constructor parameters are not JSON-serializable.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 
@@ -737,43 +737,43 @@
 
         <span class="c1"># Verify importability of the class. This ensures that the prior can be</span>
         <span class="c1"># reconstructed from its serialized form.</span>
-        <span class="k">if</span> <span class="n">module_name</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">module_name</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Prior &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; is defined in __main__ and &quot;</span>
-                <span class="s2">&quot;cannot be serialized. Define it in an importable module.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Prior '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' is defined in __main__ and "</span>
+                <span class="s2">"cannot be serialized. Define it in an importable module."</span>
             <span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39; for prior &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; is not importable.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Module '</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">' for prior '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' is not importable."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Prior class &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; not found in module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Prior class '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' not found in module '</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
 
         <span class="c1"># Ensure that we can actually perform the json dump.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Prior &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; contains non-serializable parameters. &quot;</span>
-                <span class="s2">&quot;Ensure constructor arguments are JSON-safe.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Prior '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' contains non-serializable parameters. "</span>
+                <span class="s2">"Ensure constructor arguments are JSON-safe."</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># Construct the dump dictionary.</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="s2">&quot;Prior&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">__pkg_version__</span><span class="p">,</span>
-            <span class="s2">&quot;target&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span>
+            <span class="s2">"format"</span><span class="p">:</span> <span class="s2">"Prior"</span><span class="p">,</span>
+            <span class="s2">"version"</span><span class="p">:</span> <span class="n">__pkg_version__</span><span class="p">,</span>
+            <span class="s2">"target"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span>
+            <span class="s2">"parameters"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parameters</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="Prior.from_dict">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.Prior.from_dict.html#trilobite.inference.prior.Prior.from_dict">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">prior_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Prior&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">prior_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Prior"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Reconstruct a Prior from a serialized dictionary.</span>
 
 <span class="sd">        Parameters</span>
@@ -796,48 +796,48 @@
 <span class="sd">            If module or class cannot be imported.</span>
 <span class="sd">        TypeError</span>
 <span class="sd">            If imported object is not a Prior subclass.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">importlib</span>
 
         <span class="c1"># Ensure the basic properties of the dictionary are</span>
         <span class="c1"># self consistent. We need a dictionary, we need to</span>
         <span class="c1"># correct format, and we need a target to exist.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prior_dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;prior_dict must be a dictionary.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"prior_dict must be a dictionary."</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">prior_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;format&quot;</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">&quot;Prior&quot;</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dictionary does not represent a Prior.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">prior_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"format"</span><span class="p">)</span> <span class="o">!=</span> <span class="s2">"Prior"</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Dictionary does not represent a Prior."</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">target</span> <span class="o">=</span> <span class="n">prior_dict</span><span class="p">[</span><span class="s2">&quot;target&quot;</span><span class="p">]</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">prior_dict</span><span class="p">[</span><span class="s2">"target"</span><span class="p">]</span>
         <span class="k">except</span> <span class="ne">KeyError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Serialized Prior missing required &#39;target&#39; field.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Serialized Prior missing required 'target' field."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
-        <span class="n">parameters</span> <span class="o">=</span> <span class="n">prior_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parameters&quot;</span><span class="p">,</span> <span class="p">{})</span>
+        <span class="n">parameters</span> <span class="o">=</span> <span class="n">prior_dict</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"parameters"</span><span class="p">,</span> <span class="p">{})</span>
 
         <span class="c1"># Check the target structure and then attempt to import</span>
         <span class="c1"># the class to make sure everything works.</span>
-        <span class="k">if</span> <span class="s2">&quot;:&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid target &#39;</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">&#39;. Must be &#39;module.submodule:ClassName&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">":"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">target</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid target '</span><span class="si">{</span><span class="n">target</span><span class="si">}</span><span class="s2">'. Must be 'module.submodule:ClassName'."</span><span class="p">)</span>
 
-        <span class="n">module_name</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">module_name</span><span class="p">,</span> <span class="n">class_name</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">":"</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">module</span> <span class="o">=</span> <span class="n">importlib</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="n">module_name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ImportError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Could not import module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39; while reconstructing Prior &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Could not import module '</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">' while reconstructing Prior '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">'."</span>
             <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># Retrieve the class and ensure it exists. This also serves as a check that the class is importable.</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">prior_cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="n">class_name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Class &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; not found in module &#39;</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+            <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Class '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' not found in module '</span><span class="si">{</span><span class="n">module_name</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
 
         <span class="c1"># Check the type.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">issubclass</span><span class="p">(</span><span class="n">prior_cls</span><span class="p">,</span> <span class="n">Prior</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Imported class &#39;</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">&#39; is not a subclass of Prior.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Imported class '</span><span class="si">{</span><span class="n">class_name</span><span class="si">}</span><span class="s2">' is not a subclass of Prior."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">prior_cls</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span></div>
 </div>
@@ -847,17 +847,17 @@
 <div class="viewcode-block" id="CallablePrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.CallablePrior.html#trilobite.inference.prior.CallablePrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CallablePrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Wrapper for user-supplied log-prior callables.</span>
 
 <span class="sd">    This allows custom priors without requiring users to subclass `Prior`,</span>
 <span class="sd">    while preserving introspection and serialization metadata.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_prior_callable</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="c1"># Ensure that the callable is valid.</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">log_prior_callable</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;log_prior_callable must be callable.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"log_prior_callable must be callable."</span><span class="p">)</span>
 
         <span class="c1"># Store the callable and metadata.</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_user_log_prior</span> <span class="o">=</span> <span class="n">log_prior_callable</span>
@@ -875,7 +875,7 @@
 <div class="viewcode-block" id="UniformPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.UniformPrior.html#trilobite.inference.prior.UniformPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UniformPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Uniform (top-hat) prior distribution.</span>
 
 <span class="sd">    This prior assigns equal probability density to all values within a</span>
@@ -917,11 +917,11 @@
 <span class="sd">      (e.g., uniform in ``x`` is not uniform in ``log x``).</span>
 <span class="sd">    - For scale parameters spanning orders of magnitude, a log-uniform</span>
 <span class="sd">      prior is usually more appropriate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">upper</span> <span class="o">&lt;=</span> <span class="n">lower</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;UniformPrior requires upper &gt; lower.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"UniformPrior requires upper &gt; lower."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">lower</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">upper</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -939,7 +939,7 @@
 <div class="viewcode-block" id="LogUniformPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.LogUniformPrior.html#trilobite.inference.prior.LogUniformPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LogUniformPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Log-uniform (Jeffreys-type) prior distribution.</span>
 
 <span class="sd">    This prior assigns equal probability per decade in the parameter,</span>
@@ -978,13 +978,13 @@
 <span class="sd">    - Requires explicit lower and upper bounds</span>
 <span class="sd">    - Diverges as :math:`x\to 0` without a lower cutoff</span>
 <span class="sd">    - Should not be used for parameters that can take zero or negative values</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">lower</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">upper</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;LogUniformPrior bounds must be &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"LogUniformPrior bounds must be &gt; 0."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">upper</span> <span class="o">&lt;=</span> <span class="n">lower</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;LogUniformPrior requires upper &gt; lower.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"LogUniformPrior requires upper &gt; lower."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">lower</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">lower</span><span class="p">),</span> <span class="n">upper</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">upper</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -1005,7 +1005,7 @@
 <div class="viewcode-block" id="NormalPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.NormalPrior.html#trilobite.inference.prior.NormalPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NormalPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Normal (Gaussian) prior distribution.</span>
 
 <span class="sd">    This prior assumes that the parameter follows a normal distribution</span>
@@ -1018,11 +1018,11 @@
 <span class="sd">        -\frac{(x - \mu)^2}{2\sigma^2}</span>
 <span class="sd">        \right]</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;NormalPrior requires sigma &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"NormalPrior requires sigma &gt; 0."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mean</span><span class="p">),</span> <span class="n">sigma</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -1038,7 +1038,7 @@
 <div class="viewcode-block" id="TruncatedNormalPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.TruncatedNormalPrior.html#trilobite.inference.prior.TruncatedNormalPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TruncatedNormalPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Truncated normal (Gaussian) prior distribution.</span>
 
 <span class="sd">    This prior is a normal distribution restricted to a finite interval</span>
@@ -1079,13 +1079,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    - Behavior near the boundaries can influence inference</span>
 <span class="sd">    - Poorly chosen bounds can introduce bias</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TruncatedNormalPrior requires sigma &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"TruncatedNormalPrior requires sigma &gt; 0."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">upper</span> <span class="o">&lt;=</span> <span class="n">lower</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TruncatedNormalPrior requires upper &gt; lower.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"TruncatedNormalPrior requires upper &gt; lower."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
             <span class="n">mean</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mean</span><span class="p">),</span>
             <span class="n">sigma</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">),</span>
@@ -1099,7 +1099,7 @@
         <span class="n">Z</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">erf</span><span class="p">(</span><span class="n">beta</span><span class="p">)</span> <span class="o">-</span> <span class="n">erf</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span>
 
         <span class="k">if</span> <span class="n">Z</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid truncation range for TruncatedNormalPrior.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid truncation range for TruncatedNormalPrior."</span><span class="p">)</span>
 
         <span class="n">log_norm</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Z</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigma</span><span class="p">)</span>
 
@@ -1115,7 +1115,7 @@
 <div class="viewcode-block" id="HalfNormalPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.HalfNormalPrior.html#trilobite.inference.prior.HalfNormalPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">HalfNormalPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Half-normal prior distribution.</span>
 
 <span class="sd">    This is a normal distribution restricted to non-negative values.</span>
@@ -1153,11 +1153,11 @@
 <span class="sd">    -------</span>
 <span class="sd">    - Strongly informative near zero</span>
 <span class="sd">    - Scale parameter must be chosen carefully</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;HalfNormalPrior requires sigma &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"HalfNormalPrior requires sigma &gt; 0."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">sigma</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -1178,7 +1178,7 @@
 <div class="viewcode-block" id="LogNormalPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.LogNormalPrior.html#trilobite.inference.prior.LogNormalPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LogNormalPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Log-normal prior distribution.</span>
 
 <span class="sd">    This prior assumes that the logarithm of the parameter is normally</span>
@@ -1219,11 +1219,11 @@
 <span class="sd">    -------</span>
 <span class="sd">    - Mean and variance are not intuitive in linear space</span>
 <span class="sd">    - Strongly asymmetric for large :math:`\sigma`</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">sigma</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;LogNormalPrior requires sigma &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"LogNormalPrior requires sigma &gt; 0."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">mean</span><span class="p">),</span> <span class="n">sigma</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">mean</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -1245,7 +1245,7 @@
 <div class="viewcode-block" id="GammaPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.GammaPrior.html#trilobite.inference.prior.GammaPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GammaPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Gamma prior distribution.</span>
 
 <span class="sd">    The Gamma distribution is defined as</span>
@@ -1282,11 +1282,11 @@
 <span class="sd">    -------</span>
 <span class="sd">    - Shape and scale parameters may be unintuitive</span>
 <span class="sd">    - Can become highly informative if poorly chosen</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">shape</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">scale</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;GammaPrior requires shape &gt; 0 and scale &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"GammaPrior requires shape &gt; 0 and scale &gt; 0."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">shape</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">scale</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">scale</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -1307,7 +1307,7 @@
 <div class="viewcode-block" id="BetaPrior">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.inference.prior.BetaPrior.html#trilobite.inference.prior.BetaPrior">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BetaPrior</span><span class="p">(</span><span class="n">Prior</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Beta prior distribution.</span>
 
 <span class="sd">    This prior is defined on the unit interval.</span>
@@ -1346,11 +1346,11 @@
 <span class="sd">    - Singular behavior at boundaries when :math:`\alpha &lt; 1` or</span>
 <span class="sd">      :math:`\beta &lt; 1`</span>
 <span class="sd">    - Must not be used outside the unit interval</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">beta</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;BetaPrior requires alpha &gt; 0 and beta &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"BetaPrior requires alpha &gt; 0 and beta &gt; 0."</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">alpha</span><span class="p">),</span> <span class="n">beta</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">beta</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_generate_log_prior</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">beta</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -1372,37 +1372,37 @@
 <span class="c1"># unit parsing and other checks. This also allows us to easily test that all</span>
 <span class="c1"># concrete subclasses of Prior are included in the registry.</span>
 <span class="n">PRIOR_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;uniform&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">UniformPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="s2">&quot;upper&quot;</span><span class="p">),</span>
+    <span class="s2">"uniform"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">UniformPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"lower"</span><span class="p">,</span> <span class="s2">"upper"</span><span class="p">),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;loguniform&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">LogUniformPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="s2">&quot;upper&quot;</span><span class="p">),</span>
+    <span class="s2">"loguniform"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">LogUniformPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"lower"</span><span class="p">,</span> <span class="s2">"upper"</span><span class="p">),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;normal&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">NormalPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma&quot;</span><span class="p">),</span>
+    <span class="s2">"normal"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">NormalPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"sigma"</span><span class="p">),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;lognormal&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">LogNormalPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma&quot;</span><span class="p">),</span>
+    <span class="s2">"lognormal"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">LogNormalPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"sigma"</span><span class="p">),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;halfnormal&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">HalfNormalPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,),</span>
+    <span class="s2">"halfnormal"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">HalfNormalPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"sigma"</span><span class="p">,),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;gamma&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">GammaPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;scale&quot;</span><span class="p">,),</span>
+    <span class="s2">"gamma"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">GammaPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"scale"</span><span class="p">,),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;beta&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">BetaPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;scale&quot;</span><span class="p">,),</span>
+    <span class="s2">"beta"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">BetaPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"scale"</span><span class="p">,),</span>
     <span class="p">},</span>
-    <span class="s2">&quot;truncatednormal&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class&quot;</span><span class="p">:</span> <span class="n">TruncatedNormalPrior</span><span class="p">,</span>
-        <span class="s2">&quot;unit_params&quot;</span><span class="p">:</span> <span class="p">(</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="s2">&quot;lower&quot;</span><span class="p">,</span> <span class="s2">&quot;upper&quot;</span><span class="p">),</span>
+    <span class="s2">"truncatednormal"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s2">"class"</span><span class="p">:</span> <span class="n">TruncatedNormalPrior</span><span class="p">,</span>
+        <span class="s2">"unit_params"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mean"</span><span class="p">,</span> <span class="s2">"sigma"</span><span class="p">,</span> <span class="s2">"lower"</span><span class="p">,</span> <span class="s2">"upper"</span><span class="p">),</span>
     <span class="p">},</span>
 <span class="p">}</span>
 </pre></div>
@@ -1434,8 +1434,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1469,7 +1469,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

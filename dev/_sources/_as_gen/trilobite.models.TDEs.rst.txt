@@ -22,6 +22,7 @@ trilobite.models.TDEs
 
    
       tde_utils
+      van_velzen
    
    
 

@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/shocks/core/shock_engine';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.shocks.core.shock_engine</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Shock engine module for shock computation in astrophysical transients.</span>
 
 <span class="sd">The :class:`ShockEngine` is an abstract base class which encapsulates all of the necessary</span>
@@ -454,7 +454,7 @@
 
 <span class="sd">These shock engines can then be instantiated by :class:`~trilobite.models.core.base.Model` classes to provide</span>
 <span class="sd">an engine for forward modeling of astrophysical transients.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
@@ -465,7 +465,7 @@
 <div class="viewcode-block" id="ShockEngine">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.shock_engine.ShockEngine.html#trilobite.dynamics.shocks.numerical.ShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ShockEngine</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Base class for shock engine implementations.</span>
 
 <span class="sd">    A :class:`ShockEngine` encapsulates the necessary physical tooling to compute the dynamics</span>
@@ -500,9 +500,9 @@
 
 <span class="sd">        all of which have very different internal structures but can be interfaced in a consistent manner via</span>
 <span class="sd">        the :class:`ShockEngine` abstraction.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">_STATE_CLASS</span><span class="p">:</span> <span class="s2">&quot;Union[type, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_STATE_CLASS</span><span class="p">:</span> <span class="s2">"Union[type, None]"</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="c1"># =========================================== #</span>
     <span class="c1"># Initialization                              #</span>
@@ -510,10 +510,10 @@
     <span class="c1"># The shock engine is a state-less object which simply provides methods for computing</span>
     <span class="c1"># shock properties given input parameters and (if necessary) caching of intermediate</span>
     <span class="c1"># results. The __init__ MUST reflect this design choice when subclassed. It IS NOT</span>
-    <span class="c1"># re-initialized on every call to its host Model&#39;s forward call.</span>
+    <span class="c1"># re-initialized on every call to its host Model's forward call.</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Instantiate the shock engine instance.</span>
 
 <span class="sd">        Parameters</span>
@@ -522,7 +522,7 @@
 <span class="sd">            Parameters to be used for initializing the shock engine. These may vary</span>
 <span class="sd">            depending on the specific implementation and its requirements. By default, the</span>
 <span class="sd">            parameters are not used.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># DEVELOPER NOTE: ``**kwargs`` here should be instance-level parameters for things like</span>
         <span class="c1"># the cache size, numerical tolerances, etc. These are NOT the physical parameters</span>
         <span class="c1"># of the shock model itself, which should be passed to the compute methods. IN NO CASES</span>
@@ -537,7 +537,7 @@
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.shock_engine.ShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.numerical.ShockEngine.compute_shock_properties">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="n">_UnitBearingArrayLike</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_UnitBearingArrayLike</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the shock properties at a given dynamical time.</span>
 
 <span class="sd">        This method is a high-level wrapper around the low-level ``._compute_shock_properties_cgs``, which handles</span>
@@ -560,7 +560,7 @@
 <span class="sd">        dict of str, float, astropy.units.Quantity, or numpy.ndarray</span>
 <span class="sd">            The results of the computation. The various calculated quantities are encapsulated in the</span>
 <span class="sd">            returned dictionary with specific keys.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">pass</span></div>
 
 
@@ -572,13 +572,13 @@
     <span class="c1"># DUNDER METHODS                              #</span>
     <span class="c1"># =========================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;ShockEngine()&quot;</span>
+        <span class="k">return</span> <span class="s2">"ShockEngine()"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s2">&quot;&lt;ShockEngine()&gt;&quot;</span>
+        <span class="k">return</span> <span class="s2">"&lt;ShockEngine()&gt;"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time</span><span class="p">:</span> <span class="n">_UnitBearingArrayLike</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">_UnitBearingArrayLike</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the shock properties at a given dynamical time.</span>
 
 <span class="sd">        This is an alias to the :meth:`compute_shock_properties` function.</span>
@@ -599,7 +599,7 @@
 <span class="sd">        dict of str, float, astropy.units.Quantity, or numpy.ndarray</span>
 <span class="sd">            The results of the computation. The various calculated quantities are encapsulated in the</span>
 <span class="sd">            returned dictionary with specific keys.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_shock_properties</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span></div>
 
 </pre></div>
@@ -631,8 +631,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -666,7 +666,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

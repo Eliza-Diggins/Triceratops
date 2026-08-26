@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/shocks/blandford_mckee';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.shocks.blandford_mckee</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Blandford--McKee ultra-relativistic blastwave shock dynamics.</span>
 
 <span class="sd">This module implements the analytic Blandford--McKee (BM) self-similar solution</span>
@@ -488,7 +488,7 @@
 <span class="sd">References</span>
 <span class="sd">----------</span>
 <span class="sd">.. footbibliography::</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Union</span>
@@ -514,7 +514,7 @@
 <div class="viewcode-block" id="BlandfordMcKeeShockState">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockState.html#trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockState">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BlandfordMcKeeShockState</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Time-dependent state returned by Blandford--McKee shock engines.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Time-dependent state returned by Blandford--McKee shock engines.</span>
 
 <span class="sd">    Fields that carry physical dimensions are returned as</span>
 <span class="sd">    :class:`~astropy.units.Quantity` by the public interface and as plain</span>
@@ -530,65 +530,65 @@
 <span class="sd">    Proper (comoving-frame) thermodynamic quantities are Lorentz scalars.</span>
 <span class="sd">    Lab-frame quantities are defined in the rest frame of the unshocked external</span>
 <span class="sd">    medium.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">radius</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shock radius :math:`R(t) \approx ct` in cm.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shock radius :math:`R(t) \approx ct` in cm."""</span>
 
     <span class="n">lorentz_factor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shock Lorentz factor :math:`\Gamma(t)` [dimensionless].&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shock Lorentz factor :math:`\Gamma(t)` [dimensionless]."""</span>
 
     <span class="n">beta</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shock velocity in units of :math:`c`, :math:`\beta = v/c` [dimensionless].&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shock velocity in units of :math:`c`, :math:`\beta = v/c` [dimensionless]."""</span>
 
     <span class="n">velocity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Shock velocity :math:`v = \beta c` in cm/s.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Shock velocity :math:`v = \beta c` in cm/s."""</span>
 
     <span class="n">fluid_lorentz_factor</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Lorentz factor of the immediately post-shock fluid,</span>
 <span class="sd">    :math:`\gamma_2 \approx \Gamma / \sqrt{2}` [dimensionless].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_pressure</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Proper (comoving-frame) post-shock pressure</span>
 <span class="sd">    :math:`p_2 \simeq \tfrac{2}{3}\rho_{\rm ext}c^2\Gamma^2`</span>
 <span class="sd">    in :math:`\mathrm{dyne\,cm^{-2}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_temperature</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Proper (comoving-frame) post-shock temperature :math:`T_2` in K,</span>
 <span class="sd">    from the Maxwell--Jüttner internal-energy inversion.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_comoving_density</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Proper (comoving-frame) post-shock rest-mass density :math:`\rho_2`</span>
 <span class="sd">    in :math:`\mathrm{g\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">post_shock_lab_density</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Lab-frame post-shock rest-mass density</span>
 <span class="sd">    :math:`\gamma_2\rho_2`</span>
 <span class="sd">    in :math:`\mathrm{g\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">thermal_energy_density_comoving</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Proper (comoving-frame) post-shock thermal (internal) energy density</span>
 <span class="sd">    :math:`U_{\rm int,2} = p_2 / (\hat{\gamma} - 1)`</span>
 <span class="sd">    in :math:`\mathrm{erg\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">thermal_energy_density_lab</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Lab-frame post-shock energy density</span>
 <span class="sd">    :math:`T^{00} = (e_2 + p_2)\gamma_2^2 - p_2`</span>
 <span class="sd">    in :math:`\mathrm{erg\,cm^{-3}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span></div>
+<span class="sd">    """</span></div>
 
 
 
@@ -600,7 +600,7 @@
 <div class="viewcode-block" id="BlandfordMcKeeShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockEngine.html#trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BlandfordMcKeeShockEngine</span><span class="p">(</span><span class="n">ShockEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Blandford--McKee ultra-relativistic blastwave shock engine.</span>
 
 <span class="sd">    Implements the analytic self-similar solution of</span>
@@ -688,7 +688,7 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">_STATE_CLASS</span> <span class="o">=</span> <span class="n">BlandfordMcKeeShockState</span>
 
@@ -703,7 +703,7 @@
         <span class="n">lorentz_warn_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Instantiate the :class:`BlandfordMcKeeShockEngine`.</span>
 
 <span class="sd">        Parameters</span>
@@ -717,7 +717,7 @@
 <span class="sd">            value. Default is ``2.0``.</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Forwarded to :class:`~trilobite.dynamics.shocks.core.shock_engine.ShockEngine`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_mu</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_gamma_hat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_hat</span><span class="p">)</span>
@@ -731,11 +731,11 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockEngine.normalize_csm_density.html#trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockEngine.normalize_csm_density">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize_csm_density</span><span class="p">(</span>
-        <span class="n">rho_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">r_0</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
+        <span class="n">rho_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">r_0</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
         <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the CSM normalization constant from a reference density.</span>
 
 <span class="sd">        Returns :math:`K` such that</span>
@@ -759,7 +759,7 @@
 <span class="sd">        K : ~astropy.units.Quantity</span>
 <span class="sd">            Normalization constant with units</span>
 <span class="sd">            :math:`\mathrm{g\,cm^{k-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rho_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">rho_0</span> <span class="o">=</span> <span class="n">rho_0</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r_0</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
@@ -775,12 +775,12 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeShockEngine.compute_shock_properties">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">E</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e51</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
-        <span class="n">K_csm</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">E</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e51</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
+        <span class="n">K_csm</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlandfordMcKeeShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the BM shock state at one or more times.</span>
 
 <span class="sd">        Parameters</span>
@@ -817,9 +817,9 @@
 <span class="sd">        -----</span>
 <span class="sd">        RuntimeWarning</span>
 <span class="sd">            If any :math:`\Gamma(t)` falls below ``lorentz_warn_threshold``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;=</span> <span class="mf">3.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The CSM power-law index k must be less than 3 for the BM solution; got k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The CSM power-law index k must be less than 3 for the BM solution; got k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">K_csm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">K_csm</span> <span class="o">=</span> <span class="n">m_p_cgs</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">**</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span>
@@ -854,12 +854,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_shock_properties_cgs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">E</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e51</span><span class="p">,</span>
         <span class="n">K_csm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">m_p_cgs</span><span class="p">,</span>
         <span class="n">k</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlandfordMcKeeShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the BM shock state in CGS units.</span>
 
 <span class="sd">        Parameters</span>
@@ -880,7 +880,7 @@
 <span class="sd">            Dimensionless fields (:attr:`~BlandfordMcKeeShockState.lorentz_factor`,</span>
 <span class="sd">            :attr:`~BlandfordMcKeeShockState.beta`,</span>
 <span class="sd">            :attr:`~BlandfordMcKeeShockState.fluid_lorentz_factor`) are bare arrays.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="c1"># Shock radius: ultra-relativistic approximation R ≈ ct</span>
@@ -893,9 +893,9 @@
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">Gamma</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lorentz_warn_threshold</span><span class="p">):</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;The BM shock Lorentz factor Γ has fallen below </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_lorentz_warn_threshold</span><span class="si">}</span><span class="s2"> at one or more &quot;</span>
-                <span class="s2">&quot;requested times. The ultra-relativistic approximation is breaking down; &quot;</span>
-                <span class="s2">&quot;consider switching to a trans-relativistic or Newtonian solver.&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"The BM shock Lorentz factor Γ has fallen below </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_lorentz_warn_threshold</span><span class="si">}</span><span class="s2"> at one or more "</span>
+                <span class="s2">"requested times. The ultra-relativistic approximation is breaking down; "</span>
+                <span class="s2">"consider switching to a trans-relativistic or Newtonian solver."</span><span class="p">,</span>
                 <span class="ne">RuntimeWarning</span><span class="p">,</span>
                 <span class="n">stacklevel</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
             <span class="p">)</span>
@@ -967,7 +967,7 @@
 <div class="viewcode-block" id="BlandfordMcKeeWindShockEngine">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeWindShockEngine.html#trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeWindShockEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BlandfordMcKeeWindShockEngine</span><span class="p">(</span><span class="n">BlandfordMcKeeShockEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Blandford--McKee engine specialised for a steady stellar-wind external medium.</span>
 
 <span class="sd">    For a wind with mass-loss rate :math:`\dot{M}` and terminal velocity</span>
@@ -1005,7 +1005,7 @@
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
 <span class="sd">    BlandfordMcKeeShockEngine : General power-law external medium.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =========================================== #</span>
     <span class="c1"># Public shock-property interface             #</span>
@@ -1015,12 +1015,12 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeWindShockEngine.compute_shock_properties.html#trilobite.dynamics.shocks.blandford_mckee.BlandfordMcKeeWindShockEngine.compute_shock_properties">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_shock_properties</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">E</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e51</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
-        <span class="n">M_dot</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Msun</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
-        <span class="n">v_wind</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">1000.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">E</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e51</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">,</span>
+        <span class="n">M_dot</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1e-5</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Msun</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+        <span class="n">v_wind</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">1000.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlandfordMcKeeShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the BM shock state for a stellar-wind external medium.</span>
 
 <span class="sd">        Parameters</span>
@@ -1048,7 +1048,7 @@
 <span class="sd">        -----</span>
 <span class="sd">        RuntimeWarning</span>
 <span class="sd">            If any :math:`\Gamma(t)` falls below ``lorentz_warn_threshold``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
             <span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
@@ -1081,12 +1081,12 @@
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_shock_properties_cgs</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">time</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">time</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">E</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e51</span><span class="p">,</span>
         <span class="n">M_dot</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">6.3e20</span><span class="p">,</span>
         <span class="n">v_wind</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BlandfordMcKeeShockState</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;CGS backend: convert wind parameters to K_csm then delegate to the parent solver.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""CGS backend: convert wind parameters to K_csm then delegate to the parent solver."""</span>
         <span class="n">K_csm</span> <span class="o">=</span> <span class="n">M_dot</span> <span class="o">/</span> <span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">v_wind</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">_compute_shock_properties_cgs</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="n">E</span><span class="o">=</span><span class="n">E</span><span class="p">,</span> <span class="n">K_csm</span><span class="o">=</span><span class="n">K_csm</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span></div>
 
@@ -1119,8 +1119,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1154,7 +1154,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

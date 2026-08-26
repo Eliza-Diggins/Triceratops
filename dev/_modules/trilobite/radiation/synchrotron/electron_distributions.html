@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/synchrotron/electron_distributions';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.synchrotron.electron_distributions</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Relativistic electron distributions for synchrotron radiation.</span>
 
 <span class="sd">Provides encapsulated classes for many common electron distributions relevant to</span>
@@ -458,7 +458,7 @@
 <span class="sd">:ref:`synchrotron_theory` for a general introduction to synchrotron emission.</span>
 <span class="sd">:ref:`synchrotron_electron_distributions` for documentation on working with electron distributions in Trilobite.</span>
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Optional</span>
@@ -480,18 +480,18 @@
 <span class="c1"># =========================================================================== #</span>
 <span class="c1"># These are generic functions which do not correspond to any particular distribution function,</span>
 <span class="c1"># but are nonetheless useful for the work of the module.</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">_opt_equipartition_magnetic_field</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_opt_equipartition_magnetic_field</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">epsilon_B</span> <span class="o">*</span> <span class="n">u_therm</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_opt_equipartition_electron_energy</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">epsilon_e</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_opt_equipartition_electron_energy</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">epsilon_e</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">epsilon_e</span> <span class="o">*</span> <span class="n">u_therm</span>
 
 
 <div class="viewcode-block" id="equipartition_magnetic_field">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.equipartition_magnetic_field.html#trilobite.radiation.synchrotron.electron_distributions.equipartition_magnetic_field">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">equipartition_magnetic_field</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">equipartition_magnetic_field</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the magnetic field implied by a thermal energy density.</span>
 
 <span class="sd">    This function assumes that a fixed fraction of the thermal/internal energy</span>
@@ -559,7 +559,7 @@
 <span class="sd">    ... )</span>
 <span class="sd">    &lt;Quantity 50.13256549 G&gt;</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">u_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">u_therm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">epsilon_B</span> <span class="o">*</span> <span class="n">u_cgs</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">G</span></div>
 
@@ -567,8 +567,8 @@
 
 <div class="viewcode-block" id="equipartition_electron_energy">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.equipartition_electron_energy.html#trilobite.radiation.synchrotron.electron_distributions.equipartition_electron_energy">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">equipartition_electron_energy</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span> <span class="n">epsilon_e</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">equipartition_electron_energy</span><span class="p">(</span><span class="n">u_therm</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span> <span class="n">epsilon_e</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the electron energy density implied by a thermal energy density.</span>
 
 <span class="sd">    This function assumes that a fixed fraction of the thermal/internal energy</span>
@@ -622,7 +622,7 @@
 
 <span class="sd">    &gt;&gt;&gt; equipartition_electron_energy(1e3, 0.01)</span>
 <span class="sd">    &lt;Quantity 10. erg / cm3&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">u_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">u_therm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">epsilon_e</span> <span class="o">*</span> <span class="n">u_cgs</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span></div>
 
@@ -638,7 +638,7 @@
 <div class="viewcode-block" id="ElectronDistribution">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ElectronDistribution</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for relativistic electron energy distributions.</span>
 
 <span class="sd">    Subclasses must implement :meth:`pdf` and :meth:`support`.  All other</span>
@@ -678,7 +678,7 @@
 <span class="sd">    &gt;&gt;&gt; f = PowerLaw.as_callable(norm=1.0, p=2.0)</span>
 <span class="sd">    &gt;&gt;&gt; f(100.0)</span>
 <span class="sd">    array(0.0001)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ---------------------------------------------- #</span>
     <span class="c1"># Utility Methods                                #</span>
@@ -687,7 +687,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.as_callable.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.as_callable">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">as_callable</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return a callable representation of the distribution.</span>
 
 <span class="sd">        This method freezes the distribution amplitude and shape parameters,</span>
@@ -714,7 +714,7 @@
 <span class="sd">        ... )</span>
 <span class="sd">        &gt;&gt;&gt; pdf(10.0)</span>
 <span class="sd">        array(0.001)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">norm</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">norm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">_pdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">):</span>
@@ -730,8 +730,8 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.pdf.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.pdf">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the electron Lorentz-factor distribution.</span>
 
 <span class="sd">        This method returns the differential number density distribution</span>
@@ -778,7 +778,7 @@
 <span class="sd">        (i.e. they behave as if ``norm=1`` always); the amplitude :math:`N_0` is</span>
 <span class="sd">        applied by the caller.  Subclasses that do need to apply ``norm`` inline</span>
 <span class="sd">        should multiply the shape by ``norm`` before returning.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="ElectronDistribution.support">
@@ -786,7 +786,7 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">support</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the non-zero Lorentz-factor support of the distribution.</span>
 
 <span class="sd">        The support defines the interval over which :meth:`pdf` may be non-zero,</span>
@@ -817,7 +817,7 @@
 <span class="sd">        The support is used by normalization, moment, sampling, and validation</span>
 <span class="sd">        routines. Implementations should therefore return bounds that are consistent</span>
 <span class="sd">        with the behavior of :meth:`pdf`.</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
     <span class="c1"># ---------------------------------------------- #</span>
@@ -827,7 +827,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.n_total.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.n_total">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_total</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the total number of electrons in the distribution.</span>
 
 <span class="sd">        .. math::</span>
@@ -848,7 +848,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        N_tot : float</span>
 <span class="sd">            Total number of electrons.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">norm</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
 
@@ -856,7 +856,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.n_eff.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.n_eff">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_eff</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the synchrotron-effective electron count.</span>
 
 <span class="sd">        This method returns the :math:`\gamma^2`-weighted number of electrons,</span>
@@ -913,7 +913,7 @@
 <span class="sd">        N_eff : float</span>
 <span class="sd">            Synchrotron-effective electron count,</span>
 <span class="sd">            :math:`N_{\rm eff} = \int \gamma^2 N(\gamma)\,d\gamma`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">norm</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
 
@@ -927,7 +927,7 @@
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the number of electrons between two Lorentz factors.</span>
 
 <span class="sd">        This method computes</span>
@@ -964,7 +964,7 @@
 <span class="sd">        -----</span>
 <span class="sd">        If ``[a, b]`` does not overlap the distribution support, this method</span>
 <span class="sd">        returns ``0.0``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">norm</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">moment_between</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
 
@@ -978,7 +978,7 @@
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the synchrotron-effective electron count between two Lorentz factors.</span>
 
 <span class="sd">        This method computes the :math:`\gamma^2`-weighted electron count,</span>
@@ -1015,7 +1015,7 @@
 <span class="sd">        -----</span>
 <span class="sd">        If ``[a, b]`` does not overlap the distribution support, this method</span>
 <span class="sd">        returns ``0.0``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">norm</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">moment_between</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
 
@@ -1024,18 +1024,18 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the cumulative distribution function.</span>
 
 <span class="sd">        .. math::</span>
 
 <span class="sd">            F(\gamma)</span>
 <span class="sd">            =</span>
-<span class="sd">            N_0 \int_{\gamma_{\min}}^\gamma f(\gamma&#39;)\,d\gamma&#39;,</span>
+<span class="sd">            N_0 \int_{\gamma_{\min}}^\gamma f(\gamma')\,d\gamma',</span>
 
 <span class="sd">        where :math:`f(\gamma)` is the shape function and :math:`N_0 = \mathrm{norm}`.</span>
 <span class="sd">        Values below the lower support bound return zero; values above the upper</span>
@@ -1061,7 +1061,7 @@
 <span class="sd">        Implemented by numerical quadrature over :meth:`pdf` with ``norm=1``; the</span>
 <span class="sd">        amplitude is applied at the end.  Subclasses may override this method</span>
 <span class="sd">        with an analytic expression.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">support</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">)</span>
         <span class="n">scalar_input</span> <span class="o">=</span> <span class="n">gamma_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span>
@@ -1089,18 +1089,18 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">sf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the survival function.</span>
 
 <span class="sd">        The survival function is the complementary cumulative integral,</span>
 
 <span class="sd">        .. math::</span>
 
-<span class="sd">            S(\gamma) = N_0 \int_\gamma^{\gamma_{\max}} f(\gamma&#39;)\,d\gamma&#39;</span>
+<span class="sd">            S(\gamma) = N_0 \int_\gamma^{\gamma_{\max}} f(\gamma')\,d\gamma'</span>
 <span class="sd">            = N_{\rm tot} - F(\gamma).</span>
 
 <span class="sd">        Parameters</span>
@@ -1117,7 +1117,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        S_gamma : ~numpy.ndarray</span>
 <span class="sd">            Survival integral of the electron distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">total</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">n_total</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">total</span> <span class="o">-</span> <span class="bp">cls</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
@@ -1127,11 +1127,11 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">logpdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the natural logarithm of the differential distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -1147,7 +1147,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        log_N_gamma : ~numpy.ndarray</span>
 <span class="sd">            Natural logarithm of :math:`N_0 f(\gamma)` evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">norm</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span></div>
 
 
@@ -1156,11 +1156,11 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">logcdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the natural logarithm of the cumulative distribution function.</span>
 
 <span class="sd">        Parameters</span>
@@ -1176,7 +1176,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        log_F_gamma : ~numpy.ndarray</span>
 <span class="sd">            Natural logarithm of :meth:`cdf` evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span></div>
 
 
@@ -1185,11 +1185,11 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">logsf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the natural logarithm of the survival function.</span>
 
 <span class="sd">        Parameters</span>
@@ -1205,7 +1205,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        log_S_gamma : ~numpy.ndarray</span>
 <span class="sd">            Natural logarithm of :meth:`sf` evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">))</span></div>
 
 
@@ -1217,7 +1217,7 @@
         <span class="n">order</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the :math:`k`-th raw moment of the shape function.</span>
 
 <span class="sd">        .. math::</span>
@@ -1252,7 +1252,7 @@
 <span class="sd">        The default implementation uses numerical quadrature over :meth:`pdf`</span>
 <span class="sd">        with ``norm=1``.  Subclasses should override this method with an</span>
 <span class="sd">        analytic expression when one is available.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">support</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="n">result</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">quad</span><span class="p">(</span>
             <span class="k">lambda</span> <span class="n">gamma</span><span class="p">:</span> <span class="n">gamma</span><span class="o">**</span><span class="n">order</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">),</span>
@@ -1272,7 +1272,7 @@
         <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute a truncated raw moment of the shape function.</span>
 
 <span class="sd">        This method computes</span>
@@ -1308,7 +1308,7 @@
 <span class="sd">        -----</span>
 <span class="sd">        If the requested interval does not overlap the distribution support,</span>
 <span class="sd">        this method returns ``0.0``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">support</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
         <span class="n">lower</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">gamma_min</span><span class="p">)</span>
@@ -1330,7 +1330,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.mean.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.mean">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the mean electron Lorentz factor.</span>
 
 <span class="sd">        .. math::</span>
@@ -1349,7 +1349,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        mean_gamma : float</span>
 <span class="sd">            Mean electron Lorentz factor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">m0</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m0</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
@@ -1360,7 +1360,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.var.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.var">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">var</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the variance of the electron Lorentz factor.</span>
 
 <span class="sd">        .. math::</span>
@@ -1378,7 +1378,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        var_gamma : float</span>
 <span class="sd">            Variance of the electron Lorentz factor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">m0</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">m0</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
@@ -1391,7 +1391,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.std.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.std">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">std</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the standard deviation of the electron Lorentz factor.</span>
 
 <span class="sd">        .. math::</span>
@@ -1409,7 +1409,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        std_gamma : float</span>
 <span class="sd">            Standard deviation of the electron Lorentz factor.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">))</span></div>
 
 
@@ -1417,7 +1417,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.mean_energy.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.mean_energy">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean_energy</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the mean total relativistic electron energy.</span>
 
 <span class="sd">        The mean total energy is</span>
@@ -1447,7 +1447,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        mean_energy : float</span>
 <span class="sd">            Mean total relativistic electron energy in erg.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">electron_rest_energy_cgs</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span></div>
 
 
@@ -1455,7 +1455,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.mean_kinetic_energy.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.mean_kinetic_energy">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mean_kinetic_energy</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the mean kinetic electron energy.</span>
 
 <span class="sd">        The mean kinetic energy is</span>
@@ -1486,7 +1486,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        mean_kinetic_energy : float</span>
 <span class="sd">            Mean kinetic electron energy in erg.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">electron_rest_energy_cgs</span> <span class="o">*</span> <span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span></div>
 
 
@@ -1523,8 +1523,8 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_n_total.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_n_total">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize_from_n_total</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">n_total</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the distribution&#39;s normalization from a known total electron number density.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">        Compute the distribution's normalization from a known total electron number density.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1537,7 +1537,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~astropy.units.Quantity</span>
 <span class="sd">            Distribution amplitude :math:`N_0` in :math:`\\mathrm{cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">n_total</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_normalize_from_n_total</span><span class="p">(</span><span class="n">n_cgs</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span></div>
 
@@ -1546,7 +1546,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_n_eff.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_n_eff">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize_from_n_eff</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">n_eff</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the normalization from a known effective radiating electron number density.</span>
 
 <span class="sd">        Parameters</span>
@@ -1560,7 +1560,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~astropy.units.Quantity</span>
 <span class="sd">            Distribution amplitude :math:`N_0` in :math:`\\mathrm{cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">n_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">n_eff</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_normalize_from_n_eff</span><span class="p">(</span><span class="n">n_cgs</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span></div>
 
@@ -1569,7 +1569,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_magnetic_field.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_magnetic_field">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize_from_magnetic_field</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute N₀ via equipartition with a magnetic field.</span>
 
 <span class="sd">        Solves</span>
@@ -1597,7 +1597,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~astropy.units.Quantity</span>
 <span class="sd">            Power-law normalization :math:`N_0` in :math:`\\mathrm{cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">B_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">G</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_normalize_from_magnetic_field</span><span class="p">(</span><span class="n">B_cgs</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span></div>
 
@@ -1606,7 +1606,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_energy_density.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.normalize_from_energy_density">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize_from_energy_density</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">u_therm</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute N₀ from a fraction ε_E of the thermal energy density.</span>
 
 <span class="sd">        Solves</span>
@@ -1631,7 +1631,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ~astropy.units.Quantity</span>
 <span class="sd">            Distribution amplitude :math:`N_0` in :math:`\\mathrm{cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">u_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">u_therm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_normalize_from_energy_density</span><span class="p">(</span><span class="n">u_cgs</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span></div>
 
@@ -1645,7 +1645,7 @@
         <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate a scalar definite power-law integral.</span>
 
 <span class="sd">        Computes</span>
@@ -1674,7 +1674,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        integral : float</span>
 <span class="sd">            Returns ``0.0`` if ``upper &lt;= lower``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">exponent</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">exponent</span><span class="p">)</span>
         <span class="n">lower</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
         <span class="n">upper</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">upper</span><span class="p">)</span>
@@ -1709,7 +1709,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.bol_emiss_from_magnetic_field.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.bol_emiss_from_magnetic_field">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">bol_emiss_from_magnetic_field</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Bolometric synchrotron emissivity from a magnetic field via equipartition.</span>
 
 <span class="sd">        Derives :math:`N_0` from :math:`B`, :math:`\varepsilon_B`, and</span>
@@ -1739,7 +1739,7 @@
 <span class="sd">        ~astropy.units.Quantity</span>
 <span class="sd">            Bolometric synchrotron emissivity in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">B_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">G</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_bol_emiss_from_magnetic_field</span><span class="p">(</span><span class="n">B_cgs</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span></div>
 
@@ -1748,7 +1748,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.bol_emiss_from_energy_density.html#trilobite.radiation.synchrotron.electron_distributions.ElectronDistribution.bol_emiss_from_energy_density">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">bol_emiss_from_energy_density</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">u_therm</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Bolometric synchrotron emissivity from thermal energy density via equipartition.</span>
 
 <span class="sd">        Derives both :math:`B` and :math:`N_0` from ``u_therm``, ``epsilon_B``,</span>
@@ -1772,7 +1772,7 @@
 <span class="sd">        ~astropy.units.Quantity</span>
 <span class="sd">            Bolometric synchrotron emissivity in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">u_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">u_therm</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_bol_emiss_from_energy_density</span><span class="p">(</span><span class="n">u_cgs</span><span class="p">,</span> <span class="n">epsilon_B</span><span class="p">,</span> <span class="n">epsilon_E</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span></div>
 </div>
@@ -1785,7 +1785,7 @@
 <div class="viewcode-block" id="PowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.PowerLaw.html#trilobite.radiation.synchrotron.electron_distributions.PowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PowerLaw</span><span class="p">(</span><span class="n">ElectronDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Truncated power-law distribution of electron Lorentz factors.</span>
 
 <span class="sd">    The shape function is</span>
@@ -1902,7 +1902,7 @@
 <span class="sd">    &gt;&gt;&gt; import astropy.units as u</span>
 <span class="sd">    &gt;&gt;&gt; PowerLaw.normalize_from_n_total(1e-3 * u.cm**-3, p=3.0)</span>
 <span class="sd">    &lt;Quantity 0.002 1 / cm3&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Helper Methods                                                     #</span>
@@ -1913,7 +1913,7 @@
         <span class="n">gamma_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Validate scalar power-law parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -1930,22 +1930,22 @@
 <span class="sd">        ValueError</span>
 <span class="sd">            If the power-law index is non-finite or non-positive, if</span>
 <span class="sd">            ``gamma_min &lt; 1``, or if ``gamma_max &lt;= gamma_min``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="n">gamma_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_min</span><span class="p">)</span>
         <span class="n">gamma_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_max</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Power-law index `p` must be finite.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Power-law index `p` must be finite."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Power-law index `p` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Power-law index `p` must be positive."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_min</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_min` must be greater than or equal to 1.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_min` must be greater than or equal to 1."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_max</span> <span class="o">&lt;=</span> <span class="n">gamma_min</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_max` must be greater than `gamma_min`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_max` must be greater than `gamma_min`."</span><span class="p">)</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Distribution Interface                                             #</span>
@@ -1955,7 +1955,7 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -1963,7 +1963,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the power-law distribution.</span>
 
 <span class="sd">        This method returns</span>
@@ -1997,10 +1997,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        N_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">gamma_min</span><span class="o">=</span><span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">)</span>
 
-        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="n">gamma_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_min</span><span class="p">)</span>
         <span class="n">gamma_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_max</span><span class="p">)</span>
@@ -2026,7 +2026,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the non-zero support of the power-law distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -2042,15 +2042,15 @@
 <span class="sd">        -------</span>
 <span class="sd">        gamma_min, gamma_max : tuple of float</span>
 <span class="sd">            Lower and upper Lorentz-factor bounds.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gamma_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_min</span><span class="p">)</span>
         <span class="n">gamma_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_max</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_min</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_min` must be greater than or equal to 1.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_min` must be greater than or equal to 1."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_max</span> <span class="o">&lt;=</span> <span class="n">gamma_min</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_max` must be greater than `gamma_min`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_max` must be greater than `gamma_min`."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span></div>
 
@@ -2067,7 +2067,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute an analytic raw moment of the power-law shape function.</span>
 
 <span class="sd">        This method computes</span>
@@ -2095,7 +2095,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        M_k : float</span>
 <span class="sd">            Raw moment of the shape function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">gamma_min</span><span class="o">=</span><span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">)</span>
 
         <span class="n">exponent</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -2116,7 +2116,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute an analytic truncated raw moment of the shape function.</span>
 
 <span class="sd">        This method computes</span>
@@ -2152,7 +2152,7 @@
 <span class="sd">        M_k_between : float</span>
 <span class="sd">            Truncated raw moment over the clipped interval. Returns ``0.0`` if</span>
 <span class="sd">            the requested interval does not overlap the support.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">gamma_min</span><span class="o">=</span><span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">)</span>
 
         <span class="n">lower</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_min</span><span class="p">))</span>
@@ -2170,7 +2170,7 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -2178,7 +2178,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the cumulative power-law distribution analytically.</span>
 
 <span class="sd">        This method computes</span>
@@ -2189,7 +2189,7 @@
 <span class="sd">            =</span>
 <span class="sd">            N_0</span>
 <span class="sd">            \int_{\gamma_{\min}}^\gamma</span>
-<span class="sd">            \gamma&#39;^{-p}\,d\gamma&#39;,</span>
+<span class="sd">            \gamma'^{-p}\,d\gamma',</span>
 
 <span class="sd">        with values below :math:`\gamma_{\min}` clipped to zero and values</span>
 <span class="sd">        above :math:`\gamma_{\max}` clipped to the total integral.</span>
@@ -2214,10 +2214,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        F_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Cumulative distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">gamma_min</span><span class="o">=</span><span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">)</span>
 
-        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
         <span class="n">scalar_input</span> <span class="o">=</span> <span class="n">gamma_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span>
 
         <span class="n">p</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
@@ -2247,7 +2247,7 @@
 <div class="viewcode-block" id="BrokenPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw.html#trilobite.radiation.synchrotron.electron_distributions.BrokenPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BrokenPowerLaw</span><span class="p">(</span><span class="n">ElectronDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Truncated broken power-law distribution of electron Lorentz factors.</span>
 
 <span class="sd">    The shape function is</span>
@@ -2361,7 +2361,7 @@
 <span class="sd">    ...     1e-3 * u.cm**-3, p1=2.0, p2=4.0, gamma_c=10.0</span>
 <span class="sd">    ... )  # doctest: +ELLIPSIS</span>
 <span class="sd">    &lt;Quantity ...e-05 1 / cm3&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Helper Methods                                                     #</span>
@@ -2374,7 +2374,7 @@
         <span class="n">gamma_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Validate scalar broken-power-law parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -2394,7 +2394,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If any parameter is outside the supported physical range.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">p1</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
         <span class="n">p2</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
         <span class="n">gamma_c</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_c</span><span class="p">)</span>
@@ -2402,28 +2402,28 @@
         <span class="n">gamma_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_max</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">p1</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lower power-law index `p1` must be finite.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lower power-law index `p1` must be finite."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">p2</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Upper power-law index `p2` must be finite.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Upper power-law index `p2` must be finite."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">p1</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Lower power-law index `p1` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Lower power-law index `p1` must be positive."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">p2</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Upper power-law index `p2` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Upper power-law index `p2` must be positive."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_min</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_min` must be greater than or equal to 1.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_min` must be greater than or equal to 1."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_max</span> <span class="o">&lt;=</span> <span class="n">gamma_min</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_max` must be greater than `gamma_min`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_max` must be greater than `gamma_min`."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_c</span> <span class="o">&lt;=</span> <span class="n">gamma_min</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_c` must be greater than `gamma_min`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_c` must be greater than `gamma_min`."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_c</span> <span class="o">&gt;=</span> <span class="n">gamma_max</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_c` must be less than `gamma_max`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_c` must be less than `gamma_max`."</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_branch_moment</span><span class="p">(</span>
@@ -2434,7 +2434,7 @@
         <span class="n">lower</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">upper</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute a scalar moment contribution from one broken-power-law branch.</span>
 
 <span class="sd">        The branch shape is</span>
@@ -2453,7 +2453,7 @@
 <span class="sd">            =</span>
 <span class="sd">            \gamma_c^{p_i}</span>
 <span class="sd">            \int_a^b \gamma^{k-p_i}\,d\gamma.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">exponent</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">order</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gamma_c</span> <span class="o">**</span> <span class="nb">float</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_integral_power_law</span><span class="p">(</span>
             <span class="n">exponent</span><span class="p">,</span>
@@ -2469,7 +2469,7 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">p1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -2479,7 +2479,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the broken power-law distribution.</span>
 
 <span class="sd">        This method returns</span>
@@ -2522,7 +2522,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        N_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span>
             <span class="n">p1</span><span class="p">,</span>
             <span class="n">p2</span><span class="p">,</span>
@@ -2531,7 +2531,7 @@
             <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
         <span class="n">scalar_input</span> <span class="o">=</span> <span class="n">gamma_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="n">gamma_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">gamma_array</span><span class="p">)</span>
 
@@ -2566,7 +2566,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the non-zero support of the broken power-law distribution.</span>
 
 <span class="sd">        Parameters</span>
@@ -2582,15 +2582,15 @@
 <span class="sd">        -------</span>
 <span class="sd">        gamma_min, gamma_max : tuple of float</span>
 <span class="sd">            Lower and upper Lorentz-factor bounds.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">gamma_min</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_min</span><span class="p">)</span>
         <span class="n">gamma_max</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_max</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_min</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_min` must be greater than or equal to 1.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_min` must be greater than or equal to 1."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">gamma_max</span> <span class="o">&lt;=</span> <span class="n">gamma_min</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_max` must be greater than `gamma_min`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_max` must be greater than `gamma_min`."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">gamma_min</span><span class="p">,</span> <span class="n">gamma_max</span></div>
 
@@ -2609,7 +2609,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute an analytic raw moment of the broken power-law shape function.</span>
 
 <span class="sd">        This method computes</span>
@@ -2644,7 +2644,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        M_k : float</span>
 <span class="sd">            Raw moment of the shape function.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span>
             <span class="n">p1</span><span class="p">,</span>
             <span class="n">p2</span><span class="p">,</span>
@@ -2689,7 +2689,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute an analytic truncated raw moment of the broken power-law shape.</span>
 
 <span class="sd">        This method computes</span>
@@ -2730,7 +2730,7 @@
 <span class="sd">        M_k_between : float</span>
 <span class="sd">            Truncated raw moment over the clipped interval. Returns ``0.0`` if</span>
 <span class="sd">            the requested interval does not overlap the support.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span>
             <span class="n">p1</span><span class="p">,</span>
             <span class="n">p2</span><span class="p">,</span>
@@ -2769,7 +2769,7 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">p1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -2779,7 +2779,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the cumulative broken power-law distribution analytically.</span>
 
 <span class="sd">        This method computes</span>
@@ -2790,7 +2790,7 @@
 <span class="sd">            =</span>
 <span class="sd">            N_0</span>
 <span class="sd">            \int_{\gamma_{\min}}^\gamma</span>
-<span class="sd">            f(\gamma&#39;)\,d\gamma&#39;,</span>
+<span class="sd">            f(\gamma')\,d\gamma',</span>
 
 <span class="sd">        with values below :math:`\gamma_{\min}` clipped to zero and values</span>
 <span class="sd">        above :math:`\gamma_{\max}` clipped to the total integral.</span>
@@ -2819,7 +2819,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        F_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Cumulative distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span>
             <span class="n">p1</span><span class="p">,</span>
             <span class="n">p2</span><span class="p">,</span>
@@ -2828,7 +2828,7 @@
             <span class="n">gamma_max</span><span class="o">=</span><span class="n">gamma_max</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
         <span class="n">scalar_input</span> <span class="o">=</span> <span class="n">gamma_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="n">gamma_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">gamma_array</span><span class="p">)</span>
 
@@ -2847,7 +2847,7 @@
             <span class="n">gamma_c</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">gamma_clipped</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">gamma_clipped</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
 
         <span class="n">below_break</span> <span class="o">=</span> <span class="n">gamma_clipped</span> <span class="o">&lt;</span> <span class="n">gamma_c</span>
         <span class="n">above_break</span> <span class="o">=</span> <span class="o">~</span><span class="n">below_break</span>
@@ -2890,7 +2890,7 @@
 <div class="viewcode-block" id="MaxwellJuettner">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MaxwellJuettner</span><span class="p">(</span><span class="n">ElectronDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Relativistic thermal electron distribution (Maxwell-Jüttner).</span>
 
 <span class="sd">    The Maxwell-Jüttner distribution is the relativistic generalisation of</span>
@@ -3007,14 +3007,14 @@
 <span class="sd">    &gt;&gt;&gt; import astropy.units as u</span>
 <span class="sd">    &gt;&gt;&gt; MaxwellJuettner.normalize_from_n_total(1e-3 * u.cm**-3, Theta=1.0)</span>
 <span class="sd">    &lt;Quantity 0.001 1 / cm3&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Helper Methods                                                     #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_parameters</span><span class="p">(</span><span class="n">Theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Validate scalar Maxwell-Jüttner parameters.</span>
 
 <span class="sd">        Parameters</span>
@@ -3026,14 +3026,14 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If ``Theta`` is non-finite or non-positive.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">Theta</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dimensionless temperature `Theta` must be finite.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Dimensionless temperature `Theta` must be finite."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">Theta</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Dimensionless temperature `Theta` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Dimensionless temperature `Theta` must be positive."</span><span class="p">)</span>
 
     <span class="c1"># ---------------------------------------------- #</span>
     <span class="c1"># Statistical Methods                            #</span>
@@ -3043,13 +3043,13 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">Theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the Maxwell-Jüttner distribution.</span>
 
 <span class="sd">        This method returns</span>
@@ -3091,10 +3091,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        N_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Maxwell-Jüttner distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
 
-        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
         <span class="n">scalar_input</span> <span class="o">=</span> <span class="n">gamma_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span>
 
         <span class="n">Theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
@@ -3134,7 +3134,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.support.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.support">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">support</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the non-zero support of the Maxwell-Jüttner distribution.</span>
 
 <span class="sd">        The Maxwell-Jüttner distribution is non-zero for all Lorentz factors</span>
@@ -3154,7 +3154,7 @@
 <span class="sd">        --------</span>
 <span class="sd">        &gt;&gt;&gt; MaxwellJuettner.support(Theta=1.0)</span>
 <span class="sd">        (1, inf)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span></div>
 
 
@@ -3162,7 +3162,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.moment">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">moment</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">Theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate raw moments of the Maxwell-Jüttner distribution.</span>
 
 <span class="sd">        The distribution is</span>
@@ -3211,9 +3211,9 @@
 <span class="sd">        -------</span>
 <span class="sd">        moment_order : float</span>
 <span class="sd">            Raw moment :math:`\langle \gamma^n \rangle`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">order</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Moment order `order` must be non-negative.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Moment order `order` must be non-negative."</span><span class="p">)</span>
 
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
 
@@ -3242,7 +3242,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_moment.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_moment">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">approx_first_moment</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the approximate first-moment of the MJ distribution.</span>
 
 <span class="sd">        Formally, the first moment of the MJ distribution is given by</span>
@@ -3282,7 +3282,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        first_moment : float</span>
 <span class="sd">            Approximate first raw moment :math:`\langle\gamma\rangle`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
 
         <span class="n">Theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
@@ -3294,7 +3294,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_kinetic_moment.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettner.approx_first_kinetic_moment">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">approx_first_kinetic_moment</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">Theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the approximate first kinetic moment of the MJ distribution.</span>
 
 <span class="sd">        Formally, the first kinetic moment of the MJ distribution is given by</span>
@@ -3372,7 +3372,7 @@
 <span class="sd">        first_kinetic_moment : float</span>
 <span class="sd">            Approximate first kinetic moment</span>
 <span class="sd">            :math:`\langle\gamma - 1\rangle`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
 
         <span class="n">Theta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
@@ -3385,20 +3385,20 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">cdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">Theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">**</span><span class="n">_</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the Maxwell-Jüttner cumulative distribution function.</span>
 
 <span class="sd">        .. math::</span>
 
 <span class="sd">            F(\gamma)</span>
 <span class="sd">            =</span>
-<span class="sd">            N_0 \int_1^\gamma f(\gamma&#39;)\,d\gamma&#39;</span>
+<span class="sd">            N_0 \int_1^\gamma f(\gamma')\,d\gamma'</span>
 
 <span class="sd">        This override uses a vectorized trapezoidal integration on a log-spaced</span>
 <span class="sd">        grid followed by linear interpolation, avoiding the per-element</span>
@@ -3419,10 +3419,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        F_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Cumulative distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_parameters</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span>
 
-        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;f8&quot;</span><span class="p">)</span>
+        <span class="n">gamma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"f8"</span><span class="p">)</span>
         <span class="n">scalar_input</span> <span class="o">=</span> <span class="n">gamma_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="n">gamma_flat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">gamma_array</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
 
@@ -3482,7 +3482,7 @@
 <div class="viewcode-block" id="MixedThermalNonThermal">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.html#trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MixedThermalNonThermal</span><span class="p">(</span><span class="n">ElectronDistribution</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Base class for mixed thermal and non-thermal electron distributions.</span>
 
 <span class="sd">    This class represents a mixture of a thermal Maxwell-Jüttner component and</span>
@@ -3536,7 +3536,7 @@
 <span class="sd">    MaxwellJuettnerPowerLaw : Concrete mixture with a power-law non-thermal component.</span>
 <span class="sd">    MaxwellJuettnerBrokenPowerLaw : Concrete mixture with a broken-power-law non-thermal component.</span>
 <span class="sd">    MaxwellJuettner : Thermal Maxwell-Jüttner component used in all subclasses.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">THERMAL_DISTRIBUTION</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">ElectronDistribution</span><span class="p">]]</span> <span class="o">=</span> <span class="n">MaxwellJuettner</span>
     <span class="n">NON_THERMAL_DISTRIBUTION</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">ElectronDistribution</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -3546,7 +3546,7 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_mixture_parameter</span><span class="p">(</span><span class="n">delta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Validate the thermal mixture fraction.</span>
 
 <span class="sd">        Parameters</span>
@@ -3558,44 +3558,44 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If ``delta`` is non-finite or outside the interval ``[0, 1]``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">delta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">delta</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mixture parameter `delta` must be finite.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Mixture parameter `delta` must be finite."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">delta</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mixture parameter `delta` must satisfy 0 &lt;= delta &lt;= 1.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Mixture parameter `delta` must satisfy 0 &lt;= delta &lt;= 1."</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_validate_non_thermal_distribution</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Validate that the subclass defines a non-thermal distribution.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Validate that the subclass defines a non-thermal distribution."""</span>
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">NON_THERMAL_DISTRIBUTION</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                <span class="s2">&quot;`MixedThermalNonThermal` must be subclassed with a concrete `NON_THERMAL_DISTRIBUTION`.&quot;</span>
+                <span class="s2">"`MixedThermalNonThermal` must be subclassed with a concrete `NON_THERMAL_DISTRIBUTION`."</span>
             <span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_non_thermal_m0</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the zeroth moment of the non-thermal shape function.</span>
 
 <span class="sd">        This is used to normalize the non-thermal component before forming the</span>
 <span class="sd">        mixture.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_non_thermal_distribution</span><span class="p">()</span>
 
         <span class="n">m0</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">NON_THERMAL_DISTRIBUTION</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">m0</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;The zeroth moment of the non-thermal component is not finite. &quot;</span>
-                <span class="s2">&quot;Use parameters that give a normalizable non-thermal shape, &quot;</span>
-                <span class="s2">&quot;for example a finite `gamma_max` or a sufficiently steep index.&quot;</span>
+                <span class="s2">"The zeroth moment of the non-thermal component is not finite. "</span>
+                <span class="s2">"Use parameters that give a normalizable non-thermal shape, "</span>
+                <span class="s2">"for example a finite `gamma_max` or a sufficiently steep index."</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">m0</span> <span class="o">&lt;=</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The zeroth moment of the non-thermal component must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"The zeroth moment of the non-thermal component must be positive."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">m0</span><span class="p">)</span>
 
@@ -3607,13 +3607,13 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pdf</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">gamma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">gamma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
         <span class="n">norm</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
         <span class="n">delta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the mixed thermal/non-thermal electron distribution.</span>
 
 <span class="sd">        This method returns</span>
@@ -3653,7 +3653,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        N_gamma : float or ~numpy.ndarray</span>
 <span class="sd">            Mixed electron distribution evaluated at ``gamma``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_mixture_parameter</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_non_thermal_distribution</span><span class="p">()</span>
 
@@ -3684,7 +3684,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.support.html#trilobite.radiation.synchrotron.electron_distributions.MixedThermalNonThermal.support">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">support</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">params</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Return the non-zero support of the mixed distribution.</span>
 
 <span class="sd">        The support is the union of the thermal and non-thermal supports.</span>
@@ -3698,7 +3698,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        gamma_min, gamma_max : tuple of float</span>
 <span class="sd">            Lower and upper support bounds of the mixed distribution.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_non_thermal_distribution</span><span class="p">()</span>
 
         <span class="n">thermal_min</span><span class="p">,</span> <span class="n">thermal_max</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">THERMAL_DISTRIBUTION</span><span class="o">.</span><span class="n">support</span><span class="p">(</span><span class="o">**</span><span class="n">params</span><span class="p">)</span>
@@ -3722,7 +3722,7 @@
         <span class="n">delta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute a raw moment of the mixed distribution.</span>
 
 <span class="sd">        This method computes</span>
@@ -3760,7 +3760,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        M_k : float</span>
 <span class="sd">            Raw moment of the normalized mixture shape.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_mixture_parameter</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_non_thermal_distribution</span><span class="p">()</span>
 
@@ -3792,7 +3792,7 @@
         <span class="n">delta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="o">**</span><span class="n">params</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute a truncated raw moment of the mixed distribution.</span>
 
 <span class="sd">        This method computes</span>
@@ -3825,7 +3825,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        M_k_between : float</span>
 <span class="sd">            Truncated raw moment over the requested interval.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_mixture_parameter</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_non_thermal_distribution</span><span class="p">()</span>
 
@@ -3857,7 +3857,7 @@
 <div class="viewcode-block" id="MaxwellJuettnerPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MaxwellJuettnerPowerLaw</span><span class="p">(</span><span class="n">MixedThermalNonThermal</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Mixed Maxwell-Jüttner plus power-law electron distribution.</span>
 
 <span class="sd">    The normalized mixture shape is</span>
@@ -3963,7 +3963,7 @@
 <span class="sd">    ...     1e-3 * u.cm**-3, delta=0.5, Theta=1.0, p=3.0</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &lt;Quantity 0.001 1 / cm3&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">NON_THERMAL_DISTRIBUTION</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">ElectronDistribution</span><span class="p">]]</span> <span class="o">=</span> <span class="n">PowerLaw</span></div>
 
@@ -3972,7 +3972,7 @@
 <div class="viewcode-block" id="MaxwellJuettnerBrokenPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw.html#trilobite.radiation.synchrotron.electron_distributions.MaxwellJuettnerBrokenPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MaxwellJuettnerBrokenPowerLaw</span><span class="p">(</span><span class="n">MixedThermalNonThermal</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Mixed Maxwell-Jüttner plus broken-power-law electron distribution.</span>
 
 <span class="sd">    The normalized mixture shape is</span>
@@ -4102,7 +4102,7 @@
 <span class="sd">    ...     gamma_c=10.0,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &lt;Quantity 0.001 1 / cm3&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">NON_THERMAL_DISTRIBUTION</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">type</span><span class="p">[</span><span class="n">ElectronDistribution</span><span class="p">]]</span> <span class="o">=</span> <span class="n">BrokenPowerLaw</span></div>
 
@@ -4135,8 +4135,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -4170,7 +4170,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

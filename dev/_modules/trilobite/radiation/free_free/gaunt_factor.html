@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/free_free/gaunt_factor';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.free_free.gaunt_factor</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Gaunt factor support for free–free emission and absorption.</span>
 
 <span class="sd">The **Gaunt factor** :math:`g_{\rm ff}(Z, T, \nu)` is a dimensionless quantum-mechanical</span>
@@ -482,25 +482,25 @@
 <span class="sd">     - Regime</span>
 <span class="sd">     - Notes</span>
 
-<span class="sd">   * - ``&quot;lu&quot;``</span>
+<span class="sd">   * - ``"lu"``</span>
 <span class="sd">     - Analytic</span>
 <span class="sd">     - Non-relativistic (general)</span>
 <span class="sd">     - Default. Smooth, fast, and accurate across a wide parameter range.</span>
 <span class="sd">       Based on :footcite:t:`lu_2026_18603474`.</span>
 
-<span class="sd">   * - ``&quot;draine&quot;``</span>
+<span class="sd">   * - ``"draine"``</span>
 <span class="sd">     - Analytic</span>
 <span class="sd">     - Classical non-relativistic</span>
 <span class="sd">     - Simpler classical approximation from</span>
-<span class="sd">       :footcite:t:`draine2011physics`. Slightly less accurate than ``&quot;lu&quot;``.</span>
+<span class="sd">       :footcite:t:`draine2011physics`. Slightly less accurate than ``"lu"``.</span>
 
-<span class="sd">   * - ``&quot;vanhoof&quot;``</span>
+<span class="sd">   * - ``"vanhoof"``</span>
 <span class="sd">     - Tabulated (2D)</span>
 <span class="sd">     - Non-relativistic</span>
 <span class="sd">     - Bilinear interpolation on the van Hoof et al. (2014) table.</span>
 <span class="sd">       More accurate than analytic forms; slower due to interpolation.</span>
 
-<span class="sd">   * - ``&quot;vanhoof_rel&quot;``</span>
+<span class="sd">   * - ``"vanhoof_rel"``</span>
 <span class="sd">     - Tabulated (3D)</span>
 <span class="sd">     - Relativistic (high :math:`T`)</span>
 <span class="sd">     - Trilinear interpolation including explicit :math:`Z` dependence.</span>
@@ -508,7 +508,7 @@
 <span class="sd">       corrections are important.</span>
 
 
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -528,24 +528,24 @@
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># Interpolator classes</span>
-    <span class="s2">&quot;GauntFactorInterpolatorBase&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;NonRelativisticGauntFactorInterpolator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;RelativisticGauntFactorInterpolator&quot;</span><span class="p">,</span>
+    <span class="s2">"GauntFactorInterpolatorBase"</span><span class="p">,</span>
+    <span class="s2">"NonRelativisticGauntFactorInterpolator"</span><span class="p">,</span>
+    <span class="s2">"RelativisticGauntFactorInterpolator"</span><span class="p">,</span>
     <span class="c1"># Interpolator factories</span>
-    <span class="s2">&quot;get_default_gaunt_interpolator&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;get_default_relativistic_gaunt_interpolator&quot;</span><span class="p">,</span>
+    <span class="s2">"get_default_gaunt_interpolator"</span><span class="p">,</span>
+    <span class="s2">"get_default_relativistic_gaunt_interpolator"</span><span class="p">,</span>
     <span class="c1"># Public compute functions</span>
-    <span class="s2">&quot;compute_ff_gaunt_factor&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_ff_gaunt_factor_comp&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_mean_ff_gaunt_factor&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;compute_mean_ff_gaunt_factor_comp&quot;</span><span class="p">,</span>
+    <span class="s2">"compute_ff_gaunt_factor"</span><span class="p">,</span>
+    <span class="s2">"compute_ff_gaunt_factor_comp"</span><span class="p">,</span>
+    <span class="s2">"compute_mean_ff_gaunt_factor"</span><span class="p">,</span>
+    <span class="s2">"compute_mean_ff_gaunt_factor_comp"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="c1"># ============================================ #</span>
 <span class="c1"># PATHS                                        #</span>
 <span class="c1"># ============================================ #</span>
-<span class="n">_VAN_HOOF_NON_REL_PATH</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;gaunt_tables&quot;</span> <span class="o">/</span> <span class="s2">&quot;gauntff_vanhoof_2014.hdf5&quot;</span>
-<span class="n">_VAN_HOOF_REL_PATH</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;gaunt_tables&quot;</span> <span class="o">/</span> <span class="s2">&quot;gauntff_rel_vanhoof_2014.hdf5&quot;</span>
+<span class="n">_VAN_HOOF_NON_REL_PATH</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"gaunt_tables"</span> <span class="o">/</span> <span class="s2">"gauntff_vanhoof_2014.hdf5"</span>
+<span class="n">_VAN_HOOF_REL_PATH</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"gaunt_tables"</span> <span class="o">/</span> <span class="s2">"gauntff_rel_vanhoof_2014.hdf5"</span>
 
 
 <span class="c1"># ================================================ #</span>
@@ -554,18 +554,18 @@
 <div class="viewcode-block" id="GauntFactorInterpolatorBase">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.GauntFactorInterpolatorBase.html#trilobite.radiation.free_free.gaunt_factor.GauntFactorInterpolatorBase">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GauntFactorInterpolatorBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for tabulated free–free Gaunt factor interpolators.</span>
+<span class="w">    </span><span class="sd">"""Abstract base class for tabulated free–free Gaunt factor interpolators.</span>
 
 <span class="sd">    Defines the shared interface for all Gaunt factor interpolators, including</span>
 <span class="sd">    HDF5 loading and the callable/containment protocol.</span>
 
 <span class="sd">    Concrete subclasses must implement :meth:`__call__`, :meth:`__contains__`,</span>
 <span class="sd">    and the :attr:`description` property.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_load_hdf5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load Gaunt factor datasets from an HDF5 file.</span>
+<span class="w">        </span><span class="sd">"""Load Gaunt factor datasets from an HDF5 file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -576,7 +576,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
 <span class="sd">            Dictionary containing all datasets found in the file.  Guaranteed</span>
-<span class="sd">            keys are ``&#39;log_gamma2&#39;``, ``&#39;log_u&#39;``, and ``&#39;gff&#39;``; ``&#39;Z&#39;`` is</span>
+<span class="sd">            keys are ``'log_gamma2'``, ``'log_u'``, and ``'gff'``; ``'Z'`` is</span>
 <span class="sd">            included when present.</span>
 
 <span class="sd">        Raises</span>
@@ -585,41 +585,41 @@
 <span class="sd">            If *path* does not exist on disk.</span>
 <span class="sd">        KeyError</span>
 <span class="sd">            If the HDF5 file is missing one of the required datasets</span>
-<span class="sd">            (``&#39;log_gamma2&#39;``, ``&#39;log_u&#39;``, ``&#39;gff&#39;``).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            (``'log_gamma2'``, ``'log_u'``, ``'gff'``).</span>
+<span class="sd">        """</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gaunt factor table not found at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Gaunt factor table not found at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Loading Gaunt factor table from </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading Gaunt factor table from </span><span class="si">%s</span><span class="s2">."</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
         <span class="n">datasets</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;log_gamma2&quot;</span><span class="p">,</span> <span class="s2">&quot;log_u&quot;</span><span class="p">,</span> <span class="s2">&quot;gff&quot;</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"log_gamma2"</span><span class="p">,</span> <span class="s2">"log_u"</span><span class="p">,</span> <span class="s2">"gff"</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gaunt factor table at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> is missing required dataset &#39;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+                    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Gaunt factor table at </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> is missing required dataset '</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
                 <span class="n">datasets</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="n">key</span><span class="p">][:]</span>
-            <span class="k">if</span> <span class="s2">&quot;Z&quot;</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-                <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">][:]</span>
-        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Retrieved Gaunt factor table from </span><span class="si">%s</span><span class="s2">.&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+            <span class="k">if</span> <span class="s2">"Z"</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">datasets</span><span class="p">[</span><span class="s2">"Z"</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">"Z"</span><span class="p">][:]</span>
+        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Retrieved Gaunt factor table from </span><span class="si">%s</span><span class="s2">."</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">datasets</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">Z</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-        <span class="n">T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Evaluate the free–free Gaunt factor at ``(Z, T, nu)``.&quot;&quot;&quot;</span>
+        <span class="n">Z</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+        <span class="n">T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Evaluate the free–free Gaunt factor at ``(Z, T, nu)``."""</span>
 
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check whether ``(Z, T, nu)`` lies within the interpolation domain.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Check whether ``(Z, T, nu)`` lies within the interpolation domain."""</span>
 
     <span class="nd">@property</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Human-readable one-line description of the table.&quot;&quot;&quot;</span></div>
+<span class="w">        </span><span class="sd">"""str: Human-readable one-line description of the table."""</span></div>
 
 
 
@@ -629,7 +629,7 @@
 <div class="viewcode-block" id="NonRelativisticGauntFactorInterpolator">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.NonRelativisticGauntFactorInterpolator.html#trilobite.radiation.free_free.gaunt_factor.NonRelativisticGauntFactorInterpolator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NonRelativisticGauntFactorInterpolator</span><span class="p">(</span><span class="n">GauntFactorInterpolatorBase</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Bilinear interpolator for non-relativistic tabulated free–free Gaunt factors.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Bilinear interpolator for non-relativistic tabulated free–free Gaunt factors.</span>
 
 <span class="sd">    Wraps a :class:`~scipy.interpolate.RegularGridInterpolator` loaded from</span>
 <span class="sd">    the 2-D van Hoof et al. (2014) HDF5 table.  The table layout is::</span>
@@ -663,30 +663,30 @@
 
 <span class="sd">        interp = get_default_gaunt_interpolator()</span>
 <span class="sd">        gff = interp(Z=1, T=1e4, nu=1e10)</span>
-<span class="sd">        print(f&quot;gff = {gff:.4f}&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        print(f"gff = {gff:.4f}")</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">_VAN_HOOF_NON_REL_PATH</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
         <span class="n">datasets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;log_gamma2&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;log_u&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;gff&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"log_gamma2"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"log_u"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"gff"</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Non-relativistic Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> has shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">; expected 2-D.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Non-relativistic Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> has shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">; expected 2-D."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-0 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;does not match log_u grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-0 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"does not match log_u grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-1 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;does not match log_gamma2 grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-1 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"does not match log_gamma2 grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_interpolator</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">(</span>
@@ -694,18 +694,18 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Loading Gaunt factor table from </span><span class="si">%s</span><span class="s2">. [DONE]&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading Gaunt factor table from </span><span class="si">%s</span><span class="s2">. [DONE]"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Calling interface                                                    #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">Z</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-        <span class="n">T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the non-relativistic free–free Gaunt factor at ``(Z, T, nu)``.</span>
+        <span class="n">Z</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+        <span class="n">T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Evaluate the non-relativistic free–free Gaunt factor at ``(Z, T, nu)``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -721,7 +721,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ~numpy.ndarray</span>
 <span class="sd">            The dimensionless Gaunt factor :math:`g_{\rm ff}(Z, T, \nu)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Z_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">T_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">nu_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -744,24 +744,24 @@
     <span class="c1"># Dunder helpers                                                       #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(n_log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2">, n_log_gamma2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2">, path=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(n_log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2">, n_log_gamma2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2">, path='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">')"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;NonRelativisticGauntFactorInterpolator</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  Source  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  log_u   : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2"> points)</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  log_γ²  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2"> points)&quot;</span>
+            <span class="sa">f</span><span class="s2">"NonRelativisticGauntFactorInterpolator</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  Source  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  log_u   : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  "</span>
+            <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2"> points)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  log_γ²  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  "</span>
+            <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2"> points)"</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the total number of tabulated Gaunt factor values.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the total number of tabulated Gaunt factor values."""</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Check whether ``(Z, T, nu)`` lies within the interpolation domain.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Check whether ``(Z, T, nu)`` lies within the interpolation domain.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -780,9 +780,9 @@
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">            (1, 1e4, 1e10) in interp  # True or False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;__contains__ expects a 3-tuple (Z, T, nu).&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"__contains__ expects a 3-tuple (Z, T, nu)."</span><span class="p">)</span>
         <span class="n">Z</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="n">item</span>
         <span class="n">log_g2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Ry_cgs</span> <span class="o">/</span> <span class="p">(</span><span class="n">kB_cgs</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
         <span class="n">log_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">h_cgs</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">kB_cgs</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
@@ -795,53 +795,53 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;tuple: Shape of the underlying Gaunt factor array ``(n_log_u, n_log_gamma2)``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""tuple: Shape of the underlying Gaunt factor array ``(n_log_u, n_log_gamma2)``."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_gamma2_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;tuple: Minimum and maximum :math:`\log_{10}\gamma^2` in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""tuple: Minimum and maximum :math:`\log_{10}\gamma^2` in the table."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_u_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;tuple: Minimum and maximum :math:`\log_{10} u` in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""tuple: Minimum and maximum :math:`\log_{10} u` in the table."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_log_gamma2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;int: Number of :math:`\log_{10}\gamma^2` grid points.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""int: Number of :math:`\log_{10}\gamma^2` grid points."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_log_u</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;int: Number of :math:`\log_{10} u` grid points.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""int: Number of :math:`\log_{10} u` grid points."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Absolute path to the HDF5 file backing this interpolator.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: Absolute path to the HDF5 file backing this interpolator."""</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Human-readable one-line description of the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: Human-readable one-line description of the table."""</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Non-relativistic free-free Gaunt factors &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;log_γ²=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="sa">f</span><span class="s2">"Non-relativistic free-free Gaunt factors "</span>
+            <span class="sa">f</span><span class="s2">"(log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"log_γ²=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)"</span>
         <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_gamma2_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;~numpy.ndarray: Read-only view of the :math:`\log_{10}\gamma^2` grid.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""~numpy.ndarray: Read-only view of the :math:`\log_{10}\gamma^2` grid."""</span>
         <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="n">view</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">view</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_u_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;~numpy.ndarray: Read-only view of the :math:`\log_{10} u` grid.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""~numpy.ndarray: Read-only view of the :math:`\log_{10} u` grid."""</span>
         <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="n">view</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">view</span></div>
@@ -851,7 +851,7 @@
 <div class="viewcode-block" id="RelativisticGauntFactorInterpolator">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.RelativisticGauntFactorInterpolator.html#trilobite.radiation.free_free.gaunt_factor.RelativisticGauntFactorInterpolator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelativisticGauntFactorInterpolator</span><span class="p">(</span><span class="n">GauntFactorInterpolatorBase</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Trilinear interpolator for relativistic tabulated free–free Gaunt factors.</span>
+<span class="w">    </span><span class="sd">"""Trilinear interpolator for relativistic tabulated free–free Gaunt factors.</span>
 
 <span class="sd">    Wraps a :class:`~scipy.interpolate.RegularGridInterpolator` loaded from</span>
 <span class="sd">    the 3-D van Hoof et al. (2014) relativistic HDF5 table.  The table layout</span>
@@ -884,37 +884,37 @@
 <span class="sd">            get_default_relativistic_gaunt_interpolator()</span>
 <span class="sd">        )</span>
 <span class="sd">        gff = interp(Z=1, T=1e8, nu=1e18)</span>
-<span class="sd">        print(f&quot;gff = {gff:.4f}&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        print(f"gff = {gff:.4f}")</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">_VAN_HOOF_REL_PATH</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">expanduser</span><span class="p">()</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
         <span class="n">datasets</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="s2">&quot;Z&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relativistic Gaunt factor table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> is missing required dataset &#39;Z&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">"Z"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">datasets</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Relativistic Gaunt factor table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> is missing required dataset 'Z'."</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;log_gamma2&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;log_u&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">&quot;gff&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"Z"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"log_gamma2"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"log_u"</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">datasets</span><span class="p">[</span><span class="s2">"gff"</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relativistic Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> has shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">; expected 3-D.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Relativistic Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2"> has shape </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">; expected 3-D."</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-0 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;does not match Z grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-0 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"does not match Z grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-1 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;does not match log_u grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-1 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"does not match log_u grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-2 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;does not match log_gamma2 grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"Gaunt table at </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">: axis-2 length </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s2"> "</span>
+                <span class="sa">f</span><span class="s2">"does not match log_gamma2 grid length </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_interpolator</span> <span class="o">=</span> <span class="n">RegularGridInterpolator</span><span class="p">(</span>
@@ -922,18 +922,18 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Loading Gaunt factor table from </span><span class="si">%s</span><span class="s2">. [DONE]&quot;</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
+        <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">"Loading Gaunt factor table from </span><span class="si">%s</span><span class="s2">. [DONE]"</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Calling interface                                                    #</span>
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">Z</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-        <span class="n">T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;np.ndarray&quot;</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the relativistic free–free Gaunt factor at ``(Z, T, nu)``.</span>
+        <span class="n">Z</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+        <span class="n">T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="s2">"np.ndarray"</span><span class="p">]:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Evaluate the relativistic free–free Gaunt factor at ``(Z, T, nu)``.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -949,7 +949,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ~numpy.ndarray</span>
 <span class="sd">            The dimensionless Gaunt factor :math:`g_{\rm ff}(Z, T, \nu)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">Z_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">T_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">nu_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -973,30 +973,30 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;n_Z=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_Z</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;n_log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;n_log_gamma2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;path=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">&#39;)&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">("</span>
+            <span class="sa">f</span><span class="s2">"n_Z=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_Z</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"n_log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"n_log_gamma2=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"path='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="si">}</span><span class="s2">')"</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;RelativisticGauntFactorInterpolator</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  Source  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  Z range : </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  log_u   : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2"> points)</span><span class="se">\n</span><span class="s2">&quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;  log_γ²  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2"> points)&quot;</span>
+            <span class="sa">f</span><span class="s2">"RelativisticGauntFactorInterpolator</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  Source  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  Z range : </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  log_u   : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  "</span>
+            <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_u</span><span class="si">}</span><span class="s2"> points)</span><span class="se">\n</span><span class="s2">"</span>
+            <span class="sa">f</span><span class="s2">"  log_γ²  : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> – </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">  "</span>
+            <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">n_log_gamma2</span><span class="si">}</span><span class="s2"> points)"</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the total number of tabulated Gaunt factor values.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return the total number of tabulated Gaunt factor values."""</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check whether ``(Z, T, nu)`` lies within the interpolation domain.</span>
+<span class="w">        </span><span class="sd">"""Check whether ``(Z, T, nu)`` lies within the interpolation domain.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1013,9 +1013,9 @@
 <span class="sd">        .. code-block:: python</span>
 
 <span class="sd">            (1, 1e4, 1e10) in interp  # True or False</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">3</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;__contains__ expects a 3-tuple (Z, T, nu).&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"__contains__ expects a 3-tuple (Z, T, nu)."</span><span class="p">)</span>
         <span class="n">Z</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">nu</span> <span class="o">=</span> <span class="n">item</span>
         <span class="n">log_g2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Ry_cgs</span> <span class="o">/</span> <span class="p">(</span><span class="n">kB_cgs</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
         <span class="n">log_u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">h_cgs</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">nu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">kB_cgs</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
@@ -1029,71 +1029,71 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;tuple: Shape of the underlying Gaunt factor array ``(n_Z, n_log_u, n_log_gamma2)``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""tuple: Shape of the underlying Gaunt factor array ``(n_Z, n_log_u, n_log_gamma2)``."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_array</span><span class="o">.</span><span class="n">shape</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">z_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;tuple: Minimum and maximum ion charge ``(Z_min, Z_max)``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""tuple: Minimum and maximum ion charge ``(Z_min, Z_max)``."""</span>
         <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_gamma2_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;tuple: Minimum and maximum :math:`\log_{10}\gamma^2` in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""tuple: Minimum and maximum :math:`\log_{10}\gamma^2` in the table."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_u_range</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;tuple: Minimum and maximum :math:`\log_{10} u` in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""tuple: Minimum and maximum :math:`\log_{10} u` in the table."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_Z</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;int: Number of ion charge values in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""int: Number of ion charge values in the table."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_log_gamma2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;int: Number of :math:`\log_{10}\gamma^2` grid points.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""int: Number of :math:`\log_{10}\gamma^2` grid points."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_log_u</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;int: Number of :math:`\log_{10} u` grid points.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""int: Number of :math:`\log_{10} u` grid points."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">source</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Absolute path to the HDF5 file backing this interpolator.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: Absolute path to the HDF5 file backing this interpolator."""</span>
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">description</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;str: Human-readable one-line description of the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""str: Human-readable one-line description of the table."""</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Relativistic free-free Gaunt factors &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;(Z=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;log_γ²=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="sa">f</span><span class="s2">"Relativistic free-free Gaunt factors "</span>
+            <span class="sa">f</span><span class="s2">"(Z=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">z_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"log_u=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_u_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"log_γ²=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">–</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">log_gamma2_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">)"</span>
         <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">z_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;~numpy.ndarray: Read-only view of the ion charge grid.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""~numpy.ndarray: Read-only view of the ion charge grid."""</span>
         <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_z_grid</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="n">view</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">view</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_gamma2_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;~numpy.ndarray: Read-only view of the :math:`\log_{10}\gamma^2` grid.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""~numpy.ndarray: Read-only view of the :math:`\log_{10}\gamma^2` grid."""</span>
         <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_gamma2_grid</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="n">view</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">view</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">log_u_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;~numpy.ndarray: Read-only view of the :math:`\log_{10} u` grid.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""~numpy.ndarray: Read-only view of the :math:`\log_{10} u` grid."""</span>
         <span class="n">view</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_u_grid</span><span class="o">.</span><span class="n">view</span><span class="p">()</span>
         <span class="n">view</span><span class="o">.</span><span class="n">flags</span><span class="o">.</span><span class="n">writeable</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="n">view</span></div>
@@ -1109,7 +1109,7 @@
 
 <span class="c1"># ----------- Private Functions ------------------- #</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_lu</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Free–free Gaunt factor using the W. Lu textbook approximation.</span>
 
 <span class="sd">    Parameters</span>
@@ -1150,7 +1150,7 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`lu_2026_18603474`, equation 6.79.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Ensure everything is correctly case as logarithmic and in CGS-compatible units.</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1176,7 +1176,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_lu_comp</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Xs</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Composition-weighted effective free–free Gaunt factor (W. Lu textbook approximation).</span>
 
 <span class="sd">    Parameters</span>
@@ -1210,16 +1210,16 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`lu_2026_18603474`, equation 6.79.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">gaunt_factors</span> <span class="o">=</span> <span class="n">_gaunt_ff_lu</span><span class="p">(</span><span class="n">log_nu</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">log_T</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">Zs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:])</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">Zs</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Xs</span> <span class="o">*</span> <span class="n">gaunt_factors</span>
@@ -1227,7 +1227,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_draine</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Free–free Gaunt factor using the Draine (2011) approximation.</span>
 
 <span class="sd">    Parameters</span>
@@ -1259,7 +1259,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`draine2011physics`, Chapter 10, and</span>
 <span class="sd">    :footcite:t:`2023MNRAS.519.3432T`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1277,7 +1277,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_draine_comp</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Xs</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Composition-weighted effective free–free Gaunt factor (Draine 2011 approximation).</span>
 
 <span class="sd">    Parameters</span>
@@ -1306,16 +1306,16 @@
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`draine2011physics`, Chapter 10, and</span>
 <span class="sd">    :footcite:t:`2023MNRAS.519.3432T`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">gaunt_factors</span> <span class="o">=</span> <span class="n">_gaunt_ff_draine</span><span class="p">(</span><span class="n">log_nu</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">log_T</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">Zs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:])</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">Zs</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Xs</span> <span class="o">*</span> <span class="n">gaunt_factors</span>
@@ -1323,7 +1323,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_average_gaunt_ff_draine</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Frequency-averaged free–free Gaunt factor (Draine 2011 approximation).</span>
 
 <span class="sd">    Computes the thermally averaged (frequency-integrated) Gaunt factor</span>
@@ -1379,7 +1379,7 @@
 <span class="sd">        Frequency-dependent Gaunt factor.</span>
 <span class="sd">    _average_gaunt_ff_draine_comp :</span>
 <span class="sd">        Composition-weighted averaged Gaunt factor.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Compute the Q factor ln(T/K/(10^5.4 Z^2))</span>
     <span class="n">log_Q</span> <span class="o">=</span> <span class="n">log_T</span> <span class="o">-</span> <span class="mf">5.4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
 
@@ -1389,7 +1389,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_average_gaunt_ff_draine_comp</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Xs</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Composition-weighted frequency-averaged free–free Gaunt factor.</span>
 
 <span class="sd">    Computes the effective averaged Gaunt factor for a multi-species plasma:</span>
@@ -1442,7 +1442,7 @@
 
 <span class="sd">    * fully ionised plasma,</span>
 <span class="sd">    * number fractions (not mass fractions),</span>
-<span class="sd">    * independent evaluation of each species&#39; Gaunt factor.</span>
+<span class="sd">    * independent evaluation of each species' Gaunt factor.</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -1450,14 +1450,14 @@
 <span class="sd">        Single-species averaged Gaunt factor.</span>
 <span class="sd">    _gaunt_ff_draine_comp :</span>
 <span class="sd">        Frequency-dependent composition-weighted Gaunt factor.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">Zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">gaunt_factors</span> <span class="o">=</span> <span class="n">_average_gaunt_ff_draine</span><span class="p">(</span><span class="n">log_T</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="n">Zs</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:])</span>
     <span class="n">weights</span> <span class="o">=</span> <span class="n">Zs</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Xs</span> <span class="o">*</span> <span class="n">gaunt_factors</span>
@@ -1468,22 +1468,22 @@
 <span class="c1"># Tabulated Wrappers (Van Hoof 2014)              #</span>
 <span class="c1"># =============================================== #</span>
 <span class="c1"># Lazily-loaded module-level interpolator instances.  These are created on the</span>
-<span class="c1"># first call to a &#39;vanhoof&#39; or &#39;vanhoof_rel&#39; approximation and then reused.</span>
+<span class="c1"># first call to a 'vanhoof' or 'vanhoof_rel' approximation and then reused.</span>
 <span class="c1"># bounds_error=False / fill_value=NaN means out-of-domain queries return NaN</span>
 <span class="c1"># rather than raising, consistent with the opacity module convention.</span>
 
-<span class="n">_DEFAULT_NON_REL_INTERP</span><span class="p">:</span> <span class="s2">&quot;Optional[NonRelativisticGauntFactorInterpolator]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">_DEFAULT_REL_INTERP</span><span class="p">:</span> <span class="s2">&quot;Optional[RelativisticGauntFactorInterpolator]&quot;</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_DEFAULT_NON_REL_INTERP</span><span class="p">:</span> <span class="s2">"Optional[NonRelativisticGauntFactorInterpolator]"</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">_DEFAULT_REL_INTERP</span><span class="p">:</span> <span class="s2">"Optional[RelativisticGauntFactorInterpolator]"</span> <span class="o">=</span> <span class="kc">None</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_get_non_rel_interp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;NonRelativisticGauntFactorInterpolator&quot;</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_non_rel_interp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">"NonRelativisticGauntFactorInterpolator"</span><span class="p">:</span>
     <span class="k">global</span> <span class="n">_DEFAULT_NON_REL_INTERP</span>
     <span class="k">if</span> <span class="n">_DEFAULT_NON_REL_INTERP</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_DEFAULT_NON_REL_INTERP</span> <span class="o">=</span> <span class="n">NonRelativisticGauntFactorInterpolator</span><span class="p">(</span><span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_DEFAULT_NON_REL_INTERP</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_get_rel_interp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;RelativisticGauntFactorInterpolator&quot;</span><span class="p">:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_get_rel_interp</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">"RelativisticGauntFactorInterpolator"</span><span class="p">:</span>
     <span class="k">global</span> <span class="n">_DEFAULT_REL_INTERP</span>
     <span class="k">if</span> <span class="n">_DEFAULT_REL_INTERP</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">_DEFAULT_REL_INTERP</span> <span class="o">=</span> <span class="n">RelativisticGauntFactorInterpolator</span><span class="p">(</span><span class="n">bounds_error</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
@@ -1491,7 +1491,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_vanhoof</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Free–free Gaunt factor via bilinear interpolation on the van Hoof et al. (2014) non-relativistic table.</span>
 
 <span class="sd">    Parameters</span>
@@ -1519,14 +1519,14 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`2014MNRAS.444..420V`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">_get_non_rel_interp</span><span class="p">()(</span><span class="n">Z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_vanhoof_comp</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Xs</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Composition-weighted effective free–free Gaunt factor using the van Hoof et al. (2014) non-relativistic table.</span>
 
 <span class="sd">    Parameters</span>
@@ -1561,13 +1561,13 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`2014MNRAS.444..420V`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">Zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
@@ -1579,7 +1579,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_vanhoof_rel</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Z</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Free–free Gaunt factor via trilinear interpolation on the van Hoof et al. (2014) relativistic table.</span>
 
 <span class="sd">    Parameters</span>
@@ -1610,14 +1610,14 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`2014MNRAS.444..420V`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">_get_rel_interp</span><span class="p">()(</span><span class="n">Z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">,</span> <span class="n">nu</span><span class="o">=</span><span class="n">nu</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_gaunt_ff_vanhoof_rel_comp</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">Zs</span><span class="p">,</span> <span class="n">Xs</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Composition-weighted effective free–free Gaunt factor using the van Hoof et al. (2014) relativistic table.</span>
 
 <span class="sd">    Parameters</span>
@@ -1653,13 +1653,13 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    See :footcite:t:`2014MNRAS.444..420V`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">Zs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Zs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">Xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Xs</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must have the same shape; got </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">Xs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Zs</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Zs and Xs must be 1-D arrays; got shape </span><span class="si">{</span><span class="n">Zs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
     <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
@@ -1673,26 +1673,26 @@
 <span class="c1"># ----------- Public Functions ------------------- #</span>
 
 <span class="n">_APPROX_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;lu&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_lu</span><span class="p">,</span> <span class="n">_gaunt_ff_lu_comp</span><span class="p">),</span>
-    <span class="s2">&quot;draine&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_draine</span><span class="p">,</span> <span class="n">_gaunt_ff_draine_comp</span><span class="p">),</span>
-    <span class="s2">&quot;vanhoof&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_vanhoof</span><span class="p">,</span> <span class="n">_gaunt_ff_vanhoof_comp</span><span class="p">),</span>
-    <span class="s2">&quot;vanhoof_rel&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_vanhoof_rel</span><span class="p">,</span> <span class="n">_gaunt_ff_vanhoof_rel_comp</span><span class="p">),</span>
+    <span class="s2">"lu"</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_lu</span><span class="p">,</span> <span class="n">_gaunt_ff_lu_comp</span><span class="p">),</span>
+    <span class="s2">"draine"</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_draine</span><span class="p">,</span> <span class="n">_gaunt_ff_draine_comp</span><span class="p">),</span>
+    <span class="s2">"vanhoof"</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_vanhoof</span><span class="p">,</span> <span class="n">_gaunt_ff_vanhoof_comp</span><span class="p">),</span>
+    <span class="s2">"vanhoof_rel"</span><span class="p">:</span> <span class="p">(</span><span class="n">_gaunt_ff_vanhoof_rel</span><span class="p">,</span> <span class="n">_gaunt_ff_vanhoof_rel_comp</span><span class="p">),</span>
 <span class="p">}</span>
 
 <span class="n">_AVERAGE_APPROX_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;draine&quot;</span><span class="p">:</span> <span class="p">(</span><span class="n">_average_gaunt_ff_draine</span><span class="p">,</span> <span class="n">_average_gaunt_ff_draine_comp</span><span class="p">),</span>
+    <span class="s2">"draine"</span><span class="p">:</span> <span class="p">(</span><span class="n">_average_gaunt_ff_draine</span><span class="p">,</span> <span class="n">_average_gaunt_ff_draine_comp</span><span class="p">),</span>
 <span class="p">}</span>
 
 
 <div class="viewcode-block" id="compute_ff_gaunt_factor">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.compute_ff_gaunt_factor.html#trilobite.radiation.free_free.gaunt_factor.compute_ff_gaunt_factor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_gaunt_factor</span><span class="p">(</span>
-    <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lu&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Union[float, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the free–free Gaunt factor :math:`g_{\rm ff}(\nu, T, Z)` for a single ion species.</span>
+    <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lu"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Union[float, np.ndarray]"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate the free–free Gaunt factor :math:`g_{\rm ff}(\nu, T, Z)` for a single ion species.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1704,8 +1704,8 @@
 <span class="sd">        unit-bearing Quantities are converted automatically.</span>
 <span class="sd">    Z : int, float, or ~numpy.ndarray, optional</span>
 <span class="sd">        Ionic charge number (:math:`Z \geq 1`).  Dimensionless. Default is 1 (proton).</span>
-<span class="sd">    approx : {&#39;lu&#39;, &#39;draine&#39;, &#39;vanhoof&#39;, &#39;vanhoof_rel&#39;}, optional</span>
-<span class="sd">        Approximation method.  Default is ``&#39;lu&#39;``. See notes regarding the available</span>
+<span class="sd">    approx : {'lu', 'draine', 'vanhoof', 'vanhoof_rel'}, optional</span>
+<span class="sd">        Approximation method.  Default is ``'lu'``. See notes regarding the available</span>
 <span class="sd">        approximation methods.</span>
 
 <span class="sd">    Returns</span>
@@ -1724,7 +1724,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    Four methods are available:</span>
 
-<span class="sd">    ``&#39;lu&#39;`` (default)</span>
+<span class="sd">    ``'lu'`` (default)</span>
 <span class="sd">        Analytic extension of the Draine (2011) formula by</span>
 <span class="sd">        :footcite:t:`lu_2026_18603474` (equation 6.79), expressed in terms of</span>
 <span class="sd">        :math:`\nu_9 \equiv \nu / (10^9\,\mathrm{Hz})` and</span>
@@ -1740,7 +1740,7 @@
 <span class="sd">        Covers both the classical and semi-quantum non-relativistic regimes.</span>
 <span class="sd">        Valid for arbitrary :math:`Z`.</span>
 
-<span class="sd">    ``&#39;draine&#39;``</span>
+<span class="sd">    ``'draine'``</span>
 <span class="sd">        Classical analytic approximation from</span>
 <span class="sd">        :footcite:t:`draine2011physics` (Chapter 10) and</span>
 <span class="sd">        :footcite:t:`2023MNRAS.519.3432T`:</span>
@@ -1753,7 +1753,7 @@
 
 <span class="sd">        Suitable when only the classical non-relativistic regime is needed.</span>
 
-<span class="sd">    ``&#39;vanhoof&#39;``</span>
+<span class="sd">    ``'vanhoof'``</span>
 <span class="sd">        Bilinear interpolation on the 2-D non-relativistic table of</span>
 <span class="sd">        :footcite:t:`2014MNRAS.444..420V`.  Covers</span>
 <span class="sd">        :math:`-16 \le \log_{10} u \le +13` and</span>
@@ -1762,10 +1762,10 @@
 <span class="sd">        call; subsequent calls are fast.  Recommended when accuracy matters</span>
 <span class="sd">        and relativistic corrections are negligible.</span>
 
-<span class="sd">    ``&#39;vanhoof_rel&#39;``</span>
+<span class="sd">    ``'vanhoof_rel'``</span>
 <span class="sd">        Trilinear interpolation on the 3-D relativistic table of</span>
 <span class="sd">        :footcite:t:`2014MNRAS.444..420V` with :math:`Z = 1\text{–}36`.</span>
-<span class="sd">        Covers the same :math:`(u, \gamma^2)` domain as ``&#39;vanhoof&#39;``.</span>
+<span class="sd">        Covers the same :math:`(u, \gamma^2)` domain as ``'vanhoof'``.</span>
 <span class="sd">        Appropriate for high-temperature plasmas</span>
 <span class="sd">        (:math:`T \gtrsim 10^8\,\mathrm{K}`) where relativistic corrections</span>
 <span class="sd">        are significant.</span>
@@ -1796,19 +1796,19 @@
 <span class="sd">        gff = compute_ff_gaunt_factor(</span>
 <span class="sd">            nu=1e10 * u.Hz, T=1e4 * u.K, Z=1</span>
 <span class="sd">        )</span>
-<span class="sd">        print(f&quot;g_ff (lu)      = {gff:.4f}&quot;)</span>
+<span class="sd">        print(f"g_ff (lu)      = {gff:.4f}")</span>
 
 <span class="sd">        # Tabulated non-relativistic</span>
 <span class="sd">        gff_tab = compute_ff_gaunt_factor(</span>
 <span class="sd">            nu=1e10 * u.Hz,</span>
 <span class="sd">            T=1e4 * u.K,</span>
 <span class="sd">            Z=1,</span>
-<span class="sd">            approx=&quot;vanhoof&quot;,</span>
+<span class="sd">            approx="vanhoof",</span>
 <span class="sd">        )</span>
-<span class="sd">        print(f&quot;g_ff (vanhoof) = {gff_tab:.4f}&quot;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        print(f"g_ff (vanhoof) = {gff_tab:.4f}")</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">approx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_APPROX_REGISTRY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
     <span class="n">T_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
@@ -1821,13 +1821,13 @@
 <div class="viewcode-block" id="compute_ff_gaunt_factor_comp">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.compute_ff_gaunt_factor_comp.html#trilobite.radiation.free_free.gaunt_factor.compute_ff_gaunt_factor_comp">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ff_gaunt_factor_comp</span><span class="p">(</span>
-    <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Zs</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Xs</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;lu&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Union[float, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the composition-weighted effective free–free Gaunt factor.</span>
+    <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">Zs</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">Xs</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"lu"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Union[float, np.ndarray]"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate the composition-weighted effective free–free Gaunt factor.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1843,9 +1843,9 @@
 <span class="sd">    Xs : ~numpy.ndarray</span>
 <span class="sd">        Number fractions of each species (:math:`\sum_i x_i = 1`).</span>
 <span class="sd">        Must match the shape of *Zs*.</span>
-<span class="sd">    approx : {&#39;lu&#39;, &#39;draine&#39;, &#39;vanhoof&#39;, &#39;vanhoof_rel&#39;}, optional</span>
+<span class="sd">    approx : {'lu', 'draine', 'vanhoof', 'vanhoof_rel'}, optional</span>
 <span class="sd">        Method used to evaluate the per-species Gaunt factor.</span>
-<span class="sd">        Default is ``&#39;lu&#39;``.</span>
+<span class="sd">        Default is ``'lu'``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1873,10 +1873,10 @@
 
 <span class="sd">    where :math:`g_{{\rm ff},i}` is evaluated by the method selected through</span>
 <span class="sd">    *approx*.  See :func:`compute_ff_gaunt_factor` for a description of each</span>
-<span class="sd">    available method; all four (``&#39;lu&#39;``, ``&#39;draine&#39;``, ``&#39;vanhoof&#39;``,</span>
-<span class="sd">    ``&#39;vanhoof_rel&#39;``) are supported here.</span>
+<span class="sd">    available method; all four (``'lu'``, ``'draine'``, ``'vanhoof'``,</span>
+<span class="sd">    ``'vanhoof_rel'``) are supported here.</span>
 
-<span class="sd">    For the tabulated methods (``&#39;vanhoof&#39;``, ``&#39;vanhoof_rel&#39;``), the</span>
+<span class="sd">    For the tabulated methods (``'vanhoof'``, ``'vanhoof_rel'``), the</span>
 <span class="sd">    per-species evaluations iterate over species in a Python loop; the</span>
 <span class="sd">    interpolator is lazy-loaded and cached on the first call.</span>
 
@@ -1920,11 +1920,11 @@
 <span class="sd">            T=1e4 * u.K,</span>
 <span class="sd">            Zs=Zs,</span>
 <span class="sd">            Xs=Xs,</span>
-<span class="sd">            approx=&quot;vanhoof&quot;,</span>
+<span class="sd">            approx="vanhoof",</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">approx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_APPROX_REGISTRY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">nu_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
     <span class="n">T_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
@@ -1937,11 +1937,11 @@
 <div class="viewcode-block" id="compute_mean_ff_gaunt_factor">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.compute_mean_ff_gaunt_factor.html#trilobite.radiation.free_free.gaunt_factor.compute_mean_ff_gaunt_factor">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_mean_ff_gaunt_factor</span><span class="p">(</span>
-    <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;draine&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Union[float, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the frequency-averaged free–free Gaunt factor for a single ion species.</span>
+    <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"draine"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Union[float, np.ndarray]"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate the frequency-averaged free–free Gaunt factor for a single ion species.</span>
 
 <span class="sd">    Returns the thermally averaged (frequency-integrated) Gaunt factor</span>
 <span class="sd">    :math:`\bar{g}_{\rm ff}(T, Z)` used in bolometric free–free luminosity</span>
@@ -1955,9 +1955,9 @@
 <span class="sd">        unit-bearing Quantities are converted automatically.</span>
 <span class="sd">    Z : int, float, or ~numpy.ndarray, optional</span>
 <span class="sd">        Ionic charge number (:math:`Z \geq 1`).  Dimensionless. Default is 1.</span>
-<span class="sd">    approx : {&#39;draine&#39;}, optional</span>
-<span class="sd">        Approximation method.  Currently only ``&#39;draine&#39;`` is available.</span>
-<span class="sd">        Default is ``&#39;draine&#39;``.</span>
+<span class="sd">    approx : {'draine'}, optional</span>
+<span class="sd">        Approximation method.  Currently only ``'draine'`` is available.</span>
+<span class="sd">        Default is ``'draine'``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1974,9 +1974,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_gaunt_factor : Frequency-specific Gaunt factor.</span>
 <span class="sd">    compute_mean_ff_gaunt_factor_comp : Composition-weighted variant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">approx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_AVERAGE_APPROX_REGISTRY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_AVERAGE_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_AVERAGE_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">T_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
 
@@ -1988,12 +1988,12 @@
 <div class="viewcode-block" id="compute_mean_ff_gaunt_factor_comp">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.compute_mean_ff_gaunt_factor_comp.html#trilobite.radiation.free_free.gaunt_factor.compute_mean_ff_gaunt_factor_comp">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_mean_ff_gaunt_factor_comp</span><span class="p">(</span>
-    <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Zs</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">Xs</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;draine&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Union[float, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the composition-weighted frequency-averaged free–free Gaunt factor.</span>
+    <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">Zs</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">Xs</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">approx</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"draine"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Union[float, np.ndarray]"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Evaluate the composition-weighted frequency-averaged free–free Gaunt factor.</span>
 
 <span class="sd">    Returns :math:`\sum_i Z_i^2\, x_i\, \bar{g}_{{\rm ff},i}(T, Z_i)` where</span>
 <span class="sd">    :math:`\bar{g}_{{\rm ff},i}` is the frequency-averaged Gaunt factor for</span>
@@ -2011,9 +2011,9 @@
 <span class="sd">    Xs : ~numpy.ndarray</span>
 <span class="sd">        Number fractions of each species (:math:`\sum_i x_i = 1`).</span>
 <span class="sd">        Must match the shape of *Zs*.</span>
-<span class="sd">    approx : {&#39;draine&#39;}, optional</span>
+<span class="sd">    approx : {'draine'}, optional</span>
 <span class="sd">        Method used to evaluate the per-species averaged Gaunt factor.</span>
-<span class="sd">        Currently only ``&#39;draine&#39;`` is available.  Default is ``&#39;draine&#39;``.</span>
+<span class="sd">        Currently only ``'draine'`` is available.  Default is ``'draine'``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -2032,9 +2032,9 @@
 <span class="sd">    --------</span>
 <span class="sd">    compute_ff_gaunt_factor_comp : Frequency-specific composition-weighted variant.</span>
 <span class="sd">    compute_mean_ff_gaunt_factor : Single-species variant.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">approx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_AVERAGE_APPROX_REGISTRY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_AVERAGE_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"approx must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_AVERAGE_APPROX_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">; got </span><span class="si">{</span><span class="n">approx</span><span class="si">!r}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">T_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
 
@@ -2049,7 +2049,7 @@
 <div class="viewcode-block" id="get_default_gaunt_interpolator">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.get_default_gaunt_interpolator.html#trilobite.radiation.free_free.gaunt_factor.get_default_gaunt_interpolator">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_default_gaunt_interpolator</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NonRelativisticGauntFactorInterpolator</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return a :class:`NonRelativisticGauntFactorInterpolator` loaded from the bundled table.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return a :class:`NonRelativisticGauntFactorInterpolator` loaded from the bundled table.</span>
 
 <span class="sd">    The bundled table is the non-relativistic free–free Gaunt factor grid of</span>
 <span class="sd">    :footcite:t:`2014MNRAS.444..420V`. The table covers:</span>
@@ -2080,7 +2080,7 @@
 
 <span class="sd">        interp = get_default_gaunt_interpolator()</span>
 <span class="sd">        gff = interp(Z=1, T=1e4, nu=1e10)</span>
-<span class="sd">        print(f&quot;g_ff = {gff:.4f}&quot;)</span>
+<span class="sd">        print(f"g_ff = {gff:.4f}")</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -2090,7 +2090,7 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">NonRelativisticGauntFactorInterpolator</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -2098,7 +2098,7 @@
 <div class="viewcode-block" id="get_default_relativistic_gaunt_interpolator">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.free_free.gaunt_factor.get_default_relativistic_gaunt_interpolator.html#trilobite.radiation.free_free.gaunt_factor.get_default_relativistic_gaunt_interpolator">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_default_relativistic_gaunt_interpolator</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RelativisticGauntFactorInterpolator</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return a :class:`RelativisticGauntFactorInterpolator` loaded from the bundled table.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Return a :class:`RelativisticGauntFactorInterpolator` loaded from the bundled table.</span>
 
 <span class="sd">    The bundled table is the relativistic free–free Gaunt factor grid of</span>
 <span class="sd">    :footcite:t:`2014MNRAS.444..420V`. The table covers:</span>
@@ -2132,7 +2132,7 @@
 <span class="sd">            get_default_relativistic_gaunt_interpolator()</span>
 <span class="sd">        )</span>
 <span class="sd">        gff = interp(Z=1, T=1e8, nu=1e18)</span>
-<span class="sd">        print(f&quot;g_ff = {gff:.4f}&quot;)</span>
+<span class="sd">        print(f"g_ff = {gff:.4f}")</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -2142,7 +2142,7 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">RelativisticGauntFactorInterpolator</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -2150,11 +2150,11 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_gff</span><span class="p">(</span>
     <span class="n">log_nu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_T</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="n">Z</span><span class="p">:</span> <span class="s2">&quot;Union[float, _ArrayLike]&quot;</span><span class="p">,</span>
-    <span class="n">X</span><span class="p">:</span> <span class="s2">&quot;Optional[_ArrayLike]&quot;</span><span class="p">,</span>
-    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">&quot;Optional[Union[float, _ArrayLike]]&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;tuple[float, float]&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Resolve ``(Z_eff, g_ff_eff)`` for free-free emission calculations.</span>
+    <span class="n">Z</span><span class="p">:</span> <span class="s2">"Union[float, _ArrayLike]"</span><span class="p">,</span>
+    <span class="n">X</span><span class="p">:</span> <span class="s2">"Optional[_ArrayLike]"</span><span class="p">,</span>
+    <span class="n">g_ff</span><span class="p">:</span> <span class="s2">"Optional[Union[float, _ArrayLike]]"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"tuple[float, float]"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Resolve ``(Z_eff, g_ff_eff)`` for free-free emission calculations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -2193,7 +2193,7 @@
 <span class="sd">    are evaluated at the given ``(log_nu, log_T)`` using :func:`_gaunt_ff_lu`.</span>
 <span class="sd">    When *X* is ``None`` and *g_ff* is ``None``, the single-species Gaunt</span>
 <span class="sd">    factor is similarly computed via :func:`_gaunt_ff_lu`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">X</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -2235,8 +2235,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2270,7 +2270,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/physics_utils/cosmology';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.physics_utils.cosmology</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Cosmological utility functions.</span>
 
 <span class="sd">This module provides helper utilities used throughout the Trilobite</span>
@@ -452,7 +452,7 @@
 <span class="sd">distances. These functions ensure a consistent interface for interacting</span>
 <span class="sd">with Astropy cosmologies and for converting between commonly used</span>
 <span class="sd">cosmological distance measures.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy.cosmology</span><span class="w"> </span><span class="kn">import</span> <span class="n">z_at_value</span>
 
@@ -462,7 +462,7 @@
 <div class="viewcode-block" id="get_cosmology">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.cosmology.get_cosmology.html#trilobite.physics_utils.cosmology.get_cosmology">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_cosmology</span><span class="p">(</span><span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Return the cosmology to be used for calculations.</span>
 
 <span class="sd">    If no cosmology is provided, the default cosmology defined in the</span>
@@ -472,7 +472,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    cosmology : astropy.cosmology.FLRW, optional</span>
 <span class="sd">        Cosmology to use. If ``None``, the cosmology specified in</span>
-<span class="sd">        ``trilobite_config[&#39;physics.default_cosmology&#39;]`` is returned.</span>
+<span class="sd">        ``trilobite_config['physics.default_cosmology']`` is returned.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -483,9 +483,9 @@
 <span class="sd">    -----</span>
 <span class="sd">    This helper ensures that all parts of the framework consistently</span>
 <span class="sd">    use the configured cosmology unless explicitly overridden.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">cosmology</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">trilobite_config</span><span class="p">[</span><span class="s2">&quot;physics.default_cosmology&quot;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">trilobite_config</span><span class="p">[</span><span class="s2">"physics.default_cosmology"</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">cosmology</span></div>
 
 
@@ -499,7 +499,7 @@
     <span class="n">proper_distance</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Resolve cosmological distance measures and redshift.</span>
 
 <span class="sd">    Given **exactly one** of redshift or a cosmological distance,</span>
@@ -569,7 +569,7 @@
 <span class="sd">    &gt;&gt;&gt; resolve_cosmological_distances(</span>
 <span class="sd">    ...     luminosity_distance=3 * u.Gpc</span>
 <span class="sd">    ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">cosmo</span> <span class="o">=</span> <span class="n">get_cosmology</span><span class="p">(</span><span class="n">cosmology</span><span class="p">)</span>
 
     <span class="n">provided</span> <span class="o">=</span> <span class="p">[</span>
@@ -581,8 +581,8 @@
 
     <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">provided</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Exactly one of redshift, luminosity_distance, &quot;</span>
-            <span class="s2">&quot;angular_diameter_distance, or proper_distance must be provided.&quot;</span>
+            <span class="s2">"Exactly one of redshift, luminosity_distance, "</span>
+            <span class="s2">"angular_diameter_distance, or proper_distance must be provided."</span>
         <span class="p">)</span>
 
     <span class="c1"># ---------------------------------------------------</span>
@@ -606,10 +606,10 @@
     <span class="n">proper_distance</span> <span class="o">=</span> <span class="n">cosmo</span><span class="o">.</span><span class="n">comoving_distance</span><span class="p">(</span><span class="n">redshift</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;redshift&quot;</span><span class="p">:</span> <span class="n">redshift</span><span class="p">,</span>
-        <span class="s2">&quot;luminosity_distance&quot;</span><span class="p">:</span> <span class="n">luminosity_distance</span><span class="p">,</span>
-        <span class="s2">&quot;angular_diameter_distance&quot;</span><span class="p">:</span> <span class="n">angular_diameter_distance</span><span class="p">,</span>
-        <span class="s2">&quot;proper_distance&quot;</span><span class="p">:</span> <span class="n">proper_distance</span><span class="p">,</span>
+        <span class="s2">"redshift"</span><span class="p">:</span> <span class="n">redshift</span><span class="p">,</span>
+        <span class="s2">"luminosity_distance"</span><span class="p">:</span> <span class="n">luminosity_distance</span><span class="p">,</span>
+        <span class="s2">"angular_diameter_distance"</span><span class="p">:</span> <span class="n">angular_diameter_distance</span><span class="p">,</span>
+        <span class="s2">"proper_distance"</span><span class="p">:</span> <span class="n">proper_distance</span><span class="p">,</span>
     <span class="p">}</span></div>
 
 
@@ -617,7 +617,7 @@
 <div class="viewcode-block" id="redshift_to_age">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.cosmology.redshift_to_age.html#trilobite.physics_utils.cosmology.redshift_to_age">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">redshift_to_age</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute the age of the universe at a given redshift.</span>
 
 <span class="sd">    Parameters</span>
@@ -648,7 +648,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; redshift_to_age(1.0)</span>
 <span class="sd">    &lt;Quantity ... Gyr&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">cosmo</span> <span class="o">=</span> <span class="n">get_cosmology</span><span class="p">(</span><span class="n">cosmology</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cosmo</span><span class="o">.</span><span class="n">age</span><span class="p">(</span><span class="n">z</span><span class="p">)</span></div>
 
@@ -657,7 +657,7 @@
 <div class="viewcode-block" id="redshift_to_lookback_time">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.cosmology.redshift_to_lookback_time.html#trilobite.physics_utils.cosmology.redshift_to_lookback_time">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">redshift_to_lookback_time</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the lookback time corresponding to a given redshift.</span>
 
 <span class="sd">    Parameters</span>
@@ -687,7 +687,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; redshift_to_lookback_time(0.5)</span>
 <span class="sd">    &lt;Quantity ... Gyr&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">cosmo</span> <span class="o">=</span> <span class="n">get_cosmology</span><span class="p">(</span><span class="n">cosmology</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">cosmo</span><span class="o">.</span><span class="n">lookback_time</span><span class="p">(</span><span class="n">z</span><span class="p">)</span></div>
 
@@ -696,7 +696,7 @@
 <div class="viewcode-block" id="age_to_redshift">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.cosmology.age_to_redshift.html#trilobite.physics_utils.cosmology.age_to_redshift">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">age_to_redshift</span><span class="p">(</span><span class="n">age</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute the redshift corresponding to a given cosmic age.</span>
 
 <span class="sd">    Parameters</span>
@@ -723,7 +723,7 @@
 <span class="sd">    &gt;&gt;&gt; import astropy.units as u</span>
 <span class="sd">    &gt;&gt;&gt; age_to_redshift(5 * u.Gyr)</span>
 <span class="sd">    1.2</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">cosmo</span> <span class="o">=</span> <span class="n">get_cosmology</span><span class="p">(</span><span class="n">cosmology</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">z_at_value</span><span class="p">(</span><span class="n">cosmo</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span></div>
 
@@ -732,7 +732,7 @@
 <div class="viewcode-block" id="angular_to_physical">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.cosmology.angular_to_physical.html#trilobite.physics_utils.cosmology.angular_to_physical">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">angular_to_physical</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">redshift</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Convert an angular size to a physical transverse size.</span>
 
 <span class="sd">    Parameters</span>
@@ -767,9 +767,9 @@
 <span class="sd">    &gt;&gt;&gt; import astropy.units as u</span>
 <span class="sd">    &gt;&gt;&gt; angular_to_physical(1 * u.arcsec, redshift=1.0)</span>
 <span class="sd">    &lt;Quantity ... kpc&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">distances</span> <span class="o">=</span> <span class="n">resolve_cosmological_distances</span><span class="p">(</span><span class="n">redshift</span><span class="o">=</span><span class="n">redshift</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="n">cosmology</span><span class="p">)</span>
-    <span class="n">DA</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="s2">&quot;angular_diameter_distance&quot;</span><span class="p">]</span>
+    <span class="n">DA</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="s2">"angular_diameter_distance"</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">theta</span> <span class="o">*</span> <span class="n">DA</span></div>
 
 
@@ -777,7 +777,7 @@
 <div class="viewcode-block" id="physical_to_angular">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.cosmology.physical_to_angular.html#trilobite.physics_utils.cosmology.physical_to_angular">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">physical_to_angular</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">redshift</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Convert a physical transverse size to an angular size.</span>
 
 <span class="sd">    Parameters</span>
@@ -812,9 +812,9 @@
 <span class="sd">    &gt;&gt;&gt; import astropy.units as u</span>
 <span class="sd">    &gt;&gt;&gt; physical_to_angular(10 * u.kpc, redshift=0.5)</span>
 <span class="sd">    &lt;Quantity ... arcsec&gt;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">distances</span> <span class="o">=</span> <span class="n">resolve_cosmological_distances</span><span class="p">(</span><span class="n">redshift</span><span class="o">=</span><span class="n">redshift</span><span class="p">,</span> <span class="n">cosmology</span><span class="o">=</span><span class="n">cosmology</span><span class="p">)</span>
-    <span class="n">DA</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="s2">&quot;angular_diameter_distance&quot;</span><span class="p">]</span>
+    <span class="n">DA</span> <span class="o">=</span> <span class="n">distances</span><span class="p">[</span><span class="s2">"angular_diameter_distance"</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">size</span> <span class="o">/</span> <span class="n">DA</span></div>
 
 </pre></div>
@@ -846,8 +846,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -881,7 +881,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

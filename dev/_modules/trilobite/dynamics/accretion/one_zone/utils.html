@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/accretion/one_zone/utils';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.accretion.one_zone.utils</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Accretion physics utility functions for one-zone disk models.</span>
+<span></span><span class="sa">r</span><span class="sd">"""Accretion physics utility functions for one-zone disk models.</span>
 
 <span class="sd">This module provides several levels of functionality:</span>
 
@@ -496,7 +496,7 @@
 <span class="sd">:mod:`trilobite.physics_utils.eos` : sound-speed implementations.</span>
 <span class="sd">:class:`~trilobite.dynamics.accretion.one_zone.core.FullPressureDisk` : model</span>
 <span class="sd">    class whose Cython closure implements the same balance.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -538,7 +538,7 @@
     <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">opacity_obj</span><span class="p">:</span> <span class="n">GreyOpacityLaw</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Viscous heating and radiative cooling rates in log-space (CGS).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Viscous heating and radiative cooling rates in log-space (CGS).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -560,7 +560,7 @@
 <span class="sd">    log_q_visc, log_q_rad : ndarray</span>
 <span class="sd">        Natural logs of viscous heating and radiative cooling rates</span>
 <span class="sd">        (erg cm⁻² s⁻¹).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_cs</span> <span class="o">=</span> <span class="n">_log_radiative_ideal_gas_disk_sound_speed</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_Sigma</span><span class="p">,</span> <span class="n">log_Omega</span><span class="p">)</span>
     <span class="n">log_rho</span> <span class="o">=</span> <span class="n">log_Sigma</span> <span class="o">+</span> <span class="n">log_Omega</span> <span class="o">-</span> <span class="n">log_cs</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
@@ -582,7 +582,7 @@
     <span class="n">xi</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">opacity_obj</span><span class="p">:</span> <span class="n">GreyOpacityLaw</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Viscous heating, radiative cooling, and advective cooling rates in log-space (CGS).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Viscous heating, radiative cooling, and advective cooling rates in log-space (CGS).</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -608,7 +608,7 @@
 <span class="sd">    log_q_visc, log_q_rad, log_q_adv : ndarray</span>
 <span class="sd">        Natural logs of viscous heating, radiative cooling, and advective</span>
 <span class="sd">        cooling rates (erg cm⁻² s⁻¹).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_cs</span> <span class="o">=</span> <span class="n">_log_radiative_ideal_gas_disk_sound_speed</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">log_Sigma</span><span class="p">,</span> <span class="n">log_Omega</span><span class="p">)</span>
     <span class="n">log_rho</span> <span class="o">=</span> <span class="n">log_Sigma</span> <span class="o">+</span> <span class="n">log_Omega</span> <span class="o">-</span> <span class="n">log_cs</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
@@ -629,10 +629,10 @@
     <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">opacity_obj</span><span class="p">:</span> <span class="n">GreyOpacityLaw</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Thermal residual :math:`q^+ - q^-` (erg cm⁻² s⁻¹) for a non-advective disk.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Thermal residual :math:`q^+ - q^-` (erg cm⁻² s⁻¹) for a non-advective disk.</span>
 
 <span class="sd">    Positive when the disk is over-heated; zero at thermal equilibrium.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_q_visc</span><span class="p">,</span> <span class="n">log_q_rad</span> <span class="o">=</span> <span class="n">_log_heating_curves</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_Sigma</span><span class="p">,</span> <span class="n">log_Omega</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">opacity_obj</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_q_visc</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_q_rad</span><span class="p">))</span>
 
@@ -647,10 +647,10 @@
     <span class="n">xi</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">opacity_obj</span><span class="p">:</span> <span class="n">GreyOpacityLaw</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Thermal residual :math:`q^+ - q^- - q_{\rm adv}` (erg cm⁻² s⁻¹).</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Thermal residual :math:`q^+ - q^- - q_{\rm adv}` (erg cm⁻² s⁻¹).</span>
 
 <span class="sd">    Positive when the disk is over-heated; zero at thermal equilibrium.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_q_visc</span><span class="p">,</span> <span class="n">log_q_rad</span><span class="p">,</span> <span class="n">log_q_adv</span> <span class="o">=</span> <span class="n">_log_advective_heating_curves</span><span class="p">(</span>
         <span class="n">log_T</span><span class="p">,</span> <span class="n">log_Sigma</span><span class="p">,</span> <span class="n">log_Omega</span><span class="p">,</span> <span class="n">log_R</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">xi</span><span class="p">,</span> <span class="n">opacity_obj</span>
     <span class="p">)</span>
@@ -665,13 +665,13 @@
 <div class="viewcode-block" id="disk_state">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.accretion.one_zone.utils.disk_state.html#trilobite.dynamics.accretion.one_zone.utils.disk_state">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">disk_state</span><span class="p">(</span>
-    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-    <span class="n">M_D</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">R_D</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">J_D</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Sigma_D</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+    <span class="n">M_D</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">R_D</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">J_D</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Sigma_D</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the full one-zone disk state from any two of the four disk variables.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute the full one-zone disk state from any two of the four disk variables.</span>
 
 <span class="sd">    Given the black hole mass and exactly **two** of :math:`(M_D, R_D, J_D, \Sigma_D)`,</span>
 <span class="sd">    this function infers the remaining two variables and the Keplerian angular velocity</span>
@@ -701,23 +701,23 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    dict</span>
-<span class="sd">        Dictionary with keys ``&quot;M_D&quot;``, ``&quot;R_D&quot;``, ``&quot;J_D&quot;``, ``&quot;Sigma_D&quot;``,</span>
-<span class="sd">        ``&quot;Omega&quot;``, all as :class:`~astropy.units.Quantity` in CGS units.</span>
+<span class="sd">        Dictionary with keys ``"M_D"``, ``"R_D"``, ``"J_D"``, ``"Sigma_D"``,</span>
+<span class="sd">        ``"Omega"``, all as :class:`~astropy.units.Quantity` in CGS units.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
 <span class="sd">        If not exactly two of the four disk variables are provided.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">provided</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">&quot;M_D&quot;</span><span class="p">:</span> <span class="n">M_D</span><span class="p">,</span>
-        <span class="s2">&quot;R_D&quot;</span><span class="p">:</span> <span class="n">R_D</span><span class="p">,</span>
-        <span class="s2">&quot;J_D&quot;</span><span class="p">:</span> <span class="n">J_D</span><span class="p">,</span>
-        <span class="s2">&quot;Sigma_D&quot;</span><span class="p">:</span> <span class="n">Sigma_D</span><span class="p">,</span>
+        <span class="s2">"M_D"</span><span class="p">:</span> <span class="n">M_D</span><span class="p">,</span>
+        <span class="s2">"R_D"</span><span class="p">:</span> <span class="n">R_D</span><span class="p">,</span>
+        <span class="s2">"J_D"</span><span class="p">:</span> <span class="n">J_D</span><span class="p">,</span>
+        <span class="s2">"Sigma_D"</span><span class="p">:</span> <span class="n">Sigma_D</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="n">given</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">provided</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">given</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exactly 2 of (M_D, R_D, J_D, Sigma_D) must be provided; got </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">given</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Exactly 2 of (M_D, R_D, J_D, Sigma_D) must be provided; got </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">given</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="c1"># Work in CGS floats internally.</span>
     <span class="n">MBH</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
@@ -730,40 +730,40 @@
 
     <span class="n">keys</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">given</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
-    <span class="k">if</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;M_D&quot;</span><span class="p">,</span> <span class="s2">&quot;R_D&quot;</span><span class="p">}:</span>
+    <span class="k">if</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">"M_D"</span><span class="p">,</span> <span class="s2">"R_D"</span><span class="p">}:</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">M_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">xi</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">MBH</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">M</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;M_D&quot;</span><span class="p">,</span> <span class="s2">&quot;J_D&quot;</span><span class="p">}:</span>
+    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">"M_D"</span><span class="p">,</span> <span class="s2">"J_D"</span><span class="p">}:</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">M_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">J_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="c1"># J = xi * M * sqrt(G * MBH * R)  =&gt;  R = (J / (xi * M))^2 / (G * MBH)</span>
         <span class="n">R</span> <span class="o">=</span> <span class="p">(</span><span class="n">J</span> <span class="o">/</span> <span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">M</span><span class="p">))</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">MBH</span><span class="p">)</span>
         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">M</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;M_D&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma_D&quot;</span><span class="p">}:</span>
+    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">"M_D"</span><span class="p">,</span> <span class="s2">"Sigma_D"</span><span class="p">}:</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">M_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">Sigma_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
         <span class="c1"># Sigma = M / (pi * A * R^2)  =&gt;  R = sqrt(M / (pi * A * Sigma))</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">M</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">Sigma</span><span class="p">))</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">xi</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">MBH</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;R_D&quot;</span><span class="p">,</span> <span class="s2">&quot;J_D&quot;</span><span class="p">}:</span>
+    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">"R_D"</span><span class="p">,</span> <span class="s2">"J_D"</span><span class="p">}:</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">J_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="c1"># J = xi * M * sqrt(G * MBH * R)  =&gt;  M = J / (xi * sqrt(G * MBH * R))</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">J</span> <span class="o">/</span> <span class="p">(</span><span class="n">xi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">MBH</span> <span class="o">*</span> <span class="n">R</span><span class="p">))</span>
         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">M</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">&quot;R_D&quot;</span><span class="p">,</span> <span class="s2">&quot;Sigma_D&quot;</span><span class="p">}:</span>
+    <span class="k">elif</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">{</span><span class="s2">"R_D"</span><span class="p">,</span> <span class="s2">"Sigma_D"</span><span class="p">}:</span>
         <span class="n">R</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">Sigma_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">Sigma</span> <span class="o">*</span> <span class="n">R</span><span class="o">**</span><span class="mi">2</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">xi</span> <span class="o">*</span> <span class="n">M</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">MBH</span> <span class="o">*</span> <span class="n">R</span><span class="p">)</span>
 
-    <span class="k">else</span><span class="p">:</span>  <span class="c1"># keys == {&quot;J_D&quot;, &quot;Sigma_D&quot;}</span>
+    <span class="k">else</span><span class="p">:</span>  <span class="c1"># keys == {"J_D", "Sigma_D"}</span>
         <span class="n">J</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">J_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="n">Sigma</span> <span class="o">=</span> <span class="n">_cgs</span><span class="p">(</span><span class="n">Sigma_D</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
         <span class="c1"># J = xi * pi * A * Sigma * sqrt(G * MBH) * R^(5/2)</span>
@@ -774,11 +774,11 @@
     <span class="n">Omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">G</span> <span class="o">*</span> <span class="n">MBH</span> <span class="o">/</span> <span class="n">R</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;M_D&quot;</span><span class="p">:</span> <span class="n">M</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
-        <span class="s2">&quot;R_D&quot;</span><span class="p">:</span> <span class="n">R</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-        <span class="s2">&quot;J_D&quot;</span><span class="p">:</span> <span class="n">J</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
-        <span class="s2">&quot;Sigma_D&quot;</span><span class="p">:</span> <span class="n">Sigma</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-        <span class="s2">&quot;Omega&quot;</span><span class="p">:</span> <span class="n">Omega</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">rad</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="s2">"M_D"</span><span class="p">:</span> <span class="n">M</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">,</span>
+        <span class="s2">"R_D"</span><span class="p">:</span> <span class="n">R</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+        <span class="s2">"J_D"</span><span class="p">:</span> <span class="n">J</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="s2">"Sigma_D"</span><span class="p">:</span> <span class="n">Sigma</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+        <span class="s2">"Omega"</span><span class="p">:</span> <span class="n">Omega</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">rad</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
     <span class="p">}</span></div>
 
 
@@ -791,20 +791,20 @@
 <div class="viewcode-block" id="compute_heating_curves">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.accretion.one_zone.utils.compute_heating_curves.html#trilobite.dynamics.accretion.one_zone.utils.compute_heating_curves">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_heating_curves</span><span class="p">(</span>
-    <span class="n">M_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">J_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">R_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Sigma_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">M_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">J_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">R_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Sigma_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.615</span><span class="p">,</span>
-    <span class="n">opacity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">GreyOpacityLaw</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;electron_scattering&quot;</span><span class="p">,</span>
-    <span class="n">T_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">GreyOpacityLaw</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"electron_scattering"</span><span class="p">,</span>
+    <span class="n">T_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingArrayLike"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">T_grid_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="n">T_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
-    <span class="n">T_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="n">T_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="n">T_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute viscous heating and radiative cooling as functions of temperature.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute viscous heating and radiative cooling as functions of temperature.</span>
 
 <span class="sd">    Exactly two of ``(M_disk, J_disk, R_disk, Sigma_disk)`` must be provided</span>
 <span class="sd">    together with ``M_BH`` to fully specify the disk state.</span>
@@ -843,13 +843,13 @@
 <span class="sd">        Viscous heating rate.</span>
 <span class="sd">    q_rad : Quantity, shape (T_grid_n,) [erg cm⁻² s⁻¹]</span>
 <span class="sd">        Radiative cooling rate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">M_BH</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;M_BH must be provided.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"M_BH must be provided."</span><span class="p">)</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">disk_state</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="n">M_D</span><span class="o">=</span><span class="n">M_disk</span><span class="p">,</span> <span class="n">R_D</span><span class="o">=</span><span class="n">R_disk</span><span class="p">,</span> <span class="n">J_D</span><span class="o">=</span><span class="n">J_disk</span><span class="p">,</span> <span class="n">Sigma_D</span><span class="o">=</span><span class="n">Sigma_disk</span><span class="p">)</span>
-    <span class="n">Sigma</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;Sigma_D&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-    <span class="n">Omega</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;Omega&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">Sigma</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"Sigma_D"</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">Omega</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"Omega"</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
 
     <span class="n">T_min_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
     <span class="n">T_max_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_max</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
@@ -874,21 +874,21 @@
 <div class="viewcode-block" id="compute_advective_heating_curves">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.accretion.one_zone.utils.compute_advective_heating_curves.html#trilobite.dynamics.accretion.one_zone.utils.compute_advective_heating_curves">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_advective_heating_curves</span><span class="p">(</span>
-    <span class="n">M_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">J_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">R_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">Sigma_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">M_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">J_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">R_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">Sigma_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="n">xi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
     <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.615</span><span class="p">,</span>
-    <span class="n">opacity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">GreyOpacityLaw</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;electron_scattering&quot;</span><span class="p">,</span>
-    <span class="n">T_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">GreyOpacityLaw</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"electron_scattering"</span><span class="p">,</span>
+    <span class="n">T_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingArrayLike"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">T_grid_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="n">T_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
-    <span class="n">T_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="n">T_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="n">T_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute viscous heating, radiative cooling, and advective cooling as functions of temperature.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute viscous heating, radiative cooling, and advective cooling as functions of temperature.</span>
 
 <span class="sd">    Exactly two of ``(M_disk, J_disk, R_disk, Sigma_disk)`` must be provided</span>
 <span class="sd">    together with ``M_BH`` to fully specify the disk state.</span>
@@ -930,14 +930,14 @@
 <span class="sd">        Radiative cooling rate.</span>
 <span class="sd">    q_adv : Quantity, shape (T_grid_n,) [erg cm⁻² s⁻¹]</span>
 <span class="sd">        Advective cooling rate.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">M_BH</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;M_BH must be provided.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"M_BH must be provided."</span><span class="p">)</span>
 
     <span class="n">state</span> <span class="o">=</span> <span class="n">disk_state</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="n">M_D</span><span class="o">=</span><span class="n">M_disk</span><span class="p">,</span> <span class="n">R_D</span><span class="o">=</span><span class="n">R_disk</span><span class="p">,</span> <span class="n">J_D</span><span class="o">=</span><span class="n">J_disk</span><span class="p">,</span> <span class="n">Sigma_D</span><span class="o">=</span><span class="n">Sigma_disk</span><span class="p">)</span>
-    <span class="n">R</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;R_D&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-    <span class="n">Sigma</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;Sigma_D&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-    <span class="n">Omega</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;Omega&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"R_D"</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">Sigma</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"Sigma_D"</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">Omega</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">"Omega"</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
 
     <span class="n">T_min_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
     <span class="n">T_max_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_max</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
@@ -975,20 +975,20 @@
 <div class="viewcode-block" id="compute_advection_s_curve">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.accretion.one_zone.utils.compute_advection_s_curve.html#trilobite.dynamics.accretion.one_zone.utils.compute_advection_s_curve">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_advection_s_curve</span><span class="p">(</span>
-    <span class="n">R_disk</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
+    <span class="n">R_disk</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+    <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
     <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
     <span class="n">xi</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">,</span>
     <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.615</span><span class="p">,</span>
-    <span class="n">opacity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">GreyOpacityLaw</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;electron_scattering&quot;</span><span class="p">,</span>
-    <span class="n">T_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">opacity</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">GreyOpacityLaw</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"electron_scattering"</span><span class="p">,</span>
+    <span class="n">T_grid</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingArrayLike"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">T_grid_n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="n">T_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
-    <span class="n">T_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
-    <span class="n">sigma_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-    <span class="n">sigma_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">T_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e3</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="n">T_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e8</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+    <span class="n">sigma_max</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e6</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">sigma_min</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingScalarLike"</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute the thermal equilibrium S-curve for an advective disk.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute the thermal equilibrium S-curve for an advective disk.</span>
 
 <span class="sd">    For each temperature in the grid, finds the surface density :math:`\Sigma`</span>
 <span class="sd">    at which :math:`q^+ = q^- + q_{\rm adv}` using :func:`scipy.optimize.brentq`.</span>
@@ -1022,7 +1022,7 @@
 <span class="sd">        Temperature grid (NaN entries where no equilibrium was found).</span>
 <span class="sd">    Sigma : Quantity, shape (T_grid_n,) [g cm⁻²]</span>
 <span class="sd">        Equilibrium surface density (NaN where no root exists).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">R_disk</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_disk</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
     <span class="n">M_BH</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
     <span class="n">T_min_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">)</span>
@@ -1095,8 +1095,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1130,7 +1130,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

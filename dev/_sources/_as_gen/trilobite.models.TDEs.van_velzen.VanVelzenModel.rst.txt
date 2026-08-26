@@ -1,0 +1,48 @@
+VanVelzenModel
+===============================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. autoclass:: trilobite.models.TDEs.van_velzen.VanVelzenModel
+
+   
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~VanVelzenModel.add_filter
+      ~VanVelzenModel.check_model_bounds
+      ~VanVelzenModel.check_parameter_bounds
+      ~VanVelzenModel.coerce_model_parameters
+      ~VanVelzenModel.coerce_model_variables
+      ~VanVelzenModel.forward_model
+      ~VanVelzenModel.from_model_spec
+      ~VanVelzenModel.remove_filter
+      ~VanVelzenModel.to_model_spec
+   
+   
+
+   
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+      :toctree:
+      :recursive:
+   
+      ~VanVelzenModel.DESCRIPTION
+      ~VanVelzenModel.PARAMETERS
+      ~VanVelzenModel.REFERENCE
+      ~VanVelzenModel.UNITS
+      ~VanVelzenModel.VARIABLES
+      ~VanVelzenModel.bundle
+      ~VanVelzenModel.output_names
+      ~VanVelzenModel.output_units
+      ~VanVelzenModel.parameter_names
+      ~VanVelzenModel.variable_names
+   
+   

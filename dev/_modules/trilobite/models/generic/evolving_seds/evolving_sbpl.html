@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/generic/evolving_seds/evolving_sbpl';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.generic.evolving_seds.evolving_sbpl</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Phenomenological models of evolving spectral energy distributions (SEDs).</span>
 
 <span class="sd">This module provides flexible analytic models describing time-evolving</span>
@@ -453,7 +453,7 @@
 
 <span class="sd">The models here assume that:</span>
 
-<span class="sd">- Each epoch&#39;s SED is described by a smooth broken power law.</span>
+<span class="sd">- Each epoch's SED is described by a smooth broken power law.</span>
 <span class="sd">- The break frequency evolves as a power law in time.</span>
 <span class="sd">- The break flux density evolves as a power law in time.</span>
 
@@ -481,7 +481,7 @@
 <span class="sd">Care should be taken when interpreting fitted parameters</span>
 <span class="sd">physically, as degeneracies between spectral slopes and</span>
 <span class="sd">temporal evolution indices may arise.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
@@ -492,9 +492,9 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">EvolvingSEDModel</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;PL_Evolving_SBPL_Model&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;BPL_Evolving_SBPL_Model&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;TripleBPL_Evolving_SBPL_Model&quot;</span><span class="p">,</span>
+    <span class="s2">"PL_Evolving_SBPL_Model"</span><span class="p">,</span>
+    <span class="s2">"BPL_Evolving_SBPL_Model"</span><span class="p">,</span>
+    <span class="s2">"TripleBPL_Evolving_SBPL_Model"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -510,7 +510,7 @@
     <span class="n">a2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of a normalized smooth broken power law.</span>
 
 <span class="sd">    This function evaluates</span>
@@ -570,7 +570,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    The implementation uses :func:`numpy.logaddexp` to maintain</span>
 <span class="sd">    numerical stability over a wide dynamic range.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">dx</span> <span class="o">=</span> <span class="n">log_x</span> <span class="o">-</span> <span class="n">log_xb</span>
 
     <span class="k">return</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">s</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span>
@@ -588,7 +588,7 @@
     <span class="n">slope_lo</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">slope_hi</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of a sharp broken power law.</span>
 
 <span class="sd">    The function is defined piecewise as</span>
@@ -629,7 +629,7 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    The function is continuous at :math:`x = x_b`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_x</span><span class="p">)</span>
     <span class="n">dx</span> <span class="o">=</span> <span class="n">log_x</span> <span class="o">-</span> <span class="n">log_xb</span>
 
@@ -655,7 +655,7 @@
     <span class="n">slope_2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">slope_3</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of a sharp triple power law.</span>
 
 <span class="sd">    The function is defined piecewise as</span>
@@ -701,7 +701,7 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    The function is continuous at both break points.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_x</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">log_x</span><span class="p">)</span>
 
@@ -722,7 +722,7 @@
 <span class="c1"># ============================================================</span>
 <span class="c1"># Output Definition</span>
 <span class="c1"># ============================================================</span>
-<span class="n">_PLEvolvingOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;PLEvolvingSSAOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux_density&quot;</span><span class="p">])</span>
+<span class="n">_PLEvolvingOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"PLEvolvingSSAOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux_density"</span><span class="p">])</span>
 
 
 <span class="c1"># ============================================================</span>
@@ -731,13 +731,13 @@
 <div class="viewcode-block" id="PL_Evolving_SBPL_Model">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.models.generic.evolving_seds.evolving_sbpl.PL_Evolving_SBPL_Model.html#trilobite.models.generic.evolving_seds.evolving_sbpl.PL_Evolving_SBPL_Model">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PL_Evolving_SBPL_Model</span><span class="p">(</span><span class="n">EvolvingSEDModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    A generic model of synchrotron SED evolution assuming a time-evolving smoothed broken power law.</span>
 
 <span class="sd">    This model provides a useful parameterization for first-look analysis of evolving SEDs in radio</span>
 <span class="sd">    supernovae, GRB afterglows, and other synchrotron-dominated transients. The model assumes that the</span>
 <span class="sd">    SED at each epoch can be described by a smoothed broken power law, with the break frequency and break</span>
-<span class="sd">    flux density evolving as power laws in time. For an example of the model&#39;s use, see</span>
+<span class="sd">    flux density evolving as power laws in time. For an example of the model's use, see</span>
 <span class="sd">    :footcite:t:`2019ApJ...872...18M`.</span>
 
 <span class="sd">    In this model, we assume that the temporal evolution of the SED can be described by the break frequency:</span>
@@ -892,14 +892,14 @@
 <span class="sd">        # --------------------------------------------------</span>
 
 <span class="sd">        parameters = {</span>
-<span class="sd">            &quot;alpha_1&quot;: 5 / 2,  # self-absorbed slope</span>
-<span class="sd">            &quot;alpha_2&quot;: -1.0,  # optically thin slope</span>
-<span class="sd">            &quot;beta&quot;: 1.0,  # nu_brk evolution</span>
-<span class="sd">            &quot;gamma&quot;: 0.0,  # F_brk evolution</span>
-<span class="sd">            &quot;nu_brk_0&quot;: 1e10 * u.Hz,</span>
-<span class="sd">            &quot;F_brk_0&quot;: 1.0 * u.Jy,</span>
-<span class="sd">            &quot;t_0&quot;: 10 * u.day,</span>
-<span class="sd">            &quot;s&quot;: 0.3,</span>
+<span class="sd">            "alpha_1": 5 / 2,  # self-absorbed slope</span>
+<span class="sd">            "alpha_2": -1.0,  # optically thin slope</span>
+<span class="sd">            "beta": 1.0,  # nu_brk evolution</span>
+<span class="sd">            "gamma": 0.0,  # F_brk evolution</span>
+<span class="sd">            "nu_brk_0": 1e10 * u.Hz,</span>
+<span class="sd">            "F_brk_0": 1.0 * u.Jy,</span>
+<span class="sd">            "t_0": 10 * u.day,</span>
+<span class="sd">            "s": 0.3,</span>
 <span class="sd">        }</span>
 
 <span class="sd">        # --------------------------------------------------</span>
@@ -910,7 +910,7 @@
 
 <span class="sd">        for t in times:</span>
 <span class="sd">            flux = model(</span>
-<span class="sd">                {&quot;frequency&quot;: nu, &quot;time&quot;: t},</span>
+<span class="sd">                {"frequency": nu, "time": t},</span>
 <span class="sd">                parameters</span>
 <span class="sd">            ).flux_density</span>
 
@@ -918,12 +918,12 @@
 <span class="sd">            noise = 0.1 * flux * rng.normal(size=flux.size)</span>
 <span class="sd">            synthetic = flux + noise</span>
 
-<span class="sd">            plt.loglog(nu, flux, lw=2, label=f&quot;t = {t.value:.0f} d&quot;)</span>
+<span class="sd">            plt.loglog(nu, flux, lw=2, label=f"t = {t.value:.0f} d")</span>
 <span class="sd">            plt.scatter(nu, synthetic, s=8, alpha=0.4)</span>
 
-<span class="sd">        plt.xlabel(&quot;Frequency [Hz]&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux Density [Jy]&quot;)</span>
-<span class="sd">        plt.title(&quot;Time-Evolving Smoothed Broken Power-Law SED&quot;)</span>
+<span class="sd">        plt.xlabel("Frequency [Hz]")</span>
+<span class="sd">        plt.ylabel("Flux Density [Jy]")</span>
+<span class="sd">        plt.title("Time-Evolving Smoothed Broken Power-Law SED")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.tight_layout()</span>
 <span class="sd">        plt.show()</span>
@@ -931,29 +931,29 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Observing frequency.&quot;</span><span class="p">),</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Time since explosion.&quot;</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"frequency"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Observing frequency."</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Time since explosion."</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;F_brk_0&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;nu_brk_0&quot;</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;beta&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;gamma&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"F_brk_0"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"nu_brk_0"</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"beta"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"gamma"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PLEvolvingOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux_density</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Time-evolving smoothed broken power-law SSA SED.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Generic self-similar synchrotron evolution model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Time-evolving smoothed broken power-law SSA SED."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Generic self-similar synchrotron evolution model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
@@ -963,39 +963,39 @@
     <span class="c1"># ------------------------------------------------------------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_F0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;F_brk_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
+        <span class="n">log_F0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"F_brk_0"</span><span class="p">])</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
 
         <span class="n">log_tau</span> <span class="o">=</span> <span class="n">log_t</span> <span class="o">-</span> <span class="n">log_t0</span>
-        <span class="k">return</span> <span class="n">log_F0</span> <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">log_tau</span>
+        <span class="k">return</span> <span class="n">log_F0</span> <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma"</span><span class="p">]</span> <span class="o">*</span> <span class="n">log_tau</span>
 
     <span class="c1"># ------------------------------------------------------------</span>
     <span class="c1"># Log breaks</span>
     <span class="c1"># ------------------------------------------------------------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_breaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_nu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;nu_brk_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
+        <span class="n">log_nu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"nu_brk_0"</span><span class="p">])</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
 
         <span class="n">log_tau</span> <span class="o">=</span> <span class="n">log_t</span> <span class="o">-</span> <span class="n">log_t0</span>
 
-        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_nu0</span> <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">log_tau</span>
+        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_nu0</span> <span class="o">+</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta"</span><span class="p">]</span> <span class="o">*</span> <span class="n">log_tau</span>
 
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;nu_brk&quot;</span><span class="p">:</span> <span class="n">log_nu_brk</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"nu_brk"</span><span class="p">:</span> <span class="n">log_nu_brk</span><span class="p">}</span>
 
     <span class="c1"># ------------------------------------------------------------</span>
     <span class="c1"># Log shape</span>
     <span class="c1"># ------------------------------------------------------------</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">log_breaks</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_breaks</span><span class="p">[</span><span class="s2">&quot;nu_brk&quot;</span><span class="p">]</span>
+        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_breaks</span><span class="p">[</span><span class="s2">"nu_brk"</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">log_smooth_broken_power_law</span><span class="p">(</span>
             <span class="n">log_nu</span><span class="p">,</span>
             <span class="n">log_nu_brk</span><span class="p">,</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">],</span>
         <span class="p">)</span></div>
 
 
@@ -1003,7 +1003,7 @@
 <div class="viewcode-block" id="BPL_Evolving_SBPL_Model">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.models.generic.evolving_seds.evolving_sbpl.BPL_Evolving_SBPL_Model.html#trilobite.models.generic.evolving_seds.evolving_sbpl.BPL_Evolving_SBPL_Model">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BPL_Evolving_SBPL_Model</span><span class="p">(</span><span class="n">EvolvingSEDModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    A generic model of synchrotron SED evolution assuming a time-evolving broken power law in time.</span>
 
 <span class="sd">    This model extends :class:`PL_Evolving_SSA_SED_Model` by allowing the</span>
@@ -1131,65 +1131,65 @@
 <span class="sd">    - The model is continuous in time by construction.</span>
 <span class="sd">    - Spectral curvature in each segment is controlled by ``s1`` and ``s2``.</span>
 <span class="sd">    - This model does **not** enforce microphysical closure relations.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Observing frequency.&quot;</span><span class="p">),</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Time since explosion.&quot;</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"frequency"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Observing frequency."</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Time since explosion."</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;F_brk_0&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;nu_brk_0&quot;</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_11&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_21&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_12&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_22&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;beta1&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;gamma1&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;beta2&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;gamma2&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s2&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"F_brk_0"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"nu_brk_0"</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_11"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_21"</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_12"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_22"</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"beta1"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"gamma1"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"beta2"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"gamma2"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s1"</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s2"</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PLEvolvingOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux_density</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Time-evolving broken power-law SSA SED.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Generic multi-stage synchrotron evolution model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Time-evolving broken power-law SSA SED."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Generic multi-stage synchrotron evolution model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_F0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;F_brk_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
+        <span class="n">log_F0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"F_brk_0"</span><span class="p">])</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">log_F0</span> <span class="o">+</span> <span class="n">log_broken_power_law</span><span class="p">(</span>
             <span class="n">log_t</span><span class="p">,</span>
             <span class="n">log_t0</span><span class="p">,</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma2&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma2"</span><span class="p">],</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_breaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_nu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;nu_brk_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
+        <span class="n">log_nu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"nu_brk_0"</span><span class="p">])</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
 
         <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_nu0</span> <span class="o">+</span> <span class="n">log_broken_power_law</span><span class="p">(</span>
             <span class="n">log_t</span><span class="p">,</span>
             <span class="n">log_t0</span><span class="p">,</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta2&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta2"</span><span class="p">],</span>
         <span class="p">)</span>
 
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;nu_brk&quot;</span><span class="p">:</span> <span class="n">log_nu_brk</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"nu_brk"</span><span class="p">:</span> <span class="n">log_nu_brk</span><span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">log_breaks</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_breaks</span><span class="p">[</span><span class="s2">&quot;nu_brk&quot;</span><span class="p">]</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
+        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_breaks</span><span class="p">[</span><span class="s2">"nu_brk"</span><span class="p">]</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
 
         <span class="n">regime1</span> <span class="o">=</span> <span class="n">log_t</span> <span class="o">&lt;</span> <span class="n">log_t0</span>
         <span class="n">regime2</span> <span class="o">=</span> <span class="o">~</span><span class="n">regime1</span>
@@ -1200,18 +1200,18 @@
             <span class="n">log_phi</span><span class="p">[</span><span class="n">regime1</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_smooth_broken_power_law</span><span class="p">(</span>
                 <span class="n">log_nu</span><span class="p">[</span><span class="n">regime1</span><span class="p">],</span>
                 <span class="n">log_nu_brk</span><span class="p">[</span><span class="n">regime1</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_11&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_21&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s1&quot;</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_11"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_21"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"s1"</span><span class="p">],</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">regime2</span><span class="p">):</span>
             <span class="n">log_phi</span><span class="p">[</span><span class="n">regime2</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_smooth_broken_power_law</span><span class="p">(</span>
                 <span class="n">log_nu</span><span class="p">[</span><span class="n">regime2</span><span class="p">],</span>
                 <span class="n">log_nu_brk</span><span class="p">[</span><span class="n">regime2</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_12&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_22&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s2&quot;</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_12"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_22"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"s2"</span><span class="p">],</span>
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">log_phi</span></div>
@@ -1221,7 +1221,7 @@
 <div class="viewcode-block" id="TripleBPL_Evolving_SBPL_Model">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.models.generic.evolving_seds.evolving_sbpl.TripleBPL_Evolving_SBPL_Model.html#trilobite.models.generic.evolving_seds.evolving_sbpl.TripleBPL_Evolving_SBPL_Model">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TripleBPL_Evolving_SBPL_Model</span><span class="p">(</span><span class="n">EvolvingSEDModel</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    A generic model of synchrotron SED evolution assuming a time-evolving triple broken power law in time.</span>
 
 <span class="sd">    This model extends :class:`PL_Evolving_SSA_SED_Model` by allowing the</span>
@@ -1347,77 +1347,77 @@
 <span class="sd">    - The model remains continuous in time by construction.</span>
 <span class="sd">    - Spectral curvature is controlled by ``s1``, ``s2``, and ``s3``.</span>
 <span class="sd">    - This model does **not** enforce physical closure relations.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Observing frequency.&quot;</span><span class="p">),</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Time since explosion.&quot;</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"frequency"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Observing frequency."</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Time since explosion."</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;F_brk_0&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;nu_brk_0&quot;</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_11&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_21&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_12&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_22&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_13&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_23&quot;</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;beta1&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;gamma1&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;beta2&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;gamma2&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;beta3&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;gamma3&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s1&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s2&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_1&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"F_brk_0"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"nu_brk_0"</span><span class="p">,</span> <span class="mf">1e9</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_11"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_21"</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_12"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_22"</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_13"</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_23"</span><span class="p">,</span> <span class="mi">5</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"beta1"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"gamma1"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"beta2"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"gamma2"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"beta3"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"gamma3"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s1"</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s2"</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s3"</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_1"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PLEvolvingOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux_density</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Time-evolving triple broken power-law SSA SED.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Generic multi-stage synchrotron evolution model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Time-evolving triple broken power-law SSA SED."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Generic multi-stage synchrotron evolution model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_F0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;F_brk_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_1&quot;</span><span class="p">])</span>
+        <span class="n">log_F0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"F_brk_0"</span><span class="p">])</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
+        <span class="n">log_t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_1"</span><span class="p">])</span>
 
         <span class="k">return</span> <span class="n">log_F0</span> <span class="o">+</span> <span class="n">log_triple_power_law</span><span class="p">(</span>
             <span class="n">log_t</span><span class="p">,</span>
             <span class="n">log_t0</span><span class="p">,</span>
             <span class="n">log_t1</span><span class="p">,</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma2&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma3&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma2"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma3"</span><span class="p">],</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_breaks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_nu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;nu_brk_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_1&quot;</span><span class="p">])</span>
+        <span class="n">log_nu0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"nu_brk_0"</span><span class="p">])</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
+        <span class="n">log_t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_1"</span><span class="p">])</span>
 
         <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_nu0</span> <span class="o">+</span> <span class="n">log_triple_power_law</span><span class="p">(</span>
             <span class="n">log_t</span><span class="p">,</span>
             <span class="n">log_t0</span><span class="p">,</span>
             <span class="n">log_t1</span><span class="p">,</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta2&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta3&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta2"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta3"</span><span class="p">],</span>
         <span class="p">)</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;nu_brk&quot;</span><span class="p">:</span> <span class="n">log_nu_brk</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"nu_brk"</span><span class="p">:</span> <span class="n">log_nu_brk</span><span class="p">}</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_nu</span><span class="p">,</span> <span class="n">log_t</span><span class="p">,</span> <span class="n">log_breaks</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_breaks</span><span class="p">[</span><span class="s2">&quot;nu_brk&quot;</span><span class="p">]</span>
-        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">])</span>
-        <span class="n">log_t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_1&quot;</span><span class="p">])</span>
+        <span class="n">log_nu_brk</span> <span class="o">=</span> <span class="n">log_breaks</span><span class="p">[</span><span class="s2">"nu_brk"</span><span class="p">]</span>
+        <span class="n">log_t0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">])</span>
+        <span class="n">log_t1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"t_1"</span><span class="p">])</span>
 
         <span class="n">regime1</span> <span class="o">=</span> <span class="n">log_t</span> <span class="o">&lt;</span> <span class="n">log_t0</span>
         <span class="n">regime2</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_t</span> <span class="o">&gt;=</span> <span class="n">log_t0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">log_t</span> <span class="o">&lt;</span> <span class="n">log_t1</span><span class="p">)</span>
@@ -1429,27 +1429,27 @@
             <span class="n">log_phi</span><span class="p">[</span><span class="n">regime1</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_smooth_broken_power_law</span><span class="p">(</span>
                 <span class="n">log_nu</span><span class="p">[</span><span class="n">regime1</span><span class="p">],</span>
                 <span class="n">log_nu_brk</span><span class="p">[</span><span class="n">regime1</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_11&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_21&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s1&quot;</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_11"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_21"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"s1"</span><span class="p">],</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">regime2</span><span class="p">):</span>
             <span class="n">log_phi</span><span class="p">[</span><span class="n">regime2</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_smooth_broken_power_law</span><span class="p">(</span>
                 <span class="n">log_nu</span><span class="p">[</span><span class="n">regime2</span><span class="p">],</span>
                 <span class="n">log_nu_brk</span><span class="p">[</span><span class="n">regime2</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_12&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_22&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s2&quot;</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_12"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_22"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"s2"</span><span class="p">],</span>
             <span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">regime3</span><span class="p">):</span>
             <span class="n">log_phi</span><span class="p">[</span><span class="n">regime3</span><span class="p">]</span> <span class="o">=</span> <span class="n">log_smooth_broken_power_law</span><span class="p">(</span>
                 <span class="n">log_nu</span><span class="p">[</span><span class="n">regime3</span><span class="p">],</span>
                 <span class="n">log_nu_brk</span><span class="p">[</span><span class="n">regime3</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_13&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_23&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s3&quot;</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_13"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_23"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"s3"</span><span class="p">],</span>
             <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">log_phi</span></div>
@@ -1483,8 +1483,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1518,7 +1518,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

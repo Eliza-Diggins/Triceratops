@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/opacity/grey_opacity/tops';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.opacity.grey_opacity.tops</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">TOPS (LANL) tabulated grey opacity models.</span>
 
 <span class="sd">This module provides grey opacity laws constructed from tabulated</span>
@@ -479,7 +479,7 @@
 <span class="sd">- Invalid or out-of-domain values are represented by ``NaN``.</span>
 <span class="sd">- This module provides a concrete tabulated implementation of</span>
 <span class="sd">  :class:`~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw`.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Optional</span>
@@ -491,15 +491,15 @@
 <span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">types</span><span class="w"> </span><span class="kn">import</span> <span class="n">SimpleNamespace</span>
 
-<span class="n">_OOB_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;raise&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;clamp&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;nan&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">_OOB_MODES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"raise"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"clamp"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">"nan"</span><span class="p">:</span> <span class="mi">2</span><span class="p">}</span>
 
-<span class="n">_TABLES_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">&quot;tables&quot;</span>
+<span class="n">_TABLES_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"tables"</span>
 
 
 <div class="viewcode-block" id="TOPSOpacity">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.tops.TOPSOpacity.html#trilobite.radiation.opacity.grey_opacity.tops.TOPSOpacity">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TOPSOpacity</span><span class="p">(</span><span class="n">GreyOpacityLaw</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    TOPS (LANL) tabulated grey opacity.</span>
 
 <span class="sd">    This class represents a grey opacity law constructed from tabulated</span>
@@ -533,9 +533,9 @@
 <span class="sd">    kappa : array_like, shape (n_T, n_\rho)</span>
 <span class="sd">        :math:`\log_{10}(\kappa\,[\mathrm{cm^2\,g^{-1}}])`. ``NaN`` marks</span>
 <span class="sd">        invalid or out-of-domain cells.</span>
-<span class="sd">    mean_type : {&#39;rosseland&#39;, &#39;planck&#39;}</span>
+<span class="sd">    mean_type : {'rosseland', 'planck'}</span>
 <span class="sd">        Frequency-averaging convention represented by the table.</span>
-<span class="sd">    out_of_bounds : {&#39;raise&#39;, &#39;clamp&#39;, &#39;nan&#39;}</span>
+<span class="sd">    out_of_bounds : {'raise', 'clamp', 'nan'}</span>
 <span class="sd">        Behaviour for queries outside the tabulated domain.</span>
 
 <span class="sd">    Notes</span>
@@ -552,12 +552,12 @@
 <span class="sd">        Construct from a parsed TOPS dataset.</span>
 <span class="sd">    TOPSOpacity.load_default</span>
 <span class="sd">        Load the bundled solar-composition TOPS table.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="n">_DEFAULT_PATH</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">_TABLES_DIR</span> <span class="o">/</span> <span class="s2">&quot;tops_solar.dat&quot;</span>
-    <span class="n">_DEFAULT_NS</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;SimpleNamespace&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_DEFAULT_PATH</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="n">_TABLES_DIR</span> <span class="o">/</span> <span class="s2">"tops_solar.dat"</span>
+    <span class="n">_DEFAULT_NS</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="s2">"SimpleNamespace"</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -565,13 +565,13 @@
         <span class="n">grid_rho</span><span class="p">,</span>
         <span class="n">kappa</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span><span class="p">,</span>
-        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rosseland"</span><span class="p">,</span>
+        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">out_of_bounds</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_OOB_MODES</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;out_of_bounds must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_OOB_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">mean_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;rosseland&quot;</span><span class="p">,</span> <span class="s2">&quot;planck&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mean_type must be &#39;rosseland&#39; or &#39;planck&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"out_of_bounds must be one of </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">_OOB_MODES</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">mean_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"rosseland"</span><span class="p">,</span> <span class="s2">"planck"</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mean_type must be 'rosseland' or 'planck'."</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mean_type</span> <span class="o">=</span> <span class="n">mean_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">out_of_bounds</span> <span class="o">=</span> <span class="n">out_of_bounds</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -587,15 +587,15 @@
         <span class="k">return</span> <span class="n">C_TOPSTableOpacity</span><span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grid_T</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
             <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">grid_rho</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">),</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;C&quot;</span><span class="p">),</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">"C"</span><span class="p">),</span>
             <span class="n">_OOB_MODES</span><span class="p">[</span><span class="n">out_of_bounds</span><span class="p">],</span>
         <span class="p">)</span>
 
 <div class="viewcode-block" id="TOPSOpacity.get_default_ns">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.radiation.opacity.grey_opacity.tops.TOPSOpacity.get_default_ns.html#trilobite.radiation.opacity.grey_opacity.tops.TOPSOpacity.get_default_ns">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_ns</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;SimpleNamespace&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the bundled solar-composition TOPS namespace, loading it on first call.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_default_ns</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"SimpleNamespace"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Return the bundled solar-composition TOPS namespace, loading it on first call.</span>
 
 <span class="sd">        The file ``tables/tops_solar.dat`` (relative to the package) is parsed</span>
 <span class="sd">        with :func:`~trilobite.radiation.opacity.opacity_io.read_tops` and the result</span>
@@ -605,7 +605,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        SimpleNamespace</span>
 <span class="sd">            Namespace as returned by :func:`~trilobite.radiation.opacity.opacity_io.read_tops`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_DEFAULT_NS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.opacity.opacity_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_tops</span>
 
@@ -619,17 +619,17 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">load_default</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span><span class="p">,</span>
-        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+        <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rosseland"</span><span class="p">,</span>
+        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
         <span class="n">table_path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TOPSOpacity&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load the bundled solar-composition TOPS table.</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"TOPSOpacity"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Load the bundled solar-composition TOPS table.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        mean_type : {&#39;rosseland&#39;, &#39;planck&#39;}</span>
+<span class="sd">        mean_type : {'rosseland', 'planck'}</span>
 <span class="sd">            Which mean opacity to use.</span>
-<span class="sd">        out_of_bounds : {&#39;raise&#39;, &#39;clamp&#39;, &#39;nan&#39;}</span>
+<span class="sd">        out_of_bounds : {'raise', 'clamp', 'nan'}</span>
 <span class="sd">            Behaviour for queries outside the table domain.</span>
 <span class="sd">        table_path : path-like, optional</span>
 <span class="sd">            Override the bundled file.  If ``None``, ``tops_solar.dat`` is used.</span>
@@ -637,7 +637,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TOPSOpacity</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">table_path</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.opacity.opacity_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">read_tops</span>
 
@@ -652,12 +652,12 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_tops</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">ns</span><span class="p">:</span> <span class="s2">&quot;SimpleNamespace&quot;</span><span class="p">,</span>
+        <span class="n">ns</span><span class="p">:</span> <span class="s2">"SimpleNamespace"</span><span class="p">,</span>
         <span class="o">*</span><span class="p">,</span>
-        <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span><span class="p">,</span>
-        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TOPSOpacity&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct a :class:`TOPSOpacity` tops data namespace.</span>
+        <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rosseland"</span><span class="p">,</span>
+        <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"TOPSOpacity"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Construct a :class:`TOPSOpacity` tops data namespace.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -665,21 +665,21 @@
 <span class="sd">            Output of :func:`~trilobite.radiation.opacity.opacity_io.read_tops`.</span>
 <span class="sd">            Must have ``grid_T`` (K), ``grid_rho`` (g cm⁻³), ``rosseland``</span>
 <span class="sd">            and ``planck`` arrays.</span>
-<span class="sd">        mean_type : {&#39;rosseland&#39;, &#39;planck&#39;}</span>
+<span class="sd">        mean_type : {'rosseland', 'planck'}</span>
 <span class="sd">            Which opacity table to use.</span>
-<span class="sd">        out_of_bounds : {&#39;raise&#39;, &#39;clamp&#39;, &#39;nan&#39;}</span>
+<span class="sd">        out_of_bounds : {'raise', 'clamp', 'nan'}</span>
 <span class="sd">            Behaviour for out-of-range ``(T, rho)`` queries.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        TOPSOpacity</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">mean_type</span> <span class="o">==</span> <span class="s2">&quot;rosseland&quot;</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">mean_type</span> <span class="o">==</span> <span class="s2">"rosseland"</span><span class="p">:</span>
             <span class="n">kappa_raw</span> <span class="o">=</span> <span class="n">ns</span><span class="o">.</span><span class="n">rosseland</span>
-        <span class="k">elif</span> <span class="n">mean_type</span> <span class="o">==</span> <span class="s2">&quot;planck&quot;</span><span class="p">:</span>
+        <span class="k">elif</span> <span class="n">mean_type</span> <span class="o">==</span> <span class="s2">"planck"</span><span class="p">:</span>
             <span class="n">kappa_raw</span> <span class="o">=</span> <span class="n">ns</span><span class="o">.</span><span class="n">planck</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mean_type must be &#39;rosseland&#39; or &#39;planck&#39;.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"mean_type must be 'rosseland' or 'planck'."</span><span class="p">)</span>
 
         <span class="n">grid_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">ns</span><span class="o">.</span><span class="n">grid_T</span><span class="p">)</span>
         <span class="n">grid_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">ns</span><span class="o">.</span><span class="n">grid_rho</span><span class="p">)</span>
@@ -700,25 +700,25 @@
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_log_opacity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\ln\kappa` via bilinear interpolation in the table.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\ln\kappa` via bilinear interpolation in the table."""</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_rho</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">log_opacity_array</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_broadcast</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">log_opacity</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlogrho</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\rho` from the table gradient.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln\rho` from the table gradient."""</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_rho</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogrho_array</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_broadcast</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogrho</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlogT</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln T` from the table gradient.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln T` from the table gradient."""</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">log_rho</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogT_array</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_broadcast</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogT</span><span class="p">(</span><span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;TOPSOpacity(mean_type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean_type</span><span class="si">!r}</span><span class="s2">, out_of_bounds=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">out_of_bounds</span><span class="si">!r}</span><span class="s2">)&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"TOPSOpacity(mean_type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mean_type</span><span class="si">!r}</span><span class="s2">, out_of_bounds=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">out_of_bounds</span><span class="si">!r}</span><span class="s2">)"</span></div>
 
 </pre></div>
 
@@ -749,8 +749,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -784,7 +784,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/parallel/mp';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.parallel.mp</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Multiprocessing backend for likelihood evaluation.</span>
 
 <span class="sd">This module provides a specialized multiprocessing pool designed</span>
@@ -481,7 +481,7 @@
 <span class="sd">    - MCMC likelihood evaluation</span>
 <span class="sd">    - Heavy compute per likelihood call</span>
 <span class="sd">    - Minimal IPC overhead</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mp</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">signal</span>
@@ -507,7 +507,7 @@
 <span class="c1">#</span>
 <span class="c1"># =====================================================================</span>
 <span class="n">_LIKELIHOOD_MP_POOL_WORKER_PROBLEM</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="sd">&quot;&quot;&quot; The serialized InferenceProblem reconstructed in each worker process. &quot;&quot;&quot;</span>
+<span class="sd">""" The serialized InferenceProblem reconstructed in each worker process. """</span>
 
 <span class="c1"># =====================================================================</span>
 <span class="c1"># Worker Initialization</span>
@@ -515,7 +515,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_worker_initialize</span><span class="p">(</span><span class="n">problem_json</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Per-process initializer.</span>
 
 <span class="sd">    This function is executed exactly once in each worker process.</span>
@@ -530,7 +530,7 @@
 <span class="sd">    ----------</span>
 <span class="sd">    problem_json : str</span>
 <span class="sd">        JSON-serialized representation of the InferenceProblem.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">global</span> <span class="n">_LIKELIHOOD_MP_POOL_WORKER_PROBLEM</span>
 
     <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.inference.problem</span><span class="w"> </span><span class="kn">import</span> <span class="n">InferenceProblem</span>
@@ -542,7 +542,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_worker_log_prob</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Evaluate the log posterior for a single parameter vector.</span>
 
 <span class="sd">    This function is executed inside worker processes.</span>
@@ -560,7 +560,7 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    Assumes `_LIKELIHOOD_MP_POOL_WORKER_PROBLEM` has already been initialized.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_LIKELIHOOD_MP_POOL_WORKER_PROBLEM</span><span class="o">.</span><span class="n">_log_free_posterior</span><span class="p">(</span><span class="n">theta</span><span class="p">)</span>
 
 
@@ -570,7 +570,7 @@
 <div class="viewcode-block" id="LikelihoodMPPool">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.parallel.mp.LikelihoodMPPool.html#trilobite.parallel.mp.LikelihoodMPPool">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LikelihoodMPPool</span><span class="p">(</span><span class="n">Pool</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Multiprocessing pool specialized for evaluating a single InferenceProblem.</span>
 
 <span class="sd">    This class implements the minimal interface required by `emcee`:</span>
@@ -593,7 +593,7 @@
 <span class="sd">    wait_timeout : int, optional</span>
 <span class="sd">        Timeout (seconds) used when polling async results.</span>
 <span class="sd">        This allows KeyboardInterrupt to be caught properly.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -601,17 +601,17 @@
         <span class="n">processes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">wait_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Construct the multiprocessing likelihood pool.</span>
 
 <span class="sd">        The problem is serialized once in the parent and reconstructed</span>
 <span class="sd">        once per worker process.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">processes</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">processes</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">processes</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;processes must be &gt;= 1&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"processes must be &gt;= 1"</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_processes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">processes</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_problem_json</span> <span class="o">=</span> <span class="n">problem</span><span class="o">.</span><span class="n">to_json</span><span class="p">()</span>
@@ -630,7 +630,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of worker processes.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of worker processes."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_processes</span>
 
     <span class="c1"># ------------------------------------------------------------------</span>
@@ -645,7 +645,7 @@
         <span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
         <span class="n">callback</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Map parameter vectors to log posterior values.</span>
 
 <span class="sd">        Parameters</span>
@@ -662,7 +662,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        list of float</span>
 <span class="sd">            Log posterior values corresponding to each element.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">async_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">map_async</span><span class="p">(</span><span class="n">_worker_log_prob</span><span class="p">,</span> <span class="n">iterable</span><span class="p">)</span>
 
         <span class="c1"># Poll with timeout to avoid swallowing Ctrl+C</span>
@@ -694,11 +694,11 @@
 <div class="viewcode-block" id="LikelihoodMPPool.close">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.parallel.mp.LikelihoodMPPool.close.html#trilobite.parallel.mp.LikelihoodMPPool.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Close the pool gracefully.</span>
 
 <span class="sd">        Waits for all worker processes to exit cleanly.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
 
@@ -706,18 +706,18 @@
 <div class="viewcode-block" id="LikelihoodMPPool.terminate">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.parallel.mp.LikelihoodMPPool.terminate.html#trilobite.parallel.mp.LikelihoodMPPool.terminate">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">terminate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Terminate worker processes immediately.</span>
 
 <span class="sd">        Used for interrupt/error handling.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="LikelihoodMPPool.join">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.parallel.mp.LikelihoodMPPool.join.html#trilobite.parallel.mp.LikelihoodMPPool.join">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wait for worker processes to exit.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Wait for worker processes to exit."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span></div>
 
 
@@ -725,16 +725,16 @@
     <span class="c1"># Context Manager Support</span>
     <span class="c1"># ------------------------------------------------------------------</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;LikelihoodMPPool&quot;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"LikelihoodMPPool"</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc</span><span class="p">,</span> <span class="n">tb</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Ensure pool is cleaned up on exit.</span>
 
 <span class="sd">        If exiting due to an exception, terminate immediately.</span>
 <span class="sd">        Otherwise close gracefully.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">exc_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
@@ -770,8 +770,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -805,7 +805,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

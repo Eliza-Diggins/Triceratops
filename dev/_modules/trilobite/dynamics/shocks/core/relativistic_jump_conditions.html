@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/shocks/core/relativistic_jump_conditions';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.shocks.core.relativistic_jump_conditions</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Relativistic Rankine–Hugoniot jump conditions for high-velocity astrophysical shocks.</span>
 
 <span class="sd">This module provides solvers for relativistic shock jump conditions, covering the</span>
@@ -467,7 +467,7 @@
 <span class="sd">References</span>
 <span class="sd">----------</span>
 <span class="sd">See :ref:`relativistic_jump_conditions_theory` for the full theoretical derivation.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
@@ -493,15 +493,15 @@
 <span class="c1"># Private Helper Functions                                             #</span>
 <span class="c1"># ================================================================== #</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_lorentz_factor</span><span class="p">(</span><span class="n">beta</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Lorentz factor Γ = 1/√((1−β)(1+β)).</span>
+<span class="w">    </span><span class="sd">"""Lorentz factor Γ = 1/√((1−β)(1+β)).</span>
 
 <span class="sd">    The factored form avoids catastrophic cancellation in 1−β² when β≈1.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">beta</span><span class="p">))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_shock_frame_beta</span><span class="p">(</span><span class="n">beta_shock</span><span class="p">,</span> <span class="n">beta_upstream</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Upstream fluid velocity in the shock frame via relativistic velocity addition.</span>
+<span class="w">    </span><span class="sd">"""Upstream fluid velocity in the shock frame via relativistic velocity addition.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -514,12 +514,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        Upstream fluid velocity in the shock rest frame, β₁.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">beta_shock</span> <span class="o">-</span> <span class="n">beta_upstream</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta_shock</span> <span class="o">*</span> <span class="n">beta_upstream</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_maxwell_juttner_temperature_cgs</span><span class="p">(</span><span class="n">U_int</span><span class="p">,</span> <span class="n">rho</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Post-shock temperature from the Maxwell–Jüttner internal energy relation.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Post-shock temperature from the Maxwell–Jüttner internal energy relation.</span>
 
 <span class="sd">    Inverts the Gammie–McKinney approximation :footcite:p:`1998ApJ...498..313G`</span>
 
@@ -556,7 +556,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        Post-shock temperature (K).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">xi</span> <span class="o">=</span> <span class="n">U_int</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">c_cgs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="n">discriminant</span> <span class="o">=</span> <span class="p">(</span><span class="mf">6.0</span> <span class="o">-</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">xi</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">240.0</span> <span class="o">*</span> <span class="n">xi</span>
     <span class="n">theta</span> <span class="o">=</span> <span class="p">(</span><span class="mf">5.0</span> <span class="o">*</span> <span class="n">xi</span> <span class="o">-</span> <span class="mf">6.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">discriminant</span><span class="p">))</span> <span class="o">/</span> <span class="mf">30.0</span>
@@ -564,7 +564,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_relativistic_implicit_eq</span><span class="p">(</span><span class="n">beta2</span><span class="p">,</span> <span class="n">beta1</span><span class="p">,</span> <span class="n">gamma1</span><span class="p">,</span> <span class="n">omega1</span><span class="p">,</span> <span class="n">pi1</span><span class="p">,</span> <span class="n">gamma_hat</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Residual of the relativistic jump condition.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Residual of the relativistic jump condition.</span>
 
 <span class="sd">    Evaluates the left-hand side of :eq:`eq:relativistic_jump_condition_final`</span>
 <span class="sd">    from :ref:`relativistic_jump_conditions_theory`:</span>
@@ -594,7 +594,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        Residual; zero at the physical downstream velocity.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">gamma2</span> <span class="o">=</span> <span class="n">_lorentz_factor</span><span class="p">(</span><span class="n">beta2</span><span class="p">)</span>
     <span class="n">term1</span> <span class="o">=</span> <span class="p">((</span><span class="n">gamma_hat</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="n">gamma_hat</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">gamma1</span> <span class="o">*</span> <span class="n">beta1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">gamma2</span> <span class="o">*</span> <span class="n">beta2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">omega1</span> <span class="o">*</span> <span class="n">gamma1</span> <span class="o">/</span> <span class="n">gamma2</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span>
     <span class="n">term2</span> <span class="o">=</span> <span class="n">omega1</span> <span class="o">*</span> <span class="n">gamma1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">beta1</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">beta2</span> <span class="o">/</span> <span class="n">beta1</span><span class="p">)</span>
@@ -602,7 +602,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_reconstruct_state_cgs</span><span class="p">(</span><span class="n">beta1</span><span class="p">,</span> <span class="n">beta2</span><span class="p">,</span> <span class="n">rho1</span><span class="p">,</span> <span class="n">omega1</span><span class="p">,</span> <span class="n">gamma_hat</span><span class="p">,</span> <span class="n">mu</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Reconstruct the full post-shock state from β₁, β₂, and the upstream state.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Reconstruct the full post-shock state from β₁, β₂, and the upstream state.</span>
 
 <span class="sd">    Given the downstream shock-frame velocity β₂ (from root-finding or analytic</span>
 <span class="sd">    formula), applies the continuity and energy-momentum conditions to recover all</span>
@@ -627,7 +627,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    dict</span>
 <span class="sd">        Post-shock quantities in CGS, keyed by :attr:`RelativisticJumpConditions.OUTPUT_FIELDS` names.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">gamma1</span> <span class="o">=</span> <span class="n">_lorentz_factor</span><span class="p">(</span><span class="n">beta1</span><span class="p">)</span>
     <span class="n">gamma2</span> <span class="o">=</span> <span class="n">_lorentz_factor</span><span class="p">(</span><span class="n">beta2</span><span class="p">)</span>
 
@@ -651,14 +651,14 @@
     <span class="n">T2</span> <span class="o">=</span> <span class="n">_maxwell_juttner_temperature_cgs</span><span class="p">(</span><span class="n">U_int2</span><span class="p">,</span> <span class="n">rho2</span><span class="p">,</span> <span class="n">mu</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">&quot;compression_ratio&quot;</span><span class="p">:</span> <span class="n">R</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_beta&quot;</span><span class="p">:</span> <span class="n">beta2</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_lorentz_factor&quot;</span><span class="p">:</span> <span class="n">gamma2</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_density&quot;</span><span class="p">:</span> <span class="n">rho2</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_number_density&quot;</span><span class="p">:</span> <span class="n">n2</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_pressure&quot;</span><span class="p">:</span> <span class="n">P2</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_temperature&quot;</span><span class="p">:</span> <span class="n">T2</span><span class="p">,</span>
-        <span class="s2">&quot;post_shock_energy_density&quot;</span><span class="p">:</span> <span class="n">e2</span><span class="p">,</span>
+        <span class="s2">"compression_ratio"</span><span class="p">:</span> <span class="n">R</span><span class="p">,</span>
+        <span class="s2">"post_shock_beta"</span><span class="p">:</span> <span class="n">beta2</span><span class="p">,</span>
+        <span class="s2">"post_shock_lorentz_factor"</span><span class="p">:</span> <span class="n">gamma2</span><span class="p">,</span>
+        <span class="s2">"post_shock_density"</span><span class="p">:</span> <span class="n">rho2</span><span class="p">,</span>
+        <span class="s2">"post_shock_number_density"</span><span class="p">:</span> <span class="n">n2</span><span class="p">,</span>
+        <span class="s2">"post_shock_pressure"</span><span class="p">:</span> <span class="n">P2</span><span class="p">,</span>
+        <span class="s2">"post_shock_temperature"</span><span class="p">:</span> <span class="n">T2</span><span class="p">,</span>
+        <span class="s2">"post_shock_energy_density"</span><span class="p">:</span> <span class="n">e2</span><span class="p">,</span>
     <span class="p">}</span>
 
 
@@ -667,9 +667,9 @@
     <span class="n">gamma_hat</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">gamma_hat</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;</span> <span class="n">beta1</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`beta1` must satisfy 0 &lt; beta1 &lt; 1.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`beta1` must satisfy 0 &lt; beta1 &lt; 1."</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">&lt;</span> <span class="n">gamma_hat</span> <span class="o">&lt;=</span> <span class="mf">2.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`gamma_hat` should satisfy 1 &lt; gamma_hat &lt;= 2.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`gamma_hat` should satisfy 1 &lt; gamma_hat &lt;= 2."</span><span class="p">)</span>
 
     <span class="c1"># Weak-shock / NR limit. Avoid the singular residual near beta2 = 0.</span>
     <span class="k">if</span> <span class="n">beta1</span> <span class="o">&lt;</span> <span class="mf">1e-6</span><span class="p">:</span>
@@ -704,9 +704,9 @@
     <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">signbit</span><span class="p">(</span><span class="n">vals</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">signbit</span><span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">idx</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Could not bracket physical shock root for &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;beta1=</span><span class="si">{</span><span class="n">beta1</span><span class="si">}</span><span class="s2">, gamma_hat=</span><span class="si">{</span><span class="n">gamma_hat</span><span class="si">}</span><span class="s2">. &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;residual min/max = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="s2">"Could not bracket physical shock root for "</span>
+            <span class="sa">f</span><span class="s2">"beta1=</span><span class="si">{</span><span class="n">beta1</span><span class="si">}</span><span class="s2">, gamma_hat=</span><span class="si">{</span><span class="n">gamma_hat</span><span class="si">}</span><span class="s2">. "</span>
+            <span class="sa">f</span><span class="s2">"residual min/max = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
     <span class="n">i</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -728,7 +728,7 @@
 <div class="viewcode-block" id="RelativisticJumpConditions">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.relativistic_jump_conditions.RelativisticJumpConditions.html#trilobite.dynamics.shocks.core.relativistic_jump_conditions.RelativisticJumpConditions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelativisticJumpConditions</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for relativistic Rankine–Hugoniot jump-condition solvers.</span>
+<span class="w">    </span><span class="sd">"""Abstract base class for relativistic Rankine–Hugoniot jump-condition solvers.</span>
 
 <span class="sd">    Mirrors the interface of</span>
 <span class="sd">    :class:`~trilobite.dynamics.shocks.core.rankine_hugoniot.JumpConditions`</span>
@@ -742,35 +742,35 @@
 
 <span class="sd">    Subclasses must implement :meth:`_solve` (CGS backend) and :meth:`solve`</span>
 <span class="sd">    (public unit-aware wrapper).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">OUTPUT_FIELDS</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="p">(</span><span class="s2">&quot;compression_ratio&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_beta&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_lorentz_factor&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_density&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_number_density&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_pressure&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">dyn</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_temperature&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">),</span>
-        <span class="p">(</span><span class="s2">&quot;post_shock_energy_density&quot;</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"compression_ratio"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_beta"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_lorentz_factor"</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_density"</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_number_density"</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**-</span><span class="mi">3</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_pressure"</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">dyn</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_temperature"</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"post_shock_energy_density"</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">),</span>
     <span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple: Post-shock output fields as ``(name, unit)`` pairs.</span>
+<span class="w">    </span><span class="sd">"""tuple: Post-shock output fields as ``(name, unit)`` pairs.</span>
 
 <span class="sd">    ``None`` units are returned as bare floats (dimensionless quantities).</span>
 <span class="sd">    The field order determines the named-tuple returned by :meth:`solve`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">OUTPUT_FIELDS</span><span class="p">:</span>
             <span class="bp">cls</span><span class="o">.</span><span class="n">_result_type</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">Result&quot;</span><span class="p">,</span>
+                <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">Result"</span><span class="p">,</span>
                 <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">OUTPUT_FIELDS</span><span class="p">],</span>
             <span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_make_result</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">result_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Attach :attr:`OUTPUT_FIELDS` units to *result_dict* and return the named tuple.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Attach :attr:`OUTPUT_FIELDS` units to *result_dict* and return the named tuple."""</span>
         <span class="c1"># noinspection PyArgumentList</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_result_type</span><span class="p">(</span>
             <span class="o">**</span><span class="p">{</span>
@@ -782,7 +782,7 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_solve</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;CGS backend.  Returns a plain ``dict`` keyed by :attr:`OUTPUT_FIELDS` names.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""CGS backend.  Returns a plain ``dict`` keyed by :attr:`OUTPUT_FIELDS` names."""</span>
         <span class="o">...</span>
 
 <div class="viewcode-block" id="RelativisticJumpConditions.solve">
@@ -790,12 +790,12 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute jump-condition quantities and return them as a named tuple.</span>
+<span class="w">        </span><span class="sd">"""Compute jump-condition quantities and return them as a named tuple.</span>
 
 <span class="sd">        Subclasses define the explicit input signature.  Physical quantities are</span>
 <span class="sd">        returned as :class:`~astropy.units.Quantity` objects; dimensionless fields</span>
 <span class="sd">        (β, Γ, compression ratio) are bare floats.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="o">...</span></div>
 </div>
 
@@ -809,7 +809,7 @@
 <div class="viewcode-block" id="RelativisticShockConditions">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.relativistic_jump_conditions.RelativisticShockConditions.html#trilobite.dynamics.shocks.core.relativistic_jump_conditions.RelativisticShockConditions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelativisticShockConditions</span><span class="p">(</span><span class="n">RelativisticJumpConditions</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;General relativistic jump conditions solved numerically.</span>
+<span class="w">    </span><span class="sd">"""General relativistic jump conditions solved numerically.</span>
 
 <span class="sd">    Finds the downstream shock-frame velocity β₂ by bracketed root-finding</span>
 <span class="sd">    (:footcite:t:`brent2013algorithms`) applied to the implicit condition</span>
@@ -826,7 +826,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    RelativisticColdShockConditions : Specialisation for P₁ ≈ 0.</span>
 <span class="sd">    UltraRelativisticShockConditions : Analytic solver for Γ₁ ≫ 1.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_solve</span><span class="p">(</span>
@@ -839,7 +839,7 @@
         <span class="n">mu</span><span class="o">=</span><span class="mf">0.61</span><span class="p">,</span>
         <span class="n">gamma_hat</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;CGS backend — all inputs are plain floats in CGS.</span>
+<span class="w">        </span><span class="sd">"""CGS backend — all inputs are plain floats in CGS.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -867,12 +867,12 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If neither *upstream_pressure* nor *upstream_temperature* is supplied.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">upstream_pressure</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">upstream_temperature</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;RelativisticShockConditions requires upstream_pressure or &quot;</span>
-                <span class="s2">&quot;upstream_temperature to determine the upstream enthalpy Ω₁. &quot;</span>
-                <span class="s2">&quot;For a cold upstream (P₁ = 0), use RelativisticColdShockConditions.&quot;</span>
+                <span class="s2">"RelativisticShockConditions requires upstream_pressure or "</span>
+                <span class="s2">"upstream_temperature to determine the upstream enthalpy Ω₁. "</span>
+                <span class="s2">"For a cold upstream (P₁ = 0), use RelativisticColdShockConditions."</span>
             <span class="p">)</span>
 
         <span class="c1"># Resolve upstream pressure from temperature if needed</span>
@@ -907,15 +907,15 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">upstream_pressure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">upstream_temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.61</span><span class="p">,</span>
         <span class="n">gamma_hat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the relativistic jump conditions for a general upstream state.</span>
+<span class="w">        </span><span class="sd">"""Solve the relativistic jump conditions for a general upstream state.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -948,7 +948,7 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If neither *upstream_pressure* nor *upstream_temperature* is supplied.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">v_sh</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">shock_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="n">rho1</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_density</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">v_up</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
@@ -969,7 +969,7 @@
 <div class="viewcode-block" id="RelativisticColdShockConditions">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.relativistic_jump_conditions.RelativisticColdShockConditions.html#trilobite.dynamics.shocks.core.relativistic_jump_conditions.RelativisticColdShockConditions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">RelativisticColdShockConditions</span><span class="p">(</span><span class="n">RelativisticShockConditions</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Relativistic jump conditions for a cold upstream medium (P₁ ≈ 0).</span>
+<span class="w">    </span><span class="sd">"""Relativistic jump conditions for a cold upstream medium (P₁ ≈ 0).</span>
 
 <span class="sd">    A specialisation of :class:`RelativisticShockConditions` that fixes Π₁ = 0</span>
 <span class="sd">    and Ω₁ = 1.  Upstream pressure and temperature are not required as inputs.</span>
@@ -980,7 +980,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    RelativisticShockConditions : General hot-upstream solver.</span>
 <span class="sd">    UltraRelativisticColdShockConditions : Analytic cold-upstream solver for Γ₁ ≫ 1.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_solve</span><span class="p">(</span>
@@ -1005,13 +1005,13 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.61</span><span class="p">,</span>
         <span class="n">gamma_hat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the relativistic jump conditions for a cold upstream medium.</span>
+<span class="w">        </span><span class="sd">"""Solve the relativistic jump conditions for a cold upstream medium.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1032,7 +1032,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        RelativisticColdShockConditionsResult</span>
 <span class="sd">            Named tuple with post-shock fields in physical units.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">v_sh</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">shock_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="n">rho1</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_density</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">v_up</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
@@ -1049,7 +1049,7 @@
 <div class="viewcode-block" id="UltraRelativisticShockConditions">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.relativistic_jump_conditions.UltraRelativisticShockConditions.html#trilobite.dynamics.shocks.core.relativistic_jump_conditions.UltraRelativisticShockConditions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UltraRelativisticShockConditions</span><span class="p">(</span><span class="n">RelativisticJumpConditions</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Analytic jump-condition solver for the ultra-relativistic strong-shock limit.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Analytic jump-condition solver for the ultra-relativistic strong-shock limit.</span>
 
 <span class="sd">    In the limit :math:`\Gamma_1 \gg 1` the downstream shock-frame velocity</span>
 <span class="sd">    satisfies</span>
@@ -1078,15 +1078,15 @@
 <span class="sd">    --------</span>
 <span class="sd">    UltraRelativisticColdShockConditions : Simplified cold-upstream variant.</span>
 <span class="sd">    RelativisticShockConditions : General numerical solver.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_ur_beta2</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">gamma_hat</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Analytic downstream velocity in the UR strong-shock limit.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Analytic downstream velocity in the UR strong-shock limit.</span>
 
 <span class="sd">        Returns :math:`\beta_2 = \hat{\gamma} - 1`, derived by solving</span>
 <span class="sd">        :math:`\beta_2(1-\beta_2) = [(\hat{\gamma}-1)/\hat{\gamma}](1-\beta_2^2)`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">gamma_hat</span> <span class="o">-</span> <span class="mf">1.0</span>
 
     <span class="nd">@classmethod</span>
@@ -1100,7 +1100,7 @@
         <span class="n">mu</span><span class="o">=</span><span class="mf">0.61</span><span class="p">,</span>
         <span class="n">gamma_hat</span><span class="o">=</span><span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;CGS backend — all inputs are plain floats in CGS.</span>
+<span class="w">        </span><span class="sd">"""CGS backend — all inputs are plain floats in CGS.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1125,7 +1125,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
 <span class="sd">            Post-shock quantities in CGS.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># Resolve upstream pressure; default to cold (P₁ = 0) if neither supplied</span>
         <span class="k">if</span> <span class="n">upstream_pressure</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">upstream_temperature</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">upstream_pressure</span> <span class="o">=</span> <span class="n">upstream_density</span> <span class="o">*</span> <span class="n">k_B_cgs</span> <span class="o">*</span> <span class="n">upstream_temperature</span> <span class="o">/</span> <span class="p">(</span><span class="n">mu</span> <span class="o">*</span> <span class="n">m_p_cgs</span><span class="p">)</span>
@@ -1148,15 +1148,15 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">upstream_pressure</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">upstream_temperature</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.61</span><span class="p">,</span>
         <span class="n">gamma_hat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the ultra-relativistic jump conditions analytically.</span>
+<span class="w">        </span><span class="sd">"""Solve the ultra-relativistic jump conditions analytically.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1183,7 +1183,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        UltraRelativisticShockConditionsResult</span>
 <span class="sd">            Named tuple with post-shock fields in physical units.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">v_sh</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">shock_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="n">rho1</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_density</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">v_up</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
@@ -1204,7 +1204,7 @@
 <div class="viewcode-block" id="UltraRelativisticColdShockConditions">
 <a class="viewcode-back" href="../../../../../_as_gen/trilobite.dynamics.shocks.core.relativistic_jump_conditions.UltraRelativisticColdShockConditions.html#trilobite.dynamics.shocks.core.relativistic_jump_conditions.UltraRelativisticColdShockConditions">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UltraRelativisticColdShockConditions</span><span class="p">(</span><span class="n">UltraRelativisticShockConditions</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Analytic jump conditions for the UR strong-shock limit into a cold medium.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Analytic jump conditions for the UR strong-shock limit into a cold medium.</span>
 
 <span class="sd">    A specialisation of :class:`UltraRelativisticShockConditions` that fixes</span>
 <span class="sd">    P₁ = 0 (Π₁ = 0, Ω₁ = 1).  Upstream pressure and temperature are not required</span>
@@ -1215,7 +1215,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    UltraRelativisticShockConditions : Generalisation that accepts a warm upstream.</span>
 <span class="sd">    RelativisticColdShockConditions : Numerical cold-upstream solver (arbitrary Γ₁).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_solve</span><span class="p">(</span>
@@ -1240,13 +1240,13 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">solve</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+        <span class="n">shock_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_density</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">upstream_velocity</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.61</span><span class="p">,</span>
         <span class="n">gamma_hat</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">4.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve the cold-upstream ultra-relativistic jump conditions analytically.</span>
+<span class="w">        </span><span class="sd">"""Solve the cold-upstream ultra-relativistic jump conditions analytically.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1267,7 +1267,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        UltraRelativisticColdShockConditionsResult</span>
 <span class="sd">            Named tuple with post-shock fields in physical units.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">v_sh</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">shock_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
         <span class="n">rho1</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_density</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
         <span class="n">v_up</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">upstream_velocity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
@@ -1303,8 +1303,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1338,7 +1338,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

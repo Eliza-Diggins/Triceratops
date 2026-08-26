@@ -1,0 +1,6 @@
+trilobite.models.TDEs.van\_velzen.VanVelzenModel.coerce\_model\_variables
+=========================================================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. automethod:: VanVelzenModel.coerce_model_variables

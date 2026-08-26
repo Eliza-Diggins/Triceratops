@@ -1,0 +1,6 @@
+trilobite.models.TDEs.van\_velzen.VanVelzenModel.output\_names
+==============================================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. autoproperty:: VanVelzenModel.output_names

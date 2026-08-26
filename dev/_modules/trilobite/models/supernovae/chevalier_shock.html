@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/supernovae/chevalier_shock';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.supernovae.chevalier_shock</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Supernova shock model based on the work of Chevalier (1982).</span>
 
 <span class="sd">This model describes the evolution of a supernova shock wave as it expands into the surrounding medium using</span>
@@ -453,7 +453,7 @@
 <span class="sd">References</span>
 <span class="sd">----------</span>
 <span class="sd">.. footbibliography::</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
@@ -466,7 +466,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.radiation.synchrotron.SEDs</span><span class="w"> </span><span class="kn">import</span> <span class="n">SSA_SED_PowerLaw</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;ChevalierShockModel&quot;</span><span class="p">,</span>
+    <span class="s2">"ChevalierShockModel"</span><span class="p">,</span>
 <span class="p">]</span>
 
 
@@ -474,7 +474,7 @@
 <div class="viewcode-block" id="ChevalierShockModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.supernovae.chevalier_shock.ChevalierShockModel.html#trilobite.models.supernovae.chevalier_shock.ChevalierShockModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ChevalierShockModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Supernova shock synchrotron emission model based on Chevalier (1982).</span>
 
 <span class="sd">    This model simulates the synchrotron emission from a supernova shock wave expanding into a circumstellar medium</span>
@@ -482,7 +482,7 @@
 <span class="sd">    The model computes the shock dynamics and resulting synchrotron spectral energy distribution (SED)</span>
 <span class="sd">    based on a set of macroscopic and microscopic parameters.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Parameter and Variable Declarations             #</span>
@@ -490,154 +490,154 @@
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
         <span class="c1"># ------------- Microscopic Shock Parameters ------------- #</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_e&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_e"</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Fraction of shock energy in relativistic electrons.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Fraction of shock energy in relativistic electrons."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_e&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_e"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;epsilon_B&quot;</span><span class="p">,</span>
+            <span class="s2">"epsilon_B"</span><span class="p">,</span>
             <span class="mf">0.1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Fraction of shock energy in magnetic fields.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Fraction of shock energy in magnetic fields."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\epsilon_B&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\epsilon_B"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;p&quot;</span><span class="p">,</span>
+            <span class="s2">"p"</span><span class="p">,</span>
             <span class="mf">3.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Power-law index of the electron energy distribution.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Power-law index of the electron energy distribution."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;p&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"p"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;gamma_max&quot;</span><span class="p">,</span>
+            <span class="s2">"gamma_max"</span><span class="p">,</span>
             <span class="mf">1e7</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The maximum Lorentz factor of the electron population. Only used if p &lt; 2.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The maximum Lorentz factor of the electron population. Only used if p &lt; 2."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\gamma_{\rm max}&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\gamma_{\rm max}"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;gamma_min&quot;</span><span class="p">,</span>
+            <span class="s2">"gamma_min"</span><span class="p">,</span>
             <span class="mi">1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The minimum Lorentz factor of the electron population.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The minimum Lorentz factor of the electron population."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\gamma_{\rm max}&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\gamma_{\rm max}"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="c1"># ----------- Geometric Parameters ------------ #</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;f&quot;</span><span class="p">,</span>
+            <span class="s2">"f"</span><span class="p">,</span>
             <span class="mf">0.5</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Filling factor of the emitting region.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Filling factor of the emitting region."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;f&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"f"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;theta&quot;</span><span class="p">,</span>
+            <span class="s2">"theta"</span><span class="p">,</span>
             <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The pitch angle of the electron population.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The pitch angle of the electron population."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\theta&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\theta"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Distance to the source.&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;Mpc&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"D"</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Distance to the source."</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">"Mpc"</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"D"</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;smoothing_s&quot;</span><span class="p">,</span>
+            <span class="s2">"smoothing_s"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The smoothing parameter of the broken power-law.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The smoothing parameter of the broken power-law."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"s"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="c1"># ----------- Macroscopic Shock Parameters ------------ #</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;E_ej&quot;</span><span class="p">,</span>
+            <span class="s2">"E_ej"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mf">1e51</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The kinetic energy of the supernova ejecta.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The kinetic energy of the supernova ejecta."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;E_{\rm ej}&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;erg&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"E_{\rm ej}"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"erg"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;M_ej&quot;</span><span class="p">,</span>
+            <span class="s2">"M_ej"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mf">1.4</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The mass of the supernova ejecta.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The mass of the supernova ejecta."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;M_{\rm ej}&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"M_{\rm ej}"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"g"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;n&quot;</span><span class="p">,</span>
+            <span class="s2">"n"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The power-law index of the outer ejecta density profile.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The power-law index of the outer ejecta density profile."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;n&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"n"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;s&quot;</span><span class="p">,</span>
+            <span class="s2">"s"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The power-law index of the circumstellar medium density profile.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The power-law index of the circumstellar medium density profile."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;s&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"s"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;rho_0&quot;</span><span class="p">,</span>
+            <span class="s2">"rho_0"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The CSM density at a fiducial radius of 1e14 cm.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The CSM density at a fiducial radius of 1e14 cm."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\rho_0&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;g/cm**3&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\rho_0"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"g/cm**3"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;delta&quot;</span><span class="p">,</span>
+            <span class="s2">"delta"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The power-law index of the inner ejecta density profile.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"The power-law index of the inner ejecta density profile."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\delta&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\delta"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;frequency&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Observing frequency at which to evaluate the SED.&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;Hz&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\nu&quot;</span>
+            <span class="s2">"frequency"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Observing frequency at which to evaluate the SED."</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">"Hz"</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\nu"</span>
         <span class="p">),</span>
-        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Time since explosion.&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;t&quot;</span><span class="p">),</span>
+        <span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"time"</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"Time since explosion."</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="s2">"s"</span><span class="p">,</span> <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"t"</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Model Metadata Declarations                     #</span>
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Each model must declare its parameters and variables as class-level attributes.</span>
-    <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;ChevalierShockOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux_density&quot;</span><span class="p">])</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of str: The names of the model&#39;s outputs.</span>
+    <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"ChevalierShockOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux_density"</span><span class="p">])</span>
+<span class="w">    </span><span class="sd">"""tuple of str: The names of the model's outputs.</span>
 
 <span class="sd">    Each element of :attr:`OUTPUTS` is a string that defines the name of a single output of the model.</span>
-<span class="sd">    These names correspond to the keys in the dictionary returned by the model&#39;s evaluation method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    These names correspond to the keys in the dictionary returned by the model's evaluation method.</span>
+<span class="sd">    """</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux_density</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Jy</span><span class="p">)</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`astropy.units.Unit`: The units of the model&#39;s outputs.</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`astropy.units.Unit`: The units of the model's outputs.</span>
 
 <span class="sd">    Each element of :attr:`UNITS` is an :class:`astropy.units.Unit` instance that defines the units of a single</span>
 <span class="sd">    output of the model. The order of the units in :attr:`UNITS` corresponds to the order of the output names</span>
 <span class="sd">    in :attr:`OUTPUTS`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: A brief description of the model.&quot;&quot;&quot;</span>
-    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Chevalier (1982), deMarchi et. al. (2022)&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: A reference for the model, e.g., a journal article or textbook.&quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span>
+<span class="w">    </span><span class="sd">"""str: A brief description of the model."""</span>
+    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Chevalier (1982), deMarchi et. al. (2022)"</span>
+<span class="w">    </span><span class="sd">"""str: A reference for the model, e.g., a journal article or textbook."""</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Initialization Method                           #</span>
     <span class="c1"># =============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model."""</span>
         <span class="c1"># Initialize the base Model class</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
@@ -660,36 +660,36 @@
     <span class="p">):</span>
         <span class="c1"># First, use the shock engine to compute the shock properties at a given time.</span>
         <span class="n">shock_properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shock_engine</span><span class="o">.</span><span class="n">_compute_shock_properties_cgs</span><span class="p">(</span>
-            <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;time&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;E_ej&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;M_ej&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;rho_0&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e14</span><span class="p">)</span> <span class="o">**</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;delta&quot;</span><span class="p">],</span>
+            <span class="n">variables</span><span class="p">[</span><span class="s2">"time"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"E_ej"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"M_ej"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"rho_0"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1e14</span><span class="p">)</span> <span class="o">**</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"n"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"delta"</span><span class="p">],</span>
         <span class="p">)</span>
         <span class="n">_shock_radius</span><span class="p">,</span> <span class="n">_shock_velocity</span> <span class="o">=</span> <span class="n">shock_properties</span><span class="o">.</span><span class="n">radius</span><span class="p">,</span> <span class="n">shock_properties</span><span class="o">.</span><span class="n">velocity</span>
 
         <span class="c1"># Now use the shock radius and velocity to compute the</span>
         <span class="c1"># corresponding magnetic field strength.</span>
-        <span class="n">_rho_up</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;rho_0&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">_shock_radius</span> <span class="o">/</span> <span class="mf">1e14</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span>
+        <span class="n">_rho_up</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"rho_0"</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">_shock_radius</span> <span class="o">/</span> <span class="mf">1e14</span><span class="p">)</span> <span class="o">**</span> <span class="o">-</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">]</span>
         <span class="n">_R</span> <span class="o">=</span> <span class="mf">4.0</span>  <span class="c1"># = (gamma+1)/(gamma-1) for gamma=5/3</span>
         <span class="n">_U</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">_R</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">_R</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">_rho_up</span> <span class="o">*</span> <span class="n">_shock_velocity</span><span class="o">**</span><span class="mi">2</span>
-        <span class="n">_shock_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_B&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">_U</span><span class="p">)</span>
+        <span class="n">_shock_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_B"</span><span class="p">]</span> <span class="o">*</span> <span class="n">_U</span><span class="p">)</span>
 
         <span class="c1"># First use the parameters to compute the BPL parameters from the</span>
         <span class="c1"># core physics parameters.</span>
         <span class="n">nu_brk</span><span class="p">,</span> <span class="n">F_brk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sed</span><span class="o">.</span><span class="n">_opt_from_physics_to_params</span><span class="p">(</span>
             <span class="n">_shock_B</span><span class="p">,</span>
             <span class="n">_shock_radius</span><span class="p">,</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;D&quot;</span><span class="p">],</span>  <span class="c1"># cm</span>
-            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-            <span class="n">f</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;f&quot;</span><span class="p">],</span>
-            <span class="n">theta</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;theta&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_B&quot;</span><span class="p">],</span>
-            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;epsilon_e&quot;</span><span class="p">],</span>
-            <span class="n">gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma_min&quot;</span><span class="p">],</span>
-            <span class="n">gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;gamma_max&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"D"</span><span class="p">],</span>  <span class="c1"># cm</span>
+            <span class="n">p</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+            <span class="n">f</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"f"</span><span class="p">],</span>
+            <span class="n">theta</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"theta"</span><span class="p">],</span>
+            <span class="n">epsilon_B</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_B"</span><span class="p">],</span>
+            <span class="n">epsilon_E</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"epsilon_e"</span><span class="p">],</span>
+            <span class="n">gamma_min</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma_min"</span><span class="p">],</span>
+            <span class="n">gamma_max</span><span class="o">=</span><span class="n">parameters</span><span class="p">[</span><span class="s2">"gamma_max"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="c1"># Return the flux density in Jy</span>
@@ -697,11 +697,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span>
             <span class="n">flux_density</span><span class="o">=</span><span class="mf">1e-23</span>
             <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">sed</span><span class="o">.</span><span class="n">_log_opt_sed</span><span class="p">(</span>
-                <span class="n">variables</span><span class="p">[</span><span class="s2">&quot;frequency&quot;</span><span class="p">],</span>
+                <span class="n">variables</span><span class="p">[</span><span class="s2">"frequency"</span><span class="p">],</span>
                 <span class="n">nu_brk</span><span class="p">,</span>
                 <span class="n">F_brk</span><span class="p">,</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">],</span>
-                <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;smoothing_s&quot;</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"p"</span><span class="p">],</span>
+                <span class="n">parameters</span><span class="p">[</span><span class="s2">"smoothing_s"</span><span class="p">],</span>
             <span class="p">)</span>
         <span class="p">)</span></div>
 
@@ -734,8 +734,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -769,7 +769,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

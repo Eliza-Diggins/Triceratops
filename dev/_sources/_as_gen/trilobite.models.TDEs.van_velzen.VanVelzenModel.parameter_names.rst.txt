@@ -1,0 +1,6 @@
+trilobite.models.TDEs.van\_velzen.VanVelzenModel.parameter\_names
+=================================================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. autoproperty:: VanVelzenModel.parameter_names

@@ -1,0 +1,6 @@
+trilobite.models.TDEs.van\_velzen.VanVelzenModel.remove\_filter
+===============================================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. automethod:: VanVelzenModel.remove_filter

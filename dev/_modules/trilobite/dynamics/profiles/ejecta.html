@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/profiles/ejecta';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.profiles.ejecta</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Ejecta density profile classes.</span>
 
 <span class="sd">This module provides an abstract base class and concrete implementations for</span>
@@ -469,7 +469,7 @@
 
 <span class="sd">Both kernels can be analytically normalized to a supplied ejecta mass and</span>
 <span class="sd">kinetic energy via :meth:`~BrokenPowerLawEjectaProfile.normalize`.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">ClassVar</span>
@@ -496,7 +496,7 @@
     <span class="n">delta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">v_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Normalize a (possibly truncated) broken-power-law ejecta kernel in CGS.</span>
 
 <span class="sd">    The kernel is</span>
@@ -537,19 +537,19 @@
 <span class="sd">        Inner-branch normalization in :math:`\mathrm{g\,cm^{\delta-3}\,s^{3-\delta}}`.</span>
 <span class="sd">    v_t : float</span>
 <span class="sd">        Transition velocity in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">E_ej</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`E_ej` must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`E_ej` must be positive."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">M_ej</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`M_ej` must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`M_ej` must be positive."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">delta</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`delta` must be &lt; 3 for finite mass.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`delta` must be &lt; 3 for finite mass."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`n` must be &gt; 5 for finite kinetic energy.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`n` must be &gt; 5 for finite kinetic energy."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">delta</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`n` must exceed `delta`.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`n` must exceed `delta`."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">v_max</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_max` must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_max` must be positive."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v_max</span><span class="p">):</span>
         <span class="n">specific_velocity_sq</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">E_ej</span> <span class="o">/</span> <span class="n">M_ej</span>
@@ -559,7 +559,7 @@
 
     <span class="n">target</span> <span class="o">=</span> <span class="n">E_ej</span> <span class="o">/</span> <span class="n">M_ej</span>
     <span class="k">if</span> <span class="n">target</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">v_max</span><span class="o">**</span><span class="mi">2</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`E_ej / M_ej` is incompatible with `v_max`: must be &lt; 0.5 * v_max**2.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`E_ej / M_ej` is incompatible with `v_max`: must be &lt; 0.5 * v_max**2."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_power_integral</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">b</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">:</span>
@@ -596,7 +596,7 @@
 
     <span class="k">if</span> <span class="n">bracket</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="s2">&quot;Could not bracket the BPL transition velocity. The requested E/M may be incompatible with `v_max`.&quot;</span>
+            <span class="s2">"Could not bracket the BPL transition velocity. The requested E/M may be incompatible with `v_max`."</span>
         <span class="p">)</span>
 
     <span class="n">v_t</span> <span class="o">=</span> <span class="n">bracket</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">bracket</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">bracket</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">brentq</span><span class="p">(</span><span class="n">_residual</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">bracket</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">bracket</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
@@ -610,7 +610,7 @@
     <span class="n">v_min</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">v_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Normalize a (possibly truncated) exponential ejecta kernel in CGS.</span>
 
 <span class="sd">    The kernel is</span>
@@ -650,15 +650,15 @@
 <span class="sd">        Kernel normalization in :math:`\mathrm{g\,s^3\,cm^{-3}}`.</span>
 <span class="sd">    v_e : float</span>
 <span class="sd">        Exponential velocity scale in cm/s.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">E_ej</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`E_ej` must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`E_ej` must be positive."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">M_ej</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`M_ej` must be positive.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`M_ej` must be positive."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">v_min</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_min` must be non-negative.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_min` must be non-negative."</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">v_max</span> <span class="o">&lt;=</span> <span class="n">v_min</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_max` must be greater than `v_min`.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_max` must be greater than `v_min`."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">v_min</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v_max</span><span class="p">):</span>
         <span class="n">v_e</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">E_ej</span> <span class="o">/</span> <span class="p">(</span><span class="mf">6.0</span> <span class="o">*</span> <span class="n">M_ej</span><span class="p">))</span>
@@ -683,7 +683,7 @@
             <span class="n">term1</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">x1</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">x1</span><span class="o">**</span><span class="mi">4</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">x1</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mf">12.0</span> <span class="o">*</span> <span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">24.0</span> <span class="o">*</span> <span class="n">x1</span> <span class="o">+</span> <span class="mf">24.0</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">v_e_</span><span class="o">**</span><span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">term0</span> <span class="o">-</span> <span class="n">term1</span><span class="p">)</span>
 
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only moment orders 2 and 4 are supported.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Only moment orders 2 and 4 are supported."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_residual</span><span class="p">(</span><span class="n">log_v_e</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="n">v_e_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_v_e</span><span class="p">)</span>
@@ -704,8 +704,8 @@
 
     <span class="k">if</span> <span class="n">bracket</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
-            <span class="s2">&quot;Could not bracket the exponential velocity scale. &quot;</span>
-            <span class="s2">&quot;The requested E/M may be incompatible with the velocity cutoffs.&quot;</span>
+            <span class="s2">"Could not bracket the exponential velocity scale. "</span>
+            <span class="s2">"The requested E/M may be incompatible with the velocity cutoffs."</span>
         <span class="p">)</span>
 
     <span class="n">v_e</span> <span class="o">=</span> <span class="n">bracket</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">bracket</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">bracket</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">brentq</span><span class="p">(</span><span class="n">_residual</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">bracket</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">bracket</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
@@ -719,7 +719,7 @@
 <div class="viewcode-block" id="EjectaDensityProfile">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.html#trilobite.dynamics.profiles.ejecta.EjectaDensityProfile">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">EjectaDensityProfile</span><span class="p">(</span><span class="n">_DynamicalProfile</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for homologous ejecta density profiles.</span>
 
 <span class="sd">    All ejecta profiles in this module assume the homologous factored form</span>
@@ -744,11 +744,11 @@
 <span class="sd">    --------</span>
 <span class="sd">    BrokenPowerLawEjectaProfile : Chevalier-style broken-power-law ejecta kernel.</span>
 <span class="sd">    ExponentialEjectaProfile : Exponential ejecta kernel.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">OUTPUT_UNITS</span><span class="p">:</span> <span class="n">ClassVar</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span>
     <span class="n">KERNEL_UNITS</span><span class="p">:</span> <span class="n">ClassVar</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Units of the velocity-space kernel :math:`G(v)`.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Units of the velocity-space kernel :math:`G(v)`."""</span>
 
     <span class="c1"># ------------------------------------------------------------------ #</span>
     <span class="c1"># Kernel Interface                                                   #</span>
@@ -756,7 +756,7 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_opt_eval_kernel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the ejecta kernel :math:`G(v)` using processed unit-free inputs.</span>
 
 <span class="sd">        Parameters</span>
@@ -770,14 +770,14 @@
 <span class="sd">        -------</span>
 <span class="sd">        G : ~numpy.ndarray</span>
 <span class="sd">            Velocity-space ejecta density kernel in :math:`\mathrm{g\,s^3\,cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span>
 
 <div class="viewcode-block" id="EjectaDensityProfile.kernel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.kernel.html#trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.kernel">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">kernel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">kernel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the velocity-space ejecta kernel :math:`G(v)` with unit handling.</span>
 
 <span class="sd">        The physical density is recovered as</span>
@@ -797,7 +797,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        G : ~astropy.units.Quantity</span>
 <span class="sd">            Kernel value in :math:`\mathrm{g\,s^3\,cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">v_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
         <span class="n">processed</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_validate_and_process_parameters</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_opt_eval_kernel</span><span class="p">(</span><span class="n">v_cgs</span><span class="p">,</span> <span class="o">**</span><span class="n">processed</span><span class="p">)</span> <span class="o">*</span> <span class="bp">cls</span><span class="o">.</span><span class="n">KERNEL_UNITS</span></div>
@@ -806,8 +806,8 @@
 <div class="viewcode-block" id="EjectaDensityProfile.fkernel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.fkernel.html#trilobite.dynamics.profiles.ejecta.EjectaDensityProfile.fkernel">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fkernel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fkernel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the velocity-space ejecta kernel :math:`G(v)` without unit handling.</span>
 
 <span class="sd">        This calls :meth:`_opt_eval_kernel` directly. No unit conversion or</span>
@@ -825,7 +825,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        G : float or ~numpy.ndarray</span>
 <span class="sd">            Kernel value in :math:`\mathrm{g\,s^3\,cm^{-3}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_opt_eval_kernel</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span></div>
 
 
@@ -851,7 +851,7 @@
 <div class="viewcode-block" id="BrokenPowerLawEjectaProfile">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.html#trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BrokenPowerLawEjectaProfile</span><span class="p">(</span><span class="n">EjectaDensityProfile</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Broken-power-law homologous ejecta density profile.</span>
 
 <span class="sd">    The velocity-space kernel is</span>
@@ -909,20 +909,20 @@
 <span class="sd">    &gt;&gt;&gt; rho = BrokenPowerLawEjectaProfile.eval(</span>
 <span class="sd">    ...     1e16 * u.cm, 10 * u.day, K=K, v_t=v_t, n=10, delta=0</span>
 <span class="sd">    ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="BrokenPowerLawEjectaProfile.normalize">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize.html#trilobite.dynamics.profiles.ejecta.BrokenPowerLawEjectaProfile.normalize">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">E_ej</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">M_ej</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
+        <span class="n">E_ej</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">M_ej</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
         <span class="n">n</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
         <span class="n">delta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="n">v_max</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+        <span class="n">v_max</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the kernel normalization and transition velocity.</span>
 
 <span class="sd">        The returned parameters ``K`` and ``v_t`` are chosen so that the</span>
@@ -949,7 +949,7 @@
 <span class="sd">            :math:`\mathrm{g\,cm^{\delta-3}\,s^{3-\delta}}`.</span>
 <span class="sd">        v_t : ~astropy.units.Quantity</span>
 <span class="sd">            Transition velocity in cm/s.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">E_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">))</span>
         <span class="n">M_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_ej</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
         <span class="n">v_max_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v_max</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v_max</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
@@ -970,19 +970,19 @@
         <span class="n">v_max_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v_max</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v_max</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
         <span class="k">if</span> <span class="n">K_cgs</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`K` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`K` must be positive."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v_t_cgs</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_t` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_t` must be positive."</span><span class="p">)</span>
 
         <span class="n">K_outer</span> <span class="o">=</span> <span class="n">K_cgs</span> <span class="o">*</span> <span class="n">v_t_cgs</span> <span class="o">**</span> <span class="p">(</span><span class="n">n_f</span> <span class="o">-</span> <span class="n">delta_f</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;K_inner&quot;</span><span class="p">:</span> <span class="n">K_cgs</span><span class="p">,</span>
-            <span class="s2">&quot;K_outer&quot;</span><span class="p">:</span> <span class="n">K_outer</span><span class="p">,</span>
-            <span class="s2">&quot;v_t&quot;</span><span class="p">:</span> <span class="n">v_t_cgs</span><span class="p">,</span>
-            <span class="s2">&quot;n&quot;</span><span class="p">:</span> <span class="n">n_f</span><span class="p">,</span>
-            <span class="s2">&quot;delta&quot;</span><span class="p">:</span> <span class="n">delta_f</span><span class="p">,</span>
-            <span class="s2">&quot;v_max&quot;</span><span class="p">:</span> <span class="n">v_max_cgs</span><span class="p">,</span>
+            <span class="s2">"K_inner"</span><span class="p">:</span> <span class="n">K_cgs</span><span class="p">,</span>
+            <span class="s2">"K_outer"</span><span class="p">:</span> <span class="n">K_outer</span><span class="p">,</span>
+            <span class="s2">"v_t"</span><span class="p">:</span> <span class="n">v_t_cgs</span><span class="p">,</span>
+            <span class="s2">"n"</span><span class="p">:</span> <span class="n">n_f</span><span class="p">,</span>
+            <span class="s2">"delta"</span><span class="p">:</span> <span class="n">delta_f</span><span class="p">,</span>
+            <span class="s2">"v_max"</span><span class="p">:</span> <span class="n">v_max_cgs</span><span class="p">,</span>
         <span class="p">}</span>
 
     <span class="nd">@classmethod</span>
@@ -1002,7 +1002,7 @@
 <div class="viewcode-block" id="ExponentialEjectaProfile">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.html#trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExponentialEjectaProfile</span><span class="p">(</span><span class="n">EjectaDensityProfile</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Exponential homologous ejecta density profile.</span>
 
 <span class="sd">    The velocity-space kernel is</span>
@@ -1050,19 +1050,19 @@
 <span class="sd">    &gt;&gt;&gt; rho = ExponentialEjectaProfile.eval(</span>
 <span class="sd">    ...     1e16 * u.cm, 10 * u.day, K=K, v_e=v_e</span>
 <span class="sd">    ... )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="ExponentialEjectaProfile.normalize">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.normalize.html#trilobite.dynamics.profiles.ejecta.ExponentialEjectaProfile.normalize">[docs]</a>
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span>
         <span class="bp">cls</span><span class="p">,</span>
-        <span class="n">E_ej</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">M_ej</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span><span class="p">,</span>
-        <span class="n">v_min</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="n">v_max</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingScalarLike&quot;</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
+        <span class="n">E_ej</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">M_ej</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span><span class="p">,</span>
+        <span class="n">v_min</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="n">v_max</span><span class="p">:</span> <span class="s2">"_UnitBearingScalarLike"</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the kernel normalization and velocity scale.</span>
 
 <span class="sd">        Parameters</span>
@@ -1083,7 +1083,7 @@
 <span class="sd">            Kernel normalization in :math:`\mathrm{g\,s^3\,cm^{-3}}`.</span>
 <span class="sd">        v_e : ~astropy.units.Quantity</span>
 <span class="sd">            Exponential velocity scale in cm/s.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">E_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">E_ej</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="p">))</span>
         <span class="n">M_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_ej</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
         <span class="n">v_min_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v_min</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v_min</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span>
@@ -1104,15 +1104,15 @@
         <span class="n">v_max_cgs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">v_max</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isinf</span><span class="p">(</span><span class="n">v_max</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
         <span class="k">if</span> <span class="n">K_cgs</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`K` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`K` must be positive."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v_e_cgs</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_e` must be positive.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_e` must be positive."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v_min_cgs</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_min` must be non-negative.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_min` must be non-negative."</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v_max_cgs</span> <span class="o">&lt;=</span> <span class="n">v_min_cgs</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;`v_max` must be greater than `v_min`.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"`v_max` must be greater than `v_min`."</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="n">K_cgs</span><span class="p">,</span> <span class="s2">&quot;v_e&quot;</span><span class="p">:</span> <span class="n">v_e_cgs</span><span class="p">,</span> <span class="s2">&quot;v_min&quot;</span><span class="p">:</span> <span class="n">v_min_cgs</span><span class="p">,</span> <span class="s2">&quot;v_max&quot;</span><span class="p">:</span> <span class="n">v_max_cgs</span><span class="p">}</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"K"</span><span class="p">:</span> <span class="n">K_cgs</span><span class="p">,</span> <span class="s2">"v_e"</span><span class="p">:</span> <span class="n">v_e_cgs</span><span class="p">,</span> <span class="s2">"v_min"</span><span class="p">:</span> <span class="n">v_min_cgs</span><span class="p">,</span> <span class="s2">"v_max"</span><span class="p">:</span> <span class="n">v_max_cgs</span><span class="p">}</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_opt_eval_kernel</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">v_e</span><span class="p">,</span> <span class="n">v_min</span><span class="p">,</span> <span class="n">v_max</span><span class="p">,</span> <span class="o">**</span><span class="n">_</span><span class="p">):</span>
@@ -1155,8 +1155,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1190,7 +1190,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

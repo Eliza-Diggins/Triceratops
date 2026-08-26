@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/utils/phot_utils';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,13 +444,13 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.utils.phot_utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Photometry utilities for interacting with and processing photometric data in Trilobite.</span>
 
 <span class="sd">This module provides tools for filter-based photometry, including individual filter</span>
 <span class="sd">response curves, batched filter bundles optimised for MCMC hot loops, and conversions</span>
 <span class="sd">between flux density and standard magnitude systems (AB, ST).</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -494,7 +494,7 @@
 <div class="viewcode-block" id="PhotometryFilter">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.html#trilobite.utils.phot_utils.PhotometryFilter">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PhotometryFilter</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    A photometric bandpass filter with precomputed integration weights.</span>
 
 <span class="sd">    Stores a filter transmission curve on a wavelength grid and precomputes</span>
@@ -512,17 +512,17 @@
 <span class="sd">        the same shape as ``wavelength``. Values are not required to be</span>
 <span class="sd">        normalised; normalisation is applied internally when computing weights.</span>
 <span class="sd">    name : str, optional</span>
-<span class="sd">        Human-readable name for the filter (e.g. ``&quot;sdss-r&quot;``). Stored for</span>
+<span class="sd">        Human-readable name for the filter (e.g. ``"sdss-r"``). Stored for</span>
 <span class="sd">        display and IO purposes only.</span>
-<span class="sd">    weighting : {&quot;photon&quot;, &quot;energy&quot;}, optional</span>
-<span class="sd">        Photon-counting detectors (CCDs) should use ``&quot;photon&quot;`` (default).</span>
-<span class="sd">        Bolometers and energy-sensitive detectors should use ``&quot;energy&quot;``.</span>
+<span class="sd">    weighting : {"photon", "energy"}, optional</span>
+<span class="sd">        Photon-counting detectors (CCDs) should use ``"photon"`` (default).</span>
+<span class="sd">        Bolometers and energy-sensitive detectors should use ``"energy"``.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ValueError</span>
 <span class="sd">        If ``wavelength`` and ``transmission`` have different shapes, or if</span>
-<span class="sd">        ``weighting`` is not one of ``&quot;photon&quot;`` or ``&quot;energy&quot;``.</span>
+<span class="sd">        ``weighting`` is not one of ``"photon"`` or ``"energy"``.</span>
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
@@ -556,37 +556,37 @@
 
 <span class="sd">        lam = np.linspace(5500, 7000, 300) * u.AA</span>
 <span class="sd">        T = np.exp(-0.5 * ((lam.value - 6200) / 400) ** 2)</span>
-<span class="sd">        filt = PhotometryFilter(lam, T, name=&quot;r-band&quot;)</span>
+<span class="sd">        filt = PhotometryFilter(lam, T, name="r-band")</span>
 <span class="sd">        F_nu = (</span>
 <span class="sd">            np.ones(300) * 3.631e-20</span>
 <span class="sd">        )  # flat 0-mag spectrum</span>
 <span class="sd">        filt.apply(F_nu)  # doctest: +SKIP</span>
 <span class="sd">        3.631e-20</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">wavelength</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">wavelength</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
         <span class="n">transmission</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">,</span>
+        <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="c1"># ------------------------------------------------------------------ #</span>
         <span class="c1"># Validate and coerce inputs                                          #</span>
         <span class="c1"># ------------------------------------------------------------------ #</span>
-        <span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+        <span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
         <span class="n">transmission</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">transmission</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">wavelength</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">transmission</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="s2">&quot;wavelength and transmission must have the same shape. &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;Got </span><span class="si">{</span><span class="n">wavelength</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">transmission</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="s2">"wavelength and transmission must have the same shape. "</span>
+                <span class="sa">f</span><span class="s2">"Got </span><span class="si">{</span><span class="n">wavelength</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">transmission</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">weighting</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;photon&quot;</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;weighting must be &#39;photon&#39; or &#39;energy&#39;, got &#39;</span><span class="si">{</span><span class="n">weighting</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">weighting</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"energy"</span><span class="p">,</span> <span class="s2">"photon"</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"weighting must be 'photon' or 'energy', got '</span><span class="si">{</span><span class="n">weighting</span><span class="si">}</span><span class="s2">'."</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="s2">""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span> <span class="o">=</span> <span class="n">weighting</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span> <span class="o">=</span> <span class="n">wavelength</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span> <span class="o">=</span> <span class="n">transmission</span>
@@ -600,7 +600,7 @@
         <span class="c1"># delta_lambda via central differences (units: cm)</span>
         <span class="n">delta_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">gradient</span><span class="p">(</span><span class="n">wavelength</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">weighting</span> <span class="o">==</span> <span class="s2">&quot;photon&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">weighting</span> <span class="o">==</span> <span class="s2">"photon"</span><span class="p">:</span>
             <span class="c1"># Photon-weighted: T(lambda) * (1/lambda) * |dlambda|</span>
             <span class="c1"># (hc cancels in normalisation)</span>
             <span class="n">raw</span> <span class="o">=</span> <span class="n">transmission</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">wavelength</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">delta_lambda</span><span class="p">)</span>
@@ -624,52 +624,52 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Human-readable filter name (empty string if not set).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Human-readable filter name (empty string if not set)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wavelength grid in cm.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Wavelength grid in cm."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Frequency grid in Hz (same ordering as :attr:`wavelength`).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Frequency grid in Hz (same ordering as :attr:`wavelength`)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">transmission</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Raw transmission values (not normalised).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Raw transmission values (not normalised)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Precomputed, normalised integration weights (on the wavelength grid).</span>
 
 <span class="sd">        The weights satisfy ``np.dot(F_nu_on_filter_grid, weights) == &lt;F_nu&gt;``</span>
 <span class="sd">        where ``&lt;F_nu&gt;`` is the band-averaged flux density.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">weighting</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Weighting scheme, either ``&#39;photon&#39;`` or ``&#39;energy&#39;``.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Weighting scheme, either ``'photon'`` or ``'energy'``."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">wavelength_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;``(lambda_min, lambda_max)`` of the filter grid in cm.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""``(lambda_min, lambda_max)`` of the filter grid in cm."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength_bounds</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">frequency_bounds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;``(nu_min, nu_max)`` of the filter grid in Hz.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""``(nu_min, nu_max)`` of the filter grid in Hz."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency_bounds</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">effective_wavelength</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Pivot (effective) wavelength of the filter in cm.</span>
 
 <span class="sd">        Defined as the photon-weighted pivot wavelength independent of the</span>
@@ -680,7 +680,7 @@
 <span class="sd">            lambda_{rm pivot} = sqrt{</span>
 <span class="sd">                frac{int T(lambda),dlambda}{int T(lambda)/lambda^2,dlambda}</span>
 <span class="sd">            }</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">numerator</span> <span class="o">=</span> <span class="n">_trapz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span>
         <span class="n">denominator</span> <span class="o">=</span> <span class="n">_trapz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">denominator</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
@@ -689,17 +689,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">effective_frequency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pivot frequency in Hz, derived from :attr:`effective_wavelength`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Pivot frequency in Hz, derived from :attr:`effective_wavelength`."""</span>
         <span class="k">return</span> <span class="n">const</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">effective_wavelength</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">filter_width_lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Equivalent width of the filter in wavelength space (cm).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Equivalent width of the filter in wavelength space (cm)."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">_trapz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">))</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">filter_width_nu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Equivalent width of the filter in frequency space (Hz).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Equivalent width of the filter in frequency space (Hz)."""</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">_trapz</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency</span><span class="p">)))</span>
 
     <span class="c1"># ====================================================================== #</span>
@@ -707,20 +707,20 @@
     <span class="c1"># ====================================================================== #</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">name_part</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="k">else</span> <span class="s2">&quot;unnamed&quot;</span>
+        <span class="n">name_part</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="si">}</span><span class="s2">'"</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="k">else</span> <span class="s2">"unnamed"</span>
         <span class="n">lam_eff_aa</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">effective_wavelength</span> <span class="o">*</span> <span class="mf">1e8</span>  <span class="c1"># cm → Å</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;PhotometryFilter(</span><span class="si">{</span><span class="n">name_part</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;lam_eff=</span><span class="si">{</span><span class="n">lam_eff_aa</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> AA, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;weighting=&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span><span class="si">}</span><span class="s2">&#39;, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;N=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="sa">f</span><span class="s2">"PhotometryFilter(</span><span class="si">{</span><span class="n">name_part</span><span class="si">}</span><span class="s2">, "</span>
+            <span class="sa">f</span><span class="s2">"lam_eff=</span><span class="si">{</span><span class="n">lam_eff_aa</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> AA, "</span>
+            <span class="sa">f</span><span class="s2">"weighting='</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span><span class="si">}</span><span class="s2">', "</span>
+            <span class="sa">f</span><span class="s2">"N=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Determine the number of grid points in the filter.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Determine the number of grid points in the filter."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -733,7 +733,7 @@
         <span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convolve an SED with this filter (shorthand for :meth:`convolve_nu`).</span>
 
 <span class="sd">        Parameters</span>
@@ -747,7 +747,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            Band-averaged flux density.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convolve_nu</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">)</span>
 
     <span class="c1"># ====================================================================== #</span>
@@ -757,7 +757,7 @@
 <div class="viewcode-block" id="PhotometryFilter.apply">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.apply.html#trilobite.utils.phot_utils.PhotometryFilter.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Apply filter weights to an SED already sampled on the filter grid.</span>
 
 <span class="sd">        This is the fastest path — it assumes ``F_nu`` is evaluated exactly</span>
@@ -781,11 +781,11 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If the last dimension of ``F_nu`` does not match the filter grid.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">F_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_nu</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">F_nu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;F_nu last dimension (</span><span class="si">{</span><span class="n">F_nu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) must match filter grid size (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">).&quot;</span>
+                <span class="sa">f</span><span class="s2">"F_nu last dimension (</span><span class="si">{</span><span class="n">F_nu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) must match filter grid size (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">)."</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">F_nu</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weights</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></div>
 
@@ -793,10 +793,10 @@
 <div class="viewcode-block" id="PhotometryFilter.convolve_nu">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.convolve_nu.html#trilobite.utils.phot_utils.PhotometryFilter.convolve_nu">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">convolve_nu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convolve an SED defined on an arbitrary frequency grid.</span>
 
-<span class="sd">        Linearly interpolates ``F_nu`` onto the filter&#39;s frequency grid</span>
+<span class="sd">        Linearly interpolates ``F_nu`` onto the filter's frequency grid</span>
 <span class="sd">        then calls :meth:`apply`.</span>
 
 <span class="sd">        Parameters</span>
@@ -811,7 +811,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            Band-averaged flux density. Scalar or ``(N_t,)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">F_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
@@ -846,7 +846,7 @@
 <div class="viewcode-block" id="PhotometryFilter.convolve_lambda">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.convolve_lambda.html#trilobite.utils.phot_utils.PhotometryFilter.convolve_lambda">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">convolve_lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">F_lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convolve an SED defined in wavelength space (F_lambda).</span>
 
 <span class="sd">        Converts ``F_lambda`` → ``F_nu`` using ``F_nu = (lambda^2/c)*F_lambda``,</span>
@@ -864,7 +864,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            Band-averaged flux density in erg/s/cm²/Hz.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">F_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_lambda</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">F_nu</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavelength</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">const</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">*</span> <span class="n">F_lambda</span>
@@ -880,12 +880,12 @@
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.plot.html#trilobite.utils.phot_utils.PhotometryFilter.plot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">fig</span><span class="p">:</span> <span class="s2">&quot;Optional[matplotlib.figure.Figure]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">axes</span><span class="p">:</span> <span class="s2">&quot;Optional[matplotlib.axes.Axes]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">wavelength_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;AA&quot;</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">:</span> <span class="s2">"Optional[matplotlib.figure.Figure]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">axes</span><span class="p">:</span> <span class="s2">"Optional[matplotlib.axes.Axes]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">wavelength_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"AA"</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Plot the filter transmission curve.</span>
 
 <span class="sd">        Parameters</span>
@@ -895,7 +895,7 @@
 <span class="sd">        axes : matplotlib.axes.Axes, optional</span>
 <span class="sd">            Existing axes. Creates new axes if ``None``.</span>
 <span class="sd">        wavelength_unit : str, optional</span>
-<span class="sd">            Astropy unit string for the x-axis (default ``&quot;AA&quot;`` = Ångström).</span>
+<span class="sd">            Astropy unit string for the x-axis (default ``"AA"`` = Ångström).</span>
 <span class="sd">        **kwargs</span>
 <span class="sd">            Additional keyword arguments forwarded to</span>
 <span class="sd">            :func:`matplotlib.axes.Axes.plot`.</span>
@@ -904,7 +904,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        fig : matplotlib.figure.Figure</span>
 <span class="sd">        axes : matplotlib.axes.Axes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.plot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">resolve_fig_axes</span><span class="p">,</span> <span class="n">set_plot_style</span>
 
         <span class="n">set_plot_style</span><span class="p">()</span>
@@ -912,8 +912,8 @@
 
         <span class="n">scale</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">wavelength_unit</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span> <span class="o">*</span> <span class="n">scale</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavelength [</span><span class="si">{</span><span class="n">wavelength_unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Transmission&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wavelength [</span><span class="si">{</span><span class="n">wavelength_unit</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
@@ -928,28 +928,28 @@
 <div class="viewcode-block" id="PhotometryFilter.to_dict">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.to_dict.html#trilobite.utils.phot_utils.PhotometryFilter.to_dict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Serialise the filter to a plain Python dictionary.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            Keys: ``&quot;name&quot;``, ``&quot;wavelength_cm&quot;``, ``&quot;transmission&quot;``,</span>
-<span class="sd">            ``&quot;weighting&quot;``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            Keys: ``"name"``, ``"wavelength_cm"``, ``"transmission"``,</span>
+<span class="sd">            ``"weighting"``.</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
-            <span class="s2">&quot;wavelength_cm&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
-            <span class="s2">&quot;transmission&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
-            <span class="s2">&quot;weighting&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span>
+            <span class="s2">"wavelength_cm"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s2">"transmission"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+            <span class="s2">"weighting"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 
 <div class="viewcode-block" id="PhotometryFilter.from_dict">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.from_dict.html#trilobite.utils.phot_utils.PhotometryFilter.from_dict">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PhotometryFilter&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"PhotometryFilter"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Reconstruct a :class:`PhotometryFilter` from a dictionary.</span>
 
 <span class="sd">        Parameters</span>
@@ -960,35 +960,35 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        PhotometryFilter</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">wavelength</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">]),</span>
-            <span class="n">transmission</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;transmission&quot;</span><span class="p">]),</span>
-            <span class="n">name</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
-            <span class="n">weighting</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;weighting&quot;</span><span class="p">,</span> <span class="s2">&quot;photon&quot;</span><span class="p">),</span>
+            <span class="n">wavelength</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"wavelength_cm"</span><span class="p">]),</span>
+            <span class="n">transmission</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s2">"transmission"</span><span class="p">]),</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">weighting</span><span class="o">=</span><span class="n">d</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"weighting"</span><span class="p">,</span> <span class="s2">"photon"</span><span class="p">),</span>
         <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PhotometryFilter.to_json">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.to_json.html#trilobite.utils.phot_utils.PhotometryFilter.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Write the filter to a JSON file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        path : str or Path</span>
 <span class="sd">            Output file path.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">fh</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PhotometryFilter.from_json">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.from_json.html#trilobite.utils.phot_utils.PhotometryFilter.from_json">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;PhotometryFilter&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">"PhotometryFilter"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load a :class:`PhotometryFilter` from a JSON file.</span>
 
 <span class="sd">        Parameters</span>
@@ -999,7 +999,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        PhotometryFilter</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
@@ -1007,8 +1007,8 @@
 
 <div class="viewcode-block" id="PhotometryFilter.to_hdf5">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.to_hdf5.html#trilobite.utils.phot_utils.PhotometryFilter.to_hdf5">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"filter"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Write the filter to an HDF5 file.</span>
 
 <span class="sd">        Parameters</span>
@@ -1017,23 +1017,23 @@
 <span class="sd">            Output HDF5 file path.</span>
 <span class="sd">        key : str, optional</span>
 <span class="sd">            HDF5 group name under which the filter is stored (default</span>
-<span class="sd">            ``&quot;filter&quot;``).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="sd">            ``"filter"``).</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">fh</span><span class="p">:</span>
                 <span class="k">del</span> <span class="n">fh</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
             <span class="n">grp</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
-            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span>
-            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;transmission&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">)</span>
-            <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-            <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;weighting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span></div>
+            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"wavelength_cm"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">)</span>
+            <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"transmission"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">)</span>
+            <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+            <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"weighting"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span></div>
 
 
 <div class="viewcode-block" id="PhotometryFilter.from_hdf5">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.from_hdf5.html#trilobite.utils.phot_utils.PhotometryFilter.from_hdf5">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_hdf5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;filter&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PhotometryFilter&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_hdf5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"filter"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"PhotometryFilter"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load a :class:`PhotometryFilter` from an HDF5 file.</span>
 
 <span class="sd">        Parameters</span>
@@ -1041,25 +1041,25 @@
 <span class="sd">        path : str or Path</span>
 <span class="sd">            Path to an HDF5 file written by :meth:`to_hdf5`.</span>
 <span class="sd">        key : str, optional</span>
-<span class="sd">            HDF5 group name (default ``&quot;filter&quot;``).</span>
+<span class="sd">            HDF5 group name (default ``"filter"``).</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        PhotometryFilter</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">grp</span> <span class="o">=</span> <span class="n">fh</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
-            <span class="n">wavelength</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">][()]</span>
-            <span class="n">transmission</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">&quot;transmission&quot;</span><span class="p">][()]</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="kc">None</span>
-            <span class="n">weighting</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;weighting&quot;</span><span class="p">,</span> <span class="s2">&quot;photon&quot;</span><span class="p">))</span>
+            <span class="n">wavelength</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">"wavelength_cm"</span><span class="p">][()]</span>
+            <span class="n">transmission</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">"transmission"</span><span class="p">][()]</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span> <span class="ow">or</span> <span class="kc">None</span>
+            <span class="n">weighting</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"weighting"</span><span class="p">,</span> <span class="s2">"photon"</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">transmission</span><span class="o">=</span><span class="n">transmission</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="n">weighting</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PhotometryFilter.to_table">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.to_table.html#trilobite.utils.phot_utils.PhotometryFilter.to_table">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_table</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Table</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Serialise the filter to an :class:`astropy.table.Table`.</span>
 
 <span class="sd">        Returns</span>
@@ -1067,15 +1067,15 @@
 <span class="sd">        astropy.table.Table</span>
 <span class="sd">            Two columns: ``wavelength_cm`` and ``transmission``. Filter</span>
 <span class="sd">            metadata (``name``, ``weighting``) are stored in ``table.meta``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">tbl</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span>
             <span class="p">{</span>
-                <span class="s2">&quot;wavelength_cm&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">,</span>
-                <span class="s2">&quot;transmission&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">,</span>
+                <span class="s2">"wavelength_cm"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">,</span>
+                <span class="s2">"transmission"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">,</span>
             <span class="p">}</span>
         <span class="p">)</span>
-        <span class="n">tbl</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-        <span class="n">tbl</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">&quot;weighting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span>
+        <span class="n">tbl</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+        <span class="n">tbl</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s2">"weighting"</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weighting</span>
         <span class="k">return</span> <span class="n">tbl</span></div>
 
 
@@ -1087,8 +1087,8 @@
         <span class="n">table</span><span class="p">:</span> <span class="n">Table</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">weighting</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PhotometryFilter&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"PhotometryFilter"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Reconstruct a :class:`PhotometryFilter` from an :class:`astropy.table.Table`.</span>
 
 <span class="sd">        Parameters</span>
@@ -1105,12 +1105,12 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        PhotometryFilter</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">resolved_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
-        <span class="n">resolved_weighting</span> <span class="o">=</span> <span class="n">weighting</span> <span class="k">if</span> <span class="n">weighting</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;weighting&quot;</span><span class="p">,</span> <span class="s2">&quot;photon&quot;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">resolved_name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span> <span class="ow">or</span> <span class="kc">None</span>
+        <span class="n">resolved_weighting</span> <span class="o">=</span> <span class="n">weighting</span> <span class="k">if</span> <span class="n">weighting</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">table</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"weighting"</span><span class="p">,</span> <span class="s2">"photon"</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
-            <span class="n">wavelength</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">]),</span>
-            <span class="n">transmission</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;transmission&quot;</span><span class="p">]),</span>
+            <span class="n">wavelength</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">"wavelength_cm"</span><span class="p">]),</span>
+            <span class="n">transmission</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">"transmission"</span><span class="p">]),</span>
             <span class="n">name</span><span class="o">=</span><span class="n">resolved_name</span><span class="p">,</span>
             <span class="n">weighting</span><span class="o">=</span><span class="n">resolved_weighting</span><span class="p">,</span>
         <span class="p">)</span></div>
@@ -1119,14 +1119,14 @@
 <div class="viewcode-block" id="PhotometryFilter.to_array">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.PhotometryFilter.to_array.html#trilobite.utils.phot_utils.PhotometryFilter.to_array">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_array</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Serialise the filter to a 2-D NumPy array.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        ndarray, shape (2, N)</span>
 <span class="sd">            Row 0 is the wavelength grid in cm; row 1 is the transmission.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">_wavelength</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transmission</span><span class="p">])</span></div>
 
 
@@ -1137,9 +1137,9 @@
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">arr</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;PhotometryFilter&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"PhotometryFilter"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Reconstruct a :class:`PhotometryFilter` from a 2-D NumPy array.</span>
 
 <span class="sd">        Parameters</span>
@@ -1149,7 +1149,7 @@
 <span class="sd">        name : str, optional</span>
 <span class="sd">            Filter name.</span>
 <span class="sd">        weighting : str, optional</span>
-<span class="sd">            ``&quot;photon&quot;`` (default) or ``&quot;energy&quot;``.</span>
+<span class="sd">            ``"photon"`` (default) or ``"energy"``.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
@@ -1159,10 +1159,10 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If ``arr`` does not have shape ``(2, N)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;arr must have shape (2, N), got </span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"arr must have shape (2, N), got </span><span class="si">{</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">wavelength</span><span class="o">=</span><span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">transmission</span><span class="o">=</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="n">weighting</span><span class="p">)</span></div>
 </div>
 
@@ -1174,7 +1174,7 @@
 <div class="viewcode-block" id="FilterBundle">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.html#trilobite.utils.phot_utils.FilterBundle">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FilterBundle</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A collection of :class:`PhotometryFilter` objects optimised for batched convolution via matrix multiplication.</span>
 
 <span class="sd">    At construction time all individual filter grids are merged into a single</span>
@@ -1236,9 +1236,9 @@
 
 <span class="sd">        bundle = FilterBundle(</span>
 <span class="sd">            {</span>
-<span class="sd">                &quot;g&quot;: gauss_filter(4770, 600, &quot;g&quot;),</span>
-<span class="sd">                &quot;r&quot;: gauss_filter(6231, 600, &quot;r&quot;),</span>
-<span class="sd">                &quot;i&quot;: gauss_filter(7625, 600, &quot;i&quot;),</span>
+<span class="sd">                "g": gauss_filter(4770, 600, "g"),</span>
+<span class="sd">                "r": gauss_filter(6231, 600, "r"),</span>
+<span class="sd">                "i": gauss_filter(7625, 600, "i"),</span>
 <span class="sd">            }</span>
 <span class="sd">        )</span>
 <span class="sd">        nu = bundle.frequency_grid</span>
@@ -1248,11 +1248,11 @@
 <span class="sd">        F_bands = bundle.apply(</span>
 <span class="sd">            F_nu</span>
 <span class="sd">        )  # shape (3,)  doctest: +SKIP</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">filters</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;FilterBundle requires at least one filter.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"FilterBundle requires at least one filter."</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -1265,7 +1265,7 @@
     <span class="c1"># ------------------------------------------------------------------ #</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_build_common_grid_and_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rebuild the common frequency grid and weight matrix.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Rebuild the common frequency grid and weight matrix."""</span>
         <span class="c1"># Union of all individual filter frequency grids, ascending order</span>
         <span class="n">all_freqs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">f</span><span class="o">.</span><span class="n">frequency</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_list</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_frequency_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">all_freqs</span><span class="p">))</span>
@@ -1280,7 +1280,7 @@
             <span class="k">if</span> <span class="ow">not</span> <span class="n">mask</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
                 <span class="k">continue</span>
 
-            <span class="c1"># Sort filter&#39;s frequency to ascending for np.interp</span>
+            <span class="c1"># Sort filter's frequency to ascending for np.interp</span>
             <span class="n">filt_nu</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">frequency</span>
             <span class="n">filt_weights</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">weights</span>
             <span class="n">sort_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">filt_nu</span><span class="p">)</span>
@@ -1308,37 +1308,37 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">filters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Dictionary mapping filter name → :class:`PhotometryFilter`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Dictionary mapping filter name → :class:`PhotometryFilter`."""</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">filter_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ordered list of filter names.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Ordered list of filter names."""</span>
         <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">frequency_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Common frequency grid in Hz (ascending order).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Common frequency grid in Hz (ascending order)."""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency_grid</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">wavelength_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Common wavelength grid in cm (descending, = c/frequency_grid).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Common wavelength grid in cm (descending, = c/frequency_grid)."""</span>
         <span class="k">return</span> <span class="n">const</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_frequency_grid</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">weight_matrix</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Precomputed weight matrix, shape ``(N_filters, N_common)``.</span>
 
 <span class="sd">        Row ``i`` contains the normalised weights for ``filter_names[i]``</span>
 <span class="sd">        interpolated onto the common frequency grid.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_matrix</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">n_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Number of filters in the bundle.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Number of filters in the bundle."""</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">)</span>
 
     <span class="c1"># ====================================================================== #</span>
@@ -1349,8 +1349,8 @@
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">names_str</span> <span class="o">=</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&#39;&quot;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="p">)</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;FilterBundle([</span><span class="si">{</span><span class="n">names_str</span><span class="si">}</span><span class="s2">], N_common=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frequency_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="n">names_str</span> <span class="o">=</span> <span class="s2">", "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">'"</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="p">)</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"FilterBundle([</span><span class="si">{</span><span class="n">names_str</span><span class="si">}</span><span class="s2">], N_common=</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_frequency_grid</span><span class="p">)</span><span class="si">}</span><span class="s2">)"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__repr__</span><span class="p">()</span>
@@ -1365,7 +1365,7 @@
         <span class="k">return</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convolve an SED through all filters (shorthand for :meth:`convolve_nu`).</span>
 
 <span class="sd">        Parameters</span>
@@ -1380,7 +1380,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            Shape ``(N_filters,)`` or ``(N_t, N_filters)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convolve_nu</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">)</span>
 
     <span class="c1"># ====================================================================== #</span>
@@ -1390,7 +1390,7 @@
 <div class="viewcode-block" id="FilterBundle.apply">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.apply.html#trilobite.utils.phot_utils.FilterBundle.apply">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Apply all filter weights to an SED on the common frequency grid.</span>
 
 <span class="sd">        This is the **hot-loop method** for MCMC: it assumes ``F_nu`` is</span>
@@ -1413,13 +1413,13 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If the last dimension of ``F_nu`` does not match the common grid.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">F_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">F_nu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;F_nu last dimension (</span><span class="si">{</span><span class="n">F_nu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) must match the common grid size &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_weight_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">). &quot;</span>
-                <span class="s2">&quot;Use convolve_nu() for SEDs on arbitrary grids.&quot;</span>
+                <span class="sa">f</span><span class="s2">"F_nu last dimension (</span><span class="si">{</span><span class="n">F_nu</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">) must match the common grid size "</span>
+                <span class="sa">f</span><span class="s2">"(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_weight_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">). "</span>
+                <span class="s2">"Use convolve_nu() for SEDs on arbitrary grids."</span>
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">F_nu</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">_weight_matrix</span><span class="o">.</span><span class="n">T</span></div>
 
@@ -1427,7 +1427,7 @@
 <div class="viewcode-block" id="FilterBundle.convolve_nu">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.convolve_nu.html#trilobite.utils.phot_utils.FilterBundle.convolve_nu">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">convolve_nu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convolve an SED on an arbitrary frequency grid through all filters.</span>
 
 <span class="sd">        Interpolates ``F_nu`` onto the common grid then calls :meth:`apply`.</span>
@@ -1444,7 +1444,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            Shape ``(N_filters,)`` or ``(N_t, N_filters)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">F_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
@@ -1468,7 +1468,7 @@
 <div class="viewcode-block" id="FilterBundle.convolve_lambda">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.convolve_lambda.html#trilobite.utils.phot_utils.FilterBundle.convolve_lambda">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">convolve_lambda</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wavelength</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">F_lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convolve an SED defined in wavelength space (F_lambda) through all filters.</span>
 
 <span class="sd">        Converts ``F_lambda`` → ``F_nu`` then delegates to :meth:`convolve_nu`.</span>
@@ -1485,7 +1485,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        ndarray</span>
 <span class="sd">            Shape ``(N_filters,)`` or ``(N_t, N_filters)``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">F_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_lambda</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">F_nu</span> <span class="o">=</span> <span class="p">(</span><span class="n">wavelength</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">const</span><span class="o">.</span><span class="n">c</span><span class="o">.</span><span class="n">cgs</span><span class="o">.</span><span class="n">value</span><span class="p">)</span> <span class="o">*</span> <span class="n">F_lambda</span>
@@ -1500,7 +1500,7 @@
 <div class="viewcode-block" id="FilterBundle.add_filter">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.add_filter.html#trilobite.utils.phot_utils.FilterBundle.add_filter">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">add_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">filt</span><span class="p">:</span> <span class="n">PhotometryFilter</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Add a filter and rebuild the common grid and weight matrix.</span>
 
 <span class="sd">        Parameters</span>
@@ -1514,9 +1514,9 @@
 <span class="sd">        ------</span>
 <span class="sd">        KeyError</span>
 <span class="sd">            If a filter with the same name already exists.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;A filter named &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; already exists. Remove it first.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"A filter named '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' already exists. Remove it first."</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">filt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_filter_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">filt</span><span class="p">)</span>
@@ -1526,7 +1526,7 @@
 <div class="viewcode-block" id="FilterBundle.remove_filter">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.remove_filter.html#trilobite.utils.phot_utils.FilterBundle.remove_filter">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">remove_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Remove a filter and rebuild the common grid and weight matrix.</span>
 
 <span class="sd">        Parameters</span>
@@ -1545,11 +1545,11 @@
 <span class="sd">            If no filter with that name exists.</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If removing the filter would leave the bundle empty.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No filter named &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; in the bundle.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No filter named '</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">' in the bundle."</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot remove the last filter from a FilterBundle.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Cannot remove the last filter from a FilterBundle."</span><span class="p">)</span>
         <span class="n">filt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
@@ -1566,13 +1566,13 @@
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.plot.html#trilobite.utils.phot_utils.FilterBundle.plot">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">plot</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">fig</span><span class="p">:</span> <span class="s2">&quot;Optional[matplotlib.figure.Figure]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">axes</span><span class="p">:</span> <span class="s2">&quot;Optional[matplotlib.axes.Axes]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">wavelength_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;AA&quot;</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">:</span> <span class="s2">"Optional[matplotlib.figure.Figure]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">axes</span><span class="p">:</span> <span class="s2">"Optional[matplotlib.axes.Axes]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">wavelength_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"AA"</span><span class="p">,</span>
         <span class="n">legend</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Plot all filter transmission curves on a single set of axes.</span>
 
 <span class="sd">        Each filter is drawn in a distinct colour sampled from the default</span>
@@ -1583,7 +1583,7 @@
 <span class="sd">        fig : matplotlib.figure.Figure, optional</span>
 <span class="sd">        axes : matplotlib.axes.Axes, optional</span>
 <span class="sd">        wavelength_unit : str, optional</span>
-<span class="sd">            Astropy unit string for the x-axis (default ``&quot;AA&quot;``).</span>
+<span class="sd">            Astropy unit string for the x-axis (default ``"AA"``).</span>
 <span class="sd">        legend : bool, optional</span>
 <span class="sd">            Whether to add a legend (default ``True``).</span>
 <span class="sd">        **kwargs</span>
@@ -1594,7 +1594,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        fig : matplotlib.figure.Figure</span>
 <span class="sd">        axes : matplotlib.axes.Axes</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.plot_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_default_cmap</span><span class="p">,</span> <span class="n">resolve_fig_axes</span><span class="p">,</span> <span class="n">set_plot_style</span>
 
         <span class="n">set_plot_style</span><span class="p">()</span>
@@ -1613,8 +1613,8 @@
                 <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
             <span class="p">)</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Wavelength [</span><span class="si">{</span><span class="n">wavelength_unit</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Transmission&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wavelength [</span><span class="si">{</span><span class="n">wavelength_unit</span><span class="si">}</span><span class="s2">]"</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Transmission"</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">legend</span><span class="p">:</span>
@@ -1630,22 +1630,22 @@
 <div class="viewcode-block" id="FilterBundle.to_dict">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.to_dict.html#trilobite.utils.phot_utils.FilterBundle.to_dict">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Serialise the bundle to a plain Python dictionary.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            ``{&quot;filters&quot;: {name: filter_dict, ...}}``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;filters&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">filt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span></div>
+<span class="sd">            ``{"filters": {name: filter_dict, ...}}``.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s2">"filters"</span><span class="p">:</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">filt</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="o">.</span><span class="n">items</span><span class="p">()}}</span></div>
 
 
 <div class="viewcode-block" id="FilterBundle.from_dict">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.from_dict.html#trilobite.utils.phot_utils.FilterBundle.from_dict">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;FilterBundle&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dict</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"FilterBundle"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Reconstruct a :class:`FilterBundle` from a dictionary.</span>
 
 <span class="sd">        Parameters</span>
@@ -1656,30 +1656,30 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        FilterBundle</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="n">PhotometryFilter</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">&quot;filters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">({</span><span class="n">name</span><span class="p">:</span> <span class="n">PhotometryFilter</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">fd</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">fd</span> <span class="ow">in</span> <span class="n">d</span><span class="p">[</span><span class="s2">"filters"</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()})</span></div>
 
 
 <div class="viewcode-block" id="FilterBundle.to_json">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.to_json.html#trilobite.utils.phot_utils.FilterBundle.to_json">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Write the bundle to a JSON file.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        path : str or Path</span>
 <span class="sd">            Output file path.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(),</span> <span class="n">fh</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="FilterBundle.from_json">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.from_json.html#trilobite.utils.phot_utils.FilterBundle.from_json">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;FilterBundle&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_json</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">"FilterBundle"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load a :class:`FilterBundle` from a JSON file.</span>
 
 <span class="sd">        Parameters</span>
@@ -1690,7 +1690,7 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        FilterBundle</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
             <span class="n">d</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fh</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">d</span><span class="p">)</span></div>
@@ -1699,7 +1699,7 @@
 <div class="viewcode-block" id="FilterBundle.to_hdf5">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.to_hdf5.html#trilobite.utils.phot_utils.FilterBundle.to_hdf5">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_hdf5</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Write the bundle to an HDF5 file.</span>
 
 <span class="sd">        Each filter is stored as a separate HDF5 group. The original filter</span>
@@ -1709,22 +1709,22 @@
 <span class="sd">        ----------</span>
 <span class="sd">        path : str or Path</span>
 <span class="sd">            Output HDF5 file path.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-            <span class="n">fh</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;filter_names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="n">fh</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"filter_names"</span><span class="p">]</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_filter_names</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">filt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_filters</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">grp</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-                <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">filt</span><span class="o">.</span><span class="n">wavelength</span><span class="p">)</span>
-                <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">&quot;transmission&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">filt</span><span class="o">.</span><span class="n">transmission</span><span class="p">)</span>
-                <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">name</span>
-                <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;weighting&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">weighting</span></div>
+                <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"wavelength_cm"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">filt</span><span class="o">.</span><span class="n">wavelength</span><span class="p">)</span>
+                <span class="n">grp</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="s2">"transmission"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">filt</span><span class="o">.</span><span class="n">transmission</span><span class="p">)</span>
+                <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">name</span>
+                <span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"weighting"</span><span class="p">]</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">weighting</span></div>
 
 
 <div class="viewcode-block" id="FilterBundle.from_hdf5">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.FilterBundle.from_hdf5.html#trilobite.utils.phot_utils.FilterBundle.from_hdf5">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_hdf5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">&quot;FilterBundle&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_hdf5</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s2">"FilterBundle"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Load a :class:`FilterBundle` from an HDF5 file.</span>
 
 <span class="sd">        Parameters</span>
@@ -1735,19 +1735,19 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        FilterBundle</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">filters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
-            <span class="k">if</span> <span class="s2">&quot;filter_names&quot;</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
-                <span class="n">names</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">&quot;filter_names&quot;</span><span class="p">]))</span>
+        <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s2">"filter_names"</span> <span class="ow">in</span> <span class="n">fh</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s2">"filter_names"</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fh</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
                 <span class="n">grp</span> <span class="o">=</span> <span class="n">fh</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
-                <span class="n">wavelength</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">&quot;wavelength_cm&quot;</span><span class="p">][()]</span>
-                <span class="n">transmission</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">&quot;transmission&quot;</span><span class="p">][()]</span>
-                <span class="n">filt_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span> <span class="ow">or</span> <span class="kc">None</span>
-                <span class="n">weighting</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;weighting&quot;</span><span class="p">,</span> <span class="s2">&quot;photon&quot;</span><span class="p">))</span>
+                <span class="n">wavelength</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">"wavelength_cm"</span><span class="p">][()]</span>
+                <span class="n">transmission</span> <span class="o">=</span> <span class="n">grp</span><span class="p">[</span><span class="s2">"transmission"</span><span class="p">][()]</span>
+                <span class="n">filt_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span> <span class="ow">or</span> <span class="kc">None</span>
+                <span class="n">weighting</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">attrs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"weighting"</span><span class="p">,</span> <span class="s2">"photon"</span><span class="p">))</span>
                 <span class="n">filters</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">PhotometryFilter</span><span class="p">(</span>
                     <span class="n">wavelength</span><span class="o">=</span><span class="n">wavelength</span><span class="p">,</span>
                     <span class="n">transmission</span><span class="o">=</span><span class="n">transmission</span><span class="p">,</span>
@@ -1767,7 +1767,7 @@
 <div class="viewcode-block" id="flux_to_ab_mag">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.flux_to_ab_mag.html#trilobite.utils.phot_utils.flux_to_ab_mag">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">flux_to_ab_mag</span><span class="p">(</span><span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Convert flux density to AB magnitude.</span>
 
 <span class="sd">    The AB system is defined such that a constant spectrum with</span>
@@ -1800,9 +1800,9 @@
 <span class="sd">        0.0</span>
 <span class="sd">        flux_to_ab_mag(0.0)</span>
 <span class="sd">        inf</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">F_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">mag</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">F_nu</span> <span class="o">/</span> <span class="n">_AB_ZERO_POINT_CGS</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mag</span></div>
 
@@ -1811,7 +1811,7 @@
 <div class="viewcode-block" id="ab_mag_to_flux">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.ab_mag_to_flux.html#trilobite.utils.phot_utils.ab_mag_to_flux">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">ab_mag_to_flux</span><span class="p">(</span><span class="n">mag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convert AB magnitude to flux density.</span>
 
 <span class="sd">    Parameters</span>
@@ -1830,7 +1830,7 @@
 
 <span class="sd">        ab_mag_to_flux(0.0)</span>
 <span class="sd">        3.631e-20</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_AB_ZERO_POINT_CGS</span> <span class="o">*</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span></div>
 
 
@@ -1838,7 +1838,7 @@
 <div class="viewcode-block" id="flux_lambda_to_st_mag">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.flux_lambda_to_st_mag.html#trilobite.utils.phot_utils.flux_lambda_to_st_mag">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">flux_lambda_to_st_mag</span><span class="p">(</span><span class="n">F_lambda</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Convert F_lambda flux density to ST magnitude.</span>
 
 <span class="sd">    The ST system is defined by ``m_ST = -2.5 log10(F_lambda) - 21.1``</span>
@@ -1862,9 +1862,9 @@
 <span class="sd">        m_{rm ST} = -2.5 log_{10}(F_lambda) - 21.1</span>
 
 <span class="sd">    where ``F_lambda`` is in erg/s/cm²/Å.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">F_lambda</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F_lambda</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">mag</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">F_lambda</span><span class="p">)</span> <span class="o">-</span> <span class="n">_ST_ZERO_POINT_OFFSET</span>
     <span class="k">return</span> <span class="n">mag</span></div>
 
@@ -1873,7 +1873,7 @@
 <div class="viewcode-block" id="st_mag_to_flux_lambda">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.st_mag_to_flux_lambda.html#trilobite.utils.phot_utils.st_mag_to_flux_lambda">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">st_mag_to_flux_lambda</span><span class="p">(</span><span class="n">mag</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Convert ST magnitude to F_lambda flux density.</span>
 
 <span class="sd">    Parameters</span>
@@ -1885,7 +1885,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray</span>
 <span class="sd">        Flux density in erg/s/cm²/Å. Same shape as input.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">10.0</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.4</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">+</span> <span class="n">_ST_ZERO_POINT_OFFSET</span><span class="p">))</span></div>
 
 
@@ -1897,7 +1897,7 @@
     <span class="n">nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">F_nu</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Compute AB magnitude(s) from filter convolution of an SED.</span>
 
 <span class="sd">    Convolves ``F_nu`` through ``filt`` then converts the resulting</span>
@@ -1921,7 +1921,7 @@
 <span class="sd">        - :class:`PhotometryFilter` + 2-D → ``(N_t,)``</span>
 <span class="sd">        - :class:`FilterBundle` + 1-D → ``(N_filters,)``</span>
 <span class="sd">        - :class:`FilterBundle` + 2-D → ``(N_t, N_filters)``</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">F_band</span> <span class="o">=</span> <span class="n">filt</span><span class="o">.</span><span class="n">convolve_nu</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">flux_to_ab_mag</span><span class="p">(</span><span class="n">F_band</span><span class="p">)</span></div>
 
@@ -1937,10 +1937,10 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">load_filter_from_file</span><span class="p">(</span>
     <span class="n">file_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
     <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">,</span>
-    <span class="n">wavelength_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;AA&quot;</span><span class="p">,</span>
+    <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">,</span>
+    <span class="n">wavelength_unit</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"AA"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Load a photometric filter from a two-column ASCII file.</span>
 
 <span class="sd">    Parameters</span>
@@ -1951,14 +1951,14 @@
 <span class="sd">    name : str, optional</span>
 <span class="sd">        Filter name. Defaults to the file stem if not provided.</span>
 <span class="sd">    weighting : str, optional</span>
-<span class="sd">        ``&quot;photon&quot;`` (default) or ``&quot;energy&quot;``.</span>
+<span class="sd">        ``"photon"`` (default) or ``"energy"``.</span>
 <span class="sd">    wavelength_unit : str, optional</span>
-<span class="sd">        Astropy unit string for the wavelength column (default ``&quot;AA&quot;``).</span>
+<span class="sd">        Astropy unit string for the wavelength column (default ``"AA"``).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    PhotometryFilter</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">file_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
     <span class="n">wavelength</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">wavelength_unit</span><span class="p">)</span>
@@ -1971,8 +1971,8 @@
 
 <div class="viewcode-block" id="load_filter_from_speclite">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.load_filter_from_speclite.html#trilobite.utils.phot_utils.load_filter_from_speclite">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">load_filter_from_speclite</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_filter_from_speclite</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Load a photometric filter from the ``speclite`` filter registry.</span>
 
 <span class="sd">    Requires the optional ``speclite`` package::</span>
@@ -1982,11 +1982,11 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    name : str</span>
-<span class="sd">        Filter name in speclite notation, e.g. ``&quot;sdss-r&quot;``, ``&quot;ztf-r&quot;``,</span>
-<span class="sd">        ``&quot;lsst2016-r&quot;``. Call :func:`list_speclite_filters` to enumerate</span>
+<span class="sd">        Filter name in speclite notation, e.g. ``"sdss-r"``, ``"ztf-r"``,</span>
+<span class="sd">        ``"lsst2016-r"``. Call :func:`list_speclite_filters` to enumerate</span>
 <span class="sd">        available filters.</span>
 <span class="sd">    weighting : str, optional</span>
-<span class="sd">        ``&quot;photon&quot;`` (default) or ``&quot;energy&quot;``.</span>
+<span class="sd">        ``"photon"`` (default) or ``"energy"``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1996,12 +1996,12 @@
 <span class="sd">    ------</span>
 <span class="sd">    ImportError</span>
 <span class="sd">        If ``speclite`` is not installed.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">speclite.filters</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sf</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-            <span class="s2">&quot;speclite is required to load filters by name. Install it with: pip install trilobite[optical]&quot;</span>
+            <span class="s2">"speclite is required to load filters by name. Install it with: pip install trilobite[optical]"</span>
         <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
 
     <span class="n">filt</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">load_filter</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -2015,8 +2015,8 @@
 
 <div class="viewcode-block" id="load_filter_from_name">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.load_filter_from_name.html#trilobite.utils.phot_utils.load_filter_from_name">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">load_filter_from_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">load_filter_from_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Load a photometric filter by name from the ``speclite`` registry.</span>
 
 <span class="sd">    This is an alias for :func:`load_filter_from_speclite` and exists for</span>
@@ -2025,14 +2025,14 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    name : str</span>
-<span class="sd">        Filter name (e.g. ``&quot;sdss-r&quot;``).</span>
+<span class="sd">        Filter name (e.g. ``"sdss-r"``).</span>
 <span class="sd">    weighting : str, optional</span>
-<span class="sd">        ``&quot;photon&quot;`` (default) or ``&quot;energy&quot;``.</span>
+<span class="sd">        ``"photon"`` (default) or ``"energy"``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    PhotometryFilter</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">load_filter_from_speclite</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="n">weighting</span><span class="p">)</span></div>
 
 
@@ -2040,14 +2040,14 @@
 <div class="viewcode-block" id="list_speclite_filters">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.list_speclite_filters.html#trilobite.utils.phot_utils.list_speclite_filters">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">list_speclite_filters</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    List filter names available in the ``speclite`` registry.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    group : str, optional</span>
 <span class="sd">        If provided, only filters whose name starts with ``group`` are</span>
-<span class="sd">        returned (e.g. ``&quot;sdss&quot;`` to list all SDSS filters).</span>
+<span class="sd">        returned (e.g. ``"sdss"`` to list all SDSS filters).</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -2058,17 +2058,17 @@
 <span class="sd">    ------</span>
 <span class="sd">    ImportError</span>
 <span class="sd">        If ``speclite`` is not installed.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">speclite.filters</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sf</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">&quot;speclite is required. Install it with: pip install trilobite[optical]&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+        <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span><span class="s2">"speclite is required. Install it with: pip install trilobite[optical]"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
 
     <span class="c1"># speclite &gt;=0.17 exposes filter_names(); older builds may not.</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">sf</span><span class="o">.</span><span class="n">filter_names</span><span class="p">())</span>
     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-        <span class="c1"># Fallback: speclite stores built-in data files; we can&#39;t enumerate</span>
+        <span class="c1"># Fallback: speclite stores built-in data files; we can't enumerate</span>
         <span class="c1"># them portably without knowing the version, so return an empty list.</span>
         <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -2082,11 +2082,11 @@
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.phot_utils.load_filter_from_svo.html#trilobite.utils.phot_utils.load_filter_from_svo">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_filter_from_svo</span><span class="p">(</span>
     <span class="n">filter_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">,</span>
+    <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">,</span>
     <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PhotometryFilter</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Load a photometric filter from the SVO Filter Profile Service.</span>
 
 <span class="sd">    Fetches the transmission curve for *filter_id* from the Spanish Virtual</span>
@@ -2102,13 +2102,13 @@
 <span class="sd">    ----------</span>
 <span class="sd">    filter_id : str</span>
 <span class="sd">        SVO filter identifier in ``facility/instrument.band`` notation, e.g.</span>
-<span class="sd">        ``&quot;Kepler/Kepler.K&quot;``, ``&quot;2MASS/2MASS.H&quot;``, ``&quot;Generic/Johnson.R&quot;``.</span>
+<span class="sd">        ``"Kepler/Kepler.K"``, ``"2MASS/2MASS.H"``, ``"Generic/Johnson.R"``.</span>
 <span class="sd">        Browse available IDs at</span>
 <span class="sd">        https://svo2.cab.inta-csic.es/svo/theory/fps/.</span>
 <span class="sd">    weighting : str, optional</span>
-<span class="sd">        ``&quot;photon&quot;`` (default, appropriate for CCDs) or ``&quot;energy&quot;``.</span>
+<span class="sd">        ``"photon"`` (default, appropriate for CCDs) or ``"energy"``.</span>
 <span class="sd">    cache : bool, optional</span>
-<span class="sd">        Whether to use astroquery&#39;s on-disk cache (default ``True``).</span>
+<span class="sd">        Whether to use astroquery's on-disk cache (default ``True``).</span>
 <span class="sd">    timeout : int, optional</span>
 <span class="sd">        HTTP request timeout in seconds (default 60).</span>
 
@@ -2122,23 +2122,23 @@
 <span class="sd">        If ``astroquery`` is not installed.</span>
 <span class="sd">    ValueError</span>
 <span class="sd">        If *filter_id* is not found in the SVO catalogue.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">astroquery.svo_fps</span><span class="w"> </span><span class="kn">import</span> <span class="n">SvoFps</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-            <span class="s2">&quot;astroquery is required to load SVO filters. Install it with: pip install trilobite[optical]&quot;</span>
+            <span class="s2">"astroquery is required to load SVO filters. Install it with: pip install trilobite[optical]"</span>
         <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
 
     <span class="n">table</span> <span class="o">=</span> <span class="n">SvoFps</span><span class="o">.</span><span class="n">get_transmission_data</span><span class="p">(</span><span class="n">filter_id</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">table</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Filter &#39;</span><span class="si">{</span><span class="n">filter_id</span><span class="si">}</span><span class="s2">&#39; was not found in the SVO Filter Profile Service. &quot;</span>
-            <span class="s2">&quot;Check the filter ID at https://svo2.cab.inta-csic.es/svo/theory/fps/.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Filter '</span><span class="si">{</span><span class="n">filter_id</span><span class="si">}</span><span class="s2">' was not found in the SVO Filter Profile Service. "</span>
+            <span class="s2">"Check the filter ID at https://svo2.cab.inta-csic.es/svo/theory/fps/."</span>
         <span class="p">)</span>
 
-    <span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;Wavelength&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Angstrom</span>
-    <span class="n">transmission</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">&quot;Transmission&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="n">wavelength</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">"Wavelength"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Angstrom</span>
+    <span class="n">transmission</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="s2">"Transmission"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">transmission</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">transmission</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">transmission</span> <span class="o">&gt;=</span> <span class="mf">0.0</span><span class="p">),</span> <span class="n">transmission</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">PhotometryFilter</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">transmission</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">filter_id</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="n">weighting</span><span class="p">)</span></div>
 
@@ -2152,7 +2152,7 @@
     <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Table</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    List filters available in the SVO Filter Profile Service for a given facility.</span>
 
 <span class="sd">    Returns the full metadata table so callers can inspect effective</span>
@@ -2166,13 +2166,13 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    facility : str</span>
-<span class="sd">        Telescope or observatory name as registered in SVO, e.g. ``&quot;Kepler&quot;``,</span>
-<span class="sd">        ``&quot;HST&quot;``, ``&quot;SDSS&quot;``, ``&quot;2MASS&quot;``.</span>
+<span class="sd">        Telescope or observatory name as registered in SVO, e.g. ``"Kepler"``,</span>
+<span class="sd">        ``"HST"``, ``"SDSS"``, ``"2MASS"``.</span>
 <span class="sd">    instrument : str, optional</span>
-<span class="sd">        Restrict results to a specific instrument (e.g. ``&quot;WFC3_IR&quot;``).</span>
+<span class="sd">        Restrict results to a specific instrument (e.g. ``"WFC3_IR"``).</span>
 <span class="sd">        If ``None`` (default) all instruments for the facility are returned.</span>
 <span class="sd">    cache : bool, optional</span>
-<span class="sd">        Whether to use astroquery&#39;s on-disk cache (default ``True``).</span>
+<span class="sd">        Whether to use astroquery's on-disk cache (default ``True``).</span>
 <span class="sd">    timeout : int, optional</span>
 <span class="sd">        HTTP request timeout in seconds (default 60).</span>
 
@@ -2181,27 +2181,27 @@
 <span class="sd">    astropy.table.Table</span>
 <span class="sd">        Table with columns including ``filterID``, ``WavelengthEff``,</span>
 <span class="sd">        ``WavelengthMin``, ``WavelengthMax``, ``FWHM``, ``ZeroPoint``,</span>
-<span class="sd">        ``MagSys``, and others. Pass ``table[&quot;filterID&quot;]`` to</span>
+<span class="sd">        ``MagSys``, and others. Pass ``table["filterID"]`` to</span>
 <span class="sd">        :func:`load_filter_from_svo` to fetch individual transmission curves.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
 <span class="sd">    ImportError</span>
 <span class="sd">        If ``astroquery`` is not installed.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">astroquery.svo_fps</span><span class="w"> </span><span class="kn">import</span> <span class="n">SvoFps</span>
     <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-            <span class="s2">&quot;astroquery is required to query the SVO. Install it with: pip install trilobite[optical]&quot;</span>
+            <span class="s2">"astroquery is required to query the SVO. Install it with: pip install trilobite[optical]"</span>
         <span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
 
     <span class="n">table</span> <span class="o">=</span> <span class="n">SvoFps</span><span class="o">.</span><span class="n">get_filter_list</span><span class="p">(</span><span class="n">facility</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">instrument</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># The SVO server does not reliably filter by instrument via URL params,</span>
-        <span class="c1"># so we filter client-side on the filterID column (&quot;facility/instrument.band&quot;).</span>
-        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;/</span><span class="si">{</span><span class="n">instrument</span><span class="si">}</span><span class="s2">.&quot;</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">table</span><span class="p">[</span><span class="s2">&quot;filterID&quot;</span><span class="p">]])</span>
+        <span class="c1"># so we filter client-side on the filterID column ("facility/instrument.band").</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="sa">f</span><span class="s2">"/</span><span class="si">{</span><span class="n">instrument</span><span class="si">}</span><span class="s2">."</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span> <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">table</span><span class="p">[</span><span class="s2">"filterID"</span><span class="p">]])</span>
         <span class="n">table</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">table</span></div>
@@ -2213,15 +2213,15 @@
 <span class="k">def</span><span class="w"> </span><span class="nf">load_filters_from_svo</span><span class="p">(</span>
     <span class="n">facility</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">instrument</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;photon&quot;</span><span class="p">,</span>
+    <span class="n">weighting</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"photon"</span><span class="p">,</span>
     <span class="n">cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Load all SVO filters for a facility as a dict ready for :class:`FilterBundle`.</span>
 
 <span class="sd">    Convenience wrapper around :func:`list_svo_filters` and</span>
-<span class="sd">    :func:`load_filter_from_svo`. Each filter&#39;s transmission curve is fetched</span>
+<span class="sd">    :func:`load_filter_from_svo`. Each filter's transmission curve is fetched</span>
 <span class="sd">    in a separate astroquery call; results are cached locally after the first</span>
 <span class="sd">    request.</span>
 
@@ -2232,14 +2232,14 @@
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    facility : str</span>
-<span class="sd">        Telescope or observatory name (e.g. ``&quot;Kepler&quot;``, ``&quot;2MASS&quot;``).</span>
+<span class="sd">        Telescope or observatory name (e.g. ``"Kepler"``, ``"2MASS"``).</span>
 <span class="sd">    instrument : str, optional</span>
 <span class="sd">        Restrict to a specific instrument. If ``None`` all instruments are</span>
 <span class="sd">        included.</span>
 <span class="sd">    weighting : str, optional</span>
-<span class="sd">        ``&quot;photon&quot;`` (default) or ``&quot;energy&quot;``.</span>
+<span class="sd">        ``"photon"`` (default) or ``"energy"``.</span>
 <span class="sd">    cache : bool, optional</span>
-<span class="sd">        Whether to use astroquery&#39;s on-disk cache (default ``True``).</span>
+<span class="sd">        Whether to use astroquery's on-disk cache (default ``True``).</span>
 <span class="sd">    timeout : int, optional</span>
 <span class="sd">        HTTP request timeout in seconds per request (default 60).</span>
 
@@ -2256,24 +2256,24 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; filters = load_filters_from_svo(&quot;Kepler&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; filters = load_filters_from_svo("Kepler")</span>
 <span class="sd">    &gt;&gt;&gt; from trilobite.utils.phot_utils import (</span>
 <span class="sd">    ...     FilterBundle,</span>
 <span class="sd">    ... )</span>
 <span class="sd">    &gt;&gt;&gt; bundle = FilterBundle(filters)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.utils.log</span><span class="w"> </span><span class="kn">import</span> <span class="n">trilobite_logger</span>
 
     <span class="n">index</span> <span class="o">=</span> <span class="n">list_svo_filters</span><span class="p">(</span><span class="n">facility</span><span class="p">,</span> <span class="n">instrument</span><span class="o">=</span><span class="n">instrument</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-    <span class="n">filter_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="s2">&quot;filterID&quot;</span><span class="p">])</span>
-    <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Loading </span><span class="si">%d</span><span class="s2"> SVO filters for facility &#39;</span><span class="si">%s</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_ids</span><span class="p">),</span> <span class="n">facility</span><span class="p">)</span>
+    <span class="n">filter_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">index</span><span class="p">[</span><span class="s2">"filterID"</span><span class="p">])</span>
+    <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Loading </span><span class="si">%d</span><span class="s2"> SVO filters for facility '</span><span class="si">%s</span><span class="s2">'"</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">filter_ids</span><span class="p">),</span> <span class="n">facility</span><span class="p">)</span>
 
     <span class="n">result</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">fid</span> <span class="ow">in</span> <span class="n">filter_ids</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span><span class="p">[</span><span class="n">fid</span><span class="p">]</span> <span class="o">=</span> <span class="n">load_filter_from_svo</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">weighting</span><span class="o">=</span><span class="n">weighting</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="n">cache</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;SVO filter &#39;</span><span class="si">%s</span><span class="s2">&#39; has no transmission data; skipping.&quot;</span><span class="p">,</span> <span class="n">fid</span><span class="p">)</span>
+            <span class="n">trilobite_logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"SVO filter '</span><span class="si">%s</span><span class="s2">' has no transmission data; skipping."</span><span class="p">,</span> <span class="n">fid</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 </pre></div>
@@ -2305,8 +2305,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2340,7 +2340,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

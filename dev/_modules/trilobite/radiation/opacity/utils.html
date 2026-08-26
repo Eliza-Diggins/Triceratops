@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/opacity/utils';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.opacity.utils</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Opacity resolution and utility functions.</span>
 
 <span class="sd">This module provides helper functions for constructing and working with</span>
@@ -452,7 +452,7 @@
 <span class="sd">mechanism for resolving string identifiers into concrete</span>
 <span class="sd">:class:`~trilobite.radiation.opacity.base.OpacityLaw` instances, along</span>
 <span class="sd">with convenience wrappers for common opacity models.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -474,17 +474,17 @@
 
 <span class="n">_OPACITY_REGISTRY</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">type</span><span class="p">[</span><span class="n">OpacityLaw</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># ---- Rosseland mean: analytic grey approximations -------------------</span>
-    <span class="s2">&quot;electron_scattering&quot;</span><span class="p">:</span> <span class="n">ElectronScatteringOpacity</span><span class="p">,</span>
-    <span class="s2">&quot;kramers_ff&quot;</span><span class="p">:</span> <span class="n">KramersFFOpacity</span><span class="p">,</span>
-    <span class="s2">&quot;kramers_bf&quot;</span><span class="p">:</span> <span class="n">KramersBFOpacity</span><span class="p">,</span>
-    <span class="s2">&quot;kramers&quot;</span><span class="p">:</span> <span class="n">KramersOpacity</span><span class="p">,</span>
-    <span class="s2">&quot;kramers_ff_es&quot;</span><span class="p">:</span> <span class="n">KramersFFESOpacity</span><span class="p">,</span>
-    <span class="s2">&quot;kramers_bf_es&quot;</span><span class="p">:</span> <span class="n">KramersBFESOpacity</span><span class="p">,</span>
-    <span class="s2">&quot;kramers_es&quot;</span><span class="p">:</span> <span class="n">KramersESOpacity</span><span class="p">,</span>
+    <span class="s2">"electron_scattering"</span><span class="p">:</span> <span class="n">ElectronScatteringOpacity</span><span class="p">,</span>
+    <span class="s2">"kramers_ff"</span><span class="p">:</span> <span class="n">KramersFFOpacity</span><span class="p">,</span>
+    <span class="s2">"kramers_bf"</span><span class="p">:</span> <span class="n">KramersBFOpacity</span><span class="p">,</span>
+    <span class="s2">"kramers"</span><span class="p">:</span> <span class="n">KramersOpacity</span><span class="p">,</span>
+    <span class="s2">"kramers_ff_es"</span><span class="p">:</span> <span class="n">KramersFFESOpacity</span><span class="p">,</span>
+    <span class="s2">"kramers_bf_es"</span><span class="p">:</span> <span class="n">KramersBFESOpacity</span><span class="p">,</span>
+    <span class="s2">"kramers_es"</span><span class="p">:</span> <span class="n">KramersESOpacity</span><span class="p">,</span>
     <span class="c1"># ---- Rosseland mean: numerically exact OPAL table -------------------</span>
-    <span class="s2">&quot;opal&quot;</span><span class="p">:</span> <span class="n">OPALOpacity</span><span class="p">,</span>
+    <span class="s2">"opal"</span><span class="p">:</span> <span class="n">OPALOpacity</span><span class="p">,</span>
     <span class="c1"># ---- TOPS table (Rosseland or Planck; pass mean_type kwarg) ---------</span>
-    <span class="s2">&quot;tops&quot;</span><span class="p">:</span> <span class="n">TOPSOpacity</span><span class="p">,</span>
+    <span class="s2">"tops"</span><span class="p">:</span> <span class="n">TOPSOpacity</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="c1"># ================================================================ #</span>
@@ -502,7 +502,7 @@
     <span class="n">force_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OpacityLaw</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Resolve an opacity specification into an :class:`~trilobite.radiation.opacity.base.OpacityLaw` instance.</span>
 
 <span class="sd">    This function provides a unified entry point for constructing opacity</span>
@@ -516,7 +516,7 @@
 
 <span class="sd">        - :class:`str`: The name of a specific opacity type (see table below). In this case, the</span>
 <span class="sd">          corresponding class is looked up in the internal registry and initialized. Additional</span>
-<span class="sd">          keyword arguments are forwarded to the class&#39;s</span>
+<span class="sd">          keyword arguments are forwarded to the class's</span>
 <span class="sd">          :meth:`~trilobite.radiation.opacity.base.OpacityLaw.load_default` method.</span>
 <span class="sd">        - :class:`float`/:class:`int`/:class:`~astropy.units.Quantity`: Generate a constant opacity</span>
 <span class="sd">          law with the specified</span>
@@ -529,12 +529,12 @@
 
 <span class="sd">    force_type : str, optional</span>
 <span class="sd">        If specified, the function will require that the resolved opacity match the specified type.</span>
-<span class="sd">        Options are ``&quot;rosseland&quot;`` or ``&quot;planck&quot;``. If the resolved opacity&#39;s ``mean_type`` does not match, a</span>
+<span class="sd">        Options are ``"rosseland"`` or ``"planck"``. If the resolved opacity's ``mean_type`` does not match, a</span>
 <span class="sd">        ValueError is raised.</span>
 
 <span class="sd">    **kwargs</span>
 <span class="sd">        If the *opacity* argument is a string key, any additional keyword arguments are passed to the</span>
-<span class="sd">        corresponding class&#39;s :meth:`~trilobite.radiation.opacity.base.OpacityLaw.load_default` method</span>
+<span class="sd">        corresponding class's :meth:`~trilobite.radiation.opacity.base.OpacityLaw.load_default` method</span>
 <span class="sd">        for initialization. This allows for flexible configuration of opacity instances based on user input.</span>
 
 
@@ -556,16 +556,16 @@
 <span class="sd">    Registered string names:</span>
 
 <span class="sd">    =========================  ======================================================</span>
-<span class="sd">    ``&quot;electron_scattering&quot;``  Constant Thomson opacity (default: 0.34 :math:`\mathrm{cm^2\,g^{-1}}`)</span>
-<span class="sd">    ``&quot;kramers_ff&quot;``           Free-free Kramers :math:`\kappa \propto \rho T^{-3.5}`</span>
-<span class="sd">    ``&quot;kramers_bf&quot;``           Bound-free Kramers</span>
-<span class="sd">    ``&quot;kramers&quot;``              Combined free-free + bound-free Kramers</span>
-<span class="sd">    ``&quot;kramers_ff_es&quot;``        Free-free Kramers + electron scattering</span>
-<span class="sd">    ``&quot;kramers_bf_es&quot;``        Bound-free Kramers + electron scattering</span>
-<span class="sd">    ``&quot;kramers_es&quot;``           Combined Kramers + electron scattering</span>
-<span class="sd">    ``&quot;opal&quot;``                 OPAL Rosseland mean (default: X = 0.70, Z = 0.02)</span>
-<span class="sd">    ``&quot;tops&quot;``                 TOPS solar table; pass ``mean_type=&quot;rosseland&quot;`` (default)</span>
-<span class="sd">                               or ``mean_type=&quot;planck&quot;``</span>
+<span class="sd">    ``"electron_scattering"``  Constant Thomson opacity (default: 0.34 :math:`\mathrm{cm^2\,g^{-1}}`)</span>
+<span class="sd">    ``"kramers_ff"``           Free-free Kramers :math:`\kappa \propto \rho T^{-3.5}`</span>
+<span class="sd">    ``"kramers_bf"``           Bound-free Kramers</span>
+<span class="sd">    ``"kramers"``              Combined free-free + bound-free Kramers</span>
+<span class="sd">    ``"kramers_ff_es"``        Free-free Kramers + electron scattering</span>
+<span class="sd">    ``"kramers_bf_es"``        Bound-free Kramers + electron scattering</span>
+<span class="sd">    ``"kramers_es"``           Combined Kramers + electron scattering</span>
+<span class="sd">    ``"opal"``                 OPAL Rosseland mean (default: X = 0.70, Z = 0.02)</span>
+<span class="sd">    ``"tops"``                 TOPS solar table; pass ``mean_type="rosseland"`` (default)</span>
+<span class="sd">                               or ``mean_type="planck"``</span>
 <span class="sd">    =========================  ======================================================</span>
 
 <span class="sd">    Examples</span>
@@ -576,49 +576,49 @@
 <span class="sd">            get_opacity,</span>
 <span class="sd">        )</span>
 
-<span class="sd">        op = get_opacity(&quot;kramers_es&quot;, kappa_es=0.20)</span>
-<span class="sd">        op = get_opacity(&quot;opal&quot;, out_of_bounds=&quot;nan&quot;)</span>
+<span class="sd">        op = get_opacity("kramers_es", kappa_es=0.20)</span>
+<span class="sd">        op = get_opacity("opal", out_of_bounds="nan")</span>
 <span class="sd">        op = get_opacity(0.34)</span>
 <span class="sd">        op = get_opacity(0.34 * u.cm**2 / u.g)</span>
 <span class="sd">        op = get_opacity(</span>
-<span class="sd">            &quot;kramers_es&quot;, force_type=&quot;rosseland&quot;</span>
+<span class="sd">            "kramers_es", force_type="rosseland"</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="n">OpacityLaw</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">opacity</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">result</span> <span class="o">=</span> <span class="n">ConstantGreyOpacity</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">opacity</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">),</span> <span class="n">mean_type</span><span class="o">=</span><span class="n">force_type</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">u</span><span class="o">.</span><span class="n">UnitConversionError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot convert opacity units </span><span class="si">{</span><span class="n">opacity</span><span class="o">.</span><span class="n">unit</span><span class="si">!r}</span><span class="s2"> to cm² g⁻¹.&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Cannot convert opacity units </span><span class="si">{</span><span class="n">opacity</span><span class="o">.</span><span class="n">unit</span><span class="si">!r}</span><span class="s2"> to cm² g⁻¹."</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exc</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">ConstantGreyOpacity</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">opacity</span><span class="p">),</span> <span class="n">mean_type</span><span class="o">=</span><span class="n">force_type</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">opacity</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">opacity</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_OPACITY_REGISTRY</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown opacity </span><span class="si">{</span><span class="n">opacity</span><span class="si">!r}</span><span class="s2">.  Available: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_OPACITY_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown opacity </span><span class="si">{</span><span class="n">opacity</span><span class="si">!r}</span><span class="s2">.  Available: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">_OPACITY_REGISTRY</span><span class="p">)</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">_OPACITY_REGISTRY</span><span class="p">[</span><span class="n">opacity</span><span class="p">]</span><span class="o">.</span><span class="n">load_default</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;opacity must be a str, float, Quantity, or OpacityLaw, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"opacity must be a str, float, Quantity, or OpacityLaw, got </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">opacity</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">force_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">mean_type</span> <span class="o">!=</span> <span class="n">force_type</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Resolved opacity has mean_type=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">mean_type</span><span class="si">!r}</span><span class="s2">, but force_type=</span><span class="si">{</span><span class="n">force_type</span><span class="si">!r}</span><span class="s2"> was requested.&quot;</span>
+            <span class="sa">f</span><span class="s2">"Resolved opacity has mean_type=</span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">mean_type</span><span class="si">!r}</span><span class="s2">, but force_type=</span><span class="si">{</span><span class="n">force_type</span><span class="si">!r}</span><span class="s2"> was requested."</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">result</span></div>
 
 
 
 <div class="viewcode-block" id="load_opal_opacity">
-<a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.utils.load_opal_opacity.html#trilobite.radiation.opacity.load_opal_opacity">[docs]</a>
+<a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.load_opal_opacity.html#trilobite.radiation.opacity.load_opal_opacity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_opal_opacity</span><span class="p">(</span>
     <span class="n">index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">*</span><span class="p">,</span>
     <span class="n">X</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">Z</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">table_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Load an OPAL Rosseland mean opacity for a specified composition.</span>
 
 <span class="sd">    The OPAL opacities provided by default in Trilobite are those from</span>
@@ -651,13 +651,13 @@
 <span class="sd">    table_path : str, ~pathlib.Path, optional</span>
 <span class="sd">        Path to an alternative HDF5 OPAL table. Defaults to the bundled</span>
 <span class="sd">        :footcite:t:`2005ASPC..336...25A` dataset.</span>
-<span class="sd">    out_of_bounds : {&quot;raise&quot;, &quot;clamp&quot;, &quot;nan&quot;}, optional</span>
+<span class="sd">    out_of_bounds : {"raise", "clamp", "nan"}, optional</span>
 <span class="sd">        The behavior of the resulting opacity object when evaluated at points outside the tabulated domain.</span>
 <span class="sd">        The options are:</span>
 
-<span class="sd">        - ``&quot;raise&quot;`` (default): Raise a ValueError if evaluated outside the table domain.</span>
-<span class="sd">        - ``&quot;clamp&quot;``: Return the opacity at the nearest valid point within the table.</span>
-<span class="sd">        - ``&quot;nan&quot;``: Return NaN for points outside the table domain.</span>
+<span class="sd">        - ``"raise"`` (default): Raise a ValueError if evaluated outside the table domain.</span>
+<span class="sd">        - ``"clamp"``: Return the opacity at the nearest valid point within the table.</span>
+<span class="sd">        - ``"nan"``: Return NaN for points outside the table domain.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -690,7 +690,7 @@
 
 <span class="sd">        # By composition</span>
 <span class="sd">        op = load_opal_opacity(X=0.74, Z=0.016)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">OPALOpacity</span><span class="o">.</span><span class="n">load_default</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span> <span class="n">X</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">Z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span> <span class="n">table_path</span><span class="o">=</span><span class="n">table_path</span><span class="p">,</span> <span class="n">out_of_bounds</span><span class="o">=</span><span class="n">out_of_bounds</span><span class="p">)</span></div>
 
 
@@ -699,26 +699,26 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.utils.load_tops_opacity.html#trilobite.radiation.opacity.load_tops_opacity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">load_tops_opacity</span><span class="p">(</span>
     <span class="o">*</span><span class="p">,</span>
-    <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;rosseland&quot;</span><span class="p">,</span>
+    <span class="n">mean_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"rosseland"</span><span class="p">,</span>
     <span class="n">table_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;raise&quot;</span><span class="p">,</span>
+    <span class="n">out_of_bounds</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"raise"</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Load a TOPS opacity from the bundled solar-composition table.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Load a TOPS opacity from the bundled solar-composition table.</span>
 
 <span class="sd">    Convenience wrapper around</span>
 <span class="sd">    :meth:`~trilobite.radiation.opacity.grey_opacity.tops.TOPSOpacity.load_default`.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    mean_type : {&#39;rosseland&#39;, &#39;planck&#39;}, optional</span>
-<span class="sd">        Which mean opacity to use.  Default ``&#39;rosseland&#39;``.</span>
+<span class="sd">    mean_type : {'rosseland', 'planck'}, optional</span>
+<span class="sd">        Which mean opacity to use.  Default ``'rosseland'``.</span>
 <span class="sd">    table_path : str or ~pathlib.Path, optional</span>
 <span class="sd">        Path to an alternative TOPS text file parsed by</span>
 <span class="sd">        :func:`~trilobite.radiation.opacity.opacity_io.read_tops`.</span>
 <span class="sd">        If ``None``, the bundled ``tops_solar.dat`` is used.</span>
-<span class="sd">    out_of_bounds : {&#39;raise&#39;, &#39;clamp&#39;, &#39;nan&#39;}, optional</span>
+<span class="sd">    out_of_bounds : {'raise', 'clamp', 'nan'}, optional</span>
 <span class="sd">        Behaviour when evaluated outside the tabulated domain.</span>
-<span class="sd">        Default ``&#39;raise&#39;``.</span>
+<span class="sd">        Default ``'raise'``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -737,13 +737,13 @@
 <span class="sd">        op = load_tops_opacity()</span>
 
 <span class="sd">        # Planck mean</span>
-<span class="sd">        op = load_tops_opacity(mean_type=&quot;planck&quot;)</span>
+<span class="sd">        op = load_tops_opacity(mean_type="planck")</span>
 
 <span class="sd">        # Custom file</span>
 <span class="sd">        op = load_tops_opacity(</span>
-<span class="sd">            table_path=&quot;my_tops_output.txt&quot;</span>
+<span class="sd">            table_path="my_tops_output.txt"</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">TOPSOpacity</span><span class="o">.</span><span class="n">load_default</span><span class="p">(</span><span class="n">mean_type</span><span class="o">=</span><span class="n">mean_type</span><span class="p">,</span> <span class="n">table_path</span><span class="o">=</span><span class="n">table_path</span><span class="p">,</span> <span class="n">out_of_bounds</span><span class="o">=</span><span class="n">out_of_bounds</span><span class="p">)</span></div>
 
 </pre></div>
@@ -775,8 +775,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -810,7 +810,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

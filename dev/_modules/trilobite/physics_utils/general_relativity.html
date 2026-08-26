@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/physics_utils/general_relativity';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.physics_utils.general_relativity</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">General relativistic utility functions for Trilobite models.</span>
 
 <span class="sd">Provides radius, spin, angular-momentum, and orbital precession quantities</span>
@@ -486,7 +486,7 @@
 <span class="sd">See Also</span>
 <span class="sd">--------</span>
 <span class="sd">:mod:`trilobite.physics_utils.constants` : CGS constants consumed internally.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
 
@@ -503,7 +503,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_compute_r_g</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln r_g` in CGS units.</span>
 
 <span class="sd">    The gravitational radius (half the Schwarzschild radius) is</span>
@@ -523,12 +523,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln r_g` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_log_G_cgs</span> <span class="o">+</span> <span class="n">log_M</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">_log_c_cgs</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_compute_r_schwarzschild</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln r_s` in CGS units.</span>
 
 <span class="sd">    The Schwarzschild radius is twice the gravitational radius:</span>
@@ -548,12 +548,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln r_s` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">_log_compute_r_g</span><span class="p">(</span><span class="n">log_M</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_compute_isco</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">spin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">prograde</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln r_{\rm ISCO}` in CGS units (Bardeen et al. 1972).</span>
 
 <span class="sd">    .. math::</span>
@@ -575,7 +575,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln r_{\rm ISCO}` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_r_g</span> <span class="o">=</span> <span class="n">_log_compute_r_g</span><span class="p">(</span><span class="n">log_M</span><span class="p">)</span>
 
     <span class="n">Z1</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">spin</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">spin</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">spin</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">))</span>
@@ -590,7 +590,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_compute_kerr_horizon_radius</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">spin</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln r_+` in CGS units.</span>
 
 <span class="sd">    The outer Kerr event horizon is</span>
@@ -615,13 +615,13 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln r_+` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_r_g</span> <span class="o">=</span> <span class="n">_log_compute_r_g</span><span class="p">(</span><span class="n">log_M</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">log_r_g</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">spin</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_compute_kerr_spin</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_J</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln|a_\star|` from mass and angular momentum.</span>
 
 <span class="sd">    .. math::</span>
@@ -641,12 +641,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln|a_\star|` (dimensionless).</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_log_c_cgs</span> <span class="o">+</span> <span class="n">log_J</span> <span class="o">-</span> <span class="n">_log_G_cgs</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_M</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_compute_kerr_angular_momentum</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">spin</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln J` in CGS units from mass and dimensionless spin.</span>
 
 <span class="sd">    .. math::</span>
@@ -667,12 +667,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln J` [:math:`\ln(\text{g cm}^2\,\text{s}^{-1})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">spin</span><span class="p">))</span> <span class="o">+</span> <span class="n">_log_G_cgs</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_M</span> <span class="o">-</span> <span class="n">_log_c_cgs</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_precession_per_orbit</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_r</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln \Delta\phi` — periapsis precession per orbit in CGS.</span>
 
 <span class="sd">    For a nearly circular orbit in the Schwarzschild metric the apsidal</span>
@@ -695,7 +695,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln\Delta\phi` [:math:`\ln(\text{rad per orbit})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_r_g</span> <span class="o">=</span> <span class="n">_log_compute_r_g</span><span class="p">(</span><span class="n">log_M</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">6.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_r_g</span> <span class="o">-</span> <span class="n">log_r</span>
 
@@ -707,8 +707,8 @@
 
 <div class="viewcode-block" id="compute_gravitational_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_gravitational_radius.html#trilobite.physics_utils.general_relativity.compute_gravitational_radius">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_gravitational_radius</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_gravitational_radius</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the gravitational radius :math:`r_g = GM/c^2`.</span>
 
 <span class="sd">    Parameters</span>
@@ -731,7 +731,7 @@
 <span class="sd">        )</span>
 
 <span class="sd">        compute_gravitational_radius(10 * u.Msun)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_compute_r_g</span><span class="p">(</span><span class="n">log_M</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span></div>
 
@@ -739,8 +739,8 @@
 
 <div class="viewcode-block" id="compute_schwarzschild_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_schwarzschild_radius.html#trilobite.physics_utils.general_relativity.compute_schwarzschild_radius">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">compute_schwarzschild_radius</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_schwarzschild_radius</span><span class="p">(</span><span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the Schwarzschild radius :math:`r_s = 2GM/c^2`.</span>
 
 <span class="sd">    Parameters</span>
@@ -763,7 +763,7 @@
 <span class="sd">        )</span>
 
 <span class="sd">        compute_schwarzschild_radius(10 * u.Msun)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_compute_r_schwarzschild</span><span class="p">(</span><span class="n">log_M</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span></div>
 
@@ -772,12 +772,12 @@
 <div class="viewcode-block" id="compute_ISCO">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_ISCO.html#trilobite.physics_utils.general_relativity.compute_ISCO">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_ISCO</span><span class="p">(</span>
-    <span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="n">spin</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">J</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">J</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingArrayLike"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">prograde</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the innermost stable circular orbit (ISCO) radius.</span>
 
 <span class="sd">    Uses the Kerr metric formula (Bardeen, Press &amp; Teukolsky 1972):</span>
@@ -847,9 +847,9 @@
 <span class="sd">        compute_ISCO(</span>
 <span class="sd">            10 * u.Msun, spin=0.9, prograde=False</span>
 <span class="sd">        )  # retrograde</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">spin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">J</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Provide either &#39;spin&#39; or &#39;J&#39;, not both.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Provide either 'spin' or 'J', not both."</span><span class="p">)</span>
 
     <span class="n">M_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">M_cgs</span><span class="p">)</span>
@@ -863,7 +863,7 @@
 
     <span class="n">spin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">spin</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">&lt;=</span> <span class="n">spin</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spin must be in [-1, 1], got </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Spin must be in [-1, 1], got </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_compute_isco</span><span class="p">(</span><span class="n">log_M</span><span class="p">,</span> <span class="n">spin</span><span class="p">,</span> <span class="n">prograde</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span></div>
 
@@ -872,11 +872,11 @@
 <div class="viewcode-block" id="compute_kerr_horizon_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_kerr_horizon_radius.html#trilobite.physics_utils.general_relativity.compute_kerr_horizon_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_kerr_horizon_radius</span><span class="p">(</span>
-    <span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="n">spin</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">J</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">J</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="s2">"_UnitBearingArrayLike"</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the outer Kerr event horizon radius :math:`r_+ = r_g(1 + \sqrt{1-a_\star^2})`.</span>
 
 <span class="sd">    Parameters</span>
@@ -911,9 +911,9 @@
 <span class="sd">        )</span>
 
 <span class="sd">        compute_kerr_horizon_radius(10 * u.Msun, spin=0.9)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">spin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">J</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Provide either &#39;spin&#39; or &#39;J&#39;, not both.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Provide either 'spin' or 'J', not both."</span><span class="p">)</span>
 
     <span class="n">M_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">M_cgs</span><span class="p">)</span>
@@ -927,7 +927,7 @@
 
     <span class="n">spin</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">spin</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">&lt;=</span> <span class="n">spin</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spin must be in [-1, 1], got </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Spin must be in [-1, 1], got </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_compute_kerr_horizon_radius</span><span class="p">(</span><span class="n">log_M</span><span class="p">,</span> <span class="n">spin</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span></div>
 
@@ -936,10 +936,10 @@
 <div class="viewcode-block" id="compute_kerr_spin">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_kerr_spin.html#trilobite.physics_utils.general_relativity.compute_kerr_spin">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_kerr_spin</span><span class="p">(</span>
-    <span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">J</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">J</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the dimensionless Kerr spin parameter :math:`a_\star = cJ/(GM^2)`.</span>
 
 <span class="sd">    Parameters</span>
@@ -967,7 +967,7 @@
 <span class="sd">        compute_kerr_spin(</span>
 <span class="sd">            M, J=0.9 * const.G * M**2 / const.c</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_J</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">J</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_compute_kerr_spin</span><span class="p">(</span><span class="n">log_M</span><span class="p">,</span> <span class="n">log_J</span><span class="p">)))</span></div>
@@ -977,10 +977,10 @@
 <div class="viewcode-block" id="compute_kerr_angular_momentum">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_kerr_angular_momentum.html#trilobite.physics_utils.general_relativity.compute_kerr_angular_momentum">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_kerr_angular_momentum</span><span class="p">(</span>
-    <span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="n">spin</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the black hole angular momentum :math:`J = a_\star GM^2/c`.</span>
 
 <span class="sd">    Parameters</span>
@@ -1012,11 +1012,11 @@
 <span class="sd">        compute_kerr_angular_momentum(</span>
 <span class="sd">            10 * u.Msun, spin=0.9</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="n">spin</span> <span class="o">==</span> <span class="mf">0.0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;spin=0 corresponds to J=0; angular momentum is exactly zero.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"spin=0 corresponds to J=0; angular momentum is exactly zero."</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">&lt;=</span> <span class="n">spin</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spin must be in [-1, 1], got </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Spin must be in [-1, 1], got </span><span class="si">{</span><span class="n">spin</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
 
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_compute_kerr_angular_momentum</span><span class="p">(</span><span class="n">log_M</span><span class="p">,</span> <span class="n">spin</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span></div>
@@ -1026,10 +1026,10 @@
 <div class="viewcode-block" id="compute_precession_per_orbit">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.general_relativity.compute_precession_per_orbit.html#trilobite.physics_utils.general_relativity.compute_precession_per_orbit">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_precession_per_orbit</span><span class="p">(</span>
-    <span class="n">mass</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">r</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">mass</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">r</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the Schwarzschild periapsis precession per orbit.</span>
 
 <span class="sd">    For a nearly circular orbit at radius :math:`r` around a mass :math:`M`:</span>
@@ -1062,7 +1062,7 @@
 <span class="sd">        compute_precession_per_orbit(</span>
 <span class="sd">            1.4 * u.Msun, 1e6 * u.cm</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mass</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_precession_per_orbit</span><span class="p">(</span><span class="n">log_M</span><span class="p">,</span> <span class="n">log_r</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">rad</span></div>
@@ -1096,8 +1096,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1131,7 +1131,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

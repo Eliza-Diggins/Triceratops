@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/GRBs/band';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.GRBs.band</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Band function spectral model for gamma-ray burst prompt emission.</span>
 
 <span class="sd">The Band function :footcite:t:`1993ApJ...413..281B` is the</span>
@@ -457,7 +457,7 @@
 <span class="sd">References</span>
 <span class="sd">----------</span>
 <span class="sd">.. footbibliography::</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
@@ -468,16 +468,16 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.models.core.parameters</span><span class="w"> </span><span class="kn">import</span> <span class="n">ModelParameter</span><span class="p">,</span> <span class="n">ModelVariable</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;BandFunctionModel&quot;</span><span class="p">,</span>
+    <span class="s2">"BandFunctionModel"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">_BandOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;BandOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;photon_flux&quot;</span><span class="p">])</span>
+<span class="n">_BandOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"BandOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"photon_flux"</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="BandFunctionModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.GRBs.band.BandFunctionModel.html#trilobite.models.GRBs.band.BandFunctionModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BandFunctionModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Empirical Band function model for GRB prompt-emission spectra.</span>
 
 <span class="sd">    The Band function :footcite:t:`1993ApJ...413..281B` is a</span>
@@ -504,7 +504,7 @@
 
 <span class="sd">    Continuity of :math:`N(E)` at :math:`E = E_c` is guaranteed</span>
 <span class="sd">    analytically.  The function reduces to a pure power law with an</span>
-<span class="sd">    exponential cut-off (the &quot;Comptonized&quot; model) when</span>
+<span class="sd">    exponential cut-off (the "Comptonized" model) when</span>
 <span class="sd">    :math:`\beta \to -\infty`.</span>
 
 <span class="sd">    .. dropdown:: Parameters</span>
@@ -577,59 +577,59 @@
 <span class="sd">    :math:`100\ \rm keV` and acts purely as a reference normalisation</span>
 <span class="sd">    point; its value does not affect the spectral *shape*, only the</span>
 <span class="sd">    absolute normalisation of :math:`A`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Parameter and Variable Declarations             #</span>
     <span class="c1"># =============================================== #</span>
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;alpha&quot;</span><span class="p">,</span>
+            <span class="s2">"alpha"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Low-energy photon spectral index.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Low-energy photon spectral index."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\alpha&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\alpha"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;beta&quot;</span><span class="p">,</span>
+            <span class="s2">"beta"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=-</span><span class="mf">2.5</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;High-energy photon spectral index.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"High-energy photon spectral index."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;\beta&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"\beta"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">""</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;E_peak&quot;</span><span class="p">,</span>
+            <span class="s2">"E_peak"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mf">300.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Peak energy of the nu*F_nu (SED) spectrum.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Peak energy of the nu*F_nu (SED) spectrum."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;E_{\rm peak}&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"E_{\rm peak}"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"keV"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;E_piv&quot;</span><span class="p">,</span>
+            <span class="s2">"E_piv"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Pivot (reference normalisation) energy.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Pivot (reference normalisation) energy."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;E_{\rm piv}&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"E_{\rm piv}"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"keV"</span><span class="p">,</span>
         <span class="p">),</span>
         <span class="n">ModelParameter</span><span class="p">(</span>
-            <span class="s2">&quot;A&quot;</span><span class="p">,</span>
+            <span class="s2">"A"</span><span class="p">,</span>
             <span class="n">default</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Differential photon flux amplitude.&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Differential photon flux amplitude."</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;A&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;1/(cm**2 s keV)&quot;</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"A"</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"1/(cm**2 s keV)"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="s2">&quot;energy&quot;</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Photon energy at which the spectrum is evaluated.&quot;</span><span class="p">,</span>
-            <span class="n">base_units</span><span class="o">=</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;E&quot;</span><span class="p">,</span>
+            <span class="s2">"energy"</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Photon energy at which the spectrum is evaluated."</span><span class="p">,</span>
+            <span class="n">base_units</span><span class="o">=</span><span class="s2">"keV"</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"E"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
@@ -637,28 +637,28 @@
     <span class="c1"># Model Metadata Declarations                     #</span>
     <span class="c1"># =============================================== #</span>
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_BandOutputs</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of str: The names of the model&#39;s outputs.</span>
+<span class="w">    </span><span class="sd">"""tuple of str: The names of the model's outputs.</span>
 
 <span class="sd">    Each element of :attr:`OUTPUTS` is a string that defines the name of a single output of the model.</span>
-<span class="sd">    These names correspond to the keys in the dictionary returned by the model&#39;s evaluation method.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">photon_flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">&quot;1/(cm**2 s keV)&quot;</span><span class="p">))</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;tuple of :class:`astropy.units.Unit`: The units of the model&#39;s outputs.</span>
+<span class="sd">    These names correspond to the keys in the dictionary returned by the model's evaluation method.</span>
+<span class="sd">    """</span>
+    <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">photon_flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="s2">"1/(cm**2 s keV)"</span><span class="p">))</span>
+<span class="w">    </span><span class="sd">"""tuple of :class:`astropy.units.Unit`: The units of the model's outputs.</span>
 
 <span class="sd">    Each element of :attr:`UNITS` is an :class:`astropy.units.Unit` instance that defines the units of a single</span>
 <span class="sd">    output of the model. The order of the units in :attr:`UNITS` corresponds to the order of the output names</span>
 <span class="sd">    in :attr:`OUTPUTS`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Empirical Band function for GRB prompt-emission spectra.&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: A brief description of the model.&quot;&quot;&quot;</span>
-    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;Band et al. (1993)&quot;</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str: A reference for the model, e.g., a journal article or textbook.&quot;&quot;&quot;</span>
+<span class="sd">    """</span>
+    <span class="n">DESCRIPTION</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Empirical Band function for GRB prompt-emission spectra."</span>
+<span class="w">    </span><span class="sd">"""str: A brief description of the model."""</span>
+    <span class="n">REFERENCE</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Band et al. (1993)"</span>
+<span class="w">    </span><span class="sd">"""str: A reference for the model, e.g., a journal article or textbook."""</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Initialization Method                           #</span>
     <span class="c1"># =============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model."""</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
@@ -666,7 +666,7 @@
     <span class="c1"># Model-Level Bounds Checking                     #</span>
     <span class="c1"># =============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_check_model_bounds_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Enforce alpha &gt; beta and alpha &gt; -2.</span>
+<span class="w">        </span><span class="sd">"""Enforce alpha &gt; beta and alpha &gt; -2.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -679,46 +679,46 @@
 <span class="sd">        ------</span>
 <span class="sd">        ValueError</span>
 <span class="sd">            If ``alpha &lt;= beta`` or ``alpha &lt;= -2``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span>
-        <span class="n">beta</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">]</span>
+<span class="sd">        """</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">]</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta"</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&lt;=</span> <span class="n">beta</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;BandFunctionModel requires alpha &gt; beta to ensure E_c &gt; 0, but got alpha=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">, beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"BandFunctionModel requires alpha &gt; beta to ensure E_c &gt; 0, but got alpha=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">, beta=</span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">alpha</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mi">2</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;BandFunctionModel requires alpha &gt; -2 so that the exponential &quot;</span>
-                <span class="sa">f</span><span class="s2">&quot;cut-off has the correct sign, but got alpha=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">.&quot;</span>
+                <span class="sa">f</span><span class="s2">"BandFunctionModel requires alpha &gt; -2 so that the exponential "</span>
+                <span class="sa">f</span><span class="s2">"cut-off has the correct sign, but got alpha=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">."</span>
             <span class="p">)</span>
 
     <span class="c1"># =============================================== #</span>
     <span class="c1"># Core Model Evaluation Method                    #</span>
     <span class="c1"># =============================================== #</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Evaluate the Band function.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Evaluate the Band function.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        variables : dict of str to float or numpy.ndarray</span>
-<span class="sd">            Must contain ``&#39;energy&#39;`` in keV.</span>
+<span class="sd">            Must contain ``'energy'`` in keV.</span>
 <span class="sd">        parameters : dict of str to float or numpy.ndarray</span>
-<span class="sd">            Must contain ``&#39;alpha&#39;``, ``&#39;beta&#39;``, ``&#39;E_peak&#39;``,</span>
-<span class="sd">            ``&#39;E_piv&#39;``, and ``&#39;A&#39;`` in their declared base units.</span>
+<span class="sd">            Must contain ``'alpha'``, ``'beta'``, ``'E_peak'``,</span>
+<span class="sd">            ``'E_piv'``, and ``'A'`` in their declared base units.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        BandOutputs</span>
 <span class="sd">            Named tuple with field ``photon_flux`` in</span>
 <span class="sd">            :math:`rm ph,cm^{-2},s^{-1},keV^{-1}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;energy&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span>
-        <span class="n">beta</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;beta&quot;</span><span class="p">]</span>
-        <span class="n">E_peak</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;E_peak&quot;</span><span class="p">]</span>
-        <span class="n">E_piv</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;E_piv&quot;</span><span class="p">]</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
+<span class="sd">        """</span>
+        <span class="n">E</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"energy"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">]</span>
+        <span class="n">beta</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"beta"</span><span class="p">]</span>
+        <span class="n">E_peak</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"E_peak"</span><span class="p">]</span>
+        <span class="n">E_piv</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"E_piv"</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
 
         <span class="c1"># Break (transition) energy separating the two power-law regimes.</span>
         <span class="n">E_c</span> <span class="o">=</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">E_peak</span>
@@ -762,8 +762,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -797,7 +797,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

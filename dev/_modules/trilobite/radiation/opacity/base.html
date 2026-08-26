@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/opacity/base';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.opacity.base</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Abstract base class for Trilobite opacity laws.</span>
+<span></span><span class="sd">"""Abstract base class for Trilobite opacity laws.</span>
 
 <span class="sd">This module provides the core base class for generic opacity laws in Trilobite:</span>
 <span class="sd">:class:`~trilobite.radiation.opacity.base.OpacityLaw`.  This defines the public unit-bearing</span>
@@ -452,7 +452,7 @@
 
 <span class="sd">C-backed subclasses delegate the log-space methods to a Cython companion</span>
 <span class="sd">object that implements the same interface at C speed.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">ClassVar</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -473,7 +473,7 @@
 <div class="viewcode-block" id="OpacityLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.base.OpacityLaw.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">OpacityLaw</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Base class for opacity laws :math:`\kappa(\nu, \rho, T)`.</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Base class for opacity laws :math:`\kappa(\nu, \rho, T)`.</span>
 
 <span class="sd">    This class defines the interface for computing frequency-dependent</span>
 <span class="sd">    opacities as a function of frequency, density, and temperature.  It</span>
@@ -527,14 +527,14 @@
 <span class="sd">    ~trilobite.radiation.opacity.grey_opacity.base.GreyOpacityLaw : Subclass for frequency-averaged</span>
 <span class="sd">     (grey) opacity laws.</span>
 <span class="sd">    ~trilobite.radiation.opacity.opacity_base.C_OpacityBase : C-level companion class.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">IS_C_BACKED</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;bool: Whether this opacity law is backed by a Cython extension.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""bool: Whether this opacity law is backed by a Cython extension."""</span>
 
     <span class="n">mean_type</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;str or None: Frequency-averaging convention. ``&quot;rosseland&quot;`` or ``&quot;planck&quot;``</span>
-<span class="sd">    for grey subclasses; ``None`` for frequency-dependent laws.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""str or None: Frequency-averaging convention. ``"rosseland"`` or ``"planck"``</span>
+<span class="sd">    for grey subclasses; ``None`` for frequency-dependent laws."""</span>
 
     <span class="c1"># --------------------------------------------------------------------- #</span>
     <span class="c1"># Initialization and Cython backend support                             #</span>
@@ -543,19 +543,19 @@
 <div class="viewcode-block" id="OpacityLaw.__init__">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.OpacityLaw.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the opacity law.</span>
+<span class="w">        </span><span class="sd">"""Initialize the opacity law.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        **parameters</span>
 <span class="sd">            Model-specific parameters forwarded to the C backend when</span>
 <span class="sd">            :attr:`IS_C_BACKED` is ``True``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_C_object</span><span class="p">(</span><span class="o">**</span><span class="n">parameters</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IS_C_BACKED</span> <span class="k">else</span> <span class="kc">None</span></div>
 
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_initialize_C_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">parameters</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct the Cython backend object.</span>
+<span class="w">        </span><span class="sd">"""Construct the Cython backend object.</span>
 
 <span class="sd">        Must be overridden by subclasses that set :attr:`IS_C_BACKED = True`.</span>
 <span class="sd">        The returned object must expose ``log_opacity``, ``dlogkappa_dlogrho``,</span>
@@ -577,9 +577,9 @@
 <span class="sd">        NotImplementedError</span>
 <span class="sd">            If called on a subclass that declares ``IS_C_BACKED = True`` but</span>
 <span class="sd">            does not override this method.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> sets IS_C_BACKED=True but does not override _initialize_C_object().&quot;</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> sets IS_C_BACKED=True but does not override _initialize_C_object()."</span>
         <span class="p">)</span>
 
     <span class="c1"># ================================================================ #</span>
@@ -592,7 +592,7 @@
         <span class="n">log_T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
         <span class="n">log_rho</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\ln\kappa` (:math:`\mathrm{cm^2\,g^{-1}}`).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\ln\kappa` (:math:`\mathrm{cm^2\,g^{-1}}`).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -607,10 +607,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        float or ndarray</span>
 <span class="sd">            :math:`\ln\kappa` [:math:`\mathrm{cm^2\,g^{-1}}`].</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IS_C_BACKED</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">log_opacity</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _log_opacity().&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _log_opacity()."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlogrho</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -618,10 +618,10 @@
         <span class="n">log_T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
         <span class="n">log_rho</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\rho` (dimensionless).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln\rho` (dimensionless)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IS_C_BACKED</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogrho</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _dlogkappa_dlogrho().&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _dlogkappa_dlogrho()."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlogT</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -629,10 +629,10 @@
         <span class="n">log_T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
         <span class="n">log_rho</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln T` (dimensionless).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln T` (dimensionless)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IS_C_BACKED</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlogT</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _dlogkappa_dlogT().&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _dlogkappa_dlogT()."</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_dlogkappa_dlognu</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -640,10 +640,10 @@
         <span class="n">log_T</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
         <span class="n">log_rho</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\nu` (dimensionless).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln\nu` (dimensionless)."""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">IS_C_BACKED</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_c_object</span><span class="o">.</span><span class="n">dlogkappa_dlognu</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_T</span><span class="p">,</span> <span class="n">log_rho</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _dlogkappa_dlognu().&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must implement _dlogkappa_dlognu()."</span><span class="p">)</span>
 
     <span class="c1"># ================================================================ #</span>
     <span class="c1"># Public unit-bearing interface — (nu, rho, T)                     #</span>
@@ -653,11 +653,11 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.base.OpacityLaw.opacity.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw.opacity">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">opacity</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">rho</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">rho</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return opacity :math:`\kappa(\nu, \rho, T)`.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return opacity :math:`\kappa(\nu, \rho, T)`.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -688,12 +688,12 @@
 <span class="sd">                get_opacity,</span>
 <span class="sd">            )</span>
 
-<span class="sd">            op = get_opacity(&quot;kramers_ff&quot;)</span>
+<span class="sd">            op = get_opacity("kramers_ff")</span>
 <span class="sd">            nu = 1e14 * u.Hz</span>
 <span class="sd">            kappa = op.opacity(</span>
 <span class="sd">                nu, 1e-5 * u.g / u.cm**3, 1e7 * u.K</span>
 <span class="sd">            )</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span>
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
         <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
@@ -704,11 +704,11 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.base.OpacityLaw.dlogkappa_dlogrho.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw.dlogkappa_dlogrho">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dlogkappa_dlogrho</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">rho</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">rho</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\rho` (dimensionless).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln\rho` (dimensionless).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -738,13 +738,13 @@
 <span class="sd">                get_opacity,</span>
 <span class="sd">            )</span>
 
-<span class="sd">            op = get_opacity(&quot;kramers_ff&quot;)</span>
+<span class="sd">            op = get_opacity("kramers_ff")</span>
 <span class="sd">            nu = 1e14 * u.Hz</span>
 <span class="sd">            dlnk_dlnrho = op.dlogkappa_dlogrho(</span>
 <span class="sd">                nu, 1e-5 * u.g / u.cm**3, 1e7 * u.K</span>
 <span class="sd">            )</span>
 <span class="sd">            # Returns 1.0 for Kramers (kappa ~ rho^1)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span>
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
         <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
@@ -755,11 +755,11 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.base.OpacityLaw.dlogkappa_dlogT.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw.dlogkappa_dlogT">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dlogkappa_dlogT</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">rho</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">rho</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln T` (dimensionless).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln T` (dimensionless).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -789,13 +789,13 @@
 <span class="sd">                get_opacity,</span>
 <span class="sd">            )</span>
 
-<span class="sd">            op = get_opacity(&quot;kramers_ff&quot;)</span>
+<span class="sd">            op = get_opacity("kramers_ff")</span>
 <span class="sd">            nu = 1e14 * u.Hz</span>
 <span class="sd">            dlnk_dlnT = op.dlogkappa_dlogT(</span>
 <span class="sd">                nu, 1e-5 * u.g / u.cm**3, 1e7 * u.K</span>
 <span class="sd">            )</span>
 <span class="sd">            # Returns -3.5 for Kramers (kappa ~ T^-3.5)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span>
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
         <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
@@ -805,8 +805,8 @@
 <div class="viewcode-block" id="OpacityLaw.load_default">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.base.OpacityLaw.load_default.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw.load_default">[docs]</a>
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">load_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OpacityLaw&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Construct an instance with default settings.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">load_default</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"OpacityLaw"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Construct an instance with default settings.</span>
 
 <span class="sd">        The base implementation calls ``cls(**kwargs)`` directly, which is</span>
 <span class="sd">        appropriate for all analytic opacity laws whose parameters are passed</span>
@@ -833,7 +833,7 @@
 <span class="sd">            )</span>
 
 <span class="sd">            op = KramersESOpacity.load_default(kappa_es=0.20)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
@@ -841,11 +841,11 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.radiation.opacity.base.OpacityLaw.dlogkappa_dlognu.html#trilobite.radiation.opacity.grey_opacity.rosseland.models.OpacityLaw.dlogkappa_dlognu">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">dlogkappa_dlognu</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">rho</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">T</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">rho</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">T</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return :math:`\partial\ln\kappa/\partial\ln\nu` (dimensionless).</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""Return :math:`\partial\ln\kappa/\partial\ln\nu` (dimensionless).</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -876,13 +876,13 @@
 <span class="sd">                get_opacity,</span>
 <span class="sd">            )</span>
 
-<span class="sd">            op = get_opacity(&quot;kramers_ff&quot;)</span>
+<span class="sd">            op = get_opacity("kramers_ff")</span>
 <span class="sd">            nu = 1e14 * u.Hz</span>
 <span class="sd">            dlnk_dlnnu = op.dlogkappa_dlognu(</span>
 <span class="sd">                nu, 1e-5 * u.g / u.cm**3, 1e7 * u.K</span>
 <span class="sd">            )</span>
 <span class="sd">            # Returns 0.0 — Kramers is a grey opacity</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">))</span>
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">))</span>
         <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">))</span>
@@ -918,8 +918,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -953,7 +953,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

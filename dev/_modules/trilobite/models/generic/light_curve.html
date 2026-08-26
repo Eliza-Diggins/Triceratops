@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/generic/light_curve';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.generic.light_curve</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Phenomenological flare models for time-domain lightcurve analysis.</span>
 
 <span class="sd">This module provides lightweight, analytic models for asymmetric transient</span>
@@ -485,7 +485,7 @@
 <span class="sd">Care should be taken when fitting overlapping pulses, as parameter</span>
 <span class="sd">degeneracies between amplitude, rise scale, and background level</span>
 <span class="sd">can become significant.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
@@ -495,25 +495,25 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">..core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">ModelParameter</span><span class="p">,</span> <span class="n">ModelVariable</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;FRED&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GeneralizedFRED&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;GaussianPulse&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;LogNormalPulse&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;BrokenPowerLawTime&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;SmoothedBrokenPowerLawTime&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;ExponentialRisePowerLawDecay&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;NorrisPulse&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;WeibullPulse&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;LogisticPulse&quot;</span><span class="p">,</span>
+    <span class="s2">"FRED"</span><span class="p">,</span>
+    <span class="s2">"GeneralizedFRED"</span><span class="p">,</span>
+    <span class="s2">"GaussianPulse"</span><span class="p">,</span>
+    <span class="s2">"LogNormalPulse"</span><span class="p">,</span>
+    <span class="s2">"BrokenPowerLawTime"</span><span class="p">,</span>
+    <span class="s2">"SmoothedBrokenPowerLawTime"</span><span class="p">,</span>
+    <span class="s2">"ExponentialRisePowerLawDecay"</span><span class="p">,</span>
+    <span class="s2">"NorrisPulse"</span><span class="p">,</span>
+    <span class="s2">"WeibullPulse"</span><span class="p">,</span>
+    <span class="s2">"LogisticPulse"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">_FredOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;FREDOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux&quot;</span><span class="p">])</span>
+<span class="n">_FredOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"FREDOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux"</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="FRED">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.FRED.html#trilobite.models.generic.light_curve.FRED">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">FRED</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Fast Rise, Exponential Decay (FRED) lightcurve model.</span>
 
 <span class="sd">    This model describes a phenomenological flare profile commonly used</span>
@@ -623,17 +623,17 @@
 <span class="sd">        model = FRED()</span>
 
 <span class="sd">        t = np.linspace(-1, 10, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, label=&quot;Model&quot;, lw=2)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, label="Model", lw=2)</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;FRED Model Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("FRED Model Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -646,43 +646,43 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;t&quot;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"t"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Time.&quot;</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Time."</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$t$"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_r&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_d&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_r"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_d"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_FredOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Fast rise, exponential decay flare model with constant background.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Common phenomenological GRB pulse model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Fast rise, exponential decay flare model with constant background."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Common phenomenological GRB pulse model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">t0</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">]</span>
-        <span class="n">tau_r</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_r&quot;</span><span class="p">]</span>
-        <span class="n">tau_d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_d&quot;</span><span class="p">]</span>
-        <span class="n">C</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">]</span>
+        <span class="n">tau_r</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_r"</span><span class="p">]</span>
+        <span class="n">tau_d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_d"</span><span class="p">]</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">]</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
@@ -701,7 +701,7 @@
 <div class="viewcode-block" id="GeneralizedFRED">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.GeneralizedFRED.html#trilobite.models.generic.light_curve.GeneralizedFRED">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GeneralizedFRED</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Generalized Fast Rise, Exponential Decay (FRED) lightcurve model.</span>
 
 <span class="sd">    This model extends the classical FRED pulse profile by replacing the</span>
@@ -821,17 +821,17 @@
 <span class="sd">        model = GeneralizedFRED()</span>
 
 <span class="sd">        t = np.linspace(-1, 10, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Generalized FRED Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Generalized FRED Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -844,38 +844,38 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_r&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_d&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;n&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_r"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_d"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"n"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
-    <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;GenFREDOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux&quot;</span><span class="p">])</span>
+    <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"GenFREDOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux"</span><span class="p">])</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Generalized FRED with power-law rise and constant background.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Extended phenomenological GRB pulse model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Generalized FRED with power-law rise and constant background."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Extended phenomenological GRB pulse model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">t0</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">]</span>
-        <span class="n">tau_r</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_r&quot;</span><span class="p">]</span>
-        <span class="n">tau_d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_d&quot;</span><span class="p">]</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">]</span>
-        <span class="n">C</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">]</span>
+        <span class="n">tau_r</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_r"</span><span class="p">]</span>
+        <span class="n">tau_d</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_d"</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"n"</span><span class="p">]</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">]</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
@@ -891,13 +891,13 @@
 
 
 
-<span class="n">_PulseOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;PulseOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;flux&quot;</span><span class="p">])</span>
+<span class="n">_PulseOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"PulseOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"flux"</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="GaussianPulse">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.GaussianPulse.html#trilobite.models.generic.light_curve.GaussianPulse">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">GaussianPulse</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Symmetric Gaussian pulse model with constant background.</span>
 
 <span class="sd">    This model describes a symmetric transient pulse centered at</span>
@@ -1003,17 +1003,17 @@
 <span class="sd">        model = GaussianPulse()</span>
 
 <span class="sd">        t = np.linspace(-5, 5, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Gaussian Pulse Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Gaussian Pulse Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1022,34 +1022,34 @@
 <span class="sd">    :class:`FRED`</span>
 <span class="sd">    :class:`LogNormalPulse`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"sigma"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Symmetric Gaussian pulse.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Standard analytic Gaussian.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Symmetric Gaussian pulse."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Standard analytic Gaussian."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">t</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="n">sigma</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">C</span>
@@ -1060,7 +1060,7 @@
 <div class="viewcode-block" id="LogNormalPulse">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.LogNormalPulse.html#trilobite.models.generic.light_curve.LogNormalPulse">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LogNormalPulse</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Log-normal asymmetric pulse model with constant background.</span>
 
 <span class="sd">    This model describes an intrinsically asymmetric pulse</span>
@@ -1166,17 +1166,17 @@
 <span class="sd">        model = LogNormalPulse()</span>
 
 <span class="sd">        t = np.linspace(0.01, 10, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Log-Normal Pulse Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Log-Normal Pulse Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1185,36 +1185,36 @@
 <span class="sd">    :class:`FRED`</span>
 <span class="sd">    :class:`NorrisPulse`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;mu&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"mu"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"sigma"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Asymmetric log-normal pulse.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Common GRB pulse model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Asymmetric log-normal pulse."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Common GRB pulse model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;mu&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;sigma&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"mu"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"sigma"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1229,7 +1229,7 @@
 <div class="viewcode-block" id="BrokenPowerLawTime">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.BrokenPowerLawTime.html#trilobite.models.generic.light_curve.BrokenPowerLawTime">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BrokenPowerLawTime</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Sharp broken power-law temporal model with constant background.</span>
 
 <span class="sd">    This model describes a piecewise power-law transition at</span>
@@ -1324,17 +1324,17 @@
 <span class="sd">        model = BrokenPowerLawTime()</span>
 
 <span class="sd">        t = np.logspace(-1, 2, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.1 * flux * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.loglog(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.loglog(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Broken Power Law Time Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Broken Power Law Time Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1342,35 +1342,35 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`SmoothedBrokenPowerLawTime`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_b&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_b"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Sharp broken power-law in time.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Standard afterglow fitting form.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Sharp broken power-law in time."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Standard afterglow fitting form."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">tb</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_b&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_b"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -1384,7 +1384,7 @@
 <div class="viewcode-block" id="SmoothedBrokenPowerLawTime">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.SmoothedBrokenPowerLawTime.html#trilobite.models.generic.light_curve.SmoothedBrokenPowerLawTime">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SmoothedBrokenPowerLawTime</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Smoothly broken power-law temporal model.</span>
 
 <span class="sd">    This model provides a differentiable transition between two</span>
@@ -1482,17 +1482,17 @@
 <span class="sd">        model = SmoothedBrokenPowerLawTime()</span>
 
 <span class="sd">        t = np.logspace(-1, 2, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.1 * flux * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.loglog(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.loglog(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Smoothed Broken Power Law Time Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Smoothed Broken Power Law Time Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1500,38 +1500,38 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`BrokenPowerLawTime`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_b&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_b"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Smooth broken power-law in time.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Standard smooth break prescription.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Smooth broken power-law in time."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Standard smooth break prescription."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">tb</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_b&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_b"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">term</span> <span class="o">=</span> <span class="p">((</span><span class="n">t</span> <span class="o">/</span> <span class="n">tb</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">a1</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="n">tb</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">a2</span> <span class="o">/</span> <span class="n">s</span><span class="p">))</span> <span class="o">**</span> <span class="n">s</span>
@@ -1542,7 +1542,7 @@
 <div class="viewcode-block" id="ExponentialRisePowerLawDecay">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.ExponentialRisePowerLawDecay.html#trilobite.models.generic.light_curve.ExponentialRisePowerLawDecay">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExponentialRisePowerLawDecay</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Exponential rise with power-law decay model.</span>
 
 <span class="sd">    This model describes a transient with a smooth exponential</span>
@@ -1636,17 +1636,17 @@
 <span class="sd">        model = ExponentialRisePowerLawDecay()</span>
 
 <span class="sd">        t = np.logspace(-2, 2, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.1 * flux * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.loglog(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.loglog(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Exponential Rise Power-Law Decay Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Exponential Rise Power-Law Decay Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1654,36 +1654,36 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`BrokenPowerLawTime`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_r&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_r"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Exponential rise with power-law decay.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Common transient decay model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Exponential rise with power-law decay."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Common transient decay model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tau_r</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_r&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_r"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -1701,7 +1701,7 @@
 <div class="viewcode-block" id="NorrisPulse">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.NorrisPulse.html#trilobite.models.generic.light_curve.NorrisPulse">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NorrisPulse</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Norris GRB pulse model.</span>
 
 <span class="sd">    This model was introduced to describe asymmetric GRB</span>
@@ -1796,17 +1796,17 @@
 <span class="sd">        model = NorrisPulse()</span>
 
 <span class="sd">        t = np.linspace(0, 10, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Norris Pulse Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Norris Pulse Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1818,36 +1818,36 @@
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    .. footbibliography::</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_s&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_1&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau_2&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_s"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_1"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau_2"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Classic Norris GRB pulse.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Norris et al. (1996, 2005).&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Classic Norris GRB pulse."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Norris et al. (1996, 2005)."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">ts</span><span class="p">,</span> <span class="n">tau1</span><span class="p">,</span> <span class="n">tau2</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_s&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_1&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau_2&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_s"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_1"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau_2"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -1862,7 +1862,7 @@
 <div class="viewcode-block" id="WeibullPulse">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.WeibullPulse.html#trilobite.models.generic.light_curve.WeibullPulse">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">WeibullPulse</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Weibull pulse profile with background.</span>
 
 <span class="sd">    This model uses the Weibull distribution to generate</span>
@@ -1954,17 +1954,17 @@
 <span class="sd">        model = WeibullPulse()</span>
 
 <span class="sd">        t = np.linspace(0, 10, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Weibull Pulse Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Weibull Pulse Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -1973,36 +1973,36 @@
 <span class="sd">    :class:`NorrisPulse`</span>
 <span class="sd">    :class:`LogNormalPulse`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;lambda_&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"k"</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"lambda_"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Weibull pulse profile.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Generalized statistical pulse form.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Weibull pulse profile."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Generalized statistical pulse form."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;lambda_&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"k"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"lambda_"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">C</span><span class="p">)</span>
@@ -2017,7 +2017,7 @@
 <div class="viewcode-block" id="LogisticPulse">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.light_curve.LogisticPulse.html#trilobite.models.generic.light_curve.LogisticPulse">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LogisticPulse</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logistic sigmoid transition model with background.</span>
 
 <span class="sd">    This model describes a smooth monotonic transition</span>
@@ -2106,17 +2106,17 @@
 <span class="sd">        model = LogisticPulse()</span>
 
 <span class="sd">        t = np.linspace(-5, 10, 400)</span>
-<span class="sd">        flux = model({&quot;t&quot;: t}, {}).flux</span>
+<span class="sd">        flux = model({"t": t}, {}).flux</span>
 
 <span class="sd">        noise = 0.05 * np.max(flux) * rng.normal(size=t.size)</span>
 <span class="sd">        synthetic = flux + noise</span>
 
-<span class="sd">        plt.plot(t, flux, lw=2, label=&quot;Model&quot;)</span>
-<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label=&quot;Synthetic Data&quot;)</span>
+<span class="sd">        plt.plot(t, flux, lw=2, label="Model")</span>
+<span class="sd">        plt.scatter(t, synthetic, s=8, alpha=0.5, label="Synthetic Data")</span>
 
-<span class="sd">        plt.xlabel(&quot;Time&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;Flux&quot;)</span>
-<span class="sd">        plt.title(&quot;Logistic Transition Example&quot;)</span>
+<span class="sd">        plt.xlabel("Time")</span>
+<span class="sd">        plt.ylabel("Flux")</span>
+<span class="sd">        plt.title("Logistic Transition Example")</span>
 <span class="sd">        plt.legend()</span>
 <span class="sd">        plt.show()</span>
 
@@ -2124,34 +2124,34 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`GaussianPulse`</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;t&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"t"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;t_0&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;tau&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"t_0"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"tau"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-6</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_PulseOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">flux</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Logistic rise pulse.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Sigmoid transient model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Logistic rise pulse."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Sigmoid transient model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;t&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"t"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">A</span><span class="p">,</span> <span class="n">t0</span><span class="p">,</span> <span class="n">tau</span><span class="p">,</span> <span class="n">C</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;t_0&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">],</span>
-            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"t_0"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"tau"</span><span class="p">],</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">],</span>
         <span class="p">)</span>
 
         <span class="n">y</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span> <span class="o">/</span> <span class="n">tau</span><span class="p">))</span> <span class="o">+</span> <span class="n">C</span>
@@ -2186,8 +2186,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -2221,7 +2221,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

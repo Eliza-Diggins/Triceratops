@@ -1,0 +1,6 @@
+trilobite.models.TDEs.van\_velzen.VanVelzenModel.check\_model\_bounds
+=====================================================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. automethod:: VanVelzenModel.check_model_bounds

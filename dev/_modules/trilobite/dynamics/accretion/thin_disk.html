@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/accretion/thin_disk';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.accretion.thin_disk</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Thin-disk analytical accretion disk models.</span>
 
 <span class="sd">This module implements the canonical **geometrically-thin, optically-thick** accretion disk model</span>
@@ -455,7 +455,7 @@
 <span class="sd">--------</span>
 <span class="sd">:mod:`trilobite.dynamics.accretion.utils` : Low-level disk utility functions (T_eff profile, SED integrals, etc.)</span>
 <span class="sd">:mod:`trilobite.dynamics.accretion.one_zone` : Time-dependent one-zone disk models.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
@@ -472,17 +472,17 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite._typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">_ArrayLike</span><span class="p">,</span> <span class="n">_UnitBearingArrayLike</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;ThinDiskBase&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;AlphaDisk&quot;</span><span class="p">,</span>
+    <span class="s2">"ThinDiskBase"</span><span class="p">,</span>
+    <span class="s2">"AlphaDisk"</span><span class="p">,</span>
     <span class="c1"># SS73 steady-state emission utilities</span>
-    <span class="s2">&quot;disk_effective_temperature&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;disk_bolometric_luminosity&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;disk_spectral_luminosity&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;disk_spectral_luminosity_iso&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;disk_flux_density&quot;</span><span class="p">,</span>
+    <span class="s2">"disk_effective_temperature"</span><span class="p">,</span>
+    <span class="s2">"disk_bolometric_luminosity"</span><span class="p">,</span>
+    <span class="s2">"disk_spectral_luminosity"</span><span class="p">,</span>
+    <span class="s2">"disk_spectral_luminosity_iso"</span><span class="p">,</span>
+    <span class="s2">"disk_flux_density"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">_trapz</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;trapezoid&quot;</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">&quot;trapz&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+<span class="n">_trapz</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">"trapezoid"</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">np</span><span class="p">,</span> <span class="s2">"trapz"</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
 
 <span class="c1"># ============================================================= #</span>
 <span class="c1"># Constants</span>
@@ -517,12 +517,12 @@
 <span class="c1"># This is the low-level interface for these disk models, which operate on raw</span>
 <span class="c1"># cgs arrays without any checks.</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_disk_effective_temperature</span><span class="p">(</span>
-    <span class="n">log_r</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_r</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_M_BH</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_M_dot</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_in</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln T_{\rm eff}(r)` for a steady-state Shakura-Sunyaev disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -547,10 +547,10 @@
 <span class="sd">    -------</span>
 <span class="sd">    array-like</span>
 <span class="sd">        :math:`\ln T_{\rm eff}(r)` [K].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">log_r</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">log_coef</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">_log_T_disk_coef</span> <span class="o">+</span> <span class="n">log_M_BH</span> <span class="o">+</span> <span class="n">log_M_dot</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">log_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">log_R_in</span> <span class="o">-</span> <span class="n">log_r</span><span class="p">)))</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">log_coef</span> <span class="o">-</span> <span class="mf">0.75</span> <span class="o">*</span> <span class="n">log_r</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">log_f</span>
     <span class="k">return</span> <span class="n">log_T</span> <span class="k">if</span> <span class="n">log_T</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">log_T</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
@@ -564,7 +564,7 @@
     <span class="n">log_R_out</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Evaluate the core radial integral of the Planck function over disk annuli.</span>
 
 <span class="sd">    .. math::</span>
@@ -588,7 +588,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (Nν,)</span>
 <span class="sd">        :math:`I(\nu)` in :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}\,sr^{-1}}`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Obtain the log_r and log_T grids on the fly.</span>
     <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_disk_effective_temperature</span><span class="p">(</span><span class="n">log_r</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">))</span>
@@ -602,7 +602,7 @@
     <span class="n">r2_grid</span> <span class="o">=</span> <span class="n">r_sq</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1"># (1, Nr)</span>
 
     <span class="c1"># At r = R_in, T → 0 → x → ∞ → B_ν → 0.  Suppress benign boundary warnings.</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">B_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_planck_fnu_cgs</span><span class="p">(</span><span class="n">log_nu_2d</span><span class="p">,</span> <span class="n">log_T_grid</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">_trapz</span><span class="p">(</span><span class="n">r2_grid</span> <span class="o">*</span> <span class="n">B_nu</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">log_r</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (N_nu,)</span>
@@ -613,7 +613,7 @@
     <span class="n">log_M_dot</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_in</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Analytic bolometric luminosity of a steady-state Shakura-Sunyaev disk.</span>
 
 <span class="sd">    Integrating the viscous dissipation profile over both faces with a</span>
@@ -627,7 +627,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln L_{\rm bol}` [:math:`\mathrm{erg\,s^{-1}}`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_log_G_cgs</span> <span class="o">+</span> <span class="n">log_M_BH</span> <span class="o">+</span> <span class="n">log_M_dot</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_R_in</span>
 
 
@@ -639,7 +639,7 @@
     <span class="n">log_R_out</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln L_\nu` — the angle-integrated spectral luminosity.</span>
 
 <span class="sd">    Accounts for emission from both disk faces (Lambertian emitter):</span>
@@ -653,7 +653,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (Nν,)</span>
 <span class="sd">        :math:`\ln L_\nu` [:math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">integral</span> <span class="o">=</span> <span class="n">_disk_planck_ring_integral</span><span class="p">(</span><span class="n">log_nu_arr</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">4.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span>
 
@@ -668,7 +668,7 @@
     <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln F_\nu` for a multi-colour blackbody disk (one face).</span>
 
 <span class="sd">    The observer sees one optically-thick face of the disk.  For a Lambertian</span>
@@ -683,7 +683,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (Nν,)</span>
 <span class="sd">        :math:`\ln F_\nu` [:math:`\mathrm{erg\,s^{-1}\,Hz^{-1}\,cm^{-2}}`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">integral</span> <span class="o">=</span> <span class="n">_disk_planck_ring_integral</span><span class="p">(</span><span class="n">log_nu_arr</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="n">F_nu</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">cos_theta</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_DL</span><span class="p">)</span> <span class="o">*</span> <span class="n">integral</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">F_nu</span><span class="p">)</span>
@@ -698,7 +698,7 @@
     <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln L_{\nu,{\rm iso}}` — the isotropic-equivalent spectral luminosity.</span>
 
 <span class="sd">    This is the luminosity an observer infers by multiplying the observed flux</span>
@@ -714,7 +714,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray, shape (Nν,)</span>
 <span class="sd">        :math:`\ln L_{\nu,{\rm iso}}` [:math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">integral</span> <span class="o">=</span> <span class="n">_disk_planck_ring_integral</span><span class="p">(</span><span class="n">log_nu_arr</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">integral</span><span class="p">)</span>
 
@@ -730,7 +730,7 @@
     <span class="n">mdot</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Effective temperature profile of a steady-state Shakura-Sunyaev disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -755,11 +755,11 @@
 <span class="sd">    -------</span>
 <span class="sd">    `~astropy.units.Quantity`</span>
 <span class="sd">        Effective temperature :math:`T_{\rm eff}` [K].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+<span class="sd">    """</span>
+    <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_disk_effective_temperature</span><span class="p">(</span><span class="n">log_r</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">))</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span>
@@ -774,7 +774,7 @@
     <span class="n">mdot</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Bolometric luminosity of a steady-state Shakura-Sunyaev disk.</span>
 
 <span class="sd">    Analytic result from integrating the viscous dissipation profile over both</span>
@@ -803,10 +803,10 @@
 <span class="sd">    This is equivalent to an efficiency :math:`\eta = R_{\rm S} / (4 R_{\rm in})`</span>
 <span class="sd">    where :math:`R_{\rm S} = 2 G M / c^2` is the Schwarzschild radius.</span>
 <span class="sd">    For a Schwarzschild ISCO (:math:`R_{\rm in} = 3 R_{\rm S}`), :math:`\eta \approx 0.083`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+<span class="sd">    """</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_disk_bolometric_luminosity</span><span class="p">(</span><span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">))</span>
     <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span></div>
@@ -823,7 +823,7 @@
     <span class="n">R_out</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Angle-integrated spectral luminosity of a multi-colour blackbody disk.</span>
 
 <span class="sd">    Assumes Lambertian emission from both disk faces:</span>
@@ -853,15 +853,15 @@
 <span class="sd">    -------</span>
 <span class="sd">    `~astropy.units.Quantity`</span>
 <span class="sd">        :math:`L_\nu` [erg s⁻¹ Hz⁻¹], same shape as *nu*.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
     <span class="n">scalar_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">nu_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)))</span>
 
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
+    <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
     <span class="n">log_L</span> <span class="o">=</span> <span class="n">_log_disk_spectral_luminosity</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_L</span><span class="p">)</span>
@@ -882,7 +882,7 @@
     <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Isotropic-equivalent spectral luminosity of a multi-colour blackbody disk.</span>
 
 <span class="sd">    The luminosity an observer infers by assuming isotropic emission</span>
@@ -916,15 +916,15 @@
 <span class="sd">    -------</span>
 <span class="sd">    `~astropy.units.Quantity`</span>
 <span class="sd">        :math:`L_{\nu,{\rm iso}}` [erg s⁻¹ Hz⁻¹], same shape as *nu*.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
     <span class="n">scalar_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">nu_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)))</span>
 
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
+    <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
     <span class="n">log_L</span> <span class="o">=</span> <span class="n">_log_disk_spectral_luminosity_iso</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">cos_theta</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_L</span><span class="p">)</span>
@@ -946,7 +946,7 @@
     <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Observed flux density of a multi-colour blackbody disk (one face).</span>
 
 <span class="sd">    For an optically thick disk the observer sees one face.  For a Lambertian</span>
@@ -981,16 +981,16 @@
 <span class="sd">    -------</span>
 <span class="sd">    `~astropy.units.Quantity`</span>
 <span class="sd">        :math:`F_\nu` [erg s⁻¹ Hz⁻¹ cm⁻²], same shape as *nu*.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
     <span class="n">scalar_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">nu_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)))</span>
 
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
-    <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
-    <span class="n">log_DL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">D_L</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+    <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
+    <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
+    <span class="n">log_DL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">D_L</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
     <span class="n">log_F</span> <span class="o">=</span> <span class="n">_log_disk_flux_density</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">log_DL</span><span class="p">,</span> <span class="n">cos_theta</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_F</span><span class="p">)</span>
@@ -1006,7 +1006,7 @@
 <div class="viewcode-block" id="ThinDiskBase">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.thin_disk.ThinDiskBase.html#trilobite.dynamics.accretion.thin_disk.ThinDiskBase">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ThinDiskBase</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for steady-state thin-disk accretion models.</span>
 
 <span class="sd">    A :class:`ThinDiskBase` encapsulates the physical scalings needed to evaluate</span>
@@ -1028,7 +1028,7 @@
 <span class="sd">    ``M_BH``, ``mdot``, and ``R_in`` are passed at call time, not stored at</span>
 <span class="sd">    construction.  Subclass ``__init__`` methods may cache model-level constants</span>
 <span class="sd">    (e.g. the viscosity parameter α) but must not cache physical state.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># =========================================================================</span>
     <span class="c1"># Initialisation</span>
@@ -1037,7 +1037,7 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.ThinDiskBase.html#trilobite.dynamics.accretion.thin_disk.ThinDiskBase.__init__">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Instantiate the disk engine.</span>
 
 <span class="sd">        Parameters</span>
@@ -1045,7 +1045,7 @@
 <span class="sd">        kwargs</span>
 <span class="sd">            Model-level configuration (e.g. viscosity parameter ``alpha``).</span>
 <span class="sd">            Physical disk state must **not** be stored here.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">pass</span></div>
 
 
@@ -1056,12 +1056,12 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute.html#trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">radius</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">mdot</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">R_in</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;dict[str, Union[u.Quantity, _ArrayLike]]&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">mdot</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">R_in</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"dict[str, Union[u.Quantity, _ArrayLike]]"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Evaluate the disk structure at the given radius (or radii).</span>
 
 <span class="sd">        This is the high-level, unit-aware wrapper around :meth:`_compute_cgs`.</span>
@@ -1084,29 +1084,29 @@
 <span class="sd">        dict</span>
 <span class="sd">            Keys and units:</span>
 
-<span class="sd">            - ``&quot;Sigma&quot;``  : surface density [g cm⁻²]</span>
-<span class="sd">            - ``&quot;T_c&quot;``    : midplane temperature [K]</span>
-<span class="sd">            - ``&quot;H&quot;``      : pressure scale height [cm]</span>
-<span class="sd">            - ``&quot;rho&quot;``    : midplane mass density [g cm⁻³]</span>
-<span class="sd">            - ``&quot;tau&quot;``    : vertical optical depth [dimensionless]</span>
-<span class="sd">            - ``&quot;nu&quot;``     : kinematic viscosity [cm² s⁻¹]</span>
-<span class="sd">            - ``&quot;v_R&quot;``    : radial drift velocity [cm s⁻¹]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">radius_cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">M_BH_g</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">))</span>
-        <span class="n">mdot_gs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">))</span>
-        <span class="n">R_in_cm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">            - ``"Sigma"``  : surface density [g cm⁻²]</span>
+<span class="sd">            - ``"T_c"``    : midplane temperature [K]</span>
+<span class="sd">            - ``"H"``      : pressure scale height [cm]</span>
+<span class="sd">            - ``"rho"``    : midplane mass density [g cm⁻³]</span>
+<span class="sd">            - ``"tau"``    : vertical optical depth [dimensionless]</span>
+<span class="sd">            - ``"nu"``     : kinematic viscosity [cm² s⁻¹]</span>
+<span class="sd">            - ``"v_R"``    : radial drift velocity [cm s⁻¹]</span>
+<span class="sd">        """</span>
+        <span class="n">radius_cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">M_BH_g</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">))</span>
+        <span class="n">mdot_gs</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">))</span>
+        <span class="n">R_in_cm</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
         <span class="n">raw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_cgs</span><span class="p">(</span><span class="n">radius_cm</span><span class="p">,</span> <span class="n">M_BH_g</span><span class="p">,</span> <span class="n">mdot_gs</span><span class="p">,</span> <span class="n">R_in_cm</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;Sigma&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;Sigma&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
-            <span class="s2">&quot;T_c&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;T_c&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
-            <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;H&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
-            <span class="s2">&quot;rho&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span>
-            <span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;tau&quot;</span><span class="p">],</span>
-            <span class="s2">&quot;nu&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;nu&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
-            <span class="s2">&quot;v_R&quot;</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">&quot;v_R&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+            <span class="s2">"Sigma"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"Sigma"</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span>
+            <span class="s2">"T_c"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"T_c"</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span><span class="p">,</span>
+            <span class="s2">"H"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"H"</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">,</span>
+            <span class="s2">"rho"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"rho"</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">3</span><span class="p">,</span>
+            <span class="s2">"tau"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"tau"</span><span class="p">],</span>
+            <span class="s2">"nu"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"nu"</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+            <span class="s2">"v_R"</span><span class="p">:</span> <span class="n">raw</span><span class="p">[</span><span class="s2">"v_R"</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
         <span class="p">}</span></div>
 
 
@@ -1117,8 +1117,8 @@
         <span class="n">M_BH_g</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">mdot_gs</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">R_in_cm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;dict[str, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"dict[str, np.ndarray]"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Low-level CGS evaluation of the disk structure.</span>
 
 <span class="sd">        All inputs and outputs are plain floats / NumPy arrays in CGS.</span>
@@ -1139,9 +1139,9 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            Keys: ``&quot;Sigma&quot;``, ``&quot;T_c&quot;``, ``&quot;H&quot;``, ``&quot;rho&quot;``, ``&quot;tau&quot;``,</span>
-<span class="sd">            ``&quot;nu&quot;``, ``&quot;v_R&quot;`` — all CGS, no units attached.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            Keys: ``"Sigma"``, ``"T_c"``, ``"H"``, ``"rho"``, ``"tau"``,</span>
+<span class="sd">            ``"nu"``, ``"v_R"`` — all CGS, no units attached.</span>
+<span class="sd">        """</span>
         <span class="k">pass</span>
 
     <span class="c1"># =========================================================================</span>
@@ -1151,12 +1151,12 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute_effective_temperature.html#trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute_effective_temperature">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_effective_temperature</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">radius</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">mdot</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">R_in</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">mdot</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">R_in</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Effective (surface) temperature profile of the steady-state disk.</span>
 
 <span class="sd">        Computed from the first-principles viscous dissipation formula,</span>
@@ -1188,13 +1188,13 @@
 <span class="sd">        -------</span>
 <span class="sd">        `~astropy.units.Quantity`</span>
 <span class="sd">            Effective temperature :math:`T_{\rm eff}(r)` in K.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">radius_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">radius_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)</span>
         <span class="n">scalar_radius</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">radius_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">radius_val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)))</span>
-        <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-        <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-        <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+        <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+        <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+        <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
         <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_disk_effective_temperature</span><span class="p">(</span><span class="n">log_r</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">))</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_T</span><span class="p">)</span>
@@ -1210,16 +1210,16 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute_sed.html#trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute_sed">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_sed</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">mdot</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">R_in</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">R_out</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">D_L</span><span class="p">:</span> <span class="s2">&quot;Union[_UnitBearingArrayLike, None]&quot;</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">nu</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">mdot</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">R_in</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">R_out</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">D_L</span><span class="p">:</span> <span class="s2">"Union[_UnitBearingArrayLike, None]"</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
         <span class="n">N_r</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;dict[str, u.Quantity]&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"dict[str, u.Quantity]"</span><span class="p">:</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Multi-colour blackbody spectral energy distribution of the disk.</span>
 
 <span class="sd">        Integrates the Planck function weighted by the local effective temperature</span>
@@ -1257,7 +1257,7 @@
 <span class="sd">        R_out : float or `~astropy.units.Quantity`</span>
 <span class="sd">            Outer disk radius.</span>
 <span class="sd">        D_L : float or `~astropy.units.Quantity`, optional</span>
-<span class="sd">            Luminosity distance.  If provided, ``&quot;F_nu&quot;`` is included in the</span>
+<span class="sd">            Luminosity distance.  If provided, ``"F_nu"`` is included in the</span>
 <span class="sd">            returned dict.</span>
 <span class="sd">        cos_theta : float, optional</span>
 <span class="sd">            Cosine of the inclination angle (1 = face-on).</span>
@@ -1267,32 +1267,32 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            - ``&quot;L_nu&quot;`` : spectral luminosity [erg s⁻¹ Hz⁻¹] (always present)</span>
-<span class="sd">            - ``&quot;F_nu&quot;`` : flux density [erg s⁻¹ Hz⁻¹ cm⁻²] (only if *D_L* given)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
+<span class="sd">            - ``"L_nu"`` : spectral luminosity [erg s⁻¹ Hz⁻¹] (always present)</span>
+<span class="sd">            - ``"F_nu"`` : flux density [erg s⁻¹ Hz⁻¹ cm⁻²] (only if *D_L* given)</span>
+<span class="sd">        """</span>
+        <span class="n">nu_val</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
         <span class="n">scalar_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndim</span><span class="p">(</span><span class="n">nu_val</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
         <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu_val</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)))</span>
 
-        <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-        <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-        <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
-        <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+        <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+        <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+        <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
+        <span class="n">log_R_out</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_out</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
         <span class="n">log_L</span> <span class="o">=</span> <span class="n">_log_disk_spectral_luminosity</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
         <span class="n">L_nu_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_L</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">scalar_nu</span><span class="p">:</span>
             <span class="n">L_nu_arr</span> <span class="o">=</span> <span class="n">L_nu_arr</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
-        <span class="n">out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;L_nu&quot;</span><span class="p">:</span> <span class="n">L_nu_arr</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">}</span>
+        <span class="n">out</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"L_nu"</span><span class="p">:</span> <span class="n">L_nu_arr</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="n">D_L</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">log_DL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">D_L</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+            <span class="n">log_DL</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">D_L</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
             <span class="n">log_F</span> <span class="o">=</span> <span class="n">_log_disk_flux_density</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_R_out</span><span class="p">,</span> <span class="n">log_DL</span><span class="p">,</span> <span class="n">cos_theta</span><span class="p">,</span> <span class="n">N_r</span><span class="p">)</span>
             <span class="n">F_nu_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_F</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">scalar_nu</span><span class="p">:</span>
                 <span class="n">F_nu_arr</span> <span class="o">=</span> <span class="n">F_nu_arr</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
-            <span class="n">out</span><span class="p">[</span><span class="s2">&quot;F_nu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">F_nu_arr</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span>
+            <span class="n">out</span><span class="p">[</span><span class="s2">"F_nu"</span><span class="p">]</span> <span class="o">=</span> <span class="n">F_nu_arr</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span>
 
         <span class="k">return</span> <span class="n">out</span></div>
 
@@ -1304,11 +1304,11 @@
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute_bolometric_luminosity.html#trilobite.dynamics.accretion.thin_disk.ThinDiskBase.compute_bolometric_luminosity">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">compute_bolometric_luminosity</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">mdot</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">R_in</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">mdot</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">R_in</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Analytic bolometric luminosity of the steady-state thin disk.</span>
 
 <span class="sd">        Integrating the viscous dissipation profile :math:`Q^+(r)` over both</span>
@@ -1335,10 +1335,10 @@
 <span class="sd">        -------</span>
 <span class="sd">        `~astropy.units.Quantity`</span>
 <span class="sd">            Bolometric luminosity :math:`L_{\rm bol}` [erg s⁻¹].</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)))</span>
-        <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">)))</span>
-        <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">)))</span>
+<span class="sd">        """</span>
+        <span class="n">log_M_BH</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)))</span>
+        <span class="n">log_M_dot</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">)))</span>
+        <span class="n">log_R_in</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">)))</span>
 
         <span class="n">log_L</span> <span class="o">=</span> <span class="n">_log_disk_bolometric_luminosity</span><span class="p">(</span><span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_M_dot</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_L</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span></div>
@@ -1349,16 +1349,16 @@
     <span class="c1"># =========================================================================</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">radius</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">mdot</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-        <span class="n">R_in</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;dict[str, Union[u.Quantity, _ArrayLike]]&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="n">radius</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">M_BH</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">mdot</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+        <span class="n">R_in</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"dict[str, Union[u.Quantity, _ArrayLike]]"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the disk structure (alias for :meth:`compute`).</span>
 
 <span class="sd">        See :meth:`compute` for full parameter and return documentation.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute</span><span class="p">(</span><span class="n">radius</span><span class="p">,</span> <span class="n">M_BH</span><span class="p">,</span> <span class="n">mdot</span><span class="p">,</span> <span class="n">R_in</span><span class="p">)</span></div>
 
 
@@ -1369,7 +1369,7 @@
 <div class="viewcode-block" id="AlphaDisk">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.thin_disk.AlphaDisk.html#trilobite.dynamics.accretion.thin_disk.AlphaDisk">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AlphaDisk</span><span class="p">(</span><span class="n">ThinDiskBase</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Shakura-Sunyaev alpha-disk model (SS73 / FKR zone-C scalings).</span>
 
 <span class="sd">    This model assumes a geometrically thin, optically thick accretion disk in</span>
@@ -1470,7 +1470,7 @@
 <span class="sd">            3e6 * u.cm,</span>
 <span class="sd">        )</span>
 <span class="sd">        print(</span>
-<span class="sd">            result[&quot;T_c&quot;]</span>
+<span class="sd">            result["T_c"]</span>
 <span class="sd">        )  # midplane temperature at each radius</span>
 
 <span class="sd">    Compute the bolometric luminosity and a broadband SED:</span>
@@ -1492,26 +1492,26 @@
 <span class="sd">            R_out=1e12 * u.cm,</span>
 <span class="sd">            D_L=100 * u.Mpc,</span>
 <span class="sd">        )</span>
-<span class="sd">        print(sed[&quot;F_nu&quot;])</span>
+<span class="sd">        print(sed["F_nu"])</span>
 
 <span class="sd">    References</span>
 <span class="sd">    ----------</span>
 <span class="sd">    Shakura, N. I., &amp; Sunyaev, R. A. 1973, A&amp;A, 24, 337.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="AlphaDisk.__init__">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.AlphaDisk.html#trilobite.dynamics.accretion.thin_disk.AlphaDisk.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Instantiate an AlphaDisk with the given viscosity parameter.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        alpha : float</span>
 <span class="sd">            Shakura-Sunyaev viscosity parameter.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">0.0</span> <span class="o">&lt;</span> <span class="n">alpha</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;alpha must satisfy 0 &lt; alpha &lt;= 1; got </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"alpha must satisfy 0 &lt; alpha &lt;= 1; got </span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_log_alpha</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">alpha</span><span class="p">))</span></div>
 
@@ -1525,8 +1525,8 @@
         <span class="n">M_BH_g</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">mdot_gs</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">R_in_cm</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;dict[str, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"dict[str, np.ndarray]"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Evaluate the Shakura-Sunyaev scalings in CGS.</span>
 
 <span class="sd">        Parameters</span>
@@ -1543,9 +1543,9 @@
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
 <span class="sd">        dict</span>
-<span class="sd">            Keys: ``&quot;Sigma&quot;``, ``&quot;T_c&quot;``, ``&quot;H&quot;``, ``&quot;rho&quot;``, ``&quot;tau&quot;``,</span>
-<span class="sd">            ``&quot;nu&quot;``, ``&quot;v_R&quot;`` (all CGS, plain NumPy values).</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            Keys: ``"Sigma"``, ``"T_c"``, ``"H"``, ``"rho"``, ``"tau"``,</span>
+<span class="sd">            ``"nu"``, ``"v_R"`` (all CGS, plain NumPy values).</span>
+<span class="sd">        """</span>
         <span class="c1"># Work entirely in log-space: replace multiplications with additions</span>
         <span class="c1"># and power operations with scalar multiplications.</span>
         <span class="n">log_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">radius_cm</span><span class="p">)</span>
@@ -1555,7 +1555,7 @@
         <span class="n">log_alpha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_log_alpha</span>
 
         <span class="c1"># Inner-boundary correction: f⁴ = max(1 − √(R_in/R), 0),  log_f = ¼ log(f⁴)</span>
-        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
             <span class="n">xi</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">R_in_cm</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_r</span><span class="p">))</span>
         <span class="n">log_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">xi</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xi</span><span class="p">),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
 
@@ -1611,23 +1611,23 @@
         <span class="p">)</span>  <span class="c1"># noqa: E501</span>
 
         <span class="k">return</span> <span class="p">{</span>
-            <span class="s2">&quot;Sigma&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_Sigma</span><span class="p">),</span>
-            <span class="s2">&quot;T_c&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_Tc</span><span class="p">),</span>
-            <span class="s2">&quot;H&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_H</span><span class="p">),</span>
-            <span class="s2">&quot;rho&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_rho</span><span class="p">),</span>
-            <span class="s2">&quot;tau&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_tau</span><span class="p">),</span>
-            <span class="s2">&quot;nu&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_nu</span><span class="p">),</span>
-            <span class="s2">&quot;v_R&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_vR</span><span class="p">),</span>
+            <span class="s2">"Sigma"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_Sigma</span><span class="p">),</span>
+            <span class="s2">"T_c"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_Tc</span><span class="p">),</span>
+            <span class="s2">"H"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_H</span><span class="p">),</span>
+            <span class="s2">"rho"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_rho</span><span class="p">),</span>
+            <span class="s2">"tau"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_tau</span><span class="p">),</span>
+            <span class="s2">"nu"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_nu</span><span class="p">),</span>
+            <span class="s2">"v_R"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_vR</span><span class="p">),</span>
         <span class="p">}</span>
 
     <span class="c1"># -------------------------------------------------------------------------</span>
     <span class="c1"># Dunder methods</span>
     <span class="c1"># -------------------------------------------------------------------------</span>
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;AlphaDisk(alpha=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"AlphaDisk(alpha=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)"</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;AlphaDisk(alpha=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&gt;&quot;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;AlphaDisk(alpha=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="si">}</span><span class="s2">)&gt;"</span></div>
 
 </pre></div>
 
@@ -1658,8 +1658,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1693,7 +1693,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

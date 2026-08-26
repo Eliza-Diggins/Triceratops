@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/synchrotron/SEDs/one_zone/_functions';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,14 +444,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.synchrotron.SEDs.one_zone._functions</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Spectral shape functions for 1-zone synchrotron SEDs.</span>
 
 <span class="sd">This module provides all of the core spectrum shape functions for the various analytical</span>
 <span class="sd">synchrotron SED engines. These functions are designed to be used internally by the SED engines</span>
 <span class="sd">and are not intended for direct use by the user. They are not guaranteed to be stable or accurate</span>
 <span class="sd">outside of the context of the SED engines.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
@@ -461,12 +461,12 @@
 <div class="viewcode-block" id="log_smoothed_SFBPL">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_smoothed_SFBPL.html#trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_smoothed_SFBPL">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">log_smoothed_SFBPL</span><span class="p">(</span>
-    <span class="n">log_x</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_x</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">a1</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">a2</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">smoothing</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of a scale-free smoothed broken power law (SFBPL).</span>
 
 <span class="sd">    This function returns the **logarithm** of a *scale-free*, multiplicative</span>
@@ -526,7 +526,7 @@
 <span class="sd">      are introduced besides the implicit break location in :math:`x`.</span>
 <span class="sd">    - Intended to be **added** to an existing log-spectrum:</span>
 <span class="sd">      if :math:`\log F(\nu)` is your baseline, then</span>
-<span class="sd">      :math:`\log F&#39;(\nu) = \log F(\nu) + \log \tilde f(\nu/\nu_{\rm brk})`.</span>
+<span class="sd">      :math:`\log F'(\nu) = \log F(\nu) + \log \tilde f(\nu/\nu_{\rm brk})`.</span>
 <span class="sd">    - Multiple factors may be composed, but you should ensure each break is</span>
 <span class="sd">      applied with the correct baseline slopes and does not unintentionally</span>
 <span class="sd">      re-modify the same frequency range.</span>
@@ -535,7 +535,7 @@
 
 <span class="sd">    Let :math:`k=(a_2-a_1)/s`. Then:</span>
 
-<span class="sd">    - If :math:`k&gt;0` (the common case for &quot;low side → a1, high side → a2&quot;):</span>
+<span class="sd">    - If :math:`k&gt;0` (the common case for "low side → a1, high side → a2"):</span>
 
 <span class="sd">      - For :math:`x \ll 1`: :math:`\tilde f(x) \to 1`</span>
 <span class="sd">      - For :math:`x \gg 1`: :math:`\tilde f(x) \propto x^{\,a_2-a_1}`</span>
@@ -549,7 +549,7 @@
 
 <span class="sd">    In all cases, the multiplicative factor produces a net slope change of</span>
 <span class="sd">    :math:`\Delta a = a_2-a_1` across the transition.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">smoothing</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">logaddexp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">((</span><span class="n">a2</span> <span class="o">-</span> <span class="n">a1</span><span class="p">)</span> <span class="o">/</span> <span class="n">smoothing</span><span class="p">)</span> <span class="o">*</span> <span class="n">log_x</span><span class="p">))</span></div>
 
 
@@ -557,9 +557,9 @@
 <div class="viewcode-block" id="log_exp_cutoff_sed">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_exp_cutoff_sed.html#trilobite.radiation.synchrotron.SEDs.one_zone._functions.log_exp_cutoff_sed">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">log_exp_cutoff_sed</span><span class="p">(</span>
-    <span class="n">log_x</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_x</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of a smooth high-frequency exponential cutoff.</span>
 
 <span class="sd">    This function implements a *scale-free*, phenomenological cutoff factor</span>
@@ -601,7 +601,7 @@
 <span class="sd">      above :math:`\nu_{\max}`, preserving exact scale-freeness below the</span>
 <span class="sd">      cutoff.</span>
 <span class="sd">    - Implemented entirely in log-space for numerical stability.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">log_x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">log_x</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_x</span><span class="p">)),</span> <span class="mf">0.0</span><span class="p">)</span></div>
 
 
@@ -609,7 +609,7 @@
 <div class="viewcode-block" id="smoothed_BPL">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.one_zone._functions.smoothed_BPL.html#trilobite.radiation.synchrotron.SEDs.one_zone._functions.smoothed_BPL">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">smoothed_BPL</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">F_nu</span><span class="p">,</span> <span class="n">nu_brk</span><span class="p">,</span> <span class="n">alpha_1</span><span class="p">,</span> <span class="n">alpha_2</span><span class="p">,</span> <span class="n">smoothing</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Smoothed broken power-law (BPL) SED.</span>
 
 <span class="sd">    This function constructs a smoothed broken power-law SED by combining</span>
@@ -641,19 +641,19 @@
 <span class="sd">    - The SED is normalized such that :math:`F_\nu(\nu_{\rm brk}) = F_{\nu}`.</span>
 <span class="sd">    - The smoothness parameter controls how gradual the transition is between</span>
 <span class="sd">      the two power-law segments.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">F_nu</span> <span class="o">*</span> <span class="p">((</span><span class="n">nu</span> <span class="o">/</span> <span class="n">nu_brk</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">alpha_1</span> <span class="o">/</span> <span class="n">smoothing</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">nu</span> <span class="o">/</span> <span class="n">nu_brk</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">alpha_2</span> <span class="o">/</span> <span class="n">smoothing</span><span class="p">))</span> <span class="o">**</span> <span class="n">smoothing</span></div>
 
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of the synchrotron SED for a non-cooling power-law electron population.</span>
 
 <span class="sd">    This function implements the **non-cooling**, optically thin synchrotron</span>
@@ -693,7 +693,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    - No synchrotron self-absorption (SSA) is included.</span>
 <span class="sd">    - The high-frequency exponential cutoff is applied multiplicatively.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
 
@@ -710,14 +710,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_cool_1</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of the synchrotron SED in the **fast-cooling** regime.</span>
 
 <span class="sd">    This function implements the fast-cooling synchrotron spectrum for a</span>
@@ -760,7 +760,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    - Assumes :math:`\nu_c &lt; \nu_m`; no internal validation is performed.</span>
 <span class="sd">    - No synchrotron self-absorption (SSA) is included.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_c</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_c</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
@@ -781,14 +781,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_cool_2</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of the synchrotron SED in the **slow-cooling** regime.</span>
 
 <span class="sd">    This function implements the slow-cooling synchrotron spectrum for a</span>
@@ -832,7 +832,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    - Assumes :math:`\nu_m &lt; \nu_c`; no internal validation is performed.</span>
 <span class="sd">    - No synchrotron self-absorption (SSA) is included.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_c</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_c</span>
     <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
@@ -853,22 +853,22 @@
 
 
 <span class="n">COOLING_SED_FUNCTION_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;fast_cooling&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_cool_1</span><span class="p">,</span>
-    <span class="s2">&quot;slow_cooling&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_cool_2</span><span class="p">,</span>
-    <span class="s2">&quot;no_cooling&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed</span><span class="p">,</span>
+    <span class="s2">"fast_cooling"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_cool_1</span><span class="p">,</span>
+    <span class="s2">"slow_cooling"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_cool_2</span><span class="p">,</span>
+    <span class="s2">"no_cooling"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="sd">&quot;&quot;&quot;dict: Registry mapping cooling regimes to their corresponding SED functions.&quot;&quot;&quot;</span>
+<span class="sd">"""dict: Registry mapping cooling regimes to their corresponding SED functions."""</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_1</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of the synchrotron SED with SSA, assuming the ordering :math:`\nu &lt; \nu_a &lt; \nu_m`.</span>
 
 <span class="sd">    The resulting spectral segments are:</span>
@@ -911,7 +911,7 @@
 <span class="sd">    - Assumes :math:`\nu &lt; \nu_a &lt; \nu_m`; no internal validation is performed.</span>
 <span class="sd">    - The spectrum is constructed via log-space SED surgery using scale-free</span>
 <span class="sd">      SFBPL kernels.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_a</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
@@ -932,14 +932,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_2</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Logarithm of the synchrotron SED with SSA, assuming the ordering :math:`\nu &lt; \nu_m &lt; \nu_a`.</span>
 
 <span class="sd">    The resulting spectral segments are:</span>
@@ -981,7 +981,7 @@
 <span class="sd">    - The increase in slope from :math:`\nu^2` to :math:`\nu^{5/2}` requires</span>
 <span class="sd">      flipping the sign of the smoothing parameter due to the adopted SFBPL</span>
 <span class="sd">      convention.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_a</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span>
     <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
@@ -1002,14 +1002,14 @@
 
 
 <span class="n">SSA_SED_FUNCTION_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;optically_thick&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_2</span><span class="p">,</span>
-    <span class="s2">&quot;optically_thin&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_1</span><span class="p">,</span>
+    <span class="s2">"optically_thick"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_2</span><span class="p">,</span>
+    <span class="s2">"optically_thin"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_1</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="sd">&quot;&quot;&quot;dict: Registry mapping SSA regimes to their corresponding SED functions.&quot;&quot;&quot;</span>
+<span class="sd">"""dict: Registry mapping SSA regimes to their corresponding SED functions."""</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_cool_3</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -1017,7 +1017,7 @@
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchrotron SED with SSA in the **slow-cooling** regime, assuming the ordering :math:`\nu &lt; \nu_a &lt; \nu_m &lt; \nu_c`.</span>
 
 <span class="sd">    The resulting spectral segments are:</span>
@@ -1054,7 +1054,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    array-like</span>
 <span class="sd">        Logarithm of the synchrotron SED.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_a</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_c</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_c</span>
@@ -1077,7 +1077,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_cool_4</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -1085,7 +1085,7 @@
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchrotron SED with SSA in the **slow-cooling** regime, assuming the ordering :math:`\nu &lt; \nu_m &lt; \nu_a &lt; \nu_c`.</span>
 
 <span class="sd">    The spectral segments are:</span>
@@ -1105,7 +1105,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    array-like</span>
 <span class="sd">        Logarithm of the synchrotron SED.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">x_m</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span>
     <span class="n">x_a</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span>
     <span class="n">x_c</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_c</span>
@@ -1128,7 +1128,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_cool_5</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_c</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -1137,7 +1137,7 @@
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchrotron SED with synchrotron self-absorption (SSA) in the **fast-cooling** regime.</span>
 
 <span class="sd">    Includes stratified absorption, assuming the ordering</span>
@@ -1195,7 +1195,7 @@
 <span class="sd">      ordering; no internal validation is performed.</span>
 <span class="sd">    - The :math:`11/8` slope arises from stratified synchrotron self-absorption in</span>
 <span class="sd">      a cooling electron population.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Determine the nu/nu_a, nu/nu_m, and nu/nu_c ratios</span>
     <span class="n">x_a</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">x_ac</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span><span class="p">,</span>
@@ -1228,7 +1228,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_cool_6</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_ac</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
@@ -1236,7 +1236,7 @@
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchrotron SED with SSA assuming the ordering :math:`\nu &lt; \nu_{ac} &lt; \nu_a &lt; \nu_m`.</span>
 
 <span class="sd">    In this configuration, the cooling break lies *above* the self-absorption</span>
@@ -1282,7 +1282,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    - Assumes fast cooling with the cooling break hidden by SSA.</span>
 <span class="sd">    - The :math:`11/8` segment reflects stratified absorption in a cooling flow.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Determine the nu/nu_a, nu/nu_m, and nu/nu_c ratios.</span>
     <span class="n">x_a</span><span class="p">,</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">x_ac</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_ac</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
 
@@ -1307,14 +1307,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_cool_7</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchrotron SED with SSA in the **slow-cooling** regime, assuming the ordering :math:`\nu &lt; \nu_m &lt; \nu_a`.</span>
 
 <span class="sd">    In this case, both the cooling break and any stratified absorption structure</span>
@@ -1357,7 +1357,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    - This regime corresponds to extreme self-absorption in a fast-cooling system.</span>
 <span class="sd">    - No explicit cooling break appears in the observable spectrum.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Determine the nu/nu_a and nu/nu_m ratios</span>
     <span class="n">x_a</span><span class="p">,</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
 
@@ -1378,14 +1378,14 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_powerlaw_sbpl_sed_ssa_cool_8</span><span class="p">(</span>
-    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_nu_m</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_nu_max</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Synchrotron SED with SSA in the **fast-cooling** regime, assuming the ordering :math:`\nu_c &lt; \nu_m &lt; \nu_a`.</span>
 
 <span class="sd">    In this case, both the cooling break and any stratified absorption structure</span>
@@ -1428,7 +1428,7 @@
 <span class="sd">    -----</span>
 <span class="sd">    - This regime corresponds to extreme self-absorption in a fast-cooling system.</span>
 <span class="sd">    - No explicit cooling break appears in the observable spectrum.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Determine the nu/nu_a and nu/nu_m ratios</span>
     <span class="n">x_a</span><span class="p">,</span> <span class="n">x_m</span><span class="p">,</span> <span class="n">x_max</span> <span class="o">=</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_a</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_m</span><span class="p">,</span> <span class="n">log_nu</span> <span class="o">-</span> <span class="n">log_nu_max</span>
 
@@ -1449,16 +1449,16 @@
 
 
 <span class="n">SSA_COOLING_SED_FUNCTION_REGISTRY</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Spectrum1&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_1</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum2&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_2</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum3&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_3</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum4&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_4</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum5&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_5</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum6&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_6</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum7&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_7</span><span class="p">,</span>
-    <span class="s2">&quot;Spectrum8&quot;</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_8</span><span class="p">,</span>
+    <span class="s2">"Spectrum1"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_1</span><span class="p">,</span>
+    <span class="s2">"Spectrum2"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_2</span><span class="p">,</span>
+    <span class="s2">"Spectrum3"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_3</span><span class="p">,</span>
+    <span class="s2">"Spectrum4"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_4</span><span class="p">,</span>
+    <span class="s2">"Spectrum5"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_5</span><span class="p">,</span>
+    <span class="s2">"Spectrum6"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_6</span><span class="p">,</span>
+    <span class="s2">"Spectrum7"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_7</span><span class="p">,</span>
+    <span class="s2">"Spectrum8"</span><span class="p">:</span> <span class="n">_log_powerlaw_sbpl_sed_ssa_cool_8</span><span class="p">,</span>
 <span class="p">}</span>
-<span class="sd">&quot;&quot;&quot;dict: Registry mapping SSA cooling regimes to their corresponding SED functions.&quot;&quot;&quot;</span>
+<span class="sd">"""dict: Registry mapping SSA cooling regimes to their corresponding SED functions."""</span>
 </pre></div>
 
                 </article>
@@ -1488,8 +1488,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1523,7 +1523,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

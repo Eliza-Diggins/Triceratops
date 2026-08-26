@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/radiation/synchrotron/SEDs/numerical/one_zone';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.radiation.synchrotron.SEDs.numerical.one_zone</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Non-relativistic and ultra-relativistic spherical synchrotron engines.</span>
 
 <span class="sd">Geometry-specializing wrappers around</span>
@@ -460,7 +460,7 @@
 <span class="sd">--------</span>
 <span class="sd">:class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`</span>
 <span class="sd">    Base engine providing all low-level numerical synchrotron machinery.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Union</span>
@@ -475,7 +475,7 @@
 <div class="viewcode-block" id="NonRelativisticSphericalSynchrotronEngine">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.one_zone.NonRelativisticSphericalSynchrotronEngine.html#trilobite.radiation.synchrotron.SEDs.numerical.one_zone.NonRelativisticSphericalSynchrotronEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NonRelativisticSphericalSynchrotronEngine</span><span class="p">(</span><span class="n">NumericalSynchrotronEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Non-relativistic spherical synchrotron engine.</span>
 
 <span class="sd">    A thin geometry-specializing wrapper around</span>
@@ -500,7 +500,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`</span>
 <span class="sd">        Base class providing all low-level numerical synchrotron machinery.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_spherical_geometry</span><span class="p">(</span>
@@ -508,7 +508,7 @@
         <span class="n">f_V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">f_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``(slab_depth_cgs, A_eff_cgs)`` from sphere parameters.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return ``(slab_depth_cgs, A_eff_cgs)`` from sphere parameters."""</span>
         <span class="n">R_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
         <span class="n">slab_depth_cgs</span> <span class="o">=</span> <span class="n">f_V</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">R_cgs</span>
         <span class="n">A_eff_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">R_cgs</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f_A</span>
@@ -535,7 +535,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame specific intensity :math:`I_\nu` for a non-relativistic spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -574,7 +574,7 @@
 <span class="sd">        I_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame specific intensity in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spherical_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_specific_intensity</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -614,7 +614,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame spectral flux density :math:`F_\nu` for a non-relativistic spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -664,7 +664,7 @@
 <span class="sd">        F_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame spectral flux density in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spherical_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_flux_density</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -704,7 +704,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame brightness temperature :math:`T_B` for a non-relativistic spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -740,7 +740,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        T_B : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame brightness temperature in Kelvin.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spherical_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_brightness_temperature</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -775,8 +775,8 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the comoving-frame spectral luminosity density :math:`L&#39;_{\nu&#39;}` for a NR spherical source.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">        Compute the comoving-frame spectral luminosity density :math:`L'_{\nu'}` for a NR spherical source.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -813,7 +813,7 @@
 <span class="sd">        L_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Comoving-frame spectral luminosity density in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spherical_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_rest_frame_luminosity_density</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -847,7 +847,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame spectral luminosity density :math:`L_\nu` for a non-relativistic spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -887,7 +887,7 @@
 <span class="sd">        L_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame spectral luminosity density in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spherical_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_luminosity_density</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -928,7 +928,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the isotropic-equivalent spectral luminosity :math:`L_{\nu,\mathrm{iso}}` for a NR spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -976,7 +976,7 @@
 <span class="sd">        L_iso : ~astropy.units.Quantity</span>
 <span class="sd">            Isotropic-equivalent spectral luminosity in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spherical_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_isotropic_luminosity</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1004,7 +1004,7 @@
 <div class="viewcode-block" id="UltraRelativisticSphericalSynchrotronEngine">
 <a class="viewcode-back" href="../../../../../../_as_gen/trilobite.radiation.synchrotron.SEDs.numerical.one_zone.UltraRelativisticSphericalSynchrotronEngine.html#trilobite.radiation.synchrotron.SEDs.numerical.one_zone.UltraRelativisticSphericalSynchrotronEngine">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">UltraRelativisticSphericalSynchrotronEngine</span><span class="p">(</span><span class="n">NumericalSynchrotronEngine</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Ultra-relativistic spherical synchrotron engine (beamed-cap approximation).</span>
 
 <span class="sd">    A thin geometry-specializing wrapper around</span>
@@ -1019,7 +1019,7 @@
 <span class="sd">    .. math::</span>
 
 <span class="sd">        A_\mathrm{eff} = \frac{\pi R^2 f_A}{\Gamma^2}, \qquad</span>
-<span class="sd">        \ell&#39; = \frac{f_V\,R}{\Gamma},</span>
+<span class="sd">        \ell' = \frac{f_V\,R}{\Gamma},</span>
 
 <span class="sd">    and the bulk velocity is derived self-consistently as</span>
 <span class="sd">    :math:`\beta = \sqrt{1 - \Gamma^{-2}}`. The line-of-sight angle is fixed at</span>
@@ -1029,7 +1029,7 @@
 <span class="sd">    --------</span>
 <span class="sd">    :class:`~trilobite.radiation.synchrotron.SEDs.numerical.core.NumericalSynchrotronEngine`</span>
 <span class="sd">        Base class providing all low-level numerical synchrotron machinery.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_ultra_rel_geometry</span><span class="p">(</span>
@@ -1038,7 +1038,7 @@
         <span class="n">f_V</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">f_A</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return ``(slab_depth_cgs, A_eff_cgs, beta)`` from blast-wave parameters.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Return ``(slab_depth_cgs, A_eff_cgs, beta)`` from blast-wave parameters."""</span>
         <span class="n">R_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span>
         <span class="n">slab_depth_cgs</span> <span class="o">=</span> <span class="n">f_V</span> <span class="o">*</span> <span class="n">R_cgs</span> <span class="o">/</span> <span class="n">Gamma</span>
         <span class="n">A_eff_cgs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">R_cgs</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f_A</span> <span class="o">/</span> <span class="n">Gamma</span><span class="o">**</span><span class="mi">2</span>
@@ -1067,7 +1067,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame specific intensity :math:`I_\nu` for an UR spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -1088,7 +1088,7 @@
 <span class="sd">            Explicit electron Lorentz factor grid.</span>
 <span class="sd">        f_V : float, optional</span>
 <span class="sd">            Volume filling factor; sets</span>
-<span class="sd">            :math:`\ell&#39; = f_V R / \Gamma`. Default ``1.0``.</span>
+<span class="sd">            :math:`\ell' = f_V R / \Gamma`. Default ``1.0``.</span>
 <span class="sd">        z : float, optional</span>
 <span class="sd">            Source redshift. Default ``0``.</span>
 <span class="sd">        alpha : float, ~astropy.units.Quantity, or None, optional</span>
@@ -1105,7 +1105,7 @@
 <span class="sd">        I_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame specific intensity in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}\,sr^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ultra_rel_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_specific_intensity</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1146,7 +1146,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame spectral flux density :math:`F_\nu` for an UR spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -1167,7 +1167,7 @@
 <span class="sd">            Explicit electron Lorentz factor grid.</span>
 <span class="sd">        f_V : float, optional</span>
 <span class="sd">            Volume filling factor; sets</span>
-<span class="sd">            :math:`\ell&#39; = f_V R / \Gamma`. Default ``1.0``.</span>
+<span class="sd">            :math:`\ell' = f_V R / \Gamma`. Default ``1.0``.</span>
 <span class="sd">        f_A : float, optional</span>
 <span class="sd">            Area filling factor; sets</span>
 <span class="sd">            :math:`A_\mathrm{eff} = \pi R^2 f_A / \Gamma^2`. Default ``1.0``.</span>
@@ -1195,7 +1195,7 @@
 <span class="sd">        F_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame spectral flux density in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,cm^{-2}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ultra_rel_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_flux_density</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1236,7 +1236,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame brightness temperature :math:`T_B` for an UR spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -1257,7 +1257,7 @@
 <span class="sd">            Explicit electron Lorentz factor grid.</span>
 <span class="sd">        f_V : float, optional</span>
 <span class="sd">            Volume filling factor; sets</span>
-<span class="sd">            :math:`\ell&#39; = f_V R / \Gamma`. Default ``1.0``.</span>
+<span class="sd">            :math:`\ell' = f_V R / \Gamma`. Default ``1.0``.</span>
 <span class="sd">        z : float, optional</span>
 <span class="sd">            Source redshift. Default ``0``.</span>
 <span class="sd">        alpha : float, ~astropy.units.Quantity, or None, optional</span>
@@ -1273,7 +1273,7 @@
 <span class="sd">        -------</span>
 <span class="sd">        T_B : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame brightness temperature in Kelvin.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ultra_rel_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_brightness_temperature</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1309,8 +1309,8 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute the comoving-frame spectral luminosity density :math:`L&#39;_{\nu&#39;}` for an UR spherical source.</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
+<span class="sd">        Compute the comoving-frame spectral luminosity density :math:`L'_{\nu'}` for an UR spherical source.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -1330,7 +1330,7 @@
 <span class="sd">            Explicit electron Lorentz factor grid.</span>
 <span class="sd">        f_V : float, optional</span>
 <span class="sd">            Volume filling factor; sets</span>
-<span class="sd">            :math:`\ell&#39; = f_V R / \Gamma`. Default ``1.0``.</span>
+<span class="sd">            :math:`\ell' = f_V R / \Gamma`. Default ``1.0``.</span>
 <span class="sd">        f_A : float, optional</span>
 <span class="sd">            Area filling factor; sets</span>
 <span class="sd">            :math:`A_\mathrm{eff} = \pi R^2 f_A / \Gamma^2`. Default ``1.0``.</span>
@@ -1348,7 +1348,7 @@
 <span class="sd">        L_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Comoving-frame spectral luminosity density in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ultra_rel_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_rest_frame_luminosity_density</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1383,7 +1383,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the observer-frame spectral luminosity density :math:`L_\nu` for an ultra-relativistic spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -1404,7 +1404,7 @@
 <span class="sd">            Explicit electron Lorentz factor grid.</span>
 <span class="sd">        f_V : float, optional</span>
 <span class="sd">            Volume filling factor; sets</span>
-<span class="sd">            :math:`\ell&#39; = f_V R / \Gamma`. Default ``1.0``.</span>
+<span class="sd">            :math:`\ell' = f_V R / \Gamma`. Default ``1.0``.</span>
 <span class="sd">        f_A : float, optional</span>
 <span class="sd">            Area filling factor; sets</span>
 <span class="sd">            :math:`A_\mathrm{eff} = \pi R^2 f_A / \Gamma^2`. Default ``1.0``.</span>
@@ -1424,7 +1424,7 @@
 <span class="sd">        L_nu : ~astropy.units.Quantity</span>
 <span class="sd">            Observer-frame spectral luminosity density in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ultra_rel_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_luminosity_density</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1466,7 +1466,7 @@
         <span class="n">gamma_max</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1e8</span><span class="p">,</span>
         <span class="n">n_gamma</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">        Compute the spectral luminosity :math:`L_{\nu,\mathrm{iso}}` for an ultra-relativistic spherical source.</span>
 
 <span class="sd">        Parameters</span>
@@ -1487,7 +1487,7 @@
 <span class="sd">            Explicit electron Lorentz factor grid.</span>
 <span class="sd">        f_V : float, optional</span>
 <span class="sd">            Volume filling factor; sets</span>
-<span class="sd">            :math:`\ell&#39; = f_V R / \Gamma`. Default ``1.0``.</span>
+<span class="sd">            :math:`\ell' = f_V R / \Gamma`. Default ``1.0``.</span>
 <span class="sd">        f_A : float, optional</span>
 <span class="sd">            Area filling factor; sets</span>
 <span class="sd">            :math:`A_\mathrm{eff} = \pi R^2 f_A / \Gamma^2`. Default ``1.0``.</span>
@@ -1515,7 +1515,7 @@
 <span class="sd">        L_iso : ~astropy.units.Quantity</span>
 <span class="sd">            Isotropic-equivalent spectral luminosity in</span>
 <span class="sd">            :math:`\mathrm{erg\,s^{-1}\,Hz^{-1}}`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">slab_depth</span><span class="p">,</span> <span class="n">A_eff</span><span class="p">,</span> <span class="n">beta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ultra_rel_geometry</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Gamma</span><span class="p">,</span> <span class="n">f_V</span><span class="p">,</span> <span class="n">f_A</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">compute_isotropic_luminosity</span><span class="p">(</span>
             <span class="n">nu</span><span class="p">,</span>
@@ -1567,8 +1567,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1602,7 +1602,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/utils/io_utils';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.utils.io_utils</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;IO utilities for Trilobite.&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""IO utilities for Trilobite."""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
@@ -466,11 +466,11 @@
 <span class="c1"># YAML Reader/Writer tools                        #</span>
 <span class="c1"># ----------------------------------------------- #</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">_YAMLHandler</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Abstract base class for defining custom YAML representers and constructors.</span>
 
 <span class="sd">    Subclasses must define:</span>
-<span class="sd">        - `__tag__`: a YAML tag string (e.g., &quot;!unyt_quantity&quot;)</span>
+<span class="sd">        - `__tag__`: a YAML tag string (e.g., "!unyt_quantity")</span>
 <span class="sd">        - `__type__`: the Python type to associate with this handler</span>
 <span class="sd">        - `to_yaml()`: a static method to serialize the Python object to a YAML node</span>
 <span class="sd">        - `from_yaml()`: a static method to deserialize a YAML node to a Python object</span>
@@ -481,33 +481,33 @@
 <span class="sd">    Example</span>
 <span class="sd">    -------</span>
 <span class="sd">    class MyTypeHandler(_YAMLHandler):</span>
-<span class="sd">        __tag__ = &quot;!my_type&quot;</span>
+<span class="sd">        __tag__ = "!my_type"</span>
 <span class="sd">        __type__ = MyType</span>
 
 <span class="sd">        @staticmethod</span>
 <span class="sd">        def to_yaml(representer, obj):</span>
 <span class="sd">            return representer.represent_mapping(MyTypeHandler.__tag__, {</span>
-<span class="sd">                &quot;x&quot;: obj.x,</span>
-<span class="sd">                &quot;y&quot;: obj.y</span>
+<span class="sd">                "x": obj.x,</span>
+<span class="sd">                "y": obj.y</span>
 <span class="sd">            })</span>
 
 <span class="sd">        @staticmethod</span>
 <span class="sd">        def from_yaml(loader, node):</span>
 <span class="sd">            data = CommentedMap()</span>
 <span class="sd">            loader.construct_mapping(node, maptyp=data,  deep=True)</span>
-<span class="sd">            return MyType(data[&quot;x&quot;], data[&quot;y&quot;])</span>
+<span class="sd">            return MyType(data["x"], data["y"])</span>
 
 <span class="sd">    yaml = YAML()</span>
 <span class="sd">    MyTypeHandler.register(yaml)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">__tag__</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__type__</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@staticmethod</span>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">to_yaml</span><span class="p">(</span><span class="n">representer</span><span class="p">:</span> <span class="s2">&quot;Representer&quot;</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Node&quot;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">to_yaml</span><span class="p">(</span><span class="n">representer</span><span class="p">:</span> <span class="s2">"Representer"</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Node"</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert a Python object to a YAML node.</span>
 
 <span class="sd">        Parameters</span>
@@ -521,13 +521,13 @@
 <span class="sd">        -------</span>
 <span class="sd">        ``ruamel.yaml.nodes.Node``</span>
 <span class="sd">            A YAML node representing the serialized object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">pass</span>
 
     <span class="nd">@staticmethod</span>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_yaml</span><span class="p">(</span><span class="n">loader</span><span class="p">:</span> <span class="s2">&quot;Constructor&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="s2">&quot;Node&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_yaml</span><span class="p">(</span><span class="n">loader</span><span class="p">:</span> <span class="s2">"Constructor"</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="s2">"Node"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Convert a YAML node to a Python object.</span>
 
 <span class="sd">        Parameters</span>
@@ -541,21 +541,21 @@
 <span class="sd">        -------</span>
 <span class="sd">        Any</span>
 <span class="sd">            The deserialized Python object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">pass</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">yaml</span><span class="p">:</span> <span class="s2">&quot;YAML&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Register this handler&#39;s representer and constructor with a YAML instance.</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">register</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">yaml</span><span class="p">:</span> <span class="s2">"YAML"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Register this handler's representer and constructor with a YAML instance.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        yaml : ``ruamel.yaml.YAML``</span>
 <span class="sd">            The YAML instance to register the handler with.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__tag__</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__type__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must define both __tag__ and __type__.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> must define both __tag__ and __type__."</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">__type__</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">set</span><span class="p">)):</span>
             <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__type__</span><span class="p">:</span>
@@ -569,9 +569,9 @@
 <div class="viewcode-block" id="AstropyQuantityHandler">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.io_utils.AstropyQuantityHandler.html#trilobite.utils.io_utils.AstropyQuantityHandler">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AstropyQuantityHandler</span><span class="p">(</span><span class="n">_YAMLHandler</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Astropy Quantity handler for YAML serialization/deserialization.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Astropy Quantity handler for YAML serialization/deserialization."""</span>
 
-    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">&quot;!astropy_quantity&quot;</span>
+    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">"!astropy_quantity"</span>
     <span class="n">__type__</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span>
 
 <div class="viewcode-block" id="AstropyQuantityHandler.to_yaml">
@@ -579,14 +579,14 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_yaml</span><span class="p">(</span><span class="n">representer</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">):</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">value</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">&quot;tolist&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="s2">"tolist"</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="n">representer</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span>
             <span class="n">AstropyQuantityHandler</span><span class="o">.</span><span class="n">__tag__</span><span class="p">,</span>
             <span class="p">{</span>
-                <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
-                <span class="s2">&quot;unit&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span>
+                <span class="s2">"value"</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+                <span class="s2">"unit"</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to_string</span><span class="p">(),</span>
             <span class="p">},</span>
         <span class="p">)</span></div>
 
@@ -598,11 +598,11 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">CommentedMap</span><span class="p">()</span>
         <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">maptyp</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;unit&quot;</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Unit</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"unit"</span><span class="p">])</span></div>
 </div>
 
 
@@ -610,14 +610,14 @@
 <div class="viewcode-block" id="AstropyCosmologyHandler">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.io_utils.AstropyCosmologyHandler.html#trilobite.utils.io_utils.AstropyCosmologyHandler">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">AstropyCosmologyHandler</span><span class="p">(</span><span class="n">_YAMLHandler</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    YAML handler for Astropy built-in cosmologies.</span>
 
-<span class="sd">    Stores only the cosmology name (e.g., &quot;Planck18&quot;) and</span>
-<span class="sd">    reconstructs using Astropy&#39;s cosmology registry.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    Stores only the cosmology name (e.g., "Planck18") and</span>
+<span class="sd">    reconstructs using Astropy's cosmology registry.</span>
+<span class="sd">    """</span>
 
-    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">&quot;!astropy_cosmology&quot;</span>
+    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">"!astropy_cosmology"</span>
     <span class="n">__type__</span> <span class="o">=</span> <span class="p">[</span><span class="n">FlatLambdaCDM</span><span class="p">,</span> <span class="n">FLRW</span><span class="p">]</span>
 
 <div class="viewcode-block" id="AstropyCosmologyHandler.to_yaml">
@@ -626,11 +626,11 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_yaml</span><span class="p">(</span><span class="n">representer</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">FLRW</span><span class="p">):</span>
         <span class="c1"># Require that cosmology has a name</span>
         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Only named cosmologies can be serialized. Custom cosmologies are not supported.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Only named cosmologies can be serialized. Custom cosmologies are not supported."</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">representer</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span>
             <span class="n">AstropyCosmologyHandler</span><span class="o">.</span><span class="n">__tag__</span><span class="p">,</span>
-            <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">name</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">"name"</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">name</span><span class="p">},</span>
         <span class="p">)</span></div>
 
 
@@ -643,12 +643,12 @@
         <span class="n">data</span> <span class="o">=</span> <span class="n">CommentedMap</span><span class="p">()</span>
         <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">maptyp</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-        <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cosmology</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">exp</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown built-in cosmology: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exp</span></div>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown built-in cosmology: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">exp</span></div>
 </div>
 
 
@@ -656,9 +656,9 @@
 <div class="viewcode-block" id="NumpyArrayHandler">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.io_utils.NumpyArrayHandler.html#trilobite.utils.io_utils.NumpyArrayHandler">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">NumpyArrayHandler</span><span class="p">(</span><span class="n">_YAMLHandler</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;NumPy array handler for YAML serialization/deserialization.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""NumPy array handler for YAML serialization/deserialization."""</span>
 
-    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">&quot;!ndarray&quot;</span>
+    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">"!ndarray"</span>
     <span class="n">__type__</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
 <div class="viewcode-block" id="NumpyArrayHandler.to_yaml">
@@ -667,7 +667,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_yaml</span><span class="p">(</span><span class="n">representer</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="c1"># We store both dtype and shape to ensure safe reconstruction</span>
         <span class="k">return</span> <span class="n">representer</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span>
-            <span class="n">NumpyArrayHandler</span><span class="o">.</span><span class="n">__tag__</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;dtype&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="s2">&quot;shape&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+            <span class="n">NumpyArrayHandler</span><span class="o">.</span><span class="n">__tag__</span><span class="p">,</span> <span class="p">{</span><span class="s2">"dtype"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="s2">"shape"</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
         <span class="p">)</span></div>
 
 
@@ -679,17 +679,17 @@
         <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">maptyp</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># Validate required fields</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;dtype&quot;</span><span class="p">,</span> <span class="s2">&quot;shape&quot;</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">)):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid ndarray YAML mapping: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">k</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">"dtype"</span><span class="p">,</span> <span class="s2">"shape"</span><span class="p">,</span> <span class="s2">"data"</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid ndarray YAML mapping: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
-        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;dtype&quot;</span><span class="p">]))</span>
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"data"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">dtype</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"dtype"</span><span class="p">]))</span>
 
         <span class="c1"># Optionally enforce shape</span>
-        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;shape&quot;</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"shape"</span><span class="p">]):</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;shape&quot;</span><span class="p">])</span>
+                <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">"shape"</span><span class="p">])</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape mismatch when reconstructing ndarray: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Shape mismatch when reconstructing ndarray: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="nn">e</span>
 
         <span class="k">return</span> <span class="n">arr</span></div>
 </div>
@@ -699,18 +699,18 @@
 <div class="viewcode-block" id="PathHandler">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.io_utils.PathHandler.html#trilobite.utils.io_utils.PathHandler">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PathHandler</span><span class="p">(</span><span class="n">_YAMLHandler</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Path handler for YAML serialization/deserialization.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Path handler for YAML serialization/deserialization."""</span>
 
-    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">&quot;!path&quot;</span>
+    <span class="n">__tag__</span> <span class="o">=</span> <span class="s2">"!path"</span>
     <span class="n">__type__</span> <span class="o">=</span> <span class="n">Path</span>
 
 <div class="viewcode-block" id="PathHandler.to_yaml">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.io_utils.PathHandler.to_yaml.html#trilobite.utils.io_utils.PathHandler.to_yaml">[docs]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_yaml</span><span class="p">(</span><span class="n">representer</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;absolute&quot;</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">(),</span> <span class="s2">&quot;parts&quot;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">parts</span><span class="p">)}</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"absolute"</span><span class="p">:</span> <span class="n">obj</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">(),</span> <span class="s2">"parts"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">parts</span><span class="p">)}</span>
         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">drive</span><span class="p">:</span>
-            <span class="n">data</span><span class="p">[</span><span class="s2">&quot;drive&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">drive</span>
+            <span class="n">data</span><span class="p">[</span><span class="s2">"drive"</span><span class="p">]</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">drive</span>
         <span class="k">return</span> <span class="n">representer</span><span class="o">.</span><span class="n">represent_mapping</span><span class="p">(</span><span class="n">PathHandler</span><span class="o">.</span><span class="n">__tag__</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
 
@@ -720,9 +720,9 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">from_yaml</span><span class="p">(</span><span class="n">loader</span><span class="p">,</span> <span class="n">node</span><span class="p">):</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">CommentedMap</span><span class="p">()</span>
         <span class="n">loader</span><span class="o">.</span><span class="n">construct_mapping</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">maptyp</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">parts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;parts&quot;</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">parts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"parts"</span><span class="p">,</span> <span class="p">[])</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="o">*</span><span class="n">parts</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;absolute&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"absolute"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">path</span><span class="o">.</span><span class="n">is_absolute</span><span class="p">():</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">path</span></div>
 </div>
@@ -731,8 +731,8 @@
 
 <div class="viewcode-block" id="get_unit_compatible_yaml">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.utils.io_utils.get_unit_compatible_yaml.html#trilobite.utils.io_utils.get_unit_compatible_yaml">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">get_unit_compatible_yaml</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">&quot;YAML&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_unit_compatible_yaml</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s2">"YAML"</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Get a YAML instance configured for unyt compatibility.</span>
 
 <span class="sd">    This function creates a `ruamel.yaml.YAML` instance and registers</span>
@@ -742,10 +742,10 @@
 <span class="sd">    -------</span>
 <span class="sd">    ``ruamel.yaml.YAML``</span>
 <span class="sd">        A YAML instance with unyt support.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">ruamel.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">YAML</span>
 
-    <span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">(</span><span class="n">typ</span><span class="o">=</span><span class="s2">&quot;rt&quot;</span><span class="p">)</span>
+    <span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">(</span><span class="n">typ</span><span class="o">=</span><span class="s2">"rt"</span><span class="p">)</span>
 
     <span class="n">AstropyQuantityHandler</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">yaml</span><span class="p">)</span>
     <span class="n">PathHandler</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">yaml</span><span class="p">)</span>
@@ -786,8 +786,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -821,7 +821,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

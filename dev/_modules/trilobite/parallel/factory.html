@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/parallel/factory';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,14 +444,14 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.parallel.factory</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Factory utilities for constructing parallel pool instances.</span>
 
 <span class="sd">This module provides :func:`make_pool`, a convenience function for creating</span>
 <span class="sd">pool objects without importing backend-specific modules directly. Backend</span>
 <span class="sd">modules are imported lazily so that optional dependencies (e.g. ``mpi4py``)</span>
 <span class="sd">are only required when the corresponding backend is actually requested.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
 
@@ -465,19 +465,19 @@
     <span class="n">problem</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Construct a parallel pool for the given backend.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    backend : str</span>
-<span class="sd">        Pool backend to construct. One of ``&quot;serial&quot;``, ``&quot;mp&quot;``, ``&quot;mpi&quot;``.</span>
+<span class="sd">        Pool backend to construct. One of ``"serial"``, ``"mp"``, ``"mpi"``.</span>
 <span class="sd">    problem : InferenceProblem, optional</span>
-<span class="sd">        Inference problem instance. Required for ``&quot;mp&quot;`` and ``&quot;mpi&quot;`` backends.</span>
+<span class="sd">        Inference problem instance. Required for ``"mp"`` and ``"mpi"`` backends.</span>
 <span class="sd">    **kwargs</span>
 <span class="sd">        Additional keyword arguments forwarded to the pool constructor.</span>
-<span class="sd">        For ``&quot;mp&quot;``: accepts ``processes`` and ``wait_timeout``.</span>
-<span class="sd">        For ``&quot;mpi&quot;``: accepts ``comm``.</span>
+<span class="sd">        For ``"mp"``: accepts ``processes`` and ``wait_timeout``.</span>
+<span class="sd">        For ``"mpi"``: accepts ``comm``.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -489,38 +489,38 @@
 <span class="sd">    ValueError</span>
 <span class="sd">        If `backend` is not recognised, or if `problem` is required but not supplied.</span>
 <span class="sd">    RuntimeError</span>
-<span class="sd">        If ``&quot;mpi&quot;`` is requested but ``mpi4py`` is not installed.</span>
+<span class="sd">        If ``"mpi"`` is requested but ``mpi4py`` is not installed.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    &gt;&gt;&gt; pool = make_pool(&quot;serial&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; pool = make_pool("serial")</span>
 
 <span class="sd">    &gt;&gt;&gt; pool = make_pool(</span>
-<span class="sd">    ...     &quot;mp&quot;, problem=my_problem, processes=4</span>
+<span class="sd">    ...     "mp", problem=my_problem, processes=4</span>
 <span class="sd">    ... )</span>
 
-<span class="sd">    &gt;&gt;&gt; pool = make_pool(&quot;mpi&quot;, problem=my_problem)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; pool = make_pool("mpi", problem=my_problem)</span>
+<span class="sd">    """</span>
     <span class="n">backend</span> <span class="o">=</span> <span class="n">backend</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;serial&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">"serial"</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">SerialPool</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;mp&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">"mp"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">problem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;problem&#39; must be provided for the &#39;mp&#39; backend.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"'problem' must be provided for the 'mp' backend."</span><span class="p">)</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.mp</span><span class="w"> </span><span class="kn">import</span> <span class="n">LikelihoodMPPool</span>
 
         <span class="k">return</span> <span class="n">LikelihoodMPPool</span><span class="p">(</span><span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;mpi&quot;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">"mpi"</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">problem</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;problem&#39; must be provided for the &#39;mpi&#39; backend.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"'problem' must be provided for the 'mpi' backend."</span><span class="p">)</span>
         <span class="kn">from</span><span class="w"> </span><span class="nn">.mpi</span><span class="w"> </span><span class="kn">import</span> <span class="n">LikelihoodMPIPool</span>
 
         <span class="k">return</span> <span class="n">LikelihoodMPIPool</span><span class="p">(</span><span class="n">problem</span><span class="o">=</span><span class="n">problem</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown pool backend </span><span class="si">{</span><span class="n">backend</span><span class="si">!r}</span><span class="s2">. Choose one of: &#39;serial&#39;, &#39;mp&#39;, &#39;mpi&#39;.&quot;</span><span class="p">)</span></div>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown pool backend </span><span class="si">{</span><span class="n">backend</span><span class="si">!r}</span><span class="s2">. Choose one of: 'serial', 'mp', 'mpi'."</span><span class="p">)</span></div>
 
 </pre></div>
 
@@ -551,8 +551,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -586,7 +586,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

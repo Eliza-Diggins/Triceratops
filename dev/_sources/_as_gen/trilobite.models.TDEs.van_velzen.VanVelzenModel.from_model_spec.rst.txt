@@ -1,0 +1,6 @@
+trilobite.models.TDEs.van\_velzen.VanVelzenModel.from\_model\_spec
+==================================================================
+
+.. currentmodule:: trilobite.models.TDEs.van_velzen
+
+.. automethod:: VanVelzenModel.from_model_spec

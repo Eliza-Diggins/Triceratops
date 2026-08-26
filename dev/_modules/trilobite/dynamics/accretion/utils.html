@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/dynamics/accretion/utils';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.dynamics.accretion.utils</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Accretion disk utility functions.</span>
 
 <span class="sd">This module provides low-level functions covering the core recurring calculations</span>
@@ -461,7 +461,7 @@
 <span class="sd">--------</span>
 <span class="sd">:mod:`.one_zone.core` : One-zone disk models that consume these utilities.</span>
 <span class="sd">:ref:`one_zone_disk`, :ref:`one_zone_disk_theory`</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Union</span>
 
@@ -479,8 +479,8 @@
 <span class="c1"># ================================================================== #</span>
 <span class="c1"># Private (log-space CGS)                                            #</span>
 <span class="c1"># ================================================================== #</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_omega_K</span><span class="p">(</span><span class="n">log_M_BH</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_R</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_omega_K</span><span class="p">(</span><span class="n">log_M_BH</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_R</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln \Omega_K` from the BH mass and radius.</span>
 
 <span class="sd">    .. math::</span>
@@ -488,95 +488,95 @@
 <span class="sd">        \Omega_K = \sqrt{\frac{G M_{\rm BH}}{R^3}}</span>
 <span class="sd">        \implies</span>
 <span class="sd">        \ln \Omega_K = \tfrac{1}{2}\left(\ln G + \ln M_{\rm BH} - 3\ln R\right)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">_log_G_cgs</span> <span class="o">+</span> <span class="n">log_M_BH</span> <span class="o">-</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">log_R</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln Q^+` from viscosity, surface density, and angular velocity.</span>
 
 <span class="sd">    .. math::</span>
 
 <span class="sd">        Q^+ = \frac{9}{8} \nu \Sigma \Omega^2</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">9.0</span> <span class="o">/</span> <span class="mf">8.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_nu</span> <span class="o">+</span> <span class="n">log_sigma</span> <span class="o">+</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_omega</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_f</span><span class="p">(</span><span class="n">log_R</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`\ln f(R)` where :math:`f(R) = 1 - \sqrt{R_{\rm in}/R}`.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_compute_log_f</span><span class="p">(</span><span class="n">log_R</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`\ln f(R)` where :math:`f(R) = 1 - \sqrt{R_{\rm in}/R}`."""</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_R_in</span> <span class="o">-</span> <span class="n">log_R</span><span class="p">)))</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_visc_dissipation_rate_from_mdot</span><span class="p">(</span>
-    <span class="n">log_M_BH</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">log_M_dot</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">log_R</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">log_R_in</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="n">log_M_BH</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">log_M_dot</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">log_R</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+    <span class="n">log_R_in</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln Q^+` from the accretion rate in steady state.</span>
 
 <span class="sd">    .. math::</span>
 
 <span class="sd">        Q^+ = \frac{3 G M_{\rm BH} \dot{M}}{8\pi R^3}</span>
 <span class="sd">              \left(1 - \sqrt{\frac{R_{\rm in}}{R}}\right)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">3.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">8.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">+</span> <span class="n">_log_G_cgs</span> <span class="o">+</span> <span class="n">log_M_BH</span> <span class="o">+</span> <span class="n">log_M_dot</span> <span class="o">-</span> <span class="mf">3.0</span> <span class="o">*</span> <span class="n">log_R</span> <span class="o">+</span> <span class="n">_compute_log_f</span><span class="p">(</span><span class="n">log_R</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">)</span>
     <span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_T_eff_from_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_Q_plus</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_T_eff_from_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_Q_plus</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln T_{\rm eff}` from the surface dissipation rate.</span>
 
 <span class="sd">    .. math::</span>
 
 <span class="sd">        T_{\rm eff} = \left(\frac{Q^+}{\sigma_{\rm SB}}\right)^{1/4}</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">log_Q_plus</span> <span class="o">-</span> <span class="n">_log_sigma_sb_cgs</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_T_eff_from_nu</span><span class="p">(</span><span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`\ln T_{\rm eff}` directly from viscosity, surface density, and :math:`\Omega`.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_T_eff_from_nu</span><span class="p">(</span><span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`\ln T_{\rm eff}` directly from viscosity, surface density, and :math:`\Omega`."""</span>
     <span class="n">log_Q_plus</span> <span class="o">=</span> <span class="n">_log_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_log_T_eff_from_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_Q_plus</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_alpha_viscosity</span><span class="p">(</span><span class="n">log_cs_sq</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_alpha_viscosity</span><span class="p">(</span><span class="n">log_cs_sq</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln \nu` under the Shakura-Sunyaev alpha prescription.</span>
 
 <span class="sd">    .. math::</span>
 
 <span class="sd">        \nu = \alpha \frac{c_s^2}{\Omega}</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_cs_sq</span> <span class="o">-</span> <span class="n">log_omega</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_viscous_timescale</span><span class="p">(</span><span class="n">log_R</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`\ln t_{\rm visc}` where :math:`t_{\rm visc} = R^2 / \nu`.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_viscous_timescale</span><span class="p">(</span><span class="n">log_R</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`\ln t_{\rm visc}` where :math:`t_{\rm visc} = R^2 / \nu`."""</span>
     <span class="k">return</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R</span> <span class="o">-</span> <span class="n">log_nu</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_scale_height</span><span class="p">(</span><span class="n">log_cs</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`\ln H` where :math:`H = c_s / \Omega`.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_scale_height</span><span class="p">(</span><span class="n">log_cs</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`\ln H` where :math:`H = c_s / \Omega`."""</span>
     <span class="k">return</span> <span class="n">log_cs</span> <span class="o">-</span> <span class="n">log_omega</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_midplane_density</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_H</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`\ln \rho_{\rm mid}` where :math:`\rho_{\rm mid} = \Sigma / (2H)`.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_midplane_density</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_H</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`\ln \rho_{\rm mid}` where :math:`\rho_{\rm mid} = \Sigma / (2H)`."""</span>
     <span class="k">return</span> <span class="n">log_sigma</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_H</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_optical_depth</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_kappa</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;Compute :math:`\ln \tau` where :math:`\tau = \Sigma \kappa`.&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_optical_depth</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_kappa</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""Compute :math:`\ln \tau` where :math:`\tau = \Sigma \kappa`."""</span>
     <span class="k">return</span> <span class="n">log_sigma</span> <span class="o">+</span> <span class="n">log_kappa</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_log_central_temperature</span><span class="p">(</span><span class="n">log_T_eff</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">log_tau</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_log_central_temperature</span><span class="p">(</span><span class="n">log_T_eff</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">log_tau</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln T_c` for an optically thick blackbody disk midplane.</span>
 
 <span class="sd">    .. math::</span>
@@ -584,7 +584,7 @@
 <span class="sd">        T_c = \left(\frac{3\tau}{4}\right)^{1/4} T_{\rm eff}</span>
 <span class="sd">        \implies</span>
 <span class="sd">        \ln T_c = \tfrac{1}{4}\left(\ln\tfrac{3}{4} + \ln\tau\right) + \ln T_{\rm eff}</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">3.0</span> <span class="o">/</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_tau</span><span class="p">)</span> <span class="o">+</span> <span class="n">log_T_eff</span>
 
 
@@ -594,7 +594,7 @@
 <div class="viewcode-block" id="alpha_viscosity">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.alpha_viscosity.html#trilobite.dynamics.accretion.utils.alpha_viscosity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">alpha_viscosity</span><span class="p">(</span><span class="n">c_s</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Omega</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the kinematic viscosity under the Shakura-Sunyaev alpha prescription.</span>
 
 <span class="sd">    .. math::</span>
@@ -627,9 +627,9 @@
 <span class="sd">            1e-2 * u.rad / u.s,</span>
 <span class="sd">            alpha=0.1,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="s2">&quot;cm/s&quot;</span><span class="p">))</span>
-    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="s2">"cm/s"</span><span class="p">))</span>
+    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">"rad/s"</span><span class="p">))</span>
 
     <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_alpha_viscosity</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_cs</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">,</span> <span class="n">alpha</span><span class="p">))</span>
 
@@ -641,7 +641,7 @@
 <div class="viewcode-block" id="viscous_timescale">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.viscous_timescale.html#trilobite.dynamics.accretion.utils.viscous_timescale">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">viscous_timescale</span><span class="p">(</span><span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">nu</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the viscous (spreading) timescale.</span>
 
 <span class="sd">    .. math::</span>
@@ -669,9 +669,9 @@
 <span class="sd">        viscous_timescale(</span>
 <span class="sd">            1e10 * u.cm, 1e14 * u.cm**2 / u.s</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;cm^2/s&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
+    <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"cm^2/s"</span><span class="p">))</span>
 
     <span class="n">log_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_viscous_timescale</span><span class="p">(</span><span class="n">log_R</span><span class="p">,</span> <span class="n">log_nu</span><span class="p">))</span>
 
@@ -683,7 +683,7 @@
 <div class="viewcode-block" id="keplerian_angular_velocity">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.keplerian_angular_velocity.html#trilobite.dynamics.accretion.utils.keplerian_angular_velocity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">keplerian_angular_velocity</span><span class="p">(</span><span class="n">M_BH</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the Keplerian angular velocity at radius :math:`R`.</span>
 
 <span class="sd">    .. math::</span>
@@ -712,9 +712,9 @@
 <span class="sd">        M_BH = 3 * const.M_sun</span>
 <span class="sd">        R = 1e10 * u.cm</span>
 <span class="sd">        keplerian_angular_velocity(M_BH, R)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">))</span>
-    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">))</span>
+    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_Omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_omega_K</span><span class="p">(</span><span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_R</span><span class="p">))</span>
 
@@ -725,8 +725,8 @@
 
 <div class="viewcode-block" id="inner_boundary_correction">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.inner_boundary_correction.html#trilobite.dynamics.accretion.utils.inner_boundary_correction">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">inner_boundary_correction</span><span class="p">(</span><span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">inner_boundary_correction</span><span class="p">(</span><span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the dimensionless inner-boundary correction factor.</span>
 
 <span class="sd">    .. math::</span>
@@ -760,12 +760,12 @@
 <span class="sd">        import astropy.units as u</span>
 
 <span class="sd">        inner_boundary_correction(1e10 * u.cm, 1e9 * u.cm)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">log_R</span> <span class="o">&lt;</span> <span class="n">log_R_in</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;R must be &gt;= R_in everywhere.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"R must be &gt;= R_in everywhere."</span><span class="p">)</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_compute_log_f</span><span class="p">(</span><span class="n">log_R</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -775,7 +775,7 @@
 <div class="viewcode-block" id="viscous_dissipation_rate">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.viscous_dissipation_rate.html#trilobite.dynamics.accretion.utils.viscous_dissipation_rate">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">viscous_dissipation_rate</span><span class="p">(</span><span class="n">nu</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Omega</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the viscous surface dissipation rate.</span>
 
 <span class="sd">    .. math::</span>
@@ -804,13 +804,13 @@
 
 <span class="sd">        viscous_dissipation_rate(</span>
 <span class="sd">            1e14 * u.cm**2 / u.s,</span>
-<span class="sd">            1e3 * u.Unit(&quot;g/cm^2&quot;),</span>
+<span class="sd">            1e3 * u.Unit("g/cm^2"),</span>
 <span class="sd">            1e3 * u.rad / u.s,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;cm^2/s&quot;</span><span class="p">))</span>
-    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;g/cm^2&quot;</span><span class="p">))</span>
-    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"cm^2/s"</span><span class="p">))</span>
+    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">"g/cm^2"</span><span class="p">))</span>
+    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">"rad/s"</span><span class="p">))</span>
 
     <span class="n">log_Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">))</span>
 
@@ -827,7 +827,7 @@
     <span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the steady-state viscous dissipation rate from the accretion rate.</span>
 
 <span class="sd">    .. math::</span>
@@ -864,11 +864,11 @@
 <span class="sd">            1e10 * u.cm,</span>
 <span class="sd">            3e6 * u.cm,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">))</span>
-    <span class="n">log_mdot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">&quot;g/s&quot;</span><span class="p">))</span>
-    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_M_BH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_BH</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">))</span>
+    <span class="n">log_mdot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">mdot</span><span class="p">,</span> <span class="s2">"g/s"</span><span class="p">))</span>
+    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_visc_dissipation_rate_from_mdot</span><span class="p">(</span><span class="n">log_M_BH</span><span class="p">,</span> <span class="n">log_mdot</span><span class="p">,</span> <span class="n">log_R</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">))</span>
 
@@ -880,7 +880,7 @@
 <div class="viewcode-block" id="effective_temperature">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.effective_temperature.html#trilobite.dynamics.accretion.utils.effective_temperature">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">effective_temperature</span><span class="p">(</span><span class="n">Q_plus</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the effective (blackbody) surface temperature from the dissipation rate.</span>
 
 <span class="sd">    .. math::</span>
@@ -907,8 +907,8 @@
 <span class="sd">        effective_temperature(</span>
 <span class="sd">            1e10 * u.erg / u.cm**2 / u.s</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Q_plus</span><span class="p">,</span> <span class="s2">&quot;erg / (cm^2 s)&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_Q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Q_plus</span><span class="p">,</span> <span class="s2">"erg / (cm^2 s)"</span><span class="p">))</span>
 
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_T_eff_from_visc_dissipation_rate</span><span class="p">(</span><span class="n">log_Q</span><span class="p">))</span>
 
@@ -920,7 +920,7 @@
 <div class="viewcode-block" id="effective_temperature_from_viscosity">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.effective_temperature_from_viscosity.html#trilobite.dynamics.accretion.utils.effective_temperature_from_viscosity">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">effective_temperature_from_viscosity</span><span class="p">(</span><span class="n">nu</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Omega</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the effective surface temperature directly from viscous parameters.</span>
 
 <span class="sd">    Combines :func:`viscous_dissipation_rate` and :func:`effective_temperature`:</span>
@@ -951,13 +951,13 @@
 
 <span class="sd">        effective_temperature_from_viscosity(</span>
 <span class="sd">            1e14 * u.cm**2 / u.s,</span>
-<span class="sd">            1e3 * u.Unit(&quot;g/cm^2&quot;),</span>
+<span class="sd">            1e3 * u.Unit("g/cm^2"),</span>
 <span class="sd">            1e3 * u.rad / u.s,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;cm^2/s&quot;</span><span class="p">))</span>
-    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;g/cm^2&quot;</span><span class="p">))</span>
-    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"cm^2/s"</span><span class="p">))</span>
+    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">"g/cm^2"</span><span class="p">))</span>
+    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">"rad/s"</span><span class="p">))</span>
 
     <span class="n">log_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_T_eff_from_nu</span><span class="p">(</span><span class="n">log_nu</span><span class="p">,</span> <span class="n">log_sigma</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">))</span>
 
@@ -969,7 +969,7 @@
 <div class="viewcode-block" id="disk_scale_height">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.disk_scale_height.html#trilobite.dynamics.accretion.utils.disk_scale_height">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">disk_scale_height</span><span class="p">(</span><span class="n">c_s</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Omega</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the disk pressure scale height.</span>
 
 <span class="sd">    .. math::</span>
@@ -1003,9 +1003,9 @@
 <span class="sd">        disk_scale_height(</span>
 <span class="sd">            1e6 * u.cm / u.s, 1e-2 * u.rad / u.s</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="s2">&quot;cm/s&quot;</span><span class="p">))</span>
-    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="s2">"cm/s"</span><span class="p">))</span>
+    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">"rad/s"</span><span class="p">))</span>
 
     <span class="n">log_H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_scale_height</span><span class="p">(</span><span class="n">log_cs</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">))</span>
 
@@ -1016,8 +1016,8 @@
 
 <div class="viewcode-block" id="disk_aspect_ratio">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.disk_aspect_ratio.html#trilobite.dynamics.accretion.utils.disk_aspect_ratio">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">disk_aspect_ratio</span><span class="p">(</span><span class="n">c_s</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Omega</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">disk_aspect_ratio</span><span class="p">(</span><span class="n">c_s</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">Omega</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">R</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the disk aspect ratio :math:`h = H/R`.</span>
 
 <span class="sd">    .. math::</span>
@@ -1055,10 +1055,10 @@
 <span class="sd">            1e-2 * u.rad / u.s,</span>
 <span class="sd">            1e8 * u.cm,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="s2">&quot;cm/s&quot;</span><span class="p">))</span>
-    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">&quot;rad/s&quot;</span><span class="p">))</span>
-    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="s2">"cm/s"</span><span class="p">))</span>
+    <span class="n">log_omega</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">Omega</span><span class="p">,</span> <span class="s2">"rad/s"</span><span class="p">))</span>
+    <span class="n">log_R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_scale_height</span><span class="p">(</span><span class="n">log_cs</span><span class="p">,</span> <span class="n">log_omega</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_R</span><span class="p">)</span>
 
@@ -1070,7 +1070,7 @@
 <div class="viewcode-block" id="midplane_density">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.midplane_density.html#trilobite.dynamics.accretion.utils.midplane_density">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">midplane_density</span><span class="p">(</span><span class="n">sigma</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">H</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the disk midplane mass density.</span>
 
 <span class="sd">    .. math::</span>
@@ -1102,11 +1102,11 @@
 <span class="sd">        import astropy.units as u</span>
 
 <span class="sd">        midplane_density(</span>
-<span class="sd">            1e3 * u.Unit(&quot;g/cm^2&quot;), 1e6 * u.cm</span>
+<span class="sd">            1e3 * u.Unit("g/cm^2"), 1e6 * u.cm</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;g/cm^2&quot;</span><span class="p">))</span>
-    <span class="n">log_H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">"g/cm^2"</span><span class="p">))</span>
+    <span class="n">log_H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_rho</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_midplane_density</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">,</span> <span class="n">log_H</span><span class="p">))</span>
 
@@ -1122,7 +1122,7 @@
     <span class="n">t_visc</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">f_disk</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Estimate the accretion rate from the disk mass and viscous timescale.</span>
 
 <span class="sd">    .. math::</span>
@@ -1159,9 +1159,9 @@
 <span class="sd">        accretion_rate_from_viscous_timescale(</span>
 <span class="sd">            0.1 * const.M_sun, 1e3 * u.s</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">M_D_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_D</span><span class="p">,</span> <span class="s2">&quot;g&quot;</span><span class="p">)</span>
-    <span class="n">t_visc_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">t_visc</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">M_D_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_D</span><span class="p">,</span> <span class="s2">"g"</span><span class="p">)</span>
+    <span class="n">t_visc_cgs</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">t_visc</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">)</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">f_disk</span> <span class="o">*</span> <span class="n">M_D_cgs</span> <span class="o">/</span> <span class="n">t_visc_cgs</span><span class="p">)</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span></div>
@@ -1170,8 +1170,8 @@
 
 <div class="viewcode-block" id="optical_depth">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.optical_depth.html#trilobite.dynamics.accretion.utils.optical_depth">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">optical_depth</span><span class="p">(</span><span class="n">sigma</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">kappa</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Union[float, np.ndarray]&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">optical_depth</span><span class="p">(</span><span class="n">sigma</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">kappa</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"Union[float, np.ndarray]"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the vertical optical depth.</span>
 
 <span class="sd">    .. math::</span>
@@ -1197,11 +1197,11 @@
 <span class="sd">        import astropy.units as u</span>
 
 <span class="sd">        optical_depth(</span>
-<span class="sd">            1e3 * u.Unit(&quot;g/cm^2&quot;), 0.34 * u.cm**2 / u.g</span>
+<span class="sd">            1e3 * u.Unit("g/cm^2"), 0.34 * u.cm**2 / u.g</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">&quot;g/cm^2&quot;</span><span class="p">))</span>
-    <span class="n">log_kappa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="s2">&quot;cm^2/g&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">sigma</span><span class="p">,</span> <span class="s2">"g/cm^2"</span><span class="p">))</span>
+    <span class="n">log_kappa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">kappa</span><span class="p">,</span> <span class="s2">"cm^2/g"</span><span class="p">))</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_log_optical_depth</span><span class="p">(</span><span class="n">log_sigma</span><span class="p">,</span> <span class="n">log_kappa</span><span class="p">)))</span>
     <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">result</span></div>
@@ -1210,8 +1210,8 @@
 
 <div class="viewcode-block" id="central_temperature">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.dynamics.accretion.utils.central_temperature.html#trilobite.dynamics.accretion.utils.central_temperature">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">central_temperature</span><span class="p">(</span><span class="n">T_eff</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">tau</span><span class="p">:</span> <span class="s2">&quot;Union[float, np.ndarray]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">central_temperature</span><span class="p">(</span><span class="n">T_eff</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span> <span class="n">tau</span><span class="p">:</span> <span class="s2">"Union[float, np.ndarray]"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the disk central (midplane) temperature for an optically thick disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -1237,8 +1237,8 @@
 <span class="sd">        import astropy.units as u</span>
 
 <span class="sd">        central_temperature(1e4 * u.K, tau=100.0)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">))</span>
     <span class="n">log_tau</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span>
 
     <span class="n">log_T_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">_log_central_temperature</span><span class="p">(</span><span class="n">log_T_eff</span><span class="p">,</span> <span class="n">log_tau</span><span class="p">))</span>
@@ -1258,8 +1258,8 @@
 <span class="n">_log_sigma_sb_cgs_em</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">_log_sigma_sb_cgs</span>  <span class="c1"># alias for clarity</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_planck_fnu_cgs</span><span class="p">(</span><span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_planck_fnu_cgs</span><span class="p">(</span><span class="n">nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span> <span class="n">T</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Specific intensity of a blackbody (Planck function) in CGS.</span>
 
 <span class="sd">    .. math::</span>
@@ -1278,12 +1278,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray</span>
 <span class="sd">        :math:`B_\nu` [erg s⁻¹ cm⁻² Hz⁻¹ sr⁻¹].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">_h_cgs</span> <span class="o">*</span> <span class="n">nu</span> <span class="o">/</span> <span class="p">(</span><span class="n">_k_B_cgs</span> <span class="o">*</span> <span class="n">T</span><span class="p">)</span>
     <span class="c1"># At high frequencies (x &gt;&gt; 1) expm1 overflows; B_nu → 0 there, which is</span>
     <span class="c1"># physically correct (Wien exponential cutoff).  Suppress the benign warning.</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">over</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">over</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">_h_cgs</span> <span class="o">/</span> <span class="n">_c_cgs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">nu</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">expm1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
 
@@ -1292,7 +1292,7 @@
     <span class="n">log_R_D</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_in</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Natural log of the bolometric luminosity for a uniform-temperature disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -1317,22 +1317,22 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln L_{\rm bol}` [erg s⁻¹].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">R_D2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R_D</span><span class="p">)</span>
     <span class="n">R_in2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R_in</span><span class="p">)</span>
     <span class="n">area_diff</span> <span class="o">=</span> <span class="n">R_D2</span> <span class="o">-</span> <span class="n">R_in2</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">invalid</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="n">log_area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">area_diff</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">area_diff</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="n">_log_sigma_sb_cgs_em</span> <span class="o">+</span> <span class="mf">4.0</span> <span class="o">*</span> <span class="n">log_T_eff</span> <span class="o">+</span> <span class="n">log_area</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_uniform_disk_spectral_luminosity</span><span class="p">(</span>
-    <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_T_eff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_D</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_in</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Natural log of the spectral luminosity for a uniform-temperature disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -1356,26 +1356,26 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray</span>
 <span class="sd">        :math:`\ln L_\nu` [erg s⁻¹ Hz⁻¹].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_T_eff</span><span class="p">)</span>
     <span class="n">R_D2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R_D</span><span class="p">)</span>
     <span class="n">R_in2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R_in</span><span class="p">)</span>
     <span class="n">B_nu</span> <span class="o">=</span> <span class="n">_planck_fnu_cgs</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">T_eff</span><span class="p">)</span>
     <span class="n">L_nu</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">B_nu</span> <span class="o">*</span> <span class="p">(</span><span class="n">R_D2</span> <span class="o">-</span> <span class="n">R_in2</span><span class="p">)</span>
     <span class="c1"># B_nu → 0 in the Wien tail; log(0) = -inf is expected and benign.</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">L_nu</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_log_uniform_disk_flux_density</span><span class="p">(</span>
-    <span class="n">nu</span><span class="p">:</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">nu</span><span class="p">:</span> <span class="s2">"_ArrayLike"</span><span class="p">,</span>
     <span class="n">log_T_eff</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_D</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_R_in</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">log_D_L</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
     <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;_ArrayLike&quot;</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">"_ArrayLike"</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Natural log of the flux density for a uniform-temperature disk (one face).</span>
 
 <span class="sd">    .. math::</span>
@@ -1405,14 +1405,14 @@
 <span class="sd">    -------</span>
 <span class="sd">    ndarray</span>
 <span class="sd">        :math:`\ln F_\nu` [erg s⁻¹ Hz⁻¹ cm⁻²].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_T_eff</span><span class="p">)</span>
     <span class="n">R_D2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R_D</span><span class="p">)</span>
     <span class="n">R_in2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_R_in</span><span class="p">)</span>
     <span class="n">D_L2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_D_L</span><span class="p">)</span>
     <span class="n">B_nu</span> <span class="o">=</span> <span class="n">_planck_fnu_cgs</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">T_eff</span><span class="p">)</span>
     <span class="n">F_nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">cos_theta</span> <span class="o">*</span> <span class="n">B_nu</span> <span class="o">*</span> <span class="p">(</span><span class="n">R_D2</span> <span class="o">-</span> <span class="n">R_in2</span><span class="p">)</span> <span class="o">/</span> <span class="n">D_L2</span>
-    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s2">"ignore"</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">F_nu</span><span class="p">)</span>
 
 
@@ -1423,7 +1423,7 @@
     <span class="n">R_D</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Bolometric luminosity of a uniform-temperature disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -1459,10 +1459,10 @@
 <span class="sd">        L = uniform_disk_bolometric_luminosity(</span>
 <span class="sd">            3e4 * u.K, 1e13 * u.cm, 3e6 * u.cm</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">))</span>
-    <span class="n">log_R_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">))</span>
+    <span class="n">log_R_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_L</span> <span class="o">=</span> <span class="n">_log_uniform_disk_bolometric_luminosity</span><span class="p">(</span><span class="n">log_T_eff</span><span class="p">,</span> <span class="n">log_R_D</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_L</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span></div>
@@ -1477,7 +1477,7 @@
     <span class="n">R_D</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">R_in</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Spectral luminosity of a uniform-temperature disk.</span>
 
 <span class="sd">    .. math::</span>
@@ -1516,11 +1516,11 @@
 <span class="sd">        L_nu = uniform_disk_spectral_luminosity(</span>
 <span class="sd">            nu, 3e4 * u.K, 1e13 * u.cm, 3e6 * u.cm</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nu_hz</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
-    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">))</span>
-    <span class="n">log_R_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">nu_hz</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
+    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">))</span>
+    <span class="n">log_R_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_L_nu</span> <span class="o">=</span> <span class="n">_log_uniform_disk_spectral_luminosity</span><span class="p">(</span><span class="n">nu_hz</span><span class="p">,</span> <span class="n">log_T_eff</span><span class="p">,</span> <span class="n">log_R_D</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_L_nu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span></div>
@@ -1537,7 +1537,7 @@
     <span class="n">D_L</span><span class="p">:</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">,</span>
     <span class="n">cos_theta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Flux density of a uniform-temperature disk at luminosity distance :math:`D_L`.</span>
 
 <span class="sd">    .. math::</span>
@@ -1586,12 +1586,12 @@
 <span class="sd">            3e6 * u.cm,</span>
 <span class="sd">            100 * u.Mpc,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">nu_hz</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">&quot;Hz&quot;</span><span class="p">)</span>
-    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">))</span>
-    <span class="n">log_R_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
-    <span class="n">log_D_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">D_L</span><span class="p">,</span> <span class="s2">&quot;cm&quot;</span><span class="p">))</span>
+<span class="sd">    """</span>
+    <span class="n">nu_hz</span> <span class="o">=</span> <span class="n">ensure_in_units</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="s2">"Hz"</span><span class="p">)</span>
+    <span class="n">log_T_eff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">T_eff</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">))</span>
+    <span class="n">log_R_D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_D</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
+    <span class="n">log_R_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_in</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
+    <span class="n">log_D_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">D_L</span><span class="p">,</span> <span class="s2">"cm"</span><span class="p">))</span>
 
     <span class="n">log_F_nu</span> <span class="o">=</span> <span class="n">_log_uniform_disk_flux_density</span><span class="p">(</span><span class="n">nu_hz</span><span class="p">,</span> <span class="n">log_T_eff</span><span class="p">,</span> <span class="n">log_R_D</span><span class="p">,</span> <span class="n">log_R_in</span><span class="p">,</span> <span class="n">log_D_L</span><span class="p">,</span> <span class="n">cos_theta</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_F_nu</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
@@ -1625,8 +1625,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1660,7 +1660,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

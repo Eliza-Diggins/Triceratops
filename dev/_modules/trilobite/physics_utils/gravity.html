@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/physics_utils/gravity';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.physics_utils.gravity</h1><div class="highlight"><pre>
-<span></span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">Newtonian gravitational physics utilities for Trilobite models.</span>
 
 <span class="sd">Provides characteristic radii for tidal disruption, binary mass transfer,</span>
@@ -461,7 +461,7 @@
 <span class="sd">References</span>
 <span class="sd">----------</span>
 <span class="sd">Eggleton (1983), ApJ, 268, 368.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">astropy</span><span class="w"> </span><span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
@@ -476,10 +476,10 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_tidal_radius</span><span class="p">(</span><span class="n">log_R_star</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_M_primary</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_M_secondary</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln R_T` in CGS units.</span>
 
-<span class="sd">    The tidal disruption radius is the orbital distance at which the primary&#39;s</span>
+<span class="sd">    The tidal disruption radius is the orbital distance at which the primary's</span>
 <span class="sd">    self-gravity is overcome by tidal forces from a more massive body:</span>
 
 <span class="sd">    .. math::</span>
@@ -503,12 +503,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln R_T` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">log_R_star</span> <span class="o">+</span> <span class="p">(</span><span class="n">log_M_primary</span> <span class="o">-</span> <span class="n">log_M_secondary</span><span class="p">)</span> <span class="o">/</span> <span class="mf">3.0</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_hill_radius</span><span class="p">(</span><span class="n">log_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_m_secondary</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_M_primary</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln R_H` in CGS units.</span>
 
 <span class="sd">    The Hill (Roche) sphere radius sets the region within which a secondary</span>
@@ -535,12 +535,12 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln R_H` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">log_a</span> <span class="o">+</span> <span class="p">(</span><span class="n">log_m_secondary</span> <span class="o">-</span> <span class="n">log_M_primary</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mf">3.0</span><span class="p">))</span> <span class="o">/</span> <span class="mf">3.0</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_roche_lobe_radius</span><span class="p">(</span><span class="n">log_m_donor</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_m_accretor</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_a</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln r_L` in CGS units via the Eggleton (1983) approximation.</span>
 
 <span class="sd">    The Roche lobe radius of the donor star is</span>
@@ -565,7 +565,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln r_L` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">q</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_m_donor</span> <span class="o">-</span> <span class="n">log_m_accretor</span><span class="p">)</span>
     <span class="n">q_13</span> <span class="o">=</span> <span class="n">q</span> <span class="o">**</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
     <span class="n">q_23</span> <span class="o">=</span> <span class="n">q</span> <span class="o">**</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">)</span>
@@ -574,7 +574,7 @@
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">_compute_bondi_radius</span><span class="p">(</span><span class="n">log_M</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">log_c_s</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute :math:`\ln r_B` in CGS units.</span>
 
 <span class="sd">    The Bondi (gravitational capture) radius is the distance at which the</span>
@@ -597,7 +597,7 @@
 <span class="sd">    -------</span>
 <span class="sd">    float</span>
 <span class="sd">        :math:`\ln r_B` [:math:`\ln(\text{cm})`].</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">_log_G_cgs</span> <span class="o">+</span> <span class="n">log_M</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">log_c_s</span>
 
 
@@ -609,15 +609,15 @@
 <div class="viewcode-block" id="compute_tidal_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.gravity.compute_tidal_radius.html#trilobite.physics_utils.gravity.compute_tidal_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_tidal_radius</span><span class="p">(</span>
-    <span class="n">R_star</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">M_primary</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">M_secondary</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">R_star</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">M_primary</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">M_secondary</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the tidal disruption radius :math:`R_T`.</span>
 
 <span class="sd">    The tidal radius is the orbital separation at which the tidal force of the</span>
-<span class="sd">    primary on the secondary equals the secondary&#39;s self-gravity:</span>
+<span class="sd">    primary on the secondary equals the secondary's self-gravity:</span>
 
 <span class="sd">    .. math::</span>
 
@@ -656,7 +656,7 @@
 <span class="sd">            M_primary=1e6 * u.Msun,</span>
 <span class="sd">            M_secondary=1.0 * u.Msun,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_R_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">R_star</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">log_M_primary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_primary</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_M_secondary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_secondary</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
@@ -667,11 +667,11 @@
 <div class="viewcode-block" id="compute_hill_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.gravity.compute_hill_radius.html#trilobite.physics_utils.gravity.compute_hill_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_hill_radius</span><span class="p">(</span>
-    <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">m_secondary</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">M_primary</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">a</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">m_secondary</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">M_primary</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the Hill sphere radius :math:`R_H`.</span>
 
 <span class="sd">    The Hill sphere is the region around a secondary body within which it</span>
@@ -682,7 +682,7 @@
 
 <span class="sd">        R_H = a \left(\frac{m_{\rm secondary}}{3 M_{\rm primary}}\right)^{1/3}.</span>
 
-<span class="sd">    This radius sets the size of a planet&#39;s sphere of gravitational influence</span>
+<span class="sd">    This radius sets the size of a planet's sphere of gravitational influence</span>
 <span class="sd">    relative to its host star, or the zone within which a satellite can</span>
 <span class="sd">    maintain a stable orbit around a planet.</span>
 
@@ -709,13 +709,13 @@
 <span class="sd">            compute_hill_radius,</span>
 <span class="sd">        )</span>
 
-<span class="sd">        # Earth&#39;s Hill sphere at 1 AU from the Sun</span>
+<span class="sd">        # Earth's Hill sphere at 1 AU from the Sun</span>
 <span class="sd">        R_H = compute_hill_radius(</span>
 <span class="sd">            a=1.0 * u.au,</span>
 <span class="sd">            m_secondary=1.0 * u.Mearth,</span>
 <span class="sd">            M_primary=1.0 * u.Msun,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
     <span class="n">log_m_secondary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">m_secondary</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_M_primary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M_primary</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
@@ -726,11 +726,11 @@
 <div class="viewcode-block" id="compute_roche_lobe_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.gravity.compute_roche_lobe_radius.html#trilobite.physics_utils.gravity.compute_roche_lobe_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_roche_lobe_radius</span><span class="p">(</span>
-    <span class="n">m_donor</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">m_accretor</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">a</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">m_donor</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">m_accretor</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">a</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the donor Roche lobe radius via the Eggleton (1983) formula.</span>
 
 <span class="sd">    The Eggleton approximation gives the Roche lobe radius of the donor star</span>
@@ -760,7 +760,7 @@
 
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
-<span class="sd">    Mass transfer begins when the donor&#39;s stellar radius equals :math:`r_L`.</span>
+<span class="sd">    Mass transfer begins when the donor's stellar radius equals :math:`r_L`.</span>
 <span class="sd">    The formula is symmetric in the sense that swapping donor and accretor</span>
 <span class="sd">    (and updating :math:`q` accordingly) gives the Roche lobe of the other star.</span>
 
@@ -783,7 +783,7 @@
 <span class="sd">            m_accretor=1.4 * u.Msun,</span>
 <span class="sd">            a=10.0 * u.Rsun,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_m_donor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">m_donor</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_m_accretor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">m_accretor</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">))</span>
@@ -794,10 +794,10 @@
 <div class="viewcode-block" id="compute_bondi_radius">
 <a class="viewcode-back" href="../../../_as_gen/trilobite.physics_utils.gravity.compute_bondi_radius.html#trilobite.physics_utils.gravity.compute_bondi_radius">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_bondi_radius</span><span class="p">(</span>
-    <span class="n">M</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
-    <span class="n">c_s</span><span class="p">:</span> <span class="s2">&quot;_UnitBearingArrayLike&quot;</span><span class="p">,</span>
+    <span class="n">M</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
+    <span class="n">c_s</span><span class="p">:</span> <span class="s2">"_UnitBearingArrayLike"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">:</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Compute the Bondi accretion radius :math:`r_B = GM / c_s^2`.</span>
 
 <span class="sd">    The Bondi radius is the characteristic length scale within which an</span>
@@ -843,7 +843,7 @@
 <span class="sd">            M=1.4 * u.Msun,</span>
 <span class="sd">            c_s=10.0 * u.km / u.s,</span>
 <span class="sd">        )</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">log_M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">g</span><span class="p">))</span>
     <span class="n">log_c_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ensure_in_units</span><span class="p">(</span><span class="n">c_s</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">_compute_bondi_radius</span><span class="p">(</span><span class="n">log_M</span><span class="p">,</span> <span class="n">log_c_s</span><span class="p">))</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span></div>
@@ -877,8 +877,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -912,7 +912,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>

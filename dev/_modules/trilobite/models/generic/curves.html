@@ -26,8 +26,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../../../_static/styles/theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
-<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=a95f357e85573c9b56d5" rel="stylesheet" />
+  <link href="../../../../_static/styles/theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=cb8930eaaf36d9849b67" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
@@ -41,10 +41,10 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/custom.css?v=391a8568" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="../../../../_static/scripts/fontawesome.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/fontawesome.js?digest=cb8930eaaf36d9849b67"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5" />
-<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5" />
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67" />
 
     <script src="../../../../_static/documentation_options.js?v=3ce10a4d"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
@@ -55,7 +55,7 @@
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = '_modules/trilobite/models/generic/curves';</script>
     <script>
-        DOCUMENTATION_OPTIONS.theme_version = '0.19.0';
+        DOCUMENTATION_OPTIONS.theme_version = '0.21.0';
         DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://transientsextragalactic.github.io/Trilobite/versions.json';
         DOCUMENTATION_OPTIONS.theme_switcher_version_match = 'dev';
         DOCUMENTATION_OPTIONS.show_version_warning_banner =
@@ -444,7 +444,7 @@
                 <article class="bd-article">
                   
   <h1>Source code for trilobite.models.generic.curves</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">"""</span>
 <span class="sd">Elementary curve models.</span>
 
 <span class="sd">This module provides a collection of simple analytic curve models</span>
@@ -478,7 +478,7 @@
 <span class="sd">- Units may be extended in future versions if required.</span>
 <span class="sd">- These models are not intended to represent physical systems,</span>
 <span class="sd">  but rather serve as analytic test functions.</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">"""</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
@@ -487,15 +487,15 @@
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">trilobite.models.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span><span class="p">,</span> <span class="n">ModelParameter</span><span class="p">,</span> <span class="n">ModelVariable</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;LinearModel&quot;</span><span class="p">,</span> <span class="s2">&quot;QuadraticModel&quot;</span><span class="p">,</span> <span class="s2">&quot;PowerLawModel&quot;</span><span class="p">,</span> <span class="s2">&quot;ExponentialModel&quot;</span><span class="p">,</span> <span class="s2">&quot;ConstantModel&quot;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"LinearModel"</span><span class="p">,</span> <span class="s2">"QuadraticModel"</span><span class="p">,</span> <span class="s2">"PowerLawModel"</span><span class="p">,</span> <span class="s2">"ExponentialModel"</span><span class="p">,</span> <span class="s2">"ConstantModel"</span><span class="p">]</span>
 
-<span class="n">_CurveOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;CurveOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+<span class="n">_CurveOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"CurveOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"y"</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="LinearModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.LinearModel.html#trilobite.models.generic.curves.LinearModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">LinearModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Linear function model.</span>
 
 <span class="sd">    .. math::</span>
@@ -543,28 +543,28 @@
 <span class="sd">           * - ``y``</span>
 <span class="sd">             - :math:`y(x)`</span>
 <span class="sd">             - Evaluated model value.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;m&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"m"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_CurveOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Simple linear model.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Elementary linear function.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Simple linear model."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Elementary linear function."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;m&quot;</span><span class="p">]</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"m"</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">m</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span></div>
 
 
@@ -572,7 +572,7 @@
 <div class="viewcode-block" id="QuadraticModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.QuadraticModel.html#trilobite.models.generic.curves.QuadraticModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">QuadraticModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Quadratic polynomial model.</span>
 
 <span class="sd">    .. math::</span>
@@ -623,30 +623,30 @@
 <span class="sd">           * - ``y``</span>
 <span class="sd">             - :math:`y(x)`</span>
 <span class="sd">             - Evaluated model value.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"a"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"b"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"c"</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_CurveOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Quadratic polynomial model.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Elementary quadratic function.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Quadratic polynomial model."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Elementary quadratic function."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">]</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">]</span>
-        <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"a"</span><span class="p">]</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"b"</span><span class="p">]</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"c"</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span></div>
 
 
@@ -654,7 +654,7 @@
 <div class="viewcode-block" id="PowerLawModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.PowerLawModel.html#trilobite.models.generic.curves.PowerLawModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">PowerLawModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Power-law model.</span>
 
 <span class="sd">    .. math::</span>
@@ -706,28 +706,28 @@
 <span class="sd">    Notes</span>
 <span class="sd">    -----</span>
 <span class="sd">    The amplitude parameter is constrained to be non-negative.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_CurveOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Simple power-law model.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Elementary scaling relation.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Simple power-law model."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Elementary scaling relation."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">alpha</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha&quot;</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">alpha</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha"</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">A</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">alpha</span><span class="p">)</span></div>
 
 
@@ -735,7 +735,7 @@
 <div class="viewcode-block" id="ExponentialModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.ExponentialModel.html#trilobite.models.generic.curves.ExponentialModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ExponentialModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Exponential model.</span>
 
 <span class="sd">    .. math::</span>
@@ -783,28 +783,28 @@
 <span class="sd">           * - ``y``</span>
 <span class="sd">             - :math:`y(x)`</span>
 <span class="sd">             - Evaluated model value.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"k"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_CurveOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Simple exponential model.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Elementary exponential function.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Simple exponential model."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Elementary exponential function."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"k"</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">A</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">k</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span></div>
 
 
@@ -812,7 +812,7 @@
 <div class="viewcode-block" id="ConstantModel">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.ConstantModel.html#trilobite.models.generic.curves.ConstantModel">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ConstantModel</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Constant model.</span>
 
 <span class="sd">    .. math::</span>
@@ -857,35 +857,35 @@
 <span class="sd">           * - ``y``</span>
 <span class="sd">             - :math:`C`</span>
 <span class="sd">             - Constant model value.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
-    <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
+    <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"C"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="kc">None</span><span class="p">),)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_CurveOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Constant function.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Zero-order polynomial.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Constant function."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Zero-order polynomial."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-        <span class="n">C</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">]</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"C"</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">full_like</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="p">))</span></div>
 
 
 
-<span class="n">_BPLOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">&quot;BPLOutputs&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">])</span>
+<span class="n">_BPLOutputs</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s2">"BPLOutputs"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"y"</span><span class="p">])</span>
 
 
 <div class="viewcode-block" id="BrokenPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.BrokenPowerLaw.html#trilobite.models.generic.curves.BrokenPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BrokenPowerLaw</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Sharp two-segment broken power-law model.</span>
 
 <span class="sd">    This model describes a continuous but non-differentiable</span>
@@ -992,51 +992,51 @@
 <span class="sd">        model = BrokenPowerLaw()</span>
 
 <span class="sd">        x = np.logspace(-2, 2, 500)</span>
-<span class="sd">        y = model({&quot;x&quot;: x}, {}).y</span>
+<span class="sd">        y = model({"x": x}, {}).y</span>
 
 <span class="sd">        plt.loglog(x, y)</span>
-<span class="sd">        plt.xlabel(&quot;x&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;y&quot;)</span>
-<span class="sd">        plt.title(&quot;Broken Power Law Example&quot;)</span>
+<span class="sd">        plt.xlabel("x")</span>
+<span class="sd">        plt.ylabel("y")</span>
+<span class="sd">        plt.title("Broken Power Law Example")</span>
 <span class="sd">        plt.show()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span>
         <span class="n">ModelVariable</span><span class="p">(</span>
-            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span>
             <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span>
-            <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Independent variable.&quot;</span><span class="p">,</span>
-            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$x$&quot;</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s2">"Independent variable."</span><span class="p">,</span>
+            <span class="n">latex</span><span class="o">=</span><span class="sa">r</span><span class="s2">"$x$"</span><span class="p">,</span>
         <span class="p">),</span>
     <span class="p">)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;x_b&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"x_b"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_BPLOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Sharp two-segment broken power law.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Standard phenomenological broken power law.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Sharp two-segment broken power law."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Standard phenomenological broken power law."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;BrokenPowerLaw requires x &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"BrokenPowerLaw requires x &gt; 0."</span><span class="p">)</span>
 
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">xb</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;x_b&quot;</span><span class="p">]</span>
-        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">]</span>
-        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"x_b"</span><span class="p">]</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">]</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">]</span>
 
         <span class="n">log_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">log_xb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
@@ -1055,7 +1055,7 @@
 <div class="viewcode-block" id="SmoothedBrokenPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.SmoothedBrokenPowerLaw.html#trilobite.models.generic.curves.SmoothedBrokenPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SmoothedBrokenPowerLaw</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Smooth two-segment broken power-law model.</span>
 
 <span class="sd">    This model replaces the sharp transition at :math:`x_b`</span>
@@ -1157,49 +1157,49 @@
 <span class="sd">        model = SmoothedBrokenPowerLaw()</span>
 
 <span class="sd">        x = np.logspace(-2, 2, 500)</span>
-<span class="sd">        y = model({&quot;x&quot;: x}, {}).y</span>
+<span class="sd">        y = model({"x": x}, {}).y</span>
 
 <span class="sd">        plt.loglog(x, y)</span>
-<span class="sd">        plt.xlabel(&quot;x&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;y&quot;)</span>
-<span class="sd">        plt.title(&quot;Smoothed Broken Power Law Example&quot;)</span>
+<span class="sd">        plt.xlabel("x")</span>
+<span class="sd">        plt.ylabel("y")</span>
+<span class="sd">        plt.title("Smoothed Broken Power Law Example")</span>
 <span class="sd">        plt.show()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;x_b&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"x_b"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_BPLOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Smooth two-segment broken power law.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Standard smooth break prescription.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Smooth two-segment broken power law."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Standard smooth break prescription."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;SmoothedBrokenPowerLaw requires x &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"SmoothedBrokenPowerLaw requires x &gt; 0."</span><span class="p">)</span>
 
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">xb</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;x_b&quot;</span><span class="p">]</span>
-        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">]</span>
-        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">]</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">xb</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"x_b"</span><span class="p">]</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">]</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">]</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Smoothing parameter s must be non-zero.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Smoothing parameter s must be non-zero."</span><span class="p">)</span>
 
         <span class="n">log_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">log_ratio</span> <span class="o">=</span> <span class="n">log_x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">xb</span><span class="p">)</span>
@@ -1218,7 +1218,7 @@
 <div class="viewcode-block" id="TripleBrokenPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.TripleBrokenPowerLaw.html#trilobite.models.generic.curves.TripleBrokenPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">TripleBrokenPowerLaw</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Sharp three-segment broken power-law model.</span>
 
 <span class="sd">    This model introduces two break locations,</span>
@@ -1315,48 +1315,48 @@
 <span class="sd">        model = TripleBrokenPowerLaw()</span>
 
 <span class="sd">        x = np.logspace(-2, 3, 500)</span>
-<span class="sd">        y = model({&quot;x&quot;: x}, {}).y</span>
+<span class="sd">        y = model({"x": x}, {}).y</span>
 
 <span class="sd">        plt.loglog(x, y)</span>
-<span class="sd">        plt.xlabel(&quot;x&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;y&quot;)</span>
-<span class="sd">        plt.title(&quot;Triple Broken Power Law Example&quot;)</span>
+<span class="sd">        plt.xlabel("x")</span>
+<span class="sd">        plt.ylabel("y")</span>
+<span class="sd">        plt.title("Triple Broken Power Law Example")</span>
 <span class="sd">        plt.show()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;x_b1&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;x_b2&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_3&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"x_b1"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"x_b2"</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_3"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_BPLOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Sharp three-segment broken power law.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Standard multi-break phenomenological model.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Sharp three-segment broken power law."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Standard multi-break phenomenological model."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;TripleBrokenPowerLaw requires x &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"TripleBrokenPowerLaw requires x &gt; 0."</span><span class="p">)</span>
 
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">b1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;x_b1&quot;</span><span class="p">]</span>
-        <span class="n">b2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;x_b2&quot;</span><span class="p">]</span>
-        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">]</span>
-        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">]</span>
-        <span class="n">a3</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_3&quot;</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">b1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"x_b1"</span><span class="p">]</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"x_b2"</span><span class="p">]</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">]</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">]</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_3"</span><span class="p">]</span>
 
         <span class="n">log_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">log_b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
@@ -1384,7 +1384,7 @@
 <div class="viewcode-block" id="SmoothedTripleBrokenPowerLaw">
 <a class="viewcode-back" href="../../../../_as_gen/trilobite.models.generic.curves.SmoothedTripleBrokenPowerLaw.html#trilobite.models.generic.curves.SmoothedTripleBrokenPowerLaw">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">SmoothedTripleBrokenPowerLaw</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
-<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">"""</span>
 <span class="sd">    Smooth three-segment broken power-law model.</span>
 
 <span class="sd">    This model introduces two smooth transitions using</span>
@@ -1437,53 +1437,53 @@
 <span class="sd">        model = SmoothedTripleBrokenPowerLaw()</span>
 
 <span class="sd">        x = np.logspace(-2, 3, 500)</span>
-<span class="sd">        y = model({&quot;x&quot;: x}, {}).y</span>
+<span class="sd">        y = model({"x": x}, {}).y</span>
 
 <span class="sd">        plt.loglog(x, y)</span>
-<span class="sd">        plt.xlabel(&quot;x&quot;)</span>
-<span class="sd">        plt.ylabel(&quot;y&quot;)</span>
-<span class="sd">        plt.title(&quot;Smoothed Triple Broken Power Law Example&quot;)</span>
+<span class="sd">        plt.xlabel("x")</span>
+<span class="sd">        plt.ylabel("y")</span>
+<span class="sd">        plt.title("Smoothed Triple Broken Power Law Example")</span>
 <span class="sd">        plt.show()</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">),)</span>
+    <span class="n">VARIABLES</span> <span class="o">=</span> <span class="p">(</span><span class="n">ModelVariable</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">),)</span>
 
     <span class="n">PARAMETERS</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;x_b1&quot;</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;x_b2&quot;</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;alpha_3&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
-        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"x_b1"</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"x_b2"</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-12</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_1"</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_2"</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"alpha_3"</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)),</span>
+        <span class="n">ModelParameter</span><span class="p">(</span><span class="s2">"s"</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">base_units</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">,</span> <span class="n">bounds</span><span class="o">=</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)),</span>
     <span class="p">)</span>
 
     <span class="n">OUTPUTS</span> <span class="o">=</span> <span class="n">_BPLOutputs</span>
     <span class="n">UNITS</span> <span class="o">=</span> <span class="n">OUTPUTS</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
-    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">&quot;Smooth three-segment broken power law.&quot;</span>
-    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;Nested smooth break prescription.&quot;</span>
+    <span class="n">DESCRIPTION</span> <span class="o">=</span> <span class="s2">"Smooth three-segment broken power law."</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">"Nested smooth break prescription."</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the model with given parameters and variables.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""Initialize the model with given parameters and variables."""</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_register_init</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_forward_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">variables</span><span class="p">,</span> <span class="n">parameters</span><span class="p">):</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">variables</span><span class="p">[</span><span class="s2">"x"</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;SmoothedTripleBrokenPowerLaw requires x &gt; 0.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"SmoothedTripleBrokenPowerLaw requires x &gt; 0."</span><span class="p">)</span>
 
-        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">]</span>
-        <span class="n">b1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;x_b1&quot;</span><span class="p">]</span>
-        <span class="n">b2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;x_b2&quot;</span><span class="p">]</span>
-        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_1&quot;</span><span class="p">]</span>
-        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_2&quot;</span><span class="p">]</span>
-        <span class="n">a3</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;alpha_3&quot;</span><span class="p">]</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;s&quot;</span><span class="p">]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"A"</span><span class="p">]</span>
+        <span class="n">b1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"x_b1"</span><span class="p">]</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"x_b2"</span><span class="p">]</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_1"</span><span class="p">]</span>
+        <span class="n">a2</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_2"</span><span class="p">]</span>
+        <span class="n">a3</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"alpha_3"</span><span class="p">]</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">"s"</span><span class="p">]</span>
 
         <span class="k">if</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Smoothing parameter s must be non-zero.&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Smoothing parameter s must be non-zero."</span><span class="p">)</span>
 
         <span class="n">log_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">log_b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">b1</span><span class="p">)</span>
@@ -1540,8 +1540,8 @@
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../../../../_static/scripts/bootstrap.js?digest=a95f357e85573c9b56d5"></script>
-<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=a95f357e85573c9b56d5"></script>
+  <script defer src="../../../../_static/scripts/bootstrap.js?digest=cb8930eaaf36d9849b67"></script>
+<script defer src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=cb8930eaaf36d9849b67"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1575,7 +1575,7 @@
         <div class="footer-item">
 <p class="theme-version">
   <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.19.0.
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.21.0.
 </p></div>
       
     </div>
